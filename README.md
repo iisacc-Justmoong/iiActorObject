@@ -58,3 +58,13 @@ target_link_libraries(my_app PRIVATE iiActorObject::iiActorObject)
 ```
 
 `CMAKE_PREFIX_PATH`에 SDK 설치 경로와 Qt 경로를 포함한다. 빌드·테스트·설치까지만 제공하며 커밋, 원격 업로드 또는 배포 단계는 없다.
+
+## License
+
+SPDX-License-Identifier: AGPL-3.0-only
+
+iiActorObject의 자체 작성 코드와 문서는 GNU Affero General Public License v3.0 전용으로
+배포한다. 전체 조건은 [LICENSE](LICENSE)를 따른다.
+
+Qt를 포함한 외부 라이브러리와 별도 고지가 있는 서드파티 코드는 각자의 라이선스를
+유지한다. 이 프로젝트의 라이선스 선언은 해당 서드파티 라이선스를 대체하지 않는다.
