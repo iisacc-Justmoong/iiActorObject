@@ -14,7 +14,7 @@ const QString message = iiActorObject::helloWorld();
 
 ## 빌드, 테스트, 설치
 
-CMake 3.24 이상, C++20 컴파일러 및 Qt 6.8.3이 필요하다. macOS에서는 `~/Qt/6.8.3/macos`가 존재하면 자동으로 탐색 경로에 추가한다.
+CMake 3.24 이상, C++20 컴파일러 및 Qt 6.8.3이 필요하다. macOS에서는 `/Volumes/Storage/Qt/6.8.3/macos`가 존재하면 자동으로 탐색 경로에 추가한다.
 
 ```sh
 ./install.sh
@@ -29,7 +29,7 @@ CMake 3.24 이상, C++20 컴파일러 및 Qt 6.8.3이 필요하다. macOS에서�
 설정은 명령행 인자 대신 환경 변수로 전달한다. `INSTALL_PREFIX`는 절대 경로여야 하며, `CMAKE_PREFIX_PATH`는 세미콜론 또는 콜론으로 구분한 추가 검색 경로를 받는다. 병렬 빌드 개수는 `CMAKE_BUILD_PARALLEL_LEVEL`로 지정하며 기본값은 2이다.
 
 ```sh
-QT_PREFIX_PATH="$HOME/Qt/6.8.3/macos" \
+QT_PREFIX_PATH="/Volumes/Storage/Qt/6.8.3/macos" \
 INSTALL_PREFIX="$HOME/.local/SDK/iiActorObject" \
 ./install.sh
 ```
@@ -38,12 +38,12 @@ INSTALL_PREFIX="$HOME/.local/SDK/iiActorObject" \
 
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON \
-  -DCMAKE_PREFIX_PATH="$HOME/Qt/6.8.3/macos"
+  -DCMAKE_PREFIX_PATH="/Volumes/Storage/Qt/6.8.3/macos"
 cmake --build build --config Release
 ctest --test-dir build -C Release --output-on-failure
 cmake --install build --config Release
 cmake -S tests/consumer -B build/consumer/build -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_PREFIX_PATH="$HOME/.local/SDK/iiActorObject;$HOME/Qt/6.8.3/macos"
+  -DCMAKE_PREFIX_PATH="$HOME/.local/SDK/iiActorObject;/Volumes/Storage/Qt/6.8.3/macos"
 cmake --build build/consumer/build --config Release
 ctest --test-dir build/consumer/build -C Release --output-on-failure
 ```
