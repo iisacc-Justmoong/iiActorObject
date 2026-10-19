@@ -1,6 +1,11 @@
 # iiActorObject
 
-C++20 and Qt 6.8.3 Core version 0.1.0 is a dynamic library placeholder. The current API is a single function that returns exactly `Hello world!`, and does not implement the domain functionality implied by the SDK name.
+Package release: **0.1.1** (2026-10-19). This patch packages the current
+source snapshot; build, test and installation evidence is recorded in the SDK
+patch-release report. Earlier versioned feature notes remain historical.
+
+
+C++20 and Qt 6.8.3 Core version 0.1.1 is a dynamic library placeholder. The current API is a single function that returns exactly `Hello world!`, and does not implement the domain functionality implied by the SDK name.
 
 <a id="공개-api"></a>
 
@@ -59,7 +64,7 @@ ctest --test-dir build/consumer/build -C Release --output-on-failure
 At the default installation path, `include/iiActorObject.h`, `lib/` shared libraries, `lib/cmake/iiActorObject/` CMake packages, and `share/iiActorObject/README.md` are created. The Windows shared library executable is installed at `bin/`. Consumers are informed of C++20 and `Qt6::Core` link requirements. Qt is not bundled and copied; an installed Qt runtime is required. The shared library installation RPATH includes the paths of external libraries used during linking.
 
 ```cmake
-find_package(iiActorObject 0.1.0 CONFIG REQUIRED)
+find_package(iiActorObject 0.1.1 CONFIG REQUIRED)
 target_link_libraries(my_app PRIVATE iiActorObject::iiActorObject)
 ```
 
