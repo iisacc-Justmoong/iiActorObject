@@ -1,16 +1,7 @@
 #pragma once
 
-#include <QtCore/QString>
-#include <QtCore/QtGlobal>
-
-#if defined(IIACTOROBJECT_BUILDING_LIBRARY)
-#    define IIACTOROBJECT_EXPORT Q_DECL_EXPORT
-#else
-#    define IIACTOROBJECT_EXPORT Q_DECL_IMPORT
-#endif
-
-namespace iiActorObject {
-
-[[nodiscard]] IIACTOROBJECT_EXPORT QString helloWorld();
-
-} // namespace iiActorObject
+#include <iiActorObject/Actor.h>
+#include <iiActorObject/ActorComponent.h>
+#include <iiActorObject/SceneComponent.h>
+#include <iiActorObject/Transform.h>
+#include <iiActorObject/Usd.h>

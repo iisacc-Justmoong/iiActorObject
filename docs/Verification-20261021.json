@@ -1,0 +1,152 @@
+{
+  "project": "iiActorObject",
+  "version": "0.2.1",
+  "verified_at": "2026-10-21T07:59:01.943549+09:00",
+  "host": "Windows x64",
+  "compiler": "MSVC 19.51.36260",
+  "configuration": "Release",
+  "cpp_standard": 23,
+  "status": "passed",
+  "tests": {
+    "shared": {
+      "junit": "usd-tests-release.xml",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        "iiActorObject.identity",
+        "iiActorObject.properties",
+        "iiActorObject.transform",
+        "iiActorObject.scene",
+        "iiActorObject.components",
+        "iiActorObject.lifecycle",
+        "iiActorObject.callbacks",
+        "iiActorObject.validation",
+        "iiActorObject.usd.matrix",
+        "iiActorObject.usd.layer",
+        "iiActorObject.usd.hierarchy",
+        "iiActorObject.usd.references",
+        "iiActorObject.usd.validation",
+        "iiActorObject.usd.fixture",
+        "iiActorObject.usd.openusd"
+      ],
+      "openusd_python_test_cases": 6
+    },
+    "shared_installed_consumer": {
+      "junit": "consumer/build/usd-installed-consumer.xml",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        "iiActorObject.installed_consumer"
+      ]
+    },
+    "static": {
+      "junit": "static/build/usd-tests-static.xml",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        "iiActorObject.identity",
+        "iiActorObject.properties",
+        "iiActorObject.transform",
+        "iiActorObject.scene",
+        "iiActorObject.components",
+        "iiActorObject.lifecycle",
+        "iiActorObject.callbacks",
+        "iiActorObject.validation",
+        "iiActorObject.usd.matrix",
+        "iiActorObject.usd.layer",
+        "iiActorObject.usd.hierarchy",
+        "iiActorObject.usd.references",
+        "iiActorObject.usd.validation",
+        "iiActorObject.usd.fixture",
+        "iiActorObject.usd.openusd"
+      ],
+      "openusd_python_test_cases": 6
+    },
+    "static_installed_consumer": {
+      "junit": "static/consumer/build/usd-installed-consumer-static.xml",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        "iiActorObject.installed_consumer"
+      ]
+    }
+  },
+  "total_ctests": 32,
+  "failures": 0,
+  "skips": 0,
+  "openusd_validation_version": "26.8",
+  "usd_runtime_dependency": false,
+  "qt_runtime_dependency": false,
+  "usd_parser_checks": [
+    "metadata/UTF-8",
+    "15 independent point transforms",
+    "detached transforms",
+    "Xform/Cube and Sphere references",
+    "instancing",
+    "placement-layer reference composition",
+    "Y/Z and stage units",
+    "USDA to USDC roundtrip"
+  ],
+  "dll_imports": [
+    "MSVCP140.dll",
+    "MSVCP140_2.dll",
+    "VCRUNTIME140.dll",
+    "VCRUNTIME140_1.dll",
+    "api-ms-win-crt-math-l1-1-0.dll",
+    "api-ms-win-crt-string-l1-1-0.dll",
+    "api-ms-win-crt-runtime-l1-1-0.dll",
+    "api-ms-win-crt-heap-l1-1-0.dll",
+    "KERNEL32.dll"
+  ],
+  "source_sha256": {
+    "cmake/iiActorObjectConfig.cmake.in": "78a7b6677a45e6e6a5cd87f6fb0ffb4cb20f383bb3239a0f32c6a3519a0319bf",
+    "CMakeLists.txt": "5f083e2430d8c7aa88c490373270a097c196a5b21f8e451d86693aa2e934195b",
+    "iiActorObject.cpp": "d721c4664b91c3b9f8724ce8e0291a2c5c51d336e98491a6ce100ccfcb9f7cd0",
+    "iiActorObject.h": "2fc7694e1b236369982036e0567bdf8d5523e8744b59d243902861e5ff526dfd",
+    "include/iiActorObject/Actor.h": "dbde1d73bccb29703632e8009e3f30d573ed2f5412779861f301d91fccbcd988",
+    "include/iiActorObject/ActorComponent.h": "130905e32d748a646e674cf0075c019152c6b32552f09b5084936be314df72e0",
+    "include/iiActorObject/SceneComponent.h": "447697b494118b5123d423bc55365f0530fb9a785d417748cd675f3e0cccecb6",
+    "include/iiActorObject/Transform.h": "21e6383421cb1cd7449de261e341d48e87c4d2d01fcf9800d637115ec76a5ec7",
+    "include/iiActorObject/Usd.h": "3fbb715481da70774fc9fc512606656b8f89deedee854a461cb1bc05ce5f011e",
+    "install.sh": "f6a7cec5f1867fb52d33c721c07126ef65f86d02d909a15e42a029405dac5cd5",
+    "src/ActorComponent.cpp": "4ffa94b8ca6f435d354114c8c56711ef88057036a373c6062ed21a92fae27a62",
+    "src/SceneComponent.cpp": "90fe23e9fa46397fdbbf10d57d9d6627e30bf79f217fd44e09590562f9e91eef",
+    "src/Transform.cpp": "190142498f37d4c47029e33eea688f29a3ba5011c158d235beaa19be416eabed",
+    "src/Usd.cpp": "c26687976fb10806645ee3ccd17a9ac3ad4549e501d997a35b7d7990c886a75b",
+    "tests/ActorTest.cpp": "e8e6ad4df3114c0a20ee436b74e10124cda67c7825c2d928bfb75e86c2fd0203",
+    "tests/consumer/CMakeLists.txt": "1fcbdcfb504e2306700691e00deabd1f8388a5c5c61ec93cf2e1144117a52681",
+    "tests/consumer/main.cpp": "5f1ea745cf1c73a527318a25e6674f4fb211eb480d0bb2fc8def5bb8b7880e2f",
+    "tests/UsdTest.cpp": "26911260e8b96cf512ff5286926df064f381be210cd92005760dcb7e17212eac",
+    "tests/VerifyUsd.py": "94b8e5637543bcc30b7e4b205e07ea541e845c613eed78150d6fde8864fb5890"
+  },
+  "compiler_warnings": [
+    "Existing C4251 warnings for exported classes with private STL members; use matching compiler/STL/CRT."
+  ],
+  "scope": [
+    "One-way synchronous USDA placement snapshot; no Actor deserialization or live synchronization.",
+    "Windows x64 shared/static builds executed; other platforms were not executed."
+  ],
+  "build_tools": {
+    "cmake": "4.4.4",
+    "ninja": "1.13.2"
+  },
+  "evidence": {
+    "local_report": "build/verification.json",
+    "junit_path_base": "build/",
+    "source_hash_scope": "Raw source file bytes in the verified Windows working tree.",
+    "rechecked_at": "2026-10-21T08:04:23.023794+09:00",
+    "source_files_rechecked": 19,
+    "junit_files_rechecked": 4,
+    "source_hashes_match": true,
+    "junit_results_match": true,
+    "build_artifacts_tracked_in_git": false
+  }
+}
