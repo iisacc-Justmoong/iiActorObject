@@ -5,3 +5,4 @@
 #include <iiActorObject/SceneComponent.h>
 #include <iiActorObject/Transform.h>
 #include <iiActorObject/Usd.h>
+#include <iiActorObject/Character.h>

@@ -28,6 +28,8 @@ public:
     [[nodiscard]] Vector3 transformPoint(Vector3 point) const noexcept;
     [[nodiscard]] Vector3 transformVector(Vector3 vector) const noexcept;
     [[nodiscard]] Matrix4 operator*(const Matrix4& other) const noexcept;
+    [[nodiscard]] Matrix4 invertedAffine() const;
+    [[nodiscard]] Matrix4 transposed() const noexcept;
 private:
     friend struct Transform;
     explicit Matrix4(std::array<double, 16> elements) noexcept;

@@ -13,8 +13,15 @@ C++23 표준 라이브러리로 구현한 월드 개체·컴포넌트 SDK이다.
 | `SceneComponent` | ActorComponent에 로컬 변환과 부모·자식 공간 계층을 더한다. |
 | `Transform` | 위치·쿼터니언 회전·스케일 값이다. |
 | `Matrix4` | 공간 계층의 누적 아핀 변환을 표현한다. 비균일 스케일과 회전의 합성도 행렬로 보존한다. |
+| `iiCharacter` | Actor 수명주기에 개별 Pose·애니메이션 재생기와 스켈레탈 메시 파트를 구성한다. |
+| `Skeleton`, `Pose` | 공유 골격·역 바인드와 인스턴스별 본 변환·스킨/법선 팔레트·증분 평가를 제공한다. |
+| `AnimationClip`, `AnimationPlayer` | 변환 키프레임·스칼라 곡선, 반복·탐색·역방향 재생을 제공한다. |
+| `SkeletalMesh`, `SkeletalMeshComponent` | LOD별 스킨·모프와 CPU 메시 변형, 파트별 변경 캐시를 제공한다. |
+| `CharacterRig`, `FacialRig` | FK·2본 IK와 의미 채널 기반 관절·블렌드셰이프·머티리얼 값을 계산한다. |
 
 Actor에는 `Root` SceneComponent가 기본 생성된다. Actor의 변환은 루트의 로컬 변환과 동일한 데이터이다. 새 SceneComponent는 기본적으로 루트에 부착된다.
+
+캐릭터 구성·재생·리깅과 실제 참조 소스는 [iiCharacter 문서](docs/Character.md)를 따른다. 헤더와 구현은 모두 `src/iiActorObject/`에 함께 둔다.
 
 ## USD 배치 호환성
 
@@ -63,7 +70,7 @@ int main()
 }
 ```
 
-`SceneComponent`는 공간·부착 관계를 제공한다. 위의 `MeshAnchor` 이름이 렌더링 또는 메시 로딩 기능을 추가하지는 않는다. 월드, 렌더러, 물리, 네트워크 복제, 메타휴먼·메시 데이터 처리는 각 기능 모듈이 구성할 책임이다.
+`SceneComponent`는 공간·부착 관계를 제공한다. 위의 `MeshAnchor` 이름이 렌더링 또는 메시 로딩 기능을 추가하지는 않는다. 스켈레탈 데이터와 변형에는 `SkeletalMeshComponent`를 사용한다. 월드, 렌더러, 물리, 네트워크 복제와 외부 에셋 형식 로딩은 호스트 또는 해당 기능 모듈이 구성한다.
 
 ## 소유권과 수명주기
 
@@ -123,7 +130,7 @@ target_link_libraries(my_app PRIVATE iiActorObject::iiActorObject)
 
 Unreal Engine 5.8.3의 로컬 `GameFramework/Actor.h`, `Components/ActorComponent.h`, `Components/SceneComponent.h`에서 개체·구성·공간 책임을 확인하고, iiSDK용 C++23 코드로 독립 구현하였다. Unreal 소스 코드나 빌드 의존성을 이 패키지에 포함하지 않았다. Unreal의 복제·물리·에디터 기능이나 전체 API와의 호환성을 제공하지 않는다.
 
-Actor 계약 8개, USD 계약 5개와 레이어 생성 fixture 1개를 기본 CTest로 검사한다. `IIACTOROBJECT_VALIDATE_OPENUSD=ON`이면 실제 OpenUSD로 파싱·좌표·참조·USDC 변환을 검사하는 테스트를 추가한다. 설치본 소비자는 별도 CMake 프로젝트에서 실제 Actor·USD 공개 함수를 링크·실행한다. 검증 범위와 기록은 [검증 문서](docs/Verification.md)에 있다.
+기본 CTest는 Actor 계약 8개, USD 계약 5개와 레이어 생성 fixture 1개, 캐릭터 계약 19개를 검사한다. `IIACTOROBJECT_VALIDATE_OPENUSD=ON`이면 실제 OpenUSD로 파싱·좌표·참조·USDC 변환을 검사하는 테스트를 추가한다. 설치본 소비자는 별도 CMake 프로젝트에서 Actor·USD·캐릭터·스키닝·표정 공개 함수를 링크·실행한다. Actor/USD의 이전 검증은 [검증 문서](docs/Verification.md), 새 캐릭터 구현의 검증은 [캐릭터 기록](docs/CharacterVerification-20261021.json)을 따른다.
 
 0.1.1에서 0.2.1까지의 구현·이전 방법·소스 확보 경위는 [2026년 10월 21일 변경 기록](docs/Changes-20261021.md)에 정리하였다. 커밋에 보존하는 검사 결과와 소스 SHA-256은 [검증 요약 JSON](docs/Verification-20261021.json)에 있다.
 
@@ -132,3 +139,15 @@ Actor 계약 8개, USD 계약 5개와 레이어 생성 fixture 1개를 기본 CT
 SPDX-License-Identifier: MIT
 
 이 프로젝트의 자체 코드와 문서는 MIT 라이선스로 제공한다. 전문은 [LICENSE](LICENSE)를 따른다. 별도 고지된 외부 라이브러리와 제삼자 코드는 각자의 라이선스를 유지한다.
+
+## Source header layout
+
+Public headers and implementations live together in `src/iiActorObject/`.
+There is no separate authored `include/` tree. Existing public `#include` names
+and exported CMake targets are unchanged; installation still places only public
+headers in the package include directory. Generated export headers belong to
+`build/`, not to the authored source tree.
+
+Validate this layout from the SDK workspace with
+`python3 -B tests/test_source_header_layout.py`. Reconfigure, build, run CTest,
+and verify a staged installed consumer after changing source/header paths.

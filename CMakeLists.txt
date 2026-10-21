@@ -18,8 +18,10 @@ include(GenerateExportHeader)
 include(CTest)
 option(BUILD_SHARED_LIBS "Build iiActorObject as a shared library" ON)
 
-add_library(iiActorObject iiActorObject.cpp
-    src/ActorComponent.cpp src/SceneComponent.cpp src/Transform.cpp src/Usd.cpp)
+add_library(iiActorObject src/iiActorObject/Actor.cpp
+    src/iiActorObject/ActorComponent.cpp src/iiActorObject/SceneComponent.cpp src/iiActorObject/Transform.cpp src/iiActorObject/Usd.cpp
+    src/iiActorObject/Skeleton.cpp src/iiActorObject/Animation.cpp src/iiActorObject/SkeletalMesh.cpp
+    src/iiActorObject/CharacterRig.cpp src/iiActorObject/Character.cpp)
 add_library(iiActorObject::iiActorObject ALIAS iiActorObject)
 target_compile_features(iiActorObject PUBLIC cxx_std_23)
 generate_export_header(iiActorObject BASE_NAME IIACTOROBJECT
@@ -34,7 +36,7 @@ else()
 endif()
 target_include_directories(iiActorObject PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
@@ -48,6 +50,12 @@ set_target_properties(iiActorObject PROPERTIES
 )
 
 if(BUILD_TESTING)
+    add_executable(iiActorObjectCharacterTests tests/CharacterTest.cpp)
+    target_link_libraries(iiActorObjectCharacterTests PRIVATE iiActorObject::iiActorObject)
+    set_target_properties(iiActorObjectCharacterTests PROPERTIES CXX_EXTENSIONS OFF)
+    foreach(_case bones dirty inverse animation clip_validation player skin normals mesh_validation component fk ik ik_sweep face face_alias modular character clock_error stress)
+        add_test(NAME iiActorObject.character.${_case} COMMAND iiActorObjectCharacterTests ${_case})
+    endforeach()
     add_executable(iiActorObjectTests tests/ActorTest.cpp)
     target_link_libraries(iiActorObjectTests PRIVATE iiActorObject::iiActorObject)
     set_target_properties(iiActorObjectTests PROPERTIES CXX_EXTENSIONS OFF)
@@ -100,7 +108,18 @@ install(TARGETS iiActorObject EXPORT iiActorObjectTargets
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 install(FILES iiActorObject.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES
+    src/iiActorObject/Actor.h
+    src/iiActorObject/ActorComponent.h
+    src/iiActorObject/SceneComponent.h
+    src/iiActorObject/Transform.h
+    src/iiActorObject/Usd.h
+    src/iiActorObject/Skeleton.h
+    src/iiActorObject/Animation.h
+    src/iiActorObject/SkeletalMesh.h
+    src/iiActorObject/CharacterRig.h
+    src/iiActorObject/Character.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiActorObject)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/iiActorObject/Export.h"
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiActorObject)
 install(EXPORT iiActorObjectTargets NAMESPACE iiActorObject:: DESTINATION "${_package_dir}")

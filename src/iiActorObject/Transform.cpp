@@ -68,6 +68,52 @@ Matrix4 Matrix4::operator*(const Matrix4& other) const noexcept
     return Matrix4(result);
 }
 
+Matrix4 Matrix4::transposed() const noexcept
+{
+    std::array<double,16> result{};
+    for (std::size_t r=0;r<4;++r)
+        for (std::size_t c=0;c<4;++c) result[c*4+r]=elements_[r*4+c];
+    return Matrix4(result);
+}
+
+Matrix4 Matrix4::invertedAffine() const
+{
+    for (double value:elements_)
+        if (!std::isfinite(value)) throw std::invalid_argument("Matrix must be finite");
+    if (elements_[3]!=0 || elements_[7]!=0 || elements_[11]!=0 || elements_[15]!=1)
+        throw std::invalid_argument("Matrix must be affine");
+    long double rows[3][6]{};
+    for (std::size_t r=0;r<3;++r) {
+        for (std::size_t c=0;c<3;++c) rows[r][c]=elements_[c*4+r];
+        rows[r][r+3]=1;
+    }
+    for (std::size_t c=0;c<3;++c) {
+        std::size_t pivot=c;
+        for (std::size_t r=c+1;r<3;++r)
+            if (std::abs(rows[r][c])>std::abs(rows[pivot][c])) pivot=r;
+        if (rows[pivot][c]==0) throw std::invalid_argument("Matrix is singular");
+        if (pivot!=c) for (std::size_t k=0;k<6;++k) std::swap(rows[c][k],rows[pivot][k]);
+        const auto divisor=rows[c][c];
+        for (auto& value:rows[c]) value/=divisor;
+        for (std::size_t r=0;r<3;++r) if (r!=c) {
+            const auto factor=rows[r][c];
+            for (std::size_t k=0;k<6;++k) rows[r][k]-=factor*rows[c][k];
+        }
+    }
+    std::array<double,16> result{}; result[15]=1;
+    for (std::size_t r=0;r<3;++r) {
+        long double translation=0;
+        for (std::size_t c=0;c<3;++c) {
+            result[c*4+r]=static_cast<double>(rows[r][c+3]);
+            translation-=rows[r][c+3]*elements_[12+c];
+        }
+        result[12+r]=static_cast<double>(translation);
+    }
+    for (double value:result)
+        if (!std::isfinite(value)) throw std::overflow_error("Inverse matrix overflow");
+    return Matrix4(result);
+}
+
 Transform Transform::validated() const
 {
     if (!finite(position) || !finite(scale))

@@ -1,0 +1,219 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-21T13:11:30+09:00",
+  "module": "iiActorObject",
+  "version": "0.2.1",
+  "cpp_standard": 23,
+  "host": {
+    "system": "macOS",
+    "version": "27.0.1",
+    "architecture": "arm64",
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)"
+  },
+  "build": {
+    "shared": "build",
+    "static": "build/character-static/build",
+    "sanitized": "build/character-sanitized/build",
+    "qt_package_discovery_disabled": true,
+    "runtime_dependencies": [
+      "libc++",
+      "libSystem"
+    ],
+    "sanitizer_flags": "-fsanitize=address,undefined -fno-omit-frame-pointer",
+    "ubsan_options": "halt_on_error=1:print_stacktrace=1",
+    "new_build_warnings": 0
+  },
+  "test_results": [
+    {
+      "configuration": "shared_release",
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "build/character-20261021/tests.xml",
+      "junit_sha256": "b3094f193f46be898c412dc2ee4dc69d6fc31fb631f7a391c5d52fc137793c67"
+    },
+    {
+      "configuration": "shared_installed_consumer",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "build/character-20261021/consumer-tests.xml",
+      "junit_sha256": "1b26a0472f2e45911c519f7a592fa52efc51b2c4132d2a9fbe56b79d28437083"
+    },
+    {
+      "configuration": "static_release",
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "build/character-20261021/static-tests.xml",
+      "junit_sha256": "adba2677cf1fc5e2dbebe6f833da0f1f7f077008fee0978105018f39cf76c264"
+    },
+    {
+      "configuration": "static_installed_consumer",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "build/character-20261021/static-consumer-tests.xml",
+      "junit_sha256": "e7d746a959d2b5246080d5048d9c6043412e441977c3f93504e5b6e60b5e9e0d"
+    },
+    {
+      "configuration": "asan_ubsan_debug",
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "build/character-20261021/sanitized-tests.xml",
+      "junit_sha256": "7cc172e68ada3471c7f63f690788a899ecfb03424935284d822468cd261dfaa5"
+    }
+  ],
+  "character_contract_cases": 19,
+  "existing_actor_usd_cases": 14,
+  "header_layout": {
+    "passed": 2,
+    "failed": 0,
+    "log": "build/character-20261021/header-layout.log"
+  },
+  "installed_headers": {
+    "standalone_cpp23_compile_passed": 12,
+    "failed": 0,
+    "audit": "build/character-20261021/public-headers.json",
+    "headers": [
+      "iiActorObject/Actor.h",
+      "iiActorObject/ActorComponent.h",
+      "iiActorObject/Animation.h",
+      "iiActorObject/Character.h",
+      "iiActorObject/CharacterRig.h",
+      "iiActorObject/Export.h",
+      "iiActorObject/SceneComponent.h",
+      "iiActorObject/SkeletalMesh.h",
+      "iiActorObject/Skeleton.h",
+      "iiActorObject/Transform.h",
+      "iiActorObject/Usd.h",
+      "iiActorObject.h"
+    ]
+  },
+  "package": {
+    "shared_prefix": "build/character-20261021/install",
+    "static_prefix": "build/character-static/build/install",
+    "public_headers_match_sources": true,
+    "private_character_math_header_installed": false,
+    "cmake_package_contains_source_tree_paths": false,
+    "consumer_header_environment_cleared": [
+      "CPATH",
+      "CPLUS_INCLUDE_PATH",
+      "C_INCLUDE_PATH",
+      "OBJC_INCLUDE_PATH"
+    ],
+    "default_user_install_updated": false
+  },
+  "tdd": {
+    "initial_contract_link_failure_log": "build/character-20261021/red-build.log",
+    "modular_mesh_cache_failure_log": "build/character-20261021/modular-red.log",
+    "modular_cache_regression_now_passed": true
+  },
+  "epic_source": {
+    "repository": "https://github.com/EpicGames/OpenRigLogic",
+    "branch": "5.8",
+    "commit": "55756aca0c4c55adc56ad68a796bcc1c0bf6fa5a",
+    "license": "MIT",
+    "working_tree_clean": true,
+    "source_root_relative_to_workspace": "Reverse/Projects/Epic Games/OpenRigLogic",
+    "source_files": {
+      "LICENSE": {
+        "bytes": 1075,
+        "sha256": "6b05b9b4c54ec4a7723061dbaf4652240a2197642aae899c0162a38f00abd18f"
+      },
+      "include/riglogic/riglogic/RigLogic.h": {
+        "bytes": 13172,
+        "sha256": "7f708e0b847ea6f6af37dfa67de6fd1bda2638288c9e8a7e1f6af3e39a4f743d"
+      },
+      "include/riglogic/riglogic/RigInstance.h": {
+        "bytes": 4732,
+        "sha256": "b8505b81c253b9e0a8488209300e9c3d0ee644ba9d8775655911f39bd47e570b"
+      },
+      "include/dna/layers/DefinitionReader.h": {
+        "bytes": 11746,
+        "sha256": "6f4236ce43d6406aa667befe6aac50cd4111d2f3d654fb71b0125b1d20e94ef5"
+      },
+      "include/dna/layers/GeometryReader.h": {
+        "bytes": 21086,
+        "sha256": "a8bdd0b7104216cdb414632805eee634fa4586dde391bb0da269e1f6583a22bf"
+      },
+      "src/riglogic/riglogic/RigLogicImpl.cpp": {
+        "bytes": 16006,
+        "sha256": "3f673f875f4ac1326e7ea318b351b705a18a49b12925924d0cfded3a3e203228"
+      },
+      "src/riglogic/riglogic/RigInstanceImpl.cpp": {
+        "bytes": 7551,
+        "sha256": "5bd09b1326d5d668d9138a85780b5d212ae1cbaec1c1a096d50ef5f073c8ad54"
+      },
+      "src/riglogic/controls/Controls.cpp": {
+        "bytes": 2236,
+        "sha256": "f9a04cc52a5e3aaa2cfe6d83c79e26f66d1b32313531ced8c6326f4ed0578106"
+      },
+      "src/riglogic/joints/Joints.cpp": {
+        "bytes": 2398,
+        "sha256": "3d18fae2ab324971750f333832d9d323edd67239bf41c08af99b4373a5882b73"
+      },
+      "src/riglogic/blendshapes/BlendShapes.cpp": {
+        "bytes": 176,
+        "sha256": "22157243959474f9ab775592d9e3a2b86ba44767a37380477e135c32f570e76b"
+      }
+    },
+    "integration": "Reference only; no upstream source copied into or linked by iiActorObject"
+  },
+  "execution_scope": {
+    "executed_platforms": [
+      "macOS arm64"
+    ],
+    "windows_character_execution_performed": false,
+    "linux_character_execution_performed": false,
+    "actual_metahuman_asset_import_tested": false,
+    "test_assets": "Synthetic C++ skeletons, geometry, curves and rig inputs; includes 1,024-bone chain and 160-goal IK sweep",
+    "openusd_python_validation_enabled": false,
+    "source_reference_only": true
+  },
+  "capability_limits": [
+    "No Epic DNA, FBX or .uasset loader",
+    "No full RigLogic numerical compatibility",
+    "No GPU skinning or renderer",
+    "No full-body IK, physics, ML/RBF evaluator or animation blueprint VM",
+    "Existing USD placement does not serialize UsdSkel"
+  ],
+  "source_sha256": {
+    "CMakeLists.txt": "b74d84eb999720f75e5960d540703ba032148b7cd811b042dd3d2c0ed3b5052c",
+    "iiActorObject.h": "000fa7476d27b2e5adfcb7a1ab7400acee1bdcfc0c49ede8ac86f23a4751e27d",
+    "README.md": "c6230256e510f4faeab44e590282cae250e49e759b1b058f72c1cc29ebce7963",
+    "docs/Character.md": "ec0ba7953132035dc5db153e176c68713edbdbf79dc360dddbf01fa5e2600d63",
+    "docs/Changes-20261021.md": "92a427208f487847a42476a8fd426639dd1e4ede3fe9f41ba4d43f0a90bee287",
+    "install.sh": "f6a7cec5f1867fb52d33c721c07126ef65f86d02d909a15e42a029405dac5cd5",
+    "src/iiActorObject/Actor.cpp": "d721c4664b91c3b9f8724ce8e0291a2c5c51d336e98491a6ce100ccfcb9f7cd0",
+    "src/iiActorObject/Actor.h": "dbde1d73bccb29703632e8009e3f30d573ed2f5412779861f301d91fccbcd988",
+    "src/iiActorObject/ActorComponent.cpp": "4ffa94b8ca6f435d354114c8c56711ef88057036a373c6062ed21a92fae27a62",
+    "src/iiActorObject/ActorComponent.h": "130905e32d748a646e674cf0075c019152c6b32552f09b5084936be314df72e0",
+    "src/iiActorObject/Animation.cpp": "0ffd7e9a36401d7407fbdad6daf185b4d736ffe585f73919e0099dd6b246adf2",
+    "src/iiActorObject/Animation.h": "e13b8cdb035d1fdd107697a99f7a03740c4e40251117140008119a699edadaeb",
+    "src/iiActorObject/Character.cpp": "0fa7bb86a5641bea7cc50ef15c55694c9d42acb894002c50866c39448803fe39",
+    "src/iiActorObject/Character.h": "fa4263637ff9592468dceb5c80f5458db14764e41f8a38094b82b3d29350a67a",
+    "src/iiActorObject/CharacterMath.h": "ec795fcad76bc3c1ea8ef91f600ecd1f15dc46569194aefe9bdea87f43a235da",
+    "src/iiActorObject/CharacterRig.cpp": "ef53c421379e6e249c033394a5b6829e5abcb3bcffda9ac7dfbcdc3ba7a59f40",
+    "src/iiActorObject/CharacterRig.h": "9d13fabb1d63c5eab46b8da64422f16a9a9bef7b3535425cea277ea293e97a87",
+    "src/iiActorObject/SceneComponent.cpp": "90fe23e9fa46397fdbbf10d57d9d6627e30bf79f217fd44e09590562f9e91eef",
+    "src/iiActorObject/SceneComponent.h": "447697b494118b5123d423bc55365f0530fb9a785d417748cd675f3e0cccecb6",
+    "src/iiActorObject/SkeletalMesh.cpp": "bb1d5b218e2b274d32997aa93d3ba7b8049ab54120837403882abff7ac678576",
+    "src/iiActorObject/SkeletalMesh.h": "b3450dce14aa454f23d56d0513791d0f04bba3b6dca701d52d0ff0d1194643fa",
+    "src/iiActorObject/Skeleton.cpp": "ac0a5794e071aa014651b0cf335ce63d36dc9cee29c24751110576619394b4ef",
+    "src/iiActorObject/Skeleton.h": "98dddd815f425a9e97593aa795265ed8e8d56b199251c331caf2261eeea36fc9",
+    "src/iiActorObject/Transform.cpp": "899257a73d506d78a64a0f151082b4118cbf42f833f0a028d4f95a2ad24bdd39",
+    "src/iiActorObject/Transform.h": "4329f67a0ca14b3460fd54e6e4e3057481bc93f951586423d1ce78d2cfe61646",
+    "src/iiActorObject/Usd.cpp": "c26687976fb10806645ee3ccd17a9ac3ad4549e501d997a35b7d7990c886a75b",
+    "src/iiActorObject/Usd.h": "3fbb715481da70774fc9fc512606656b8f89deedee854a461cb1bc05ce5f011e",
+    "tests/.DS_Store": "857018396a4166d440795ab752829cd1e74362138b28bf8998d5a1b283338fcc",
+    "tests/ActorTest.cpp": "e8e6ad4df3114c0a20ee436b74e10124cda67c7825c2d928bfb75e86c2fd0203",
+    "tests/CharacterTest.cpp": "ba3f90cd9ab6f00c48e7972c576c400215efc50133921792b9b2a402e4b83447",
+    "tests/UsdTest.cpp": "26911260e8b96cf512ff5286926df064f381be210cd92005760dcb7e17212eac",
+    "tests/VerifyUsd.py": "94b8e5637543bcc30b7e4b205e07ea541e845c613eed78150d6fde8864fb5890",
+    "tests/consumer/CMakeLists.txt": "1fcbdcfb504e2306700691e00deabd1f8388a5c5c61ec93cf2e1144117a52681",
+    "tests/consumer/main.cpp": "283264364ac47c6865048c82d53c0e8d9e2c9a049a90ae42f8839894b19510e6",
+    "cmake/iiActorObjectConfig.cmake.in": "78a7b6677a45e6e6a5cd87f6fb0ffb4cb20f383bb3239a0f32c6a3519a0319bf"
+  }
+}
