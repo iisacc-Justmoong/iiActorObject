@@ -30,7 +30,7 @@ using FbxImportedMorphs = std::vector<FbxImportedMorph>;
 struct FbxImportedProgressiveControl final
 {
     std::string name;
-    const ufbx_blend_channel *channel;
+    std::vector<const ufbx_blend_channel *> channels;
 };
 std::vector<FbxImportedClip> planFbxImportedAnimations(const ufbx_scene &scene,
     std::span<const FbxImportedNode> nodes, const FbxImportedMorphs &morphs,

@@ -1,0 +1,319 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:9990296acf88713df74bff769e544699b19a0319939bdad51f2dc869aa2b6c72",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/InstanceTransferVerification-20261029.md",
+    "sha256": "6d7d864aa4b33a92665f60bff0406340915d2f9a92b186e302e900bfa7c7c3c7",
+    "bytes": 4932,
+    "line_count": 30,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "편집 후 액터 상태 이전 검증 기록",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 편집 후 액터 상태 이전 검증 기록\n",
+      "level": 1,
+      "title": "편집 후 액터 상태 이전 검증 기록"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 구현 범위\n",
+      "level": 2,
+      "title": "구현 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "[액터 상태 이전](InstanceTransfer.md)은 기존 에셋에서 생성한 액터를 수정하지 않고 편집된 에셋에 대응하는 새 액터를 준비한다. 바인드 포즈 대비 현재 포즈와 클립 키, 재생 시각·속도·반복 방식·정지 상태, 이름과 태그, 액터 및 메시 컴포넌트의 변환·설정과 현재 모프 값을 이전한다. 메시와 모프 이름이 유지되는 경우 위치나 순서가 달라져도 대응한다. 새 액터는 `Created` 상태이며 호스트가 생명 주기와 장면 교체를 관리한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`transferObject3DEditorInstance`는 새 액터 준비와 편집 리그 세트의 재연결을 묶는다. 액터 준비가 실패하거나 어느 리그의 재연결이 실패하면 기존 액터와 기존 리그 세트가 유효하게 유지된다. 이 보장은 이미 완료된 편집 자체를 되돌리지는 않는다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 확인한 동작\n",
+      "level": 2,
+      "title": "확인한 동작"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "list",
+      "start_line": 11,
+      "end_line": 16,
+      "raw": "- 합성 자산에서 바뀐 바인드 위치·회전·스케일에 대해 현재 포즈와 키가 기준 대비 변화를 유지하는지, 일시 정지된 클립을 다시 진행할 때 시간과 변환이 이어지는지 확인했다. 인스턴스 모프의 이름별 이전과 대상의 새 기본값도 확인했다.\n- 부모 관계가 바뀌었을 때 현재 월드 포즈 보존을 검사했다. TRS로 표현할 수 없는 전단 변환, 기준 골격이 달라진 상태에서의 월드 포즈와 클립 동시 이전은 거부했다.\n- 존재하지 않는 0이 아닌 모프, 알 수 없는 컴포넌트, 대응을 입증할 수 없는 스킨 가중치 override 및 호환되지 않는 변형 바인드는 기본적으로 거부했다. 각각 명시적으로 제외할 수 있으며 결과에 제외 사실을 보고한다. 제거된 부모의 자식은 가능한 경우 월드 변환을 유지해 다시 연결한다.\n- 원본 토폴로지가 유지된 점 편집에서는 해당 스킨 override를 이전하고, 가려진 면으로 렌더 점 구성이 바뀐 경우에는 기본적으로 거부했다. 토폴로지가 없는 별도 자산의 중복 위치도 불명확한 대응으로 거부했다.\n- 실제 포즈 프로그램 리그와 모프 리그를 함께 사용해 액터 이전 실패와 두 번째 리그의 재연결 실패를 확인했다. 어느 경우에도 기존 리그들이 유지되었고, 성공 시에는 새 액터와 두 리그가 편집기의 같은 에셋을 사용했다.\n- CC0 MakeHuman 인체·표정·부속 자료에서 기존 머리카락과 의상을 교체하는 동안 일시 정지된 애니메이션과 본체 모프를 이전하고 얼굴 리그를 새 에셋에 재연결해 적용했다. 이전 액터도 그대로 유지했다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "합성 자산에서 바뀐 바인드 위치·회전·스케일에 대해 현재 포즈와 키가 기준 대비 변화를 유지하는지, 일시 정지된 클립을 다시 진행할 때 시간과 변환이 이어지는지 확인했다. 인스턴스 모프의 이름별 이전과 대상의 새 기본값도 확인했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "부모 관계가 바뀌었을 때 현재 월드 포즈 보존을 검사했다. TRS로 표현할 수 없는 전단 변환, 기준 골격이 달라진 상태에서의 월드 포즈와 클립 동시 이전은 거부했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "존재하지 않는 0이 아닌 모프, 알 수 없는 컴포넌트, 대응을 입증할 수 없는 스킨 가중치 override 및 호환되지 않는 변형 바인드는 기본적으로 거부했다. 각각 명시적으로 제외할 수 있으며 결과에 제외 사실을 보고한다. 제거된 부모의 자식은 가능한 경우 월드 변환을 유지해 다시 연결한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "원본 토폴로지가 유지된 점 편집에서는 해당 스킨 override를 이전하고, 가려진 면으로 렌더 점 구성이 바뀐 경우에는 기본적으로 거부했다. 토폴로지가 없는 별도 자산의 중복 위치도 불명확한 대응으로 거부했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "실제 포즈 프로그램 리그와 모프 리그를 함께 사용해 액터 이전 실패와 두 번째 리그의 재연결 실패를 확인했다. 어느 경우에도 기존 리그들이 유지되었고, 성공 시에는 새 액터와 두 리그가 편집기의 같은 에셋을 사용했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "CC0 MakeHuman 인체·표정·부속 자료에서 기존 머리카락과 의상을 교체하는 동안 일시 정지된 애니메이션과 본체 모프를 이전하고 얼굴 리그를 새 에셋에 재연결해 적용했다. 이전 액터도 그대로 유지했다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "heading",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "## 빌드와 검사\n",
+      "level": 2,
+      "title": "빌드와 검사"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "list",
+      "start_line": 20,
+      "end_line": 24,
+      "raw": "- macOS arm64 C++23 Release: 편집 리그와 인스턴스 이전 검사 12/12가 NSCharacter 포함 구성과 본체 전용 구성에서 각각 통과했다. 결과는 `build/glb-import-ninja/instance-and-rig-final.xml`, `build/core-tangent-ninja/instance-and-rig-final.xml`이다.\n- 인체 부속·표정 자료를 사용하는 연결 검사 1/1과 기존 애니메이션·캐릭터·포즈 리그 및 프로젝트 관련 회귀 검사 41/41이 통과했다. 결과는 `build/glb-import-ninja/human-instance-transfer-final.xml`, `instance-transfer-regression.xml`이다.\n- Debug ASan·UBSan에서 합성 리그와 이전 검사 12/12가 통과했다. 누수 검출은 비활성화했다. 결과는 `build/glb-import-full-asan/instance-and-rig-final.xml`이다.\n- `build/` 아래 별도로 설치한 NSCharacter 포함 소비자와 본체 전용 소비자가 공개 API를 사용해 액터·리그 이전, 클립과 프로젝트 저장·복원을 각각 통과했다. 사용자 설치본은 수정하지 않았다.\n- Emscripten C++23으로 새 구현과 관련 리그·애니메이션 구현의 구문을 확인했다. macOS 빌드에서 생성한 설정을 사용했으며 WebAssembly 전체 링크나 실행은 확인하지 않았다. macOS 본체 라이브러리의 직접 동적 의존성에는 Qt가 나타나지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "macOS arm64 C++23 Release: 편집 리그와 인스턴스 이전 검사 12/12가 NSCharacter 포함 구성과 본체 전용 구성에서 각각 통과했다. 결과는 `build/glb-import-ninja/instance-and-rig-final.xml`, `build/core-tangent-ninja/instance-and-rig-final.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "인체 부속·표정 자료를 사용하는 연결 검사 1/1과 기존 애니메이션·캐릭터·포즈 리그 및 프로젝트 관련 회귀 검사 41/41이 통과했다. 결과는 `build/glb-import-ninja/human-instance-transfer-final.xml`, `instance-transfer-regression.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Debug ASan·UBSan에서 합성 리그와 이전 검사 12/12가 통과했다. 누수 검출은 비활성화했다. 결과는 `build/glb-import-full-asan/instance-and-rig-final.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 아래 별도로 설치한 NSCharacter 포함 소비자와 본체 전용 소비자가 공개 API를 사용해 액터·리그 이전, 클립과 프로젝트 저장·복원을 각각 통과했다. 사용자 설치본은 수정하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Emscripten C++23으로 새 구현과 관련 리그·애니메이션 구현의 구문을 확인했다. macOS 빌드에서 생성한 설정을 사용했으며 WebAssembly 전체 링크나 실행은 확인하지 않았다. macOS 본체 라이브러리의 직접 동적 의존성에는 Qt가 나타나지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "heading",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "부모 구조가 바뀐 애니메이션을 자동으로 리타기팅하거나 베이크하지 않는다. 기준 골격이 바뀐 `PreserveWorld` 모드에서는 클립을 별도로 제외해야 한다. 이름이 바뀌거나 관련성이 불확실한 메시·모프의 자동 대응, 사용자 정의 컴포넌트 복제, 호스트의 장면 교체, 외부 타임라인·모프 곡선 바인딩 및 여러 클립의 혼합 상태는 제공하지 않는다. 같은 이름과 의미가 있는 무관한 자산의 동일성은 호스트가 확인해야 한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "사용자 지시에 따라 CC5·Blender·Unreal이나 사용자용 앱은 실행하지 않았다. 이 검사는 외부 앱과의 실제 동작, 시각 품질 또는 전체 MetaHuman 수준 제작 목표의 달성을 뜻하지 않는다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "편집 후 액터 상태 이전 검증 기록",
+      "anchor": "편집-후-액터-상태-이전-검증-기록",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구현 범위",
+      "anchor": "구현-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인한 동작",
+      "anchor": "확인한-동작",
+      "start_line": 9
+    },
+    {
+      "block_id": "b000013",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "빌드와 검사",
+      "anchor": "빌드와-검사",
+      "start_line": 18
+    },
+    {
+      "block_id": "b000017",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 26
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000019",
+        "line": 28,
+        "text": "부모 구조가 바뀐 애니메이션을 자동으로 리타기팅하거나 베이크하지 않는다. 기준 골격이 바뀐 `PreserveWorld` 모드에서는 클립을 별도로 제외해야 한다. 이름이 바뀌거나 관련성이 불확실한 메시·모프의 자동 대응, 사용자 정의 컴포넌트 복제, 호스트의 장면 교체, 외부 타임라인·모프 곡선 바인딩 및 여러 클립의 혼합 상태는 제공하지 않는다. 같은 이름과 의미가 있는 무관한 자산의 동일성은 호스트가 확인해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000021",
+        "line": 30,
+        "text": "사용자 지시에 따라 CC5·Blender·Unreal이나 사용자용 앱은 실행하지 않았다. 이 검사는 외부 앱과의 실제 동작, 시각 품질 또는 전체 MetaHuman 수준 제작 목표의 달성을 뜻하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "액터 상태 이전",
+        "target": "InstanceTransfer.md",
+        "kind": "relative",
+        "line": 5
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

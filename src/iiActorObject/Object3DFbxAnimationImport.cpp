@@ -138,8 +138,12 @@ SourceKeys sourceKeys(const ufbx_scene &scene,const ufbx_anim_stack &stack,
     for(const auto &morph:morphs)for(const auto *channel:morph.channels)channels.insert(channel->element_id);
     for(const auto &control:progressive)
     {
-        if(!control.channel)throw std::invalid_argument("Missing FBX progressive animation channel");
-        channels.insert(control.channel->element_id);
+        if(control.channels.empty())throw std::invalid_argument("Missing FBX progressive animation channel");
+        for(const auto *channel:control.channels)
+        {
+            if(!channel)throw std::invalid_argument("Missing FBX progressive animation channel");
+            channels.insert(channel->element_id);
+        }
     }
     for(const auto *layer:stack.layers)layers.insert(layer->element_id);
     SourceKeys result;result.times={0,stack.time_end-stack.time_begin};
@@ -260,8 +264,12 @@ FbxImportedClip bake(const ufbx_scene &scene,const ufbx_anim_stack &stack,
         warn(warnings,"An ordinary morph curve was renamed to avoid the progressive-control namespace.");
     }
     for(const auto &control:progressive)
-        activeMorphs.push_back({object3DProgressiveControlCurveName(control.name),{control.channel},{},
-                                progressiveControlTolerance(*control.channel,options.maximumMorphError)});
+    {
+        double tolerance=options.maximumMorphError;
+        for(const auto *channel:control.channels)
+            tolerance=std::min(tolerance,progressiveControlTolerance(*channel,options.maximumMorphError));
+        activeMorphs.push_back({object3DProgressiveControlCurveName(control.name),control.channels,{},tolerance});
+    }
     const auto dimensions=nodes.size()+activeMorphs.size();
     std::size_t evaluationDimensions=nodes.size();
     if(evaluationDimensions>options.maximumEvaluationValues)
@@ -312,7 +320,7 @@ FbxImportedClip bake(const ufbx_scene &scene,const ufbx_anim_stack &stack,
             for(std::size_t i=1;i<channels.size();++i)
             {
                 const double value=ufbx_evaluate_blend_weight(stack.anim,channels[i],sourceTime);
-                if(!std::isfinite(value)||std::abs(value-first)>options.maximumMorphError)
+                if(!std::isfinite(value)||std::abs(value-first)>group.maximumError)
                     throw std::invalid_argument("Matching FBX morph channels carry different animation values");
             }
             frame.morphs.push_back(first);

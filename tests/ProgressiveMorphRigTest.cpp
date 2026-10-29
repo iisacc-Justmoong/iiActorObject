@@ -15,6 +15,7 @@
 #include <iomanip>
 #include <iterator>
 #include <limits>
+#include <map>
 #include <memory>
 #include <stdexcept>
 #include <string_view>
@@ -75,6 +76,77 @@ void curve()
     changed.meshes[0].geometry.morphTargets.erase(changed.meshes[0].geometry.morphTargets.begin());
     const auto invalid=engine.createObject(changed);const auto count=engine.rigCount();
     rejects([&]{(void)rig.get().cloneFor(invalid);});CHECK(engine.rigCount()==count);
+}
+void split()
+{
+    auto input=data();auto second=input.meshes.front();second.name="Face2";
+    second.geometry.vertices[0].position.z=.3;
+    second.geometry.vertices[0].weights={{1,1}};
+    second.geometry.morphTargets[2].deltas[0].position.y=.9;
+    second.geometry.morphTargets.pop_back();
+    auto third=input.meshes.front();third.name="Face3";
+    third.geometry.vertices[0].position.z=.6;
+    third.geometry.morphTargets.erase(third.geometry.morphTargets.begin(),third.geometry.morphTargets.end()-1);
+    third.geometry.morphTargets.push_back({"Other",{{0,{0,.2,0},{}}}});
+    input.meshes.push_back(std::move(second));input.meshes.push_back(std::move(third));
+    auto p=program();p.channels[0].defaultValue=0;
+    Object3DEngine engine;const auto object=engine.createObject(std::move(input));
+    const auto rig=createObject3DProgressiveMorphRig(object,p);
+    const auto bytes=exportObject3DFbxWithProgressiveMorphs(rig);
+    ufbx_error error{};ufbx_load_opts strict{};strict.file_format=UFBX_FILE_FORMAT_FBX;strict.strict=true;
+    using Scene=std::unique_ptr<ufbx_scene,decltype(&ufbx_free_scene)>;
+    Scene scene(ufbx_load_memory(bytes.bytes.data(),bytes.bytes.size(),&strict,&error),ufbx_free_scene);
+    CHECK(scene&&scene->meshes.count==3&&scene->skin_deformers.count==3);
+    std::vector<ufbx_prop_override_desc> overrides;
+    for(const auto *channel:scene->blend_channels)
+    {
+        const std::string_view name(channel->name.data,channel->name.length);
+        if(name!="Expression"&&name!="Blink")continue;
+        ufbx_prop_override_desc value{};value.element_id=channel->element_id;
+        value.prop_name={"DeformPercent",13};value.value.x=name=="Expression"?55:20;
+        overrides.push_back(value);
+    }
+    CHECK(overrides.size()==4);
+    ufbx_anim_opts animationOptions{};animationOptions.prop_overrides={overrides.data(),overrides.size()};
+    std::unique_ptr<ufbx_anim,decltype(&ufbx_free_anim)> animation(ufbx_create_anim(scene.get(),&animationOptions,&error),ufbx_free_anim);
+    CHECK(animation);Scene sample(ufbx_evaluate_scene(scene.get(),animation.get(),0,nullptr,&error),ufbx_free_scene);CHECK(sample);
+    const auto expected=std::map<std::string,double>{{"Face",.605},{"Face2",.85},{"Face3",.08}};
+    for(const auto *node:sample->nodes)if(node->mesh)
+    {
+        const std::string name(node->name.data,node->name.length);CHECK(expected.contains(name));
+        CHECK(node->mesh->blend_deformers.count==1);
+        const auto offset=ufbx_get_blend_vertex_offset(node->mesh->blend_deformers[0],0);
+        CHECK(close(node->mesh->vertices[0].y+offset.y,expected.at(name)));
+    }
+    Object3DEngine roundEngine;const auto round=importObject3DFbxWithProgressiveMorphs(roundEngine.reference(),bytes.bytes);
+    const auto restored=inspectObject3DProgressiveMorphRig(round.rig);
+    CHECK(restored.channels.size()==2&&restored.channels[0].sourceMeshes.size()==2&&restored.channels[1].sourceMeshes.size()==2);
+    auto actor=round.asset.object.get().instantiate();
+    round.rig.get().applyTo(*actor,round.rig.get().evaluateNamed(std::array{NamedRigControl{"Expression",.55},NamedRigControl{"Blink",.2}}));
+    for(auto *component:actor->components())if(auto *mesh=dynamic_cast<SkeletalMeshComponent *>(component))
+        CHECK(close(mesh->deformedVertices()[0].position.y,expected.at(mesh->name())));
+
+    const auto expr=object3DProgressiveControlCurveName("Expression"),blink=object3DProgressiveControlCurveName("Blink");
+    AnimationClip clip(object.get().skeleton(),2,{},{{expr,{{0,0},{1,.55},{2,1}}},
+        {blink,{{0,0},{1,.2},{2,.5}}},{"Other",{{0,0},{1,.5},{2,1}}}});
+    const std::array bindings{AnimationMorphBinding{2,2,1}};
+    FbxAnimationExportOptions options;options.indexedBindings=bindings;
+    const auto animated=exportObject3DFbxWithProgressiveMorphs(rig,clip,options);
+    Scene animatedScene(ufbx_load_memory(animated.bytes.data(),animated.bytes.size(),&strict,&error),ufbx_free_scene);
+    CHECK(animatedScene&&animatedScene->anim_stacks.count==1);
+    for(const auto *channel:animatedScene->blend_channels)
+    {
+        const std::string_view name(channel->name.data,channel->name.length);
+        if(name=="Expression")CHECK(close(ufbx_evaluate_blend_weight(animatedScene->anim_stacks[0]->anim,channel,1),.55));
+        if(name=="Blink")CHECK(close(ufbx_evaluate_blend_weight(animatedScene->anim_stacks[0]->anim,channel,1),.2));
+    }
+    Object3DEngine animatedEngine;const auto loaded=importObject3DFbxWithProgressiveMorphsAndAnimations(animatedEngine.reference(),animated.bytes);
+    CHECK(loaded.animations.size()==1&&inspectObject3DProgressiveMorphRig(loaded.rig).channels.size()==2);
+    auto moved=loaded.asset.object.get().instantiate();std::vector<SkeletalMeshComponent*> meshes;
+    for(auto *component:moved->components())if(auto *mesh=dynamic_cast<SkeletalMeshComponent *>(component))meshes.push_back(mesh);
+    applyObject3DProgressiveAnimationClip(loaded.rig,*loaded.animations[0].clip,loaded.animations[0].morphBindings,1,moved->pose(),meshes);
+    for(auto *mesh:meshes)
+        CHECK(close(mesh->deformedVertices()[0].position.y,expected.at(mesh->name())+(mesh->name()=="Face3"?.1:0)));
 }
 void invalid()
 {
@@ -524,7 +596,7 @@ void emitShared(const char *path)
 int main(int argc,char **argv)
 {
     try{if(argc<2)return 2;const std::string_view mode=argv[1];
-        if(mode=="curve")curve();else if(mode=="invalid")invalid();else if(mode=="project")project();
+        if(mode=="curve")curve();else if(mode=="invalid")invalid();else if(mode=="project")project();else if(mode=="split")split();
         else if(mode=="lifetime")lifetime();else if(mode=="archive"){archive();return 0;}else if(mode=="reject_archive")rejectedArchive();
         else if(mode=="reference"&&argc==3)reference(argv[2]);
         else if(mode=="import"&&argc==3)imported(argv[2]);

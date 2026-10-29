@@ -638,6 +638,8 @@ static Object3DImport importFbx(const Object3DReference &engine,std::span<const 
     std::set<std::string> progressiveControls;
     std::map<std::string,std::set<std::string>,std::less<>> progressiveTargets;
     std::map<std::uint32_t,std::size_t> progressiveChannels;
+    struct ProgressiveGroup final {std::size_t program,expected,seen;};
+    std::map<std::uint32_t,ProgressiveGroup> progressiveGroups;
     std::size_t progressiveKeyCount=0,progressiveMeshRefs=0,progressiveKeyInstances=0;
     object3d_detail::FbxImportedMorphs animatedMorphs;
     std::vector<object3d_detail::FbxImportedProgressiveControl> animatedProgressive;
@@ -924,6 +926,20 @@ static Object3DImport importFbx(const Object3DReference &engine,std::span<const 
                 throw std::invalid_argument("Invalid FBX blend shape target or full weight");
             const auto *progressiveMarker=child(channel->element.dom_node,"iiActorObjectProgressive");
             if(progressiveMarker&&number(progressiveMarker)!=1)throw std::invalid_argument("Invalid FBX progressive marker");
+            const auto *groupNode=child(channel->element.dom_node,"iiActorObjectProgressiveGroup");
+            const auto *groupSizeNode=child(channel->element.dom_node,"iiActorObjectProgressiveGroupSize");
+            const bool grouped=options.restoreAuthoringMetadata&&(groupNode||groupSizeNode);
+            std::uint32_t groupId=0,groupSize=0;
+            if(grouped)
+            {
+                if(!groupNode||!groupSizeNode||!progressiveMarker)
+                    throw std::invalid_argument("Incomplete FBX progressive control group metadata");
+                groupId=number(groupNode);groupSize=number(groupSizeNode);
+                if(groupId==0||groupId>65535||groupSize<2||groupSize>65535)
+                    throw std::invalid_argument("Invalid FBX progressive control group metadata");
+            }
+            else if(groupNode||groupSizeNode)
+                warn("Progressive shared-control metadata was ignored; geometry channels remain separate controls.");
             if((progressiveProgram&&progressiveMarker)||channel->keyframes.count!=1||(progressiveProgram?channel->keyframes[0].target_weight!=1:
                std::abs(channel->keyframes[0].target_weight-1)>1e-6))
             {
@@ -936,8 +952,15 @@ static Object3DImport importFbx(const Object3DReference &engine,std::span<const 
                     throw std::length_error("FBX progressive morph key instance limit");
                 progressiveKeyInstances+=channel->keyframes.count;
                 const auto existingChannel=progressiveChannels.find(channel->element_id);
-                const bool newChannel=existingChannel==progressiveChannels.end();
-                if(newChannel)
+                const bool newObject=existingChannel==progressiveChannels.end();
+                const auto existingGroup=grouped?progressiveGroups.find(groupId):progressiveGroups.end();
+                const bool newProgram=newObject&&existingGroup==progressiveGroups.end();
+                const auto programIndex=newProgram?progressiveProgram->channels.size():
+                    (newObject?existingGroup->second.program:existingChannel->second);
+                if(grouped&&existingGroup!=progressiveGroups.end()&&
+                   (existingGroup->second.expected!=groupSize||existingGroup->second.program!=programIndex))
+                    throw std::invalid_argument("Conflicting FBX progressive control group metadata");
+                if(newProgram)
                 {
                     if(progressiveProgram->channels.size()>=65535||channel->keyframes.count>65535-progressiveKeyCount)
                         throw std::length_error("FBX progressive morph program limit");
@@ -949,8 +972,8 @@ static Object3DImport importFbx(const Object3DReference &engine,std::span<const 
                     child(channel->element.dom_node,"iiActorObjectMergedMorphRecords")))
                     throw std::invalid_argument("FBX progressive channel has unsupported single-target authoring metadata");
                 ProgressiveMorphChannel converted;converted.sourceName=progressiveSourceName(channel->name);
-                converted.name=newChannel?unique(converted.sourceName,progressiveControls):
-                    progressiveProgram->channels[existingChannel->second].name;
+                converted.name=newProgram?unique(converted.sourceName,progressiveControls):
+                    progressiveProgram->channels[programIndex].name;
                 converted.sourceMeshes.push_back(out.name);
                 converted.defaultValue=static_cast<double>(channel->weight);
                 if(!std::isfinite(converted.defaultValue))throw std::invalid_argument("Nonfinite FBX progressive morph default");
@@ -966,7 +989,8 @@ static Object3DImport importFbx(const Object3DReference &engine,std::span<const 
                     if(shape.normal_offsets.count&&shape.normal_offsets.count!=shape.offset_vertices.count)
                         throw std::invalid_argument("FBX blend shape normal offset count");
                     TopologyMorph morph;morph.name="__iiAO_progressive_"+
-                        std::to_string(channel->element_id)+"_"+std::to_string(keyIndex);
+                        (grouped?std::string("group_")+std::to_string(groupId):std::to_string(channel->element_id))+
+                        "_"+std::to_string(keyIndex);
                     if(!names.insert(morph.name).second||!progressiveTargets[morph.name].insert(out.name).second)
                         throw std::invalid_argument("FBX progressive target name collision");
                     auto originalName=progressiveSourceName(shape.name);
@@ -1001,20 +1025,30 @@ static Object3DImport importFbx(const Object3DReference &engine,std::span<const 
                     }
                     topology.morphTargets.push_back(std::move(morph));++progressiveLogicalCount;
                 }
-                if(newChannel)
+                if(newProgram)
                 {
-                    if(animationOptions)animatedProgressive.push_back({converted.name,channel});
-                    progressiveChannels.emplace(channel->element_id,progressiveProgram->channels.size());
+                    if(animationOptions)animatedProgressive.push_back({converted.name,{channel}});
                     progressiveProgram->channels.push_back(std::move(converted));
                 }
                 else
                 {
-                    auto &existing=progressiveProgram->channels[existingChannel->second];
+                    auto &existing=progressiveProgram->channels[programIndex];
                     if(existing.name!=converted.name||existing.defaultValue!=converted.defaultValue||
                        existing.sourceName!=converted.sourceName||existing.keys!=converted.keys||
                        std::find(existing.sourceMeshes.begin(),existing.sourceMeshes.end(),out.name)!=existing.sourceMeshes.end())
                         throw std::invalid_argument("Conflicting FBX progressive channel instances");
                     existing.sourceMeshes.push_back(out.name);
+                    if(animationOptions&&newObject)animatedProgressive.at(programIndex).channels.push_back(channel);
+                }
+                if(newObject)
+                {
+                    progressiveChannels.emplace(channel->element_id,programIndex);
+                    if(grouped)
+                    {
+                        auto [it,created]=progressiveGroups.try_emplace(groupId,ProgressiveGroup{programIndex,groupSize,0});
+                        (void)created;if(++it->second.seen>it->second.expected)
+                            throw std::invalid_argument("Too many FBX progressive control group channels");
+                    }
                 }
                 warn("Progressive FBX shapes require the returned rig; ordinary FBX and GLB exports do not preserve its channel program.");
                 continue;
@@ -1239,6 +1273,11 @@ static Object3DImport importFbx(const Object3DReference &engine,std::span<const 
         if(sourceTangents&&(retainedElements<tangentElements||retainedElements==0))
             warn("Some FBX tangent and binormal layers are not retained; tangent bases can be recomputed from geometry and UVs.");
         out.topology=std::move(topology);data.meshes.push_back(std::move(out));
+    }
+    for(const auto &[id,group]:progressiveGroups)
+    {
+        (void)id;
+        if(group.seen!=group.expected)throw std::invalid_argument("Incomplete FBX progressive control group");
     }
     if(!progressiveTargets.empty())
     {

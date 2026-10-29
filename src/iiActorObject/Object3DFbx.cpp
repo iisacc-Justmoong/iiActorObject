@@ -13,6 +13,7 @@
 #include <numbers>
 #include <map>
 #include <set>
+#include <stdexcept>
 #include <variant>
 
 namespace iiActorObject
@@ -252,6 +253,12 @@ struct ProgressiveFbxPlan final
     std::vector<std::vector<const ProgressiveMorphChannel *>> channels;
     std::vector<std::set<std::string,std::less<>>> consumedTargets;
     std::vector<std::size_t> representative;
+    // Distinct geometry channels belonging to the same SDK control.
+    std::map<const ProgressiveMorphChannel *,std::pair<std::int32_t,std::int32_t>> groups;
+};
+class SharedProgressiveGeometryMismatch final : public std::runtime_error
+{
+  public: using std::runtime_error::runtime_error;
 };
 struct FbxExportTake final
 {
@@ -334,8 +341,9 @@ static FbxProgressiveMorphExport exportProgressiveFbx(const Object3DRigHandle &r
     if(!options.externalDocument.empty())throw std::invalid_argument("Progressive FBX external identity is not supported");
     const auto program=inspectObject3DProgressiveMorphRig(rig);
     auto &session=rig.get();const auto &asset=session.object().get();const auto &meshes=asset.data().meshes;
-    ProgressiveFbxPlan plan;plan.channels.resize(meshes.size());plan.consumedTargets.resize(meshes.size());
-    plan.representative.resize(meshes.size());for(std::size_t i=0;i<meshes.size();++i)plan.representative[i]=i;
+    ProgressiveFbxPlan plan,split;plan.channels.resize(meshes.size());plan.consumedTargets.resize(meshes.size());
+    plan.representative.resize(meshes.size());split.channels.resize(meshes.size());split.representative.resize(meshes.size());
+    for(std::size_t i=0;i<meshes.size();++i)plan.representative[i]=split.representative[i]=i;
     std::map<std::string,std::vector<std::size_t>,std::less<>> membership;
     for(const auto &channel:program.channels)for(const auto &key:channel.keys)membership.try_emplace(key.target);
     std::vector<std::map<std::string_view,std::size_t,std::less<>>> records(meshes.size());
@@ -364,8 +372,10 @@ static FbxProgressiveMorphExport exportProgressiveFbx(const Object3DRigHandle &r
     std::vector<std::optional<std::size_t>> assigned(meshes.size());std::size_t comparisons=0;
     const auto account=[&](std::size_t count)
     {if(count>maximumVisits-comparisons)throw std::length_error("Progressive FBX mesh binding comparison budget");comparisons+=count;};
+    bool requiresSplit=false;std::int32_t groupId=0;
     for(const auto &channel:program.channels)
     {
+        ++groupId;
         const std::vector<std::size_t> *owners=nullptr;
         const auto defaultPercent=100.*channel.defaultValue;
         if(!std::isfinite(defaultPercent))throw std::overflow_error("Progressive FBX default percentage overflow");
@@ -386,11 +396,18 @@ static FbxProgressiveMorphExport exportProgressiveFbx(const Object3DRigHandle &r
         for(const auto index:*owners)
         {
             if(assigned[index]&&*assigned[index]!=group->second)
-                throw std::invalid_argument("Overlapping progressive FBX mesh groups cannot share one geometry");
+                requiresSplit=true;
             assigned[index]=group->second;plan.representative[index]=owners->front();
+            split.channels[index].push_back(&channel);
         }
         plan.channels.at(owners->front()).push_back(&channel);
+        if(owners->size()>1)
+        {
+            if(owners->size()>65535)throw std::length_error("Progressive FBX shared control mesh limit");
+            split.groups.emplace(&channel,std::pair{groupId,static_cast<std::int32_t>(owners->size())});
+        }
     }
+    split.consumedTargets=plan.consumedTargets;
     const auto defaults=session.evaluateNamed({});const auto &names=session.definition().blendShapes;
     for(std::size_t i=0;i<names.size();++i)
     {
@@ -411,7 +428,16 @@ static FbxProgressiveMorphExport exportProgressiveFbx(const Object3DRigHandle &r
         }
     }
     FbxProgressiveMorphExport result;
-    result.bytes=exportFbx(asset,options,takes,animationOptions,&plan);
+    if(!requiresSplit)
+    {
+        try{result.bytes=exportFbx(asset,options,takes,animationOptions,&plan);}
+        catch(const SharedProgressiveGeometryMismatch &){requiresSplit=true;}
+    }
+    if(requiresSplit)
+    {
+        result.bytes=exportFbx(asset,options,takes,animationOptions,&split);
+        result.warnings.push_back("Different geometries use separate FBX channels; their common SDK control is restored only when its authoring metadata survives. External editors may expose separate controls.");
+    }
     result.warnings.push_back("FBX preserves progressive shape behavior; SDK control and target identifiers, source record IDs and provenance may change when reimported. Colliding ordinary channel names may also change. Retain the SDK project.");
     result.warnings.push_back("Derived shape normals are baked into the FBX; other applications may evaluate values outside the key range differently.");
     if(!takes.empty())
@@ -772,23 +798,23 @@ static std::vector<std::uint8_t> exportFbx(const Object3DAsset &asset,const FbxE
         {
             const auto &original=objects.children.at(geometryNodeIndices[leader]);
             if(geom.children.size()!=original.children.size())
-                throw std::invalid_argument("Shared progressive FBX meshes have different geometry");
+                throw SharedProgressiveGeometryMismatch("Shared progressive FBX meshes have different geometry");
             for(std::size_t i=0;i<geom.children.size();++i)
                 if(!sameNode(geom.children[i],original.children[i],sharedWork))
-                    throw std::invalid_argument("Shared progressive FBX meshes have different geometry");
+                    throw SharedProgressiveGeometryMismatch("Shared progressive FBX meshes have different geometry");
             const auto &first=d.meshes[leader];const auto *firstSource=first.topology?&*first.topology:nullptr;
             if(bool(source)!=bool(firstSource)||count!=(firstSource?firstSource->points.size():first.geometry.vertices.size())||
                (source?source->skinning:g.skinning)!=(firstSource?firstSource->skinning:first.geometry.skinning))
-                throw std::invalid_argument("Shared progressive FBX meshes have different skinning");
+                throw SharedProgressiveGeometryMismatch("Shared progressive FBX meshes have different skinning");
             accountShared(count);
             for(std::size_t i=0;i<count;++i)
             {
                 const auto &a=source?source->points[i].weights:g.vertices[i].weights;
                 const auto &b=firstSource?firstSource->points[i].weights:first.geometry.vertices[i].weights;
-                if(a.size()!=b.size())throw std::invalid_argument("Shared progressive FBX meshes have different skin weights");
+                if(a.size()!=b.size())throw SharedProgressiveGeometryMismatch("Shared progressive FBX meshes have different skin weights");
                 accountShared(a.size());
                 for(std::size_t w=0;w<a.size();++w)if(a[w].bone!=b[w].bone||a[w].weight!=b[w].weight)
-                    throw std::invalid_argument("Shared progressive FBX meshes have different skin weights");
+                    throw SharedProgressiveGeometryMismatch("Shared progressive FBX meshes have different skin weights");
             }
         }
         else
@@ -875,10 +901,10 @@ static std::vector<std::uint8_t> exportFbx(const Object3DAsset &asset,const FbxE
             {
                 accountShared(m.deltas.size());if(m.normalDeltas)accountShared(m.normalDeltas->size());
                 if(!progressive->consumedTargets[leader].contains(m.name))
-                    throw std::invalid_argument("Shared progressive FBX geometry cannot preserve independent ordinary morph controls");
+                    throw SharedProgressiveGeometryMismatch("Shared progressive FBX geometry cannot preserve independent ordinary morph controls");
             }
             if(morphs!=previous||mesh.morphDefaults!=first.morphDefaults)
-                throw std::invalid_argument("Shared progressive FBX meshes have different morph shapes or defaults");
+                throw SharedProgressiveGeometryMismatch("Shared progressive FBX meshes have different morph shapes or defaults");
             continue;
         }
         if (!morphs.empty())
@@ -999,6 +1025,11 @@ static std::vector<std::uint8_t> exportFbx(const Object3DAsset &asset,const FbxE
                     {prop(channel),prop(objectName(program->name,"SubDeformer")),prop("BlendShapeChannel")},
                     {value("Version",prop(100)),value("DeformPercent",prop(100.*program->defaultValue)),
                      value("FullWeights",array(weights)),value("iiActorObjectProgressive",prop(1))}});
+                if(const auto group=progressive->groups.find(program);group!=progressive->groups.end())
+                {
+                    objects.children.back().children.push_back(value("iiActorObjectProgressiveGroup",prop(group->second.first)));
+                    objects.children.back().children.push_back(value("iiActorObjectProgressiveGroupSize",prop(group->second.second)));
+                }
                 if(!requestedTakes.empty())progressiveChannels[object3DProgressiveControlCurveName(program->name)].push_back(channel);
                 connect(channel,blend);
                 for(const auto &key:program->keys)

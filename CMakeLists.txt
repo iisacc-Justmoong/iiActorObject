@@ -402,7 +402,7 @@ if(BUILD_TESTING)
     target_link_libraries(iiActorObjectProgressiveMorphRigTests PRIVATE iiActorObject::iiActorObject)
     target_compile_features(iiActorObjectProgressiveMorphRigTests PRIVATE cxx_std_23)
     set_target_properties(iiActorObjectProgressiveMorphRigTests PROPERTIES CXX_EXTENSIONS OFF)
-    foreach(_case curve invalid project lifetime)
+    foreach(_case curve invalid project lifetime split)
         add_test(NAME iiActorObject.progressive_morph.${_case} COMMAND iiActorObjectProgressiveMorphRigTests ${_case})
     endforeach()
     add_test(NAME iiActorObject.progressive_morph.reference COMMAND iiActorObjectProgressiveMorphRigTests reference
