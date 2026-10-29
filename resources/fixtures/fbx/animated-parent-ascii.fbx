@@ -1,0 +1,109 @@
+; FBX 7.4.0 project file
+; Synthetic fixture authored for iiActorObject tests.
+; The animated non-bone parent is omitted from the imported skeleton.
+FBXHeaderExtension: { FBXHeaderVersion: 1003
+ FBXVersion: 7400
+}
+GlobalSettings: { Version: 1000
+ Properties70: { P: "UpAxis", "int", "Integer", "",1
+ P: "UpAxisSign", "int", "Integer", "",1
+ P: "FrontAxis", "int", "Integer", "",2
+ P: "FrontAxisSign", "int", "Integer", "",1
+ P: "CoordAxis", "int", "Integer", "",0
+ P: "CoordAxisSign", "int", "Integer", "",1
+ P: "UnitScaleFactor", "double", "Number", "",100
+ }
+}
+Objects: {
+ Model: 100, "Model::Carrier", "Null" { Version: 232
+  Properties70: { P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+   P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+   P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+   P: "InheritType", "int", "Integer", "",1
+  }
+ }
+ Model: 101, "Model::Bone", "LimbNode" { Version: 232
+  Properties70: { P: "Lcl Translation", "Lcl Translation", "", "A",0,1,0
+   P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+   P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+   P: "InheritType", "int", "Integer", "",1
+  }
+ }
+ NodeAttribute: 102, "NodeAttribute::Bone", "LimbNode" { TypeFlags: "Skeleton" }
+ Geometry: 103, "Geometry::Triangle", "Mesh" {
+  Vertices: *9 { a: 0,0,0,1,0,0,0,1,0 }
+  PolygonVertexIndex: *3 { a: 0,1,-3 }
+ }
+ Model: 104, "Model::Triangle", "Mesh" { Version: 232 }
+ AnimationStack: 200, "AnimStack::NegativeRange", "" {
+  Properties70: { P: "LocalStart", "KTime", "Time", "",-46186158000
+   P: "LocalStop", "KTime", "Time", "",46186158000
+   P: "ReferenceStart", "KTime", "Time", "",-46186158000
+   P: "ReferenceStop", "KTime", "Time", "",46186158000
+  }
+ }
+ AnimationLayer: 201, "AnimLayer::Base", "" { Properties70: { P: "BlendMode", "enum", "", "",1 } }
+ AnimationCurveNode: 202, "AnimCurveNode::T", "" {
+  Properties70: { P: "d|X", "double", "Number", "",0
+   P: "d|Y", "double", "Number", "",0
+   P: "d|Z", "double", "Number", "",0
+  }
+ }
+ AnimationCurve: 203, "AnimCurve::X", "" {
+  Default: 0
+  KeyVer: 4008
+  KeyTime: *2 { a: -46186158000,46186158000 }
+  KeyValueFloat: *2 { a: -1,1 }
+  KeyAttrFlags: *1 { a: 4 }
+  KeyAttrDataFloat: *4 { a: 0,0,0,0 }
+  KeyAttrRefCount: *1 { a: 2 }
+ }
+ AnimationStack: 300, "AnimStack::PositiveRange", "" {
+  Properties70: { P: "LocalStart", "KTime", "Time", "",92372316000
+   P: "LocalStop", "KTime", "Time", "",138558474000
+   P: "ReferenceStart", "KTime", "Time", "",92372316000
+   P: "ReferenceStop", "KTime", "Time", "",138558474000
+  }
+ }
+ AnimationLayer: 301, "AnimLayer::Base", "" { Properties70: { P: "BlendMode", "enum", "", "",1 } }
+ AnimationCurveNode: 302, "AnimCurveNode::T", "" {
+  Properties70: { P: "d|X", "double", "Number", "",0
+   P: "d|Y", "double", "Number", "",0
+   P: "d|Z", "double", "Number", "",0
+  }
+ }
+ AnimationCurve: 303, "AnimCurve::X", "" {
+  Default: 0
+  KeyVer: 4008
+  KeyTime: *2 { a: 92372316000,138558474000 }
+  KeyValueFloat: *2 { a: 2,3 }
+  KeyAttrFlags: *1 { a: 4 }
+  KeyAttrDataFloat: *4 { a: 0,0,0,0 }
+  KeyAttrRefCount: *1 { a: 2 }
+ }
+}
+Connections: {
+ C: "OO",100,0
+ C: "OO",101,100
+ C: "OO",102,101
+ C: "OO",103,104
+ C: "OO",104,0
+ C: "OO",201,200
+ C: "OO",202,201
+ C: "OP",202,100,"Lcl Translation"
+ C: "OP",203,202,"d|X"
+ C: "OO",301,300
+ C: "OO",302,301
+ C: "OP",302,100,"Lcl Translation"
+ C: "OP",303,302,"d|X"
+}
+Takes: { Current: "NegativeRange"
+ Take: "NegativeRange" { FileName: "NegativeRange.tak"
+  LocalTime: -46186158000,46186158000
+  ReferenceTime: -46186158000,46186158000
+ }
+ Take: "PositiveRange" { FileName: "PositiveRange.tak"
+  LocalTime: 92372316000,138558474000
+  ReferenceTime: 92372316000,138558474000
+ }
+}

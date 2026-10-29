@@ -1,0 +1,509 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:4b4e8cf75b309f3044b303aa343c4890d04702024c2beff9149c1b90f7e0df6a",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "data/MakeHumanMacro/LICENSE.md",
+    "sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+    "bytes": 3598,
+    "line_count": 95,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "LICENSE",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 2,
+      "raw": "LICENSE\n=======\n",
+      "level": 1,
+      "title": "LICENSE"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 4,
+      "end_line": 5,
+      "raw": "Table of contents\n-----------------\n",
+      "level": 2,
+      "title": "Table of contents"
+    },
+    {
+      "id": "b000004",
+      "kind": "paragraph",
+      "start_line": 6,
+      "end_line": 9,
+      "raw": "A. The overall license setup for MakeHuman\nB. The license for the source code as such\nC. The license for the bundled assets\nD. Concerning the output from MakeHuman\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 11,
+      "raw": "\n\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "heading",
+      "start_line": 12,
+      "end_line": 13,
+      "raw": "A. The overall license setup for MakeHuman\n------------------------------------------\n",
+      "level": 2,
+      "title": "A. The overall license setup for MakeHuman"
+    },
+    {
+      "id": "b000007",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "The MakeHuman application consists of two separate parts:\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "list",
+      "start_line": 17,
+      "end_line": 18,
+      "raw": "* Source code: the program logic that powers the application. \n* Assets: The graphical data that the application operates on\n",
+      "items": [
+        {
+          "marker": "*",
+          "text": "Source code: the program logic that powers the application. ",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Assets: The graphical data that the application operates on",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000011",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "heading",
+      "start_line": 20,
+      "end_line": 21,
+      "raw": "B. The license for the source code as such\n------------------------------------------\n",
+      "level": 2,
+      "title": "B. The license for the source code as such"
+    },
+    {
+      "id": "b000013",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 24,
+      "raw": "The MakeHuman source code is defined as files that contain program logic.\nThis includes python files, bat scripts, shell scripts and glsl shaders.\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "blank",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "paragraph",
+      "start_line": 26,
+      "end_line": 27,
+      "raw": "Image files required for the user interface as such are also covered. This\nincludes images for buttons, icons, and slider images.\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "The MakeHuman source (as defined per the above) is released under AGPL.\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "paragraph",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "Copyright (C) 2001-2020  MakeHuman Team (www.makehumancommunity.org)\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "blank",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "indented_code",
+      "start_line": 33,
+      "end_line": 45,
+      "raw": "    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU Affero General Public License as\n    published by the Free Software Foundation, either version 3 of the\n    License, or (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU Affero General Public License for more details.\n\n    You should have received a copy of the GNU Affero General Public License\n    along with this program.  If not, see <http://www.gnu.org/licenses/>.\n   \n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 46,
+      "end_line": 47,
+      "raw": "For the full text of the source code license, see \n[LICENSE.CODE.md](LICENSE.CODE.md)\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 48,
+      "end_line": 48,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "heading",
+      "start_line": 49,
+      "end_line": 50,
+      "raw": "C. The license for the bundled assets\n-------------------------------------\n",
+      "level": 2,
+      "title": "C. The license for the bundled assets"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 52,
+      "end_line": 53,
+      "raw": "The assets are defined as any data contributing to the graphical output of\nMakeHuman. This includes:\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 54,
+      "end_line": 54,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "list",
+      "start_line": 55,
+      "end_line": 59,
+      "raw": "* The base mesh and proxies\n* Targets and modifiers\n* Textures\n* Clothes (any MHCLO-based asset)\n* Poses and expressions\n",
+      "items": [
+        {
+          "marker": "*",
+          "text": "The base mesh and proxies",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Targets and modifiers",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Textures",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Clothes (any MHCLO-based asset)",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Poses and expressions",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 60,
+      "end_line": 60,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 61,
+      "end_line": 63,
+      "raw": "These assets have been released under CC0 1.0 Universal. In summary this means\nthat to the fullest extent possible, it is the intention of the MakeHuman \nproject that anyone can do whatever they want with it.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 64,
+      "end_line": 64,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 65,
+      "end_line": 66,
+      "raw": "For the full text of the legal statement regarding the assets, see\n[LICENSE.ASSETS.md](LICENSE.ASSETS.md)\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 67,
+      "end_line": 67,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "heading",
+      "start_line": 68,
+      "end_line": 69,
+      "raw": "D. Concerning the output from MakeHuman\n---------------------------------------\n",
+      "level": 2,
+      "title": "D. Concerning the output from MakeHuman"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 71,
+      "end_line": 76,
+      "raw": "It is the opinion of the MakeHuman project that no output from MakeHuman\ncontains any trace of program logic. That is, regardless of whether you use\nthe UI as such or if you call functions of MakeHuman via a script (such as \nvia the blender importer), what you get is a combination of assets and your\nown creative input. As the assets have been released under CC0, there is no\nlimitation on what you can do with this combined output.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 77,
+      "end_line": 77,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 78,
+      "end_line": 79,
+      "raw": "To make it clear, the MakeHuman project makes no claim whatsoever over output\nsuch as:\n"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 80,
+      "end_line": 80,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "list",
+      "start_line": 81,
+      "end_line": 86,
+      "raw": "* Exports to files (FBX, OBJ, DAE, MHX2...)\n* Exports via direct integration (import via MPFB)\n* Graphical data generated via scripting or plugins\n* Renderings\n* Screenshots\n* Saved model files\n",
+      "items": [
+        {
+          "marker": "*",
+          "text": "Exports to files (FBX, OBJ, DAE, MHX2...)",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Exports via direct integration (import via MPFB)",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Graphical data generated via scripting or plugins",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Renderings",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Screenshots",
+          "checked": null
+        },
+        {
+          "marker": "*",
+          "text": "Saved model files",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 87,
+      "end_line": 87,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 88,
+      "end_line": 89,
+      "raw": "We regard these things as your data, which is yours to handle as you see\nfit.\n"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 90,
+      "end_line": 90,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "paragraph",
+      "start_line": 91,
+      "end_line": 95,
+      "raw": "Note that what is discussed here are only assets bundled in the MakeHuman \ndistribution. If you use a third part asset, such as one downloaded from the \nasset repositories, it is your own responsibility to make sure you abide by\nits specific license. That license might be different from the one covering\nthe assets bundled by MakeHuman.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "LICENSE",
+      "anchor": "license",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Table of contents",
+      "anchor": "table-of-contents",
+      "start_line": 4
+    },
+    {
+      "block_id": "b000006",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "A. The overall license setup for MakeHuman",
+      "anchor": "a-the-overall-license-setup-for-makehuman",
+      "start_line": 12
+    },
+    {
+      "block_id": "b000012",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "B. The license for the source code as such",
+      "anchor": "b-the-license-for-the-source-code-as-such",
+      "start_line": 20
+    },
+    {
+      "block_id": "b000025",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "C. The license for the bundled assets",
+      "anchor": "c-the-license-for-the-bundled-assets",
+      "start_line": 49
+    },
+    {
+      "block_id": "b000035",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "D. Concerning the output from MakeHuman",
+      "anchor": "d-concerning-the-output-from-makehuman",
+      "start_line": 68
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000016",
+        "line": 26,
+        "text": "Image files required for the user interface as such are also covered. This",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000023",
+        "label": "LICENSE.CODE.md",
+        "target": "LICENSE.CODE.md",
+        "kind": "relative",
+        "line": 47
+      },
+      {
+        "block_id": "b000033",
+        "label": "LICENSE.ASSETS.md",
+        "target": "LICENSE.ASSETS.md",
+        "kind": "relative",
+        "line": 66
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

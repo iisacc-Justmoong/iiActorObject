@@ -1,0 +1,107 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:dc72034093f1a3447e6afc76dd85f2530d03e772f52704dfa10d284e5beaa4b7",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "data/MakeHumanExpressions/PROVENANCE.md",
+    "sha256": "bb706e05419625b9c5b09ebcbfcbe812cd910e028703b1452b55046be224d8a1",
+    "bytes": 1344,
+    "line_count": 21,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "CC0 face pose units",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# CC0 face pose units\n",
+      "level": 1,
+      "title": "CC0 face pose units"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 9,
+      "raw": "The unmodified face BVH and frame-map JSON are from the official MakeHuman\nrepository at commit `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`, under\n`makehuman/data/poseunits/face-poseunits.bvh` and `face-poseunits.json`.\nThe JSON explicitly identifies the data as CC0. Original license statements are\nincluded. `UPSTREAM-SHA256.json` records exact byte hashes and the source Git blobs.\nOnly the local filenames are shortened, keeping the original JSON motion filename.\nNo application code, shader program or Python module is copied.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 16,
+      "raw": "The dataset contains 163 named joints and 60 frames: Rest and 59 pose units.\nThe independent C++ adapter converts source Z-up to SDK Y-up, forms world-rotation\ndifferences relative to Rest and rebinds them to the target's current bind frames.\n`catalog.json` is an iiActorObject-authored index. Compiled pose programs and baked\nsnapshot morphs are SDK output, not a reconstruction of the original application.\nThe source unit names do not establish ARKit or production MetaHuman equivalence.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 18,
+      "end_line": 21,
+      "raw": "The preset explicitly removes neutral-relative local rotations at or below\n1e-6 radians before forming world differences. This filters numerical body-joint\nnoise in the six-decimal BVH data; the generic reader preserves every value and\nthe generic pose-program builder defaults to zero tolerance.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "CC0 face pose units",
+      "anchor": "cc0-face-pose-units",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000005",
+        "line": 16,
+        "text": "The source unit names do not establish ARKit or production MetaHuman equivalence.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

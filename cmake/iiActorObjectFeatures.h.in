@@ -1,0 +1,3 @@
+#pragma once
+#cmakedefine01 IIACTOROBJECT_HAS_NSCHARACTER
+#cmakedefine01 IIACTOROBJECT_HAS_DNA

@@ -1,0 +1,308 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:e3a5e68fc6b3473bd6d34bcf13ea86b783166c3990906fe520e3870c216a4b0a",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/TemplateMorphProjectVerification-20261028.md",
+    "sha256": "870190fa604a4e204b7c0a648c38b97c5627b8f78eacf6287917616b86daa5a0",
+    "bytes": 4195,
+    "line_count": 29,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "템플릿 모프 리그 프로젝트 검증 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 템플릿 모프 리그 프로젝트 검증 — 2026-10-28\n",
+      "level": 1,
+      "title": "템플릿 모프 리그 프로젝트 검증 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 저장과 재생성\n",
+      "level": 2,
+      "title": "저장과 재생성"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "합성 몸·의상 템플릿에서 `height=0.25`, `body_width=0.2`를 기준으로 두 개의 `height` 끝점을 모프 리그로 베이크했다. 기준 입력에 포함된 다른 조절도 저장한다. 저장 전 기존 동명의 모프를 명시적으로 교체하고 `epsilon=1e-12`을 사용했다. 기준 템플릿에는 이 임계값보다 작은 점 변위를 넣어, 기본 임계값 0으로 재생성하면 기록되는 점이 달라지는지 별도로 확인한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "버전 21 프로젝트를 다른 본체 엔진에 복원한 뒤 저장된 템플릿·기준 입력·채널 끝점·베이크 설정으로 다시 생성했다. 두 메시의 기준 점과 모프 이름·원본 점 ID·변위를 비교하였다. 복원 리그를 런타임 액터에 적용한 결과도 템플릿의 목표 형상과 비교했다. 편집 이력의 undo·redo와 포즈 리그의 혼합 복원도 확인한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "같은 설정을 공유하는 두 리그를 각각 다른 가중치로 평가하고 서로 다른 액터에 적용해 결과가 섞이지 않는지도 검사한다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "관절 두 개의 원본 ID와 당시 이름은 원본 ID 순서로 보존한다. 대상 에셋의 자식 관절 이름을 바꾸고 리그를 재연결한 뒤 프로젝트를 다시 저장해도 샘플 당시의 ID·이름 기록은 그대로이며, 복원된 대상 에셋에는 바뀐 이름이 남는다. 이 출처는 현재 재연결 대상에 대한 새 관절 매핑이 아니다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "heading",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "## 원본이 없거나 입력이 손상된 경우\n",
+      "level": 2,
+      "title": "원본이 없거나 입력이 손상된 경우"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "원본 템플릿을 명시적으로 제거한 뒤 저장하면 리그와 알려진 기준 입력·베이크 설정은 남고 원본 참조는 없는 상태로 복원한다. 직접 구성한 리그에서 기준 입력과 설정을 제공하지 않은 경우는 각각 `nullopt`로 유지한다. 임의 사용자 드라이버가 같은 형식 이름을 주장하더라도 내장 드라이버로 인정하지 않는다. 256개를 넘는 선택 리그는 내보내기에서 거부한다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "독립 Python 파서는 버전 21 헤더·CRC, 공유 프로그램 테이블, 기준 입력, 비기본 베이크 설정, 채널과 원본 관절 ID·이름, 원본 템플릿 참조를 읽는다. CRC를 다시 계산한 범위 초과 입력, 상충하는 기준값, 손상 설정, 잘못된 소스 참조, 중복·불일치 관절 ID와 메시 이름 등 25개 손상 사례는 거부된다. 실패 후 기존 에셋과 자원 개수뿐 아니라 다음 에셋 ID도 유지하는지 검사한다. 전체 기준 입력이 없지만 원본 템플릿이 남은 유효한 파일은 별도로 복원한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 실행 결과\n",
+      "level": 2,
+      "title": "실행 결과"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "최종 소스에서 표준 구성의 프로젝트·기존 버전·FBX 작성 탄젠트 묶음 34개와 NSCharacter를 제외한 코어 구성의 관련 묶음 32개가 통과했다. 모프 프로젝트 5개 검사는 표준, 코어 전용, DNA와 NSCharacter를 모두 제외한 구성에서 각각 통과했다. 템플릿 맞춤·소유권·모프 4개 검사는 표준과 코어 전용에서 각각 통과했다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "DNA와 템플릿 모프 리그를 섞은 프로젝트 검사를 포함한 DNA 저장·복원 묶음은 표준과 코어 전용에서 각각 3개가 통과했다. 빌드 내부에 별도로 설치한 표준·코어·VisualCodec 소비자 검사 3개도 통과했다. CC0 인체 템플릿의 얼굴과 FBX·GLB 독립 파일 검사 4개가 통과했다. 이 검사는 해당 표본과 형식 경로의 근거다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "AddressSanitizer와 UndefinedBehaviorSanitizer를 켠 모프 프로젝트·템플릿 검사 9개도 통과했다. 이 환경에서 누수 검출은 꺼 두었으므로 누수 검사를 통과했다는 뜻은 아니다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "heading",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "## 범위\n",
+      "level": 2,
+      "title": "범위"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "표준·NSCharacter 제외·DNA와 NSCharacter 제외 구성에서 공용 프로젝트 기능을 검사한다. DNA 리그와 모프 리그의 혼합 프로젝트는 독립 DNA fixture와 native reader로 검사한다. 프로젝트는 원본 입력과 결과 에셋을 보관하지만 외부 앱의 제어기를 생성하지 않는다. CC5·Blender·Unreal 실행과 시각 품질은 사용자 지시에 따라 검사하지 않는다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "템플릿 모프 리그 프로젝트 검증 — 2026-10-28",
+      "anchor": "템플릿-모프-리그-프로젝트-검증--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "저장과 재생성",
+      "anchor": "저장과-재생성",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000013",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "원본이 없거나 입력이 손상된 경우",
+      "anchor": "원본이-없거나-입력이-손상된-경우",
+      "start_line": 13
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "실행 결과",
+      "anchor": "실행-결과",
+      "start_line": 19
+    },
+    {
+      "block_id": "b000027",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "범위",
+      "anchor": "범위",
+      "start_line": 27
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000015",
+        "line": 15,
+        "text": "원본 템플릿을 명시적으로 제거한 뒤 저장하면 리그와 알려진 기준 입력·베이크 설정은 남고 원본 참조는 없는 상태로 복원한다. 직접 구성한 리그에서 기준 입력과 설정을 제공하지 않은 경우는 각각 `nullopt`로 유지한다. 임의 사용자 드라이버가 같은 형식 이름을 주장하더라도 내장 드라이버로 인정하지 않는다. 256개를 넘는 선택 리그는 내보내기에서 거부한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 29,
+        "text": "표준·NSCharacter 제외·DNA와 NSCharacter 제외 구성에서 공용 프로젝트 기능을 검사한다. DNA 리그와 모프 리그의 혼합 프로젝트는 독립 DNA fixture와 native reader로 검사한다. 프로젝트는 원본 입력과 결과 에셋을 보관하지만 외부 앱의 제어기를 생성하지 않는다. CC5·Blender·Unreal 실행과 시각 품질은 사용자 지시에 따라 검사하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

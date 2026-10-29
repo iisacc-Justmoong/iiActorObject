@@ -1,0 +1,33 @@
+{
+  "upstream": "https://github.com/makehumancommunity/makehuman",
+  "revision": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+  "license": "CC0-1.0",
+  "files": [
+    {
+      "path": "makehuman/data/poseunits/face-poseunits.bvh",
+      "local": "poseunits.bvh",
+      "bytes": 310826,
+      "gitBlobSha1": "2965c340428429da673f57ef923f883ccc1f5b7b",
+      "sha256": "42a8e69692e30010371ee6993a6e5d3b468d35065559ec0953c936e31b8d903f"
+    },
+    {
+      "path": "makehuman/data/poseunits/face-poseunits.json",
+      "local": "poseunits.json",
+      "bytes": 1590,
+      "gitBlobSha1": "cf6cc27d9701a04ef72ef853a0a47a0ffcbb45be",
+      "sha256": "e7224f76e9610049b79e5f9e8ac2985d1e9a367333395c07537919258cb42cc3"
+    },
+    {
+      "path": "LICENSE.ASSETS.md",
+      "local": "LICENSE.ASSETS.md",
+      "bytes": 6962,
+      "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c"
+    },
+    {
+      "path": "LICENSE.md",
+      "local": "LICENSE.md",
+      "bytes": 3598,
+      "sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1"
+    }
+  ]
+}

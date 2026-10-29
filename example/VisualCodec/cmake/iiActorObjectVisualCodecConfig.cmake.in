@@ -1,0 +1,6 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+find_dependency(iiActorObject 0.2.1 CONFIG)
+find_dependency(iiVisualCodec 0.2 CONFIG COMPONENTS Image)
+include("${CMAKE_CURRENT_LIST_DIR}/iiActorObjectVisualCodecTargets.cmake")
+check_required_components(iiActorObjectVisualCodec)

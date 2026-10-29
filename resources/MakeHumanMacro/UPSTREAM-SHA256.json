@@ -1,0 +1,2455 @@
+{
+  "upstream": "https://github.com/makehumancommunity/makehuman",
+  "revision": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+  "license": "CC0-1.0",
+  "files": [
+    {
+      "path": "LICENSE.ASSETS.md",
+      "local": "LICENSE.ASSETS.md",
+      "bytes": 6962,
+      "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c"
+    },
+    {
+      "path": "LICENSE.md",
+      "local": "LICENSE.md",
+      "bytes": 3598,
+      "sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-female-baby.target",
+      "local": "targets/african-female-baby.target",
+      "bytes": 463097,
+      "gitBlobSha1": "3acfecdfa7af0b09467da53519a31ea4a5863668",
+      "sha256": "b1d4b5c76c73107b8f433bba6e224addf9da542287612868a02109d0f5a1c235"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-female-child.target",
+      "local": "targets/african-female-child.target",
+      "bytes": 442183,
+      "gitBlobSha1": "3c4860cc0c91875a231dceb0b2a5a324ad2460f0",
+      "sha256": "f88b8f252df8a9a3f35f78e1664983e9a30756bca1e454afce39438296eb7b41"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-female-old.target",
+      "local": "targets/african-female-old.target",
+      "bytes": 408823,
+      "gitBlobSha1": "d135b064567df7810b3a91396bdd5c2e76b10a9d",
+      "sha256": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-female-young.target",
+      "local": "targets/african-female-young.target",
+      "bytes": 411735,
+      "gitBlobSha1": "a7d2b130667cc81ecd1ca0598da9be27bec1864a",
+      "sha256": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-male-baby.target",
+      "local": "targets/african-male-baby.target",
+      "bytes": 463002,
+      "gitBlobSha1": "f533e5325452aa62b7a0e944f54dbb3fc932a871",
+      "sha256": "32ce877fa330805971ca636a78aa736bc486b37118e91d2e4bfb9f1ad2cd48a1"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-male-child.target",
+      "local": "targets/african-male-child.target",
+      "bytes": 439005,
+      "gitBlobSha1": "dd02a4f63d29097e0589b3b7d2436545f1db87d3",
+      "sha256": "5b89c85ed7ba9984b5e57a5844b10eb74ab7fcfa79f77a5a3ec697dd860969ed"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-male-old.target",
+      "local": "targets/african-male-old.target",
+      "bytes": 411367,
+      "gitBlobSha1": "3e67c58f7e0f56495e7f4fbf20f0076ffb6f92ab",
+      "sha256": "59ec94956b3525dbb30238d1239b2bce52adc3bfae091f12cd85d2570aa1933c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/african-male-young.target",
+      "local": "targets/african-male-young.target",
+      "bytes": 406170,
+      "gitBlobSha1": "dd5743e48700267d76596f575bf17b4b5cc3b3e0",
+      "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-female-baby.target",
+      "local": "targets/asian-female-baby.target",
+      "bytes": 463063,
+      "gitBlobSha1": "91fa4366037582ab9af31d945b70654dece1ff27",
+      "sha256": "43c2a05ac425c4084f9dc30687a294cc5b61699d7c075985536f7e9c3b23f78d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-female-child.target",
+      "local": "targets/asian-female-child.target",
+      "bytes": 447393,
+      "gitBlobSha1": "260bf0ccffd331a597e2abd761ebc552fdc9b249",
+      "sha256": "a4fffea45a475a24a0a7332dac28a07dfd60a9af9eb50b61ed5abd1178197f75"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-female-old.target",
+      "local": "targets/asian-female-old.target",
+      "bytes": 426301,
+      "gitBlobSha1": "a2afe59829cd0caa66c3eea160f2f05d15890e23",
+      "sha256": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-female-young.target",
+      "local": "targets/asian-female-young.target",
+      "bytes": 435553,
+      "gitBlobSha1": "f862c96add11c31ab1ca75c69e1c67ae5e0e3d5f",
+      "sha256": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-male-baby.target",
+      "local": "targets/asian-male-baby.target",
+      "bytes": 463045,
+      "gitBlobSha1": "385d888efa256564c68785153cd7baecfa2ff1c0",
+      "sha256": "296f9dd9c9716a0e43afb9dadfb35e11be0ecc1f15d2efae6e903b0e91bc07a5"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-male-child.target",
+      "local": "targets/asian-male-child.target",
+      "bytes": 442344,
+      "gitBlobSha1": "7d56f395d9133e226e8be25d88b1cd64e991bdbb",
+      "sha256": "c1b56e9cc549cd7c463f407557d7adceaa217b528c600d34c19df98bc3d6472e"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-male-old.target",
+      "local": "targets/asian-male-old.target",
+      "bytes": 427966,
+      "gitBlobSha1": "d327b85e0b3de07b113cf4fc756f410668880359",
+      "sha256": "36dc5a3a135ded33885e814806b0e3668ca5bf44bddcebdee48ae75ae68bc3d3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/asian-male-young.target",
+      "local": "targets/asian-male-young.target",
+      "bytes": 421040,
+      "gitBlobSha1": "8cd3ef3e9ddb06ee2d166f75f9ac10871251f938",
+      "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-female-baby.target",
+      "local": "targets/caucasian-female-baby.target",
+      "bytes": 463014,
+      "gitBlobSha1": "8812b2774f0424d1b9de3fd4269456da779b2fff",
+      "sha256": "2ae0b8f760a3608b8e628b9af80054592d0fd0ac4b7867f81d8fc86b5a75c170"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-female-child.target",
+      "local": "targets/caucasian-female-child.target",
+      "bytes": 446405,
+      "gitBlobSha1": "ff74bbad4e2b3cfb68faff34f25b06d6017202a1",
+      "sha256": "17fc408839c0a407bf4efd96d9af7eebcdf20d74698659f3597b0647ed6b147e"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-female-old.target",
+      "local": "targets/caucasian-female-old.target",
+      "bytes": 408930,
+      "gitBlobSha1": "2359bb525ddc620d43d309ba3dfea12b1fa88671",
+      "sha256": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-female-young.target",
+      "local": "targets/caucasian-female-young.target",
+      "bytes": 420559,
+      "gitBlobSha1": "9d1f0cbeedc9a6a51abe33f1ebb5fa7c5a7edbf1",
+      "sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-male-baby.target",
+      "local": "targets/caucasian-male-baby.target",
+      "bytes": 463026,
+      "gitBlobSha1": "9e60e823ce7137601a20ffbb743905981e60c2ec",
+      "sha256": "f970a2e354b70f8438508a884cd40a9b2ea5cbd24fa6b89a99071a30720c7417"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-male-child.target",
+      "local": "targets/caucasian-male-child.target",
+      "bytes": 441028,
+      "gitBlobSha1": "027c36a1fdb0e47efb33700c29ef012f8c6ccfe3",
+      "sha256": "401b9b0349c88dc7aacb81e71f67daf747fecde0f7fd7f3f6e10fb2ce5586d1e"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-male-old.target",
+      "local": "targets/caucasian-male-old.target",
+      "bytes": 400125,
+      "gitBlobSha1": "07b1f5526a3139dbd528efe07452d0a454106d0d",
+      "sha256": "b0d2b1d58cba0358af59833740e70229265f7da1c20a11240f4123b7192cfd6d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/caucasian-male-young.target",
+      "local": "targets/caucasian-male-young.target",
+      "bytes": 396479,
+      "gitBlobSha1": "c3b82f92c5ced85599199cd184b0faf3b3fc6881",
+      "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-baby-averagemuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/female-baby-averagemuscle-averageweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-baby-averagemuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/female-baby-averagemuscle-maxweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/female-baby-averagemuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/female-baby-averagemuscle-minweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-baby-maxmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-baby-maxmuscle-averageweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-baby-maxmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-baby-maxmuscle-maxweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-baby-maxmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/female-baby-maxmuscle-minweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-baby-minmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-baby-minmuscle-averageweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-baby-minmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-baby-minmuscle-maxweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-baby-minmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-baby-minmuscle-minweight-minheight.target",
+      "local": "targets/height/female-baby-minmuscle-minweight-minheight.target",
+      "bytes": 440914,
+      "gitBlobSha1": "0213350bca82d2b8b1de417deaf4f2f11306f553",
+      "sha256": "d0f1c421db9f494034a70951a73bb2af34dfa030c7a27d811520b2c9878677b3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-child-averagemuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/female-child-averagemuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-child-averagemuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/female-child-averagemuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/female-child-averagemuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/female-child-averagemuscle-minweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-child-maxmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-child-maxmuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-child-maxmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-child-maxmuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-child-maxmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/female-child-maxmuscle-minweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-child-minmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-child-minmuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-child-minmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-child-minmuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-child-minmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-child-minmuscle-minweight-minheight.target",
+      "local": "targets/height/female-child-minmuscle-minweight-minheight.target",
+      "bytes": 444404,
+      "gitBlobSha1": "b2ce3c7ee1ad811012677933a087603afe9d80fc",
+      "sha256": "7529c116954716578e64a1059cc43ccd5329457818433de53a4772ca0f668315"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-old-averagemuscle-averageweight-maxheight.target",
+      "bytes": 421428,
+      "gitBlobSha1": "c415ef40f80266dbcdf22efd08f6364b160e9c4a",
+      "sha256": "4e234a5b0237ab258b83aabe5ac3706536ba56543d0281d75db1a938dda0c646"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/female-old-averagemuscle-averageweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "4e7318e89ba9b6fec71ccab8f87aaf662594ada0",
+      "sha256": "9f2c08a5fd89815d9ae523b4965261064d79e78aad50eb9a8fa731c79ec40540"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-old-averagemuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/female-old-averagemuscle-maxweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "4e7318e89ba9b6fec71ccab8f87aaf662594ada0",
+      "sha256": "9f2c08a5fd89815d9ae523b4965261064d79e78aad50eb9a8fa731c79ec40540"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/female-old-averagemuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/female-old-averagemuscle-minweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "4e7318e89ba9b6fec71ccab8f87aaf662594ada0",
+      "sha256": "9f2c08a5fd89815d9ae523b4965261064d79e78aad50eb9a8fa731c79ec40540"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-old-maxmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-old-maxmuscle-averageweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "4e7318e89ba9b6fec71ccab8f87aaf662594ada0",
+      "sha256": "9f2c08a5fd89815d9ae523b4965261064d79e78aad50eb9a8fa731c79ec40540"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-old-maxmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-old-maxmuscle-maxweight-minheight.target",
+      "bytes": 35788,
+      "gitBlobSha1": "69c25e723e3c3aba5053b559af059f30c914975c",
+      "sha256": "1f80920f3da770a71fb1b86222dc1d40230d83c4498890cca06f7f28ed0c2fe9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-old-maxmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/female-old-maxmuscle-minweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "4e7318e89ba9b6fec71ccab8f87aaf662594ada0",
+      "sha256": "9f2c08a5fd89815d9ae523b4965261064d79e78aad50eb9a8fa731c79ec40540"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-old-minmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-old-minmuscle-averageweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "4e7318e89ba9b6fec71ccab8f87aaf662594ada0",
+      "sha256": "9f2c08a5fd89815d9ae523b4965261064d79e78aad50eb9a8fa731c79ec40540"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-old-minmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-old-minmuscle-maxweight-minheight.target",
+      "bytes": 444384,
+      "gitBlobSha1": "b61b6fe3581e4c6839c170edbc93b3313eca4f0c",
+      "sha256": "a31a8e984434f3c2191c68e1888ddf6ac723706de974587cc69ec999895286c5"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-old-minmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-old-minmuscle-minweight-minheight.target",
+      "local": "targets/height/female-old-minmuscle-minweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "c4e1f6b595870b3d5a202fdd64c431022adaa4b4",
+      "sha256": "bae2ab152636467361ffc866bb46b21247ca411dd965599f3001034a9f83516f"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-young-averagemuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/female-young-averagemuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-young-averagemuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/female-young-averagemuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/female-young-averagemuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/female-young-averagemuscle-minweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-young-maxmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-young-maxmuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-young-maxmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-young-maxmuscle-maxweight-minheight.target",
+      "bytes": 444372,
+      "gitBlobSha1": "d8327f69b85f9f8d81402fee0377e742abfca1d2",
+      "sha256": "b7edc54eb9735ab752a79e7be15d0be92c81168fe5b5705ac7857b45a79e11d4"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-young-maxmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/female-young-maxmuscle-minweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/female-young-minmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/female-young-minmuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/female-young-minmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/female-young-minmuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/female-young-minmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/female-young-minmuscle-minweight-minheight.target",
+      "local": "targets/height/female-young-minmuscle-minweight-minheight.target",
+      "bytes": 444392,
+      "gitBlobSha1": "cc284379c1fae0e7d95dd8c5de1181315a67c0a3",
+      "sha256": "48fe0e14e4db968f42d8e48751895fe1547c0424a531002132bce7691ec8aa74"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-baby-averagemuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/male-baby-averagemuscle-averageweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-baby-averagemuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/male-baby-averagemuscle-maxweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/male-baby-averagemuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/male-baby-averagemuscle-minweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-baby-maxmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-baby-maxmuscle-averageweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-baby-maxmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-baby-maxmuscle-maxweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-baby-maxmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/male-baby-maxmuscle-minweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-baby-minmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-baby-minmuscle-averageweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-baby-minmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-baby-minmuscle-maxweight-minheight.target",
+      "bytes": 440900,
+      "gitBlobSha1": "9277b08fdbe4367831953ee94731b820097e1815",
+      "sha256": "5ec3660bcdecc78b4fc2d1b4b1c2d8a3c3d0c2a2297c6ed443cf9dd8126bc283"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-baby-minmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-baby-minmuscle-minweight-minheight.target",
+      "local": "targets/height/male-baby-minmuscle-minweight-minheight.target",
+      "bytes": 440914,
+      "gitBlobSha1": "0213350bca82d2b8b1de417deaf4f2f11306f553",
+      "sha256": "d0f1c421db9f494034a70951a73bb2af34dfa030c7a27d811520b2c9878677b3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-child-averagemuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/male-child-averagemuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-child-averagemuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/male-child-averagemuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/male-child-averagemuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/male-child-averagemuscle-minweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-child-maxmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-child-maxmuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-child-maxmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-child-maxmuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-child-maxmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/male-child-maxmuscle-minweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-child-minmuscle-averageweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-child-minmuscle-averageweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-child-minmuscle-maxweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-child-minmuscle-maxweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "864d9eea661dab7e37177957f452d622f20a5c0a",
+      "sha256": "375857dff927f67da53786fc5ac0545c473f4959e3b326727b6b91f49ebdd2e3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-child-minmuscle-minweight-maxheight.target",
+      "bytes": 411926,
+      "gitBlobSha1": "00ccaea1de1a32b5383e58576424989b7e8bf8eb",
+      "sha256": "0d093cad7d4d968756164a21d719aae4deb9e315ac97291d41f32b035ccf6100"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-child-minmuscle-minweight-minheight.target",
+      "local": "targets/height/male-child-minmuscle-minweight-minheight.target",
+      "bytes": 444394,
+      "gitBlobSha1": "b7804fb810c3655a4faf2a223a6fe251fb68ee42",
+      "sha256": "26fd0d609e56c7733222cd16e8a0cfea6685f5ed3902446a3cf2a5057d53eb47"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-old-averagemuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/male-old-averagemuscle-averageweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-old-averagemuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/male-old-averagemuscle-maxweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/male-old-averagemuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/male-old-averagemuscle-minweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-old-maxmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-old-maxmuscle-averageweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-old-maxmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-old-maxmuscle-maxweight-minheight.target",
+      "bytes": 10129,
+      "gitBlobSha1": "beb52536fafc23e381d9f0b4f7c262ab6c83ef73",
+      "sha256": "10ec077d2a794791fd00e394ca2e8cbc01cb44e7927c17a7ef394f7c604980aa"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-old-maxmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/male-old-maxmuscle-minweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-old-minmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-old-minmuscle-averageweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-old-minmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-old-minmuscle-maxweight-minheight.target",
+      "bytes": 444357,
+      "gitBlobSha1": "213feeef726e1eed2effc7ab4d5658334a5c31bf",
+      "sha256": "2f2aa67a2bef2474867f5c101a6822d0cab264decbb5ec05f8577552d595bf78"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-old-minmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-old-minmuscle-minweight-minheight.target",
+      "local": "targets/height/male-old-minmuscle-minweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-averagemuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-young-averagemuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-averagemuscle-averageweight-minheight.target",
+      "local": "targets/height/male-young-averagemuscle-averageweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-averagemuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-young-averagemuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-averagemuscle-maxweight-minheight.target",
+      "local": "targets/height/male-young-averagemuscle-maxweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-averagemuscle-minweight-maxheight.target",
+      "local": "targets/height/male-young-averagemuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-averagemuscle-minweight-minheight.target",
+      "local": "targets/height/male-young-averagemuscle-minweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-maxmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-young-maxmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-maxmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-young-maxmuscle-averageweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-maxmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-young-maxmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-maxmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-young-maxmuscle-maxweight-minheight.target",
+      "bytes": 444349,
+      "gitBlobSha1": "4e9670a769d6266428a360791938621e650a733b",
+      "sha256": "225c493ffc12035d0f64e55d8bf54c395d99240186a8c225e6df53d58b4edb24"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-maxmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-young-maxmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-maxmuscle-minweight-minheight.target",
+      "local": "targets/height/male-young-maxmuscle-minweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-minmuscle-averageweight-maxheight.target",
+      "local": "targets/height/male-young-minmuscle-averageweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-minmuscle-averageweight-minheight.target",
+      "local": "targets/height/male-young-minmuscle-averageweight-minheight.target",
+      "bytes": 444375,
+      "gitBlobSha1": "7208f5dcf183c0cdba3eaa1e2da8cf21e7726b84",
+      "sha256": "76a79d873dc0820ae336645903591f8e6a8adc69865210a6a66f49908caa810b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-minmuscle-maxweight-maxheight.target",
+      "local": "targets/height/male-young-minmuscle-maxweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-minmuscle-maxweight-minheight.target",
+      "local": "targets/height/male-young-minmuscle-maxweight-minheight.target",
+      "bytes": 444349,
+      "gitBlobSha1": "ed92f39e1d06d9ae8e068ad519e7fb05fb2d306c",
+      "sha256": "6a09165857ab21cb890c09f67f8d209cdc19564b277155e17e48e18de07be885"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-minmuscle-minweight-maxheight.target",
+      "local": "targets/height/male-young-minmuscle-minweight-maxheight.target",
+      "bytes": 420920,
+      "gitBlobSha1": "1db1440ae3d7ad4259d64991047093f450fb38b0",
+      "sha256": "3baacc70187410ebba2b62c56a53775266ab859b7844d47e658d36ee78493621"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/height/male-young-minmuscle-minweight-minheight.target",
+      "local": "targets/height/male-young-minmuscle-minweight-minheight.target",
+      "bytes": 444373,
+      "gitBlobSha1": "0a637c29a17d98428c82affc449b3a14ad118ff8",
+      "sha256": "2e663001577ea071808ca95dd771acbb059675ef99ab0ec800a1541be384d8f8"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-averagemuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-child-averagemuscle-averageweight-idealproportions.target",
+      "bytes": 348508,
+      "gitBlobSha1": "580223bc4bed64f90c3a7761eb267c84813e070b",
+      "sha256": "3f853d21a4746d3177df46ded4b407b658a151ffc82658e38c40864b674623d7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-averagemuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-averagemuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-averagemuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-child-averagemuscle-maxweight-idealproportions.target",
+      "bytes": 347783,
+      "gitBlobSha1": "4b4cd6986449fc23d04f7d00ec33e0f353f2e5bd",
+      "sha256": "227cb6e69e992b9318be3db945b0cbfe2856f29ec2c8ed3c84e5481ef21f3762"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-averagemuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-averagemuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-averagemuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-child-averagemuscle-minweight-idealproportions.target",
+      "bytes": 348296,
+      "gitBlobSha1": "c6539933db35885da2eb50b60d3a127da84be162",
+      "sha256": "fbed0a885cb2d0d5268af8a1ab93075b24517265abb60ea8635ea0838b751b9b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-averagemuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-averagemuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-maxmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-child-maxmuscle-averageweight-idealproportions.target",
+      "bytes": 349660,
+      "gitBlobSha1": "9192b55e2008140488d7bc2056a77d461fe693da",
+      "sha256": "775589d7f6e241b3235ec4ab969752c1d9076fc51339d02ba564d6c4428fe950"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-maxmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-maxmuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-maxmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-child-maxmuscle-maxweight-idealproportions.target",
+      "bytes": 348176,
+      "gitBlobSha1": "287f872892d6f94265becaa7440ac289e4b110e8",
+      "sha256": "6796279dcf6b9d2658f322238482d4d4153c7558c34f546d8619e72a4d885078"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-maxmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-maxmuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-maxmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-child-maxmuscle-minweight-idealproportions.target",
+      "bytes": 348257,
+      "gitBlobSha1": "4b052533c8008224e1dd497781bdbd9e04ad5d00",
+      "sha256": "fa955742031fdf3d8b3b7941b8094c35e9cd229498a1ec346fa1d0bed2ffc361"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-maxmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-maxmuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-minmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-child-minmuscle-averageweight-idealproportions.target",
+      "bytes": 349266,
+      "gitBlobSha1": "a67d369704c17efd9e5b926b693ed5770a40fd35",
+      "sha256": "51f9e2c5a13a2ba053a7b76cccbc2ce2984a2ccbf8d9a725d9d95d9642da1498"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-minmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-minmuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-minmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-child-minmuscle-maxweight-idealproportions.target",
+      "bytes": 348176,
+      "gitBlobSha1": "287f872892d6f94265becaa7440ac289e4b110e8",
+      "sha256": "6796279dcf6b9d2658f322238482d4d4153c7558c34f546d8619e72a4d885078"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-minmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-minmuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-minmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-child-minmuscle-minweight-idealproportions.target",
+      "bytes": 347590,
+      "gitBlobSha1": "63037c47acf7817331dffa0a7034b69b793dd021",
+      "sha256": "bd58e1431b262c6d238fba4a88542df01b59a3738c5efaee4d323428e6b532d7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-child-minmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-child-minmuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-averagemuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-old-averagemuscle-averageweight-idealproportions.target",
+      "bytes": 349566,
+      "gitBlobSha1": "5c78be78f450e350d0b760e8c57a69e178871cb5",
+      "sha256": "d2efe289a062817d79ed8fa94bd52f3b947c7e81395703354e7fc185950ae7fa"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-averagemuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-averagemuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-averagemuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-old-averagemuscle-maxweight-idealproportions.target",
+      "bytes": 350969,
+      "gitBlobSha1": "d145712c488b6ebe44beebb81c89dc153feb7ebb",
+      "sha256": "975192dd29084c77e2ee329039efd7d0278d478ba087b994cb2c8dff1d63e48c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-averagemuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-averagemuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-averagemuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-old-averagemuscle-minweight-idealproportions.target",
+      "bytes": 349796,
+      "gitBlobSha1": "a8f439eb4aa3a0c3ef6cb8094ec540ce1c0d8c9a",
+      "sha256": "c1165a8a9a6942a4594f23633f7fdb50790d8f349a40d84b4b0e4aa16f94cd3d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-averagemuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-averagemuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-maxmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-old-maxmuscle-averageweight-idealproportions.target",
+      "bytes": 349815,
+      "gitBlobSha1": "15706a36e225a80abe9846d44bae1da8f019ca75",
+      "sha256": "7e0bfe56022b7cc0f204ef46fe4ff59be67b426e151770686bfc0d75f1f36bf7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-maxmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-maxmuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-maxmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-old-maxmuscle-maxweight-idealproportions.target",
+      "bytes": 347420,
+      "gitBlobSha1": "de01b0c1a7d63e85b79d75dbda6a37e267b51c69",
+      "sha256": "932bfaebb21ba9921a77cae57893c18e9b9a8abcb22b2b3959e3a7ca9478e418"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-maxmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-maxmuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-maxmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-old-maxmuscle-minweight-idealproportions.target",
+      "bytes": 349727,
+      "gitBlobSha1": "283b1db884417474812f552b28ab7d55aa4a48f4",
+      "sha256": "df05798024cce081bd399af9c7bbc2c9ae5df4fccb5f338ec61149dc021eb670"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-maxmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-maxmuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-minmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-old-minmuscle-averageweight-idealproportions.target",
+      "bytes": 349606,
+      "gitBlobSha1": "3ea49e2dac46e5ef9f639191ad0b21da37a42542",
+      "sha256": "beef507103a654b5246d8f76e4f90e4d8d5edc6c69643ce8550c817fd5a042cc"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-minmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-minmuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-minmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-old-minmuscle-maxweight-idealproportions.target",
+      "bytes": 349767,
+      "gitBlobSha1": "4c7af41969ee2f029954be96781f16be0e7f3868",
+      "sha256": "8f50a46ccc4b7fa6b0ee0289b870440daa50dab04de55bf4f84e7f61dfb21b57"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-minmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-minmuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-minmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-old-minmuscle-minweight-idealproportions.target",
+      "bytes": 349547,
+      "gitBlobSha1": "1fcba3c7c931e6fc1336722fa8ea624d4a3f5466",
+      "sha256": "10234586fa89511eaf68a7084536c1b56c88567eb61e10df054532fb9c7198ee"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-old-minmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-old-minmuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-averagemuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-young-averagemuscle-averageweight-idealproportions.target",
+      "bytes": 349563,
+      "gitBlobSha1": "145e69247246510dd0a0e5a81a63bed2f6e5090a",
+      "sha256": "0a3bd099b7a88150d56d68b69c07d3d3538cb57279e0e775d13f19d3dc3e339d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-averagemuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-averagemuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-averagemuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-young-averagemuscle-maxweight-idealproportions.target",
+      "bytes": 349535,
+      "gitBlobSha1": "1fb097ffb31e788d8f0f919f9840d0df2fe60197",
+      "sha256": "96f81f6e03caae79a75c404c9328aeea0d73e80bfe4b82b5ee247b3d4ce0ea78"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-averagemuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-averagemuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-averagemuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-young-averagemuscle-minweight-idealproportions.target",
+      "bytes": 351599,
+      "gitBlobSha1": "2b71a0ba68cac6aa85f744350a8535dc48996d57",
+      "sha256": "8be529e595d7a5fb12352c476faf99af8dd3ae3f50972d452f650d1f2f810213"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-averagemuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-averagemuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-maxmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-young-maxmuscle-averageweight-idealproportions.target",
+      "bytes": 351047,
+      "gitBlobSha1": "828d508c7fe0e4326d77394a6df1f9b6f056fb1c",
+      "sha256": "12654c6dd22d81a9595f41f149f1988c141ca22a350d4c2b91fccd8f9b2ce23b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-maxmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-maxmuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-maxmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-young-maxmuscle-maxweight-idealproportions.target",
+      "bytes": 349729,
+      "gitBlobSha1": "42a6f5f1016802b6fbe783ceeec7d7611418dfe2",
+      "sha256": "071fb6747e3d1dd00303fc605ad75ce05239c610a3a0c1757ab9210d7f02a020"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-maxmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-maxmuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-maxmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-young-maxmuscle-minweight-idealproportions.target",
+      "bytes": 349835,
+      "gitBlobSha1": "3bb8110d4bcc22a0c825af12c860cbe1add5d8de",
+      "sha256": "30330cfaf3d4850c3561567dca3c9dbe08b5c7ddab6163b2565a2964c168fc60"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-maxmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-maxmuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-minmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/female-young-minmuscle-averageweight-idealproportions.target",
+      "bytes": 349582,
+      "gitBlobSha1": "1ba88e4bce9efe773d3f199e643e0c7783d8dd92",
+      "sha256": "10275c2f0d390ac4180b34ac5fa98e907f50cc3661f3a5f45d2cb4aa9f9cf11a"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-minmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-minmuscle-averageweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-minmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/female-young-minmuscle-maxweight-idealproportions.target",
+      "bytes": 349484,
+      "gitBlobSha1": "754804e92200a18a5900c232b42001e59ad6e029",
+      "sha256": "329bad60b852bbc17eb8a6343e95dfc8942c590a21014f85e10afac21ede1ed0"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-minmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-minmuscle-maxweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-minmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/female-young-minmuscle-minweight-idealproportions.target",
+      "bytes": 350141,
+      "gitBlobSha1": "05dabf654eb7fd2a4061ca5e8e6ef357a4739dd0",
+      "sha256": "d70464833b00c5f36d8516d440cf1aa3835b9f45d51bcccedd48cf7b7c30781d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/female-young-minmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/female-young-minmuscle-minweight-uncommonproportions.target",
+      "bytes": 359317,
+      "gitBlobSha1": "28d0cd73e8927c828844bafcb6b5c570c27e8c90",
+      "sha256": "e882dfd6d2f2945c4b7b47cc22172ac0ea7837cad1c81f0e43169f7cc3d34a54"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-averagemuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-child-averagemuscle-averageweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-averagemuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-averagemuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-averagemuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-child-averagemuscle-maxweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-averagemuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-averagemuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-averagemuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-child-averagemuscle-minweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-averagemuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-averagemuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-maxmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-child-maxmuscle-averageweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-maxmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-maxmuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-maxmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-child-maxmuscle-maxweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-maxmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-maxmuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-maxmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-child-maxmuscle-minweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-maxmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-maxmuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-minmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-child-minmuscle-averageweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-minmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-minmuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-minmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-child-minmuscle-maxweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-minmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-minmuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-minmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-child-minmuscle-minweight-idealproportions.target",
+      "bytes": 163723,
+      "gitBlobSha1": "7efbc892fb8a593c4ce0847004c4e325c9854be1",
+      "sha256": "4b36a92868d8ea6f4000777aca494e3ace843baa574271ff2356da89af3b2b7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-child-minmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-child-minmuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-averagemuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-old-averagemuscle-averageweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-averagemuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-averagemuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-averagemuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-old-averagemuscle-maxweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-averagemuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-averagemuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-averagemuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-old-averagemuscle-minweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-averagemuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-averagemuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-maxmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-old-maxmuscle-averageweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-maxmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-maxmuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-maxmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-old-maxmuscle-maxweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-maxmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-maxmuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-maxmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-old-maxmuscle-minweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-maxmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-maxmuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-minmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-old-minmuscle-averageweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-minmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-minmuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-minmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-old-minmuscle-maxweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-minmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-minmuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-minmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-old-minmuscle-minweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-old-minmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-old-minmuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-averagemuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-young-averagemuscle-averageweight-idealproportions.target",
+      "bytes": 164124,
+      "gitBlobSha1": "c0a95b13bd0d2a78b025da7502f7b5653f917904",
+      "sha256": "7bbd790604c908417ff8ca11e566e3577508d92a4f397a2ace0f89f4cc3aa373"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-averagemuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-averagemuscle-averageweight-uncommonproportions.target",
+      "bytes": 190170,
+      "gitBlobSha1": "4adadda4ad9c78086f309a47e2ece30670097a8c",
+      "sha256": "758c0b12e6ba8f1a2b67a884578bae4ad75069a272823adae372e08041bd02c6"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-averagemuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-young-averagemuscle-maxweight-idealproportions.target",
+      "bytes": 162992,
+      "gitBlobSha1": "bbd8618e90396e46e30d04340430092adce22c1c",
+      "sha256": "b1d386377040a51f9d2e1c173af028c3485a7c6091ca7e312a50dc28d1bd57f6"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-averagemuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-averagemuscle-maxweight-uncommonproportions.target",
+      "bytes": 189409,
+      "gitBlobSha1": "ecf6df613a452cbd87fcaf46dfc1b3194bb888dc",
+      "sha256": "aee0e911e17dead7ac8c1f62dc5f63744d77d099583ad83f1f27aa55960c73a7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-averagemuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-young-averagemuscle-minweight-idealproportions.target",
+      "bytes": 167077,
+      "gitBlobSha1": "dd97298ca50b170fb3ac118f003b35a600b1f3bb",
+      "sha256": "278060f8fb9c1843df0ae0894d015c8459ccb8cef74cf4f65032bae9152cfd6a"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-averagemuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-averagemuscle-minweight-uncommonproportions.target",
+      "bytes": 188717,
+      "gitBlobSha1": "40e4b6c5745af66b303dbcb7a527d38e1dd7a433",
+      "sha256": "8f70af09f5c90205a8143d29f1e716d1e5c50dd792f996ac5e107f010a07af39"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-maxmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-young-maxmuscle-averageweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-maxmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-maxmuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-maxmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-young-maxmuscle-maxweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-maxmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-maxmuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-maxmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-young-maxmuscle-minweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-maxmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-maxmuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-minmuscle-averageweight-idealproportions.target",
+      "local": "targets/proportions/male-young-minmuscle-averageweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-minmuscle-averageweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-minmuscle-averageweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-minmuscle-maxweight-idealproportions.target",
+      "local": "targets/proportions/male-young-minmuscle-maxweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-minmuscle-maxweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-minmuscle-maxweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-minmuscle-minweight-idealproportions.target",
+      "local": "targets/proportions/male-young-minmuscle-minweight-idealproportions.target",
+      "bytes": 164317,
+      "gitBlobSha1": "e52a6aa4c4e8467cc3f64e9eec12e28595769716",
+      "sha256": "d9452857903d18a2100ca26105d5a61083e7064fbe16f035863446728755ec20"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/proportions/male-young-minmuscle-minweight-uncommonproportions.target",
+      "local": "targets/proportions/male-young-minmuscle-minweight-uncommonproportions.target",
+      "bytes": 193841,
+      "gitBlobSha1": "02a901f73b565693960a3e7607c58cf200c370c8",
+      "sha256": "197ce307060cedf9f9a26a6d67749ec108582c94d661937128e9578713cae0d9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-averagemuscle-averageweight.target",
+      "local": "targets/universal-female-baby-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-averagemuscle-maxweight.target",
+      "local": "targets/universal-female-baby-averagemuscle-maxweight.target",
+      "bytes": 78732,
+      "gitBlobSha1": "72f152307c6ebc2dd8c0f78262a48c3b79237161",
+      "sha256": "891e93b4674797a1c6cc1b871d86206fe8348fe8c35299b4893c26e0c596a1fd"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-averagemuscle-minweight.target",
+      "local": "targets/universal-female-baby-averagemuscle-minweight.target",
+      "bytes": 99593,
+      "gitBlobSha1": "56b9120b04ddf6b74972c456cc43a6973a91fe81",
+      "sha256": "9bfb8e4f6813c36e6dbffa426f97245dcaf68802e95cbb540b3b75b5a20c5174"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-maxmuscle-averageweight.target",
+      "local": "targets/universal-female-baby-maxmuscle-averageweight.target",
+      "bytes": 106456,
+      "gitBlobSha1": "2c0ce4d16b49b982f9dec047dba31dfa8aac38fd",
+      "sha256": "09afe0e0d15212d4d98d533c145793bc9b0fe8755dbaf593fd0fafabb0064fa6"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-maxmuscle-maxweight.target",
+      "local": "targets/universal-female-baby-maxmuscle-maxweight.target",
+      "bytes": 108136,
+      "gitBlobSha1": "3dac01f571103cb9acec57d2f21d3f9aa9924963",
+      "sha256": "ab874f2286e7f9e78717d9ee8e6056b5f4bddf2b903e0f8f1e148b6b8e1373e7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-maxmuscle-minweight.target",
+      "local": "targets/universal-female-baby-maxmuscle-minweight.target",
+      "bytes": 108257,
+      "gitBlobSha1": "c4e32f792a11ba22a8df3c6580e6d2fef018e58c",
+      "sha256": "5d0953c33a5ce44b46d0962d8b923683f345ab919088c208cf967f7f0cda61a9"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-minmuscle-averageweight.target",
+      "local": "targets/universal-female-baby-minmuscle-averageweight.target",
+      "bytes": 45166,
+      "gitBlobSha1": "f7eed51a12f4f9c041e050d2eb43d0496e64fc75",
+      "sha256": "eabee9dc7a10d497d773c695d644bdef1c12eff83f4ef75ad22a43deb8164aef"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-minmuscle-maxweight.target",
+      "local": "targets/universal-female-baby-minmuscle-maxweight.target",
+      "bytes": 131238,
+      "gitBlobSha1": "92539e6474dff5fe5d9333f7700af1185ef9d3ee",
+      "sha256": "b423d9e90fb7dd46c5b13d589c1870fa77e99ae26a5142d0766343cce8dcd8b8"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-baby-minmuscle-minweight.target",
+      "local": "targets/universal-female-baby-minmuscle-minweight.target",
+      "bytes": 224648,
+      "gitBlobSha1": "3754733a45f4bbfbcfdf4c7d4ba196d1ef895331",
+      "sha256": "a22bb4435518fbf4d519149eb1979c8445d9cdaf70582cf2ea4a36f65d279d14"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-averagemuscle-averageweight.target",
+      "local": "targets/universal-female-child-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-averagemuscle-maxweight.target",
+      "local": "targets/universal-female-child-averagemuscle-maxweight.target",
+      "bytes": 129308,
+      "gitBlobSha1": "33ae258c1aef5b7ec94fec397ad4b17a08bda61f",
+      "sha256": "311017f8768f42de2f4fa9142381de527a3a3e8bef09190f97e5cd17f5ec4c2a"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-averagemuscle-minweight.target",
+      "local": "targets/universal-female-child-averagemuscle-minweight.target",
+      "bytes": 140164,
+      "gitBlobSha1": "a0647aec2035238b8531acfea7cb37ca357a7063",
+      "sha256": "a48d2f7589706e61f5776f115bfe30ce2e12dd1d4cdd5680f288b0e5d6ee69b6"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-maxmuscle-averageweight.target",
+      "local": "targets/universal-female-child-maxmuscle-averageweight.target",
+      "bytes": 142401,
+      "gitBlobSha1": "43073eec531045221796f2c535ec596fd1a9f0fa",
+      "sha256": "1888abdf3939a332921db2dfb2af29b29cf56fb1ed89245ffb8575ef78aa9f7c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-maxmuscle-maxweight.target",
+      "local": "targets/universal-female-child-maxmuscle-maxweight.target",
+      "bytes": 135259,
+      "gitBlobSha1": "1364b9201691dfa20ca2278b3297d0c6e50b9195",
+      "sha256": "c16f0b9dfc13103a5735b07e11683204aeb3c3414561740003c9824e8cc0c5b7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-maxmuscle-minweight.target",
+      "local": "targets/universal-female-child-maxmuscle-minweight.target",
+      "bytes": 136725,
+      "gitBlobSha1": "f6444dd0c3e082ba7720bb1d49b9dc75adee87cf",
+      "sha256": "c3a23a9a3060f09be7e498ba9b77f089aa2364e94371ae2dabe606b308ab9913"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-minmuscle-averageweight.target",
+      "local": "targets/universal-female-child-minmuscle-averageweight.target",
+      "bytes": 255132,
+      "gitBlobSha1": "21ed0b29b5a0efe20053bfb949aa95275f5c645f",
+      "sha256": "5d2f9ef31873c6f8bd7b639206b4d78ce24919dda341b97ff62adce5ea65a197"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-minmuscle-maxweight.target",
+      "local": "targets/universal-female-child-minmuscle-maxweight.target",
+      "bytes": 279002,
+      "gitBlobSha1": "7d5cf436332fd7b6f9c831cc40fef9148fe8a796",
+      "sha256": "adbe50e6a09db6087ad7e936f0990ef3d22c2a8ea8c30f2409299f27d4fcb592"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-child-minmuscle-minweight.target",
+      "local": "targets/universal-female-child-minmuscle-minweight.target",
+      "bytes": 236366,
+      "gitBlobSha1": "1c8548ecf40f3d6a78c8862f7de3b5bbc4a1d978",
+      "sha256": "7e4b2d9b4569e477b235e3123eb8e7f5f1a0a5fbf15f050dbba78d991b43a627"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-averagemuscle-averageweight.target",
+      "local": "targets/universal-female-old-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-averagemuscle-maxweight.target",
+      "local": "targets/universal-female-old-averagemuscle-maxweight.target",
+      "bytes": 157586,
+      "gitBlobSha1": "ce2b522615a12e6b1309d5c13b26a83aa5c477c7",
+      "sha256": "c7ff884ece15a4ea161bf9843c9668261e486135aa4c408ecc88dd7e5bc366b2"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-averagemuscle-minweight.target",
+      "local": "targets/universal-female-old-averagemuscle-minweight.target",
+      "bytes": 150212,
+      "gitBlobSha1": "bc3a0847f3661babd14252853c5d62fdd0cf4b03",
+      "sha256": "ebb291456482aab827ca0d0bb3928553b422ee0fc6900ae9c9d5fa75195dc23a"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-maxmuscle-averageweight.target",
+      "local": "targets/universal-female-old-maxmuscle-averageweight.target",
+      "bytes": 141235,
+      "gitBlobSha1": "1c5f1f0945a0c627a8b7df717c218dd0f97fb20a",
+      "sha256": "c8ab63d583bd1bcf75a3bbbd6b5e43ee30782a704584ea01a3aecbfec510dc42"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-maxmuscle-maxweight.target",
+      "local": "targets/universal-female-old-maxmuscle-maxweight.target",
+      "bytes": 163497,
+      "gitBlobSha1": "1be1614584b49502e58ada4395649527163422b5",
+      "sha256": "11549de05d8ab39daee36ca692a56a737f3778006a89684c56f70208c2e7c452"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-maxmuscle-minweight.target",
+      "local": "targets/universal-female-old-maxmuscle-minweight.target",
+      "bytes": 148741,
+      "gitBlobSha1": "ab6e5bc63b403072bde0e6b75f5b9f36bcf32fd7",
+      "sha256": "453f066a5972f59f40b238bc7d9e6ea68e96d0f1e49cf28f486c3c8c674c192b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-minmuscle-averageweight.target",
+      "local": "targets/universal-female-old-minmuscle-averageweight.target",
+      "bytes": 103383,
+      "gitBlobSha1": "3f94175239c7684b4cae763d45e79047c3c1fce6",
+      "sha256": "89c2756e3abacf3d2fb9fae1cc05e68c3e0a244ba2ff244a1f3831da5897a26b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-minmuscle-maxweight.target",
+      "local": "targets/universal-female-old-minmuscle-maxweight.target",
+      "bytes": 197647,
+      "gitBlobSha1": "bf7691c99bb6bb780cd545031a3bf5c0d2921413",
+      "sha256": "788850da7e8e75f74f37003a91473270d84a6e599b5851ed7a6fecafff8fdbd8"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-old-minmuscle-minweight.target",
+      "local": "targets/universal-female-old-minmuscle-minweight.target",
+      "bytes": 245778,
+      "gitBlobSha1": "55755b92039a7399d43d155933f0a1cce52cc7ad",
+      "sha256": "806f995cb9356c70645da92a6b64dddbd8de9ac5480420f64b6d1a651cff254d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-averagemuscle-averageweight.target",
+      "local": "targets/universal-female-young-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-averagemuscle-maxweight.target",
+      "local": "targets/universal-female-young-averagemuscle-maxweight.target",
+      "bytes": 124481,
+      "gitBlobSha1": "e0b442f75e36ad0980cd7ccda41b6b8d67b9f200",
+      "sha256": "3648e7f9b34d947726161b563b90ba92b29860bac4c4f82aea3cec37bad2bb4e"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-averagemuscle-minweight.target",
+      "local": "targets/universal-female-young-averagemuscle-minweight.target",
+      "bytes": 147131,
+      "gitBlobSha1": "7b4dfc290b1228f48f00e7b121ffe8932a7bbb75",
+      "sha256": "e53a4afc87ac2703460a59e8290b1111478aeee5c02ece6735328c1f8c62eb63"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-maxmuscle-averageweight.target",
+      "local": "targets/universal-female-young-maxmuscle-averageweight.target",
+      "bytes": 138225,
+      "gitBlobSha1": "91ca14d335389e4e4a964132fc6580ada688cb64",
+      "sha256": "2e56b09b44a8497b927585447fdaac5ea7293521d1f3a3df1059495873c53f4e"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-maxmuscle-maxweight.target",
+      "local": "targets/universal-female-young-maxmuscle-maxweight.target",
+      "bytes": 164037,
+      "gitBlobSha1": "c3f7a80bfa534dc8723deff98d045c9f99679ccd",
+      "sha256": "1b4600abf475b517db2379338a4d36a5f77fb1ad94fd0b210451bfeaa9e7e9b6"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-maxmuscle-minweight.target",
+      "local": "targets/universal-female-young-maxmuscle-minweight.target",
+      "bytes": 147219,
+      "gitBlobSha1": "7eb470715d485b9f21733dd7142f0cd0369638ac",
+      "sha256": "05351f0063429f4e1e484501b73997a6fb129b93939db355d108f98d5479fb10"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-minmuscle-averageweight.target",
+      "local": "targets/universal-female-young-minmuscle-averageweight.target",
+      "bytes": 100650,
+      "gitBlobSha1": "8d3c861b41dda1167fac41eae3dd6458cc28e8c8",
+      "sha256": "ab588aadac1ce474969f38b3dbc08c2dc081e861a223f70250e5cae135d054a3"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-minmuscle-maxweight.target",
+      "local": "targets/universal-female-young-minmuscle-maxweight.target",
+      "bytes": 202635,
+      "gitBlobSha1": "a4317e0dd09303df9034d1fe1906d49d98cdcfa8",
+      "sha256": "66600ccaea3d4c54b1427c81f49160a7cbb2794fbcb7a695ec6e6a4743d72364"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-female-young-minmuscle-minweight.target",
+      "local": "targets/universal-female-young-minmuscle-minweight.target",
+      "bytes": 380075,
+      "gitBlobSha1": "da95e85f2ab24a32c2d2ae037254325b2f10fec3",
+      "sha256": "856167f0a03efedd69f91e1cbad065957c8e8fef6acaaaf5b85a32b0f018fa67"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-averagemuscle-averageweight.target",
+      "local": "targets/universal-male-baby-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-averagemuscle-maxweight.target",
+      "local": "targets/universal-male-baby-averagemuscle-maxweight.target",
+      "bytes": 79455,
+      "gitBlobSha1": "602eb584b2917d9a897e3c38181d656b485a2735",
+      "sha256": "c8ddbea5e0336bb00df2154b8533cf71a6cc7ca7583c77f7cfb259934d0770b4"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-averagemuscle-minweight.target",
+      "local": "targets/universal-male-baby-averagemuscle-minweight.target",
+      "bytes": 99829,
+      "gitBlobSha1": "72bf54290af613ea4eca562efef52ef00266ab7b",
+      "sha256": "19f83504f9272c18c0c14694b29b2cebdf348033495299bf99f68881e8dd4b6f"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-maxmuscle-averageweight.target",
+      "local": "targets/universal-male-baby-maxmuscle-averageweight.target",
+      "bytes": 106590,
+      "gitBlobSha1": "d4eca0b2ca3ec3d1ebea781ceced3e30201d99e8",
+      "sha256": "ac4e6a31b06b0864dfd5cf8c2498ef0574e2403772c7d5b3562b38d49bfec114"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-maxmuscle-maxweight.target",
+      "local": "targets/universal-male-baby-maxmuscle-maxweight.target",
+      "bytes": 107972,
+      "gitBlobSha1": "714fc63137aef31d5450cfd713d06224f3863716",
+      "sha256": "7f6b7f7a0a76b36244d71828fa4de5b171509230a6a84dd26863f5c157754e9d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-maxmuscle-minweight.target",
+      "local": "targets/universal-male-baby-maxmuscle-minweight.target",
+      "bytes": 107906,
+      "gitBlobSha1": "188614d0b2ae0114de2f65225e4685cbc5ec986d",
+      "sha256": "93ce9d2295989a5603078f119ed6fc8a1f2f86f32cc5ff55a181e7d97695ba85"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-minmuscle-averageweight.target",
+      "local": "targets/universal-male-baby-minmuscle-averageweight.target",
+      "bytes": 45240,
+      "gitBlobSha1": "174d9f2bcf34cb689e62e5ed36a929d439b4439c",
+      "sha256": "9ad53b6a261466d772b6ff8b713b3fb8738b4c7a3c92ba21c9d9a0007adcebb5"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-minmuscle-maxweight.target",
+      "local": "targets/universal-male-baby-minmuscle-maxweight.target",
+      "bytes": 131641,
+      "gitBlobSha1": "58363937d8973fdf776c1910c92ec4d151f70cb1",
+      "sha256": "2541dc8dcde94f61fd536ccfb94add0e554d599bf232c8a86d197d2224ff719a"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-baby-minmuscle-minweight.target",
+      "local": "targets/universal-male-baby-minmuscle-minweight.target",
+      "bytes": 224823,
+      "gitBlobSha1": "af451ddc3f03bef712bf1c425e00a9330d65502c",
+      "sha256": "4a404ef92cf37904db80615928e6bf50b0fa7fd0c651e8b9d78b8a99cac55d8d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-averagemuscle-averageweight.target",
+      "local": "targets/universal-male-child-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-averagemuscle-maxweight.target",
+      "local": "targets/universal-male-child-averagemuscle-maxweight.target",
+      "bytes": 148084,
+      "gitBlobSha1": "809fb1f1959f54518664b6a7cb03752a327fece0",
+      "sha256": "7efd862be258e5a00b4cbeb896302bd33a58ad2c33209a4ff5f432cc0453dc2c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-averagemuscle-minweight.target",
+      "local": "targets/universal-male-child-averagemuscle-minweight.target",
+      "bytes": 145955,
+      "gitBlobSha1": "4a0725ea4ec5d71602cb38c2458bd0f2684ad6b8",
+      "sha256": "03a9c12855ea7bea9b07191f1d02b6f1e887f118864854e61b8c14bcc110db3c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-maxmuscle-averageweight.target",
+      "local": "targets/universal-male-child-maxmuscle-averageweight.target",
+      "bytes": 162191,
+      "gitBlobSha1": "7101cfa84878c103b699e41756fec8c45db93bf9",
+      "sha256": "ed10d8c628f73a4f494aaf2238601d0ced89866de6250188232e897c0f4b1e83"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-maxmuscle-maxweight.target",
+      "local": "targets/universal-male-child-maxmuscle-maxweight.target",
+      "bytes": 169701,
+      "gitBlobSha1": "be33a14ffdaa7bf66fa0f8e99a4b9d14ea0d6d59",
+      "sha256": "8cb2622050a49ce44e0554cc2f979e71b8f0535d5a3e80bd4550f05a2840b6c5"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-maxmuscle-minweight.target",
+      "local": "targets/universal-male-child-maxmuscle-minweight.target",
+      "bytes": 151983,
+      "gitBlobSha1": "fe58f68defc3b085b5ddc7db4013e6abec84b9a3",
+      "sha256": "b982963eae02ca43ff2a108878b95d2b284c2f1756d08a94e9835cbcfd432110"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-minmuscle-averageweight.target",
+      "local": "targets/universal-male-child-minmuscle-averageweight.target",
+      "bytes": 151083,
+      "gitBlobSha1": "e0275818b02191b0835232a4825275703e071610",
+      "sha256": "9ae65451e36ad2f282b6298acae1af45ec395cf6acdeca70814e0e607bdfd5d5"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-minmuscle-maxweight.target",
+      "local": "targets/universal-male-child-minmuscle-maxweight.target",
+      "bytes": 228630,
+      "gitBlobSha1": "09fcc106dff0ff87d2cdf86fafa35b392b8ef4b3",
+      "sha256": "d98963b18b164de3e34c01301c343ac351eb8aa9a62ad6d4147dac44870ffaf7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-child-minmuscle-minweight.target",
+      "local": "targets/universal-male-child-minmuscle-minweight.target",
+      "bytes": 208583,
+      "gitBlobSha1": "ab32aad8ea478456bed4a978bd347b316fffc7f1",
+      "sha256": "2526baed3cd8001f4eb8593dfcc8aa7790ada8c2e23ac3a13188f0e8b93abbe7"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-averagemuscle-averageweight.target",
+      "local": "targets/universal-male-old-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-averagemuscle-maxweight.target",
+      "local": "targets/universal-male-old-averagemuscle-maxweight.target",
+      "bytes": 154294,
+      "gitBlobSha1": "c141b155458cc6c581aa5d23273f04ca68dd3a38",
+      "sha256": "ac49086cf6a33f38fa3e0208c3036d335a70529e22f15f0836244b7c7448c10b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-averagemuscle-minweight.target",
+      "local": "targets/universal-male-old-averagemuscle-minweight.target",
+      "bytes": 148768,
+      "gitBlobSha1": "83893d9fdbd41122191a7cf20bde5872cf0a8a80",
+      "sha256": "dd7cae80610fc806b424f0b26d43994060053c9dd15f141001ca4e60479ddd5e"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-maxmuscle-averageweight.target",
+      "local": "targets/universal-male-old-maxmuscle-averageweight.target",
+      "bytes": 149874,
+      "gitBlobSha1": "0af509d898e9aa551c48493c3510b7f13a0385e6",
+      "sha256": "6385a3125af0dbc445b8f2a10100166ba93a7c62ac2d49a13557feb3791f2c74"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-maxmuscle-maxweight.target",
+      "local": "targets/universal-male-old-maxmuscle-maxweight.target",
+      "bytes": 175314,
+      "gitBlobSha1": "12b47a58050ddc338b2b76c9dba4ead91c73bd6e",
+      "sha256": "cf232cbd26aff7177ec6e264e0a1024a4bb7696168c8040270f1990711cb1d49"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-maxmuscle-minweight.target",
+      "local": "targets/universal-male-old-maxmuscle-minweight.target",
+      "bytes": 150982,
+      "gitBlobSha1": "9cf196719df98a3deabd59482a91945f8399b9e8",
+      "sha256": "bfe62f32e70f1e178af19437c0e86af21a68afaaaffd0f255b5679d72545420b"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-minmuscle-averageweight.target",
+      "local": "targets/universal-male-old-minmuscle-averageweight.target",
+      "bytes": 156099,
+      "gitBlobSha1": "a619e8a22121a30e940da5e26844308f8aa267f8",
+      "sha256": "761fbb7b920b2ebf0d00c94b5743709bc90a5a2a0410fe3d57dea34c99715751"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-minmuscle-maxweight.target",
+      "local": "targets/universal-male-old-minmuscle-maxweight.target",
+      "bytes": 235736,
+      "gitBlobSha1": "dbd928193b6308083b7aaeae6160a70a59172042",
+      "sha256": "57ba4273844dfbf03b5548059b577901502354845f30389d9f4b083689b636a2"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-old-minmuscle-minweight.target",
+      "local": "targets/universal-male-old-minmuscle-minweight.target",
+      "bytes": 182402,
+      "gitBlobSha1": "001f8543efd2e65df97516aa9015ac1558893557",
+      "sha256": "2d2f1bc78b1ac1f87adcf4e632a58bfb1237ab1f4b8b5527f2e6907d38b2364d"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-averagemuscle-averageweight.target",
+      "local": "targets/universal-male-young-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "gitBlobSha1": "3f92e2939e50403aa89607e4889639ab337bcead",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-averagemuscle-maxweight.target",
+      "local": "targets/universal-male-young-averagemuscle-maxweight.target",
+      "bytes": 155861,
+      "gitBlobSha1": "15d495149eec197fed9ab8dda745cdfd4878ab2b",
+      "sha256": "3e77ff5a07a9b870db5226507e1cf8a295f0e09c109fb72142770f5f50427b5e"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-averagemuscle-minweight.target",
+      "local": "targets/universal-male-young-averagemuscle-minweight.target",
+      "bytes": 147071,
+      "gitBlobSha1": "0a53c15a2d6cf23120c786d95b36d7a618c61acf",
+      "sha256": "fac0d53b7051f4d1f06230d0b419e916eb5bae5ce67c031a9998fdde05229755"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-maxmuscle-averageweight.target",
+      "local": "targets/universal-male-young-maxmuscle-averageweight.target",
+      "bytes": 147110,
+      "gitBlobSha1": "b7c039c7f463fe1f1721b9ab269c7248d9c4f2f7",
+      "sha256": "c171ff9cc95e96273beb3e3b1969a01988c2d4982ebc6fe04bf81cf72ee3b295"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-maxmuscle-maxweight.target",
+      "local": "targets/universal-male-young-maxmuscle-maxweight.target",
+      "bytes": 175015,
+      "gitBlobSha1": "a0f12e4b0c0f84f2a6b90badfaf252a125e9e3d1",
+      "sha256": "95392741389537889a37dc67a7d8453c93b30f27131e3e622bee3f30d1d8738c"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-maxmuscle-minweight.target",
+      "local": "targets/universal-male-young-maxmuscle-minweight.target",
+      "bytes": 150179,
+      "gitBlobSha1": "6b21e86b3800e7bd736b8d9aa98cd98040acd334",
+      "sha256": "5873f11edc96fde72a79ec35fa1d292a6a1a594b5eadfd82d59faf48834561de"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-minmuscle-averageweight.target",
+      "local": "targets/universal-male-young-minmuscle-averageweight.target",
+      "bytes": 155256,
+      "gitBlobSha1": "2b585bb27c88a0ef63972f0b2d480d61850c5889",
+      "sha256": "aa2bd57c3d82cbcbaee3f35e75c7d03952bbb9624003d7ee6f1aa50e04bfa5ba"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-minmuscle-maxweight.target",
+      "local": "targets/universal-male-young-minmuscle-maxweight.target",
+      "bytes": 235752,
+      "gitBlobSha1": "42d9f8ca69fe7bdc40429efc7c515e08e90b7a20",
+      "sha256": "14580444f1480b1c6b396973f8c040cc36e5ca8914addf17d11c5a023a958de2"
+    },
+    {
+      "path": "makehuman/data/targets/macrodetails/universal-male-young-minmuscle-minweight.target",
+      "local": "targets/universal-male-young-minmuscle-minweight.target",
+      "bytes": 182223,
+      "gitBlobSha1": "e63021e74918cff0f60b65e2d134ce6f256a3cb2",
+      "sha256": "3af713db636eb41f32af5010981bad30efe743a3ab1d4a61c619c664b610a51a"
+    }
+  ]
+}

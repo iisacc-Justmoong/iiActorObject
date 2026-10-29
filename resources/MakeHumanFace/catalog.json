@@ -1,0 +1,25 @@
+{
+  "format": "iiActorObject.MakeHumanFace.1",
+  "baseMesh": "hm08",
+  "components": [
+    {
+      "name": "Eyes",
+      "proxy": "eyes/high-poly/high-poly.mhclo",
+      "roughness": 0.12,
+      "rigidBones": [
+        "eye.L",
+        "eye.R"
+      ]
+    },
+    {
+      "name": "Teeth",
+      "proxy": "teeth/teeth_base/teeth_base.mhclo",
+      "roughness": 0.28
+    },
+    {
+      "name": "Tongue",
+      "proxy": "tongue/tongue01/tongue01.mhclo",
+      "roughness": 0.4
+    }
+  ]
+}

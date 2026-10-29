@@ -1,0 +1,12 @@
+{
+  "format": "iiActorObject.MakeHumanWardrobe.1",
+  "baseMesh": "hm08",
+  "components": [
+    {"id": "hair/short01", "name": "HairShort01", "category": "hair", "proxy": "hair/short01/short01.mhclo", "roughness": 0.45},
+    {"id": "hair/bob01", "name": "HairBob01", "category": "hair", "proxy": "hair/bob01/bob01.mhclo", "roughness": 0.45},
+    {"id": "clothes/female_casualsuit01", "name": "FemaleCasualSuit01", "category": "clothes", "proxy": "clothes/female_casualsuit01/female_casualsuit01.mhclo", "roughness": 0.7},
+    {"id": "clothes/male_casualsuit01", "name": "MaleCasualSuit01", "category": "clothes", "proxy": "clothes/male_casualsuit01/male_casualsuit01.mhclo", "roughness": 0.7},
+    {"id": "eyebrows/eyebrow001", "name": "Eyebrows001", "category": "eyebrows", "proxy": "eyebrows/eyebrow001/eyebrow001.mhclo", "roughness": 0.65},
+    {"id": "eyelashes/eyelashes01", "name": "Eyelashes01", "category": "eyelashes", "proxy": "eyelashes/eyelashes01/eyelashes01.mhclo", "roughness": 0.65}
+  ]
+}

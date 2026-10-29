@@ -1,0 +1,320 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:1ef8b3245e8c838c29cb3f669e980516830becf4aa268a2b11d96d524cf4aa79",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/WindowsBuildAndRun.md",
+    "sha256": "ec20e1a2c029e30ee58b157bc0c2c96dfba41228dc179f3c1b8096d6fcd0c157",
+    "bytes": 3901,
+    "line_count": 61,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "iiActorObject: Windows 빌드 및 실행",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiActorObject: Windows 빌드 및 실행\n",
+      "level": 1,
+      "title": "iiActorObject: Windows 빌드 및 실행"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "0.2.1은 Qt 의존성이 없는 C++23 Actor·컴포넌트·USD 배치 라이브러리이다. 소스와 설치본 소비자를 각각 빌드하고 실제 수명주기·공간 변환·USD 내보내기를 실행 검사한다. 모든 산출물은 프로젝트의 `build/`에 둔다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 환경 준비\n",
+      "level": 2,
+      "title": "환경 준비"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "프로젝트 루트의 PowerShell에서 SDK 공통 개발 셸을 준비한다. 이 셸이 다른 SDK를 위해 준비하는 Qt·vcpkg는 iiActorObject의 의존성이 아니다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "fenced_code",
+      "start_line": 9,
+      "end_line": 19,
+      "raw": "```powershell\n$ErrorActionPreference = 'Stop'\n$project = (Get-Location).Path\n$workspace = (Resolve-Path -LiteralPath '../..').Path\n. (Join-Path $workspace 'SDK/Windows/Enter-DevEnvironment.ps1')\nSet-Location -LiteralPath $project\n$compiler = (Get-Command cl.exe -ErrorAction Stop).Source.Replace('\\', '/')\n$msvcInclude = (Join-Path $workspace 'SDK/Windows/WindowsMsvcPrefix.cmake').Replace('\\', '/')\n$python = Join-Path $workspace 'Tools/Python314/tools/python.exe'\n$prefix = (Join-Path $project 'build/install').Replace('\\', '/')\n```\n",
+      "language": "powershell",
+      "code": "$ErrorActionPreference = 'Stop'\n$project = (Get-Location).Path\n$workspace = (Resolve-Path -LiteralPath '../..').Path\n. (Join-Path $workspace 'SDK/Windows/Enter-DevEnvironment.ps1')\nSet-Location -LiteralPath $project\n$compiler = (Get-Command cl.exe -ErrorAction Stop).Source.Replace('\\', '/')\n$msvcInclude = (Join-Path $workspace 'SDK/Windows/WindowsMsvcPrefix.cmake').Replace('\\', '/')\n$python = Join-Path $workspace 'Tools/Python314/tools/python.exe'\n$prefix = (Join-Path $project 'build/install').Replace('\\', '/')\n",
+      "closed": true
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "## 구성·빌드·검사\n",
+      "level": 2,
+      "title": "구성·빌드·검사"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "fenced_code",
+      "start_line": 23,
+      "end_line": 34,
+      "raw": "```powershell\ncmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON `\n  \"-DCMAKE_CXX_COMPILER=$compiler\" \"-DCMAKE_PROJECT_INCLUDE=$msvcInclude\" `\n  -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE\nif ($LASTEXITCODE -ne 0) { throw '구성 실패' }\n& $python (Join-Path $workspace 'SDK/Windows/Configure-WindowsNinja.py') (Join-Path $project 'build')\nif ($LASTEXITCODE -ne 0) { throw 'Ninja 의존성 설정 실패' }\ncmake --build build --config Release --parallel 4\nif ($LASTEXITCODE -ne 0) { throw '빌드 실패' }\nctest --test-dir build -C Release --output-on-failure --no-tests=error\nif ($LASTEXITCODE -ne 0) { throw '실행 검사 실패' }\n```\n",
+      "language": "powershell",
+      "code": "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON `\n  \"-DCMAKE_CXX_COMPILER=$compiler\" \"-DCMAKE_PROJECT_INCLUDE=$msvcInclude\" `\n  -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE\nif ($LASTEXITCODE -ne 0) { throw '구성 실패' }\n& $python (Join-Path $workspace 'SDK/Windows/Configure-WindowsNinja.py') (Join-Path $project 'build')\nif ($LASTEXITCODE -ne 0) { throw 'Ninja 의존성 설정 실패' }\ncmake --build build --config Release --parallel 4\nif ($LASTEXITCODE -ne 0) { throw '빌드 실패' }\nctest --test-dir build -C Release --output-on-failure --no-tests=error\nif ($LASTEXITCODE -ne 0) { throw '실행 검사 실패' }\n",
+      "closed": true
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "기존 cache가 다른 컴파일러·generator를 사용하면 동일한 `build/`에서 같은 인수에 `--fresh`를 더해 구성한다. MSVC와 MinGW 또는 서로 다른 CRT·표준 라이브러리 ABI를 혼합하지 않는다. `CMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE` 구성으로 Qt 패키지를 요구하지 않는지 확인한다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "heading",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "## Workspace 안의 설치본과 독립 소비자 검사\n",
+      "level": 2,
+      "title": "Workspace 안의 설치본과 독립 소비자 검사"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "fenced_code",
+      "start_line": 40,
+      "end_line": 55,
+      "raw": "```powershell\ncmake --install build --config Release --prefix \"$prefix\"\nif ($LASTEXITCODE -ne 0) { throw '설치 실패' }\ncmake -S tests/consumer -B build/consumer/build -G Ninja `\n  -DCMAKE_BUILD_TYPE=Release \"-DCMAKE_CXX_COMPILER=$compiler\" `\n  \"-DCMAKE_PROJECT_INCLUDE=$msvcInclude\" `\n  \"-DiiActorObject_DIR=$prefix/lib/cmake/iiActorObject\" `\n  \"-DCMAKE_PREFIX_PATH=$prefix\" -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE\nif ($LASTEXITCODE -ne 0) { throw '소비자 구성 실패' }\n& $python (Join-Path $workspace 'SDK/Windows/Configure-WindowsNinja.py') (Join-Path $project 'build/consumer/build')\nif ($LASTEXITCODE -ne 0) { throw '소비자 Ninja 설정 실패' }\ncmake --build build/consumer/build --config Release --parallel 4\nif ($LASTEXITCODE -ne 0) { throw '소비자 빌드 실패' }\nctest --test-dir build/consumer/build -C Release --output-on-failure --no-tests=error\nif ($LASTEXITCODE -ne 0) { throw '설치본 소비자 실행 실패' }\n```\n",
+      "language": "powershell",
+      "code": "cmake --install build --config Release --prefix \"$prefix\"\nif ($LASTEXITCODE -ne 0) { throw '설치 실패' }\ncmake -S tests/consumer -B build/consumer/build -G Ninja `\n  -DCMAKE_BUILD_TYPE=Release \"-DCMAKE_CXX_COMPILER=$compiler\" `\n  \"-DCMAKE_PROJECT_INCLUDE=$msvcInclude\" `\n  \"-DiiActorObject_DIR=$prefix/lib/cmake/iiActorObject\" `\n  \"-DCMAKE_PREFIX_PATH=$prefix\" -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE\nif ($LASTEXITCODE -ne 0) { throw '소비자 구성 실패' }\n& $python (Join-Path $workspace 'SDK/Windows/Configure-WindowsNinja.py') (Join-Path $project 'build/consumer/build')\nif ($LASTEXITCODE -ne 0) { throw '소비자 Ninja 설정 실패' }\ncmake --build build/consumer/build --config Release --parallel 4\nif ($LASTEXITCODE -ne 0) { throw '소비자 빌드 실패' }\nctest --test-dir build/consumer/build -C Release --output-on-failure --no-tests=error\nif ($LASTEXITCODE -ne 0) { throw '설치본 소비자 실행 실패' }\n",
+      "closed": true
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 56,
+      "end_line": 56,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 57,
+      "end_line": 57,
+      "raw": "소비자 프로젝트는 설치된 공개 헤더와 CMake 타깃만 사용한다. CTest는 설치본 DLL 디렉터리를 해당 테스트의 PATH에 추가한다. 설치 파일은 `build/install_manifest.txt`, 실행 결과는 `build/Testing/Temporary`와 소비자 빌드의 같은 하위 경로에서 확인한다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 58,
+      "end_line": 58,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "heading",
+      "start_line": 59,
+      "end_line": 59,
+      "raw": "## 확인한 실행 범위\n",
+      "level": 2,
+      "title": "확인한 실행 범위"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 60,
+      "end_line": 60,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 61,
+      "end_line": 61,
+      "raw": "기능별 CTest는 Actor 8개, USD 5개와 USDA fixture 생성 1개이다. 별도 소비자는 Actor·사용자 정의 컴포넌트·좌표 누적·Tick·파괴와 USD 공개 함수를 실행한다. 실제 OpenUSD 검사를 켜는 방법은 [USD 문서](USD.md)를 따른다. 현재 호스트 검증은 Windows x64 MSVC Release이며 다른 플랫폼의 실제 실행을 포함하지 않는다. 자세한 결과는 [검증 기록](Verification.md)을 따른다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiActorObject: Windows 빌드 및 실행",
+      "anchor": "iiactorobject-windows-빌드-및-실행",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "환경 준비",
+      "anchor": "환경-준비",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구성·빌드·검사",
+      "anchor": "구성빌드검사",
+      "start_line": 21
+    },
+    {
+      "block_id": "b000017",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Workspace 안의 설치본과 독립 소비자 검사",
+      "anchor": "workspace-안의-설치본과-독립-소비자-검사",
+      "start_line": 38
+    },
+    {
+      "block_id": "b000023",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인한 실행 범위",
+      "anchor": "확인한-실행-범위",
+      "start_line": 59
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000015",
+        "line": 36,
+        "text": "기존 cache가 다른 컴파일러·generator를 사용하면 동일한 `build/`에서 같은 인수에 `--fresh`를 더해 구성한다. MSVC와 MinGW 또는 서로 다른 CRT·표준 라이브러리 ABI를 혼합하지 않는다. `CMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE` 구성으로 Qt 패키지를 요구하지 않는지 확인한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 61,
+        "text": "기능별 CTest는 Actor 8개, USD 5개와 USDA fixture 생성 1개이다. 별도 소비자는 Actor·사용자 정의 컴포넌트·좌표 누적·Tick·파괴와 USD 공개 함수를 실행한다. 실제 OpenUSD 검사를 켜는 방법은 [USD 문서](USD.md)를 따른다. 현재 호스트 검증은 Windows x64 MSVC Release이며 다른 플랫폼의 실제 실행을 포함하지 않는다. 자세한 결과는 [검증 기록](Verification.md)을 따른다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [
+      {
+        "block_id": "b000009",
+        "language": "powershell",
+        "code": "$ErrorActionPreference = 'Stop'\n$project = (Get-Location).Path\n$workspace = (Resolve-Path -LiteralPath '../..').Path\n. (Join-Path $workspace 'SDK/Windows/Enter-DevEnvironment.ps1')\nSet-Location -LiteralPath $project\n$compiler = (Get-Command cl.exe -ErrorAction Stop).Source.Replace('\\', '/')\n$msvcInclude = (Join-Path $workspace 'SDK/Windows/WindowsMsvcPrefix.cmake').Replace('\\', '/')\n$python = Join-Path $workspace 'Tools/Python314/tools/python.exe'\n$prefix = (Join-Path $project 'build/install').Replace('\\', '/')\n"
+      },
+      {
+        "block_id": "b000013",
+        "language": "powershell",
+        "code": "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON `\n  \"-DCMAKE_CXX_COMPILER=$compiler\" \"-DCMAKE_PROJECT_INCLUDE=$msvcInclude\" `\n  -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE\nif ($LASTEXITCODE -ne 0) { throw '구성 실패' }\n& $python (Join-Path $workspace 'SDK/Windows/Configure-WindowsNinja.py') (Join-Path $project 'build')\nif ($LASTEXITCODE -ne 0) { throw 'Ninja 의존성 설정 실패' }\ncmake --build build --config Release --parallel 4\nif ($LASTEXITCODE -ne 0) { throw '빌드 실패' }\nctest --test-dir build -C Release --output-on-failure --no-tests=error\nif ($LASTEXITCODE -ne 0) { throw '실행 검사 실패' }\n"
+      },
+      {
+        "block_id": "b000019",
+        "language": "powershell",
+        "code": "cmake --install build --config Release --prefix \"$prefix\"\nif ($LASTEXITCODE -ne 0) { throw '설치 실패' }\ncmake -S tests/consumer -B build/consumer/build -G Ninja `\n  -DCMAKE_BUILD_TYPE=Release \"-DCMAKE_CXX_COMPILER=$compiler\" `\n  \"-DCMAKE_PROJECT_INCLUDE=$msvcInclude\" `\n  \"-DiiActorObject_DIR=$prefix/lib/cmake/iiActorObject\" `\n  \"-DCMAKE_PREFIX_PATH=$prefix\" -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=TRUE\nif ($LASTEXITCODE -ne 0) { throw '소비자 구성 실패' }\n& $python (Join-Path $workspace 'SDK/Windows/Configure-WindowsNinja.py') (Join-Path $project 'build/consumer/build')\nif ($LASTEXITCODE -ne 0) { throw '소비자 Ninja 설정 실패' }\ncmake --build build/consumer/build --config Release --parallel 4\nif ($LASTEXITCODE -ne 0) { throw '소비자 빌드 실패' }\nctest --test-dir build/consumer/build -C Release --output-on-failure --no-tests=error\nif ($LASTEXITCODE -ne 0) { throw '설치본 소비자 실행 실패' }\n"
+      }
+    ],
+    "links": [
+      {
+        "block_id": "b000025",
+        "label": "USD 문서",
+        "target": "USD.md",
+        "kind": "relative",
+        "line": 61
+      },
+      {
+        "block_id": "b000025",
+        "label": "검증 기록",
+        "target": "Verification.md",
+        "kind": "relative",
+        "line": 61
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

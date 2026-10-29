@@ -1,0 +1,372 @@
+{
+  "archives": [
+    {
+      "url": "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+      "bytes": 280737770,
+      "etag": "\"10bbb7ea-6160e7c0d7996\"",
+      "licensePage": "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html"
+    }
+  ],
+  "files": [
+    {
+      "path": "skins/middleage_african_female/middleage_african_female.mhmat",
+      "local": "skins/middleage_african_female/middleage_african_female.mhmat",
+      "bytes": 1472,
+      "sha256": "8b7aabedb78afa46031efb6a223b079301990ce2ffe7ae7ba2b516d3363b7297",
+      "zipCrc32": 721788679,
+      "zipOffset": 47615791,
+      "compressedBytes": 709
+    },
+    {
+      "path": "skins/middleage_african_female/middleage_darkskinned_female_diffuse.png",
+      "local": "skins/middleage_african_female/middleage_darkskinned_female_diffuse.png",
+      "bytes": 4197671,
+      "sha256": "c3c9ab972ad46fbda64cedfd1d0a626c2a8e739fd345c4c349102eaacc947699",
+      "zipCrc32": 3555675380,
+      "zipOffset": 47692628,
+      "compressedBytes": 4197913
+    },
+    {
+      "path": "skins/middleage_african_male/middleage_african_male.mhmat",
+      "local": "skins/middleage_african_male/middleage_african_male.mhmat",
+      "bytes": 1465,
+      "sha256": "865b23cde5d2116107f9e8ce3a2ec2315440ed103c301ec8bc0e1d85e29830c9",
+      "zipCrc32": 978018252,
+      "zipOffset": 55013178,
+      "compressedBytes": 704
+    },
+    {
+      "path": "skins/middleage_african_male/middleage_darkskinned_male_diffuse.png",
+      "local": "skins/middleage_african_male/middleage_darkskinned_male_diffuse.png",
+      "bytes": 3046762,
+      "sha256": "ced478cfdd2b86391f0f92a4408b287ad70adb0dd0e9271ba606d0b028b47c6b",
+      "zipCrc32": 2480227115,
+      "zipOffset": 51890757,
+      "compressedBytes": 3043083
+    },
+    {
+      "path": "skins/middleage_asian_female/middleage_asian_female.mhmat",
+      "local": "skins/middleage_asian_female/middleage_asian_female.mhmat",
+      "bytes": 1468,
+      "sha256": "d002c338239d2aeeeec037e21f9dd22cd484ba8a955aee22aa0fe279ad6a3960",
+      "zipCrc32": 1008398091,
+      "zipOffset": 15614335,
+      "compressedBytes": 705
+    },
+    {
+      "path": "skins/middleage_asian_female/middleage_lightskinned_female_diffuse2.png",
+      "local": "skins/middleage_asian_female/middleage_lightskinned_female_diffuse2.png",
+      "bytes": 3810424,
+      "sha256": "39c505ca224387bef0b20cd2bf513c3997c27c7e7434447228c9991b87cb8d01",
+      "zipCrc32": 3755238026,
+      "zipOffset": 15695549,
+      "compressedBytes": 3808476
+    },
+    {
+      "path": "skins/middleage_asian_male/middleage_asian_male.mhmat",
+      "local": "skins/middleage_asian_male/middleage_asian_male.mhmat",
+      "bytes": 1463,
+      "sha256": "341a041eeb9c4bb51133fafb4d61e859a36dbd142c75c7cef4531606143c4e22",
+      "zipCrc32": 496763690,
+      "zipOffset": 11886602,
+      "compressedBytes": 704
+    },
+    {
+      "path": "skins/middleage_asian_male/middleage_lightskinned_male_diffuse2.png",
+      "local": "skins/middleage_asian_male/middleage_lightskinned_male_diffuse2.png",
+      "bytes": 3730636,
+      "sha256": "e897c4cc1b6ad5d10a7d2b2be92402feda4e772e6582dfaf0a1e8fc4621d8097",
+      "zipCrc32": 838396536,
+      "zipOffset": 11887417,
+      "compressedBytes": 3726706
+    },
+    {
+      "path": "skins/middleage_caucasian_female/middleage_caucasian_female.mhmat",
+      "local": "skins/middleage_caucasian_female/middleage_caucasian_female.mhmat",
+      "bytes": 1475,
+      "sha256": "c01a42ea64ca4207558f5af8eb0991794934e3aaadebba1613c0a6e90d2afa29",
+      "zipCrc32": 402249784,
+      "zipOffset": 84359858,
+      "compressedBytes": 705
+    },
+    {
+      "path": "skins/middleage_caucasian_female/middleage_lightskinned_female_diffuse.png",
+      "local": "skins/middleage_caucasian_female/middleage_lightskinned_female_diffuse.png",
+      "bytes": 4363877,
+      "sha256": "bcb9c2c8ace23880bc4407602a249abbcf4608b6ba0894e423b031913012a363",
+      "zipCrc32": 2790367363,
+      "zipOffset": 84439089,
+      "compressedBytes": 4364342
+    },
+    {
+      "path": "skins/middleage_caucasian_male/middleage_caucasian_male.mhmat",
+      "local": "skins/middleage_caucasian_male/middleage_caucasian_male.mhmat",
+      "bytes": 1469,
+      "sha256": "113326b7670cb273610314b91e2597b228711adf5f0666660b16fef269bfbe72",
+      "zipCrc32": 1610347184,
+      "zipOffset": 47614876,
+      "compressedBytes": 707
+    },
+    {
+      "path": "skins/middleage_caucasian_male/middleage_lightskinned_male_diffuse.png",
+      "local": "skins/middleage_caucasian_male/middleage_lightskinned_male_diffuse.png",
+      "bytes": 3668589,
+      "sha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb",
+      "zipCrc32": 1696652457,
+      "zipOffset": 43868622,
+      "compressedBytes": 3664897
+    },
+    {
+      "path": "skins/old_african_female/old_african_female.mhmat",
+      "local": "skins/old_african_female/old_african_female.mhmat",
+      "bytes": 1451,
+      "sha256": "36a050f1ed9a59738bf3b67642364bf176a8208dec0fafe0fbe278778ac3b929",
+      "zipCrc32": 362482686,
+      "zipOffset": 147,
+      "compressedBytes": 701
+    },
+    {
+      "path": "skins/old_african_female/old_darkskinned_female_diffuse.png",
+      "local": "skins/old_african_female/old_darkskinned_female_diffuse.png",
+      "bytes": 4229797,
+      "sha256": "816103ffe714803ca577e39eeceaadb9e9c67595dc12ee6df0b602d9cf59d158",
+      "zipCrc32": 3638138845,
+      "zipOffset": 78419,
+      "compressedBytes": 4230025
+    },
+    {
+      "path": "skins/old_african_male/old_african_male.mhmat",
+      "local": "skins/old_african_male/old_african_male.mhmat",
+      "bytes": 1444,
+      "sha256": "facc3a658e2a445eb1b1022e78c1f8791a5f6b921d6aa3a93392c7f87cd014d8",
+      "zipCrc32": 4136821656,
+      "zipOffset": 63155141,
+      "compressedBytes": 692
+    },
+    {
+      "path": "skins/old_african_male/old_darkskinned_male_diffuse.png",
+      "local": "skins/old_african_male/old_darkskinned_male_diffuse.png",
+      "bytes": 3336963,
+      "sha256": "4bcc74baf88f28a0ac4887f22d3cf395bbcb60810121697dafbf0bf3293d0e72",
+      "zipCrc32": 3850412548,
+      "zipOffset": 63237790,
+      "compressedBytes": 3332979
+    },
+    {
+      "path": "skins/old_asian_female/old_asian_female.mhmat",
+      "local": "skins/old_asian_female/old_asian_female.mhmat",
+      "bytes": 1450,
+      "sha256": "e38e458d8cb8bed61237776c61b8039aee293387e3d82fda19017a3784a660c3",
+      "zipCrc32": 1457906505,
+      "zipOffset": 66652774,
+      "compressedBytes": 700
+    },
+    {
+      "path": "skins/old_asian_female/old_lightskinned_female_diffuse2.png",
+      "local": "skins/old_asian_female/old_lightskinned_female_diffuse2.png",
+      "bytes": 4766265,
+      "sha256": "e0c6317c2354ee54c16ad5f871293121e4eee697d16423536bb1db3641d56bc9",
+      "zipCrc32": 3997556989,
+      "zipOffset": 66653577,
+      "compressedBytes": 4762680
+    },
+    {
+      "path": "skins/old_asian_male/old_asian_male.mhmat",
+      "local": "skins/old_asian_male/old_asian_male.mhmat",
+      "bytes": 1442,
+      "sha256": "2a65f6268555f9cbe0b8824aa2113a60aa706993d45e6ed6d84ac05ab1d54066",
+      "zipCrc32": 1973869747,
+      "zipOffset": 43787377,
+      "compressedBytes": 691
+    },
+    {
+      "path": "skins/old_asian_male/old_lightskinned_male_diffuse2.png",
+      "local": "skins/old_asian_male/old_lightskinned_male_diffuse2.png",
+      "bytes": 4485072,
+      "sha256": "8b3232676c5b271b4f44ead68845155d93f15de641b6819561781e16701a6c59",
+      "zipCrc32": 1638043283,
+      "zipOffset": 39306669,
+      "compressedBytes": 4480595
+    },
+    {
+      "path": "skins/old_caucasian_female/old_caucasian_female.mhmat",
+      "local": "skins/old_caucasian_female/old_caucasian_female.mhmat",
+      "bytes": 1457,
+      "sha256": "a88440d9f1225d3b4c963259e6f434eb3be7d3a2932e46ea88cfc675ed20c387",
+      "zipCrc32": 3142111380,
+      "zipOffset": 75801311,
+      "compressedBytes": 702
+    },
+    {
+      "path": "skins/old_caucasian_female/old_lightskinned_female_diffuse.png",
+      "local": "skins/old_caucasian_female/old_lightskinned_female_diffuse.png",
+      "bytes": 4716109,
+      "sha256": "00c45246c145562b917371e92de44a1fe394bc5f4bd91418addf24b6adff5e9d",
+      "zipCrc32": 1090924874,
+      "zipOffset": 75802124,
+      "compressedBytes": 4712799
+    },
+    {
+      "path": "skins/old_caucasian_male/old_caucasian_male.mhmat",
+      "local": "skins/old_caucasian_male/old_caucasian_male.mhmat",
+      "bytes": 1449,
+      "sha256": "001eccec34180d4eb7369933360116a7ea1022c72674c1b012b988af65002600",
+      "zipCrc32": 2599349581,
+      "zipOffset": 71416457,
+      "compressedBytes": 694
+    },
+    {
+      "path": "skins/old_caucasian_male/old_lightskinned_male_diffuse.png",
+      "local": "skins/old_caucasian_male/old_lightskinned_male_diffuse.png",
+      "bytes": 4306141,
+      "sha256": "dfb2310ed3e0ad024ea7a3ad321215e2e9e2994cca64043d9f3d07c6543ec847",
+      "zipCrc32": 3588778234,
+      "zipOffset": 71499936,
+      "compressedBytes": 4301174
+    },
+    {
+      "path": "skins/young_african_female/young_african_female.mhmat",
+      "local": "skins/young_african_female/young_african_female.mhmat",
+      "bytes": 1457,
+      "sha256": "f7e0726cb1c4f1f3dd23e5143f2d91a7c69ddd782a8b1de153a36e1549028b5c",
+      "zipCrc32": 1132314784,
+      "zipOffset": 27238857,
+      "compressedBytes": 699
+    },
+    {
+      "path": "skins/young_african_female/young_darkskinned_female_diffuse.png",
+      "local": "skins/young_african_female/young_darkskinned_female_diffuse.png",
+      "bytes": 4427634,
+      "sha256": "96aa4a96b247fc90d371587bb88e6ae3bfc77e83f5126f17e6bbb713aa200470",
+      "zipCrc32": 4033131569,
+      "zipOffset": 27239667,
+      "compressedBytes": 4427955
+    },
+    {
+      "path": "skins/young_african_male/young_african_male.mhmat",
+      "local": "skins/young_african_male/young_african_male.mhmat",
+      "bytes": 1453,
+      "sha256": "11040111c4735028b473f8ce4bb6b0dc0515b7bf26ea815ead85f2c3cbdd7645",
+      "zipCrc32": 1630516004,
+      "zipOffset": 11805344,
+      "compressedBytes": 697
+    },
+    {
+      "path": "skins/young_african_male/young_darkskinned_male_diffuse.png",
+      "local": "skins/young_african_male/young_darkskinned_male_diffuse.png",
+      "bytes": 2976491,
+      "sha256": "e3f0dbb634e4c68561338f0087f7a122444e84ec56df102212f1222aa12e4d50",
+      "zipCrc32": 46561097,
+      "zipOffset": 8832382,
+      "compressedBytes": 2972845
+    },
+    {
+      "path": "skins/young_asian_female/young_asian_female.mhmat",
+      "local": "skins/young_asian_female/young_asian_female.mhmat",
+      "bytes": 1459,
+      "sha256": "2baeded5fdfd31acc187e83b278f9c4e4cbb59a7ffedf50ebcffcc44e4eab220",
+      "zipCrc32": 2611449671,
+      "zipOffset": 31667826,
+      "compressedBytes": 708
+    },
+    {
+      "path": "skins/young_asian_female/young_lightskinned_female_diffuse3.png",
+      "local": "skins/young_asian_female/young_lightskinned_female_diffuse3.png",
+      "bytes": 3884420,
+      "sha256": "1d82f782b7d2da732229633bd2d14754d873fff53cdb1d088977bcf67ae19dde",
+      "zipCrc32": 1036941696,
+      "zipOffset": 31747571,
+      "compressedBytes": 3884836
+    },
+    {
+      "path": "skins/young_asian_male/young_asian_male.mhmat",
+      "local": "skins/young_asian_male/young_asian_male.mhmat",
+      "bytes": 1452,
+      "sha256": "9fdfc9863cd15d1359311435f2da7de3906f81d6eea549fba6bf14cd82ceb6a0",
+      "zipCrc32": 307453584,
+      "zipOffset": 55014078,
+      "compressedBytes": 700
+    },
+    {
+      "path": "skins/young_asian_male/young_lightskinned_male_diffuse3.png",
+      "local": "skins/young_asian_male/young_lightskinned_male_diffuse3.png",
+      "bytes": 3593099,
+      "sha256": "f50016a5507fc687dc8df06599c8ea48de950cd185de33a71cafc1319ddab4d5",
+      "zipCrc32": 4054467912,
+      "zipOffset": 55094118,
+      "compressedBytes": 3589718
+    },
+    {
+      "path": "skins/young_caucasian_female/young_caucasian_female.mhmat",
+      "local": "skins/young_caucasian_female/young_caucasian_female.mhmat",
+      "bytes": 1464,
+      "sha256": "0bdea7786201f0b1132a24088336a97496ccdc54e9984db65d253a6a6d66f24f",
+      "zipCrc32": 3841631335,
+      "zipOffset": 58684040,
+      "compressedBytes": 704
+    },
+    {
+      "path": "skins/young_caucasian_female/young_lightskinned_female_diffuse.png",
+      "local": "skins/young_caucasian_female/young_lightskinned_female_diffuse.png",
+      "bytes": 4391156,
+      "sha256": "b2a6ac8cd4f9febdb447368e29c76cd68410bb66e46d9dcfa2d5f75126eea8fc",
+      "zipCrc32": 4200317813,
+      "zipOffset": 58763113,
+      "compressedBytes": 4391823
+    },
+    {
+      "path": "skins/young_caucasian_female2/young_caucasian_female2.mhmat",
+      "local": "skins/young_caucasian_female2/young_caucasian_female2.mhmat",
+      "bytes": 1465,
+      "sha256": "8934dd8d8f3beccc1b212c12116a88b3a88d6265e0a5c8fe42eb62e3fb281ab6",
+      "zipCrc32": 3328465107,
+      "zipOffset": 19591710,
+      "compressedBytes": 706
+    },
+    {
+      "path": "skins/young_caucasian_female2/young_lightskinned_female_diffuse2.png",
+      "local": "skins/young_caucasian_female2/young_lightskinned_female_diffuse2.png",
+      "bytes": 3724137,
+      "sha256": "8d1fb3ceedf142fad32a3504eca1feb4539aecca6de66acde1514b9a61fc7ba0",
+      "zipCrc32": 4100891070,
+      "zipOffset": 19592533,
+      "compressedBytes": 3724586
+    },
+    {
+      "path": "skins/young_caucasian_male/young_caucasian_male.mhmat",
+      "local": "skins/young_caucasian_male/young_caucasian_male.mhmat",
+      "bytes": 1462,
+      "sha256": "6eda60b07ff2afbde078a2535ef3913593d84e9de92b2eb76c30f396a181fe2e",
+      "zipCrc32": 3700994220,
+      "zipOffset": 27163921,
+      "compressedBytes": 703
+    },
+    {
+      "path": "skins/young_caucasian_male/young_lightskinned_male_diffuse.png",
+      "local": "skins/young_caucasian_male/young_lightskinned_male_diffuse.png",
+      "bytes": 3693828,
+      "sha256": "862a26e335e958b70534cb5f0d7c47ef30ab148a56c42b3e9da969cf76f12963",
+      "zipCrc32": 3877881233,
+      "zipOffset": 23394852,
+      "compressedBytes": 3690012
+    },
+    {
+      "path": "skins/young_caucasian_male2/young_caucasian_male2.mhmat",
+      "local": "skins/young_caucasian_male2/young_caucasian_male2.mhmat",
+      "bytes": 1464,
+      "sha256": "60022513803f7b68f30c4f91235b827ace9d36757dc07bdac157d58b7cbc226d",
+      "zipCrc32": 1807412325,
+      "zipOffset": 39224692,
+      "compressedBytes": 705
+    },
+    {
+      "path": "skins/young_caucasian_male2/young_lightskinned_male_diffuse2.png",
+      "local": "skins/young_caucasian_male2/young_lightskinned_male_diffuse2.png",
+      "bytes": 3595270,
+      "sha256": "03efe1f6b0ae52429649dcefc9dcaef6058032f874a251169cc3e2ed473c3874",
+      "zipCrc32": 873875478,
+      "zipOffset": 35632614,
+      "compressedBytes": 3591956
+    }
+  ]
+}

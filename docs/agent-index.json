@@ -1,0 +1,1231 @@
+{
+  "format": "iisacc.agent-document-index",
+  "schema_version": 1,
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "documentation_root": "docs",
+  "agent_schema": "docs/agent-document.schema.json",
+  "documents": [
+    {
+      "document_id": "urn:iisacc:document:f82de08300d2497b5b87bd8c4f0ccdf9f7e99d09989c5a92cf890df3a9d1829d",
+      "source": "AGENT.md",
+      "agent_json": "docs/entrypoints/AGENT.agent.json",
+      "source_sha256": "6524f2ab5e210ad6267216856a8877de78d730ef75711be8dc170f244fccc954",
+      "role": "instructions"
+    },
+    {
+      "document_id": "urn:iisacc:document:27fdc3e1e6d15ed34465088af2593a4e1d2173b5d2c8aee6963bee7bc0b049cb",
+      "source": "README.md",
+      "agent_json": "docs/entrypoints/README.agent.json",
+      "source_sha256": "e3057d428081202b51e4dc6361d9dd8282f34ab84e7586c0636735767647de59",
+      "role": "overview"
+    },
+    {
+      "document_id": "urn:iisacc:document:4bfe63d4c47b129e5d07aa2c3d04ae45c53684316c205d9ac6e6baacc60841c9",
+      "source": "data/MakeHuman/LICENSE.ASSETS.md",
+      "agent_json": "docs/mirrors/data/MakeHuman/LICENSE.ASSETS.agent.json",
+      "source_sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:082d03b766ee6bd268edaff9b12ee3ecf42d6ddff136cd5449d661684a45fac9",
+      "source": "data/MakeHuman/LICENSE.md",
+      "agent_json": "docs/mirrors/data/MakeHuman/LICENSE.agent.json",
+      "source_sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:39e50b4410768e46bc585308fcc853cef13122f130e9c4879bf791e58cc124c2",
+      "source": "data/MakeHuman/PROVENANCE.md",
+      "agent_json": "docs/mirrors/data/MakeHuman/PROVENANCE.agent.json",
+      "source_sha256": "7ea639c146710a216285876147fd88db8d5efd9850e23b83b8d417ff5174efff",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:266da9bd0c02334ad16018926f36c8f3d286095a01ad0b5f7695aa078a8f0dfc",
+      "source": "data/MakeHumanExpressions/LICENSE.ASSETS.md",
+      "agent_json": "docs/mirrors/data/MakeHumanExpressions/LICENSE.ASSETS.agent.json",
+      "source_sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:54af11f52943a0ae35a97782243f9f66d821bca10094220d1c4af14891a1054c",
+      "source": "data/MakeHumanExpressions/LICENSE.md",
+      "agent_json": "docs/mirrors/data/MakeHumanExpressions/LICENSE.agent.json",
+      "source_sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:dc72034093f1a3447e6afc76dd85f2530d03e772f52704dfa10d284e5beaa4b7",
+      "source": "data/MakeHumanExpressions/PROVENANCE.md",
+      "agent_json": "docs/mirrors/data/MakeHumanExpressions/PROVENANCE.agent.json",
+      "source_sha256": "bb706e05419625b9c5b09ebcbfcbe812cd910e028703b1452b55046be224d8a1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:ec1678ff9fd38ac55afc42650c4284fd8ebbdea6011ce02aadfbb8521222606f",
+      "source": "data/MakeHumanFace/LICENSE.ASSETS.md",
+      "agent_json": "docs/mirrors/data/MakeHumanFace/LICENSE.ASSETS.agent.json",
+      "source_sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:e1854aac85e47ed15b6a24408c66677ae4c2b6605b3d74692bdc0e67545377b9",
+      "source": "data/MakeHumanFace/LICENSE.md",
+      "agent_json": "docs/mirrors/data/MakeHumanFace/LICENSE.agent.json",
+      "source_sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:22755b7efc31e4356faf048762838413ac8849a377b403f4f94141d1877d7053",
+      "source": "data/MakeHumanFace/PROVENANCE.md",
+      "agent_json": "docs/mirrors/data/MakeHumanFace/PROVENANCE.agent.json",
+      "source_sha256": "176a8316296ade1fa5a5d2dca105778e267224fc6a1f65315c4774429f19244d",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:dccf8ff89ae8c16c89e92ee3060e3422e9a9a7c1a558f50991688cb607d8d68b",
+      "source": "data/MakeHumanMacro/LICENSE.ASSETS.md",
+      "agent_json": "docs/mirrors/data/MakeHumanMacro/LICENSE.ASSETS.agent.json",
+      "source_sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:4b4e8cf75b309f3044b303aa343c4890d04702024c2beff9149c1b90f7e0df6a",
+      "source": "data/MakeHumanMacro/LICENSE.md",
+      "agent_json": "docs/mirrors/data/MakeHumanMacro/LICENSE.agent.json",
+      "source_sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:5e9c66dc84fd881c02a0c45627628c5ec813df5f32d90a21bddb7947bc7fd286",
+      "source": "data/MakeHumanMacro/PROVENANCE.md",
+      "agent_json": "docs/mirrors/data/MakeHumanMacro/PROVENANCE.agent.json",
+      "source_sha256": "cc9150180dfcee1a1ec4e6b95d55223a1afc25a60b428c1cbbc3e8c59bd2efc0",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:ac90eb04d5b4b2143ce7311be7fad729e01dcd09b0c90398d6fe5e5de1775dc2",
+      "source": "docs/Actor.md",
+      "agent_json": "docs/Actor.agent.json",
+      "source_sha256": "cc2115581c2e260ee344feb17506c2464a72e639bd28bef4a8a07e7a3c3d1aad",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:941249755473837f072bb58900e9065fe5e392c43e275bc0eb8fffabda5b26bb",
+      "source": "docs/AnimationRetarget.md",
+      "agent_json": "docs/AnimationRetarget.agent.json",
+      "source_sha256": "064cba8896d38354d6f042c90b35d3aec9a3cde2c156a352e52a5cf742fe8b86",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:c408ae3f2288f9885744ee6d9b7258d1149a16377c2418fed8c5f4035526d1a6",
+      "source": "docs/AnimationRetargetVerification-20261027.md",
+      "agent_json": "docs/AnimationRetargetVerification-20261027.agent.json",
+      "source_sha256": "2dc77f33acaf878f116c361bf0397137301e96fcabdd8093eeb82e50556b965f",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:33cc9a27bdc28cc79bde8836af68d39f57a69cbd0c1e23f9fbdf018500d31895",
+      "source": "docs/AutomaticConventionDetectionVerification-20261029.md",
+      "agent_json": "docs/AutomaticConventionDetectionVerification-20261029.agent.json",
+      "source_sha256": "f9814aadda5744c0d68b635ead01e6a9a98bbd7b8655a25060196dd9208d8352",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:414763f27ac88ae9b37bd47fe483b9d5d9827a9f7e5029b641ae2022986519f6",
+      "source": "docs/AutomaticCorrectives.md",
+      "agent_json": "docs/AutomaticCorrectives.agent.json",
+      "source_sha256": "073ea0d3926b4a16664d7546dc8860ece2c98bb376e4e9e5c4951ce34e082e93",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:a24f90f3d9b55bf3eb0703a47d516683fbff80dc1a9ea6d593b977fc5163bef8",
+      "source": "docs/AutomaticCorrectivesVerification-20261029.md",
+      "agent_json": "docs/AutomaticCorrectivesVerification-20261029.agent.json",
+      "source_sha256": "845b6d9738c96970813660e113d5c1d4704fadf49973e7c315125a86d1503588",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:ff1a3c7df47a3b1a9dcab23eb9ec135bcc352ce3849dc41f74cb2f1ed2558721",
+      "source": "docs/AutomaticSurfaceFitting.md",
+      "agent_json": "docs/AutomaticSurfaceFitting.agent.json",
+      "source_sha256": "297f7c99079d5465ba4136725b82b26aa77341072600a9b5b96bba8b86e091e7",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:fba025534bfc49e5c26ec16e66350fa93fcededd52f9efa240a79d10e9fcf129",
+      "source": "docs/BaseNormalEditing.md",
+      "agent_json": "docs/BaseNormalEditing.agent.json",
+      "source_sha256": "808ca621361a5e8989c3b3f2533a6bb87677891b034b8efaaaf1aef6503b0e74",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:980a40cbc767d1ba771fdf878861a61b1f287bdbb27b24e386c7243238063296",
+      "source": "docs/BaseNormalVerification-20261028.md",
+      "agent_json": "docs/BaseNormalVerification-20261028.agent.json",
+      "source_sha256": "c6a4b44e1425045a45e7e84714cd66ba3d17d683af3de532af47b0963ce7025f",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:72ed44adbca098b75dd0d232852882e5b53da88125ecbd0cd91fe49b4dc07c14",
+      "source": "docs/Changes-20261021.md",
+      "agent_json": "docs/Changes-20261021.agent.json",
+      "source_sha256": "92a427208f487847a42476a8fd426639dd1e4ede3fe9f41ba4d43f0a90bee287",
+      "role": "history"
+    },
+    {
+      "document_id": "urn:iisacc:document:0406dd655e15d1271c546345e4cfca0649dd9d03a5dc507d0f46eeab5343535a",
+      "source": "docs/Character.md",
+      "agent_json": "docs/Character.agent.json",
+      "source_sha256": "9a37f556e2da070ccddbe37289c9dd1aa1543410b687087c7be052dcc57102aa",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:0952bc92e8e5c09e0ce907bb5890de4ade75aad73c1b643509ed7db61fa14343",
+      "source": "docs/CharacterCreatorG3Verification-20261027.md",
+      "agent_json": "docs/CharacterCreatorG3Verification-20261027.agent.json",
+      "source_sha256": "3d3d2e1321e7664d0596e4b26251b081107abed28ec88159ed2fbde8a564479e",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:8cf754f15c27efa31203a40fbe62197bf634f2d5e19da364d9b9e27051ab755d",
+      "source": "docs/CharacterTemplate.md",
+      "agent_json": "docs/CharacterTemplate.agent.json",
+      "source_sha256": "ae1f1f70074162f831436b12b9798f9d1576f72a13f471434b2a4464f87abe97",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:1441c177036606bfa59ca4bcf78dfc0550322e8073be1e854e69b5de7078ed50",
+      "source": "docs/DefaultMorphWeights.md",
+      "agent_json": "docs/DefaultMorphWeights.agent.json",
+      "source_sha256": "edcd32c02c6d61bd93f20642485fe1f3971e4728ea373df274d8e69158c741b2",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:2dab76af359805cd40c90cf6d17fe82ca7c779ef5739ba69215ba02094ba57fe",
+      "source": "docs/DefaultMorphWeightsVerification-20261028.md",
+      "agent_json": "docs/DefaultMorphWeightsVerification-20261028.agent.json",
+      "source_sha256": "87caf783aa70851eca71f6ceca0faae864e9b6c4fdf77fcc43c4d58b773fd722",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:7235e1508f0fd13714acc29cf58af4aa746daef8546c2b549f5a88be39d67733",
+      "source": "docs/DeformationSnapshotVerification-20261027.md",
+      "agent_json": "docs/DeformationSnapshotVerification-20261027.agent.json",
+      "source_sha256": "48c8ebdf29aba26956ae068aee6ffc5f14945d7fb2746d16fcb31bf06286e52f",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:d27afb1819723a3be92fd54c3ddf8ef73c4afe0aff7e5169aaebbf15966b87d9",
+      "source": "docs/DeformationSnapshots.md",
+      "agent_json": "docs/DeformationSnapshots.agent.json",
+      "source_sha256": "8d15cf0eeedbd29aa1b4192a1f652a277309e9d2a57e4d0c2cf40231bce93f48",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:cca8d2d422afbd87eb6dabeac0f9ccd0391ea58386115099a7521324fec890a7",
+      "source": "docs/DnaEditing.md",
+      "agent_json": "docs/DnaEditing.agent.json",
+      "source_sha256": "4d3ba6d29c6f85c76d92d1ecc528542d5211971b0dc5962e19e309b9dfe8f9e4",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:9a26e233e60ca8ec2732b0a68ebb5c425e1912475544877c9ee405e979c85722",
+      "source": "docs/DnaMlGraphVerification-20261028.md",
+      "agent_json": "docs/DnaMlGraphVerification-20261028.agent.json",
+      "source_sha256": "37c24a42a36c974575a57350ffe15d54463feeaca9fccf859ca9e5ce72c8639a",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:dd3cf02f45bd72827d92293b6421a538257524f40b632dbd5cae664a42fe5e62",
+      "source": "docs/DnaMlVerification-20261028.md",
+      "agent_json": "docs/DnaMlVerification-20261028.agent.json",
+      "source_sha256": "5f42423837d1863ef830ef81377896b18ea4b13801ad4fb4fabaf1fb9ad618fd",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:47a0354c4c76122f49c4da11e3a3e8a3c5f773bc4150621f34bebfb27e2ce0b5",
+      "source": "docs/DnaRbfVerification-20261028.md",
+      "agent_json": "docs/DnaRbfVerification-20261028.agent.json",
+      "source_sha256": "470a3972b8cb0857af9c5e9e218131726bad3021eddcdf50f13264cfe2cda9d1",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:8ce4ee836ca77a6184ee4ffc34887186632f258bb6b70ecd74c4443d02e75da1",
+      "source": "docs/DnaRig.md",
+      "agent_json": "docs/DnaRig.agent.json",
+      "source_sha256": "60e44609afc58a76731e098f0057c60a42053731326549d0b87c629e32a774e4",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:c5f20479140a4fab705cfa51418f5027a349f76064f1b78697b7e2195c003ff5",
+      "source": "docs/DnaTwistVerification-20261028.md",
+      "agent_json": "docs/DnaTwistVerification-20261028.agent.json",
+      "source_sha256": "0a3739dc8334eaa6a2f6b05b7f9dd4afbd69c2d14ae0c105461b80c43fafdf76",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:97ebb3fcb9f39899e122364343bce5d31501e56df357014fb7751841e238216a",
+      "source": "docs/DualQuaternionProfileVerification-20261028.md",
+      "agent_json": "docs/DualQuaternionProfileVerification-20261028.agent.json",
+      "source_sha256": "045e390777696cda4bd4e268e60af74128b8ca345fbf4e29a6a4c9a85acd706d",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:75d129c7cf2f413cb92ae86b430da438345286e3f709d5679708725cc3b8c503",
+      "source": "docs/DualQuaternionSkinning.md",
+      "agent_json": "docs/DualQuaternionSkinning.agent.json",
+      "source_sha256": "b9113a5ab5bfc616e31330f7b1d35775bddc8f5177eb22ac1a5a499a51245c29",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:29cf0b39d6f112e8901d39e7fac9b054435461e168f36f5f6e258c21e580800a",
+      "source": "docs/DualQuaternionSkinningVerification-20261028.md",
+      "agent_json": "docs/DualQuaternionSkinningVerification-20261028.agent.json",
+      "source_sha256": "efd26785f3aa4a050b836c1a26a400572e942c0628fe7b795628c1c3d9a7f666",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:fdc56e50f01b82044868a3b4906a896b0304279710f8a192ebc9b6c8a68bacac",
+      "source": "docs/DynamicMorphBindVerification-20261028.md",
+      "agent_json": "docs/DynamicMorphBindVerification-20261028.agent.json",
+      "source_sha256": "fe196287656594eb6fca8342883423e080a5dc4c20e2deaced90fd7192b455c0",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:499beefb6cd58141a5df1a5aefd75c07b7ed5337c04aa380e95af243415cb599",
+      "source": "docs/DynamicRetargetVerification-20261028.md",
+      "agent_json": "docs/DynamicRetargetVerification-20261028.agent.json",
+      "source_sha256": "6aa0dc6874713c493449e53d48ecd2b09111e60efa1532c32adb60dbcf3627d7",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:f57a3fb4f997c7fb047360d1f96c3e455fd6cac37d30083a680bce661cf924a9",
+      "source": "docs/EditLayers.md",
+      "agent_json": "docs/EditLayers.agent.json",
+      "source_sha256": "e1e7ea41b20c4c814486e27ad98f10de2e1f7b72db2e157a33bd192b43e465ef",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:3f8613fc691783136d36f2295d4c8ff022fe695573567f2968305cef180e5011",
+      "source": "docs/EditorRigFollow.md",
+      "agent_json": "docs/EditorRigFollow.agent.json",
+      "source_sha256": "c3ccc29873d7f244e200e70675ab39160b0bbb2ae97a3e5edf7743ca6584602a",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:9327f5ccfe3f40900df00896a543f27dce778f6b81a26498111bb853c63ba26f",
+      "source": "docs/EditorRigFollowVerification-20261029.md",
+      "agent_json": "docs/EditorRigFollowVerification-20261029.agent.json",
+      "source_sha256": "99583ff736d1efc65f7e699232a8aa72a3898b5b942f2b2426bbaeb9c7110a4e",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:b5bbf43bde0f0b220f11e2a0786adcdc11d26944605016c1d37065e8ad002ae3",
+      "source": "docs/EvaluatedEditLayers.md",
+      "agent_json": "docs/EvaluatedEditLayers.agent.json",
+      "source_sha256": "13b914dd4a54fa1cf5c0526b40e59046a86476fba33c3330b79938624cbc0abf",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:f049b42bb79174d00bb722768c3c4eb6dba99d109a82d5e02aa9adc7d250e821",
+      "source": "docs/ExternalEdits.md",
+      "agent_json": "docs/ExternalEdits.agent.json",
+      "source_sha256": "27c3fa28d9dd4a74114086e3015ea5eebbcec1f475815d44a9396b0c71386795",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:adb98e2fa572c69bdb2ce28e1746fcbdddd2ac85451a41e5d433953398735b2b",
+      "source": "docs/ExternalTriangleEdits.md",
+      "agent_json": "docs/ExternalTriangleEdits.agent.json",
+      "source_sha256": "62f8fa72564a8ce917ed928d509e2bc809a53faff16ac04ca297406aabf20bc2",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:7dbee11fef9b909562180d11d4102c4c11941750845d2e6e821d08b5a4d80367",
+      "source": "docs/FaceAssets.md",
+      "agent_json": "docs/FaceAssets.agent.json",
+      "source_sha256": "b76a62d27999b78b24998f2291bb093e647249d6c189347edf8e15e5ad03c2cc",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:f2ddccfcf47217a95ab8b4cd1ae30d56befc4879543dca1e0ef33c2ba2a81af0",
+      "source": "docs/FacePoseRig.md",
+      "agent_json": "docs/FacePoseRig.agent.json",
+      "source_sha256": "6148628393bad6dbf2c618804d33ab62d0686b9f42fe8011ddbdf85fb16a814d",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:dfc7635c604847c3bad3d2ff0fd26ad9c0bd9f6deee84b4ea7f0e7db9fa0b5bd",
+      "source": "docs/FbxAnimation.md",
+      "agent_json": "docs/FbxAnimation.agent.json",
+      "source_sha256": "94e3d1076d3d39b841838c4603d6a9f2b32cdd9ec74f563431d943d3dfe90b80",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:2909ffa6a1ae0588fe870f42db0627dc4fe997367f312ab575e49687bb88bf45",
+      "source": "docs/FbxAnimationImport.md",
+      "agent_json": "docs/FbxAnimationImport.agent.json",
+      "source_sha256": "85c0c68d39d2cdfdb52e1330ee61ae11be1c4714f03d174ffa104ef51a774930",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:df002a5b72a14105b8a6792786b54185c4b7f3059b391e9775380708a1ca7550",
+      "source": "docs/FbxAnimationImportVerification-20261028.md",
+      "agent_json": "docs/FbxAnimationImportVerification-20261028.agent.json",
+      "source_sha256": "78391f41ee7118b6e7875d5a1091bfbdc54491025a658eec30813b4ba5edb10b",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:efa9585d57d67154cfc34917848418e2feb213f2b220f4d9d5486cb05b9fcff8",
+      "source": "docs/FbxAnimationVerification-20261028.md",
+      "agent_json": "docs/FbxAnimationVerification-20261028.agent.json",
+      "source_sha256": "bbb1a5fdf7ec72741941c09266749df6652ed98d9890ddf5f187cc68e879785b",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:0d0f5ce1c9fc18d15a43d8ca5eef47c5c6ed500f8e33e19152cd12f2d01fb892",
+      "source": "docs/FbxAuthoredTangentsVerification-20261028.md",
+      "agent_json": "docs/FbxAuthoredTangentsVerification-20261028.agent.json",
+      "source_sha256": "4d5d530e99bd24e4b3674de96bae994ecdc3aa588a6d6dab5464403a5572069e",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:a19af215c2752edd86b6d08369bd2ea38afa09867a3d4a38ab325e5564d77e70",
+      "source": "docs/FbxAuthoring.md",
+      "agent_json": "docs/FbxAuthoring.agent.json",
+      "source_sha256": "659e73304af3e944decc731fa38ad2399b9e0306e4b805597916030f19ffe560",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:1395ab3d1b250f23562882d0cec68c75735b1868606c27cba1f7bb809497e2b3",
+      "source": "docs/FbxImageResolution.md",
+      "agent_json": "docs/FbxImageResolution.agent.json",
+      "source_sha256": "aecccbfae01181e9abda09731fe0836897399b7d6cb07aaf0fdc65ddf8509666",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:e5833c16b0ca6c8f53e0cf794ecf89bd3f01cf232e5e7e2f9089ea262fabbb9f",
+      "source": "docs/FbxImageResolutionVerification-20261028.md",
+      "agent_json": "docs/FbxImageResolutionVerification-20261028.agent.json",
+      "source_sha256": "48a08ea7dcac609a4f835b54fd943a729b09f3672db697d004ddf978fe2c78b1",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:f8b7b0534404b9b6737dc61ce4ff31ccc3a01d0f74030b424edaf4c7e5aa6efb",
+      "source": "docs/FbxTangents.md",
+      "agent_json": "docs/FbxTangents.agent.json",
+      "source_sha256": "2b151b0bcae6956fdcaecfe691db457bb964f8ef82fef02267253d9880902602",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:223918fc0b665663d5db0859f4e08bb27d65724d0101de3af1b5dadd135fb030",
+      "source": "docs/FbxTangentsVerification-20261028.md",
+      "agent_json": "docs/FbxTangentsVerification-20261028.agent.json",
+      "source_sha256": "c7dbb200a5ce2480e2fd05d05ba1ac96df310819ccaceda37918087644ac2b58",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:d7a80a3c0182c2cc1f9d14da2faaef4110e88a1ea3ad792aa88a5a86a30a58fe",
+      "source": "docs/GlbAnimation.md",
+      "agent_json": "docs/GlbAnimation.agent.json",
+      "source_sha256": "cf109f694feaf1356f45850528d56dcc571f22de69b5879e925ee93e9d776db4",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:1458293f12748872b714cd9ba996bcb0d009d0b7d11926fe113a76058399817e",
+      "source": "docs/GlbAnimationBake.md",
+      "agent_json": "docs/GlbAnimationBake.agent.json",
+      "source_sha256": "a60153152d1331aa3ad584167acba7d1b3f1f69609c260089bd3f170df9daa10",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:423534bde0398d85dfdfefe81f2ae74a96d70f77436225f359eeb5e73702fc7a",
+      "source": "docs/GlbAnimationVerification-20261028.md",
+      "agent_json": "docs/GlbAnimationVerification-20261028.agent.json",
+      "source_sha256": "24b32d2ee4579c574d51264a0606d32698dfd66ae8b9ff8c4581234344387808",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:a6ded85f76d58e642ccd2d386d53509eb051e52792d0f8c16dd53dc85b529a3e",
+      "source": "docs/GlbAuthoredTangents.md",
+      "agent_json": "docs/GlbAuthoredTangents.agent.json",
+      "source_sha256": "183440b1c5bf422e778866a333cf35971b945b958d9c7c9dda7918ff14b48d14",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:b84ff86f0c131c118f3a5a5a90356d7f29ed389d6bef38b6366362084d285209",
+      "source": "docs/GlbAuthoredTangentsVerification-20261028.md",
+      "agent_json": "docs/GlbAuthoredTangentsVerification-20261028.agent.json",
+      "source_sha256": "f54eab61cecaceffb6f187d7fd113511d31c53298c7d5655d7f7879300b31212",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:012723e56d54e9542a672c18dee1f8397f79b46b2809a3039e2f2dc106a4671b",
+      "source": "docs/GlbDocument.md",
+      "agent_json": "docs/GlbDocument.agent.json",
+      "source_sha256": "86263138054ff0ab2faf05a2dd55a7afe1aca71f7f7ee1c47ad4f2f2ad9ef089",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:40d474c68169ac8e8a4297d1bac05c4b81592ee750db278d6f01e4837e202fd0",
+      "source": "docs/GlbDocumentVerification-20261028.md",
+      "agent_json": "docs/GlbDocumentVerification-20261028.agent.json",
+      "source_sha256": "0f219218ec51c54041f7d3f0f6adff74f7c04304e45146ea3b13b6a02427eee6",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:6073348ef1c039ea55e9be490364ca5a38072435210a2763bcd7e31ad810cebe",
+      "source": "docs/GlbExternalEdits.md",
+      "agent_json": "docs/GlbExternalEdits.agent.json",
+      "source_sha256": "81dd16ced24335411dc6a29650bc8316f28d0f127e00b4d6c624ba1ab932440e",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:36e40630121e2d3b02250e17e15a0623c7dc7cc5cf0d1ca42e181ce780bf7ed0",
+      "source": "docs/GlbImport.md",
+      "agent_json": "docs/GlbImport.agent.json",
+      "source_sha256": "5cfc7237e3b510e666535dac7d78cfbd96b659090f8a053444a5c84a4e00be21",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:870d1c0b6b0ef04c67b2917073a178ed4c833513d2a3364c2d4ecc0b3c29c200",
+      "source": "docs/GlbImportVerification-20261028.md",
+      "agent_json": "docs/GlbImportVerification-20261028.agent.json",
+      "source_sha256": "a8e1fd4b62581660e5051d60f74fcbc0a432697e792950feae59c2061d5e27bb",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:182d6ee25bdee98da1de5b6a396081cd95d9bfca4c6ef628493fabf5d38de70a",
+      "source": "docs/GlbMixedAttributesVerification-20261029.md",
+      "agent_json": "docs/GlbMixedAttributesVerification-20261029.agent.json",
+      "source_sha256": "7fa50bd6c94a68745254bd97142dce0308137b5ed6ed16489f5286cb234092ad",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:91fe133de8386c0382eb477a2135e8fb7ddfa271c606a1b2f67ddcf4fa3906dd",
+      "source": "docs/GlbMorphAnimationVerification-20261028.md",
+      "agent_json": "docs/GlbMorphAnimationVerification-20261028.agent.json",
+      "source_sha256": "ff77ee0a0ea80c5914fda7e4afda7050b900532cd8256d3e775b856121979a25",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:ab25f1e2616264920c210c3e3076a9c3ac9db7efd7ce58091d4f5498c859e0ad",
+      "source": "docs/GlbMultiSkin.md",
+      "agent_json": "docs/GlbMultiSkin.agent.json",
+      "source_sha256": "015e2bd267f1f190181447cd6097f93d197b5f5ce8d3d435bd30b8ec034b3fbb",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:75695b6e255eaef1b81fa1c76129de3c371e5278a0171bfc368835ad4b5da096",
+      "source": "docs/GlbMultiSkinVerification-20261028.md",
+      "agent_json": "docs/GlbMultiSkinVerification-20261028.agent.json",
+      "source_sha256": "41b34d0715645c63c0ba7ed08881a6d3dd0c2ab4a90ddc6bc99b6bcfcf2eea7a",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:71961c3f26dc6f431ba0bbc2e7b1c931adbe97cef872129b296afef6c1bfef00",
+      "source": "docs/GlbPointIdentity.md",
+      "agent_json": "docs/GlbPointIdentity.agent.json",
+      "source_sha256": "ec07dab6b5b24e42ae630e02971b3d6b245acbd4068a217574d75e7a75df0524",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:da4c9c93c6896308acfbfc9c81fcac60fdbc4ea3b0443c04a92af6c677dd83e3",
+      "source": "docs/GlbPointIdentityVerification-20261028.md",
+      "agent_json": "docs/GlbPointIdentityVerification-20261028.agent.json",
+      "source_sha256": "9d70c6e1ecc043f93f8752f97194acbce7d3b8f00e87153be4348e1340b44756",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:9709bc567a17f134e1731f0e5f54fc97cab0cfd225d69c653ec050266d785a08",
+      "source": "docs/HumanAccessories.md",
+      "agent_json": "docs/HumanAccessories.agent.json",
+      "source_sha256": "0a0d2ba377a3e78df4fc16eac8d9f657891640dfc16e80a7061849d892e88fc6",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:ff8c05a99d6ba082fb741a7dd1c4efb8a273c978a7cfa6ae267218ea7d19a64e",
+      "source": "docs/HumanAccessoriesVerification-20261029.md",
+      "agent_json": "docs/HumanAccessoriesVerification-20261029.agent.json",
+      "source_sha256": "245e0375f1b1a67a6a5c261f69ea7ecc19d30fa320423cb1cefb67f9313a2014",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:a4358cc64a122551acf6aa438f1830a07d78e95537c3def0fb0f78ecd4a4e659",
+      "source": "docs/HumanAccessoryAdditionVerification-20261029.md",
+      "agent_json": "docs/HumanAccessoryAdditionVerification-20261029.agent.json",
+      "source_sha256": "ee34c5ebb126f0fce39004f1a94c242a7706e7c7fc2525fb40312a8e0490b6de",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:dc9e449b99c00f9e927824b8a3fb3687ae2afea9067fbf116c4cdb6c5b8a669c",
+      "source": "docs/HumanAccessoryCompositionVerification-20261029.md",
+      "agent_json": "docs/HumanAccessoryCompositionVerification-20261029.agent.json",
+      "source_sha256": "d80a560146b80cc79805c08aeb6e57b811fae80777a3af6267ec3c2ee8da8f81",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:18f773c90d7af738ea605b942b3581f838ca6b67f73b99fdbeb8e3a480cb92d7",
+      "source": "docs/HumanAccessoryRemovalVerification-20261029.md",
+      "agent_json": "docs/HumanAccessoryRemovalVerification-20261029.agent.json",
+      "source_sha256": "9174805d45b4a51e8b53be6cae3c1faddac4ce9979e4d123ee9f70b82a3caf22",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:713a101d7b0ea6cd2ba323490a9840948b47260e2a15a3e7bcecd03b0e9e011a",
+      "source": "docs/HumanAccessorySwitchVerification-20261029.md",
+      "agent_json": "docs/HumanAccessorySwitchVerification-20261029.agent.json",
+      "source_sha256": "6fef30660585af464c86565ffb1db0e5c8f35d53c7bb9a45f0821d935b0313d1",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:6b2e379dda0425a0249f116e70d0a32e1716b0ff1a443960e1f2da25264d1694",
+      "source": "docs/HumanInterchangeVerification-20261029.md",
+      "agent_json": "docs/HumanInterchangeVerification-20261029.agent.json",
+      "source_sha256": "cc7de4348b148009314d3908af31bcc33cf785745c8dfc81a8b65a6bc6b945d7",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:707309d1119ccfa73cb98af57d890782125a662cdb4fa10098d6cc4d10caa3f5",
+      "source": "docs/HumanJointNaming.md",
+      "agent_json": "docs/HumanJointNaming.agent.json",
+      "source_sha256": "c7086a448f77d6f913332f9f9cfa2c67af916455266b97c514008796d2e5e607",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:c8a0673c758658f6485a27c3d70828372faff9957cf30089d88fdc67c3ee2a34",
+      "source": "docs/HumanJointNamingVerification-20261027.md",
+      "agent_json": "docs/HumanJointNamingVerification-20261027.agent.json",
+      "source_sha256": "b2d423bb54dc31e477e95fe4494afc8e33c09b7def17388811f8f3722bfac398",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:7178785ac6798e903b1cae7b1d2a03594e38742ebf99ca6d670873806d131122",
+      "source": "docs/HumanMorphology.md",
+      "agent_json": "docs/HumanMorphology.agent.json",
+      "source_sha256": "bcba366a1dbfec64d9873cdad46894cc7452e3eb90bfcc7f0f55b8b926e68462",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:3f0e808c34335fcc00366b8239190ee8634a1ccae29d439b232ba930597c6020",
+      "source": "docs/HumanPoseDirections.md",
+      "agent_json": "docs/HumanPoseDirections.agent.json",
+      "source_sha256": "b3cb1593f864769c6de66c3b5bc50b746fbe17ec38e2af36bbc7e43fc11e4041",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:39fe5b6c349c6ca09044db5344fcb813f65dea57fd5b66625a5de44095264907",
+      "source": "docs/HumanPosePlanner.md",
+      "agent_json": "docs/HumanPosePlanner.agent.json",
+      "source_sha256": "6ff74bb89be2291de605dc77b1b0bf9a86703367b38262f9c222e88a39652a54",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:b02a947bb53df51238b41a83fd6148ab86eb8be3c3e34777b3b6e3d5c1e50966",
+      "source": "docs/HumanPosePlannerVerification-20261027.md",
+      "agent_json": "docs/HumanPosePlannerVerification-20261027.agent.json",
+      "source_sha256": "02f547507a3507b83feba8c98cf5b212fedea65370f07a83993458368c076205",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:ff2b233949d0ed4e2516699b8371a7d059bac0e7882d5db5af65fcde01c60ec8",
+      "source": "docs/HumanPoseRetarget.md",
+      "agent_json": "docs/HumanPoseRetarget.agent.json",
+      "source_sha256": "e0014eb9b6e4a96466d570f8e447d71e09add58f69aa354d822f5aa5883a3248",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:ff74a79221f41660b93b2319915a98128af7083ee8e17d971d85f5968a7ffda9",
+      "source": "docs/HumanoidCharacterization.md",
+      "agent_json": "docs/HumanoidCharacterization.agent.json",
+      "source_sha256": "2ebeaf0339e0505a44c73c39c01c72a08809f90984221323856d41a68422728c",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:cff52279de91f8efe8aa800c982b333459a9df7d53911a896541eeb4082b3474",
+      "source": "docs/InstanceTransfer.md",
+      "agent_json": "docs/InstanceTransfer.agent.json",
+      "source_sha256": "1fb2679546e7609c1e43d912a39099c3913f62323d2445c2aa5c0f05aeac2b36",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:9990296acf88713df74bff769e544699b19a0319939bdad51f2dc869aa2b6c72",
+      "source": "docs/InstanceTransferVerification-20261029.md",
+      "agent_json": "docs/InstanceTransferVerification-20261029.agent.json",
+      "source_sha256": "6d7d864aa4b33a92665f60bff0406340915d2f9a92b186e302e900bfa7c7c3c7",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:881f4d5193a7f0315aa729b1fb950e22103739eb9381ea4efb425f75a5f2a863",
+      "source": "docs/LinearizedSnapshotVerification-20261028.md",
+      "agent_json": "docs/LinearizedSnapshotVerification-20261028.agent.json",
+      "source_sha256": "6a99005935214aad90b3ff83c64a6457168dc3f7841483a1898f3fd0d086cc1b",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:144b32080a01fa240d1e394156530092955761d77a81acf9302ddcc7f2ddc555",
+      "source": "docs/LogicalMorphChannels.md",
+      "agent_json": "docs/LogicalMorphChannels.agent.json",
+      "source_sha256": "54ade59edf6b7219377598741be5bd8c7c18c33a8573fe5384fd140bef0a49c7",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:e13be18e8d68ebb058967cca084b046cab4f2b9fcc0f000f9f46f9abcb7c6f90",
+      "source": "docs/LogicalMorphChannelsVerification-20261028.md",
+      "agent_json": "docs/LogicalMorphChannelsVerification-20261028.agent.json",
+      "source_sha256": "5c36f97a1fea3e7612866505016d940b8672b6a04dabd38100d371fd77520ed1",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:f9ebde2bfbe0663398a85d387c7591e1fbcc495665ceaf48c4fa3c7f2989a1b8",
+      "source": "docs/MaterialSurface.md",
+      "agent_json": "docs/MaterialSurface.agent.json",
+      "source_sha256": "d2bd97537f99b6507c833182809e2b10c6b7358a889af4ca024b85d317db3c51",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:793898a6650f2105fdf749e5cdb4d7ce56f53835cc28b09d5cf205f19c030952",
+      "source": "docs/MaterialSurfaceVerification-20261029.md",
+      "agent_json": "docs/MaterialSurfaceVerification-20261029.agent.json",
+      "source_sha256": "464fc52df81048f2ff2c7ebea2a660aaa23f795fa558575e17c6fa6edf46299b",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:dbfbe78f2e32d25fa92faa4cd8b161f5e7a159fa0f482fba25ebf64810f7b3c0",
+      "source": "docs/MeshMaskProjection.md",
+      "agent_json": "docs/MeshMaskProjection.agent.json",
+      "source_sha256": "73cf1b0a315719a9a91573da93fc02fdca298ca3439882f66a6d3a7e1b8d71bc",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:01ca4dee7ba7ae568c0232daaa406735e284342328f5005a450c2fd85509bc12",
+      "source": "docs/MeshMaskProjectionVerification-20261028.md",
+      "agent_json": "docs/MeshMaskProjectionVerification-20261028.agent.json",
+      "source_sha256": "73d1dc661f495b3d976f7ddf7ae0ad7e400bae1526da8c18ea3df2001d942bcf",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:aa260d9ae611433791f26d894302b9e759867a3040c59514cb1f3719e4bc4c86",
+      "source": "docs/MeshPainting.md",
+      "agent_json": "docs/MeshPainting.agent.json",
+      "source_sha256": "8b7274d24b42f600aeb59735a452436d1dcad6c7705544dd847a51411b59ad2e",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:62292fa8748f28cb53c68f1b54f152af417ac6dcf0e6bdc95550bf6b7e9b7ee6",
+      "source": "docs/MeshScreenSelection.md",
+      "agent_json": "docs/MeshScreenSelection.agent.json",
+      "source_sha256": "30eb7047bc5e7b78c0b975c86144a2460bca1cb7885c6edb6b05d43943a2c7ea",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:5f29063382bee478964581e8a80dd4aaf76d7ca18bffc31bab0c7609ea60c38c",
+      "source": "docs/MeshScreenSelectionVerification-20261029.md",
+      "agent_json": "docs/MeshScreenSelectionVerification-20261029.agent.json",
+      "source_sha256": "ec079ab0611e7e970b8a0176b4d6c5967c6323aec630a221b78432121dc135c7",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:a05184d6d0129350c72de60eb10fbb63480ddae342d8558192249cb59b2658e6",
+      "source": "docs/MeshSymmetry.md",
+      "agent_json": "docs/MeshSymmetry.agent.json",
+      "source_sha256": "0701ab3c0825fbcbd7719e5607b7d613415ee9d7b3acd2897701267ede60fe88",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:2ae7e6f652008e268152e5c188800c5bab132f2a0694d34476c7e3ac3bf58de1",
+      "source": "docs/MeshTangents.md",
+      "agent_json": "docs/MeshTangents.agent.json",
+      "source_sha256": "a3cf8e98e72974e23e8382f41ddfe1fe4bbdef610f048253bb81e2220cb2abf6",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:2deeee0d05be07ce8dddd4842fb344e3418cf257697df33a5a6869a6fc9f6625",
+      "source": "docs/MeshTangentsVerification-20261028.md",
+      "agent_json": "docs/MeshTangentsVerification-20261028.agent.json",
+      "source_sha256": "dfb3155a77785af81493059b9d38b19206acefdea139aa7dfb125214091a9f3e",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:198bc59ea520eff5af8fed98309965c8a34849bc4585893a73b2ff7062160f34",
+      "source": "docs/MeshTopology.md",
+      "agent_json": "docs/MeshTopology.agent.json",
+      "source_sha256": "c079a401e709748e1273e69872dcb67aa7402086a60053d939b536618fe499e9",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:6df25dab9d7c83cc0d8208bc71c9e6519013e29a511b1b5e84f81aa704b920b6",
+      "source": "docs/MorphChannelRig.md",
+      "agent_json": "docs/MorphChannelRig.agent.json",
+      "source_sha256": "b99c30057ec520d8636054d9845ede8faa0277e88d3941b46d3efce309b489a1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:06a409fa306bca0e3d382ecbf75b320c0168b2e4e87722881bc3b866d6537b97",
+      "source": "docs/MorphChannelRigVerification-20261028.md",
+      "agent_json": "docs/MorphChannelRigVerification-20261028.agent.json",
+      "source_sha256": "e1c4cccf4e03c48205be3a5bb5aa061bf7a829f390141a61a54a73ba5e356d9a",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:7ddff27ba448a90894a1e794f725989b3282af3af11a2873b19fe4a70273cc93",
+      "source": "docs/MorphNormals.md",
+      "agent_json": "docs/MorphNormals.agent.json",
+      "source_sha256": "cad4fdd32db7752371fd21721c7310e00b50cd60d9f2392cf9fda3a1351b01be",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:aa1e2f24a122b4c779e24c545a987864ec1dc420328eae138da6a88d3e0d2316",
+      "source": "docs/MultipleUvSets.md",
+      "agent_json": "docs/MultipleUvSets.agent.json",
+      "source_sha256": "45b3bca6894592b6d408a8f21499c81331d98c4309cef8eb4c3af41802ea43f8",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:0ac36b955d273f5f28211cd7407e77c4ee044353544b857351805938c586eefe",
+      "source": "docs/MultipleUvSetsVerification-20261028.md",
+      "agent_json": "docs/MultipleUvSetsVerification-20261028.agent.json",
+      "source_sha256": "de62a2416a12b50dddd8b41f6f22093621f1d3cbb72da7a3366fc2b5bae262e8",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:16c1ac2c1c63458e272de1c051b1f97484832dbdb46ad8cb7e5b4be68a4217d8",
+      "source": "docs/NSCharacter.md",
+      "agent_json": "docs/NSCharacter.agent.json",
+      "source_sha256": "e98c540f7c903cff6ed7b8ab8050c37385e1922ae892b6f5fe23e8890ff4a896",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:c4d6a42a994c652e78bdd53e24e5f27007c21515a0545015fa65f55049699836",
+      "source": "docs/NamedPointSelections.md",
+      "agent_json": "docs/NamedPointSelections.agent.json",
+      "source_sha256": "d546a91b2cbcb2d56cadd2a236f3eaf5d6a0233889ebc5f5022eb6fb0e2d4cfb",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:4608320505a0e40b7da270a73ac664df26ae5e5d68c9d237aa6b5e90f2405ea0",
+      "source": "docs/NamedPointSelectionsVerification-20261028.md",
+      "agent_json": "docs/NamedPointSelectionsVerification-20261028.agent.json",
+      "source_sha256": "4689d82c944719c2e5cf7632660edc6c16123ff67ae7558b5bf93c1e8b6aebea",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:0ea79cb1d1817e95330230f074ee0809ae723bf9d4a662f5ee73876fa42d6b2a",
+      "source": "docs/NormalMaps.md",
+      "agent_json": "docs/NormalMaps.agent.json",
+      "source_sha256": "7a98ad8e5e604a3aa244556a3e642d733410decdbca2f175a55860341436334f",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:ca1413c1e1ff0ef4c3d84a72682702dedf2aae316617c5b7a18506fc82f05399",
+      "source": "docs/NormalMapsVerification-20261028.md",
+      "agent_json": "docs/NormalMapsVerification-20261028.agent.json",
+      "source_sha256": "327c119cdbbd22a00dabdfd68bd7d6e5357d3bcb5f22ae65c0b756f7686217b0",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:d875c18c8b364fa5d9294876d8f1e8c82e43213772becea4b0719d14efc49db0",
+      "source": "docs/Object3DAnimation.md",
+      "agent_json": "docs/Object3DAnimation.agent.json",
+      "source_sha256": "e40ec7e1adc89cb9b7564204b75d7561cf10ca45d70a7cf62514658b3e6df7c6",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:b5ff31b77cbf2637597082c16a265684d8a62946df856d25d1859cb173252a2f",
+      "source": "docs/Object3DAnimationVerification-20261029.md",
+      "agent_json": "docs/Object3DAnimationVerification-20261029.agent.json",
+      "source_sha256": "01b28f35a29b93a38eaee814d53e86f2273b1896ba5a9521b494b80c80e8793d",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:328b8da3bdfdcfbe6ecbd45da4ac81893e52b7618b14713108260376728d0595",
+      "source": "docs/Object3DEngine.md",
+      "agent_json": "docs/Object3DEngine.agent.json",
+      "source_sha256": "1620fba948af7ba19e75f8553a61ba56a7409e36b827d8769d6a11373ff26cae",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:8623241b874efc9caeb83c9cda24a07036ec357198bce154052d127d41fcfc25",
+      "source": "docs/Object3DProject.md",
+      "agent_json": "docs/Object3DProject.agent.json",
+      "source_sha256": "376ae6cbbbf3385d034869a75e2ef5970b7bedb4494f34c4304534ef57070319",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:0d663445b1b58284dce9b29a041c681ec896ae917ef2faf5e299712d9472af43",
+      "source": "docs/PoseCorrectiveAnimation.md",
+      "agent_json": "docs/PoseCorrectiveAnimation.agent.json",
+      "source_sha256": "0024c5a5a02804a56e873188be9db613ec9f42e338ef8adff7bd3c6c1d6aa3c2",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:9fbc210d43d42708e959f0351b971f942ea6c6d204a0e136f1b479c78e1aebcb",
+      "source": "docs/PoseCorrectives.md",
+      "agent_json": "docs/PoseCorrectives.agent.json",
+      "source_sha256": "5d6e6005d9e8786012c3984a96720f0fefd5aca4d76fe47eb3129cce6779f4a7",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:bc6fa9a37ba7e5fc9e793fa8dae548c6eb0b5ed215ba84b92269325f925834bd",
+      "source": "docs/PoseFrames.md",
+      "agent_json": "docs/PoseFrames.agent.json",
+      "source_sha256": "6ae105d0b136782c4f6b20639d6a0db8399b1e2748a91fe2b4b2010f053a4817",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:8c31b8c2d10ebfdfaecf7929f09129bfb5eda7cc96e88e829001184d1da9253d",
+      "source": "docs/PoseReference.md",
+      "agent_json": "docs/PoseReference.agent.json",
+      "source_sha256": "ae82906c6f0e7cb2c83f58e0b2dc204faeb0aee59ddb515607c5d8381574e1bc",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:f59e520d90e814c226562a8a922997c29d6aa994a3d880e9144855b5eb58b67c",
+      "source": "docs/PoseRetarget.md",
+      "agent_json": "docs/PoseRetarget.agent.json",
+      "source_sha256": "98485ac64df1a95302aa3a232582709e5e3d141ecafd72afab6f59d3635fabde",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:eb0a62dc20fd0225c8dd454cea44cf4740e722dc50c3f233f7719cb7b8508561",
+      "source": "docs/PoseRetargetVerification-20261027.md",
+      "agent_json": "docs/PoseRetargetVerification-20261027.agent.json",
+      "source_sha256": "46a4304162ad9504f6e2fa34de5aa00da3eb0215db1a817236fbdf81555b3914",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:d2e8302126a1b87b4714c1fbece04b70ef149615cabb2d593a729a4b38d8ce4a",
+      "source": "docs/PoseSnapshots.md",
+      "agent_json": "docs/PoseSnapshots.agent.json",
+      "source_sha256": "fa5cad9ee5439da6cca028a361c7fceefc264ac1c4a8579401a57add73dfa717",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:81b5edd9133869817f1d2a323c8dfb17260c78dc0350e8a0d8b95f593bc327a5",
+      "source": "docs/ProgressiveMorphAnimation.md",
+      "agent_json": "docs/ProgressiveMorphAnimation.agent.json",
+      "source_sha256": "98f4803260959ccf2039a4f31bd546f7fb083e7fae091735517271e3edbcbd9d",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:a1ce154b7d8f6ecf71eb6d40750c618bb9179ec6e3263f16ddc4725479b16445",
+      "source": "docs/ProgressiveMorphAnimationVerification-20261029.md",
+      "agent_json": "docs/ProgressiveMorphAnimationVerification-20261029.agent.json",
+      "source_sha256": "f609520e95eaedf2f6d0a1658ba763f99c501d8be6b8992ed5396536d5ba659c",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:0b1d2cb7698ff441f98263f3f4dd7289eb58d3b42b9c7a0ccf734a1e229f8eb3",
+      "source": "docs/ProgressiveMorphRig.md",
+      "agent_json": "docs/ProgressiveMorphRig.agent.json",
+      "source_sha256": "a08925c3b8fec9c8e9030f0daa6f7a83bc39c4df479897eaaa6b7f3969de6d30",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:040aade2cc04d427775b8db638d8c30713ab77df16372f72ea3330cf2280b752",
+      "source": "docs/ProgressiveMorphVerification-20261029.md",
+      "agent_json": "docs/ProgressiveMorphVerification-20261029.agent.json",
+      "source_sha256": "eba0e69fe7d24f037ba0bb2cc72deba4babc58af69ad2a6c2ec526359640a928",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:a431a8a821635f897e2404639c12ae47a109752e601b495f80affb2687679919",
+      "source": "docs/ProgressiveTakesVerification-20261029.md",
+      "agent_json": "docs/ProgressiveTakesVerification-20261029.agent.json",
+      "source_sha256": "3c93ceb1cb4e237a5f4ea5392dd9dcb3c1fbc7e1a1ea1b32dac5c7ef00cf35f0",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:f27bab2cf8d9c3abb91cc42334316878edd2dc65dd1858d740735f5d69b921f8",
+      "source": "docs/ProjectAnimation.md",
+      "agent_json": "docs/ProjectAnimation.agent.json",
+      "source_sha256": "4cc30b162302d226ca487a4d1d65a85658a112be0add4ec02dd3d278a9ed9b4b",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:8e7266c1b1a0a284e0b1893adf5f5213565b39cef23c016f3c4042789c76fb6b",
+      "source": "docs/ProjectAnimationVerification-20261029.md",
+      "agent_json": "docs/ProjectAnimationVerification-20261029.agent.json",
+      "source_sha256": "db12c41bd0fe59cb92970e9c59a8428727f253b6de6fcc9aa543ee5ecae31c6f",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:864a558a2b3234074de59fc961440d3421a90b251b12db696982e0770ca33d63",
+      "source": "docs/ProjectIntegrityVerification-20261028.md",
+      "agent_json": "docs/ProjectIntegrityVerification-20261028.agent.json",
+      "source_sha256": "1f36e1dd94a51133fd910562137d85439f5b84d91f77da42c8b5e63852ffc225",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:38ee28f4de9255f1f31b9b5efe4c5696c2bf41e0a2bb23db1dbd7eb0189160cf",
+      "source": "docs/README.md",
+      "agent_json": "docs/README.agent.json",
+      "source_sha256": "a25f45db724ff008fa7a1b71d22628d896f6c5633191161760e0c05d67ae7b3c",
+      "role": "overview"
+    },
+    {
+      "document_id": "urn:iisacc:document:a445f76b2cb394b993b7bf967c7cdc458bca43772460f7b028c2e7bfe57c6ac1",
+      "source": "docs/Resources.md",
+      "agent_json": "docs/Resources.agent.json",
+      "source_sha256": "11db75e7168756761161b6d47852222c2480d3cde65a03efa874d47e39ad3ff1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:a24775a1ba3ddeb6c44fde0d48a9b418c00532d928993ddef7f4b8599663d62a",
+      "source": "docs/RigControlSamples.md",
+      "agent_json": "docs/RigControlSamples.agent.json",
+      "source_sha256": "603fa33f5fd39c3c3f95390251d86acb93b6714d2b4699e4fa7994e7e788de49",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:29ec6d9087049490b845c11b96fe3b7ed9ad8e90a62c982f3ff42727f977cdda",
+      "source": "docs/RigControlSamplesVerification-20261027.md",
+      "agent_json": "docs/RigControlSamplesVerification-20261027.agent.json",
+      "source_sha256": "020192f1a1765b93994557f2c2e591db3d6160eb3dd60ea003902040efb5a9f8",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:dc1b63dcd4c2fb76ec0b8f5f89f5edc154dee54c230c9f9cebd721148336dd81",
+      "source": "docs/RigSampleSkinningVerification-20261029.md",
+      "agent_json": "docs/RigSampleSkinningVerification-20261029.agent.json",
+      "source_sha256": "129fc812a9c17ab5563685b2d5f29fad0d88fdeb125eec7c9d473c9feb4d10b4",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:98ecc56cd3a0fdbd98604cb89afc3b43dc50500647c9e64ad667c63a0be151ba",
+      "source": "docs/SelectionTransfer.md",
+      "agent_json": "docs/SelectionTransfer.agent.json",
+      "source_sha256": "01d8f09ab48e9ed791880c34fb185b6ce7007900763420449cad40cb5afb2323",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:201f7e625b4df6cbbaa86c3413cfccbd8be25984b78b09bfd8dc4a6ecaf38179",
+      "source": "docs/SelectionTransferVerification-20261029.md",
+      "agent_json": "docs/SelectionTransferVerification-20261029.agent.json",
+      "source_sha256": "f02320794a60891d497b2204ab3bd1198a33d0b7bf8f75bcc4a8b1558d8a3887",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:e5d49fe36f84203bd0e661116c2f001f89a199df7419674c01b405b439f05d2a",
+      "source": "docs/SkeletonEditing.md",
+      "agent_json": "docs/SkeletonEditing.agent.json",
+      "source_sha256": "de78a42dff6a0e1b6115990f68288cd0bacd89b2d540f577d2e3244aef852307",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:c2c797a70ed8093a4a3d4d388cc7d42213cfe1e7fd0a6c99afe97a101dd2b3bf",
+      "source": "docs/SkeletonEnvelopes.md",
+      "agent_json": "docs/SkeletonEnvelopes.agent.json",
+      "source_sha256": "7d9fa3f322085a7146200e005130af2bfe9ec8a7a6557087c9a7ec376831c0c2",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:4d36b33ab0324625df9064b3ab97f25bae5e5060d1251fc8e0bebedd9c04e419",
+      "source": "docs/SkeletonEnvelopesVerification-20261028.md",
+      "agent_json": "docs/SkeletonEnvelopesVerification-20261028.agent.json",
+      "source_sha256": "a71e1cba376d6f14d2e3f04f54655383140d19e7c73e9e3cc268c0315395ce21",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:cb558f30c8dc423782299d6e9f6f6564724e2b71b31ca5d10522721d671fefac",
+      "source": "docs/SkeletonScale.md",
+      "agent_json": "docs/SkeletonScale.agent.json",
+      "source_sha256": "cc52d18c4256a2ea99066894eb6586aa5de4a4e16ebb8c5ceb8d24c87bb7093b",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:95275ce4975c4b48981c8ca5bb4856ecd057d861fb5fa88154faff68d34ef201",
+      "source": "docs/SkinSurface.md",
+      "agent_json": "docs/SkinSurface.agent.json",
+      "source_sha256": "404d4955c257e55f9428648830c37df24ec7098dea2237da75d798e2796af81b",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:8f9bfc81913e4c961e96de8a0e1d3e96ce1333c7d53817c66cb90eb899387cfa",
+      "source": "docs/SkinningProfileTransferVerification-20261028.md",
+      "agent_json": "docs/SkinningProfileTransferVerification-20261028.agent.json",
+      "source_sha256": "8085e660ac3b003428d6fabdcec15fefc63a00ba2f31917661fd487f993712cc",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:9e9aaa49b6372811e9b1948331f4c55f01b2cf4fc892ef0cfdac557b7369c26e",
+      "source": "docs/SurfaceCollision.md",
+      "agent_json": "docs/SurfaceCollision.agent.json",
+      "source_sha256": "b84047e15d6644d1a6a468c21604918a46566f959198f4403ec0568d508a1c30",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:717213e402a273e74c2c1bf8357664a339daac0242ac6919b2d77ed7676bdee3",
+      "source": "docs/SurfaceFairing.md",
+      "agent_json": "docs/SurfaceFairing.agent.json",
+      "source_sha256": "4fccfd3ce261b67e76b8949e2397ca1f9b4e8f5de3a3943ebda09c8501c3ee2f",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:e62805455b4e4b726cb336903d787e3e92f62c9c44aedf687e470d2a60351484",
+      "source": "docs/SurfaceFitting.md",
+      "agent_json": "docs/SurfaceFitting.agent.json",
+      "source_sha256": "da2e5ce20c22e4a9244f554ebbd89644843390c4ad4711f5b1e2904597bf441c",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:fc7f9e970c3a4cbeb3eadb0ee7e2803cd96d4e991855153edcde824a5b93061e",
+      "source": "docs/SurfaceGeodesicSkin.md",
+      "agent_json": "docs/SurfaceGeodesicSkin.agent.json",
+      "source_sha256": "f8bce4f01d88d2d4bb4596501645857aeda5b9e3dcb091fa35c14b2b08b80d38",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:0da4b108b7a1a19a1c5f568be437e570a107db2f42249ae6a4c75f7d38ce0c72",
+      "source": "docs/SurfaceGeodesicSkinVerification-20261028.md",
+      "agent_json": "docs/SurfaceGeodesicSkinVerification-20261028.agent.json",
+      "source_sha256": "26030f8da4466779e147ad05676fc3272fb46f2c3c39db6cea44bede20724100",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:f56b86af8a11e750de165e3c459aefcebe39a0ffe68d1e032b83d07cfb9e7bda",
+      "source": "docs/TemplateAdapt.md",
+      "agent_json": "docs/TemplateAdapt.agent.json",
+      "source_sha256": "eef74464e452a52fdeea46c266cc82bc4ed6969a67fc8b2a5c89bf22e1928130",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:358e02101b0fd80ab5c6c8e14312a47fe5f513c55cd40264ed883bdcd01f8545",
+      "source": "docs/TemplateAdaptVerification-20261028.md",
+      "agent_json": "docs/TemplateAdaptVerification-20261028.agent.json",
+      "source_sha256": "6890b4d0ad9b260f685fd5ce000bdc76f5a2085245ac06b9d7869b032de2734b",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:22d8d143a67f09eb643ea8e821289b1671d0da06c1d66068b931d785690997e5",
+      "source": "docs/TemplateControls.md",
+      "agent_json": "docs/TemplateControls.agent.json",
+      "source_sha256": "db3368b0ecc997697398e58602f416358a7f4b45cba5acc7dd9227fb5d823bd1",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:a9e1eb1a1f6acad8dbb2d67403e4afeb750b5f3f37620fe1fd5268259c59f898",
+      "source": "docs/TemplateFollowersVerification-20261028.md",
+      "agent_json": "docs/TemplateFollowersVerification-20261028.agent.json",
+      "source_sha256": "ebdeccaa389095c8cb499d0fb93b7135b6b216bc3719386d9eb982afab706120",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:ebf75c35ec534929cf6b2dbda637b43f64eb54aa6a7cd4964308270db8157533",
+      "source": "docs/TemplateMorphBaking.md",
+      "agent_json": "docs/TemplateMorphBaking.agent.json",
+      "source_sha256": "c999b0229c0ca101f8c06f13204dd40134398db3485224c332e729f94cdac7e9",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:0524f56a6a3e55dd0896bfb5aff9ee6d111b18f21aebe4f27c9343e2e039b86a",
+      "source": "docs/TemplateMorphBakingVerification-20261028.md",
+      "agent_json": "docs/TemplateMorphBakingVerification-20261028.agent.json",
+      "source_sha256": "88a9372cfe7c127a3a1d13c49a1d067cc32a7b5cbb969040de4402d2e1082001",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:e3a5e68fc6b3473bd6d34bcf13ea86b783166c3990906fe520e3870c216a4b0a",
+      "source": "docs/TemplateMorphProjectVerification-20261028.md",
+      "agent_json": "docs/TemplateMorphProjectVerification-20261028.agent.json",
+      "source_sha256": "870190fa604a4e204b7c0a648c38b97c5627b8f78eacf6287917616b86daa5a0",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:aa1edbc8833aa066c7a43825b02ca5d60b4f42f7270f2b90fbdc948e50688424",
+      "source": "docs/TemplateRigProjection.md",
+      "agent_json": "docs/TemplateRigProjection.agent.json",
+      "source_sha256": "ac15b1f1aa4fb4ee90e2f4b15a06ec50063b5a727b320e50c6f086cd5b89b510",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:067639ec0b10faa3af74ce1e61e0a2db0d7080580ef0c0caa9fd271fe55124cf",
+      "source": "docs/TemplateRigProjectionVerification-20261028.md",
+      "agent_json": "docs/TemplateRigProjectionVerification-20261028.agent.json",
+      "source_sha256": "e985dba9fa7aaffc1cc4cd804826649e4f64d8ad1ab758732306c3102f0c4a27",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:035718366785fd08055ba55e4e03ec2f913d48e902791496b9933617ecfc203c",
+      "source": "docs/TemplateRigTransfer.md",
+      "agent_json": "docs/TemplateRigTransfer.agent.json",
+      "source_sha256": "7c5997d984951c3280a73c60813a962eb65b416e21fa91ee28ac8157dbe499ac",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:7d173256ef4e1d20b14e3ca106434a2ea33f59b8264211330fb6c1b2869506ee",
+      "source": "docs/TemplateRigTransferVerification-20261028.md",
+      "agent_json": "docs/TemplateRigTransferVerification-20261028.agent.json",
+      "source_sha256": "c0b67277360e59bfffdb7f24928d34e16e545bed31848821059bbe0774b12d2c",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:937f798c74348aec55ebc57b580a9ce010c0540578e630dafca5e45828c04bbf",
+      "source": "docs/TemplateRigYawVerification-20261028.md",
+      "agent_json": "docs/TemplateRigYawVerification-20261028.agent.json",
+      "source_sha256": "034bbcb8a335e7367a19209a388f7640b99d0ddc71d2793b8af69298aa631476",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:710730848382dda00d453390e775aeb22d84ac97241373231c5d6eacf8db71e1",
+      "source": "docs/TemplateShapeFit.md",
+      "agent_json": "docs/TemplateShapeFit.agent.json",
+      "source_sha256": "b8bcbe0552e716037f01c2e2e2f09f058c6fcf363680c78d96bd034b918bc21c",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:e49ae527085cbf114f6a00ef1f9f6ec142239d11d8566f819cefbafe8d78f5dc",
+      "source": "docs/USD.md",
+      "agent_json": "docs/USD.agent.json",
+      "source_sha256": "0bd681abcf999b37ad0abe17f49f1530be058271af3116e006e544379a4b6dce",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:24e24b7472e259e52803f664733f6c8a3e661504bd665b9d3453ce2aa52ea7b5",
+      "source": "docs/Verification.md",
+      "agent_json": "docs/Verification.agent.json",
+      "source_sha256": "f686d3b435829110a37b9f01a4aedd1d4dc75783659942ccc692587863250086",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:1ef8b3245e8c838c29cb3f669e980516830becf4aa268a2b11d96d524cf4aa79",
+      "source": "docs/WindowsBuildAndRun.md",
+      "agent_json": "docs/WindowsBuildAndRun.agent.json",
+      "source_sha256": "ec20e1a2c029e30ee58b157bc0c2c96dfba41228dc179f3c1b8096d6fcd0c157",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:b192f998c7328f7932b2031b94f6df1f818e0edf2e7d4d570fdf83b45c3f0a12",
+      "source": "docs/documentation-structure.md",
+      "agent_json": "docs/documentation-structure.agent.json",
+      "source_sha256": "e7a373bdfad1b7aa4f2ea06f2788eb7e76502d1c6dac28c968a6ebc6b30f7e07",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:aa1d82a4dff7a3a87cf810c13287f32f48e8fb2e750760e3ae7d438a61cf6658",
+      "source": "tests/fixtures/project/README.md",
+      "agent_json": "docs/mirrors/tests/fixtures/project/README.agent.json",
+      "source_sha256": "bd07b302cde5202dc9beb07c7c4aa00fe85a3de524791cb8b3be0ef2256c0b56",
+      "role": "overview"
+    }
+  ],
+  "layout": {
+    "human_entry": "README.md",
+    "agent_entry": "AGENT.md",
+    "human_format": "markdown",
+    "agent_format": "structured_json",
+    "source_authority": "markdown"
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

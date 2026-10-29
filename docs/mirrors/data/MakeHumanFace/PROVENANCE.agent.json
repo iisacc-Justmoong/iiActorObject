@@ -1,0 +1,127 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:22755b7efc31e4356faf048762838413ac8849a377b403f4f94141d1877d7053",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "data/MakeHumanFace/PROVENANCE.md",
+    "sha256": "176a8316296ade1fa5a5d2dca105778e267224fc6a1f65315c4774429f19244d",
+    "bytes": 1559,
+    "line_count": 26,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "MakeHuman CC0 facial assets",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# MakeHuman CC0 facial assets\n",
+      "level": 1,
+      "title": "MakeHuman CC0 facial assets"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "This package contains unmodified graphic assets, not application code.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 7,
+      "raw": "The eyes and original license texts come from the official MakeHuman repository\nat `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`:\nhttps://github.com/makehumancommunity/makehuman/tree/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/eyes\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 15,
+      "raw": "The teeth_base and tongue01 files come from the official system assets pack:\nhttps://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html\nThe publisher lists these system assets as CC0. Their MHCLO and material files\nalso contain the explicit original CC0 statements. Original asset license texts\nare retained here as LICENSE.ASSETS.md and LICENSE.md; the latter distinguishes\nassets from AGPL application code. No AGPL Python, shader or application source\nhas been included.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 21,
+      "raw": "UPSTREAM-SHA256.json records original paths, sizes and SHA-256 digests. Archive\nentries additionally record ZIP CRC-32, publisher URL, total archive size and\nHTTP ETag. Selected compressed entries were acquired using exact HTTP ranges;\nthe full archive was not retained or claimed to have a verified whole-file hash.\nThe original archive index is retained as build/acquisition/MakeHumanSystemAssetsIndex.json.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 26,
+      "raw": "catalog.json is authored by iiActorObject and selects three parts plus PBR\nroughness approximations. It is not an upstream file. Original mesh, mapping,\nimage and material contents remain unchanged. The original LitSphere shader is\nnot reproduced by the standard base-color image/PBR constant adapter.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "MakeHuman CC0 facial assets",
+      "anchor": "makehuman-cc0-facial-assets",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

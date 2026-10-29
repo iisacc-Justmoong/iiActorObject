@@ -1,0 +1,127 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:5e9c66dc84fd881c02a0c45627628c5ec813df5f32d90a21bddb7947bc7fd286",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "data/MakeHumanMacro/PROVENANCE.md",
+    "sha256": "cc9150180dfcee1a1ec4e6b95d55223a1afc25a60b428c1cbbc3e8c59bd2efc0",
+    "bytes": 1326,
+    "line_count": 23,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "MakeHuman CC0 morphology data",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# MakeHuman CC0 morphology data\n",
+      "level": 1,
+      "title": "MakeHuman CC0 morphology data"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 5,
+      "raw": "These 348 unmodified graphical target files come from the official MakeHuman\nrepository at commit `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`:\n`makehuman/data/targets/macrodetails/`.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 10,
+      "raw": "Families: 24 population/sex/age bases, 72 muscle/mass corrections, 144 height\ncorrections and 108 proportion corrections. The original files explicitly state\nCC0; `LICENSE.ASSETS.md` and `LICENSE.md` retain the upstream license distinction.\nNo application code, Python module or shader program is copied.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 12,
+      "end_line": 14,
+      "raw": "`UPSTREAM-SHA256.json` records source paths, byte counts, Git blob SHA-1 values\nand content SHA-256 values. Each downloaded target was checked against the pinned\nGit tree before publication. `catalog.json` is an iiActorObject-authored index.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 16,
+      "end_line": 21,
+      "raw": "The independent C++ adapter assigns tensor-product curves, bakes the default\nneutral combination and uses the core's neutral-subtracted drivers. Its age\nanchors (0, 10, 25, 90 years), centered controls and population stick-breaking\nparameterization are explicit iiActorObject semantics, not a claim to reproduce\nthe MakeHuman application's original modifier implementation. These basis labels\nname source graphic assets; they are not measurements or classifications of a person.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "The original `data/MakeHuman` and `data/MakeHumanFace` packages remain separate.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "MakeHuman CC0 morphology data",
+      "anchor": "makehuman-cc0-morphology-data",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

@@ -1,0 +1,152 @@
+; FBX 7.4.0 project file
+; Geometry and blend-shape data were authored for this project.
+FBXHeaderExtension: { FBXHeaderVersion: 1003
+ FBXVersion: 7400
+}
+GlobalSettings: { Version: 1000
+ Properties70: { P: "UpAxis", "int", "Integer", "",1
+  P: "UpAxisSign", "int", "Integer", "",1
+  P: "FrontAxis", "int", "Integer", "",2
+  P: "FrontAxisSign", "int", "Integer", "",1
+  P: "CoordAxis", "int", "Integer", "",0
+  P: "CoordAxisSign", "int", "Integer", "",1
+  P: "UnitScaleFactor", "double", "Number", "",100
+ }
+}
+Objects: {
+ Geometry: 100, "Geometry::Face", "Mesh" {
+  Vertices: *9 { a: 0,0,0,1,0,0,0,1,0 }
+  PolygonVertexIndex: *3 { a: 0,1,-3 }
+ }
+ Model: 101, "Model::Face", "Mesh" { Version: 232 }
+ Deformer: 200, "Deformer::FaceShapes", "BlendShape" { Version: 100 }
+ Deformer: 201, "SubDeformer::Expression", "BlendShapeChannel" {
+  Version: 100
+  Properties70: { P: "DeformPercent", "Number", "", "A",15 }
+  DeformPercent: 15
+  FullWeights: *5 { a: -75,-20,30,80,100 }
+ }
+ Geometry: 210, "Geometry::NegativeFar", "Shape" {
+  Version: 100
+  Indexes: *1 { a: 0 }
+  Vertices: *3 { a: 0,-0.6,0 }
+ }
+ Geometry: 211, "Geometry::NegativeNear", "Shape" {
+  Version: 100
+  Indexes: *1 { a: 0 }
+  Vertices: *3 { a: 0,-0.15,0 }
+ }
+ Geometry: 212, "Geometry::PositiveNear", "Shape" {
+  Version: 100
+  Indexes: *1 { a: 0 }
+  Vertices: *3 { a: 0,0.25,0 }
+  Normals: *3 { a: 0.1,0,0 }
+ }
+ Geometry: 213, "Geometry::PositiveMid", "Shape" {
+  Version: 100
+  Indexes: *1 { a: 0 }
+  Vertices: *3 { a: 0,0.8,0 }
+ }
+ Geometry: 214, "Geometry::PositiveFar", "Shape" {
+  Version: 100
+  Indexes: *1 { a: 0 }
+  Vertices: *3 { a: 0,1.2,0 }
+ }
+ Deformer: 202, "SubDeformer::Smile", "BlendShapeChannel" {
+  Version: 100
+  Properties70: { P: "DeformPercent", "Number", "", "A",0 }
+  DeformPercent: 0
+  FullWeights: *1 { a: 100 }
+ }
+ Geometry: 220, "Geometry::Smile", "Shape" {
+  Version: 100
+  Indexes: *1 { a: 0 }
+  Vertices: *3 { a: 0,0.4,0 }
+ }
+ Model: 500, "Model::Bone", "LimbNode" { Version: 232
+  Properties70: { P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+   P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+   P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1 }
+ }
+ NodeAttribute: 501, "NodeAttribute::Bone", "LimbNode" { TypeFlags: "Skeleton" }
+ Deformer: 400, "Deformer::Skin", "Skin" { Version: 101 }
+ Deformer: 401, "SubDeformer::Cluster", "Cluster" { Version: 100
+  Indexes: *3 { a: 0,1,2 }
+  Weights: *3 { a: 1,1,1 }
+  Transform: *16 { a: 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1 }
+  TransformLink: *16 { a: 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1 }
+ }
+ AnimationStack: 300, "AnimStack::ExpressionTake", "" {
+  Properties70: { P: "LocalStart", "KTime", "Time", "",-46186158000
+   P: "LocalStop", "KTime", "Time", "",46186158000
+   P: "ReferenceStart", "KTime", "Time", "",-46186158000
+   P: "ReferenceStop", "KTime", "Time", "",46186158000 }
+ }
+ AnimationLayer: 301, "AnimLayer::Base", "" { Properties70: { P: "BlendMode", "enum", "", "",1 } }
+ AnimationCurveNode: 302, "AnimCurveNode::DeformPercent", "" {
+  Properties70: { P: "d|DeformPercent", "double", "Number", "",-75 }
+ }
+ AnimationCurve: 303, "AnimCurve::Expression", "" {
+  Default: -75
+  KeyVer: 4008
+  KeyTime: *2 { a: -46186158000,46186158000 }
+  KeyValueFloat: *2 { a: -75,100 }
+  KeyAttrFlags: *1 { a: 4 }
+  KeyAttrDataFloat: *4 { a: 0,0,0,0 }
+  KeyAttrRefCount: *1 { a: 2 }
+ }
+ AnimationCurveNode: 304, "AnimCurveNode::DeformPercent", "" {
+  Properties70: { P: "d|DeformPercent", "double", "Number", "",0 }
+ }
+ AnimationCurve: 305, "AnimCurve::Smile", "" {
+  Default: 0
+  KeyVer: 4008
+  KeyTime: *2 { a: -46186158000,46186158000 }
+  KeyValueFloat: *2 { a: 0,100 }
+  KeyAttrFlags: *1 { a: 4 }
+  KeyAttrDataFloat: *4 { a: 0,0,0,0 }
+  KeyAttrRefCount: *1 { a: 2 }
+ }
+ AnimationCurveNode: 306, "AnimCurveNode::T", "" {
+  Properties70: { P: "d|X", "double", "Number", "",0
+   P: "d|Y", "double", "Number", "",0
+   P: "d|Z", "double", "Number", "",0 }
+ }
+ AnimationCurve: 307, "AnimCurve::BoneY", "" {
+  Default: 0
+  KeyVer: 4008
+  KeyTime: *2 { a: -46186158000,46186158000 }
+  KeyValueFloat: *2 { a: 0,1 }
+  KeyAttrFlags: *1 { a: 4 }
+  KeyAttrDataFloat: *4 { a: 0,0,0,0 }
+  KeyAttrRefCount: *1 { a: 2 }
+ }
+}
+Connections: {
+ C: "OO",100,101
+ C: "OO",101,0
+ C: "OO",200,100
+ C: "OO",201,200
+ C: "OO",210,201
+ C: "OO",211,201
+ C: "OO",212,201
+ C: "OO",213,201
+ C: "OO",214,201
+ C: "OO",202,200
+ C: "OO",220,202
+ C: "OO",400,100
+ C: "OO",401,400
+ C: "OO",500,401
+ C: "OO",501,500
+ C: "OO",500,0
+ C: "OO",301,300
+ C: "OO",302,301
+ C: "OP",302,201,"DeformPercent"
+ C: "OP",303,302,"d|DeformPercent"
+ C: "OO",304,301
+ C: "OP",304,202,"DeformPercent"
+ C: "OP",305,304,"d|DeformPercent"
+ C: "OO",306,301
+ C: "OP",306,500,"Lcl Translation"
+ C: "OP",307,306,"d|Y"
+}

@@ -1,0 +1,9 @@
+{
+  "format": "iiActorObject.MakeHumanWardrobe.1",
+  "baseMesh": "hm08",
+  "components": [
+    {"id": "hair/a", "name": "A", "category": "hair", "proxy": "a.mhclo", "roughness": 0.5},
+    {"id": "hair/b", "name": "B", "category": "hair", "proxy": "b.mhclo", "roughness": 0.5},
+    {"id": "hair/c", "name": "C", "category": "hair", "proxy": "c.mhclo", "roughness": 0.5}
+  ]
+}

@@ -1,0 +1,501 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:e62805455b4e4b726cb336903d787e3e92f62c9c44aedf687e470d2a60351484",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/SurfaceFitting.md",
+    "sha256": "da2e5ce20c22e4a9244f554ebbd89644843390c4ad4711f5b1e2904597bf441c",
+    "bytes": 7021,
+    "line_count": 54,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "명시적인 의상·표면 충돌 맞춤",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 명시적인 의상·표면 충돌 맞춤\n",
+      "level": 1,
+      "title": "명시적인 의상·표면 충돌 맞춤"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "이 문서는 명시적인 스냅샷 맞춤 연산을 다룬다. 생성 파라미터와 편집 계층의 변경에 따라 지속적으로 재계산하는 설정은 [자동 표면 맞춤](AutomaticSurfaceFitting.md)을 따른다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 계약\n",
+      "level": 2,
+      "title": "계약"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`fitMeshSurface`는 `SurfaceCollider` 인터페이스에 의존하는 본체 연산이다. 현재 메시를 장애물 밖으로 이동하여 양의 여유 거리를 확보한다. 원본 제어점 ID·연결·UV·스킨·모프 식별을 유지하고 기준 법선과 파생 렌더 캐시를 갱신한다. NSCharacter는 본체 편집 세션에 호출을 전달한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "`clearance`는 양수이며 `tolerance`보다 커야 한다. 점과 면의 충돌, 최대 이동 거리, 반복 횟수와 질의 예산을 검사한다. 기본은 면 내부의 충돌까지 확인한다. 점만 검사하는 선택은 면 전체의 충돌 제거를 보장하지 않는다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "`mobility`는 정규화한 역질량의 상대 비율이다. 0은 고정점이며 부분 값은 여러 점에 분배하는 제약의 상대 이동량을 정한다. 조형 브러시의 단순 강도 마스크와 다르다. `relaxation`은 접촉 투영의 강도, `edgeStiffness`는 작업 시작 형상의 모서리 길이를 유지하는 정도이다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "제약의 위치 투영은 [Müller 등의 Position Based Dynamics](https://matthias-research.github.io/pages/publications/posBasedDyn.pdf)의 제약식에 따른다. 이 연산에는 시간 적분·중력·속도·마찰이 없으며 동적인 천 시뮬레이터는 별도 기능이다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "`escapeConcavities`는 기본적으로 활성화한다. 국소 투영이 6회 연속 충분히 개선되지 않으면 고정점을 유지한 채 26개 방향과 최대 24개의 증가 반경에서 유효한 점·면 위치를 찾는다. 삼각형 이동에는 상대 이동 비율을 적용한다. 후보는 모든 장애물의 점·면 조건, 원본 위치 기준 이동 한도, 질의 예산을 만족할 때만 채택한다. `escapeTrials`·`escapePointProjections`·`escapeTriangleProjections`로 비용과 적용 수를 구분한다. 기존 국소 투영만 사용하려면 해당 옵션을 끈다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "이 탐색은 오목한 틈에서 반대 기울기를 번갈아 따르는 경우를 보완하는 유한 탐색이다. 전역 최적해·임의 입력의 수렴이나 재단된 옷의 형상 품질을 보장하지 않는다. 점·면의 자체 교차 검사와 천의 굽힘 모델은 별도 기능이며, 큰 보정 뒤에는 최대 이동량과 모서리 변형률도 확인한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 실패와 이력\n",
+      "level": 2,
+      "title": "실패와 이력"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "고정점·이동 제한·예산·반복 제한 때문에 제약을 만족하지 못하면 기본적으로 실패하며 메시와 편집 이력은 유지한다. `allowUnresolved`는 미해결 상태를 포함하는 명시적인 미리보기 출력이다. 반환값의 잔여 점/면 제약과 `converged`를 확인한다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "본체와 캐릭터 편집기의 `fitSurface`는 결과를 기존 편집 계층과 undo/redo로 저장한다. 자체 프로젝트 버전 8은 수정된 점을 기존 필드로 보관한다. 충돌체·맞춤 레시피·자동 재실행 정책을 프로젝트에 암묵적으로 추가하지 않는다. 생성 파라미터·몸 조형·스킨 포즈를 바꾼 후에는 새 형상에서 다시 맞춘다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "외부 FBX·GLB는 맞춘 메시·스킨·모프를 받는다. 최종 의상 품질, 자기 충돌·재단·자세 보정과 실제 앱 편집은 전체 목표에서 계속 구현·검증해야 한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "heading",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "## 사용\n",
+      "level": 2,
+      "title": "사용"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "본체 편집 세션에서 현재 몸의 파생 충돌 스냅샷을 만들고 같은 에셋의 의상에 적용하는 예이다. `bodyIndex`와 `garmentIndex`는 서로 다른 메시 인덱스이다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "fenced_code",
+      "start_line": 31,
+      "end_line": 38,
+      "raw": "```cpp\nauto body = iiActorObject::MeshCollider::fromMesh(\n    editor.get().object().get().data().meshes[bodyIndex]);\niiActorObject::SurfaceFitOptions options;\noptions.clearance = .002;\noptions.tolerance = 1e-5;\nconst auto result = editor.get().fitSurface(garmentIndex, body, options);\n```\n",
+      "language": "cpp",
+      "code": "auto body = iiActorObject::MeshCollider::fromMesh(\n    editor.get().object().get().data().meshes[bodyIndex]);\niiActorObject::SurfaceFitOptions options;\noptions.clearance = .002;\noptions.tolerance = 1e-5;\nconst auto result = editor.get().fitSurface(garmentIndex, body, options);\n",
+      "closed": true
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "여러 고체와 동시에 맞추려면 `SurfaceCollider` 포인터의 span을 전달한다. 호출 중 충돌체가 유효해야 하며 편집 세션은 해당 포인터를 보관하지 않는다. 원본 제어점 수에 맞춘 `mobility`를 전달하면 고정점과 상대 이동 비율을 지정할 수 있다. `maximumDisplacement` 기본값은 0.25이며, 점·삼각형·반복·공간 질의의 한도는 호출자가 설정한다.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "heading",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "## 인체와 실제 앱 검사\n",
+      "level": 2,
+      "title": "인체와 실제 앱 검사"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 43,
+      "end_line": 43,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "`tests/SurfaceFittingHumanTest.cpp`는 19,158개 원본 점의 몸에서 검증용 의상 표면을 생성하고 2,648개 표시 제어점에 스킨·표면 연결을 전사한다. 성인은 6회, 아동은 2회 반복으로 수렴하였다. 현재 형상으로 다시 검사했을 때 이동이 없어야 하며, 프로젝트 저장·복원·undo/redo·형상 재생성과 얼굴 리그 재연결도 확인한다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 45,
+      "end_line": 45,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 46,
+      "end_line": 46,
+      "raw": "작성용 몸의 쿼드는 원본 그대로 유지한다. FBX를 읽는 앱마다 비평면 쿼드의 대각선 선택이 달라질 수 있으므로 이 검증에서는 각 쿼드의 두 대각선에 해당하는 몸 충돌체를 함께 사용한다. 새 의상은 삼각형으로 작성하여 출력 중 면의 의미가 바뀌지 않게 한다. 생성된 의상 조각은 충돌 검증용이며 재단된 제작용 옷이 아니다.\n"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 47,
+      "end_line": 47,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 48,
+      "end_line": 48,
+      "raw": "`tests/VerifySurfaceFittingBlender.py`는 실제 Blender에서 성인·아동의 GLB·FBX 네 입력을 연다. 가져온 5개 메시·163개 본·의상 60개 모프와 나머지 메시별 59개 모프, 기준 위치와 스킨 움직임을 검사한다. 표시 의상 정점의 안팎은 배정밀도 삼각형 교차로 검사하고, 의상 전체 삼각형의 여유 거리는 공간 격자로 후보를 보수적으로 줄인 후 정점/면·모서리/모서리·모서리/면 계산으로 확인한다. 정점만 샘플링하여 면 전체 검사를 대체하지 않는다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 49,
+      "end_line": 49,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 50,
+      "end_line": 50,
+      "raw": "요청 거리는 2mm, 본체 허용 오차는 10μm이다. 실제 입력 네 건의 최소 삼각형 여유 거리는 약 1.9900mm 이상이며 형식과 Blender의 단정밀도 표현에 추가 2μm를 허용한다. 본 회전 후 스킨 이동은 별도 검사이며, 움직인 자세에서의 의상 충돌 제거를 입증하지 않는다. FBX의 서로 다른 레이아웃 모프 법선은 명시적으로 허용한 SDK 메타데이터에 보존한다. 실제 Blender에서 해당 법선 메타데이터가 적용된다는 의미는 아니다.\n"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "paragraph",
+      "start_line": 52,
+      "end_line": 52,
+      "raw": "동결 소스·설치 패키지·빌드 구성·수치와 산출물은 [SurfaceFittingVerification-20261027.json](SurfaceFittingVerification-20261027.json)에 기록한다.\n"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 53,
+      "end_line": 53,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "paragraph",
+      "start_line": 54,
+      "end_line": 54,
+      "raw": "선택적인 [형상 정리](SurfaceFairing.md)는 `options.fairing.iterations`가 양수일 때 이번 충돌 보정 변위의 연속성을 개선한다. 원래 작성 형상을 평활화하지 않으며, 같은 이동·고정점·질의 한도 아래에서 목적함수를 낮춘 유효 결과만 채택한다. 기본값 0은 기존 계산을 유지한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "명시적인 의상·표면 충돌 맞춤",
+      "anchor": "명시적인-의상표면-충돌-맞춤",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "계약",
+      "anchor": "계약",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "실패와 이력",
+      "anchor": "실패와-이력",
+      "start_line": 19
+    },
+    {
+      "block_id": "b000027",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "사용",
+      "anchor": "사용",
+      "start_line": 27
+    },
+    {
+      "block_id": "b000035",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "인체와 실제 앱 검사",
+      "anchor": "인체와-실제-앱-검사",
+      "start_line": 42
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000009",
+        "line": 9,
+        "text": "`clearance`는 양수이며 `tolerance`보다 커야 한다. 점과 면의 충돌, 최대 이동 거리, 반복 횟수와 질의 예산을 검사한다. 기본은 면 내부의 충돌까지 확인한다. 점만 검사하는 선택은 면 전체의 충돌 제거를 보장하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000017",
+        "line": 17,
+        "text": "이 탐색은 오목한 틈에서 반대 기울기를 번갈아 따르는 경우를 보완하는 유한 탐색이다. 전역 최적해·임의 입력의 수렴이나 재단된 옷의 형상 품질을 보장하지 않는다. 점·면의 자체 교차 검사와 천의 굽힘 모델은 별도 기능이며, 큰 보정 뒤에는 최대 이동량과 모서리 변형률도 확인한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 23,
+        "text": "본체와 캐릭터 편집기의 `fitSurface`는 결과를 기존 편집 계층과 undo/redo로 저장한다. 자체 프로젝트 버전 8은 수정된 점을 기존 필드로 보관한다. 충돌체·맞춤 레시피·자동 재실행 정책을 프로젝트에 암묵적으로 추가하지 않는다. 생성 파라미터·몸 조형·스킨 포즈를 바꾼 후에는 새 형상에서 다시 맞춘다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 25,
+        "text": "외부 FBX·GLB는 맞춘 메시·스킨·모프를 받는다. 최종 의상 품질, 자기 충돌·재단·자세 보정과 실제 앱 편집은 전체 목표에서 계속 구현·검증해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000033",
+        "line": 40,
+        "text": "여러 고체와 동시에 맞추려면 `SurfaceCollider` 포인터의 span을 전달한다. 호출 중 충돌체가 유효해야 하며 편집 세션은 해당 포인터를 보관하지 않는다. 원본 제어점 수에 맞춘 `mobility`를 전달하면 고정점과 상대 이동 비율을 지정할 수 있다. `maximumDisplacement` 기본값은 0.25이며, 점·삼각형·반복·공간 질의의 한도는 호출자가 설정한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000041",
+        "line": 48,
+        "text": "`tests/VerifySurfaceFittingBlender.py`는 실제 Blender에서 성인·아동의 GLB·FBX 네 입력을 연다. 가져온 5개 메시·163개 본·의상 60개 모프와 나머지 메시별 59개 모프, 기준 위치와 스킨 움직임을 검사한다. 표시 의상 정점의 안팎은 배정밀도 삼각형 교차로 검사하고, 의상 전체 삼각형의 여유 거리는 공간 격자로 후보를 보수적으로 줄인 후 정점/면·모서리/모서리·모서리/면 계산으로 확인한다. 정점만 샘플링하여 면 전체 검사를 대체하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000043",
+        "line": 50,
+        "text": "요청 거리는 2mm, 본체 허용 오차는 10μm이다. 실제 입력 네 건의 최소 삼각형 여유 거리는 약 1.9900mm 이상이며 형식과 Blender의 단정밀도 표현에 추가 2μm를 허용한다. 본 회전 후 스킨 이동은 별도 검사이며, 움직인 자세에서의 의상 충돌 제거를 입증하지 않는다. FBX의 서로 다른 레이아웃 모프 법선은 명시적으로 허용한 SDK 메타데이터에 보존한다. 실제 Blender에서 해당 법선 메타데이터가 적용된다는 의미는 아니다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000003",
+        "label": "자동 표면 맞춤",
+        "target": "AutomaticSurfaceFitting.md",
+        "kind": "relative",
+        "line": 3
+      },
+      {
+        "block_id": "b000013",
+        "label": "Müller 등의 Position Based Dynamics",
+        "target": "https://matthias-research.github.io/pages/publications/posBasedDyn.pdf",
+        "kind": "external",
+        "line": 13
+      },
+      {
+        "block_id": "b000045",
+        "label": "SurfaceFittingVerification-20261027.json",
+        "target": "SurfaceFittingVerification-20261027.json",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000047",
+        "label": "형상 정리",
+        "target": "SurfaceFairing.md",
+        "kind": "relative",
+        "line": 54
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

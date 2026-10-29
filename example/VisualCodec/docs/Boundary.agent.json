@@ -1,0 +1,135 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:f53f0cb49023aa90d1e839aba9d525674e034970bf337177464b0de694b1de08",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject%2Fexample%2FVisualCodec",
+    "name": "iiActorObjectVisualCodec",
+    "root": "SDK/iiActorObject/example/VisualCodec",
+    "kind": "application"
+  },
+  "source": {
+    "path": "docs/Boundary.md",
+    "sha256": "bfc697e991b91a33a74369613bf5305aae0bd479284032f012dfc0961f035146",
+    "bytes": 1586,
+    "line_count": 21,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "FBX 이미지 코덱 조합 경계",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# FBX 이미지 코덱 조합 경계\n",
+      "level": 1,
+      "title": "FBX 이미지 코덱 조합 경계"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 6,
+      "raw": "이 독립 소비자는 iiActorObject의 `FbxImageResolver` 인터페이스와 iiVisualCodec의\n이미지 코덱을 함께 사용한다. FBX의 파일 경로를 직접 열지 않고 호출자가 제공한\n`FbxExternalImageSource`에서만 승인된 바이트를 받는다. 입력·출력 크기와 이미지\n치수 한도 및 PNG 검증을 유지한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 8,
+      "end_line": 10,
+      "raw": "현재 전환 준비 단계이며 기존 iiActorObject의 선택형 컴포넌트도 그대로 남아 있다.\n두 구현을 같은 앱에서 동시에 연결하지 않는다. 독립 소비자의 빌드·테스트와 설치\n소비자 검증 및 기존 빌드 종료 확인 후 본체의 연결을 제거해야 한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 12,
+      "end_line": 14,
+      "raw": "소비자는 `find_package(iiActorObjectVisualCodec CONFIG REQUIRED)` 후\n`iiActorObject::VisualCodec`을 사용한다. 앱이 두 SDK와 어댑터를 조합하며 기존의\n`find_package(iiActorObject COMPONENTS VisualCodec)`은 이 별도 패키지로 이전한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 16,
+      "end_line": 21,
+      "raw": "2026-10-28 macOS arm64에서 검증용 actor 설치본과 기존 iiVisualCodec을 조합한\n독립 프로젝트의 FBX 이미지 검사 5개 및 별도 설치 소비자 검사 1개가 통과했다.\n첫 검사에서는 PNG 프레임워크의 런타임 검색 경로가 없어 5개가 실패했고, 기존\n설치본과 맞는 정적 PNG 및 JPEG 라이브러리를 명시한 뒤 같은 검사가 통과했다.\n검증용 설치는 actor 프로젝트 `build/` 아래에만 수행했다. Windows·Linux 실행과\n실제 제작 앱의 가져오기, 전체 actor 모듈의 SDK 독립화는 확인하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "FBX 이미지 코덱 조합 경계",
+      "anchor": "fbx-이미지-코덱-조합-경계",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000005",
+        "line": 9,
+        "text": "두 구현을 같은 앱에서 동시에 연결하지 않는다. 독립 소비자의 빌드·테스트와 설치",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000005",
+        "line": 10,
+        "text": "소비자 검증 및 기존 빌드 종료 확인 후 본체의 연결을 제거해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000007",
+        "line": 12,
+        "text": "소비자는 `find_package(iiActorObjectVisualCodec CONFIG REQUIRED)` 후",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

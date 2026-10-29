@@ -1,0 +1,742 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:24e24b7472e259e52803f664733f6c8a3e661504bd665b9d3453ce2aa52ea7b5",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/Verification.md",
+    "sha256": "f686d3b435829110a37b9f01a4aedd1d4dc75783659942ccc692587863250086",
+    "bytes": 7100,
+    "line_count": 77,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "iiActorObject 검증 기록",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiActorObject 검증 기록\n",
+      "level": 1,
+      "title": "iiActorObject 검증 기록"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "구현 변경 내역은 [2026년 10월 21일 변경 기록](Changes-20261021.md)에 있다. 아래 0.2.1 결과와 검사 대상 소스 19개의 SHA-256은 [검증 요약 JSON](Verification-20261021.json)으로 저장소에 보존한다. `build/`의 상세 로그·JUnit·생성 에셋은 로컬 산출물이며 Git 추적 대상이 아니다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 0.2.1 USD 배치 레이어\n",
+      "level": 2,
+      "title": "0.2.1 USD 배치 레이어"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "2026년 10월 21일 Windows x64 MSVC Release에서 USD 호환성 레이어를 검증하였다. C++ 계약과 테스트를 먼저 작성하고 구현 전 미해결 심볼 실패를 `build/usd-tdd-red.log`에 기록하였다. 이후 실제 구현과 OpenUSD 26.8 검사를 통과하였다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "table",
+      "start_line": 9,
+      "end_line": 12,
+      "raw": "| 구성 | Actor·USD 및 실제 OpenUSD CTest | 설치본 소비자 | 결과 |\n| --- | --- | --- | --- |\n| 공유 라이브러리 | 15/15 | 1/1 | 통과이다. |\n| 정적 라이브러리 | 15/15 | 1/1 | 통과이다. |\n",
+      "columns": [
+        "구성",
+        "Actor·USD 및 실제 OpenUSD CTest",
+        "설치본 소비자",
+        "결과"
+      ],
+      "rows": [
+        [
+          "공유 라이브러리",
+          "15/15",
+          "1/1",
+          "통과이다."
+        ],
+        [
+          "정적 라이브러리",
+          "15/15",
+          "1/1",
+          "통과이다."
+        ]
+      ]
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "총 32개 CTest가 통과하였고 실패·skip은 0개이다. 구성별 15개에는 기존 Actor 계약 8개, USD 계약 5개, fixture 생성 1개와 OpenUSD 통합 검사 1개가 포함된다. 각 OpenUSD 검사 안에서는 Python unittest 6개가 실행된다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "실제 OpenUSD는 다음을 확인하였다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "list",
+      "start_line": 18,
+      "end_line": 22,
+      "raw": "- USDA 파싱, Y/Z·미터 단위 선언, UTF-8·따옴표·제어 문자 메타데이터의 보존이다.\n- C++에서 계산한 15개 점과 USD 월드 좌표의 일치이다. 부모 계층, 회전, 비균일·음수·영 스케일과 분리된 노드를 포함한다.\n- 외부 Xform/Cube 및 직접 Sphere prim 참조의 스키마·원래 변환 보존과 USD 인스턴싱이다.\n- 출력 레이어를 다른 USD 스테이지에서 참조한 뒤 상위 배치 변환을 적용하는 합성이다.\n- USDA에서 USDC로 변환한 뒤 재개방하는 데이터 호환성이다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "USDA 파싱, Y/Z·미터 단위 선언, UTF-8·따옴표·제어 문자 메타데이터의 보존이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "C++에서 계산한 15개 점과 USD 월드 좌표의 일치이다. 부모 계층, 회전, 비균일·음수·영 스케일과 분리된 노드를 포함한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "외부 Xform/Cube 및 직접 Sphere prim 참조의 스키마·원래 변환 보존과 USD 인스턴싱이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "출력 레이어를 다른 USD 스테이지에서 참조한 뒤 상위 배치 변환을 적용하는 합성이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "USDA에서 USDC로 변환한 뒤 재개방하는 데이터 호환성이다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "USD/Python은 `build/usd-validation/`의 검증 도구이다. 배포 DLL의 PE import에는 Windows·MSVC 런타임만 있고 Qt·Unreal·OpenUSD DLL은 없다. 설치본 소비자는 Python이나 OpenUSD 패키지 없이 Actor와 USD 공개 함수를 링크·실행하였다. 기존 공유 클래스의 C4251 및 컴파일러·STL·CRT 조건은 아래 기준선 기록과 동일하다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "최신 결과는 `build/usd-verification.json`과 `build/verification.json`, 소스 검사 JUnit은 `build/usd-tests-release.xml` 및 `build/static/build/usd-tests-static.xml`이다. 설치본 소비자의 JUnit은 각 소비자 build의 `usd-installed-consumer*.xml`이다. 생성된 예제는 `build/usd-fixture/fixture.usda`, `fixture.usdc`와 `assets/`이며, 정적 구성의 fixture는 `build/static/build/usd-fixture/`이다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "공개 계약·범위·재현 방법은 [USD 문서](USD.md)를 따른다. 지원 범위는 USD 배치 스냅샷 내보내기이며 Actor 역직렬화·실시간 동기화·애니메이션·전체 USD 스키마 처리를 포함하지 않는다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "heading",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "## 0.2.0 Actor 기반 구현 기준선\n",
+      "level": 2,
+      "title": "0.2.0 Actor 기반 구현 기준선"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "아래는 USD 기능 추가 전의 기준선 기록이다. 최신 전체 검증 수는 위의 0.2.1 결과를 따른다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "2026년 10월 21일 Windows x64에서 검증한 Actor·컴포넌트 구현이다. 검증 도구는 MSVC 19.51, CMake 4.4.4, Ninja 1.13.2이다. 모든 빌드·로그·설치 검사 산출물은 프로젝트의 `build/` 아래에 둔다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "heading",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "## 검사 대상\n",
+      "level": 2,
+      "title": "검사 대상"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "table",
+      "start_line": 38,
+      "end_line": 48,
+      "raw": "| CTest | 검증 내용 |\n| --- | --- |\n| identity | ID 고유성·불변성, 기본 루트 소유권, 복사·이동 금지와 const 조회이다. |\n| properties | 이름 변경, 대소문자를 구분하는 중복 없는 태그와 제거이다. |\n| transform | 항등·이동·회전·비균일/음수/영 스케일, 행렬 합성, 큰 쿼터니언 정규화이다. |\n| scene | 부모 누적 좌표, 순환·교차 Actor·루트 부착 거부, 로컬 유지와 자식 보유 노드 제거 거부이다. |\n| components | 단독 소유, 실행 중 추가·제거, 종료 사유, 논리 파괴와 실제 소멸의 분리이다. |\n| lifecycle | 시작·프레임·역순 종료, 독립 Tick 제어, 재시작과 중복 파괴 방지이다. |\n| callbacks | 시작·갱신·종료·제거 콜백의 파괴 요청, 재진입과 소유권 변경 거부이다. |\n| validation | 비유한 입력, 음수 시간, 영 쿼터니언과 파괴 후 추가 거부이다. |\n| installed_consumer | 설치된 공개 CMake 타깃만 사용한 C++23 컴파일·DLL 로드·파생 컴포넌트·변환·Tick·파괴 실행이다. |\n",
+      "columns": [
+        "CTest",
+        "검증 내용"
+      ],
+      "rows": [
+        [
+          "identity",
+          "ID 고유성·불변성, 기본 루트 소유권, 복사·이동 금지와 const 조회이다."
+        ],
+        [
+          "properties",
+          "이름 변경, 대소문자를 구분하는 중복 없는 태그와 제거이다."
+        ],
+        [
+          "transform",
+          "항등·이동·회전·비균일/음수/영 스케일, 행렬 합성, 큰 쿼터니언 정규화이다."
+        ],
+        [
+          "scene",
+          "부모 누적 좌표, 순환·교차 Actor·루트 부착 거부, 로컬 유지와 자식 보유 노드 제거 거부이다."
+        ],
+        [
+          "components",
+          "단독 소유, 실행 중 추가·제거, 종료 사유, 논리 파괴와 실제 소멸의 분리이다."
+        ],
+        [
+          "lifecycle",
+          "시작·프레임·역순 종료, 독립 Tick 제어, 재시작과 중복 파괴 방지이다."
+        ],
+        [
+          "callbacks",
+          "시작·갱신·종료·제거 콜백의 파괴 요청, 재진입과 소유권 변경 거부이다."
+        ],
+        [
+          "validation",
+          "비유한 입력, 음수 시간, 영 쿼터니언과 파괴 후 추가 거부이다."
+        ],
+        [
+          "installed_consumer",
+          "설치된 공개 CMake 타깃만 사용한 C++23 컴파일·DLL 로드·파생 컴포넌트·변환·Tick·파괴 실행이다."
+        ]
+      ]
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 49,
+      "end_line": 49,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "heading",
+      "start_line": 50,
+      "end_line": 50,
+      "raw": "## 개발 순서와 근거\n",
+      "level": 2,
+      "title": "개발 순서와 근거"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 52,
+      "end_line": 52,
+      "raw": "공개 계약과 회귀 테스트를 먼저 작성하고 구현이 없는 상태의 링크 실패를 `build/tdd-red.log`에서 확인하였다. 실제 기능 구현 후 소유권 예외 처리와 경계 조건 검사를 보강하고 최종 검증을 완료하였다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 53,
+      "end_line": 53,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "table",
+      "start_line": 54,
+      "end_line": 57,
+      "raw": "| 구성 | 기능 검사 | 설치본 소비자 | 결과 |\n| --- | --- | --- | --- |\n| Windows x64 MSVC Release 공유 라이브러리 | 8/8 | 1/1 | 통과이다. |\n| Windows x64 MSVC Release 정적 라이브러리 | 8/8 | 1/1 | 통과이다. |\n",
+      "columns": [
+        "구성",
+        "기능 검사",
+        "설치본 소비자",
+        "결과"
+      ],
+      "rows": [
+        [
+          "Windows x64 MSVC Release 공유 라이브러리",
+          "8/8",
+          "1/1",
+          "통과이다."
+        ],
+        [
+          "Windows x64 MSVC Release 정적 라이브러리",
+          "8/8",
+          "1/1",
+          "통과이다."
+        ]
+      ]
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 58,
+      "end_line": 58,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 59,
+      "end_line": 59,
+      "raw": "총 18개 구성별 검사가 통과하였고 실패·skip은 0개이다. 수정한 `install.sh`도 Git for Windows Bash에서 Workspace 안의 prefix를 지정해 빌드·전체 검사·설치·소비자 검사까지 종료 코드 0으로 실행하였다. 공유 DLL의 PE import 목록에는 MSVC/Windows 런타임만 있으며 Qt·Unreal DLL은 없다.\n"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 60,
+      "end_line": 60,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 61,
+      "end_line": 61,
+      "raw": "MSVC 공유 빌드에는 private STL 멤버를 가진 export 클래스의 C4251 경고가 있다. 같은 MSVC·STL·CRT 조합의 독립 소비자에서 상속·생성·파괴를 실행 검증하였다. 컴파일러 간 바이너리 ABI 호환성을 보증하지 않으며, 소비자도 헤더와 라이브러리에 맞춰 다시 빌드해야 한다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 62,
+      "end_line": 62,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 63,
+      "end_line": 63,
+      "raw": "로컬 Unreal Engine 5.8.3 헤더의 개체·동작·공간 책임을 참고하였다. 외부 엔진 코드를 복사하지 않고 자체 구현하였다. 테스트가 검증하는 것은 iiActorObject의 공개 계약이며 Unreal 전체 Actor 동작과의 호환성이 아니다.\n"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 64,
+      "end_line": 64,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "heading",
+      "start_line": 65,
+      "end_line": 65,
+      "raw": "## 결과 파일\n",
+      "level": 2,
+      "title": "결과 파일"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 66,
+      "end_line": 66,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "list",
+      "start_line": 67,
+      "end_line": 75,
+      "raw": "- `build/build-release.log`: 최종 소스 Release 빌드 로그이다.\n- `build/tests-release.xml`: 기능별 CTest JUnit이다.\n- `build/install_manifest.txt`: 설치 검사 파일 목록이다.\n- `build/install/`: Workspace 안의 패키지 설치본이다.\n- `build/consumer/build/`: 설치본만 사용하는 별도 소비자의 빌드와 실행 결과이다.\n- `build/static/build/`, `build/static/consumer/build/`: 정적 라이브러리와 독립 소비자의 검사 결과이다.\n- `build/installer-workflow.log`: 수정한 설치 스크립트의 실제 전체 실행 결과이다.\n- `build/dll-dependencies.txt`: 공유 DLL의 네이티브 의존성 검사 결과이다.\n- `build/verification.json`: 최종 빌드·실행·설치 및 Qt 비의존성 검사 요약이다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "`build/build-release.log`: 최종 소스 Release 빌드 로그이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/tests-release.xml`: 기능별 CTest JUnit이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/install_manifest.txt`: 설치 검사 파일 목록이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/install/`: Workspace 안의 패키지 설치본이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/consumer/build/`: 설치본만 사용하는 별도 소비자의 빌드와 실행 결과이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/static/build/`, `build/static/consumer/build/`: 정적 라이브러리와 독립 소비자의 검사 결과이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/installer-workflow.log`: 수정한 설치 스크립트의 실제 전체 실행 결과이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/dll-dependencies.txt`: 공유 DLL의 네이티브 의존성 검사 결과이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/verification.json`: 최종 빌드·실행·설치 및 Qt 비의존성 검사 요약이다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000048",
+      "kind": "blank",
+      "start_line": 76,
+      "end_line": 76,
+      "raw": "\n"
+    },
+    {
+      "id": "b000049",
+      "kind": "paragraph",
+      "start_line": 77,
+      "end_line": 77,
+      "raw": "검증은 Windows x64 호스트 실행을 대상으로 한다. 다른 OS와 모바일·WASM에서의 컴파일·실행, 실제 월드 엔진·렌더러·물리 통합은 이번 결과에 포함하지 않는다. C++ 소멸자는 사용자 수명주기 훅을 호출하지 않으며, 호스트가 삭제 전에 명시적으로 `destroy()`를 호출해야 한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiActorObject 검증 기록",
+      "anchor": "iiactorobject-검증-기록",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "0.2.1 USD 배치 레이어",
+      "anchor": "021-usd-배치-레이어",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000023",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "0.2.0 Actor 기반 구현 기준선",
+      "anchor": "020-actor-기반-구현-기준선",
+      "start_line": 30
+    },
+    {
+      "block_id": "b000029",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검사 대상",
+      "anchor": "검사-대상",
+      "start_line": 36
+    },
+    {
+      "block_id": "b000033",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "개발 순서와 근거",
+      "anchor": "개발-순서와-근거",
+      "start_line": 50
+    },
+    {
+      "block_id": "b000045",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "결과 파일",
+      "anchor": "결과-파일",
+      "start_line": 65
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000021",
+        "line": 28,
+        "text": "공개 계약·범위·재현 방법은 [USD 문서](USD.md)를 따른다. 지원 범위는 USD 배치 스냅샷 내보내기이며 Actor 역직렬화·실시간 동기화·애니메이션·전체 USD 스키마 처리를 포함하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000031",
+        "line": 40,
+        "text": "| identity | ID 고유성·불변성, 기본 루트 소유권, 복사·이동 금지와 const 조회이다. |",
+        "basis": "lexical_match",
+        "context": "table"
+      },
+      {
+        "block_id": "b000041",
+        "line": 61,
+        "text": "MSVC 공유 빌드에는 private STL 멤버를 가진 export 클래스의 C4251 경고가 있다. 같은 MSVC·STL·CRT 조합의 독립 소비자에서 상속·생성·파괴를 실행 검증하였다. 컴파일러 간 바이너리 ABI 호환성을 보증하지 않으며, 소비자도 헤더와 라이브러리에 맞춰 다시 빌드해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000049",
+        "line": 77,
+        "text": "검증은 Windows x64 호스트 실행을 대상으로 한다. 다른 OS와 모바일·WASM에서의 컴파일·실행, 실제 월드 엔진·렌더러·물리 통합은 이번 결과에 포함하지 않는다. C++ 소멸자는 사용자 수명주기 훅을 호출하지 않으며, 호스트가 삭제 전에 명시적으로 `destroy()`를 호출해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000003",
+        "label": "2026년 10월 21일 변경 기록",
+        "target": "Changes-20261021.md",
+        "kind": "relative",
+        "line": 3
+      },
+      {
+        "block_id": "b000003",
+        "label": "검증 요약 JSON",
+        "target": "Verification-20261021.json",
+        "kind": "relative",
+        "line": 3
+      },
+      {
+        "block_id": "b000021",
+        "label": "USD 문서",
+        "target": "USD.md",
+        "kind": "relative",
+        "line": 28
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000009",
+        "columns": [
+          "구성",
+          "Actor·USD 및 실제 OpenUSD CTest",
+          "설치본 소비자",
+          "결과"
+        ],
+        "rows": [
+          [
+            "공유 라이브러리",
+            "15/15",
+            "1/1",
+            "통과이다."
+          ],
+          [
+            "정적 라이브러리",
+            "15/15",
+            "1/1",
+            "통과이다."
+          ]
+        ]
+      },
+      {
+        "block_id": "b000031",
+        "columns": [
+          "CTest",
+          "검증 내용"
+        ],
+        "rows": [
+          [
+            "identity",
+            "ID 고유성·불변성, 기본 루트 소유권, 복사·이동 금지와 const 조회이다."
+          ],
+          [
+            "properties",
+            "이름 변경, 대소문자를 구분하는 중복 없는 태그와 제거이다."
+          ],
+          [
+            "transform",
+            "항등·이동·회전·비균일/음수/영 스케일, 행렬 합성, 큰 쿼터니언 정규화이다."
+          ],
+          [
+            "scene",
+            "부모 누적 좌표, 순환·교차 Actor·루트 부착 거부, 로컬 유지와 자식 보유 노드 제거 거부이다."
+          ],
+          [
+            "components",
+            "단독 소유, 실행 중 추가·제거, 종료 사유, 논리 파괴와 실제 소멸의 분리이다."
+          ],
+          [
+            "lifecycle",
+            "시작·프레임·역순 종료, 독립 Tick 제어, 재시작과 중복 파괴 방지이다."
+          ],
+          [
+            "callbacks",
+            "시작·갱신·종료·제거 콜백의 파괴 요청, 재진입과 소유권 변경 거부이다."
+          ],
+          [
+            "validation",
+            "비유한 입력, 음수 시간, 영 쿼터니언과 파괴 후 추가 거부이다."
+          ],
+          [
+            "installed_consumer",
+            "설치된 공개 CMake 타깃만 사용한 C++23 컴파일·DLL 로드·파생 컴포넌트·변환·Tick·파괴 실행이다."
+          ]
+        ]
+      },
+      {
+        "block_id": "b000037",
+        "columns": [
+          "구성",
+          "기능 검사",
+          "설치본 소비자",
+          "결과"
+        ],
+        "rows": [
+          [
+            "Windows x64 MSVC Release 공유 라이브러리",
+            "8/8",
+            "1/1",
+            "통과이다."
+          ],
+          [
+            "Windows x64 MSVC Release 정적 라이브러리",
+            "8/8",
+            "1/1",
+            "통과이다."
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "format": "iiActorObject.MakeHumanSkin.1",
+  "baseMesh": "hm08",
+  "presets": [
+    {
+      "id": "middleage_african_female",
+      "label": "Middleage African Female",
+      "material": "skins/middleage_african_female/middleage_african_female.mhmat",
+      "texture": "skins/middleage_african_female/middleage_darkskinned_female_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "middleage_african_male",
+      "label": "Middleage African Male",
+      "material": "skins/middleage_african_male/middleage_african_male.mhmat",
+      "texture": "skins/middleage_african_male/middleage_darkskinned_male_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "middleage_asian_female",
+      "label": "Middleage Asian Female",
+      "material": "skins/middleage_asian_female/middleage_asian_female.mhmat",
+      "texture": "skins/middleage_asian_female/middleage_lightskinned_female_diffuse2.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "middleage_asian_male",
+      "label": "Middleage Asian Male",
+      "material": "skins/middleage_asian_male/middleage_asian_male.mhmat",
+      "texture": "skins/middleage_asian_male/middleage_lightskinned_male_diffuse2.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "middleage_caucasian_female",
+      "label": "Middleage Caucasian Female",
+      "material": "skins/middleage_caucasian_female/middleage_caucasian_female.mhmat",
+      "texture": "skins/middleage_caucasian_female/middleage_lightskinned_female_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "middleage_caucasian_male",
+      "label": "Middleage Caucasian Male",
+      "material": "skins/middleage_caucasian_male/middleage_caucasian_male.mhmat",
+      "texture": "skins/middleage_caucasian_male/middleage_lightskinned_male_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "old_african_female",
+      "label": "Old African Female",
+      "material": "skins/old_african_female/old_african_female.mhmat",
+      "texture": "skins/old_african_female/old_darkskinned_female_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "old_african_male",
+      "label": "Old African Male",
+      "material": "skins/old_african_male/old_african_male.mhmat",
+      "texture": "skins/old_african_male/old_darkskinned_male_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "old_asian_female",
+      "label": "Old Asian Female",
+      "material": "skins/old_asian_female/old_asian_female.mhmat",
+      "texture": "skins/old_asian_female/old_lightskinned_female_diffuse2.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "old_asian_male",
+      "label": "Old Asian Male",
+      "material": "skins/old_asian_male/old_asian_male.mhmat",
+      "texture": "skins/old_asian_male/old_lightskinned_male_diffuse2.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "old_caucasian_female",
+      "label": "Old Caucasian Female",
+      "material": "skins/old_caucasian_female/old_caucasian_female.mhmat",
+      "texture": "skins/old_caucasian_female/old_lightskinned_female_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "old_caucasian_male",
+      "label": "Old Caucasian Male",
+      "material": "skins/old_caucasian_male/old_caucasian_male.mhmat",
+      "texture": "skins/old_caucasian_male/old_lightskinned_male_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_african_female",
+      "label": "Young African Female",
+      "material": "skins/young_african_female/young_african_female.mhmat",
+      "texture": "skins/young_african_female/young_darkskinned_female_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_african_male",
+      "label": "Young African Male",
+      "material": "skins/young_african_male/young_african_male.mhmat",
+      "texture": "skins/young_african_male/young_darkskinned_male_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_asian_female",
+      "label": "Young Asian Female",
+      "material": "skins/young_asian_female/young_asian_female.mhmat",
+      "texture": "skins/young_asian_female/young_lightskinned_female_diffuse3.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_asian_male",
+      "label": "Young Asian Male",
+      "material": "skins/young_asian_male/young_asian_male.mhmat",
+      "texture": "skins/young_asian_male/young_lightskinned_male_diffuse3.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_caucasian_female",
+      "label": "Young Caucasian Female",
+      "material": "skins/young_caucasian_female/young_caucasian_female.mhmat",
+      "texture": "skins/young_caucasian_female/young_lightskinned_female_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_caucasian_female2",
+      "label": "Young Caucasian Female2",
+      "material": "skins/young_caucasian_female2/young_caucasian_female2.mhmat",
+      "texture": "skins/young_caucasian_female2/young_lightskinned_female_diffuse2.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_caucasian_male",
+      "label": "Young Caucasian Male",
+      "material": "skins/young_caucasian_male/young_caucasian_male.mhmat",
+      "texture": "skins/young_caucasian_male/young_lightskinned_male_diffuse.png",
+      "roughness": 0.55
+    },
+    {
+      "id": "young_caucasian_male2",
+      "label": "Young Caucasian Male2",
+      "material": "skins/young_caucasian_male2/young_caucasian_male2.mhmat",
+      "texture": "skins/young_caucasian_male2/young_lightskinned_male_diffuse2.png",
+      "roughness": 0.55
+    }
+  ]
+}

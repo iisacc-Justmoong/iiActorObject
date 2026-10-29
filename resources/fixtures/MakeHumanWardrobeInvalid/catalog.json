@@ -1,0 +1,7 @@
+{
+  "format": "iiActorObject.MakeHumanWardrobe.1",
+  "baseMesh": "hm08",
+  "components": [
+    {"id": "bad", "name": "Bad", "category": "hair", "proxy": "../outside.mhclo", "roughness": 0.5}
+  ]
+}

@@ -1,0 +1,5 @@
+# MakeHuman CC0 wardrobe assets
+
+This optional package contains unmodified graphic assets, not MakeHuman application code. The six selected components, including source OBJ meshes, MHCLO point mappings, materials and PNG images, come from the official [MakeHuman system assets pack](https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html), where they are listed as CC0. The original MHCLO and material files also state CC0. The original asset license and project license are retained as `LICENSE.ASSETS.md` and `LICENSE.md`.
+
+`UPSTREAM-SHA256.json` records the publisher URL, archive length and ETag, original paths, byte lengths, ZIP CRC-32 and SHA-256 for every included original file. The files were extracted by verified HTTP ranges from the indexed archive; the complete archive was not retained or independently hashed. `catalog.json` is authored by iiActorObject and selects components and approximate PBR roughness; it is not an upstream file. Ambient occlusion images are preserved but are not currently connected as material slots.
