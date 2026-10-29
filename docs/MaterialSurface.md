@@ -1,6 +1,6 @@
 # 캐릭터 재질의 알파와 양면 설정
 
-공용 3D 본체의 `Object3DMaterialSurface`는 캐릭터의 피부·눈·속눈썹·머리카락·의상에 적용할 알파 방식, 임계값, 양면 여부를 보관한다. 이미지와 재질은 `Object3DEngine`이 소유한 에셋에 있고 NSCharacter는 본체 에셋을 참조한다. 렌더러와 실제 셰이더는 호스트의 책임이다.
+공용 3D 본체의 `Object3DMaterialSurface`는 캐릭터의 피부·눈·속눈썹·머리카락·의상에 적용할 알파 방식, 임계값, 양면 여부를 보관한다. 이미지와 재질은 `Object3DEngine`이 소유한 에셋에 있고 NSCharacter는 본체 에셋을 참조한다. 재질 자료와 `effectiveAlphaMode`는 메시·골격·엔진에 의존하지 않는 공개 헤더 `<iiActorObject/Object3DMaterial.h>`에서 직접 사용할 수 있다. 기존 `<iiActorObject/Object3DData.h>`에서도 이 선언을 제공한다. 렌더러와 실제 셰이더는 호스트의 책임이다.
 
 ```cpp
 using namespace iiActorObject;
@@ -18,6 +18,8 @@ const bool changed = editor.get().setMaterialSurface(materialIndex, hair);
 ## 저장과 교환
 
 GLB 입력은 `OPAQUE`, `MASK`, `BLEND`, `alphaCutoff`, `doubleSided`를 보존한다. `OPAQUE`에서도 원래 기본색 알파와 이미지 알파 데이터는 남지만 그 재질의 렌더링에는 사용하지 않는다. GLB 출력은 명시된 방식을 표준 재질 속성으로 내보낸다. 기본 `Automatic`은 기존 출력과 같은 방식으로 해석한다. 마스크가 아닌 방식의 임계값은 기록할 수 있지만 해당 방식의 렌더링에는 사용하지 않는다.
+
+GLB 출력 내부에서는 메시별 기본색·법선 텍스처 UV 선택과 재질 변형 색인을 계획하는 처리기, 이미지 바이트와 재질·텍스처 JSON을 기록하는 처리기를 분리한다. 두 처리기는 입력 배열을 빌려 쓰며 엔진이나 장면을 소유하지 않는다. 이 내부 객체 타깃은 최종 `iiActorObject` 라이브러리에 포함되며 별도 설치 API는 아니다.
 
 본체 프로젝트는 기본값과 다른 표면 설정이 에셋 또는 편집 이력에 존재할 때 버전 29 이상으로 저장한다. 다중 후손 기준 자세가 함께 있으면 버전 30을 사용한다. 이전 프로젝트는 `Automatic`, 임계값 0.5, 단면으로 읽고 기존 투명 처리 방식을 유지한다. C++ 재질 구조가 확장되므로 헤더와 라이브러리를 함께 다시 빌드해야 한다.
 

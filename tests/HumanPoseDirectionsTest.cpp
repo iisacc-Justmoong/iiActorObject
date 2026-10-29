@@ -197,7 +197,9 @@ void human(const std::filesystem::path &path,const std::filesystem::path &destin
                 if(used[n])CHECK(length(sub(a.normals[n],b.normals[n]))<=8*std::numeric_limits<double>::epsilon());else CHECK(a.normals[n]==b.normals[n]);
             for(std::size_t v=0;v<a.points.size();++v)CHECK(a.points[v].position==b.points[v].position);
         }
-        const auto project=exportProject(authoring);CHECK(project[8]==13);auto restored=importProject(engine.reference(),project);CHECK(restored.editor.asset()->data().referencePose==stored.referencePose);
+        // The imported FBX may carry other authoring features that require a
+        // newer version; the reference pose still needs version 13 or later.
+        const auto project=exportProject(authoring);CHECK(project.size()>8&&project[8]>=13);auto restored=importProject(engine.reference(),project);CHECK(restored.editor.asset()->data().referencePose==stored.referencePose);
         auto restoredActor=restored.editor.asset()->instantiate();sameLocals(restoredActor->pose().locals(),expected.locals());
         std::filesystem::create_directories(destination);std::ofstream out(destination/"ReferenceSource.ii3dproject",std::ios::binary);CHECK(bool(out.write(reinterpret_cast<const char*>(project.data()),project.size())));
         snapshotObject=createReferenceObject3DPoseSnapshot(restored.editor.asset()->object());

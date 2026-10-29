@@ -4,6 +4,7 @@
 #include <iiActorObject/Object3DInterchange.h>
 #include <iiActorObject/Object3DEditorRig.h>
 #include <iiActorObject/Object3DInstanceTransfer.h>
+#include <iiActorObject/Object3DProgressiveMorph.h>
 #include <iiActorObject/Object3DObj.h>
 #include <iiActorObject/Object3DProject.h>
 #include <algorithm>
@@ -11,6 +12,7 @@
 #include <cmath>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <stdexcept>
 
 using namespace iiActorObject;
@@ -443,6 +445,60 @@ void instanceFollow(const std::filesystem::path &base,const std::filesystem::pat
     rigs.rig(0).get().applyTo(*moved.actor,evaluation);
     CHECK(actor->pose().skeleton()==original->object().get().skeleton()&&actor->animation().time()==.5);
 }
+void progressiveSplit(const std::filesystem::path &base,const std::filesystem::path &dir,bool sparse=false)
+{
+    Object3DEngine engine;MakeHumanTemplateOptions options;
+    options.accessories=HumanAccessorySelection{dir,{"hair/bob01"},true};
+    const auto human=loadMakeHumanTemplate(engine.reference(),base,options);auto editor=human.edit({},6);
+    const auto body=findMesh(editor.asset()->data(),"OBJ"),hair=findMesh(editor.asset()->data(),"HairBob01");
+    for(const auto index:{body,hair})
+    {
+        const auto &topology=*editor.asset()->data().meshes[index].topology;
+        const auto &definition=topology.layout->definition();CHECK(!definition.renderToLayout.empty());
+        const auto point=definition.layouts[definition.renderToLayout.front()].position;
+        TopologyMorph half;half.name="SharedHalf";half.normalDeltas.emplace();
+        half.deltas={{point,{0,index==body?.01:.02,0}}};editor.setControlMorph(index,std::move(half));
+        if(!sparse||index==body)
+        {
+            TopologyMorph full;full.name="SharedFull";full.normalDeltas.emplace();
+            full.deltas={{point,{0,index==body?.025:.04,0}}};editor.setControlMorph(index,std::move(full));
+        }
+    }
+    const auto original=editor.asset()->object();
+    const auto rig=createObject3DProgressiveMorphRig(original,{{{"Shared",0,{{"SharedHalf",.5},{"SharedFull",1}}}}});
+    const AnimationClip clip(original.get().skeleton(),1,{},
+        {{object3DProgressiveControlCurveName("Shared"),{{0,0},{1,sparse?.75:.5}}}});
+    const auto encoded=exportObject3DFbxWithProgressiveMorphs(rig,clip);CHECK(!encoded.bytes.empty());
+    Object3DEngine loadedEngine;const auto loaded=importObject3DFbxWithProgressiveMorphsAndAnimations(loadedEngine.reference(),encoded.bytes);
+    const auto importedProgram=inspectObject3DProgressiveMorphRig(loaded.rig);
+    CHECK(loaded.animations.size()==1&&importedProgram.channels.size()==1);
+    if(sparse)CHECK(importedProgram.channels[0].sourceMeshes.empty());
+    else CHECK(importedProgram.channels[0].sourceMeshes.size()==2);
+    if(sparse)
+    {
+        const auto &imported=loaded.asset.object.get().data();const auto hairIndex=findMesh(imported,"HairBob01");
+        const auto &morphs=imported.meshes[hairIndex].geometry.morphTargets;
+        CHECK(std::none_of(morphs.begin(),morphs.end(),[&](const auto &m){return m.name==importedProgram.channels[0].keys[1].target;}));
+    }
+    auto expected=original.get().instantiate(),actual=loaded.asset.object.get().instantiate();
+    std::vector<SkeletalMeshComponent *> left,right;
+    for(auto *component:expected->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(component))left.push_back(part);
+    for(auto *component:actual->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(component))right.push_back(part);
+    CHECK(left.size()==2&&right.size()==2);
+    std::map<std::string,Vector3,std::less<>> before;
+    for(auto *part:left)before.emplace(part->name(),part->deformedVertices()[0].position);
+    applyObject3DProgressiveAnimationClip(rig,clip,{},1,expected->pose(),left);
+    applyObject3DProgressiveAnimationClip(loaded.rig,*loaded.animations[0].clip,loaded.animations[0].morphBindings,1,actual->pose(),right);
+    for(auto *part:left)
+    {
+        const auto found=std::find_if(right.begin(),right.end(),[&](const auto *other){return other->name()==part->name();});
+        CHECK(found!=right.end());
+        const auto displacement=part->deformedVertices()[0].position.y-before.at(part->name()).y;
+        const auto desired=sparse?(part->name()=="OBJ"?.0175:.01):(part->name()=="OBJ"?.01:.02);
+        CHECK(std::abs(displacement-desired)<1e-6);
+        CHECK(distance(part->deformedVertices()[0].position,(*found)->deformedVertices()[0].position)<1e-6);
+    }
+}
 void grounded(const std::filesystem::path &base,const std::filesystem::path &dir)
 {
     Object3DEngine engine;MakeHumanTemplateOptions options;options.accessories=selection(dir);
@@ -511,6 +567,6 @@ void formats(const std::filesystem::path &base,const std::filesystem::path &dir,
 }
 int main(int argc,char **argv)
 {
-    try{if(argc!=4&&argc!=5)return 2;const std::string_view mode=argv[1];if((mode=="formats"||mode=="switch_formats"||mode=="remove_formats"||mode=="add_formats"||mode=="mixed_formats")&&argc==5)formats(argv[2],argv[3],argv[4],mode=="switch_formats",mode=="remove_formats",mode=="add_formats",mode=="mixed_formats");else if(argc!=4)return 2;else if(mode=="catalog")catalog(argv[3]);else if(mode=="human")human(argv[2],argv[3]);else if(mode=="alternate")alternate(argv[2],argv[3]);else if(mode=="editing")editing(argv[2],argv[3],false);else if(mode=="editing_large")editing(argv[2],argv[3],true);else if(mode=="batch")batch(argv[2],argv[3]);else if(mode=="visibility")visibility(argv[2],argv[3]);else if(mode=="removal")removal(argv[2],argv[3]);else if(mode=="addition")addition(argv[2],argv[3]);else if(mode=="composition")composition(argv[2],argv[3]);else if(mode=="retained_slot")retainedSlot(argv[3]);else if(mode=="rig_follow")rigFollow(argv[2],argv[3]);else if(mode=="instance_follow")instanceFollow(argv[2],argv[3]);else if(mode=="grounded")grounded(argv[2],argv[3]);else if(mode=="failures")failures(argv[2],argv[3]);else return 2;}
+    try{if(argc!=4&&argc!=5)return 2;const std::string_view mode=argv[1];if((mode=="formats"||mode=="switch_formats"||mode=="remove_formats"||mode=="add_formats"||mode=="mixed_formats")&&argc==5)formats(argv[2],argv[3],argv[4],mode=="switch_formats",mode=="remove_formats",mode=="add_formats",mode=="mixed_formats");else if(argc!=4)return 2;else if(mode=="catalog")catalog(argv[3]);else if(mode=="human")human(argv[2],argv[3]);else if(mode=="alternate")alternate(argv[2],argv[3]);else if(mode=="editing")editing(argv[2],argv[3],false);else if(mode=="editing_large")editing(argv[2],argv[3],true);else if(mode=="batch")batch(argv[2],argv[3]);else if(mode=="visibility")visibility(argv[2],argv[3]);else if(mode=="removal")removal(argv[2],argv[3]);else if(mode=="addition")addition(argv[2],argv[3]);else if(mode=="composition")composition(argv[2],argv[3]);else if(mode=="retained_slot")retainedSlot(argv[3]);else if(mode=="rig_follow")rigFollow(argv[2],argv[3]);else if(mode=="instance_follow")instanceFollow(argv[2],argv[3]);else if(mode=="progressive_split")progressiveSplit(argv[2],argv[3]);else if(mode=="progressive_sparse")progressiveSplit(argv[2],argv[3],true);else if(mode=="grounded")grounded(argv[2],argv[3]);else if(mode=="failures")failures(argv[2],argv[3]);else return 2;}
     catch(const std::exception &error){std::cerr<<error.what()<<'\n';return 1;}
 }

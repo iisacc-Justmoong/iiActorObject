@@ -1,4 +1,5 @@
 #include <iiActorObject/Object3DRigSamples.h>
+#include <iiActorObject/RigSampleCatalogExport.h>
 #include <iiActorObject/Object3DPoseRig.h>
 #include <iiActorObject/Object3DDna.h>
 #include <iiActorObject/Object3DInterchange.h>

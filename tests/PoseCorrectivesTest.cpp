@@ -199,6 +199,21 @@ void project()
     for(unsigned i=0;i<4;++i)corrupted[20+i]=static_cast<std::uint8_t>(checksum>>(i*8));
     const auto editors=target.reference().editorCount();rejects([&]{(void)importObject3DProject(target.reference(),corrupted);});
     CHECK(target.objectCount()==count&&target.reference().rigCount()==rigs&&target.reference().editorCount()==editors);
+
+    // One imported rig fits; the following rig exceeds capacity. The whole
+    // import must roll back, including next IDs and existing live handles.
+    Object3DEngine limited(Object3DEngineLimits{.rigs=2});
+    const auto kept=limited.createObject(data());
+    const auto keptRig=createObject3DPoseRig(kept,poseProgram);
+    const auto keptEditor=limited.editObject(kept);
+    const auto revision=keptEditor.get().revision();
+    rejects([&]{(void)importObject3DProject(limited.reference(),bytes);});
+    CHECK(kept.valid()&&keptRig.valid()&&keptEditor.valid()&&keptEditor.get().revision()==revision);
+    CHECK(limited.objectCount()==1&&limited.editorCount()==1&&limited.rigCount()==1&&limited.templateCount()==0);
+    const auto nextRig=createObject3DPoseRig(kept,poseProgram);
+    const auto nextEditor=limited.editObject(kept);
+    const auto nextObject=limited.createObject(kept.get().data());
+    CHECK(nextRig.id()==keptRig.id()+1&&nextEditor.id()==keptEditor.id()+1&&nextObject.id()==kept.id()+1);
 }
 void formats(const std::filesystem::path &directory)
 {

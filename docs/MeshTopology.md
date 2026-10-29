@@ -2,6 +2,8 @@
 
 공용 작성용 토폴로지는 iiActorObject 본체에 존재한다. NSCharacter는 본체 에셋과 편집기를 참조하며 별도 메시 버퍼를 소유하지 않는다.
 
+정점·모프·스키닝 자료형은 `MeshData.h`에, 본 인덱스는 `BoneIndex.h`에 있다. 이 자료와 가중치 정규화·스키닝 설정 검사는 하위 공용 객체 타깃에 속한다. 토폴로지와 메시 기하만 필요한 코드는 `MeshTopologyCore.h`와 `MeshGeometryCore.h`를 직접 포함할 수 있으며, 골격 실행 객체나 액터 컴포넌트 헤더가 따라오지 않는다. 기존 `MeshTopology.h`와 `MeshGeometry.h`는 원래의 골격 선언까지 함께 포함하는 호환 진입점이다.
+
 ## 자료와 인덱스
 
 `polygonMaterials`는 원본 face별 전역 머티리얼 ID이며 비어 있으면 메시의 기본 머티리얼을 사용한다. `trianglePolygons()`와 파생 `Object3DMesh::triangleMaterials`가 렌더 삼각형의 원본 face·머티리얼을 연결한다. 머티리얼 때문에 작성용 메시를 분할하지 않는다. [FBX 교환 계약](FbxAuthoring.md)을 따른다.

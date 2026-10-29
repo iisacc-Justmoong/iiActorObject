@@ -4,6 +4,8 @@
 
 FBX의 기본색과 노멀 이미지 자원은 `iiActorObject`의 `Object3DEngine`이 소유한다. `NSCharacter`는 이 본체의 에셋을 참조하며 이미지 저장소를 별도로 만들지 않는다. 입력 파서는 외부 파일을 열지 않는다. 내장 PNG는 원본 바이트를 검사하여 저장하고, 외부 이미지 또는 내장된 PNG 외 이미지는 호스트가 `FbxImportOptions::imageResolver`를 지정했을 때만 요청한다. 제공하지 않거나 해석기가 `std::nullopt`를 반환하면 해당 이미지 연결은 제외되고 경고가 남는다.
 
+호스트는 `<iiActorObject/FbxImageResolver.h>`만 포함해 이미지 요청과 해석기 인터페이스를 구현할 수 있다. 기존 `Object3DInterchange.h`도 이 선언을 계속 제공한다. FBX 장면의 이미지·텍스처와 재질 해석은 `Object3DFbxResources` 내부 객체 타깃이 수행하며, 가져오기 작업은 그 결과를 본체 에셋 자료에 반영한다. 이 타깃은 장면과 호스트 해석기를 빌려 쓰고 에셋이나 엔진을 소유하지 않는다.
+
 `FbxImageRequest`의 이름과 경로는 FBX가 제공한 신뢰할 수 없는 문자열이다. `filename`, `absoluteFilename`, `relativeFilename`은 접근 권한을 뜻하지 않는다. 호스트는 자신이 허용한 패키지·파일·자원만 해석해야 한다. `embeddedBytes`가 비어 있지 않으면 내장 이미지의 원본 바이트이며, 비어 있으면 외부 참조이다. 요청의 문자열과 바이트 뷰는 동기 `resolve` 호출이 끝나면 무효가 된다. 해석기는 가져오기가 끝날 때까지 살아 있어야 한다.
 
 해석기는 `FbxResolvedImage`에 검증 가능한 PNG 바이트와 `image/png` MIME을 반환한다. 선택적인 `notice`는 변환이나 손실을 가져오기 경고에 표시한다. 반환된 MIME·PNG 구조·CRC·크기와 진단 문자열을 검사한다. 같은 Video에 연결된 동일 자료는 한 이미지로 공유한다. 해석기의 예외나 잘못된 반환값, 예산 초과는 전체 가져오기를 실패시키며 엔진에 부분 에셋을 등록하지 않는다.

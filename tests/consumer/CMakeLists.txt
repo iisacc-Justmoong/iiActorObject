@@ -9,8 +9,75 @@ endif()
 add_executable(iiActorObject_installed_consumer main.cpp)
 target_link_libraries(iiActorObject_installed_consumer PRIVATE iiActorObject::iiActorObject)
 set_target_properties(iiActorObject_installed_consumer PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_character_headers
+    ../CharacterTemplateCoreHeaderTest.cpp ../MakeHumanTemplateHeaderTest.cpp ../HumanAccessoriesHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_character_headers PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_character_headers PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_progressive_headers
+    ../ProgressiveMorphDataHeaderTest.cpp ../ProgressiveMorphCoreHeaderTest.cpp ../ProgressiveMorphInterchangeHeaderTest.cpp
+    ../ProgressiveMorphCompatibilityHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_progressive_headers PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_progressive_headers PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_glb_animation_options ../GlbAnimationOptionsHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_glb_animation_options PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_glb_animation_options PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_glb_import_options ../GlbImportOptionsHeaderTest.cpp ../GlbImageResolverHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_glb_import_options PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_glb_import_options PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_mesh_headers
+    ../BoneIndexHeaderTest.cpp ../MeshDataHeaderTest.cpp ../MeshTopologyCoreHeaderTest.cpp
+    ../MeshGeometryCoreHeaderTest.cpp ../MeshCompatibilityHeaderTest.cpp
+    ../SurfaceBindingCoreHeaderTest.cpp ../SurfaceAttachmentHeaderTest.cpp
+    ../SurfaceCompatibilityHeaderTest.cpp ../Object3DDataHeaderTest.cpp ../Object3DMaterialHeaderTest.cpp ../Object3DMeshHeaderTest.cpp
+    ../Object3DAssetCompatibilityHeaderTest.cpp ../MeshSelectionCoreHeaderTest.cpp
+    ../MeshSelectionAssetHeaderTest.cpp ../MeshSelectionCompatibilityHeaderTest.cpp
+    ../SkeletalMeshCoreHeaderTest.cpp ../SkeletalMeshComponentHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_mesh_headers PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_mesh_headers PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_instance_transfer_headers
+    ../InstanceTransferCoreHeaderTest.cpp ../InstanceTransferEditorHeaderTest.cpp
+    ../InstanceTransferCompatibilityHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_instance_transfer_headers PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_instance_transfer_headers PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_rig_sample_catalog_headers
+    ../RigSampleCatalogCoreHeaderTest.cpp ../RigSampleCatalogExportHeaderTest.cpp
+    ../RigSampleCatalogCompatibilityHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_rig_sample_catalog_headers PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_rig_sample_catalog_headers PROPERTIES CXX_EXTENSIONS OFF)
 
+add_executable(iiActorObject_installed_fbx_resolver_header ../FbxResolverHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_fbx_resolver_header PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_fbx_resolver_header PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_tangent_consumer ../TangentInstalledConsumer.cpp)
+target_link_libraries(iiActorObject_installed_tangent_consumer PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_tangent_consumer PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObject_installed_project_data_headers ../ProjectDataHeadersTest.cpp
+        ../ProjectDataMeshPointMaskHeaderTest.cpp ../ProjectDataMeshPointMaskValidationHeaderTest.cpp ../ProjectDataObject3DEditLayerDataHeaderTest.cpp ../ProjectDataObject3DPoseProgramDataHeaderTest.cpp ../ProjectDataObject3DProjectOptionsHeaderTest.cpp ../ProjectDataObject3DTemplateMorphDataHeaderTest.cpp ../ProjectDataObject3DTemplateTypesHeaderTest.cpp ../ProjectDataSurfaceFitSettingsHeaderTest.cpp ../ExternalIdentityHeaderTest.cpp)
+target_link_libraries(iiActorObject_installed_project_data_headers PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_project_data_headers PROPERTIES CXX_EXTENSIONS OFF)
 enable_testing()
+add_test(NAME iiActorObject.installed_project_data_headers COMMAND iiActorObject_installed_project_data_headers)
+add_executable(iiActorObject_installed_mask_validation_consumer ../PointMaskValidationInstalledConsumer.cpp)
+target_link_libraries(iiActorObject_installed_mask_validation_consumer PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_mask_validation_consumer PROPERTIES CXX_EXTENSIONS OFF)
+add_test(NAME iiActorObject.installed_mask_validation_consumer COMMAND iiActorObject_installed_mask_validation_consumer)
+add_test(NAME iiActorObject.installed_fbx_resolver_header COMMAND iiActorObject_installed_fbx_resolver_header)
+add_test(NAME iiActorObject.installed_tangent_consumer COMMAND iiActorObject_installed_tangent_consumer)
+add_test(NAME iiActorObject.installed_character_headers COMMAND iiActorObject_installed_character_headers)
+add_test(NAME iiActorObject.installed_progressive_headers COMMAND iiActorObject_installed_progressive_headers)
+add_test(NAME iiActorObject.installed_glb_animation_options COMMAND iiActorObject_installed_glb_animation_options)
+add_test(NAME iiActorObject.installed_glb_import_options COMMAND iiActorObject_installed_glb_import_options)
+add_test(NAME iiActorObject.installed_mesh_headers COMMAND iiActorObject_installed_mesh_headers)
+add_test(NAME iiActorObject.installed_instance_transfer_headers COMMAND iiActorObject_installed_instance_transfer_headers)
+add_test(NAME iiActorObject.installed_rig_sample_catalog_headers COMMAND iiActorObject_installed_rig_sample_catalog_headers)
+if(WIN32)
+    set_tests_properties(iiActorObject.installed_tangent_consumer PROPERTIES
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:iiActorObject::iiActorObject>")
+    set_tests_properties(iiActorObject.installed_fbx_resolver_header PROPERTIES
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:iiActorObject::iiActorObject>")
+    set_tests_properties(iiActorObject.installed_mask_validation_consumer iiActorObject.installed_project_data_headers iiActorObject.installed_character_headers iiActorObject.installed_progressive_headers iiActorObject.installed_glb_animation_options iiActorObject.installed_glb_import_options iiActorObject.installed_mesh_headers iiActorObject.installed_instance_transfer_headers iiActorObject.installed_rig_sample_catalog_headers PROPERTIES
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:iiActorObject::iiActorObject>")
+endif()
 add_test(NAME iiActorObject.installed_editor_rig_consumer COMMAND iiActorObject_installed_consumer --editor-rig)
 add_test(NAME iiActorObject.installed_instance_transfer_consumer COMMAND iiActorObject_installed_consumer --instance-transfer)
 if(WIN32)

@@ -2,6 +2,7 @@
 #include <iiActorObject/Object3DDna.h>
 #include <iiActorObject/Object3DInterchange.h>
 #include <iiActorObject/Object3DProject.h>
+#include <iiActorObject/RigSampleCatalogExport.h>
 #include <array>
 #include <charconv>
 #include <cmath>

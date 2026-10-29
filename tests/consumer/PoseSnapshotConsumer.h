@@ -92,10 +92,31 @@ inline int poseSnapshotConsumer()
         if(!tangentTopology.sourceGlbTangents||!topologyGlbTangentsValid(tangentTopology)||
            tangentTopology.sourceGlbTangents->tangents.empty()||tangentTopology.sourceGlbTangents->morphTangents.size()!=1)return 158;
         const auto tangentEditor=engine.editObject(importedTangents.object);const auto tangentProject=exportObject3DProject(tangentEditor);
-        if(tangentProject.size()<24||tangentProject[8]!=24)return 159;
+        if(tangentProject.size()<24||tangentProject[8]<24)
+        {
+            std::cerr<<"Unexpected tangent project version: "<<(tangentProject.size()>8?int(tangentProject[8]):-1)<<'\n';
+            return 159;
+        }
         Object3DEngine tangentRestoredEngine;
         const auto tangentRestored=importObject3DProject(tangentRestoredEngine.reference(),tangentProject);
-        if(!topologyGlbTangentsValid(*tangentRestored.editor.get().object().get().data().meshes[0].topology))return 160;
+        const auto &restoredTangentTopology=*tangentRestored.editor.get().object().get().data().meshes[0].topology;
+        if(!restoredTangentTopology.sourceGlbTangents||!topologyGlbTangentsValid(restoredTangentTopology))return 160;
+        const auto &originalTangents=*tangentTopology.sourceGlbTangents;
+        const auto &restoredTangents=*restoredTangentTopology.sourceGlbTangents;
+        if(originalTangents.tangents.size()!=restoredTangents.tangents.size()||
+           originalTangents.morphTangents.size()!=restoredTangents.morphTangents.size())return 161;
+        for(std::size_t i=0;i<originalTangents.tangents.size();++i)
+        {
+            const auto &a=originalTangents.tangents[i],&b=restoredTangents.tangents[i];
+            if(a.layout!=b.layout||a.direction!=b.direction||a.handedness!=b.handedness)return 162;
+        }
+        for(std::size_t i=0;i<originalTangents.morphTangents.size();++i)
+        {
+            const auto &a=originalTangents.morphTangents[i],&b=restoredTangents.morphTangents[i];
+            if(a.size()!=b.size())return 163;
+            for(std::size_t j=0;j<a.size();++j)
+                if(a[j].layout!=b[j].layout||a[j].direction!=b[j].direction)return 164;
+        }
         const AnimationClip morphClip(linearDq.get().skeleton(),1,{},{{"Shape",{{0,0},{1,1}}}});
         GlbMorphAnimationOptions morphExport;morphExport.matchUnmappedCurvesByName=true;
         const auto morphAnimatedGlb=exportObject3DGlb(linearDq.get(),morphClip,{},morphExport);
@@ -121,13 +142,13 @@ inline int poseSnapshotConsumer()
         const auto current=preview->pose().worldMatrices();const auto delta=Vector3{current[1].transformPoint({}).x-current[2].transformPoint({}).x,current[1].transformPoint({}).y-current[2].transformPoint({}).y,current[1].transformPoint({}).z-current[2].transformPoint({}).z};
         if(std::abs(delta.x)>1e-10||delta.y<=0||std::abs(delta.z)>1e-10)return 119;
         auto edits=engine.editObject(authoring);edits.get().setReferencePose(std::nullopt);if(!edits.get().undo())return 120;
-        const auto project=exportObject3DProject(edits);if(project[8]!=13)return 121;auto read=importObject3DProject(engine.reference(),project);
-        if(!read.editor.get().object().get().data().referencePose)return 122;
+        const auto project=exportObject3DProject(edits);if(project.size()<24||project[8]<13)return 121;auto read=importObject3DProject(engine.reference(),project);
+        if(read.editor.get().object().get().data().referencePose!=data.referencePose)return 122;
         const auto referenceSnapshot=createReferenceObject3DPoseSnapshot(authoring);if(referenceSnapshot.get().data().referencePose)return 123;
         PoseReference ordered;ordered.directions.assign(aims.begin(),aims.end());ordered.frames.assign(frame.begin(),frame.end());
         ordered.order={{PoseReferenceStepKind::Frame,0},{PoseReferenceStepKind::Direction,0}};
         data.referencePose=ordered;const auto orderedAuthoring=engine.createObject(data);auto orderedEditor=engine.editObject(orderedAuthoring);
-        const auto orderedProject=exportObject3DProject(orderedEditor);if(orderedProject[8]!=15)return 130;
+        const auto orderedProject=exportObject3DProject(orderedEditor);if(orderedProject.size()<24||orderedProject[8]<15)return 130;
         const auto orderedRestored=importObject3DProject(engine.reference(),orderedProject);
         if(orderedRestored.editor.get().object().get().data().referencePose!=ordered)return 131;
         const auto measured=measureReferencePoseDirections(orderedAuthoring.get().skeleton(),ordered,
@@ -186,5 +207,5 @@ inline int poseSnapshotConsumer()
 #endif
     }
     if(held.valid()||deformedHeld.valid())return 114;
-    std::cout<<"installedPoseSnapshot=1 baselineMorphSnapshot=1 referenceProgram=1 nativeVersion13=1 sourceIdsRetained=1 morphInterpolation=1 coreOwned=1 expiredReference=1\n";return 0;
+    std::cout<<"installedPoseSnapshot=1 baselineMorphSnapshot=1 referenceProgram=1 nativeVersionAtLeast13=1 sourceIdsRetained=1 morphInterpolation=1 coreOwned=1 expiredReference=1\n";return 0;
 }

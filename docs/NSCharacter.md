@@ -2,7 +2,7 @@
 
 ## 목표와 완료 조건
 
-요구사항은 CC5 수준의 생성·상세 편집을 제공하고, CC5·Blender·Unreal에서 메시와 리그를 사용할 수 있게 하며 MetaHuman을 목표로 하는 독립 C++23 엔진이다. 캐릭터 계층의 위치는 `src/iiActorObject/NSCharacter/`이다. 공용 3D 엔진의 소유자는 iiActorObject 본체의 `Object3DEngine`이며 NSCharacter는 이를 참조한다. [공용 소유권 계약](Object3DEngine.md)을 따른다. 기존 `Skeleton`, `Pose`, `SkeletalMesh`, `CharacterRig`, `iiCharacter`를 재사용한다. Qt와 대상 상용 앱의 코드·에셋은 포함하지 않는다. 공개 CC0 인체 자료의 출처는 별도 패키지에 기록한다.
+요구사항은 CC5 수준의 생성·상세 편집을 제공하고, CC5·Blender·Unreal에서 메시와 리그를 사용할 수 있게 하며 MetaHuman을 목표로 하는 독립 C++23 엔진이다. 캐릭터 계층의 위치는 `src/NSCharacter/`이다. 공용 3D 엔진의 소유자는 iiActorObject 본체의 `Object3DEngine`이며 NSCharacter는 이를 참조한다. [공용 소유권 계약](Object3DEngine.md)을 따른다. 기존 `Skeleton`, `Pose`, `SkeletalMesh`, `CharacterRig`, `iiCharacter`를 재사용한다. Qt와 대상 상용 앱의 코드·에셋은 포함하지 않는다. 공개 CC0 인체 자료의 출처는 별도 패키지에 기록한다.
 
 2026-10-27 사용자가 앱 검증을 제외하였다. 현재 작업은 C++23 빌드·수치 테스트·독립
 파일 형식 검사·설치 소비자 검증으로 진행한다. CC5·Blender·Unreal 실행과 가져오기는
@@ -21,6 +21,8 @@
 5. 높은 해상도에서의 인체·얼굴 표면 품질, 관절 변형, 피부·눈·치아·머리카락·의상 등의 생성·편집 품질 확인이다. 프로시저 인체와 숫자 검사는 최종 시각 품질을 증명하지 않는다.
 
 ## 객체와 계약
+
+인체 계층은 `iiActorObjectNSCharacter` CMake 객체 타깃으로 별도 컴파일되지만 배포되는 라이브러리는 기존 `iiActorObject` 하나다. 본체의 공용 3D 자료와 리그 소유권은 변경되지 않는다. 템플릿 참조는 `CharacterTemplateCore.h`, 부속 목록·변경은 `HumanAccessories.h`, MakeHuman 자료 구성은 `MakeHumanTemplate.h`로 직접 사용할 수 있다. 기존 `CharacterTemplate.h`는 세 인터페이스를 모으는 호환 진입점이다. [책임 분리 보고서](ResponsibilitySeparation-20261029.md)와 [기계 판독 책임 목록](../resources/architecture/ResponsibilityMap.json)에서 전체 파일 분류, 검사 범위와 남은 공용 계층 결합을 확인할 수 있다.
 
 | 객체 | 책임 |
 | --- | --- |
@@ -47,7 +49,7 @@
 
 [인체 부속 선택](HumanAccessories.md)은 CC0 머리카락·의상·눈썹·속눈썹을 선택해 작성된 제어점 대응과 스킨, 몸 면 가림, 기본색·노멀 이미지를 본체 템플릿에 연결한다. 편집 중 부속을 추가·제거하거나 같은 슬롯과 분류의 대체 자산으로 교체할 수 있으며 형상 추종과 편집 이력은 본체가 소유한다. 편집한 부속의 형상 전사, 천·머리카락 물리와 제작용 외형 품질은 추가 작업이다.
 
-FBX 입력은 외부 경로를 읽지 않으며 입력 크기·정점·본·모프·파서 메모리를 제한한다. 원본 제어점·폴리곤·UV·법선 ID를 작성용 자료로 유지하고, 면별 머티리얼은 같은 메시 안에서 보관한다. [FBX 작성용 계약](FbxAuthoring.md)을 따른다. 선형·DQ·혼합 스키닝의 방식과 점별 혼합값을 보존하며, 표현할 수 없는 관절 shear와 여러 스킨 디포머는 명시적으로 거부한다. 기본 FBX 입력은 progressive morph를 거부하며, 별도의 [점진 모프 교환 API](ProgressiveMorphRig.md)는 중간 형상과 정적 제어 리그를 가져오고 단일 메시 또는 동일한 메시 인스턴스들이 공유하는 채널을 내보낸다. [점진 애니메이션 교환](ProgressiveMorphAnimation.md)은 골격·일반 표정·점진 제어를 함께 연결한다. 서로 다른 메시가 공유하는 채널의 출력은 남아 있다. 입력의 애니메이션 take·원본 앱 제약·지원하지 않는 텍스처 슬롯은 경고를 반환한다. 본체의 별도 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 이름을 연결한 모프 곡선을 작성한다. [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크와 본·표정 곡선을 본체 클립으로 표본화한다. 내장 PNG 기본색 자원은 [얼굴 부속 계약](FaceAssets.md)에 따라 읽으며, [호스트 해석기](FbxImageResolution.md)는 외부 이미지와 내장 PNG 외 자료를 PNG로 제공한다. 원본 자료가 모두 보존된 것처럼 조용히 처리하지 않는다.
+FBX 입력은 외부 경로를 읽지 않으며 입력 크기·정점·본·모프·파서 메모리를 제한한다. 원본 제어점·폴리곤·UV·법선 ID를 작성용 자료로 유지하고, 면별 머티리얼은 같은 메시 안에서 보관한다. [FBX 작성용 계약](FbxAuthoring.md)을 따른다. 선형·DQ·혼합 스키닝의 방식과 점별 혼합값을 보존하며, 표현할 수 없는 관절 shear와 여러 스킨 디포머는 명시적으로 거부한다. 기본 FBX 입력은 progressive morph를 거부하며, 별도의 [점진 모프 교환 API](ProgressiveMorphRig.md)는 중간 형상과 정적 제어 리그를 가져오고 여러 메시가 공유하는 채널을 내보낸다. 서로 다른 메시의 FBX 채널을 SDK의 공동 제어로 복원하려면 작성용 메타데이터가 유지되어야 한다. [점진 애니메이션 교환](ProgressiveMorphAnimation.md)은 골격·일반 표정·점진 제어를 함께 연결한다. 입력의 애니메이션 take·원본 앱 제약·지원하지 않는 텍스처 슬롯은 경고를 반환한다. 본체의 별도 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 이름을 연결한 모프 곡선을 작성한다. [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크와 본·표정 곡선을 본체 클립으로 표본화한다. 내장 PNG 기본색 자원은 [얼굴 부속 계약](FaceAssets.md)에 따라 읽으며, [호스트 해석기](FbxImageResolution.md)는 외부 이미지와 내장 PNG 외 자료를 PNG로 제공한다. 원본 자료가 모두 보존된 것처럼 조용히 처리하지 않는다.
 
 ufbx는 `v0.20.0`, 커밋 `a63ff0a47485328880b3300e7bcdf01413343a45`의 수정 없는 소스이며 MIT 대안을 선택하였다. 원래 `ufbx.c`를 `ufbx.cpp`로 이름만 바꿔 C++23으로 컴파일한다. [출처와 해시](../src/third_party/ufbx/PROVENANCE.md)를 따른다. 자체 작성 코드는 C++23이며 Python은 외부 형식·앱 검증에만 사용한다.
 

@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/SkinSurface.md",
-    "sha256": "404d4955c257e55f9428648830c37df24ec7098dea2237da75d798e2796af81b",
-    "bytes": 18780,
-    "line_count": 84,
+    "sha256": "e5cc169f377549c969823be2750b633cb4ca24590b7bf7c4cccbb8e0a9c88889",
+    "bytes": 24397,
+    "line_count": 106,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -59,7 +59,7 @@
       "kind": "paragraph",
       "start_line": 5,
       "end_line": 5,
-      "raw": "표면 검색·스킨 전사·대칭·의상 연결은 `src/iiActorObject/`의 공용 기능이다. 생성 템플릿·편집 세션·계층·연결 자료는 본체 엔진이 소유한다. NSCharacter는 `CharacterEditor`를 통해 본체 API를 호출한다. `MeshSurface`는 원본 에셋과 구분되는 불변 검색 스냅샷이며 공간 인덱스와 위치·삼각형 복사본을 가진다. 캐릭터 계층에 별도 엔진이나 에셋 저장소를 만들지 않는다.\n"
+      "raw": "표면 검색·스킨 전사·대칭·의상 연결은 `src/Geometry/`와 `src/Rig/`의 공용 기능이다. 생성 템플릿·편집 세션·계층·연결 자료는 본체 엔진이 소유한다. NSCharacter는 `CharacterEditor`를 통해 본체 API를 호출한다. `MeshSurface`는 원본 에셋과 구분되는 불변 검색 스냅샷이며 공간 인덱스와 위치·삼각형 복사본을 가진다. 캐릭터 계층에 별도 엔진이나 에셋 저장소를 만들지 않는다.\n"
     },
     {
       "id": "b000006",
@@ -299,12 +299,10 @@
     },
     {
       "id": "b000039",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 46,
       "end_line": 46,
-      "raw": "## 대칭 가중치\n",
-      "level": 2,
-      "title": "대칭 가중치"
+      "raw": "표면 위치의 연결·평가·복원만 사용하는 코드는 `SurfaceBindingCore.h`를 포함한다. 스킨 가중치 전달이나 표면 부착 옵션이 필요하면 `SurfaceAttachment.h`를 포함한다. 기존 `SurfaceBinding.h`는 두 인터페이스와 기존 자료 선언을 제공한다. 템플릿·프록시 등 다른 헤더를 통한 간접 포함에 의존했던 코드는 사용하는 인터페이스를 직접 포함해야 한다. 이는 API와 구현의 책임을 나눈 것이며 별도 배포 가능한 라이브러리를 추가한 것은 아니다.\n"
     },
     {
       "id": "b000040",
@@ -315,10 +313,12 @@
     },
     {
       "id": "b000041",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 48,
       "end_line": 48,
-      "raw": "`SkinBinder::mirror`는 평면 반사 위치에서 반대편 표면을 샘플링하고 본 대응을 교환한다. `boneMirrors`는 각 본을 다시 반사하면 원래 본으로 돌아오는 대응이어야 한다. 중앙 본은 자신에게 대응한다. 본 이름을 추측하여 좌우를 바꾸지 않는다.\n"
+      "raw": "## 대칭 가중치\n",
+      "level": 2,
+      "title": "대칭 가중치"
     },
     {
       "id": "b000042",
@@ -332,7 +332,7 @@
       "kind": "paragraph",
       "start_line": 50,
       "end_line": 50,
-      "raw": "`planeNormal`은 정규화하며 `planeOffset`은 정규화된 법선 방향의 거리이다. `negativeToPositive`로 방향을 선택한다. 중앙 허용 거리 안의 점과 원본 쪽 점은 유지한다. 반대편 표면이 없는 경우 자기 쪽 표면을 잘못 복사하지 않는다. 거리·영향 수·사용하지 않는 점의 처리 규약은 일반 전사와 같다.\n"
+      "raw": "`SkinBinder::mirror`는 평면 반사 위치에서 반대편 표면을 샘플링하고 본 대응을 교환한다. `boneMirrors`는 각 본을 다시 반사하면 원래 본으로 돌아오는 대응이어야 한다. 중앙 본은 자신에게 대응한다. 본 이름을 추측하여 좌우를 바꾸지 않는다.\n"
     },
     {
       "id": "b000044",
@@ -343,12 +343,10 @@
     },
     {
       "id": "b000045",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 52,
       "end_line": 52,
-      "raw": "## 의상과 부속 메시의 추종\n",
-      "level": 2,
-      "title": "의상과 부속 메시의 추종"
+      "raw": "`planeNormal`은 정규화하며 `planeOffset`은 정규화된 법선 방향의 거리이다. `negativeToPositive`로 방향을 선택한다. 중앙 허용 거리 안의 점과 원본 쪽 점은 유지한다. 반대편 표면이 없는 경우 자기 쪽 표면을 잘못 복사하지 않는다. 거리·영향 수·사용하지 않는 점의 처리 규약은 일반 전사와 같다.\n"
     },
     {
       "id": "b000046",
@@ -359,10 +357,12 @@
     },
     {
       "id": "b000047",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 54,
       "end_line": 54,
-      "raw": "`bindMeshSurface`는 대상의 각 점을 원본 삼각형에 연결하고, 무게중심 위치에서의 접선·종법선·법선 좌표계에 오프셋을 저장한다. `SurfaceBinding`은 원본 렌더 정점 수·대상 원본 점 수·삼각형 ID와 정점 ID를 함께 보존한다. 원본 연결이 바뀌면 거부한다. 대상 하나에는 하나의 입력 연결을 허용하며, 여러 연결은 DAG이어야 한다. 몸→셔츠→외투 같은 체인도 위상 순서대로 계산한다.\n"
+      "raw": "## 의상과 부속 메시의 추종\n",
+      "level": 2,
+      "title": "의상과 부속 메시의 추종"
     },
     {
       "id": "b000048",
@@ -376,7 +376,7 @@
       "kind": "paragraph",
       "start_line": 56,
       "end_line": 56,
-      "raw": "작성된 `ControlPoints` 연결은 `offsetScales`로 원본 점 쌍의 축별 길이에 따라 오프셋을 조정한다. `Object3DTemplateDefinition::surfaceOffsetBases`는 표면 연결 순서에 맞춘 선택적 `SurfaceBindingBasis`를 보유한다. 빈 벡터는 모든 연결에 오브젝트 축을 적용하며, 비어 있지 않으면 연결마다 한 항목이 있어야 한다. 각 기저는 작성 축을 현재 오브젝트 공간으로 옮기는 세 열 벡터이다. 점 쌍의 길이는 역기저로 원본 축에 투영하고, 조절된 오프셋은 정방향 기저로 되돌린다. 비유한·특이 또는 조건이 나쁜 기저와 삼각형 프레임 연결에 지정된 기저는 거부한다. `bindMeshControlPointsWithBasis`, `evaluateMeshSurfaceBindingWithBasis`, `fitMeshSurfaceBindingWithBasis`, `transferMeshBindingWeightsWithBasis` 및 여러 연결을 다루는 `WithBases` 함수는 이 기저를 명시적으로 받는다. 기존 `SurfaceBinding`의 크기와 기존 함수는 유지한다. [템플릿 적응](TemplateAdapt.md)은 회전과 스케일을 기저에 합성하며, 템플릿과 편집 이력의 기저는 프로젝트 버전 25에 보존한다.\n"
+      "raw": "`bindMeshSurface`는 대상의 각 점을 원본 삼각형에 연결하고, 무게중심 위치에서의 접선·종법선·법선 좌표계에 오프셋을 저장한다. `SurfaceBinding`은 원본 렌더 정점 수·대상 원본 점 수·삼각형 ID와 정점 ID를 함께 보존한다. 원본 연결이 바뀌면 거부한다. 대상 하나에는 하나의 입력 연결을 허용하며, 여러 연결은 DAG이어야 한다. 몸→셔츠→외투 같은 체인도 위상 순서대로 계산한다.\n"
     },
     {
       "id": "b000050",
@@ -390,7 +390,7 @@
       "kind": "paragraph",
       "start_line": 58,
       "end_line": 58,
-      "raw": "확장 오버로드의 `SurfaceBindingLimits::additionalPoints`는 보이지 않는 대상 원본 점을 명시적으로 포함한다. 같은 구조의 `maximumVertices`, `maximumTriangles`, `maximumPoints`, `maximumNodeVisits`, `maximumTriangleTests`는 단일 바인딩의 크기와 표면 질의량을 제한한다. 기존 `SurfaceBindingOptions`와 기존 오버로드는 유지하며, 기존 오버로드는 종전처럼 별도의 작업량 한도를 적용하지 않는다.\n"
+      "raw": "작성된 `ControlPoints` 연결은 `offsetScales`로 원본 점 쌍의 축별 길이에 따라 오프셋을 조정한다. `Object3DTemplateDefinition::surfaceOffsetBases`는 표면 연결 순서에 맞춘 선택적 `SurfaceBindingBasis`를 보유한다. 빈 벡터는 모든 연결에 오브젝트 축을 적용하며, 비어 있지 않으면 연결마다 한 항목이 있어야 한다. 각 기저는 작성 축을 현재 오브젝트 공간으로 옮기는 세 열 벡터이다. 점 쌍의 길이는 역기저로 원본 축에 투영하고, 조절된 오프셋은 정방향 기저로 되돌린다. 비유한·특이 또는 조건이 나쁜 기저와 삼각형 프레임 연결에 지정된 기저는 거부한다. `bindMeshControlPointsWithBasis`, `evaluateMeshSurfaceBindingWithBasis`, `fitMeshSurfaceBindingWithBasis`, `transferMeshBindingWeightsWithBasis` 및 여러 연결을 다루는 `WithBases` 함수는 이 기저를 명시적으로 받는다. 기존 `SurfaceBinding`의 크기와 기존 함수는 유지한다. [템플릿 적응](TemplateAdapt.md)은 회전과 스케일을 기저에 합성하며, 템플릿과 편집 이력의 기저는 프로젝트 버전 25에 보존한다.\n"
     },
     {
       "id": "b000052",
@@ -404,7 +404,7 @@
       "kind": "paragraph",
       "start_line": 60,
       "end_line": 60,
-      "raw": "`applyMeshSurfaceBindings`는 기준 상태와 현재 원본 표면의 차이만 대상 위치에 더한다. 따라서 대상 자체의 생성 타깃·수동 조형을 덮어쓰지 않는다. 오프셋은 표면 좌표계와 함께 회전하고, 거리는 오브젝트 단위로 유지한다. 원본 삼각형이 퇴화하면 실패한다. 연결 그래프·점·무게중심 좌표·수치의 유효성을 검사하고, 실패 시 입력을 바꾸지 않는다.\n"
+      "raw": "확장 오버로드의 `SurfaceBindingLimits::additionalPoints`는 보이지 않는 대상 원본 점을 명시적으로 포함한다. 같은 구조의 `maximumVertices`, `maximumTriangles`, `maximumPoints`, `maximumNodeVisits`, `maximumTriangleTests`는 단일 바인딩의 크기와 표면 질의량을 제한한다. 기존 `SurfaceBindingOptions`와 기존 오버로드는 유지하며, 기존 오버로드는 종전처럼 별도의 작업량 한도를 적용하지 않는다.\n"
     },
     {
       "id": "b000054",
@@ -418,7 +418,7 @@
       "kind": "paragraph",
       "start_line": 62,
       "end_line": 62,
-      "raw": "생성 템플릿은 `Object3DTemplateDefinition::surfaces`를 보유한다. 생성 파라미터에 따른 변형 뒤에 표면 추종을 적용한다. 편집 계층은 모든 위치 보정 뒤에 원본 표면의 추가 변화량을 적용하므로, 몸 조형과 의상 조형이 함께 유지된다. 관절 앵커와 렌더 법선은 변경한 결과에서 갱신한다. 스킨 가중치는 개별 의상의 편집 자료이며 몸의 가중치를 수정했다고 자동으로 덮어쓰지 않는다. 필요할 때 명시적으로 다시 전사한다.\n"
+      "raw": "`applyMeshSurfaceBindings`는 기준 상태와 현재 원본 표면의 차이만 대상 위치에 더한다. 따라서 대상 자체의 생성 타깃·수동 조형을 덮어쓰지 않는다. 오프셋은 표면 좌표계와 함께 회전하고, 거리는 오브젝트 단위로 유지한다. 원본 삼각형이 퇴화하면 실패한다. 연결 그래프·점·무게중심 좌표·수치의 유효성을 검사하고, 실패 시 입력을 바꾸지 않는다.\n"
     },
     {
       "id": "b000056",
@@ -429,12 +429,10 @@
     },
     {
       "id": "b000057",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 64,
       "end_line": 64,
-      "raw": "## 편집 중 부착\n",
-      "level": 2,
-      "title": "편집 중 부착"
+      "raw": "생성 템플릿은 `Object3DTemplateDefinition::surfaces`를 보유한다. 생성 파라미터에 따른 변형 뒤에 표면 추종을 적용한다. 편집 계층은 모든 위치 보정 뒤에 원본 표면의 추가 변화량을 적용하므로, 몸 조형과 의상 조형이 함께 유지된다. 관절 앵커와 렌더 법선은 변경한 결과에서 갱신한다. 스킨 가중치는 개별 의상의 편집 자료이며 몸의 가중치를 수정했다고 자동으로 덮어쓰지 않는다. 필요할 때 명시적으로 다시 전사한다.\n"
     },
     {
       "id": "b000058",
@@ -445,10 +443,12 @@
     },
     {
       "id": "b000059",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 66,
       "end_line": 66,
-      "raw": "`Object3DEditor::attachSurface`는 현재 모양에 맞춘 메시를 받아 스킨과 표면 연결을 생성하고 새로운 본체 템플릿을 만든다. 이미 적용한 파라미터·몸 조형을 중립 상태로 환산하여 등록하므로, 다음 파라미터 변경 때 이전 몸 조형이 중복 적용되지 않는다. 기존 계층과 편집 이력을 유지하며, 부착 이전의 메시 수·템플릿으로 undo하고 다시 redo할 수 있다. 일반 스냅샷 편집기에도 생성 타깃이 없는 본체 템플릿을 만들어 같은 경로를 사용한다.\n"
+      "raw": "## 편집 중 부착\n",
+      "level": 2,
+      "title": "편집 중 부착"
     },
     {
       "id": "b000060",
@@ -462,7 +462,7 @@
       "kind": "paragraph",
       "start_line": 68,
       "end_line": 68,
-      "raw": "반환값은 추가한 메시 ID와 스킨 전사 보고서이다. `templateProgram()`은 현재 본체 템플릿의 참조를 반환한다. 새 메시의 머티리얼 ID는 중립 템플릿과 현재 결과에 존재하는 슬롯을 사용해야 한다. 메시 자체의 재질·UV·조형·모프는 별도의 편집 자료로 유지한다. 이 API는 물리적인 천 시뮬레이션·충돌 제거·재단·최종 의상 품질을 판정하는 기능이 아니다.\n"
+      "raw": "`Object3DEditor::attachSurface`는 현재 모양에 맞춘 메시를 받아 스킨과 표면 연결을 생성하고 새로운 본체 템플릿을 만든다. 이미 적용한 파라미터·몸 조형을 중립 상태로 환산하여 등록하므로, 다음 파라미터 변경 때 이전 몸 조형이 중복 적용되지 않는다. 기존 계층과 편집 이력을 유지하며, 부착 이전의 메시 수·템플릿으로 undo하고 다시 redo할 수 있다. 일반 스냅샷 편집기에도 생성 타깃이 없는 본체 템플릿을 만들어 같은 경로를 사용한다.\n"
     },
     {
       "id": "b000062",
@@ -476,7 +476,7 @@
       "kind": "paragraph",
       "start_line": 70,
       "end_line": 70,
-      "raw": "`Object3DEditor::replaceTemplateSurfaces`는 같은 엔진의 대체 템플릿에서 기존 표면 슬롯을 교체하고, 선택한 원본 메시의 가림 상태를 바꾼다. 메시 수·본 ID·유지 대상의 작성용 연결과 남은 면의 삼각형 구성이 같아야 한다. 교체 대상은 단일 전용 재질과 대응하는 전용 이미지 슬롯을 사용해야 하며, 편집·선택·다른 추종/맞춤에 사용 중이면 거부한다. 접지 메시의 표시 점이 바뀌면 기존 접지에 사용한 원본 점 집합을 템플릿에 명시하여 체형 조절 시에도 위치 기준을 보존한다. 기존 몸의 편집은 유지하고 새 표면의 기준 위치를 원본에 맞춘 다음 현재 편집 결과의 스킨 가중치·스키닝 프로필을 전사한다. 이력은 하나의 단계로 게시한다. 인체 카탈로그별 검사는 [인체 부속 선택](HumanAccessories.md)을 따른다.\n"
+      "raw": "반환값은 추가한 메시 ID와 스킨 전사 보고서이다. `templateProgram()`은 현재 본체 템플릿의 참조를 반환한다. 새 메시의 머티리얼 ID는 중립 템플릿과 현재 결과에 존재하는 슬롯을 사용해야 한다. 메시 자체의 재질·UV·조형·모프는 별도의 편집 자료로 유지한다. 이 API는 물리적인 천 시뮬레이션·충돌 제거·재단·최종 의상 품질을 판정하는 기능이 아니다.\n"
     },
     {
       "id": "b000064",
@@ -490,7 +490,7 @@
       "kind": "paragraph",
       "start_line": 72,
       "end_line": 72,
-      "raw": "`Object3DEditor::removeTemplateSurfaces`는 추종 표면을 제거하고 뒤에 남은 메시의 편집 계층·마스크·선택과 템플릿 참조를 원래 순서로 다시 연결한다. 제거 표면이 타깃·관절·접지·남은 추종 표면·자동 맞춤에 필요하면 거부한다. 선택한 표시 메시에서 삼각형 프레임 추종의 원래 폴리곤과 코너가 남아 있으면 새 렌더 인덱스로 다시 연결하고, 기준 삼각형 자체가 가려지면 거부한다. 이 규칙은 위의 표면 교체에도 적용한다. 제거할 표면의 직접 편집·마스크·선택을 현재 상태에서 버리는 것은 `TemplateSurfaceRemovalOptions::discardRemovedEdits`를 명시할 때만 가능하다. 이전 이력에는 남는다. 재질·이미지는 제거하지 않으며 해당 참조의 정리는 별도 작업이다.\n"
+      "raw": "`Object3DEditor::replaceTemplateSurfaces`는 같은 엔진의 대체 템플릿에서 기존 표면 슬롯을 교체하고, 선택한 원본 메시의 가림 상태를 바꾼다. 메시 수·본 ID·유지 대상의 작성용 연결과 남은 면의 삼각형 구성이 같아야 한다. 교체 대상은 단일 전용 재질과 대응하는 전용 이미지 슬롯을 사용해야 하며, 편집·선택·다른 추종/맞춤에 사용 중이면 거부한다. 접지 메시의 표시 점이 바뀌면 기존 접지에 사용한 원본 점 집합을 템플릿에 명시하여 체형 조절 시에도 위치 기준을 보존한다. 기존 몸의 편집은 유지하고 새 표면의 기준 위치를 원본에 맞춘 다음 현재 편집 결과의 스킨 가중치·스키닝 프로필을 전사한다. 이력은 하나의 단계로 게시한다. 인체 카탈로그별 검사는 [인체 부속 선택](HumanAccessories.md)을 따른다.\n"
     },
     {
       "id": "b000066",
@@ -504,7 +504,7 @@
       "kind": "paragraph",
       "start_line": 74,
       "end_line": 74,
-      "raw": "`Object3DEditor::addTemplateSurfaces`는 같은 엔진의 대체 템플릿에서 새 추종 표면을 삽입한다. 새 슬롯 번호는 대체 템플릿 기준이며 표시 변경 슬롯은 기존 템플릿 기준이다. 기존 메시 순서와 점 ID를 유지하고 편집 계층·마스크·선택·타깃·관절·표면·맞춤의 메시 번호를 다시 연결한다. 새 표면의 원본 의존 관계는 순서대로 맞추고 현재 원본의 스킨을 전사한다. 중립 원본 위치가 다르거나 추가 표면이 기존 타깃·앵커·접지 기반으로 쓰이면 실패한다. 여러 재질과 공유 이미지의 참조를 보존하며 이력의 재질·이미지 배열을 같은 슬롯으로 맞춘다. 원본 명칭이 이미 다른 자원에 쓰이면 새 이름을 생성하고, 이력 길이 차이로 불필요한 슬롯 채움 자원이 남을 수 있다.\n"
+      "raw": "`Object3DEditor::removeTemplateSurfaces`는 추종 표면을 제거하고 뒤에 남은 메시의 편집 계층·마스크·선택과 템플릿 참조를 원래 순서로 다시 연결한다. 제거 표면이 타깃·관절·접지·남은 추종 표면·자동 맞춤에 필요하면 거부한다. 선택한 표시 메시에서 삼각형 프레임 추종의 원래 폴리곤과 코너가 남아 있으면 새 렌더 인덱스로 다시 연결하고, 기준 삼각형 자체가 가려지면 거부한다. 이 규칙은 위의 표면 교체에도 적용한다. 제거할 표면의 직접 편집·마스크·선택을 현재 상태에서 버리는 것은 `TemplateSurfaceRemovalOptions::discardRemovedEdits`를 명시할 때만 가능하다. 이전 이력에는 남는다. 재질·이미지는 제거하지 않으며 해당 참조의 정리는 별도 작업이다.\n"
     },
     {
       "id": "b000068",
@@ -515,12 +515,10 @@
     },
     {
       "id": "b000069",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 76,
       "end_line": 76,
-      "raw": "## 저장과 외부 교환\n",
-      "level": 2,
-      "title": "저장과 외부 교환"
+      "raw": "표면 교체·추가·제거는 내부 토폴로지 책임이 유지 메시와 가시성을 비교하고 접지점과 삼각형 추종점을 보존한다. 가려진 기준 삼각형 등으로 재연결이 실패하면 입력 연결은 변경되지 않는다. 이 계산은 편집 세션을 소유하지 않으며 사용자가 호출하는 API는 기존 `Object3DEditor` 경로다.\n"
     },
     {
       "id": "b000070",
@@ -534,43 +532,199 @@
       "kind": "paragraph",
       "start_line": 78,
       "end_line": 78,
-      "raw": "`.ii3dproject` 버전 2는 표면 연결을 템플릿 정의에 저장한다. 버전 1의 연결 없는 프로젝트도 읽고 다시 편집할 수 있다. 결과의 메시·스킨은 FBX·GLB로 내보내며 외부 앱에서 표면 연결 그래프가 그대로 복원된다고 간주하지 않는다. SDK의 생성·편집을 이어갈 때는 자체 프로젝트를 사용한다. 추가 의상 메시를 원래 DNA 문서의 원본 메시로 간주하지 않으며 기존 DNA 직렬화의 원본 식별 규약을 따른다.\n"
+      "raw": "슬롯 선택과 골격 이름·부모의 일치 여부는 내부 `Object3DTemplateSurfaceSlots` 계획기가 먼저 검사한다. 추가·제거의 유지 슬롯 대응은 기존 순서를 보존하는 양방향 인덱스 자료로 반환한다. 계획기는 슬롯 수와 골격 배열을 빌려 읽고 편집기나 에셋을 소유하지 않는다. 레이어·선택·표면 연결의 변경과 엔진 게시, 실패 시 임시 자원 정리는 편집 조정자의 책임으로 남는다.\n"
     },
     {
       "id": "b000072",
-      "kind": "heading",
+      "kind": "blank",
       "start_line": 79,
       "end_line": 79,
+      "raw": "\n"
+    },
+    {
+      "id": "b000073",
+      "kind": "paragraph",
+      "start_line": 80,
+      "end_line": 80,
+      "raw": "`Object3DTemplateSurfaceEditRemap`은 슬롯 계획을 사용하여 편집 보정, 레이어 마스크와 이름 있는 선택의 메시 인덱스를 다시 연결한다. 기존 불변 자료를 변경하지 않으며, 변화가 없으면 원래 공유 참조를 유지한다. 추가 시 재질이나 이미지 슬롯을 조정해야 하는 보정은 별도 사본으로 준비한다. 제거할 표면에 편집·마스크·선택이 있는 경우의 거부와 명시적인 폐기 옵션은 그대로 적용한다. 이 내부 처리기는 대응 배열과 제거 집합을 빌려 쓰므로 호출자는 처리기보다 오래 유지하고 그동안 변경하지 않아야 한다.\n"
+    },
+    {
+      "id": "b000074",
+      "kind": "blank",
+      "start_line": 81,
+      "end_line": 81,
+      "raw": "\n"
+    },
+    {
+      "id": "b000075",
+      "kind": "paragraph",
+      "start_line": 82,
+      "end_line": 82,
+      "raw": "`Object3DTemplateSurfaceReferences`는 타깃·관절 앵커·접지·추종 연결·맞춤 규칙의 슬롯 검증과 재연결을 별도 값 처리로 담당한다. 가시성이 바뀌면 기존 토폴로지 처리기에 추종 삼각형 재연결을 위임한다. 이 처리기의 결과는 임시 템플릿에 반영되며, 입력을 이동해 넘긴 호출은 실패 시에도 그 입력을 소비한다. 새 에셋과 편집 이력을 엔진에 게시하는 책임은 편집기에 남는다.\n"
+    },
+    {
+      "id": "b000076",
+      "kind": "blank",
+      "start_line": 83,
+      "end_line": 83,
+      "raw": "\n"
+    },
+    {
+      "id": "b000077",
+      "kind": "paragraph",
+      "start_line": 84,
+      "end_line": 84,
+      "raw": "새 추종 표면의 의존 순서, 유지 원본의 중립 메시 확인과 현재 스킨 가중치·프로필 전사는 `Object3DTemplateSurfaceFollowers`가 담당한다. 몸→의상→외투처럼 의존하는 표면은 원본이 준비된 순서대로 처리하며 순환은 거부한다. 실제 맞춤과 전사는 `TemplateSurfaceFollowerOperations` 인터페이스에 위임하고 기본 구현은 별도 네이티브 처리기가 제공한다. 호출자는 입력을 유지하고 결과용 임시 메시를 제공해야 한다. 실패 시 임시 메시에는 부분 결과가 남을 수 있지만 편집기는 이를 버리므로 게시된 객체와 이력은 바뀌지 않는다.\n"
+    },
+    {
+      "id": "b000078",
+      "kind": "blank",
+      "start_line": 85,
+      "end_line": 85,
+      "raw": "\n"
+    },
+    {
+      "id": "b000079",
+      "kind": "paragraph",
+      "start_line": 86,
+      "end_line": 86,
+      "raw": "표면 교체 때 전용 재질과 이미지의 공유 여부와 슬롯 대응은 내부 `Object3DTemplateSurfaceReplacementResources`가 계획한다. 입력 에셋은 변경하지 않고 교체 결과를 값으로 보관한다. 호출자는 계획을 사용하는 동안 두 입력을 유지해야 하며, 검사 실패 시 부분 결과가 있는 계획을 버린다. 실제 에셋·이력에 반영하는 일은 편집 조정자가 담당한다.\n"
+    },
+    {
+      "id": "b000080",
+      "kind": "blank",
+      "start_line": 87,
+      "end_line": 87,
+      "raw": "\n"
+    },
+    {
+      "id": "b000081",
+      "kind": "paragraph",
+      "start_line": 88,
+      "end_line": 88,
+      "raw": "`Object3DTemplateSurfaceReplacementLayers`는 교체 계획과 기존 편집 스냅샷을 비교해 재질·이미지 충돌을 검사하고 갱신 결과를 준비한다. 갱신할 자원 배열이 없으면 기존 공유 참조를 유지하고, 해당 배열이 있으면 사본을 만든다. 실패해도 입력 스냅샷은 그대로이며 호출자가 결과 게시를 맡는다.\n"
+    },
+    {
+      "id": "b000082",
+      "kind": "blank",
+      "start_line": 89,
+      "end_line": 89,
+      "raw": "\n"
+    },
+    {
+      "id": "b000083",
+      "kind": "paragraph",
+      "start_line": 90,
+      "end_line": 90,
+      "raw": "`Object3DTemplateSurfaceMeshes`는 슬롯 계획을 따라 유지·신규 메시를 기존 순서로 조립하고 가시성이 바뀐 유지 메시에는 원래 재질 배정을 보존한 레이아웃을 적용한다. 교체 메시에는 기존 재질 슬롯을 적용하며 작성된 탄젠트가 재질 번호에 의존하는 경우 번호 변경을 거부한다. 입력 메시를 수정하지 않고 결과를 반환한다. 호출자는 가시성에 대한 토폴로지 호환성과 교체 메시의 단일 재질 조건을 먼저 검증한다.\n"
+    },
+    {
+      "id": "b000084",
+      "kind": "blank",
+      "start_line": 91,
+      "end_line": 91,
+      "raw": "\n"
+    },
+    {
+      "id": "b000085",
+      "kind": "paragraph",
+      "start_line": 92,
+      "end_line": 92,
+      "raw": "`Object3DTemplateSurfaceMaterialRouting`은 유지 메시의 재질 대응과 추가 메시의 재질 번호 변경을 담당하고 재질·이미지의 실제 배정은 교체 가능한 매퍼 인터페이스에 위임한다. 기본 어댑터는 기존 자원 처리기를 사용한다. 처리 중 실패하면 매퍼와 임시 메시에는 부분 결과가 남을 수 있으므로 편집기는 이를 버리고 기존 에셋과 이력을 보존한다.\n"
+    },
+    {
+      "id": "b000086",
+      "kind": "blank",
+      "start_line": 93,
+      "end_line": 93,
+      "raw": "\n"
+    },
+    {
+      "id": "b000087",
+      "kind": "paragraph",
+      "start_line": 94,
+      "end_line": 94,
+      "raw": "표면 추가 중 재질·이미지 슬롯의 대응과 배열 길이 정렬은 별도 내부 자원 처리기가 맡는다. 처리기는 임시 기본 자료와 편집 계층 자원 배열을 빌려 쓰며, 실패 시 편집기가 이 임시 자료를 버리고 성공한 결과만 게시한다. 호출자는 빌려 준 배열을 처리기 사용 중 유지해야 한다. 레이아웃이 없는 토폴로지는 교체에 사용할 수 없다.\n"
+    },
+    {
+      "id": "b000088",
+      "kind": "blank",
+      "start_line": 95,
+      "end_line": 95,
+      "raw": "\n"
+    },
+    {
+      "id": "b000089",
+      "kind": "paragraph",
+      "start_line": 96,
+      "end_line": 96,
+      "raw": "`Object3DEditor::addTemplateSurfaces`는 같은 엔진의 대체 템플릿에서 새 추종 표면을 삽입한다. 새 슬롯 번호는 대체 템플릿 기준이며 표시 변경 슬롯은 기존 템플릿 기준이다. 기존 메시 순서와 점 ID를 유지하고 편집 계층·마스크·선택·타깃·관절·표면·맞춤의 메시 번호를 다시 연결한다. 새 표면의 원본 의존 관계는 순서대로 맞추고 현재 원본의 스킨을 전사한다. 중립 원본 위치가 다르거나 추가 표면이 기존 타깃·앵커·접지 기반으로 쓰이면 실패한다. 여러 재질과 공유 이미지의 참조를 보존하며 이력의 재질·이미지 배열을 같은 슬롯으로 맞춘다. 원본 명칭이 이미 다른 자원에 쓰이면 새 이름을 생성하고, 이력 길이 차이로 불필요한 슬롯 채움 자원이 남을 수 있다.\n"
+    },
+    {
+      "id": "b000090",
+      "kind": "blank",
+      "start_line": 97,
+      "end_line": 97,
+      "raw": "\n"
+    },
+    {
+      "id": "b000091",
+      "kind": "heading",
+      "start_line": 98,
+      "end_line": 98,
+      "raw": "## 저장과 외부 교환\n",
+      "level": 2,
+      "title": "저장과 외부 교환"
+    },
+    {
+      "id": "b000092",
+      "kind": "blank",
+      "start_line": 99,
+      "end_line": 99,
+      "raw": "\n"
+    },
+    {
+      "id": "b000093",
+      "kind": "paragraph",
+      "start_line": 100,
+      "end_line": 100,
+      "raw": "`.ii3dproject` 버전 2는 표면 연결을 템플릿 정의에 저장한다. 버전 1의 연결 없는 프로젝트도 읽고 다시 편집할 수 있다. 결과의 메시·스킨은 FBX·GLB로 내보내며 외부 앱에서 표면 연결 그래프가 그대로 복원된다고 간주하지 않는다. SDK의 생성·편집을 이어갈 때는 자체 프로젝트를 사용한다. 추가 의상 메시를 원래 DNA 문서의 원본 메시로 간주하지 않으며 기존 DNA 직렬화의 원본 식별 규약을 따른다.\n"
+    },
+    {
+      "id": "b000094",
+      "kind": "heading",
+      "start_line": 101,
+      "end_line": 101,
       "raw": "# 외부 절대 위치의 역산\n",
       "level": 1,
       "title": "외부 절대 위치의 역산"
     },
     {
-      "id": "b000073",
+      "id": "b000095",
       "kind": "blank",
-      "start_line": 80,
-      "end_line": 80,
+      "start_line": 102,
+      "end_line": 102,
       "raw": "\n"
     },
     {
-      "id": "b000074",
+      "id": "b000096",
       "kind": "paragraph",
-      "start_line": 81,
-      "end_line": 81,
+      "start_line": 103,
+      "end_line": 103,
       "raw": "`unapplyMeshSurfaceBindings`는 최종 위치에서 표면 추종 변위를 빼는 본체 함수이다. 모든 source 프레임은 입력의 최종 자료에서 읽고, 대상에는 복사본을 수정하여 성공할 때만 반영한다. 따라서 몸→셔츠→코트 같은 DAG에도 순서에 따른 중복 보정 없이 적용한 결과를 역산할 수 있다. 외부 앱의 절대 편집 결과를 레이어로 흡수하는 [외부 편집](ExternalEdits.md) 경로에서 사용한다.\n"
     },
     {
-      "id": "b000075",
+      "id": "b000097",
       "kind": "blank",
-      "start_line": 82,
-      "end_line": 83,
+      "start_line": 104,
+      "end_line": 105,
       "raw": "\n\n"
     },
     {
-      "id": "b000076",
+      "id": "b000098",
       "kind": "paragraph",
-      "start_line": 84,
-      "end_line": 84,
+      "start_line": 106,
+      "end_line": 106,
       "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
     }
   ],
@@ -600,44 +754,44 @@
       "start_line": 11
     },
     {
-      "block_id": "b000039",
+      "block_id": "b000041",
       "parent_id": "b000001",
       "level": 2,
       "title": "대칭 가중치",
       "anchor": "대칭-가중치",
-      "start_line": 46
+      "start_line": 48
     },
     {
-      "block_id": "b000045",
+      "block_id": "b000047",
       "parent_id": "b000001",
       "level": 2,
       "title": "의상과 부속 메시의 추종",
       "anchor": "의상과-부속-메시의-추종",
-      "start_line": 52
+      "start_line": 54
     },
     {
-      "block_id": "b000057",
+      "block_id": "b000059",
       "parent_id": "b000001",
       "level": 2,
       "title": "편집 중 부착",
       "anchor": "편집-중-부착",
-      "start_line": 64
+      "start_line": 66
     },
     {
-      "block_id": "b000069",
+      "block_id": "b000091",
       "parent_id": "b000001",
       "level": 2,
       "title": "저장과 외부 교환",
       "anchor": "저장과-외부-교환",
-      "start_line": 76
+      "start_line": 98
     },
     {
-      "block_id": "b000072",
+      "block_id": "b000094",
       "parent_id": null,
       "level": 1,
       "title": "외부 절대 위치의 역산",
       "anchor": "외부-절대-위치의-역산",
-      "start_line": 79
+      "start_line": 101
     }
   ],
   "indexes": {
@@ -685,22 +839,29 @@
         "context": "paragraph"
       },
       {
-        "block_id": "b000043",
-        "line": 50,
+        "block_id": "b000039",
+        "line": 46,
+        "text": "표면 위치의 연결·평가·복원만 사용하는 코드는 `SurfaceBindingCore.h`를 포함한다. 스킨 가중치 전달이나 표면 부착 옵션이 필요하면 `SurfaceAttachment.h`를 포함한다. 기존 `SurfaceBinding.h`는 두 인터페이스와 기존 자료 선언을 제공한다. 템플릿·프록시 등 다른 헤더를 통한 간접 포함에 의존했던 코드는 사용하는 인터페이스를 직접 포함해야 한다. 이는 API와 구현의 책임을 나눈 것이며 별도 배포 가능한 라이브러리를 추가한 것은 아니다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000045",
+        "line": 52,
         "text": "`planeNormal`은 정규화하며 `planeOffset`은 정규화된 법선 방향의 거리이다. `negativeToPositive`로 방향을 선택한다. 중앙 허용 거리 안의 점과 원본 쪽 점은 유지한다. 반대편 표면이 없는 경우 자기 쪽 표면을 잘못 복사하지 않는다. 거리·영향 수·사용하지 않는 점의 처리 규약은 일반 전사와 같다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000051",
-        "line": 58,
+        "block_id": "b000053",
+        "line": 60,
         "text": "확장 오버로드의 `SurfaceBindingLimits::additionalPoints`는 보이지 않는 대상 원본 점을 명시적으로 포함한다. 같은 구조의 `maximumVertices`, `maximumTriangles`, `maximumPoints`, `maximumNodeVisits`, `maximumTriangleTests`는 단일 바인딩의 크기와 표면 질의량을 제한한다. 기존 `SurfaceBindingOptions`와 기존 오버로드는 유지하며, 기존 오버로드는 종전처럼 별도의 작업량 한도를 적용하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000061",
-        "line": 68,
+        "block_id": "b000063",
+        "line": 70,
         "text": "반환값은 추가한 메시 ID와 스킨 전사 보고서이다. `templateProgram()`은 현재 본체 템플릿의 참조를 반환한다. 새 메시의 머티리얼 ID는 중립 템플릿과 현재 결과에 존재하는 슬롯을 사용해야 한다. 메시 자체의 재질·UV·조형·모프는 별도의 편집 자료로 유지한다. 이 API는 물리적인 천 시뮬레이션·충돌 제거·재단·최종 의상 품질을 판정하는 기능이 아니다.",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -708,6 +869,27 @@
       {
         "block_id": "b000071",
         "line": 78,
+        "text": "슬롯 선택과 골격 이름·부모의 일치 여부는 내부 `Object3DTemplateSurfaceSlots` 계획기가 먼저 검사한다. 추가·제거의 유지 슬롯 대응은 기존 순서를 보존하는 양방향 인덱스 자료로 반환한다. 계획기는 슬롯 수와 골격 배열을 빌려 읽고 편집기나 에셋을 소유하지 않는다. 레이어·선택·표면 연결의 변경과 엔진 게시, 실패 시 임시 자원 정리는 편집 조정자의 책임으로 남는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000077",
+        "line": 84,
+        "text": "새 추종 표면의 의존 순서, 유지 원본의 중립 메시 확인과 현재 스킨 가중치·프로필 전사는 `Object3DTemplateSurfaceFollowers`가 담당한다. 몸→의상→외투처럼 의존하는 표면은 원본이 준비된 순서대로 처리하며 순환은 거부한다. 실제 맞춤과 전사는 `TemplateSurfaceFollowerOperations` 인터페이스에 위임하고 기본 구현은 별도 네이티브 처리기가 제공한다. 호출자는 입력을 유지하고 결과용 임시 메시를 제공해야 한다. 실패 시 임시 메시에는 부분 결과가 남을 수 있지만 편집기는 이를 버리므로 게시된 객체와 이력은 바뀌지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000087",
+        "line": 94,
+        "text": "표면 추가 중 재질·이미지 슬롯의 대응과 배열 길이 정렬은 별도 내부 자원 처리기가 맡는다. 처리기는 임시 기본 자료와 편집 계층 자원 배열을 빌려 쓰며, 실패 시 편집기가 이 임시 자료를 버리고 성공한 결과만 게시한다. 호출자는 빌려 준 배열을 처리기 사용 중 유지해야 한다. 레이아웃이 없는 토폴로지는 교체에 사용할 수 없다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000093",
+        "line": 100,
         "text": "`.ii3dproject` 버전 2는 표면 연결을 템플릿 정의에 저장한다. 버전 1의 연결 없는 프로젝트도 읽고 다시 편집할 수 있다. 결과의 메시·스킨은 FBX·GLB로 내보내며 외부 앱에서 표면 연결 그래프가 그대로 복원된다고 간주하지 않는다. SDK의 생성·편집을 이어갈 때는 자체 프로젝트를 사용한다. 추가 의상 메시를 원래 DNA 문서의 원본 메시로 간주하지 않으며 기존 DNA 직렬화의 원본 식별 규약을 따른다.",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -737,32 +919,32 @@
         "line": 15
       },
       {
-        "block_id": "b000049",
+        "block_id": "b000051",
         "label": "템플릿 적응",
         "target": "TemplateAdapt.md",
         "kind": "relative",
-        "line": 56
+        "line": 58
       },
       {
-        "block_id": "b000063",
+        "block_id": "b000065",
         "label": "인체 부속 선택",
         "target": "HumanAccessories.md",
         "kind": "relative",
-        "line": 70
+        "line": 72
       },
       {
-        "block_id": "b000074",
+        "block_id": "b000096",
         "label": "외부 편집",
         "target": "ExternalEdits.md",
         "kind": "relative",
-        "line": 81
+        "line": 103
       },
       {
-        "block_id": "b000076",
+        "block_id": "b000098",
         "label": "얼굴 부속·이미지 연결",
         "target": "FaceAssets.md",
         "kind": "relative",
-        "line": 84
+        "line": 106
       }
     ],
     "tables": []

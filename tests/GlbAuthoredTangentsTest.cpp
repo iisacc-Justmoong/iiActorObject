@@ -128,6 +128,20 @@ std::vector<std::uint8_t> output(std::string_view mode)
     if(mode=="source")return fixture();
     if(mode=="flat_source")return flatFixture();
     if(mode=="skin_export")return skinnedFixtureExport();
+    if(mode=="identity_roundtrip"||mode=="identity_skin_roundtrip")
+    {
+        const bool skinned=mode=="identity_skin_roundtrip";
+        const auto input=output(skinned?"skin_export":"export");
+        Object3DEngine engine;const auto restored=importObject3DGlb(engine.reference(),input);
+        const auto &mesh=restored.object.get().data().meshes.at(0);CHECK(mesh.topology);
+        const auto &points=mesh.topology->points;
+        if(skinned)
+        {
+            CHECK(points.size()==6&&points[4].position==Vector3({4,4,4})&&points[5].weights.empty());
+        }
+        else CHECK(points.size()==4&&points[3].position==Vector3({-10,15,5}));
+        return exportObject3DGlb(restored.object.get());
+    }
     const bool fbx=mode.starts_with("fbx_");
     NormalResolver resolver;GlbImportOptions options;options.imageResolver=&resolver;
     auto input=mode=="flat_export"?flatFixture():(fbx&&mode!="fbx_unbound"?mappedFixture():fixture());

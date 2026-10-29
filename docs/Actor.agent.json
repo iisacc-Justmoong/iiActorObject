@@ -10,8 +10,8 @@
   },
   "source": {
     "path": "docs/Actor.md",
-    "sha256": "cc2115581c2e260ee344feb17506c2464a72e639bd28bef4a8a07e7a3c3d1aad",
-    "bytes": 11814,
+    "sha256": "a1f19bc3d9dcfdb478068a5625880e2ba7af3ee3ab070a1de64d1e1f21ca52f5",
+    "bytes": 11874,
     "line_count": 151,
     "encoding": "utf-8",
     "language": "ko"
@@ -191,7 +191,7 @@
       "kind": "paragraph",
       "start_line": 28,
       "end_line": 28,
-      "raw": "캐릭터 구성·재생·리깅과 실제 참조 소스는 [iiCharacter 문서](Character.md)를 따른다. 헤더와 구현은 모두 `src/iiActorObject/`에 함께 둔다.\n"
+      "raw": "캐릭터 구성·재생·리깅과 실제 참조 소스는 [iiCharacter 문서](Character.md)를 따른다. 헤더와 구현은 모두 `src/Runtime/`을 비롯한 책임별 디렉터리에 함께 둔다.\n"
     },
     {
       "id": "b000018",
@@ -725,7 +725,7 @@
       "kind": "paragraph",
       "start_line": 149,
       "end_line": 149,
-      "raw": "공개 헤더와 구현은 `src/iiActorObject/`에 함께 둔다. 작성 소스를 별도 `include/`에 모으지 않는다. 기존 `#include` 이름과 CMake 타깃은 유지하며, 설치 과정에서 공개 헤더만 설치본의 include 디렉터리에 배치한다. 생성 export 헤더는 `build/`에 둔다.\n"
+      "raw": "공개 헤더와 구현은 `src/Runtime/`을 비롯한 책임별 디렉터리에 함께 둔다. 작성 소스를 별도 `include/`에 모으지 않는다. 기존 `#include` 이름과 CMake 타깃은 유지하며, 설치 과정에서 공개 헤더만 설치본의 include 디렉터리에 배치한다. 생성 export 헤더는 `build/`에 둔다.\n"
     },
     {
       "id": "b000084",

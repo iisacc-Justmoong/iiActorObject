@@ -35,6 +35,9 @@ void shapes()
     const auto rectangle=selectMeshPointsOnScreen(object.get(),view(),MeshScreenRectangle{{15,25},{25,115}});
     CHECK(rectangle.masks.size()==1&&rectangle.masks[0].weights==std::vector<double>({1,0,0,1,0,0}));
     CHECK(rectangle.selectedPoints==2&&rectangle.skippedUnusedPoints==2);
+    const auto fromData=selectMeshPointsOnScreen(object.get().data(),view(),MeshScreenRectangle{{15,25},{25,115}});
+    CHECK(fromData.masks==rectangle.masks&&fromData.selectedPoints==rectangle.selectedPoints&&
+          fromData.skippedUnusedPoints==rectangle.skippedUnusedPoints);
     const auto circle=selectMeshPointsOnScreen(object.get(),view(),MeshScreenCircle{{20,30},4});
     CHECK(circle.masks[0].weights==std::vector<double>({0,0,0,1,0,0}));
     const std::array polygon{MeshScreenPoint{10,20},MeshScreenPoint{30,20},

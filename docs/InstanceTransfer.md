@@ -4,6 +4,8 @@
 
 `transferObject3DInstance`는 원본 에셋과 그 에셋의 `iiCharacter`, 새 에셋을 받아 새 액터를 준비한다. 원본 에셋·액터와 새 에셋은 수정하지 않는다. 포즈, 현재 모프 값, 재생 중인 클립과 시간·재생 속도·반복 방식·일시 정지 상태, 액터 변환·이름·태그와 보존되는 메시 컴포넌트 설정을 옮긴다. 본체 iiActorObject의 기능이며 NSCharacter는 본체 에셋 참조를 제공한다.
 
+액터 상태만 이전하는 코드는 `Object3DInstanceTransferCore.h`를 포함한다. 편집 중인 에셋의 리그 동기화까지 함께 수행하는 호출은 `Object3DEditorInstanceTransfer.h`를 포함한다. 기존 `Object3DInstanceTransfer.h`도 두 호출을 계속 제공한다. 관절 ID 정책은 독립된 `Object3DJointIdentity.h`에서 공유하며, 상태 이전은 편집기를 소유하지 않는다.
+
 ```cpp
 #include <iiActorObject/Object3DInstanceTransfer.h>
 
@@ -42,5 +44,7 @@ auto currentRigs = rigs.rigs();
 현재 LOD의 인스턴스별 이중 사원수 혼합 가중치는 렌더 점 대응이 확인될 때만 옮긴다. 원본 토폴로지가 있으면 원본·layout·렌더 연결을 비교한다. 토폴로지가 없는 별도 에셋은 순서별 위치가 같고 중복 위치가 없어야 한다. 같은 에셋의 동일 메시는 직접 대응한다. 확인할 수 없으면 기본적으로 거부하며 `discardIncompatibleSkinOverrides`는 이를 명시적으로 제외한다. 에셋의 기본 스키닝 프로필은 대상 에셋의 것을 사용한다.
 
 원본 에셋에 속하지 않는 사용자 컴포넌트, 중복 메시 컴포넌트 또는 사용자 정의 하위 클래스는 기본적으로 거부한다. `discardExtraComponents`를 선택하면 이를 제외한다. 유지되는 메시의 부모가 제외되면 새 루트에 붙이되 기존 월드 변환을 TRS로 보존할 수 없는 경우에는 거부한다. `Object3DInstanceTransferReport`는 유지·추가·제거·생략한 메시, 복사·제외한 모프와 스킨 override, 제외한 컴포넌트와 재연결 수, 클립·변형 바인드 처리를 나타낸다.
+
+기본 메시 컴포넌트의 정확한 동적 타입을 확인할 때 동일한 타입 정보 객체는 직접 식별하고, 서로 다른 타입 정보 객체는 표준 타입 비교로 판정한다. 이는 macOS의 정적 연결에서 공개 범위가 다른 코드 사이에도 기본 컴포넌트를 보존하기 위한 처리다. 사용자 정의 하위 클래스를 기본 컴포넌트로 취급하지 않는 정책은 그대로다.
 
 이전 결과는 호스트에 새 액터를 반환하는 일회성 준비 단계이며, 자동 장면 교체나 사용자 정의 컴포넌트 복제는 제공하지 않는다. [검증 기록](InstanceTransferVerification-20261029.md)에 검사한 범위와 남은 사항을 기록한다.

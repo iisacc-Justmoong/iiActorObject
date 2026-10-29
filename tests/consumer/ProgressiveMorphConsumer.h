@@ -6,6 +6,7 @@
 #if IIACTOROBJECT_HAS_NSCHARACTER
 #include <iiActorObject/NSCharacter/CharacterInterchange.h>
 #endif
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <fstream>
@@ -38,6 +39,28 @@ inline int progressiveMorphConsumer(const char *path,const char *animationPath)
     const auto sharedFbx=exportObject3DFbxWithProgressiveMorphs(sharedRig);
     Object3DEngine sharedEngine;const auto shared=importObject3DFbxWithProgressiveMorphs(sharedEngine.reference(),sharedFbx.bytes);
     if(!shared.rig.valid()||inspectObject3DProgressiveMorphRig(shared.rig).channels[0].sourceMeshes.size()!=2)return 12;
+    auto distinct=imported.asset.object.get().data();auto second=distinct.meshes[0];second.name="Face2";
+    if(!second.topology)return 22;
+    second.topology->points[0].position.z=.2;
+    const auto near=std::find_if(second.topology->morphTargets.begin(),second.topology->morphTargets.end(),
+        [&](const auto &target){return target.name==info.channels[0].keys[2].target;});
+    if(near==second.topology->morphTargets.end()||near->deltas.empty())return 23;
+    near->deltas[0].position.y=.65;distinct.meshes.push_back(std::move(second));
+    const auto distinctObject=engine.createObject(std::move(distinct));
+    const auto distinctRig=createObject3DProgressiveMorphRig(distinctObject,sharedInfo);
+    const AnimationClip sharedClip(distinctObject.get().skeleton(),1,{},
+        {{object3DProgressiveControlCurveName("Expression"),{{0,0},{1,.55}}}});
+    const auto distinctFbx=exportObject3DFbxWithProgressiveMorphs(distinctRig,sharedClip);
+    Object3DEngine distinctEngine;const auto distinctRound=importObject3DFbxWithProgressiveMorphsAndAnimations(distinctEngine.reference(),distinctFbx.bytes);
+    if(!distinctRound.rig.valid()||distinctRound.animations.size()!=1||
+       inspectObject3DProgressiveMorphRig(distinctRound.rig).channels[0].sourceMeshes.size()!=2)return 24;
+    auto distinctActor=distinctRound.asset.object.get().instantiate();std::vector<SkeletalMeshComponent *> distinctParts;
+    for(auto *component:distinctActor->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(component))distinctParts.push_back(part);
+    if(distinctParts.size()!=2)return 25;
+    applyObject3DProgressiveAnimationClip(distinctRound.rig,*distinctRound.animations[0].clip,
+        distinctRound.animations[0].morphBindings,1,distinctActor->pose(),distinctParts);
+    if(std::abs(distinctParts[0]->deformedVertices()[0].position.y-.525)>2e-4||
+       std::abs(distinctParts[1]->deformedVertices()[0].position.y-.725)>2e-4)return 26;
     std::ifstream animatedStream(animationPath,std::ios::binary);if(!animatedStream)return 13;
     const std::vector<std::uint8_t> animatedBytes{std::istreambuf_iterator<char>(animatedStream),{}};
     Object3DEngine animatedEngine;

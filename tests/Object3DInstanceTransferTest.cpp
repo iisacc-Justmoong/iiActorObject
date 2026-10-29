@@ -12,6 +12,11 @@ using namespace iiActorObject;
 #define CHECK(x) do{if(!(x))throw std::runtime_error(#x);}while(false)
 template<class F>void rejects(F action){bool failed=false;try{action();}catch(const std::exception&){failed=true;}CHECK(failed);}
 bool near(double a,double b){return std::abs(a-b)<1e-9;}
+class CustomMeshComponent final : public SkeletalMeshComponent
+{
+public:
+    using SkeletalMeshComponent::SkeletalMeshComponent;
+};
 void sameMatrix(const Matrix4 &a,const Matrix4 &b)
 {for(std::size_t i=0;i<16;++i)CHECK(near(a.elements()[i],b.elements()[i]));}
 Object3DData data()
@@ -125,6 +130,15 @@ void safeguards()
     rejects([&]{(void)transferObject3DInstance(source,*second,source,invalid);});
     auto destroyed=source.get().instantiate();CHECK(destroyed->destroy());
     rejects([&]{(void)transferObject3DInstance(source,*destroyed,source);});
+    // A custom subclass using the original mesh and pose is still not a
+    // built-in component; its custom state must never be silently dropped.
+    auto custom=source.get().instantiate();auto &originalBody=part(*custom,"Body");CHECK(custom->removeComponent(originalBody));
+    auto borrowedPose=std::shared_ptr<Pose>(&custom->pose(),[](Pose *){});
+    custom->createComponent<CustomMeshComponent>(source.get().meshes()[0],std::move(borrowedPose),"Body");
+    rejects([&]{(void)transferObject3DInstance(source,*custom,source);});
+    Object3DInstanceTransferOptions dropCustom;dropCustom.discardExtraComponents=true;
+    const auto withoutCustom=transferObject3DInstance(source,*custom,source,dropCustom);
+    CHECK(withoutCustom.report.discardedComponents==1&&withoutCustom.report.suppressedMeshes==1);
 }
 void deformationBind()
 {

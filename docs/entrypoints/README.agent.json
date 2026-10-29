@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "README.md",
-    "sha256": "e3057d428081202b51e4dc6361d9dd8282f34ab84e7586c0636735767647de59",
-    "bytes": 48957,
-    "line_count": 606,
+    "sha256": "6ed22dd3b3c58d58fa740db7ba729aba72c0a36ec8b6de3e7183941f94b090f4",
+    "bytes": 50888,
+    "line_count": 632,
     "encoding": "utf-8",
     "language": "en"
   },
@@ -128,241 +128,283 @@
       "id": "b000015",
       "kind": "paragraph",
       "start_line": 31,
-      "end_line": 31,
-      "raw": "The 3D core also supports static objects and can be built without NSCharacter:\n"
+      "end_line": 38,
+      "raw": "The human layer builds as the `iiActorObjectNSCharacter` object target and is\nincluded in the existing SDK library; it is not a separately deployed library.\nLow-level transforms and mesh data validation build as `iiActorObjectFoundation`,\nan object target that can be tested without linking the engine library. It is\nincluded in the existing SDK library rather than distributed separately.\nThe [responsibility map](resources/architecture/ResponsibilityMap.json) inventories\nthe implemented source by owner and responsibility. The [separation report](docs/ResponsibilitySeparation-20261029.md)\ndescribes the extracted components, architectural checks, and remaining core coupling.\n"
     },
     {
       "id": "b000016",
       "kind": "blank",
-      "start_line": 32,
-      "end_line": 32,
+      "start_line": 39,
+      "end_line": 39,
       "raw": "\n"
     },
     {
       "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "The 3D core also supports static objects and can be built without NSCharacter:\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
       "kind": "fenced_code",
-      "start_line": 33,
-      "end_line": 39,
+      "start_line": 42,
+      "end_line": 48,
       "raw": "```sh\ncmake -S . -B build/core-only/build -DCMAKE_BUILD_TYPE=Release \\\n  -DIIACTOROBJECT_WITH_NSCHARACTER=OFF -DBUILD_TESTING=ON\ncmake --build build/core-only/build --parallel 4\nctest --test-dir build/core-only/build --output-on-failure\nbuild/core-only/build/iiActorObjectCore3D build/object3d/Sphere.glb\n```\n",
       "language": "sh",
       "code": "cmake -S . -B build/core-only/build -DCMAKE_BUILD_TYPE=Release \\\n  -DIIACTOROBJECT_WITH_NSCHARACTER=OFF -DBUILD_TESTING=ON\ncmake --build build/core-only/build --parallel 4\nctest --test-dir build/core-only/build --output-on-failure\nbuild/core-only/build/iiActorObjectCore3D build/object3d/Sphere.glb\n",
       "closed": true
     },
     {
-      "id": "b000018",
-      "kind": "blank",
-      "start_line": 40,
-      "end_line": 40,
-      "raw": "\n"
-    },
-    {
-      "id": "b000019",
-      "kind": "paragraph",
-      "start_line": 41,
-      "end_line": 41,
-      "raw": "See [core ownership and lifetime contracts](docs/Object3DEngine.md).\n"
-    },
-    {
       "id": "b000020",
       "kind": "blank",
-      "start_line": 42,
-      "end_line": 42,
+      "start_line": 49,
+      "end_line": 49,
       "raw": "\n"
     },
     {
       "id": "b000021",
-      "kind": "heading",
-      "start_line": 43,
-      "end_line": 43,
-      "raw": "## DNA and executable rigs\n",
-      "level": 2,
-      "title": "DNA and executable rigs"
+      "kind": "paragraph",
+      "start_line": 50,
+      "end_line": 50,
+      "raw": "See [core ownership and lifetime contracts](docs/Object3DEngine.md).\n"
     },
     {
       "id": "b000022",
-      "kind": "blank",
-      "start_line": 44,
-      "end_line": 44,
-      "raw": "\n"
-    },
-    {
-      "id": "b000023",
-      "kind": "paragraph",
-      "start_line": 45,
-      "end_line": 50,
-      "raw": "The core imports DNA meshes, skeletons, skin weights and morphs and evaluates the\nreal OpenRigLogic program through a replaceable `Object3DRigDriver` interface.\n`Object3DEngine` owns rig sessions and buffers; `NSCharacter::importDna` returns\nborrowed views. Raw/GUI controls, PSD, joints, blend shapes, animated maps and\nLOD evaluation connect to the existing `iiCharacter` runtime. Named controls and\nexplicit joint remapping support editing and rebinding.\n"
-    },
-    {
-      "id": "b000024",
       "kind": "blank",
       "start_line": 51,
       "end_line": 51,
       "raw": "\n"
     },
     {
+      "id": "b000023",
+      "kind": "heading",
+      "start_line": 52,
+      "end_line": 52,
+      "raw": "## DNA and executable rigs\n",
+      "level": 2,
+      "title": "DNA and executable rigs"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 53,
+      "end_line": 53,
+      "raw": "\n"
+    },
+    {
       "id": "b000025",
       "kind": "paragraph",
-      "start_line": 52,
-      "end_line": 54,
-      "raw": "The pinned upstream C++ sources build as C++23 without Python bindings or upstream\nbuild-time downloads. `IIACTOROBJECT_WITH_DNA=OFF` omits that backend while retaining\nthe generic rig API. NSCharacter can be omitted independently.\n"
+      "start_line": 54,
+      "end_line": 59,
+      "raw": "The core imports DNA meshes, skeletons, skin weights and morphs and evaluates the\nreal OpenRigLogic program through a replaceable `Object3DRigDriver` interface.\n`Object3DEngine` owns rig sessions and buffers; `NSCharacter::importDna` returns\nborrowed views. Raw/GUI controls, PSD, joints, blend shapes, animated maps and\nLOD evaluation connect to the existing `iiCharacter` runtime. Named controls and\nexplicit joint remapping support editing and rebinding.\n"
     },
     {
       "id": "b000026",
       "kind": "blank",
-      "start_line": 55,
-      "end_line": 55,
+      "start_line": 60,
+      "end_line": 60,
       "raw": "\n"
     },
     {
       "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 61,
+      "end_line": 63,
+      "raw": "The pinned upstream C++ sources build as C++23 without Python bindings or upstream\nbuild-time downloads. `IIACTOROBJECT_WITH_DNA=OFF` omits that backend while retaining\nthe generic rig API. NSCharacter can be omitted independently.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 64,
+      "end_line": 64,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
       "kind": "fenced_code",
-      "start_line": 56,
-      "end_line": 58,
+      "start_line": 65,
+      "end_line": 67,
       "raw": "~~~sh\nbuild/iiActorObjectDnaCharacter user-owned-character.dna build/dna/Character.fbx\n~~~\n",
       "language": "sh",
       "code": "build/iiActorObjectDnaCharacter user-owned-character.dna build/dna/Character.fbx\n",
       "closed": true
     },
     {
-      "id": "b000028",
-      "kind": "blank",
-      "start_line": 59,
-      "end_line": 59,
-      "raw": "\n"
-    },
-    {
-      "id": "b000029",
-      "kind": "paragraph",
-      "start_line": 60,
-      "end_line": 65,
-      "raw": "Core authoring topology preserves original source points, polygon/layout/UV/normal\nIDs and unused attributes independently of render vertex splits. Editing supports\nsource control points, seam-consistent skin/morph updates and polygon-neighbor\nsmoothing. Edited snapshots serialize back into DNA, including coordinated mesh\nLODs, while retaining the original bytes separately. The source template's index\nconnectivity and rig definition are validated before writing.\n"
-    },
-    {
       "id": "b000030",
       "kind": "blank",
-      "start_line": 66,
-      "end_line": 66,
+      "start_line": 68,
+      "end_line": 68,
       "raw": "\n"
     },
     {
       "id": "b000031",
       "kind": "paragraph",
-      "start_line": 67,
-      "end_line": 69,
-      "raw": "Application execution validation is excluded by the current request; production visual quality remains unfinished. No commercial sample character assets are bundled. See\n[DNA contracts](docs/DnaRig.md), [authoring topology](docs/MeshTopology.md), and\n[edited DNA serialization](docs/DnaEditing.md).\n"
+      "start_line": 69,
+      "end_line": 74,
+      "raw": "Core authoring topology preserves original source points, polygon/layout/UV/normal\nIDs and unused attributes independently of render vertex splits. Editing supports\nsource control points, seam-consistent skin/morph updates and polygon-neighbor\nsmoothing. Edited snapshots serialize back into DNA, including coordinated mesh\nLODs, while retaining the original bytes separately. The source template's index\nconnectivity and rig definition are validated before writing.\n"
     },
     {
       "id": "b000032",
       "kind": "blank",
-      "start_line": 70,
-      "end_line": 70,
+      "start_line": 75,
+      "end_line": 75,
       "raw": "\n"
     },
     {
       "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 76,
+      "end_line": 78,
+      "raw": "Application execution validation is excluded by the current request; production visual quality remains unfinished. No commercial sample character assets are bundled. See\n[DNA contracts](docs/DnaRig.md), [authoring topology](docs/MeshTopology.md), and\n[edited DNA serialization](docs/DnaEditing.md).\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 79,
+      "end_line": 79,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
       "kind": "heading",
-      "start_line": 71,
-      "end_line": 71,
+      "start_line": 80,
+      "end_line": 80,
       "raw": "## Character authoring\n",
       "level": 2,
       "title": "Character authoring"
     },
     {
-      "id": "b000034",
-      "kind": "blank",
-      "start_line": 72,
-      "end_line": 72,
-      "raw": "\n"
-    },
-    {
-      "id": "b000035",
-      "kind": "paragraph",
-      "start_line": 73,
-      "end_line": 73,
-      "raw": "Public entry point: `<iiActorObject/NSCharacter/NSCharacter.h>` or `<iiActorObject.h>`.\n"
-    },
-    {
       "id": "b000036",
       "kind": "blank",
-      "start_line": 74,
-      "end_line": 74,
+      "start_line": 81,
+      "end_line": 81,
       "raw": "\n"
     },
     {
       "id": "b000037",
       "kind": "paragraph",
-      "start_line": 75,
-      "end_line": 79,
-      "raw": "`humanJointRules` and `mapHumanJoints` resolve human roles through preserved\nsemantic tags or source bone names, check required roles and ancestry, and retain\nonly a borrowed core asset handle. `exportCc5BoneMap` writes a bone-mapping-only\n`.3dxProfile` section. It does not calibrate a T pose or establish CC5 application\ncompatibility. The `CharacterCreatorG3` preset maps common `CC_Base_` body and finger names while checking ancestry. It does not identify every CC rig variant or prove application behavior. See [humanoid characterization](docs/HumanoidCharacterization.md). [Human joint naming plans](docs/HumanJointNaming.md) apply multiple role-based names in one undoable core edit. Rebinding a rig after a rename requires its original explicit joint IDs.\n"
+      "start_line": 82,
+      "end_line": 85,
+      "raw": "Public entry point: `<iiActorObject/NSCharacter/NSCharacter.h>` or `<iiActorObject.h>`.\nFocused template interfaces are available through `CharacterTemplateCore.h`,\n`HumanAccessories.h`, and `MakeHumanTemplate.h` in the same directory. The existing\n`CharacterTemplate.h` remains an aggregate compatibility header.\n"
     },
     {
       "id": "b000038",
       "kind": "blank",
-      "start_line": 80,
-      "end_line": 80,
+      "start_line": 86,
+      "end_line": 86,
       "raw": "\n"
     },
     {
       "id": "b000039",
       "kind": "paragraph",
-      "start_line": 81,
-      "end_line": 89,
-      "raw": "The core owns `Object3DTemplate` programs, sparse shape catalogs and source-point\njoint anchors. `NSCharacter::CharacterTemplate` holds only a borrowed handle.\nThe OBJ/target reader preserves source indices and hidden helper faces. Bundled\nCC0 MakeHuman data provides 19,158 source points, 163 bones and 472 additive\nbody/face targets. No MakeHuman application code is included. See the\n[template contracts](docs/CharacterTemplate.md); CC5 and MetaHuman parity remains\nin development. The core and NSCharacter use native C++23 `iiJson` via\n`CMAKE_PREFIX_PATH`. The currently installed iiJson package also requires\n`iiSDKCore::Contracts`.\n"
+      "start_line": 87,
+      "end_line": 90,
+      "raw": "For progressive morphs, `Object3DProgressiveMorphCore.h` provides rig and\nanimation evaluation, and `Object3DProgressiveMorphInterchange.h` provides FBX\nexchange. The original `Object3DProgressiveMorph.h` retains both interfaces and\nits existing project declarations for source compatibility.\n"
     },
     {
       "id": "b000040",
       "kind": "blank",
-      "start_line": 90,
-      "end_line": 90,
+      "start_line": 91,
+      "end_line": 91,
       "raw": "\n"
     },
     {
       "id": "b000041",
       "kind": "paragraph",
-      "start_line": 91,
-      "end_line": 97,
-      "raw": "Core [GLB document decoding](docs/GlbDocument.md) validates and reads embedded\nbuffer views and accessors, including interleaved, normalized and sparse values.\nCore [GLB asset import](docs/GlbImport.md) converts supported triangle meshes,\nmultiple skins, morphs and materials into editable engine-owned assets. It can\nretain and sample supported source animation channels. External and non-PNG\nimages need a host resolver; the documented scene, animation and material limits\nremain in effect.\n"
+      "start_line": 92,
+      "end_line": 95,
+      "raw": "`BoneIndex.h` and `MeshData.h` provide low-level mesh values; focused geometry\nand topology APIs are available through `MeshGeometryCore.h` and\n`MeshTopologyCore.h`. The original geometry and topology headers retain their\nprior skeletal includes as compatibility aggregates.\n"
     },
     {
       "id": "b000042",
       "kind": "blank",
-      "start_line": 98,
-      "end_line": 98,
+      "start_line": 96,
+      "end_line": 96,
       "raw": "\n"
     },
     {
       "id": "b000043",
       "kind": "paragraph",
-      "start_line": 99,
-      "end_line": 104,
-      "raw": "The optional [human skin catalogue](docs/FaceAssets.md) provides 20 unmodified\nCC0, 2048×2048 MakeHuman skin textures. Applications explicitly select a preset\nfor template creation or as an undoable character edit; body parameters do not\ninfer skin identity. Image, material and edit-history ownership remain in the\ncore. The supplied base-color/roughness mapping is a PBR approximation, not the\nsource shader or evidence of production MetaHuman visual quality.\n"
+      "start_line": 97,
+      "end_line": 101,
+      "raw": "`humanJointRules` and `mapHumanJoints` resolve human roles through preserved\nsemantic tags or source bone names, check required roles and ancestry, and retain\nonly a borrowed core asset handle. `exportCc5BoneMap` writes a bone-mapping-only\n`.3dxProfile` section. It does not calibrate a T pose or establish CC5 application\ncompatibility. The `CharacterCreatorG3` preset maps common `CC_Base_` body and finger names while checking ancestry. It does not identify every CC rig variant or prove application behavior. See [humanoid characterization](docs/HumanoidCharacterization.md). [Human joint naming plans](docs/HumanJointNaming.md) apply multiple role-based names in one undoable core edit. Rebinding a rig after a rename requires its original explicit joint IDs.\n"
     },
     {
       "id": "b000044",
       "kind": "blank",
-      "start_line": 105,
-      "end_line": 105,
+      "start_line": 102,
+      "end_line": 102,
       "raw": "\n"
     },
     {
       "id": "b000045",
       "kind": "paragraph",
-      "start_line": 106,
-      "end_line": 112,
-      "raw": "`Object3DEngine::editTemplate` and `NSCharacter::CharacterTemplate::edit` retain\nmanual sculpt, skin, morph, UV, joint and material corrections while body/face\nparameters change. The core owns immutable edit layers and history. Layer enable,\nweight, ordering, removal and undo/redo are supported; `detachTemplate` preserves\nthe current result as an ordinary snapshot. See [edit layer contracts](docs/EditLayers.md).\nCharacter views and recipes live in `src/iiActorObject/NSCharacter/`; common engine\nheaders and implementations live directly in `src/iiActorObject/`.\n"
+      "start_line": 103,
+      "end_line": 111,
+      "raw": "The core owns `Object3DTemplate` programs, sparse shape catalogs and source-point\njoint anchors. `NSCharacter::CharacterTemplate` holds only a borrowed handle.\nThe OBJ/target reader preserves source indices and hidden helper faces. Bundled\nCC0 MakeHuman data provides 19,158 source points, 163 bones and 472 additive\nbody/face targets. No MakeHuman application code is included. See the\n[template contracts](docs/CharacterTemplate.md); CC5 and MetaHuman parity remains\nin development. The core and NSCharacter use native C++23 `iiJson` via\n`CMAKE_PREFIX_PATH`. The currently installed iiJson package also requires\n`iiSDKCore::Contracts`.\n"
     },
     {
       "id": "b000046",
       "kind": "blank",
-      "start_line": 113,
-      "end_line": 113,
+      "start_line": 112,
+      "end_line": 112,
       "raw": "\n"
     },
     {
       "id": "b000047",
-      "kind": "table",
-      "start_line": 114,
+      "kind": "paragraph",
+      "start_line": 113,
+      "end_line": 121,
+      "raw": "Core [GLB document decoding](docs/GlbDocument.md) validates and reads embedded\nbuffer views and accessors, including interleaved, normalized and sparse values.\nCore [GLB asset import](docs/GlbImport.md) converts supported triangle meshes,\nmultiple skins, morphs and materials into editable engine-owned assets. It can\nretain and sample supported source animation channels. External and non-PNG\nimages need a host resolver; the documented scene, animation and material limits\nremain in effect. Import policies can be included through\n`Object3DGlbImportOptions.h`, and host image resolvers through `GlbImageResolver.h`;\nthe existing interchange header also provides both interfaces.\n"
+    },
+    {
+      "id": "b000048",
+      "kind": "blank",
+      "start_line": 122,
       "end_line": 122,
+      "raw": "\n"
+    },
+    {
+      "id": "b000049",
+      "kind": "paragraph",
+      "start_line": 123,
+      "end_line": 128,
+      "raw": "The optional [human skin catalogue](docs/FaceAssets.md) provides 20 unmodified\nCC0, 2048×2048 MakeHuman skin textures. Applications explicitly select a preset\nfor template creation or as an undoable character edit; body parameters do not\ninfer skin identity. Image, material and edit-history ownership remain in the\ncore. The supplied base-color/roughness mapping is a PBR approximation, not the\nsource shader or evidence of production MetaHuman visual quality.\n"
+    },
+    {
+      "id": "b000050",
+      "kind": "blank",
+      "start_line": 129,
+      "end_line": 129,
+      "raw": "\n"
+    },
+    {
+      "id": "b000051",
+      "kind": "paragraph",
+      "start_line": 130,
+      "end_line": 138,
+      "raw": "`Object3DEngine::editTemplate` and `NSCharacter::CharacterTemplate::edit` retain\nmanual sculpt, skin, morph, UV, joint and material corrections while body/face\nparameters change. The core owns immutable edit layers and history. Layer enable,\nweight, ordering, removal and undo/redo are supported; `detachTemplate` preserves\nthe current result as an ordinary snapshot. See [edit layer contracts](docs/EditLayers.md).\nCharacter views and recipes live in `src/NSCharacter/`; common engine code is\ngrouped by responsibility directly under `src/`. Paired headers and implementations\nremain together. The [source layout](docs/SourceLayout.md) describes the directories;\nexisting `<iiActorObject/...>` public includes remain unchanged.\n"
+    },
+    {
+      "id": "b000052",
+      "kind": "blank",
+      "start_line": 139,
+      "end_line": 139,
+      "raw": "\n"
+    },
+    {
+      "id": "b000053",
+      "kind": "table",
+      "start_line": 140,
+      "end_line": 148,
       "raw": "| Object | Responsibility |\n| --- | --- |\n| `CharacterData`, `CharacterMesh`, `CharacterMaterial` | Editable asset definitions, UVs and PBR constants. |\n| `CharacterAsset` | Borrowed view of an engine-owned `Object3DAsset`; delegates validation, storage and runtime instance creation to the core. |\n| `HumanoidGenerator` | Independent procedural human surface, body/face proportions, 71 semantic joints, skin binding and named face channels. |\n| `AutoRigger` | Reference to the core `SkinBinder` envelope binding API. |\n| `CharacterEditor` | Borrowed core edit session for vertex/sculpt, morph, rest-joint, weight and undo/redo operations. |\n| `exportGlb` | Self-contained GLB 2.0 with joints, inverse binds, UVs, materials and sparse morphs. |\n| `exportFbx`, `importFbx` | Binary FBX output and bounded FBX input with skin clusters, morphs, materials and coordinate conversion. |\n",
       "columns": [
         "Object",
@@ -400,1229 +442,1229 @@
       ]
     },
     {
-      "id": "b000048",
+      "id": "b000054",
       "kind": "blank",
-      "start_line": 123,
-      "end_line": 123,
+      "start_line": 149,
+      "end_line": 149,
       "raw": "\n"
     },
     {
-      "id": "b000049",
+      "id": "b000055",
       "kind": "fenced_code",
-      "start_line": 124,
-      "end_line": 139,
+      "start_line": 150,
+      "end_line": 165,
       "raw": "```cpp\n#include <iiActorObject.h>\n\nusing namespace iiActorObject::NSCharacter;\niiActorObject::Object3DEngine engine;\nauto asset = HumanoidGenerator::generate(engine);\nCharacterEditor editor(asset);\neditor.sculpt(0, {0, 1.65, .09}, .035, {0, 0, .002}, true);\neditor.bakeMorphs(0, std::array{MorphValue{\"mouthSmileLeft\", .5}});\nauto instance = editor.asset()->instantiate(\"Player\");\nauto glb = exportGlb(*editor.asset());\nauto fbx = exportFbx(*editor.asset());\nauto imported = importFbx(engine, fbx);\n// Inspect imported.warnings for data outside the authoring snapshot.\n// The host owns rendering, UI, file storage and application-specific integration.\n```\n",
       "language": "cpp",
       "code": "#include <iiActorObject.h>\n\nusing namespace iiActorObject::NSCharacter;\niiActorObject::Object3DEngine engine;\nauto asset = HumanoidGenerator::generate(engine);\nCharacterEditor editor(asset);\neditor.sculpt(0, {0, 1.65, .09}, .035, {0, 0, .002}, true);\neditor.bakeMorphs(0, std::array{MorphValue{\"mouthSmileLeft\", .5}});\nauto instance = editor.asset()->instantiate(\"Player\");\nauto glb = exportGlb(*editor.asset());\nauto fbx = exportFbx(*editor.asset());\nauto imported = importFbx(engine, fbx);\n// Inspect imported.warnings for data outside the authoring snapshot.\n// The host owns rendering, UI, file storage and application-specific integration.\n",
       "closed": true
     },
     {
-      "id": "b000050",
-      "kind": "blank",
-      "start_line": 140,
-      "end_line": 140,
-      "raw": "\n"
-    },
-    {
-      "id": "b000051",
-      "kind": "paragraph",
-      "start_line": 141,
-      "end_line": 145,
-      "raw": "Coordinates are right-handed, Y-up, metres. An editor validates an entire candidate\nbefore publishing a snapshot. Failed edits retain the current asset and revision.\nReaders retain old snapshots through reference tokens across edits and undo/redo\nwhile their core engine is alive. Explicit engine removal invalidates those views.\nMeshes in one asset share the exact same runtime skeleton.\n"
-    },
-    {
-      "id": "b000052",
-      "kind": "blank",
-      "start_line": 146,
-      "end_line": 146,
-      "raw": "\n"
-    },
-    {
-      "id": "b000053",
-      "kind": "paragraph",
-      "start_line": 147,
-      "end_line": 152,
-      "raw": "The procedural character is a development mesh, not a production MetaHuman asset.\nCoarse voxel sampling merges small finger details; the UVs are a simple projection.\nThe face channel set includes a reserved `tongueOut` channel without oral geometry.\nPhotorealistic skin, eyes, teeth, hair, clothing, production facial topology and\nMetaHuman DNA/rig equivalence are unfinished. Generic FBX compatibility does not\nprove CC5 humanoid characterization or actual Unreal/MetaHuman application behavior.\n"
-    },
-    {
-      "id": "b000054",
-      "kind": "blank",
-      "start_line": 153,
-      "end_line": 153,
-      "raw": "\n"
-    },
-    {
-      "id": "b000055",
-      "kind": "paragraph",
-      "start_line": 154,
-      "end_line": 159,
-      "raw": "FBX imports preserve skin and linear morphs, convert axes/units, split UV/normal\nseams and material parts, and report unsupported animation, texture and constraint\ndata. Linear, dual-quaternion and per-point blended skinning profiles are retained. They reject unsupported joint shear, multiple skins\nand progressive morphs. Render geometry is triangulated while source authoring\ntopology and IDs are retained for supported DNA roundtrips. External applications\ncan discard the metadata required for an exact source identity roundtrip.\n"
-    },
-    {
       "id": "b000056",
       "kind": "blank",
-      "start_line": 160,
-      "end_line": 160,
+      "start_line": 166,
+      "end_line": 166,
       "raw": "\n"
     },
     {
       "id": "b000057",
       "kind": "paragraph",
-      "start_line": 161,
-      "end_line": 161,
-      "raw": "See the Korean [NSCharacter contracts, completion gates and remaining work](docs/NSCharacter.md).\n"
+      "start_line": 167,
+      "end_line": 171,
+      "raw": "Coordinates are right-handed, Y-up, metres. An editor validates an entire candidate\nbefore publishing a snapshot. Failed edits retain the current asset and revision.\nReaders retain old snapshots through reference tokens across edits and undo/redo\nwhile their core engine is alive. Explicit engine removal invalidates those views.\nMeshes in one asset share the exact same runtime skeleton.\n"
     },
     {
       "id": "b000058",
-      "kind": "blank",
-      "start_line": 162,
-      "end_line": 162,
-      "raw": "\n"
-    },
-    {
-      "id": "b000059",
-      "kind": "paragraph",
-      "start_line": 163,
-      "end_line": 171,
-      "raw": "FBX interchange preserves source control points, polygon topology, separate UV and\nnormal IDs, sparse skin rows and authored morph IDs. Per-polygon materials remain\nin one authoring mesh; GLB emits material primitives over shared attributes. An\noptional validated FBX extension retains hidden faces and original source mappings\nfor SDK roundtrips. External applications may discard that extension. Explicit\nblend-shape normals are retained per authored layout. Standard FBX export rejects\nunrepresentable seam normals unless exact SDK metadata is explicitly enabled;\nDNA export rejects differing explicit normals unless their loss is explicitly allowed.\nSee [FBX authoring contracts](docs/FbxAuthoring.md) and [morph normal contracts](docs/MorphNormals.md).\n"
-    },
-    {
-      "id": "b000060",
       "kind": "blank",
       "start_line": 172,
       "end_line": 172,
       "raw": "\n"
     },
     {
-      "id": "b000061",
+      "id": "b000059",
       "kind": "paragraph",
       "start_line": 173,
       "end_line": 178,
-      "raw": "The core's optional [GLB point identity data](docs/GlbPointIdentity.md) reconnects\ncontrol points split by seams and materials and preserves unused point positions,\nskin weights and logical morph deltas when SDK-authored metadata survives and agrees\nwith the visible GLB data. Conflicting edits fall back to standard GLB points with\na warning. Other applications may remove the metadata; original polygons, hidden\nfaces, source layout IDs and editing history remain outside this GLB contract.\n"
+      "raw": "The procedural character is a development mesh, not a production MetaHuman asset.\nCoarse voxel sampling merges small finger details; the UVs are a simple projection.\nThe face channel set includes a reserved `tongueOut` channel without oral geometry.\nPhotorealistic skin, eyes, teeth, hair, clothing, production facial topology and\nMetaHuman DNA/rig equivalence are unfinished. Generic FBX compatibility does not\nprove CC5 humanoid characterization or actual Unreal/MetaHuman application behavior.\n"
     },
     {
-      "id": "b000062",
+      "id": "b000060",
       "kind": "blank",
       "start_line": 179,
       "end_line": 179,
       "raw": "\n"
     },
     {
-      "id": "b000063",
+      "id": "b000061",
       "kind": "paragraph",
       "start_line": 180,
       "end_line": 185,
-      "raw": "The core can also [merge external triangle edits](docs/ExternalTriangleEdits.md)\nagainst authored polygons when the host supplies complete, trusted point, triangle\nand source-corner mappings. Opt-in [GLB external-edit provenance](docs/GlbExternalEdits.md)\ncan derive those mappings when point IDs and the session metadata survive and the\nsource triangles are unambiguous. The public identity and GLB result structures\nchanged; rebuild C++ consumers.\n"
+      "raw": "FBX imports preserve skin and linear morphs, convert axes/units, split UV/normal\nseams and material parts, and report unsupported animation, texture and constraint\ndata. Linear, dual-quaternion and per-point blended skinning profiles are retained. They reject unsupported joint shear, multiple skins\nand progressive morphs. Render geometry is triangulated while source authoring\ntopology and IDs are retained for supported DNA roundtrips. External applications\ncan discard the metadata required for an exact source identity roundtrip.\n"
     },
     {
-      "id": "b000064",
+      "id": "b000062",
       "kind": "blank",
       "start_line": 186,
       "end_line": 186,
       "raw": "\n"
     },
     {
-      "id": "b000065",
+      "id": "b000063",
       "kind": "paragraph",
       "start_line": 187,
-      "end_line": 190,
-      "raw": "The core computes per-corner MikkTSpace bases. GLB normal-mapped primitives carry\nseam-safe tangents and representable morph tangent deltas while preserving skin and\nUV data. Bounded or unrepresentable cases omit tangents for consumer recomputation.\nSee [tangent generation and interchange](docs/MeshTangents.md).\n"
+      "end_line": 187,
+      "raw": "See the Korean [NSCharacter contracts, completion gates and remaining work](docs/NSCharacter.md).\n"
+    },
+    {
+      "id": "b000064",
+      "kind": "blank",
+      "start_line": 188,
+      "end_line": 188,
+      "raw": "\n"
+    },
+    {
+      "id": "b000065",
+      "kind": "paragraph",
+      "start_line": 189,
+      "end_line": 197,
+      "raw": "FBX interchange preserves source control points, polygon topology, separate UV and\nnormal IDs, sparse skin rows and authored morph IDs. Per-polygon materials remain\nin one authoring mesh; GLB emits material primitives over shared attributes. An\noptional validated FBX extension retains hidden faces and original source mappings\nfor SDK roundtrips. External applications may discard that extension. Explicit\nblend-shape normals are retained per authored layout. Standard FBX export rejects\nunrepresentable seam normals unless exact SDK metadata is explicitly enabled;\nDNA export rejects differing explicit normals unless their loss is explicitly allowed.\nSee [FBX authoring contracts](docs/FbxAuthoring.md) and [morph normal contracts](docs/MorphNormals.md).\n"
     },
     {
       "id": "b000066",
       "kind": "blank",
-      "start_line": 191,
-      "end_line": 191,
+      "start_line": 198,
+      "end_line": 198,
       "raw": "\n"
     },
     {
       "id": "b000067",
       "kind": "paragraph",
-      "start_line": 192,
-      "end_line": 198,
-      "raw": "Imported GLB authored tangents and morph deltas retain their source layouts,\nmaterial UV bindings, and editing history. GLB export reuses a valid snapshot,\nwhile geometry or binding edits invalidate it and report the fallback. FBX export\nalso retains the valid base direction on faces whose normal-map UV binding is\nunchanged, while recording unbound or changed bindings and base-only morphs.\nNative project version 24 stores the GLB snapshot. Rebuild C++ consumers for the topology ABI.\nSee [authored GLB tangent contracts](docs/GlbAuthoredTangents.md).\n"
+      "start_line": 199,
+      "end_line": 204,
+      "raw": "The core's optional [GLB point identity data](docs/GlbPointIdentity.md) reconnects\ncontrol points split by seams and materials and preserves unused point positions,\nskin weights and logical morph deltas when SDK-authored metadata survives and agrees\nwith the visible GLB data. Conflicting edits fall back to standard GLB points with\na warning. Other applications may remove the metadata; original polygons, hidden\nfaces, source layout IDs and editing history remain outside this GLB contract.\n"
     },
     {
       "id": "b000068",
       "kind": "blank",
-      "start_line": 199,
-      "end_line": 199,
+      "start_line": 205,
+      "end_line": 205,
       "raw": "\n"
     },
     {
       "id": "b000069",
       "kind": "paragraph",
-      "start_line": 200,
-      "end_line": 206,
-      "raw": "FBX can emit per-UV tangent and binormal layers for normal-mapped materials while\nretaining source polygons. An explicit status records unsupported projections and\nbase-only tangents on morphing meshes. Imported UV-bound authored tangent layers\nare retained with their geometry dependencies and project history; edits invalidate\ntheir use until the original state is restored. Project version 20 stores those\nlayers. Rebuild C++ consumers for the changed topology ABI. See [FBX tangent\ncontracts](docs/FbxTangents.md).\n"
+      "start_line": 206,
+      "end_line": 211,
+      "raw": "The core can also [merge external triangle edits](docs/ExternalTriangleEdits.md)\nagainst authored polygons when the host supplies complete, trusted point, triangle\nand source-corner mappings. Opt-in [GLB external-edit provenance](docs/GlbExternalEdits.md)\ncan derive those mappings when point IDs and the session metadata survive and the\nsource triangles are unambiguous. The public identity and GLB result structures\nchanged; rebuild C++ consumers.\n"
     },
     {
       "id": "b000070",
-      "kind": "blank",
-      "start_line": 207,
-      "end_line": 207,
-      "raw": "\n"
-    },
-    {
-      "id": "b000071",
-      "kind": "paragraph",
-      "start_line": 208,
-      "end_line": 211,
-      "raw": "GLB export can reuse a valid FBX tangent and binormal layer for the material's\nnormal-map UV, including polygon corners, seams and skin. Unrepresentable or\nambiguous bases fall back with bounded diagnostic notes; FBX morph tangents and\nextra UV layers are not fully represented by this conversion.\n"
-    },
-    {
-      "id": "b000072",
       "kind": "blank",
       "start_line": 212,
       "end_line": 212,
       "raw": "\n"
     },
     {
-      "id": "b000073",
+      "id": "b000071",
       "kind": "paragraph",
       "start_line": 213,
-      "end_line": 218,
-      "raw": "FBX image references can be resolved explicitly by a host-supplied interface; the\ncore does not open external paths. The optional `iiActorObject::VisualCodec`\ncomponent converts supported embedded or external image formats to PNG. Its source\nand codec dependencies are separate from the core. Transcoding does not retain the\noriginal encoded image. Rebuild C++ consumers with matching headers and library\nafter the `FbxImportOptions` ABI change. See [FBX image resolution](docs/FbxImageResolution.md).\n"
+      "end_line": 216,
+      "raw": "The core computes per-corner MikkTSpace bases. GLB normal-mapped primitives carry\nseam-safe tangents and representable morph tangent deltas while preserving skin and\nUV data. Bounded or unrepresentable cases omit tangents for consumer recomputation.\nSee [tangent generation and interchange](docs/MeshTangents.md).\n"
+    },
+    {
+      "id": "b000072",
+      "kind": "blank",
+      "start_line": 217,
+      "end_line": 217,
+      "raw": "\n"
+    },
+    {
+      "id": "b000073",
+      "kind": "paragraph",
+      "start_line": 218,
+      "end_line": 224,
+      "raw": "Imported GLB authored tangents and morph deltas retain their source layouts,\nmaterial UV bindings, and editing history. GLB export reuses a valid snapshot,\nwhile geometry or binding edits invalidate it and report the fallback. FBX export\nalso retains the valid base direction on faces whose normal-map UV binding is\nunchanged, while recording unbound or changed bindings and base-only morphs.\nNative project version 24 stores the GLB snapshot. Rebuild C++ consumers for the topology ABI.\nSee [authored GLB tangent contracts](docs/GlbAuthoredTangents.md).\n"
     },
     {
       "id": "b000074",
       "kind": "blank",
-      "start_line": 219,
-      "end_line": 219,
+      "start_line": 225,
+      "end_line": 225,
       "raw": "\n"
     },
     {
       "id": "b000075",
-      "kind": "heading",
-      "start_line": 220,
-      "end_line": 220,
-      "raw": "## Runtime\n",
-      "level": 2,
-      "title": "Runtime"
+      "kind": "paragraph",
+      "start_line": 226,
+      "end_line": 232,
+      "raw": "FBX can emit per-UV tangent and binormal layers for normal-mapped materials while\nretaining source polygons. An explicit status records unsupported projections and\nbase-only tangents on morphing meshes. Imported UV-bound authored tangent layers\nare retained with their geometry dependencies and project history; edits invalidate\ntheir use until the original state is restored. Project version 20 stores those\nlayers. Rebuild C++ consumers for the changed topology ABI. See [FBX tangent\ncontracts](docs/FbxTangents.md).\n"
     },
     {
       "id": "b000076",
       "kind": "blank",
-      "start_line": 221,
-      "end_line": 221,
+      "start_line": 233,
+      "end_line": 233,
       "raw": "\n"
     },
     {
       "id": "b000077",
       "kind": "paragraph",
-      "start_line": 222,
-      "end_line": 229,
-      "raw": "Native `.ii3dproject` sessions retain authored assets, templates, parameters,\nedit layers, undo/redo and selected DNA, pose, pose-corrective, template-morph and progressive-morph rig programs\nfor continued editing. Version 21 also preserves a template-morph rig's available\nsource template and baseline input provenance. Rebuild C++ consumers against the\nmatching headers and library after the `TemplateMorphBakeResult` layout change.\nAll restored resources belong to the caller's core engine; failed imports preserve\nits preexisting resources and ID counters. NSCharacter provides borrowed wrappers.\nUse FBX/GLB/DNA for external application interchange. See [project contracts](docs/Object3DProject.md).\n"
+      "start_line": 234,
+      "end_line": 237,
+      "raw": "GLB export can reuse a valid FBX tangent and binormal layer for the material's\nnormal-map UV, including polygon corners, seams and skin. Unrepresentable or\nambiguous bases fall back with bounded diagnostic notes; FBX morph tangents and\nextra UV layers are not fully represented by this conversion.\n"
     },
     {
       "id": "b000078",
-      "kind": "blank",
-      "start_line": 230,
-      "end_line": 230,
-      "raw": "\n"
-    },
-    {
-      "id": "b000079",
-      "kind": "paragraph",
-      "start_line": 231,
-      "end_line": 231,
-      "raw": "The explicit [progressive morph importer](docs/ProgressiveMorphRig.md) retains FBX in-between shapes, default values and shared channel controls in a core-owned rig. Store that rig with the asset in project version 31. The dedicated progressive FBX API exports static channels for a single mesh or validated identical mesh instances, with warnings and strict rejection of unsupported loss cases. The [progressive animation path](docs/ProgressiveMorphAnimation.md) imports skeleton, ordinary and progressive control animation together, applies them transactionally, and exports multiple named takes with their stored start times. Ordinary FBX/GLB export does not carry the progressive rig program.\n"
-    },
-    {
-      "id": "b000080",
-      "kind": "blank",
-      "start_line": 232,
-      "end_line": 232,
-      "raw": "\n"
-    },
-    {
-      "id": "b000081",
-      "kind": "paragraph",
-      "start_line": 233,
-      "end_line": 233,
-      "raw": "The optional [human accessories](docs/HumanAccessories.md) package connects selected CC0 hair, clothing, eyebrows and eyelashes to the core-owned template using authored control-point mappings, transferred skin weights and covered-body face masks. An editor can add, remove or replace compatible slots, including combined additions and removals in one undo step, while preserving retained edits. Grounded templates preserve their support points; project version 35 records mixed selection remapping. This is not a cloth or hair simulation.\n"
-    },
-    {
-      "id": "b000082",
-      "kind": "blank",
-      "start_line": 234,
-      "end_line": 234,
-      "raw": "\n"
-    },
-    {
-      "id": "b000083",
-      "kind": "paragraph",
-      "start_line": 235,
-      "end_line": 235,
-      "raw": "[Editor rig following](docs/EditorRigFollow.md) keeps a group of compatible core-owned rig sessions aligned with the editor's current snapshot when queried or evaluated, preserving explicit joint IDs across edits and undo/redo. The host supplies controls and rebuilds runtime actors after an asset change.\n"
-    },
-    {
-      "id": "b000084",
-      "kind": "blank",
-      "start_line": 236,
-      "end_line": 236,
-      "raw": "\n"
-    },
-    {
-      "id": "b000085",
-      "kind": "paragraph",
-      "start_line": 237,
-      "end_line": 237,
-      "raw": "[Instance transfer](docs/InstanceTransfer.md) prepares a new actor for an edited asset while retaining compatible pose, morph and animation playback state. It reports or rejects state that cannot be mapped and leaves scene replacement to the host.\n"
-    },
-    {
-      "id": "b000086",
       "kind": "blank",
       "start_line": 238,
       "end_line": 238,
       "raw": "\n"
     },
     {
-      "id": "b000087",
+      "id": "b000079",
       "kind": "paragraph",
       "start_line": 239,
       "end_line": 244,
-      "raw": "Core surface tools provide BVH nearest-triangle queries, barycentric skin transfer,\nexplicit bone-map symmetry and surface followers for garments and attachments.\n`attachSurface` retains existing parameters and edit history while creating a new\ncore-owned template; body and garment corrections remain editable together.\nNative project version 4 stores shared layer point masks, joint scale corrections and parent overrides, and continues to read versions 1, 2 and 3.\nSee [skin and surface contracts](docs/SkinSurface.md).\n"
+      "raw": "FBX image references can be resolved explicitly by a host-supplied interface; the\ncore does not open external paths. The optional `iiActorObject::VisualCodec`\ncomponent converts supported embedded or external image formats to PNG. Its source\nand codec dependencies are separate from the core. Transcoding does not retain the\noriginal encoded image. Rebuild C++ consumers with matching headers and library\nafter the `FbxImportOptions` ABI change. See [FBX image resolution](docs/FbxImageResolution.md).\n"
     },
     {
-      "id": "b000088",
+      "id": "b000080",
       "kind": "blank",
       "start_line": 245,
       "end_line": 245,
       "raw": "\n"
     },
     {
-      "id": "b000089",
-      "kind": "paragraph",
+      "id": "b000081",
+      "kind": "heading",
       "start_line": 246,
-      "end_line": 253,
-      "raw": "Core-owned collision tools add budgeted point/triangle distance queries and\nclosed-solid signed distances. `SurfaceCollider` is a replaceable query interface;\n`MeshCollider` is an immutable derived geometry snapshot. `fitSurface` projects\ngarment points and triangle interiors to an explicit clearance while preserving\nsource IDs, skin, UVs and morph identities. Unresolved constraints fail atomically\nunless preview output is requested. Fitting is an explicit edit and must be rerun\nafter body or pose changes. See [collision queries](docs/SurfaceCollision.md) and\n[surface fitting](docs/SurfaceFitting.md).\n"
+      "end_line": 246,
+      "raw": "## Runtime\n",
+      "level": 2,
+      "title": "Runtime"
     },
     {
-      "id": "b000090",
+      "id": "b000082",
       "kind": "blank",
-      "start_line": 254,
-      "end_line": 254,
+      "start_line": 247,
+      "end_line": 247,
       "raw": "\n"
     },
     {
-      "id": "b000091",
+      "id": "b000083",
       "kind": "paragraph",
-      "start_line": 255,
-      "end_line": 261,
-      "raw": "`Object3DTemplateDefinition::fittings` and `setSurfaceFittings` retain owned fitting\nsettings and mobility values in the core. Template generation and layered edits\nautomatically refit surfaces and propagate fit changes to downstream followers.\nDisabling a rule retains authored shape and manual edits; the correction is not\naccumulated into a sculpt layer. Native projects with retained fitting rules use\nversion 9. Evaluated-surface edit layers use version 10, preserving visible sculpt and external-edit displacements through nonlinear fitting. Projects without either feature continue to use version 8. See [evaluated edit layers](docs/EvaluatedEditLayers.md).\nSee [automatic fitting and dependency contracts](docs/AutomaticSurfaceFitting.md).\n"
+      "start_line": 248,
+      "end_line": 255,
+      "raw": "Native `.ii3dproject` sessions retain authored assets, templates, parameters,\nedit layers, undo/redo and selected DNA, pose, pose-corrective, template-morph and progressive-morph rig programs\nfor continued editing. Version 21 also preserves a template-morph rig's available\nsource template and baseline input provenance. Rebuild C++ consumers against the\nmatching headers and library after the `TemplateMorphBakeResult` layout change.\nAll restored resources belong to the caller's core engine; failed imports preserve\nits preexisting resources and ID counters. NSCharacter provides borrowed wrappers.\nUse FBX/GLB/DNA for external application interchange. See [project contracts](docs/Object3DProject.md).\n"
     },
     {
-      "id": "b000092",
+      "id": "b000084",
+      "kind": "blank",
+      "start_line": 256,
+      "end_line": 256,
+      "raw": "\n"
+    },
+    {
+      "id": "b000085",
+      "kind": "paragraph",
+      "start_line": 257,
+      "end_line": 257,
+      "raw": "The explicit [progressive morph importer](docs/ProgressiveMorphRig.md) retains FBX in-between shapes, default values and shared channel controls in a core-owned rig. Store that rig with the asset in project version 31. The dedicated progressive FBX API exports channels across multiple meshes: compatible identical instances share geometry, while distinct meshes receive separate channels and SDK metadata for restoring their common control. External editors can expose those channels independently. The [progressive animation path](docs/ProgressiveMorphAnimation.md) imports skeleton, ordinary and progressive control animation together, applies them transactionally, and exports multiple named takes with their stored start times. Ordinary FBX/GLB export does not carry the progressive rig program.\n"
+    },
+    {
+      "id": "b000086",
+      "kind": "blank",
+      "start_line": 258,
+      "end_line": 258,
+      "raw": "\n"
+    },
+    {
+      "id": "b000087",
+      "kind": "paragraph",
+      "start_line": 259,
+      "end_line": 259,
+      "raw": "The optional [human accessories](docs/HumanAccessories.md) package connects selected CC0 hair, clothing, eyebrows and eyelashes to the core-owned template using authored control-point mappings, transferred skin weights and covered-body face masks. An editor can add, remove or replace compatible slots, including combined additions and removals in one undo step, while preserving retained edits. Grounded templates preserve their support points; project version 35 records mixed selection remapping. This is not a cloth or hair simulation.\n"
+    },
+    {
+      "id": "b000088",
+      "kind": "blank",
+      "start_line": 260,
+      "end_line": 260,
+      "raw": "\n"
+    },
+    {
+      "id": "b000089",
+      "kind": "paragraph",
+      "start_line": 261,
+      "end_line": 261,
+      "raw": "[Editor rig following](docs/EditorRigFollow.md) keeps a group of compatible core-owned rig sessions aligned with the editor's current snapshot when queried or evaluated, preserving explicit joint IDs across edits and undo/redo. The host supplies controls and rebuilds runtime actors after an asset change.\n"
+    },
+    {
+      "id": "b000090",
       "kind": "blank",
       "start_line": 262,
       "end_line": 262,
       "raw": "\n"
     },
     {
-      "id": "b000093",
+      "id": "b000091",
       "kind": "paragraph",
       "start_line": 263,
-      "end_line": 268,
-      "raw": "Core selection and brush tools operate on authored point IDs across UV/normal seams.\nSculpt and skin strokes support soft masks, falloff, surface graph distances,\nlocked influences and one history entry per stroke. Layer point masks remain\neditable across parameter changes and project saves. See [painting contracts](docs/MeshPainting.md).\n[Point-mask projection](docs/MeshMaskProjection.md) transfers selection values to\naligned, differently tessellated surfaces for explicit use in another editor.\n"
+      "end_line": 263,
+      "raw": "[Instance transfer](docs/InstanceTransfer.md) prepares a new actor for an edited asset while retaining compatible pose, morph and animation playback state. It reports or rejects state that cannot be mapped and leaves scene replacement to the host.\n"
+    },
+    {
+      "id": "b000092",
+      "kind": "blank",
+      "start_line": 264,
+      "end_line": 264,
+      "raw": "\n"
+    },
+    {
+      "id": "b000093",
+      "kind": "paragraph",
+      "start_line": 265,
+      "end_line": 270,
+      "raw": "Core surface tools provide BVH nearest-triangle queries, barycentric skin transfer,\nexplicit bone-map symmetry and surface followers for garments and attachments.\n`attachSurface` retains existing parameters and edit history while creating a new\ncore-owned template; body and garment corrections remain editable together.\nNative project version 4 stores shared layer point masks, joint scale corrections and parent overrides, and continues to read versions 1, 2 and 3.\nSee [skin and surface contracts](docs/SkinSurface.md).\n"
     },
     {
       "id": "b000094",
       "kind": "blank",
-      "start_line": 269,
-      "end_line": 269,
+      "start_line": 271,
+      "end_line": 271,
       "raw": "\n"
     },
     {
       "id": "b000095",
       "kind": "paragraph",
-      "start_line": 270,
-      "end_line": 276,
-      "raw": "Core-owned [skeletal editing](docs/SkeletonEditing.md) adds local/object TRS,\nfull child-transform preservation, aiming and stable-ID reparenting. These edits\nremain layered across parameter changes and native project saves. Exact TRS\nconstraints reject shear-producing edits rather than losing transform data.\n[Skeleton scale profiles](docs/SkeletonScale.md) provide reversible uniform bind-scale\nnormalization for application interchange, including arbitrary pose conversion,\nname-based reimport after bone reordering, and a bounded `.ii3dscale` sidecar.\n"
+      "start_line": 272,
+      "end_line": 279,
+      "raw": "Core-owned collision tools add budgeted point/triangle distance queries and\nclosed-solid signed distances. `SurfaceCollider` is a replaceable query interface;\n`MeshCollider` is an immutable derived geometry snapshot. `fitSurface` projects\ngarment points and triangle interiors to an explicit clearance while preserving\nsource IDs, skin, UVs and morph identities. Unresolved constraints fail atomically\nunless preview output is requested. Fitting is an explicit edit and must be rerun\nafter body or pose changes. See [collision queries](docs/SurfaceCollision.md) and\n[surface fitting](docs/SurfaceFitting.md).\n"
     },
     {
       "id": "b000096",
       "kind": "blank",
-      "start_line": 277,
-      "end_line": 277,
+      "start_line": 280,
+      "end_line": 280,
       "raw": "\n"
     },
     {
       "id": "b000097",
       "kind": "paragraph",
-      "start_line": 278,
-      "end_line": 281,
-      "raw": "`Actor` owns identity, tags, a root `SceneComponent`, components and lifecycle.\n`ActorComponent` supplies host-driven hooks; `SceneComponent` adds local transforms\nand an acyclic spatial hierarchy. `Transform` and `Matrix4` use column-major affine\nmatrices and column vectors (`parent * local * point`).\n"
+      "start_line": 281,
+      "end_line": 287,
+      "raw": "`Object3DTemplateDefinition::fittings` and `setSurfaceFittings` retain owned fitting\nsettings and mobility values in the core. Template generation and layered edits\nautomatically refit surfaces and propagate fit changes to downstream followers.\nDisabling a rule retains authored shape and manual edits; the correction is not\naccumulated into a sculpt layer. Native projects with retained fitting rules use\nversion 9. Evaluated-surface edit layers use version 10, preserving visible sculpt and external-edit displacements through nonlinear fitting. Projects without either feature continue to use version 8. See [evaluated edit layers](docs/EvaluatedEditLayers.md).\nSee [automatic fitting and dependency contracts](docs/AutomaticSurfaceFitting.md).\n"
     },
     {
       "id": "b000098",
       "kind": "blank",
-      "start_line": 282,
-      "end_line": 282,
+      "start_line": 288,
+      "end_line": 288,
       "raw": "\n"
     },
     {
       "id": "b000099",
       "kind": "paragraph",
-      "start_line": 283,
-      "end_line": 309,
-      "raw": "`Skeleton` stores immutable bones with stable source IDs and inverse binds. A separate\n`evaluationOrder()` supplies parent-first traversal without renumbering joints. Each `Pose`\nowns mutable joint transforms and incrementally evaluates changed descendants.\n`SkeletalMesh` applies sparse morphs followed by the authored linear, dual-quaternion or per-vertex blended skinning profile. [Dual-quaternion skinning](docs/DualQuaternionSkinning.md) is retained in native project history and FBX; components may override it per LOD without changing the asset. Template rig transfer can copy the profile by point identity or surface interpolation while retaining excluded points. Explicit follower skin transfers can separately opt into profile propagation through a clothing or accessory chain. Pose and deformation snapshots preserve authored DQ profiles by default; an explicit linearized snapshot can carry the selected pose and morph baseline to GLB. Its later animated deformation may differ. Direct GLB and DNA export still reject nonlinear profiles. Rebuild C++ consumers for the changed public layouts.\n`AnimationClip`/`AnimationPlayer` provide\nskeletal tracks, scalar curves, seeking, looping and reverse playback.\n[GLB animation baking](docs/GlbAnimationBake.md) converts supported imported\nchannels into editable clips while keeping morph targets distinct per mesh.\nExplicit indexed morph bindings preserve that distinction in GLB and FBX export.\nFBX animation import can also retain distinct per-mesh curves and their bindings.\n[Core clip application](docs/Object3DAnimation.md) applies skeletal tracks and explicitly\nbound morph curves together to a matching asset instance after validating all inputs.\n[Project animation storage](docs/ProjectAnimation.md) optionally saves those clips,\nper-mesh bindings and source timeline origins in native project version 27.\nRebuild C++ consumers for the changed project result structures.\n[Automatic corrective generation](docs/AutomaticCorrectives.md) derives sample-pose\nmorphs from dual-quaternion skinning, with a human elbow/knee planning adapter,\noptional multiple bend samples, and explicit limits on interpolation and external\nruntime drivers.\n[Screen-space point selection](docs/MeshScreenSelection.md) maps host-provided\nprojection, optional depth, and deformed render vertices to editable source-point\nmasks without coupling the core to a UI or renderer.\n[Selection transfer](docs/SelectionTransfer.md) shares surface queries across\nnamed masks and replaces an asset and its projected selections in one undo step.\n`CharacterRig` supplies weighted FK and two-bone IK; `FacialRig` evaluates semantic\njoint, blendshape and animated-map channels. `iiCharacter` composes them with\nActor lifecycle and modular mesh parts.\n"
+      "start_line": 289,
+      "end_line": 294,
+      "raw": "Core selection and brush tools operate on authored point IDs across UV/normal seams.\nSculpt and skin strokes support soft masks, falloff, surface graph distances,\nlocked influences and one history entry per stroke. Layer point masks remain\neditable across parameter changes and project saves. See [painting contracts](docs/MeshPainting.md).\n[Point-mask projection](docs/MeshMaskProjection.md) transfers selection values to\naligned, differently tessellated surfaces for explicit use in another editor.\n"
     },
     {
       "id": "b000100",
       "kind": "blank",
-      "start_line": 310,
-      "end_line": 310,
+      "start_line": 295,
+      "end_line": 295,
       "raw": "\n"
     },
     {
       "id": "b000101",
       "kind": "paragraph",
-      "start_line": 311,
-      "end_line": 320,
-      "raw": "Pose-corrective rigs map authored local joint rotations to existing morph targets.\nThey can update multiple body and garment meshes after each animation tick without\nreplacing the joint pose. Native project version 26 stores selected corrective rigs;\nruntime components are attached again after loading. The conditions do not create\ncorrective shapes or reproduce another application's driver system. See\n[pose corrective contracts](docs/PoseCorrectives.md). Corrective weights can also\nbe baked into an animation clip for FBX and GLB interchange. The default sampling\nalso bounds possible corrective activity between probes. Rebuild C++ consumers\nfor the updated baking options and results; see\n[corrective animation baking](docs/PoseCorrectiveAnimation.md).\n"
+      "start_line": 296,
+      "end_line": 302,
+      "raw": "Core-owned [skeletal editing](docs/SkeletonEditing.md) adds local/object TRS,\nfull child-transform preservation, aiming and stable-ID reparenting. These edits\nremain layered across parameter changes and native project saves. Exact TRS\nconstraints reject shear-producing edits rather than losing transform data.\n[Skeleton scale profiles](docs/SkeletonScale.md) provide reversible uniform bind-scale\nnormalization for application interchange, including arbitrary pose conversion,\nname-based reimport after bone reordering, and a bounded `.ii3dscale` sidecar.\n"
     },
     {
       "id": "b000102",
       "kind": "blank",
-      "start_line": 321,
-      "end_line": 321,
+      "start_line": 303,
+      "end_line": 303,
       "raw": "\n"
     },
     {
       "id": "b000103",
       "kind": "paragraph",
-      "start_line": 322,
-      "end_line": 326,
-      "raw": "Components are owned by their Actor. Do not retain pointers after removal or actor\ndestruction. One host thread serializes mutations and lifecycle calls. Hooks are\n`noexcept`; ownership changes during dispatch are rejected, and logical destruction\nis deferred until the current dispatch returns. The host explicitly drives\n`beginPlay()`, `tick()` and `destroy()` before deleting a derived Actor.\n"
+      "start_line": 304,
+      "end_line": 307,
+      "raw": "`Actor` owns identity, tags, a root `SceneComponent`, components and lifecycle.\n`ActorComponent` supplies host-driven hooks; `SceneComponent` adds local transforms\nand an acyclic spatial hierarchy. `Transform` and `Matrix4` use column-major affine\nmatrices and column vectors (`parent * local * point`).\n"
     },
     {
       "id": "b000104",
       "kind": "blank",
-      "start_line": 327,
-      "end_line": 327,
+      "start_line": 308,
+      "end_line": 308,
       "raw": "\n"
     },
     {
       "id": "b000105",
       "kind": "paragraph",
-      "start_line": 328,
-      "end_line": 331,
-      "raw": "See [runtime contracts](docs/Actor.md), [character runtime](docs/Character.md),\n[USD placement](docs/USD.md), and [Windows build instructions](docs/WindowsBuildAndRun.md).\n`exportUsdLayer()` writes actor placement and references, not skinned character\ngeometry or executable behavior.\n"
+      "start_line": 309,
+      "end_line": 335,
+      "raw": "`Skeleton` stores immutable bones with stable source IDs and inverse binds. A separate\n`evaluationOrder()` supplies parent-first traversal without renumbering joints. Each `Pose`\nowns mutable joint transforms and incrementally evaluates changed descendants.\n`SkeletalMesh` applies sparse morphs followed by the authored linear, dual-quaternion or per-vertex blended skinning profile. [Dual-quaternion skinning](docs/DualQuaternionSkinning.md) is retained in native project history and FBX; components may override it per LOD without changing the asset. Template rig transfer can copy the profile by point identity or surface interpolation while retaining excluded points. Explicit follower skin transfers can separately opt into profile propagation through a clothing or accessory chain. Pose and deformation snapshots preserve authored DQ profiles by default; an explicit linearized snapshot can carry the selected pose and morph baseline to GLB. Its later animated deformation may differ. Direct GLB and DNA export still reject nonlinear profiles. Rebuild C++ consumers for the changed public layouts.\n`AnimationClip`/`AnimationPlayer` provide\nskeletal tracks, scalar curves, seeking, looping and reverse playback.\n[GLB animation baking](docs/GlbAnimationBake.md) converts supported imported\nchannels into editable clips while keeping morph targets distinct per mesh.\nExplicit indexed morph bindings preserve that distinction in GLB and FBX export.\nFBX animation import can also retain distinct per-mesh curves and their bindings.\n[Core clip application](docs/Object3DAnimation.md) applies skeletal tracks and explicitly\nbound morph curves together to a matching asset instance after validating all inputs.\n[Project animation storage](docs/ProjectAnimation.md) optionally saves those clips,\nper-mesh bindings and source timeline origins in native project version 27.\nRebuild C++ consumers for the changed project result structures.\n[Automatic corrective generation](docs/AutomaticCorrectives.md) derives sample-pose\nmorphs from dual-quaternion skinning, with a human elbow/knee planning adapter,\noptional multiple bend samples, and explicit limits on interpolation and external\nruntime drivers.\n[Screen-space point selection](docs/MeshScreenSelection.md) maps host-provided\nprojection, optional depth, and deformed render vertices to editable source-point\nmasks without coupling the core to a UI or renderer.\n[Selection transfer](docs/SelectionTransfer.md) shares surface queries across\nnamed masks and replaces an asset and its projected selections in one undo step.\n`CharacterRig` supplies weighted FK and two-bone IK; `FacialRig` evaluates semantic\njoint, blendshape and animated-map channels. `iiCharacter` composes them with\nActor lifecycle and modular mesh parts.\n"
     },
     {
       "id": "b000106",
-      "kind": "blank",
-      "start_line": 332,
-      "end_line": 332,
-      "raw": "\n"
-    },
-    {
-      "id": "b000107",
-      "kind": "heading",
-      "start_line": 333,
-      "end_line": 333,
-      "raw": "## Build and test\n",
-      "level": 2,
-      "title": "Build and test"
-    },
-    {
-      "id": "b000108",
-      "kind": "blank",
-      "start_line": 334,
-      "end_line": 334,
-      "raw": "\n"
-    },
-    {
-      "id": "b000109",
-      "kind": "paragraph",
-      "start_line": 335,
-      "end_line": 335,
-      "raw": "Use CMake 3.24+ and a C++23 compiler. All generated files belong under `build/`.\n"
-    },
-    {
-      "id": "b000110",
       "kind": "blank",
       "start_line": 336,
       "end_line": 336,
       "raw": "\n"
     },
     {
-      "id": "b000111",
-      "kind": "fenced_code",
+      "id": "b000107",
+      "kind": "paragraph",
       "start_line": 337,
-      "end_line": 343,
-      "raw": "```sh\ncmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.glb 96\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.fbx 96\n```\n",
-      "language": "sh",
-      "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.glb 96\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.fbx 96\n",
-      "closed": true
+      "end_line": 346,
+      "raw": "Pose-corrective rigs map authored local joint rotations to existing morph targets.\nThey can update multiple body and garment meshes after each animation tick without\nreplacing the joint pose. Native project version 26 stores selected corrective rigs;\nruntime components are attached again after loading. The conditions do not create\ncorrective shapes or reproduce another application's driver system. See\n[pose corrective contracts](docs/PoseCorrectives.md). Corrective weights can also\nbe baked into an animation clip for FBX and GLB interchange. The default sampling\nalso bounds possible corrective activity between probes. Rebuild C++ consumers\nfor the updated baking options and results; see\n[corrective animation baking](docs/PoseCorrectiveAnimation.md).\n"
+    },
+    {
+      "id": "b000108",
+      "kind": "blank",
+      "start_line": 347,
+      "end_line": 347,
+      "raw": "\n"
+    },
+    {
+      "id": "b000109",
+      "kind": "paragraph",
+      "start_line": 348,
+      "end_line": 352,
+      "raw": "Components are owned by their Actor. Do not retain pointers after removal or actor\ndestruction. One host thread serializes mutations and lifecycle calls. Hooks are\n`noexcept`; ownership changes during dispatch are rejected, and logical destruction\nis deferred until the current dispatch returns. The host explicitly drives\n`beginPlay()`, `tick()` and `destroy()` before deleting a derived Actor.\n"
+    },
+    {
+      "id": "b000110",
+      "kind": "blank",
+      "start_line": 353,
+      "end_line": 353,
+      "raw": "\n"
+    },
+    {
+      "id": "b000111",
+      "kind": "paragraph",
+      "start_line": 354,
+      "end_line": 357,
+      "raw": "See [runtime contracts](docs/Actor.md), [character runtime](docs/Character.md),\n[USD placement](docs/USD.md), and [Windows build instructions](docs/WindowsBuildAndRun.md).\n`exportUsdLayer()` writes actor placement and references, not skinned character\ngeometry or executable behavior.\n"
     },
     {
       "id": "b000112",
       "kind": "blank",
-      "start_line": 344,
-      "end_line": 344,
+      "start_line": 358,
+      "end_line": 358,
       "raw": "\n"
     },
     {
       "id": "b000113",
-      "kind": "paragraph",
-      "start_line": 345,
-      "end_line": 347,
-      "raw": "The example creates and edits a character and writes a self-contained asset.\n`IIACTOROBJECT_BUILD_EXAMPLE=OFF` disables it. Core CTest needs no Python or app.\nOptional independent format and actual Blender tests:\n"
+      "kind": "heading",
+      "start_line": 359,
+      "end_line": 359,
+      "raw": "## Build and test\n",
+      "level": 2,
+      "title": "Build and test"
     },
     {
       "id": "b000114",
-      "kind": "blank",
-      "start_line": 348,
-      "end_line": 348,
-      "raw": "\n"
-    },
-    {
-      "id": "b000115",
-      "kind": "fenced_code",
-      "start_line": 349,
-      "end_line": 354,
-      "raw": "```sh\ncmake -S . -B build -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=/absolute/path/to/blender\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n```\n",
-      "language": "sh",
-      "code": "cmake -S . -B build -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=/absolute/path/to/blender\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n",
-      "closed": true
-    },
-    {
-      "id": "b000116",
-      "kind": "blank",
-      "start_line": 355,
-      "end_line": 355,
-      "raw": "\n"
-    },
-    {
-      "id": "b000117",
-      "kind": "paragraph",
-      "start_line": 356,
-      "end_line": 359,
-      "raw": "Blender tests verify reference skin/morph deformation, a generated human, detailed\nediting and GLB/FBX roundtrips, including native reimport of Blender-written FBX.\nBlender and Python are verification tools; neither is linked or distributed as\npart of the engine. OpenUSD placement validation remains separately optional.\n"
-    },
-    {
-      "id": "b000118",
       "kind": "blank",
       "start_line": 360,
       "end_line": 360,
       "raw": "\n"
     },
     {
-      "id": "b000119",
-      "kind": "heading",
+      "id": "b000115",
+      "kind": "paragraph",
       "start_line": 361,
       "end_line": 361,
-      "raw": "## Shape controls\n",
-      "level": 2,
-      "title": "Shape controls"
+      "raw": "Use CMake 3.24+ and a C++23 compiler. All generated files belong under `build/`.\n"
     },
     {
-      "id": "b000120",
+      "id": "b000116",
       "kind": "blank",
       "start_line": 362,
       "end_line": 362,
       "raw": "\n"
     },
     {
-      "id": "b000121",
-      "kind": "paragraph",
+      "id": "b000117",
+      "kind": "fenced_code",
       "start_line": 363,
-      "end_line": 367,
-      "raw": "Core templates own named controls, piecewise-linear response curves and products\nof multiple control axes. Zero is neutral. `resolveValues` exposes the resulting\ntarget weights without publishing an asset, and the existing editor preserves\ndetail layers when controls change. Native project version 5 retains control\ndefinitions and history while reading versions 1 through 4.\n"
+      "end_line": 369,
+      "raw": "```sh\ncmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.glb 96\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.fbx 96\n```\n",
+      "language": "sh",
+      "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.glb 96\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.fbx 96\n",
+      "closed": true
+    },
+    {
+      "id": "b000118",
+      "kind": "blank",
+      "start_line": 370,
+      "end_line": 370,
+      "raw": "\n"
+    },
+    {
+      "id": "b000119",
+      "kind": "paragraph",
+      "start_line": 371,
+      "end_line": 373,
+      "raw": "The example creates and edits a character and writes a self-contained asset.\n`IIACTOROBJECT_BUILD_EXAMPLE=OFF` disables it. Core CTest needs no Python or app.\nOptional independent format and actual Blender tests:\n"
+    },
+    {
+      "id": "b000120",
+      "kind": "blank",
+      "start_line": 374,
+      "end_line": 374,
+      "raw": "\n"
+    },
+    {
+      "id": "b000121",
+      "kind": "fenced_code",
+      "start_line": 375,
+      "end_line": 380,
+      "raw": "```sh\ncmake -S . -B build -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=/absolute/path/to/blender\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n```\n",
+      "language": "sh",
+      "code": "cmake -S . -B build -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=/absolute/path/to/blender\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n",
+      "closed": true
     },
     {
       "id": "b000122",
       "kind": "blank",
-      "start_line": 368,
-      "end_line": 368,
+      "start_line": 381,
+      "end_line": 381,
       "raw": "\n"
     },
     {
       "id": "b000123",
       "kind": "paragraph",
-      "start_line": 369,
-      "end_line": 372,
-      "raw": "The CC0 human loader derives signed and one-sided controls from the supplied\nmodifier data and keeps the original sparse target catalog available. Set\n`MakeHumanTemplateOptions::semanticControls` to false for a raw-target-only\nprogram. See [the control contract](docs/TemplateControls.md).\n"
+      "start_line": 382,
+      "end_line": 385,
+      "raw": "Blender tests verify reference skin/morph deformation, a generated human, detailed\nediting and GLB/FBX roundtrips, including native reimport of Blender-written FBX.\nBlender and Python are verification tools; neither is linked or distributed as\npart of the engine. OpenUSD placement validation remains separately optional.\n"
     },
     {
       "id": "b000124",
       "kind": "blank",
-      "start_line": 373,
-      "end_line": 373,
+      "start_line": 386,
+      "end_line": 386,
       "raw": "\n"
     },
     {
       "id": "b000125",
       "kind": "heading",
-      "start_line": 374,
-      "end_line": 374,
-      "raw": "## Preserve edits made in another application\n",
+      "start_line": 387,
+      "end_line": 387,
+      "raw": "## Shape controls\n",
       "level": 2,
-      "title": "Preserve edits made in another application"
+      "title": "Shape controls"
     },
     {
       "id": "b000126",
       "kind": "blank",
-      "start_line": 375,
-      "end_line": 375,
+      "start_line": 388,
+      "end_line": 388,
       "raw": "\n"
     },
     {
       "id": "b000127",
       "kind": "paragraph",
-      "start_line": 376,
-      "end_line": 382,
-      "raw": "The common engine owns source-ID correspondence, external edit merging, template\nlayers and undo/redo. `NSCharacter::CharacterEditor` forwards borrowed snapshots\nto that core API. Export an FBX with `FbxExportOptions::externalDocument`, retain\nthe original `.ii3dproject`, and compare an application's unchanged FBX re-export\nagainst its edited re-export. `applyExternalEdits` merges only their differences.\nAn explicit `replaceLayer` updates an existing external-work layer without\naccumulating the same displacement each time.\n"
+      "start_line": 389,
+      "end_line": 393,
+      "raw": "Core templates own named controls, piecewise-linear response curves and products\nof multiple control axes. Zero is neutral. `resolveValues` exposes the resulting\ntarget weights without publishing an asset, and the existing editor preserves\ndetail layers when controls change. Native project version 5 retains control\ndefinitions and history while reading versions 1 through 4.\n"
     },
     {
       "id": "b000128",
       "kind": "blank",
-      "start_line": 383,
-      "end_line": 383,
+      "start_line": 394,
+      "end_line": 394,
       "raw": "\n"
     },
     {
       "id": "b000129",
       "kind": "paragraph",
-      "start_line": 384,
-      "end_line": 388,
-      "raw": "The optional [Blender adapter](example/BlenderExternalEdits.py) carries stable\npoint, face, corner, joint, morph and material identities through vertex sorting\nand display-name changes. It runs inside Blender; it is not an engine dependency.\nSee [the external editing contract](docs/ExternalEdits.md) for scale conversion,\nconflict policies, numerical tolerances and unsupported topology changes.\n"
+      "start_line": 395,
+      "end_line": 398,
+      "raw": "The CC0 human loader derives signed and one-sided controls from the supplied\nmodifier data and keeps the original sparse target catalog available. Set\n`MakeHumanTemplateOptions::semanticControls` to false for a raw-target-only\nprogram. See [the control contract](docs/TemplateControls.md).\n"
     },
     {
       "id": "b000130",
-      "kind": "blank",
-      "start_line": 389,
-      "end_line": 389,
-      "raw": "\n"
-    },
-    {
-      "id": "b000131",
-      "kind": "heading",
-      "start_line": 390,
-      "end_line": 390,
-      "raw": "## Install and consume\n",
-      "level": 2,
-      "title": "Install and consume"
-    },
-    {
-      "id": "b000132",
-      "kind": "blank",
-      "start_line": 391,
-      "end_line": 391,
-      "raw": "\n"
-    },
-    {
-      "id": "b000133",
-      "kind": "fenced_code",
-      "start_line": 392,
-      "end_line": 398,
-      "raw": "```sh\ncmake --install build --prefix \"$PWD/build/install\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DiiActorObject_DIR=\"$PWD/build/install/lib/cmake/iiActorObject\"\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure\n```\n",
-      "language": "sh",
-      "code": "cmake --install build --prefix \"$PWD/build/install\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DiiActorObject_DIR=\"$PWD/build/install/lib/cmake/iiActorObject\"\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure\n",
-      "closed": true
-    },
-    {
-      "id": "b000134",
       "kind": "blank",
       "start_line": 399,
       "end_line": 399,
       "raw": "\n"
     },
     {
-      "id": "b000135",
-      "kind": "fenced_code",
+      "id": "b000131",
+      "kind": "heading",
       "start_line": 400,
-      "end_line": 403,
+      "end_line": 400,
+      "raw": "## Preserve edits made in another application\n",
+      "level": 2,
+      "title": "Preserve edits made in another application"
+    },
+    {
+      "id": "b000132",
+      "kind": "blank",
+      "start_line": 401,
+      "end_line": 401,
+      "raw": "\n"
+    },
+    {
+      "id": "b000133",
+      "kind": "paragraph",
+      "start_line": 402,
+      "end_line": 408,
+      "raw": "The common engine owns source-ID correspondence, external edit merging, template\nlayers and undo/redo. `NSCharacter::CharacterEditor` forwards borrowed snapshots\nto that core API. Export an FBX with `FbxExportOptions::externalDocument`, retain\nthe original `.ii3dproject`, and compare an application's unchanged FBX re-export\nagainst its edited re-export. `applyExternalEdits` merges only their differences.\nAn explicit `replaceLayer` updates an existing external-work layer without\naccumulating the same displacement each time.\n"
+    },
+    {
+      "id": "b000134",
+      "kind": "blank",
+      "start_line": 409,
+      "end_line": 409,
+      "raw": "\n"
+    },
+    {
+      "id": "b000135",
+      "kind": "paragraph",
+      "start_line": 410,
+      "end_line": 414,
+      "raw": "The optional [Blender adapter](example/BlenderExternalEdits.py) carries stable\npoint, face, corner, joint, morph and material identities through vertex sorting\nand display-name changes. It runs inside Blender; it is not an engine dependency.\nSee [the external editing contract](docs/ExternalEdits.md) for scale conversion,\nconflict policies, numerical tolerances and unsupported topology changes.\n"
+    },
+    {
+      "id": "b000136",
+      "kind": "blank",
+      "start_line": 415,
+      "end_line": 415,
+      "raw": "\n"
+    },
+    {
+      "id": "b000137",
+      "kind": "heading",
+      "start_line": 416,
+      "end_line": 416,
+      "raw": "## Install and consume\n",
+      "level": 2,
+      "title": "Install and consume"
+    },
+    {
+      "id": "b000138",
+      "kind": "blank",
+      "start_line": 417,
+      "end_line": 417,
+      "raw": "\n"
+    },
+    {
+      "id": "b000139",
+      "kind": "fenced_code",
+      "start_line": 418,
+      "end_line": 424,
+      "raw": "```sh\ncmake --install build --prefix \"$PWD/build/install\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DiiActorObject_DIR=\"$PWD/build/install/lib/cmake/iiActorObject\"\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure\n```\n",
+      "language": "sh",
+      "code": "cmake --install build --prefix \"$PWD/build/install\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DiiActorObject_DIR=\"$PWD/build/install/lib/cmake/iiActorObject\"\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure\n",
+      "closed": true
+    },
+    {
+      "id": "b000140",
+      "kind": "blank",
+      "start_line": 425,
+      "end_line": 425,
+      "raw": "\n"
+    },
+    {
+      "id": "b000141",
+      "kind": "fenced_code",
+      "start_line": 426,
+      "end_line": 429,
       "raw": "```cmake\nfind_package(iiActorObject 0.2.1 CONFIG REQUIRED)\ntarget_link_libraries(app PRIVATE iiActorObject::iiActorObject)\n```\n",
       "language": "cmake",
       "code": "find_package(iiActorObject 0.2.1 CONFIG REQUIRED)\ntarget_link_libraries(app PRIVATE iiActorObject::iiActorObject)\n",
       "closed": true
     },
     {
-      "id": "b000136",
-      "kind": "blank",
-      "start_line": 404,
-      "end_line": 404,
-      "raw": "\n"
-    },
-    {
-      "id": "b000137",
-      "kind": "paragraph",
-      "start_line": 405,
-      "end_line": 407,
-      "raw": "`BUILD_SHARED_LIBS=OFF` produces a static library. The installed target propagates\nC++23 and the correct shared/static export definitions. Use a compatible C++ ABI\nand standard library between a shared library and its consumers.\n"
-    },
-    {
-      "id": "b000138",
-      "kind": "blank",
-      "start_line": 408,
-      "end_line": 408,
-      "raw": "\n"
-    },
-    {
-      "id": "b000139",
-      "kind": "paragraph",
-      "start_line": 409,
-      "end_line": 410,
-      "raw": "`./install.sh` builds, tests, installs, and verifies an installed consumer. Its\ndefault prefix is `~/.local/SDK/iiActorObject`; set `INSTALL_PREFIX` for staging.\n"
-    },
-    {
-      "id": "b000140",
-      "kind": "blank",
-      "start_line": 411,
-      "end_line": 411,
-      "raw": "\n"
-    },
-    {
-      "id": "b000141",
-      "kind": "heading",
-      "start_line": 412,
-      "end_line": 412,
-      "raw": "## License and provenance\n",
-      "level": 2,
-      "title": "License and provenance"
-    },
-    {
       "id": "b000142",
       "kind": "blank",
-      "start_line": 413,
-      "end_line": 413,
+      "start_line": 430,
+      "end_line": 430,
       "raw": "\n"
     },
     {
       "id": "b000143",
       "kind": "paragraph",
-      "start_line": 414,
-      "end_line": 417,
-      "raw": "Original code and documentation are MIT licensed; see [LICENSE](LICENSE).\nufbx v0.20.0 uses its MIT alternative, is compiled as C++23, and remains private to\nthe FBX adapter. See [third-party provenance and hashes](src/third_party/ufbx/PROVENANCE.md).\nNo vendor application source or commercial character assets are included.\n"
+      "start_line": 431,
+      "end_line": 433,
+      "raw": "`BUILD_SHARED_LIBS=OFF` produces a static library. The installed target propagates\nC++23 and the correct shared/static export definitions. Use a compatible C++ ABI\nand standard library between a shared library and its consumers.\n"
     },
     {
       "id": "b000144",
       "kind": "blank",
-      "start_line": 418,
-      "end_line": 418,
+      "start_line": 434,
+      "end_line": 434,
       "raw": "\n"
     },
     {
       "id": "b000145",
       "kind": "paragraph",
-      "start_line": 419,
-      "end_line": 420,
-      "raw": "Older verification records describe their dated snapshots; they do not prove\ncompletion of the current authoring or MetaHuman objective.\n"
+      "start_line": 435,
+      "end_line": 436,
+      "raw": "`./install.sh` builds, tests, installs, and verifies an installed consumer. Its\ndefault prefix is `~/.local/SDK/iiActorObject`; set `INSTALL_PREFIX` for staging.\n"
     },
     {
       "id": "b000146",
       "kind": "blank",
-      "start_line": 421,
-      "end_line": 421,
+      "start_line": 437,
+      "end_line": 437,
       "raw": "\n"
     },
     {
       "id": "b000147",
-      "kind": "paragraph",
-      "start_line": 422,
-      "end_line": 430,
-      "raw": "The optional CC0 `MakeHumanFace` bundle adds authored eyes, teeth and tongue with\nthree immutable PNG base-color resources. Set `MakeHumanTemplateOptions::faceAssets`\nor pass `--face-assets=resources/MakeHumanFace` to the template example. The core owns\nimages, authored source-point correspondences, skin bindings and editing history;\nNSCharacter retains borrowed handles. GLB and FBX embed the original PNG bytes.\nNative projects preserve these resources; the current format and input compatibility\nare defined in [native projects](docs/Object3DProject.md).\nOriginal LitSphere shader programs and production MetaHuman quality are outside\nthis milestone. See [face assets and ownership](docs/FaceAssets.md).\n"
+      "kind": "heading",
+      "start_line": 438,
+      "end_line": 438,
+      "raw": "## License and provenance\n",
+      "level": 2,
+      "title": "License and provenance"
     },
     {
       "id": "b000148",
       "kind": "blank",
-      "start_line": 431,
-      "end_line": 431,
+      "start_line": 439,
+      "end_line": 439,
       "raw": "\n"
     },
     {
       "id": "b000149",
       "kind": "paragraph",
-      "start_line": 432,
-      "end_line": 439,
-      "raw": "Optional full body morphology uses `MakeHumanTemplateOptions::macroAssets` with the\nseparate CC0 `MakeHumanMacro` bundle. It adds 348 original targets to the existing\n472, driven by eight independent core controls (258 controls with local details).\n`NSCharacter::makeHumanMacroValues` maps validated age, sex shape, muscle, mass,\nheight, proportions and normalized source population-basis shares to the core.\nThe core template grounds generated visible body points and translates every mesh\nand root joint together. Native projects preserve grounding; see the current\n[format contract](docs/Object3DProject.md) and [human morphology](docs/HumanMorphology.md).\n"
+      "start_line": 440,
+      "end_line": 443,
+      "raw": "Original code and documentation are MIT licensed; see [LICENSE](LICENSE).\nufbx v0.20.0 uses its MIT alternative, is compiled as C++23, and remains private to\nthe FBX adapter. See [third-party provenance and hashes](src/third_party/ufbx/PROVENANCE.md).\nNo vendor application source or commercial character assets are included.\n"
     },
     {
       "id": "b000150",
       "kind": "blank",
-      "start_line": 440,
-      "end_line": 440,
+      "start_line": 444,
+      "end_line": 444,
       "raw": "\n"
     },
     {
       "id": "b000151",
       "kind": "paragraph",
-      "start_line": 441,
-      "end_line": 449,
-      "raw": "Optional face pose generation uses `MakeHumanTemplateOptions::expressionAssets`\nwith the separate CC0 `MakeHumanExpressions` package. `generateRigged` creates\nan engine-owned mesh and a rebindable 59-unit pose rig. The core BVH decoder,\nworld-rotation program, target bind buffers and runtime sessions stay in the core.\nPose application preserves unrelated current body joints. `bakeFaceMorphs`\nexplicitly creates a portable snapshot after shape/rest/skin edits, keeping the\noriginal parametric editor separate. Native project version 8 persists pose\nprograms and sessions, supports a core with DNA disabled, and reads versions 1\nthrough 7. See [face pose rigs](docs/FacePoseRig.md).\n"
+      "start_line": 445,
+      "end_line": 446,
+      "raw": "Older verification records describe their dated snapshots; they do not prove\ncompletion of the current authoring or MetaHuman objective.\n"
     },
     {
       "id": "b000152",
       "kind": "blank",
-      "start_line": 450,
-      "end_line": 450,
+      "start_line": 447,
+      "end_line": 447,
       "raw": "\n"
     },
     {
       "id": "b000153",
       "kind": "paragraph",
-      "start_line": 451,
-      "end_line": 458,
-      "raw": "Source-point symmetry and morph mirroring belong to the common core. Build a\n`MeshSymmetryMap` once from a neutral mesh, then reuse it after shape and UV edits.\n`symmetrizeMesh` supports directional copying, averaging, strength and masks;\n`mirrorMorphs` batches displacement and explicit layout-normal reflection while\npreserving authored point IDs, UV seams, skin and existing target IDs. Same-name\nreplacement with `makeMorphSymmetryMask` symmetrizes an existing morph. The core\neditor and NSCharacter adapter use the same editing history and native project\nformat. See [symmetry contracts and application evidence](docs/MeshSymmetry.md).\n"
+      "start_line": 448,
+      "end_line": 456,
+      "raw": "The optional CC0 `MakeHumanFace` bundle adds authored eyes, teeth and tongue with\nthree immutable PNG base-color resources. Set `MakeHumanTemplateOptions::faceAssets`\nor pass `--face-assets=resources/MakeHumanFace` to the template example. The core owns\nimages, authored source-point correspondences, skin bindings and editing history;\nNSCharacter retains borrowed handles. GLB and FBX embed the original PNG bytes.\nNative projects preserve these resources; the current format and input compatibility\nare defined in [native projects](docs/Object3DProject.md).\nOriginal LitSphere shader programs and production MetaHuman quality are outside\nthis milestone. See [face assets and ownership](docs/FaceAssets.md).\n"
     },
     {
       "id": "b000154",
       "kind": "blank",
-      "start_line": 459,
-      "end_line": 459,
+      "start_line": 457,
+      "end_line": 457,
       "raw": "\n"
     },
     {
       "id": "b000155",
       "kind": "paragraph",
-      "start_line": 460,
-      "end_line": 460,
-      "raw": "Optional [collision-correction fairing](docs/SurfaceFairing.md) smooths the displacement introduced by fitting while preserving authored rest geometry, pins, movement limits and shared query budgets. It is disabled by default. The modern shape policy also prevents an increase in maximum relative edge strain. Native project version 12 records the policy; version 11 retains its original displacement-only behavior, including saved geometry and undo history.\n"
+      "start_line": 458,
+      "end_line": 465,
+      "raw": "Optional full body morphology uses `MakeHumanTemplateOptions::macroAssets` with the\nseparate CC0 `MakeHumanMacro` bundle. It adds 348 original targets to the existing\n472, driven by eight independent core controls (258 controls with local details).\n`NSCharacter::makeHumanMacroValues` maps validated age, sex shape, muscle, mass,\nheight, proportions and normalized source population-basis shares to the core.\nThe core template grounds generated visible body points and translates every mesh\nand root joint together. Native projects preserve grounding; see the current\n[format contract](docs/Object3DProject.md) and [human morphology](docs/HumanMorphology.md).\n"
     },
     {
       "id": "b000156",
       "kind": "blank",
-      "start_line": 461,
-      "end_line": 461,
+      "start_line": 466,
+      "end_line": 466,
       "raw": "\n"
     },
     {
       "id": "b000157",
       "kind": "paragraph",
-      "start_line": 462,
-      "end_line": 468,
-      "raw": "The [characterization and triangle-query checkpoint](docs/CharacterizationProjectionVerification-20261027.json)\nrecords focused checks for the full-feature configurations, complete core-only and\nDNA-disabled suites, separately installed consumers, and full archived v11/v10\nhuman project replays. All 577 CTest executions passed; the two replay pipelines\nretained exact baseline quality metrics and work counters. Ten actual Blender\nimports passed. These results preserve the core's engine ownership and do not\ncertify CC5 profile application, T-pose calibration or production MetaHuman support.\n"
+      "start_line": 467,
+      "end_line": 475,
+      "raw": "Optional face pose generation uses `MakeHumanTemplateOptions::expressionAssets`\nwith the separate CC0 `MakeHumanExpressions` package. `generateRigged` creates\nan engine-owned mesh and a rebindable 59-unit pose rig. The core BVH decoder,\nworld-rotation program, target bind buffers and runtime sessions stay in the core.\nPose application preserves unrelated current body joints. `bakeFaceMorphs`\nexplicitly creates a portable snapshot after shape/rest/skin edits, keeping the\noriginal parametric editor separate. Native project version 8 persists pose\nprograms and sessions, supports a core with DNA disabled, and reads versions 1\nthrough 7. See [face pose rigs](docs/FacePoseRig.md).\n"
     },
     {
       "id": "b000158",
       "kind": "blank",
-      "start_line": 469,
-      "end_line": 469,
+      "start_line": 476,
+      "end_line": 476,
       "raw": "\n"
     },
     {
       "id": "b000159",
       "kind": "paragraph",
-      "start_line": 470,
-      "end_line": 477,
-      "raw": "Core [pose snapshots and descendant-aware aiming](docs/PoseSnapshots.md) preserve\nintermediate helper joints, stable source IDs, skin influences and morph normal\ninterpolation while baking a pose into a separate engine-owned exchange asset.\n`NSCharacter::createHumanPoseSnapshot` resolves human roles to core joint IDs and\ndirections; runtime poses and buffers remain in the core. The core-only\n`iiActorObjectPoseSnapshot` example accepts named joint/descendant directions and\nwrites a separate FBX. Existing animation and rig calibration require explicit\nretargeting after a bind change. See [human direction rules](docs/HumanPoseDirections.md).\n"
+      "start_line": 477,
+      "end_line": 484,
+      "raw": "Source-point symmetry and morph mirroring belong to the common core. Build a\n`MeshSymmetryMap` once from a neutral mesh, then reuse it after shape and UV edits.\n`symmetrizeMesh` supports directional copying, averaging, strength and masks;\n`mirrorMorphs` batches displacement and explicit layout-normal reflection while\npreserving authored point IDs, UV seams, skin and existing target IDs. Same-name\nreplacement with `makeMorphSymmetryMask` symmetrizes an existing morph. The core\neditor and NSCharacter adapter use the same editing history and native project\nformat. See [symmetry contracts and application evidence](docs/MeshSymmetry.md).\n"
     },
     {
       "id": "b000160",
       "kind": "blank",
-      "start_line": 478,
-      "end_line": 478,
+      "start_line": 485,
+      "end_line": 485,
       "raw": "\n"
     },
     {
       "id": "b000161",
       "kind": "paragraph",
-      "start_line": 479,
-      "end_line": 485,
-      "raw": "The [pose snapshot checkpoint](docs/PoseSnapshotVerification-20261027.json) records\n568 CTest executions: changed full-feature behavior and selected consumers,\ncomplete core-only/DNA-disabled suites, and eight actual Blender FBX imports.\nThe existing static configuration disables examples; the CLI comparison is\nverified in shared Release. Native checks cover full 163-bone, 43,474-point,\n296-channel adult/child inputs, including intermediate joints and morph normals.\nHost-specific hand and palm calibration and rig retargeting remain separate requirements. CC5 and Unreal application execution is excluded by the current request.\n"
+      "start_line": 486,
+      "end_line": 486,
+      "raw": "Optional [collision-correction fairing](docs/SurfaceFairing.md) smooths the displacement introduced by fitting while preserving authored rest geometry, pins, movement limits and shared query budgets. It is disabled by default. The modern shape policy also prevents an increase in maximum relative edge strain. Native project version 12 records the policy; version 11 retains its original displacement-only behavior, including saved geometry and undo history.\n"
     },
     {
       "id": "b000162",
       "kind": "blank",
-      "start_line": 486,
-      "end_line": 486,
+      "start_line": 487,
+      "end_line": 487,
       "raw": "\n"
     },
     {
       "id": "b000163",
       "kind": "paragraph",
-      "start_line": 487,
-      "end_line": 493,
-      "raw": "Core [joint frames](docs/PoseFrames.md) align both a descendant direction and a\ngeometric plane normal while preserving local position/scale, stable source IDs\nand intermediate joints. `createOrientedObject3DPoseSnapshot` applies directions\nthen ordered frames atomically in the core. Human adapters pass only role and\nframe metadata; the example palm recipe uses middle/thumb anchors with explicit\nleft/right geometric-normal signs. It does not complete full-body or host-app\nT-pose calibration.\n"
+      "start_line": 488,
+      "end_line": 494,
+      "raw": "The [characterization and triangle-query checkpoint](docs/CharacterizationProjectionVerification-20261027.json)\nrecords focused checks for the full-feature configurations, complete core-only and\nDNA-disabled suites, separately installed consumers, and full archived v11/v10\nhuman project replays. All 577 CTest executions passed; the two replay pipelines\nretained exact baseline quality metrics and work counters. Ten actual Blender\nimports passed. These results preserve the core's engine ownership and do not\ncertify CC5 profile application, T-pose calibration or production MetaHuman support.\n"
     },
     {
       "id": "b000164",
       "kind": "blank",
-      "start_line": 494,
-      "end_line": 494,
+      "start_line": 495,
+      "end_line": 495,
       "raw": "\n"
     },
     {
       "id": "b000165",
       "kind": "paragraph",
-      "start_line": 495,
-      "end_line": 502,
-      "raw": "The [joint-frame checkpoint](docs/JointFrameVerification-20261027.json) records\n609 passing CTest executions: focused full-feature changes and ownership checks,\ncomplete core-only (262) and DNA-disabled (240) suites, and four separately\ninstalled consumers. Eight actual Blender FBX imports passed with complete\n163-bone, 43,474-point, 296-channel adult/child inputs. The core owns assets,\nediting history, rig programs and execution buffers; NSCharacter keeps human\nrules and expiring reference handles. The shared Release CLI also rejects\nsame-file, hard-link and symbolic-link input aliases before writing output.\n"
+      "start_line": 496,
+      "end_line": 503,
+      "raw": "Core [pose snapshots and descendant-aware aiming](docs/PoseSnapshots.md) preserve\nintermediate helper joints, stable source IDs, skin influences and morph normal\ninterpolation while baking a pose into a separate engine-owned exchange asset.\n`NSCharacter::createHumanPoseSnapshot` resolves human roles to core joint IDs and\ndirections; runtime poses and buffers remain in the core. The core-only\n`iiActorObjectPoseSnapshot` example accepts named joint/descendant directions and\nwrites a separate FBX. Existing animation and rig calibration require explicit\nretargeting after a bind change. See [human direction rules](docs/HumanPoseDirections.md).\n"
     },
     {
       "id": "b000166",
       "kind": "blank",
-      "start_line": 503,
-      "end_line": 503,
+      "start_line": 504,
+      "end_line": 504,
       "raw": "\n"
     },
     {
       "id": "b000167",
       "kind": "paragraph",
-      "start_line": 504,
-      "end_line": 504,
-      "raw": "The [human reference-pose planner](docs/HumanPosePlanner.md) assembles ordered arm, leg, foot, palm and finger rules for caller-supplied axes, preserving each finger's first-segment direction. It reports missing roles and does not claim host-specific calibration. See the [native verification record](docs/HumanPosePlannerVerification-20261027.md).\n"
+      "start_line": 505,
+      "end_line": 511,
+      "raw": "The [pose snapshot checkpoint](docs/PoseSnapshotVerification-20261027.json) records\n568 CTest executions: changed full-feature behavior and selected consumers,\ncomplete core-only/DNA-disabled suites, and eight actual Blender FBX imports.\nThe existing static configuration disables examples; the CLI comparison is\nverified in shared Release. Native checks cover full 163-bone, 43,474-point,\n296-channel adult/child inputs, including intermediate joints and morph normals.\nHost-specific hand and palm calibration and rig retargeting remain separate requirements. CC5 and Unreal application execution is excluded by the current request.\n"
     },
     {
       "id": "b000168",
       "kind": "blank",
-      "start_line": 505,
-      "end_line": 505,
+      "start_line": 512,
+      "end_line": 512,
       "raw": "\n"
     },
     {
       "id": "b000169",
       "kind": "paragraph",
-      "start_line": 506,
-      "end_line": 506,
-      "raw": "Core [reference-pose programs](docs/PoseReference.md) preserve original mesh, skin and bind data while initializing the runtime pose. An optional ordered sequence interleaves direction and frame constraints; projects retaining such a sequence use version 15, while existing projects retain their previous version selection. The added public field changes the C++ ABI, so binary consumers must be rebuilt against the updated headers and library. Template and detailed edits recompute the pose in the core, with undo/redo and native project versions 13 or 15. NSCharacter only resolves roles to metadata. Explicit reference snapshots provide exchange assets; direct FBX/GLB/DNA output rejects an unbaked authoring program instead of dropping it. Existing animations require explicit retargeting after a bind change. `CharacterTemplate::bakeReferenceFaceMorphs` samples the original live pose program over the reference posture into a separate exchange asset; neutral-bind face morphs and a later body bake do not provide the same weighted result.\n"
+      "start_line": 513,
+      "end_line": 519,
+      "raw": "Core [joint frames](docs/PoseFrames.md) align both a descendant direction and a\ngeometric plane normal while preserving local position/scale, stable source IDs\nand intermediate joints. `createOrientedObject3DPoseSnapshot` applies directions\nthen ordered frames atomically in the core. Human adapters pass only role and\nframe metadata; the example palm recipe uses middle/thumb anchors with explicit\nleft/right geometric-normal signs. It does not complete full-body or host-app\nT-pose calibration.\n"
     },
     {
       "id": "b000170",
       "kind": "blank",
-      "start_line": 507,
-      "end_line": 507,
+      "start_line": 520,
+      "end_line": 520,
       "raw": "\n"
     },
     {
       "id": "b000171",
       "kind": "paragraph",
-      "start_line": 508,
-      "end_line": 508,
-      "raw": "Core [pose retargeting](docs/PoseRetarget.md) transfers reference-relative rotations over explicit joint mappings and coordinate bases, with optional scaled root translation. It supports instance deformation binds when their scale corrections are positive and isotropic. The human role adapter builds a mapping and reports missing roles. Reflected or nonuniform local pose scales and non-isotropic bind corrections are rejected; IK and contact solving remain separate.\n"
+      "start_line": 521,
+      "end_line": 528,
+      "raw": "The [joint-frame checkpoint](docs/JointFrameVerification-20261027.json) records\n609 passing CTest executions: focused full-feature changes and ownership checks,\ncomplete core-only (262) and DNA-disabled (240) suites, and four separately\ninstalled consumers. Eight actual Blender FBX imports passed with complete\n163-bone, 43,474-point, 296-channel adult/child inputs. The core owns assets,\nediting history, rig programs and execution buffers; NSCharacter keeps human\nrules and expiring reference handles. The shared Release CLI also rejects\nsame-file, hard-link and symbolic-link input aliases before writing output.\n"
     },
     {
       "id": "b000172",
-      "kind": "blank",
-      "start_line": 509,
-      "end_line": 509,
-      "raw": "\n"
-    },
-    {
-      "id": "b000173",
-      "kind": "paragraph",
-      "start_line": 510,
-      "end_line": 510,
-      "raw": "Core [animation retargeting](docs/AnimationRetarget.md) bakes explicitly sampled poses into a new target-skeleton clip, including instance deformation binds. A clip requiring a target bind checks that context before playback, and GLB export rejects it until the target shape and bind are represented by a separate asset. The public `AnimationClip` layout has changed; rebuild C++ consumers against matching headers and libraries. [GLB animation export](docs/GlbAnimation.md) writes skeletal tracks and can explicitly map scalar curves to morph weights across multiple meshes, with an explicit policy for unmatched curves. [GLB animation import](docs/GlbImport.md) retains source keys and LINEAR, STEP and CUBICSPLINE interpolation, maps source nodes to imported bones and meshes, and samples supported joint poses and per-mesh morphs. Supported channels can be [baked to core clips](docs/GlbAnimationBake.md) with explicit limits; direct source-curve and tangent re-export is not yet available. [FBX animation export](docs/FbxAnimation.md) writes sampled skeletal rotations and explicitly matched morph curves; [FBX animation import](docs/FbxAnimationImport.md) samples skeletal and morph takes into core clips with explicit loss and error limits; editable original FBX curves and application compatibility remain separate work. FBX import now explicitly mirrors the X axis when converting handedness, preserving the requested up/front direction and mesh winding; re-import affected older left-handed assets.\n"
-    },
-    {
-      "id": "b000174",
-      "kind": "blank",
-      "start_line": 511,
-      "end_line": 511,
-      "raw": "\n"
-    },
-    {
-      "id": "b000175",
-      "kind": "paragraph",
-      "start_line": 512,
-      "end_line": 512,
-      "raw": "Core [deformation snapshots](docs/DeformationSnapshots.md) also bake per-mesh baseline morph weights. Retained morphs become additive offsets from that baseline, preserving positions and normal interpolation under linear, dual-quaternion and blended multi-bone skinning at the selected pose. Source IDs, UV seams, unused attributes and the original asset remain intact. `createObject3DRigSnapshot` consumes an existing generic or DNA rig evaluation using the live pose/blend mapping without another backend evaluation. Animated maps remain available in the caller's evaluation for shaders. The resulting asset belongs to the same core engine and works without NSCharacter or DNA.\n"
-    },
-    {
-      "id": "b000176",
-      "kind": "blank",
-      "start_line": 513,
-      "end_line": 513,
-      "raw": "\n"
-    },
-    {
-      "id": "b000177",
-      "kind": "paragraph",
-      "start_line": 514,
-      "end_line": 514,
-      "raw": "Core [morph-channel rigs](docs/MorphChannelRig.md) turn authored morph names into normalized controls shared across matching meshes and can be saved with a project. Procedural humans with facial morphs also include a simple jaw-bound tongue mesh with tongue and jaw channels; this is a starting mesh, not production oral anatomy or collision handling.\n"
-    },
-    {
-      "id": "b000178",
-      "kind": "blank",
-      "start_line": 515,
-      "end_line": 515,
-      "raw": "\n"
-    },
-    {
-      "id": "b000179",
-      "kind": "paragraph",
-      "start_line": 516,
-      "end_line": 516,
-      "raw": "The [reference-pose checkpoint](docs/PoseReferenceVerification-20261027.json) records 751 passing CTest executions and 16 actual Blender imports. The edited adult/child template retains 24,316 source points, 163 bones and 258 controls; all 59 single face-control endpoints are compared over four meshes in shared Release and static ASan/UBSan. Eight expression previews were visually inspected. General animation retargeting and production MetaHuman quality remain open. CC5 and Unreal application execution is excluded by the current request.\n"
-    },
-    {
-      "id": "b000180",
-      "kind": "blank",
-      "start_line": 517,
-      "end_line": 517,
-      "raw": "\n"
-    },
-    {
-      "id": "b000181",
-      "kind": "paragraph",
-      "start_line": 518,
-      "end_line": 518,
-      "raw": "Core [rig control sampling](docs/RigControlSamples.md) creates editable morph endpoints from isolated generic or DNA driver evaluations, including dual-quaternion and per-point blended source geometry and hidden normals. The API preserves skinning by default or can explicitly linearize the selected bind baseline and sample endpoints for GLB; other animated poses may differ. The core-owned asset retains historical control, joint and animated-map provenance in native projects, FBX metadata and GLB extras. These samples are not a live rig graph or automatic shader connections. NSCharacter holds only a borrowed view of the resulting asset. The separately configurable `IIACTOROBJECT_BUILD_TOOLS` option installs the `iiActorObjectRigSamples` agent CLI; it also accepts native pose-rig projects when DNA is disabled. The CLI currently preserves the source skinning profile.\n"
-    },
-    {
-      "id": "b000182",
-      "kind": "blank",
-      "start_line": 519,
-      "end_line": 519,
-      "raw": "\n"
-    },
-    {
-      "id": "b000183",
-      "kind": "paragraph",
-      "start_line": 520,
-      "end_line": 520,
-      "raw": "[GLB import](docs/GlbImport.md) accepts primitives with different normal and UV availability in one mesh. It generates flat normals and fills unused missing UVs with explicit warnings, while rejecting a primitive whose material needs an absent UV set. Generated mixed-primitive morph normals are stored as import-time deltas and may require recalculation after surface edits.\n"
-    },
-    {
-      "id": "b000184",
-      "kind": "blank",
-      "start_line": 521,
-      "end_line": 521,
-      "raw": "\n"
-    },
-    {
-      "id": "b000185",
-      "kind": "paragraph",
-      "start_line": 522,
-      "end_line": 522,
-      "raw": "Core [material surfaces](docs/MaterialSurface.md) retain explicit opaque, alpha-mask and blend modes, mask cutoff and double-sided settings through editing, undo/redo, GLB and native project version 29 or later. FBX preserves the extra settings as SDK-specific material properties; other applications may ignore them. The host supplies rendering and DNA material bindings. The added public field changes the C++ ABI, so rebuild consumers with matching headers and libraries.\n"
-    },
-    {
-      "id": "b000186",
-      "kind": "blank",
-      "start_line": 523,
-      "end_line": 523,
-      "raw": "\n"
-    },
-    {
-      "id": "b000187",
-      "kind": "paragraph",
-      "start_line": 524,
-      "end_line": 524,
-      "raw": "Human joint rules recognize CC5 G5 and Blender human metarig naming conventions, including a dot-to-underscore variant. [Automatic convention detection](docs/HumanoidCharacterization.md) checks exact bone names and ancestry, reports all complete candidates, and returns a mapping only when they agree. A shared convention does not identify the source application, and renaming does not create an application control rig. Core [reference-pose aims](docs/PoseReference.md) can aim at the centroid of multiple descendant joints. The human planner uses all five MakeHuman toe roots when a common toe base is absent, and stores such plans in native project version 30. The earlier added public fields change the C++ ABI; rebuild consumers with matching headers and library.\n"
-    },
-    {
-      "id": "b000188",
-      "kind": "blank",
-      "start_line": 525,
-      "end_line": 525,
-      "raw": "\n"
-    },
-    {
-      "id": "b000189",
-      "kind": "paragraph",
-      "start_line": 526,
-      "end_line": 526,
-      "raw": "The [rig sampling verification record](docs/RigControlSamplesVerification-20261027.md) separates automated tests from earlier, now-excluded application execution checks and documents the remaining work.\n"
-    },
-    {
-      "id": "b000190",
-      "kind": "blank",
-      "start_line": 527,
-      "end_line": 527,
-      "raw": "\n"
-    },
-    {
-      "id": "b000191",
-      "kind": "paragraph",
-      "start_line": 528,
-      "end_line": 528,
-      "raw": "Project-supplied character templates and fixed test inputs are stored in `resources/`; generated build and test outputs remain in `build/`. See [resource paths and provenance](docs/Resources.md).\n"
-    },
-    {
-      "id": "b000192",
       "kind": "blank",
       "start_line": 529,
       "end_line": 529,
       "raw": "\n"
     },
     {
-      "id": "b000193",
+      "id": "b000173",
       "kind": "paragraph",
       "start_line": 530,
       "end_line": 530,
-      "raw": "Automated unit and integration tests remain enabled. Separate execution validation of user-facing applications and tools is off by default and is enabled with `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION` only when explicitly requested. `install.sh` also defaults this option to OFF, even if a build cache was previously configured differently.\n"
+      "raw": "The [human reference-pose planner](docs/HumanPosePlanner.md) assembles ordered arm, leg, foot, palm and finger rules for caller-supplied axes, preserving each finger's first-segment direction. It reports missing roles and does not claim host-specific calibration. See the [native verification record](docs/HumanPosePlannerVerification-20261027.md).\n"
     },
     {
-      "id": "b000194",
+      "id": "b000174",
       "kind": "blank",
       "start_line": 531,
       "end_line": 531,
       "raw": "\n"
     },
     {
-      "id": "b000195",
+      "id": "b000175",
       "kind": "paragraph",
       "start_line": 532,
       "end_line": 532,
-      "raw": "Core [multiple UV sets](docs/MultipleUvSets.md) retain named source coordinates, per-layout seams and material UV selection across editing, project versions 16 and later, FBX and GLB. DNA output rejects additional sets unless loss is explicitly allowed. These added public fields change the C++ ABI; rebuild consumers against the matching library and headers. Application import is not validated.\n"
+      "raw": "Core [reference-pose programs](docs/PoseReference.md) preserve original mesh, skin and bind data while initializing the runtime pose. An optional ordered sequence interleaves direction and frame constraints; projects retaining such a sequence use version 15, while existing projects retain their previous version selection. The added public field changes the C++ ABI, so binary consumers must be rebuilt against the updated headers and library. Template and detailed edits recompute the pose in the core, with undo/redo and native project versions 13 or 15. NSCharacter only resolves roles to metadata. Explicit reference snapshots provide exchange assets; direct FBX/GLB/DNA output rejects an unbaked authoring program instead of dropping it. Existing animations require explicit retargeting after a bind change. `CharacterTemplate::bakeReferenceFaceMorphs` samples the original live pose program over the reference posture into a separate exchange asset; neutral-bind face morphs and a later body bake do not provide the same weighted result.\n"
     },
     {
-      "id": "b000196",
+      "id": "b000176",
       "kind": "blank",
       "start_line": 533,
       "end_line": 533,
       "raw": "\n"
     },
     {
-      "id": "b000197",
+      "id": "b000177",
       "kind": "paragraph",
       "start_line": 534,
       "end_line": 534,
-      "raw": "The core editor also stores [named point selections](docs/NamedPointSelections.md) for brush and layer masks, including undo/redo and project version 17. NSCharacter forwards to the core session. Existing application binaries should be rebuilt against the matching headers and library.\n"
+      "raw": "Core [pose retargeting](docs/PoseRetarget.md) transfers reference-relative rotations over explicit joint mappings and coordinate bases, with optional scaled root translation. It supports instance deformation binds when their scale corrections are positive and isotropic. The human role adapter builds a mapping and reports missing roles. Reflected or nonuniform local pose scales and non-isotropic bind corrections are rejected; IK and contact solving remain separate.\n"
     },
     {
-      "id": "b000198",
+      "id": "b000178",
       "kind": "blank",
       "start_line": 535,
       "end_line": 535,
       "raw": "\n"
     },
     {
-      "id": "b000199",
+      "id": "b000179",
       "kind": "paragraph",
       "start_line": 536,
       "end_line": 536,
-      "raw": "Core [normal-map bindings](docs/NormalMaps.md) retain embedded PNG, named UV selection and scale through editing, project version 18 and GLB. FBX uses a standard normal-map connection and an iiActorObject-specific scale property. GLB and FBX emit tangent bases for supported normal-mapped meshes; documented limits and fallbacks apply. Rebuild C++ consumers against the updated headers and library. Application import and rendered appearance have not been validated.\n"
+      "raw": "Core [animation retargeting](docs/AnimationRetarget.md) bakes explicitly sampled poses into a new target-skeleton clip, including instance deformation binds. A clip requiring a target bind checks that context before playback, and GLB export rejects it until the target shape and bind are represented by a separate asset. The public `AnimationClip` layout has changed; rebuild C++ consumers against matching headers and libraries. [GLB animation export](docs/GlbAnimation.md) writes skeletal tracks and can explicitly map scalar curves to morph weights across multiple meshes, with an explicit policy for unmatched curves. [GLB animation import](docs/GlbImport.md) retains source keys and LINEAR, STEP and CUBICSPLINE interpolation, maps source nodes to imported bones and meshes, and samples supported joint poses and per-mesh morphs. Supported channels can be [baked to core clips](docs/GlbAnimationBake.md) with explicit limits; direct source-curve and tangent re-export is not yet available. [FBX animation export](docs/FbxAnimation.md) writes sampled skeletal rotations and explicitly matched morph curves; [FBX animation import](docs/FbxAnimationImport.md) samples skeletal and morph takes into core clips with explicit loss and error limits; editable original FBX curves and application compatibility remain separate work. FBX import now explicitly mirrors the X axis when converting handedness, preserving the requested up/front direction and mesh winding; re-import affected older left-handed assets.\n"
     },
     {
-      "id": "b000200",
+      "id": "b000180",
       "kind": "blank",
       "start_line": 537,
       "end_line": 537,
       "raw": "\n"
     },
     {
-      "id": "b000201",
+      "id": "b000181",
       "kind": "paragraph",
       "start_line": 538,
-      "end_line": 546,
-      "raw": "Core [surface-geodesic skin binding](docs/SurfaceGeodesicSkin.md) computes bounded\nedge-path distances from automatically selected or authored bone seeds, with explicit\npolicies for disconnected points. The procedural human generator can opt into this\nmethod using its generated rig envelopes. The core and NSCharacter editors retain undo/redo\nand layer behavior. This is a discrete approximation, not a production auto-rig\nquality guarantee; rebuild C++ consumers against the updated library and headers.\nThe core can also infer [branch-aware envelopes from an existing bind skeleton](docs/SkeletonEnvelopes.md)\nand apply them in one undoable operation. The geometric inference does not classify\ndeforming or helper joints or guarantee production deformation quality.\n"
+      "end_line": 538,
+      "raw": "Core [deformation snapshots](docs/DeformationSnapshots.md) also bake per-mesh baseline morph weights. Retained morphs become additive offsets from that baseline, preserving positions and normal interpolation under linear, dual-quaternion and blended multi-bone skinning at the selected pose. Source IDs, UV seams, unused attributes and the original asset remain intact. `createObject3DRigSnapshot` consumes an existing generic or DNA rig evaluation using the live pose/blend mapping without another backend evaluation. Animated maps remain available in the caller's evaluation for shaders. The resulting asset belongs to the same core engine and works without NSCharacter or DNA.\n"
     },
     {
-      "id": "b000202",
+      "id": "b000182",
+      "kind": "blank",
+      "start_line": 539,
+      "end_line": 539,
+      "raw": "\n"
+    },
+    {
+      "id": "b000183",
+      "kind": "paragraph",
+      "start_line": 540,
+      "end_line": 540,
+      "raw": "Core [morph-channel rigs](docs/MorphChannelRig.md) turn authored morph names into normalized controls shared across matching meshes and can be saved with a project. Procedural humans with facial morphs also include a simple jaw-bound tongue mesh with tongue and jaw channels; this is a starting mesh, not production oral anatomy or collision handling.\n"
+    },
+    {
+      "id": "b000184",
+      "kind": "blank",
+      "start_line": 541,
+      "end_line": 541,
+      "raw": "\n"
+    },
+    {
+      "id": "b000185",
+      "kind": "paragraph",
+      "start_line": 542,
+      "end_line": 542,
+      "raw": "The [reference-pose checkpoint](docs/PoseReferenceVerification-20261027.json) records 751 passing CTest executions and 16 actual Blender imports. The edited adult/child template retains 24,316 source points, 163 bones and 258 controls; all 59 single face-control endpoints are compared over four meshes in shared Release and static ASan/UBSan. Eight expression previews were visually inspected. General animation retargeting and production MetaHuman quality remain open. CC5 and Unreal application execution is excluded by the current request.\n"
+    },
+    {
+      "id": "b000186",
+      "kind": "blank",
+      "start_line": 543,
+      "end_line": 543,
+      "raw": "\n"
+    },
+    {
+      "id": "b000187",
+      "kind": "paragraph",
+      "start_line": 544,
+      "end_line": 544,
+      "raw": "Core [rig control sampling](docs/RigControlSamples.md) creates editable morph endpoints from isolated generic or DNA driver evaluations, including dual-quaternion and per-point blended source geometry and hidden normals. The API preserves skinning by default or can explicitly linearize the selected bind baseline and sample endpoints for GLB; other animated poses may differ. The core-owned asset retains historical control, joint and animated-map provenance in native projects, FBX metadata and GLB extras. These samples are not a live rig graph or automatic shader connections. NSCharacter holds only a borrowed view of the resulting asset. The separately configurable `IIACTOROBJECT_BUILD_TOOLS` option installs the `iiActorObjectRigSamples` agent CLI; it also accepts native pose-rig projects when DNA is disabled. The CLI currently preserves the source skinning profile.\n"
+    },
+    {
+      "id": "b000188",
+      "kind": "blank",
+      "start_line": 545,
+      "end_line": 545,
+      "raw": "\n"
+    },
+    {
+      "id": "b000189",
+      "kind": "paragraph",
+      "start_line": 546,
+      "end_line": 546,
+      "raw": "[GLB import](docs/GlbImport.md) accepts primitives with different normal and UV availability in one mesh. It generates flat normals and fills unused missing UVs with explicit warnings, while rejecting a primitive whose material needs an absent UV set. Generated mixed-primitive morph normals are stored as import-time deltas and may require recalculation after surface edits.\n"
+    },
+    {
+      "id": "b000190",
       "kind": "blank",
       "start_line": 547,
       "end_line": 547,
       "raw": "\n"
     },
     {
-      "id": "b000203",
+      "id": "b000191",
       "kind": "paragraph",
       "start_line": 548,
-      "end_line": 552,
-      "raw": "[Template rig transfer](docs/TemplateRigTransfer.md) creates a core-owned skeletal\nasset from a static mesh using matching authoring point IDs, or supplied target joint\nanchors with closest-surface skin transfer for different topology. It preserves the\ntarget mesh and reports unanchored joints and unmatched meshes. Automatic landmark\ninference and production-quality deformation are not implied.\n"
+      "end_line": 548,
+      "raw": "Core [material surfaces](docs/MaterialSurface.md) retain explicit opaque, alpha-mask and blend modes, mask cutoff and double-sided settings through editing, undo/redo, GLB and native project version 29 or later. FBX preserves the extra settings as SDK-specific material properties; other applications may ignore them. The host supplies rendering and DNA material bindings. The added public field changes the C++ ABI, so rebuild consumers with matching headers and libraries.\n"
     },
     {
-      "id": "b000204",
+      "id": "b000192",
+      "kind": "blank",
+      "start_line": 549,
+      "end_line": 549,
+      "raw": "\n"
+    },
+    {
+      "id": "b000193",
+      "kind": "paragraph",
+      "start_line": 550,
+      "end_line": 550,
+      "raw": "Human joint rules recognize CC5 G5 and Blender human metarig naming conventions, including a dot-to-underscore variant. [Automatic convention detection](docs/HumanoidCharacterization.md) checks exact bone names and ancestry, reports all complete candidates, and returns a mapping only when they agree. A shared convention does not identify the source application, and renaming does not create an application control rig. Core [reference-pose aims](docs/PoseReference.md) can aim at the centroid of multiple descendant joints. The human planner uses all five MakeHuman toe roots when a common toe base is absent, and stores such plans in native project version 30. The earlier added public fields change the C++ ABI; rebuild consumers with matching headers and library.\n"
+    },
+    {
+      "id": "b000194",
+      "kind": "blank",
+      "start_line": 551,
+      "end_line": 551,
+      "raw": "\n"
+    },
+    {
+      "id": "b000195",
+      "kind": "paragraph",
+      "start_line": 552,
+      "end_line": 552,
+      "raw": "The [rig sampling verification record](docs/RigControlSamplesVerification-20261027.md) separates automated tests from earlier, now-excluded application execution checks and documents the remaining work.\n"
+    },
+    {
+      "id": "b000196",
       "kind": "blank",
       "start_line": 553,
       "end_line": 553,
       "raw": "\n"
     },
     {
-      "id": "b000205",
+      "id": "b000197",
       "kind": "paragraph",
       "start_line": 554,
-      "end_line": 588,
-      "raw": "For nearby pre-aligned meshes with different topology, optional [surface-projected\njoint anchors](docs/TemplateRigProjection.md) transfer a template rig without manually\nspecifying each target joint. The report exposes individual projections and distance,\nnormal, and work limits. Optional bounds matching handles scale and translation;\nan additional bounded Y-up yaw search can align rotated input and rejects ambiguous\nopposite orientations by default. Neither method is anatomical recognition or\nnon-rigid registration.\nOptional [surface-based template shape fitting](docs/TemplateShapeFit.md) estimates\nraw target weights before projecting joints. It reports the candidates, residual and\nwork limits; similar surface shapes can still imply different internal joints.\nThe core can also [adapt a template to a new mesh](docs/TemplateAdapt.md), retaining\nits shape controls and joint anchors in an independently owned program. Render-only\nmeshes are promoted to authoring topology, and raw runtime morph channels can be\npublished on request. This uses geometric correspondence, not anatomical inference.\nMapped facial and garment followers can retain authored point bindings or reproject\ntheir source anchors; hosts can also add a bounded target-mesh follower graph.\nYaw registration is applied consistently to the reference surface, shape deltas,\ngrounding direction, pose axes and authored follower offsets. Axis-scaled point\nbindings retain their local basis through repeated registrations and native project\nversion 25; rebuild C++ consumers against the matching headers and library.\nFor projected rigs and changed-topology shapes, an optional nearby-face normal tie\nbreaker reduces transfers across opposing surfaces; ambiguous neighborhoods retain\nthe nearest result and still require review.\nThe core and NSCharacter editors also expose the same bounded skin transfer with\nundo, layers and project persistence; unchanged results do not create history.\nThis remains a geometric approximation for changed topology. Explicit [template\nmorph baking](docs/TemplateMorphBaking.md) samples selected controls on every\naffected follower mesh. Hosts must synchronize those per-mesh channels, and their\nexternal bind joints and nonlinear interpolation remain limitations. Inside the SDK,\nthe core template morph rig applies normalized controls to matching mesh channels.\nWith a live source template and matching skeleton, it can also recompute an\ninstance-specific bind and inverse bind while preserving the existing animation\nlocals. Changed inputs evaluate the template graph and the latest result is\ncached; external application controllers are not produced. The public `Pose` layout has changed, so C++\nconsumers must rebuild against matching headers and libraries.\n"
+      "end_line": 554,
+      "raw": "Project-supplied character templates and fixed test inputs are stored in `resources/`; generated build and test outputs remain in `build/`. See [resource paths and provenance](docs/Resources.md).\n"
+    },
+    {
+      "id": "b000198",
+      "kind": "blank",
+      "start_line": 555,
+      "end_line": 555,
+      "raw": "\n"
+    },
+    {
+      "id": "b000199",
+      "kind": "paragraph",
+      "start_line": 556,
+      "end_line": 556,
+      "raw": "Automated unit and integration tests remain enabled. Separate execution validation of user-facing applications and tools is off by default and is enabled with `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION` only when explicitly requested. `install.sh` also defaults this option to OFF, even if a build cache was previously configured differently.\n"
+    },
+    {
+      "id": "b000200",
+      "kind": "blank",
+      "start_line": 557,
+      "end_line": 557,
+      "raw": "\n"
+    },
+    {
+      "id": "b000201",
+      "kind": "paragraph",
+      "start_line": 558,
+      "end_line": 558,
+      "raw": "Core [multiple UV sets](docs/MultipleUvSets.md) retain named source coordinates, per-layout seams and material UV selection across editing, project versions 16 and later, FBX and GLB. DNA output rejects additional sets unless loss is explicitly allowed. These added public fields change the C++ ABI; rebuild consumers against the matching library and headers. Application import is not validated.\n"
+    },
+    {
+      "id": "b000202",
+      "kind": "blank",
+      "start_line": 559,
+      "end_line": 559,
+      "raw": "\n"
+    },
+    {
+      "id": "b000203",
+      "kind": "paragraph",
+      "start_line": 560,
+      "end_line": 560,
+      "raw": "The core editor also stores [named point selections](docs/NamedPointSelections.md) for brush and layer masks, including undo/redo and project version 17. NSCharacter forwards to the core session. Existing application binaries should be rebuilt against the matching headers and library.\n"
+    },
+    {
+      "id": "b000204",
+      "kind": "blank",
+      "start_line": 561,
+      "end_line": 561,
+      "raw": "\n"
+    },
+    {
+      "id": "b000205",
+      "kind": "paragraph",
+      "start_line": 562,
+      "end_line": 562,
+      "raw": "Core [normal-map bindings](docs/NormalMaps.md) retain embedded PNG, named UV selection and scale through editing, project version 18 and GLB. FBX uses a standard normal-map connection and an iiActorObject-specific scale property. GLB and FBX emit tangent bases for supported normal-mapped meshes; documented limits and fallbacks apply. Rebuild C++ consumers against the updated headers and library. Application import and rendered appearance have not been validated.\n"
     },
     {
       "id": "b000206",
       "kind": "blank",
-      "start_line": 589,
-      "end_line": 589,
+      "start_line": 563,
+      "end_line": 563,
       "raw": "\n"
     },
     {
       "id": "b000207",
       "kind": "paragraph",
-      "start_line": 590,
-      "end_line": 590,
-      "raw": "Core [logical morph channels](docs/LogicalMorphChannels.md) consolidate same-name source records when producing an external-edit FBX. The original project retains the source target IDs, and imported edits are merged back into those records. Ordinary archival FBX keeps the original separate records. Application execution is not part of this verification.\n"
+      "start_line": 564,
+      "end_line": 572,
+      "raw": "Core [surface-geodesic skin binding](docs/SurfaceGeodesicSkin.md) computes bounded\nedge-path distances from automatically selected or authored bone seeds, with explicit\npolicies for disconnected points. The procedural human generator can opt into this\nmethod using its generated rig envelopes. The core and NSCharacter editors retain undo/redo\nand layer behavior. This is a discrete approximation, not a production auto-rig\nquality guarantee; rebuild C++ consumers against the updated library and headers.\nThe core can also infer [branch-aware envelopes from an existing bind skeleton](docs/SkeletonEnvelopes.md)\nand apply them in one undoable operation. The geometric inference does not classify\ndeforming or helper joints or guarantee production deformation quality.\n"
     },
     {
       "id": "b000208",
       "kind": "blank",
-      "start_line": 591,
-      "end_line": 591,
+      "start_line": 573,
+      "end_line": 573,
       "raw": "\n"
     },
     {
       "id": "b000209",
       "kind": "paragraph",
-      "start_line": 592,
-      "end_line": 592,
-      "raw": "Core [base normal editing](docs/BaseNormalEditing.md) merges authored per-corner directions into existing source normal IDs, including geometry edits and non-destructive layers. Project version 19 stores layer corrections; rebuild binary consumers against the matching library and headers. Actual application imports and visual results have not been verified.\n"
+      "start_line": 574,
+      "end_line": 578,
+      "raw": "[Template rig transfer](docs/TemplateRigTransfer.md) creates a core-owned skeletal\nasset from a static mesh using matching authoring point IDs, or supplied target joint\nanchors with closest-surface skin transfer for different topology. It preserves the\ntarget mesh and reports unanchored joints and unmatched meshes. Automatic landmark\ninference and production-quality deformation are not implied.\n"
     },
     {
       "id": "b000210",
       "kind": "blank",
-      "start_line": 593,
-      "end_line": 594,
-      "raw": "\n\n"
+      "start_line": 579,
+      "end_line": 579,
+      "raw": "\n"
     },
     {
       "id": "b000211",
       "kind": "paragraph",
-      "start_line": 595,
-      "end_line": 595,
-      "raw": "Core-owned [default morph weights](docs/DefaultMorphWeights.md) initialize new instances and persist through GLB, FBX and native project interchange. Nonzero defaults select project version 23 or later when another feature requires it. The added public mesh field requires consumers to rebuild against the updated headers and library.\n"
+      "start_line": 580,
+      "end_line": 614,
+      "raw": "For nearby pre-aligned meshes with different topology, optional [surface-projected\njoint anchors](docs/TemplateRigProjection.md) transfer a template rig without manually\nspecifying each target joint. The report exposes individual projections and distance,\nnormal, and work limits. Optional bounds matching handles scale and translation;\nan additional bounded Y-up yaw search can align rotated input and rejects ambiguous\nopposite orientations by default. Neither method is anatomical recognition or\nnon-rigid registration.\nOptional [surface-based template shape fitting](docs/TemplateShapeFit.md) estimates\nraw target weights before projecting joints. It reports the candidates, residual and\nwork limits; similar surface shapes can still imply different internal joints.\nThe core can also [adapt a template to a new mesh](docs/TemplateAdapt.md), retaining\nits shape controls and joint anchors in an independently owned program. Render-only\nmeshes are promoted to authoring topology, and raw runtime morph channels can be\npublished on request. This uses geometric correspondence, not anatomical inference.\nMapped facial and garment followers can retain authored point bindings or reproject\ntheir source anchors; hosts can also add a bounded target-mesh follower graph.\nYaw registration is applied consistently to the reference surface, shape deltas,\ngrounding direction, pose axes and authored follower offsets. Axis-scaled point\nbindings retain their local basis through repeated registrations and native project\nversion 25; rebuild C++ consumers against the matching headers and library.\nFor projected rigs and changed-topology shapes, an optional nearby-face normal tie\nbreaker reduces transfers across opposing surfaces; ambiguous neighborhoods retain\nthe nearest result and still require review.\nThe core and NSCharacter editors also expose the same bounded skin transfer with\nundo, layers and project persistence; unchanged results do not create history.\nThis remains a geometric approximation for changed topology. Explicit [template\nmorph baking](docs/TemplateMorphBaking.md) samples selected controls on every\naffected follower mesh. Hosts must synchronize those per-mesh channels, and their\nexternal bind joints and nonlinear interpolation remain limitations. Inside the SDK,\nthe core template morph rig applies normalized controls to matching mesh channels.\nWith a live source template and matching skeleton, it can also recompute an\ninstance-specific bind and inverse bind while preserving the existing animation\nlocals. Changed inputs evaluate the template graph and the latest result is\ncached; external application controllers are not produced. The public `Pose` layout has changed, so C++\nconsumers must rebuild against matching headers and libraries.\n"
     },
     {
       "id": "b000212",
       "kind": "blank",
-      "start_line": 596,
-      "end_line": 596,
+      "start_line": 615,
+      "end_line": 615,
       "raw": "\n"
     },
     {
       "id": "b000213",
       "kind": "paragraph",
-      "start_line": 597,
-      "end_line": 597,
-      "raw": "The core [GLB multi-skin importer](docs/GlbMultiSkin.md) merges shared joints and reports each source skin's joint mapping. Static meshes in a mixed scene are baked and attached to their nearest source joint or the synthetic root; the original scene-node structure is not retained. Rebuild consumers after the public import result and options change.\n"
+      "start_line": 616,
+      "end_line": 616,
+      "raw": "Core [logical morph channels](docs/LogicalMorphChannels.md) consolidate same-name source records when producing an external-edit FBX. The original project retains the source target IDs, and imported edits are merged back into those records. Ordinary archival FBX keeps the original separate records. Application execution is not part of this verification.\n"
     },
     {
       "id": "b000214",
       "kind": "blank",
-      "start_line": 598,
-      "end_line": 598,
+      "start_line": 617,
+      "end_line": 617,
       "raw": "\n"
     },
     {
       "id": "b000215",
-      "kind": "html",
-      "start_line": 599,
-      "end_line": 599,
-      "raw": "<!-- workspace-docs:readme:start -->\n"
+      "kind": "paragraph",
+      "start_line": 618,
+      "end_line": 618,
+      "raw": "Core [base normal editing](docs/BaseNormalEditing.md) merges authored per-corner directions into existing source normal IDs, including geometry edits and non-destructive layers. Project version 19 stores layer corrections; rebuild binary consumers against the matching library and headers. Actual application imports and visual results have not been verified.\n"
     },
     {
       "id": "b000216",
+      "kind": "blank",
+      "start_line": 619,
+      "end_line": 620,
+      "raw": "\n\n"
+    },
+    {
+      "id": "b000217",
+      "kind": "paragraph",
+      "start_line": 621,
+      "end_line": 621,
+      "raw": "Core-owned [default morph weights](docs/DefaultMorphWeights.md) initialize new instances and persist through GLB, FBX and native project interchange. Nonzero defaults select project version 23 or later when another feature requires it. The added public mesh field requires consumers to rebuild against the updated headers and library.\n"
+    },
+    {
+      "id": "b000218",
+      "kind": "blank",
+      "start_line": 622,
+      "end_line": 622,
+      "raw": "\n"
+    },
+    {
+      "id": "b000219",
+      "kind": "paragraph",
+      "start_line": 623,
+      "end_line": 623,
+      "raw": "The core [GLB multi-skin importer](docs/GlbMultiSkin.md) merges shared joints and reports each source skin's joint mapping. Static meshes in a mixed scene are baked and attached to their nearest source joint or the synthetic root; the original scene-node structure is not retained. Rebuild consumers after the public import result and options change.\n"
+    },
+    {
+      "id": "b000220",
+      "kind": "blank",
+      "start_line": 624,
+      "end_line": 624,
+      "raw": "\n"
+    },
+    {
+      "id": "b000221",
+      "kind": "html",
+      "start_line": 625,
+      "end_line": 625,
+      "raw": "<!-- workspace-docs:readme:start -->\n"
+    },
+    {
+      "id": "b000222",
       "kind": "heading",
-      "start_line": 600,
-      "end_line": 600,
+      "start_line": 626,
+      "end_line": 626,
       "raw": "## Documentation entry points\n",
       "level": 2,
       "title": "Documentation entry points"
     },
     {
-      "id": "b000217",
+      "id": "b000223",
       "kind": "blank",
-      "start_line": 601,
-      "end_line": 601,
+      "start_line": 627,
+      "end_line": 627,
       "raw": "\n"
     },
     {
-      "id": "b000218",
+      "id": "b000224",
       "kind": "list",
-      "start_line": 602,
-      "end_line": 605,
+      "start_line": 628,
+      "end_line": 631,
       "raw": "- Human overview: this English `README.md`.\n- Agent instructions: [AGENT.md](AGENT.md).\n- Human documentation: [documentation index](docs/README.md).\n- Structured agent documentation: [agent index](docs/agent-index.json).\n",
       "items": [
         {
@@ -1648,10 +1690,10 @@
       ]
     },
     {
-      "id": "b000219",
+      "id": "b000225",
       "kind": "html",
-      "start_line": 606,
-      "end_line": 606,
+      "start_line": 632,
+      "end_line": 632,
       "raw": "<!-- workspace-docs:readme:end -->\n"
     }
   ],
@@ -1673,167 +1715,167 @@
       "start_line": 17
     },
     {
-      "block_id": "b000021",
+      "block_id": "b000023",
       "parent_id": "b000001",
       "level": 2,
       "title": "DNA and executable rigs",
       "anchor": "dna-and-executable-rigs",
-      "start_line": 43
+      "start_line": 52
     },
     {
-      "block_id": "b000033",
+      "block_id": "b000035",
       "parent_id": "b000001",
       "level": 2,
       "title": "Character authoring",
       "anchor": "character-authoring",
-      "start_line": 71
+      "start_line": 80
     },
     {
-      "block_id": "b000075",
+      "block_id": "b000081",
       "parent_id": "b000001",
       "level": 2,
       "title": "Runtime",
       "anchor": "runtime",
-      "start_line": 220
+      "start_line": 246
     },
     {
-      "block_id": "b000107",
+      "block_id": "b000113",
       "parent_id": "b000001",
       "level": 2,
       "title": "Build and test",
       "anchor": "build-and-test",
-      "start_line": 333
-    },
-    {
-      "block_id": "b000119",
-      "parent_id": "b000001",
-      "level": 2,
-      "title": "Shape controls",
-      "anchor": "shape-controls",
-      "start_line": 361
+      "start_line": 359
     },
     {
       "block_id": "b000125",
       "parent_id": "b000001",
       "level": 2,
-      "title": "Preserve edits made in another application",
-      "anchor": "preserve-edits-made-in-another-application",
-      "start_line": 374
+      "title": "Shape controls",
+      "anchor": "shape-controls",
+      "start_line": 387
     },
     {
       "block_id": "b000131",
       "parent_id": "b000001",
       "level": 2,
-      "title": "Install and consume",
-      "anchor": "install-and-consume",
-      "start_line": 390
+      "title": "Preserve edits made in another application",
+      "anchor": "preserve-edits-made-in-another-application",
+      "start_line": 400
     },
     {
-      "block_id": "b000141",
+      "block_id": "b000137",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Install and consume",
+      "anchor": "install-and-consume",
+      "start_line": 416
+    },
+    {
+      "block_id": "b000147",
       "parent_id": "b000001",
       "level": 2,
       "title": "License and provenance",
       "anchor": "license-and-provenance",
-      "start_line": 412
+      "start_line": 438
     },
     {
-      "block_id": "b000216",
+      "block_id": "b000222",
       "parent_id": "b000001",
       "level": 2,
       "title": "Documentation entry points",
       "anchor": "documentation-entry-points",
-      "start_line": 600
+      "start_line": 626
     }
   ],
   "indexes": {
     "directive_candidates": [
       {
-        "block_id": "b000037",
-        "line": 76,
+        "block_id": "b000043",
+        "line": 98,
         "text": "semantic tags or source bone names, check required roles and ancestry, and retain",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000043",
-        "line": 101,
+        "block_id": "b000049",
+        "line": 125,
         "text": "for template creation or as an undoable character edit; body parameters do not",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000055",
-        "line": 159,
+        "block_id": "b000061",
+        "line": 185,
         "text": "can discard the metadata required for an exact source identity roundtrip.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000089",
-        "line": 251,
+        "block_id": "b000095",
+        "line": 277,
         "text": "unless preview output is requested. Fitting is an explicit edit and must be rerun",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000101",
-        "line": 314,
+        "block_id": "b000107",
+        "line": 340,
         "text": "runtime components are attached again after loading. The conditions do not create",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000103",
-        "line": 322,
+        "block_id": "b000109",
+        "line": 348,
         "text": "Components are owned by their Actor. Do not retain pointers after removal or actor",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000145",
-        "line": 419,
+        "block_id": "b000151",
+        "line": 445,
         "text": "Older verification records describe their dated snapshots; they do not prove",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000157",
-        "line": 467,
+        "block_id": "b000163",
+        "line": 493,
         "text": "imports passed. These results preserve the core's engine ownership and do not",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000169",
-        "line": 506,
+        "block_id": "b000175",
+        "line": 532,
         "text": "Core [reference-pose programs](docs/PoseReference.md) preserve original mesh, skin and bind data while initializing the runtime pose. An optional ordered sequence interleaves direction and frame constraints; projects retaining such a sequence use version 15, while existing projects retain their previous version selection. The added public field changes the C++ ABI, so binary consumers must be rebuilt against the updated headers and library. Template and detailed edits recompute the pose in the core, with undo/redo and native project versions 13 or 15. NSCharacter only resolves roles to metadata. Explicit reference snapshots provide exchange assets; direct FBX/GLB/DNA output rejects an unbaked authoring program instead of dropping it. Existing animations require explicit retargeting after a bind change. `CharacterTemplate::bakeReferenceFaceMorphs` samples the original live pose program over the reference posture into a separate exchange asset; neutral-bind face morphs and a later body bake do not provide the same weighted result.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000197",
-        "line": 534,
+        "block_id": "b000203",
+        "line": 560,
         "text": "The core editor also stores [named point selections](docs/NamedPointSelections.md) for brush and layer masks, including undo/redo and project version 17. NSCharacter forwards to the core session. Existing application binaries should be rebuilt against the matching headers and library.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000205",
-        "line": 578,
+        "block_id": "b000211",
+        "line": 604,
         "text": "undo, layers and project persistence; unchanged results do not create history.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000205",
-        "line": 581,
+        "block_id": "b000211",
+        "line": 607,
         "text": "affected follower mesh. Hosts must synchronize those per-mesh channels, and their",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000205",
-        "line": 588,
+        "block_id": "b000211",
+        "line": 614,
         "text": "consumers must rebuild against matching headers and libraries.",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -1841,743 +1883,764 @@
     ],
     "commands": [
       {
-        "block_id": "b000017",
+        "block_id": "b000019",
         "language": "sh",
         "code": "cmake -S . -B build/core-only/build -DCMAKE_BUILD_TYPE=Release \\\n  -DIIACTOROBJECT_WITH_NSCHARACTER=OFF -DBUILD_TESTING=ON\ncmake --build build/core-only/build --parallel 4\nctest --test-dir build/core-only/build --output-on-failure\nbuild/core-only/build/iiActorObjectCore3D build/object3d/Sphere.glb\n"
       },
       {
-        "block_id": "b000027",
+        "block_id": "b000029",
         "language": "sh",
         "code": "build/iiActorObjectDnaCharacter user-owned-character.dna build/dna/Character.fbx\n"
       },
       {
-        "block_id": "b000111",
+        "block_id": "b000117",
         "language": "sh",
         "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.glb 96\nbuild/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.fbx 96\n"
       },
       {
-        "block_id": "b000115",
+        "block_id": "b000121",
         "language": "sh",
         "code": "cmake -S . -B build -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=/absolute/path/to/blender\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n"
       },
       {
-        "block_id": "b000133",
+        "block_id": "b000139",
         "language": "sh",
         "code": "cmake --install build --prefix \"$PWD/build/install\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DiiActorObject_DIR=\"$PWD/build/install/lib/cmake/iiActorObject\"\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure\n"
       }
     ],
     "links": [
       {
-        "block_id": "b000019",
+        "block_id": "b000015",
+        "label": "responsibility map",
+        "target": "resources/architecture/ResponsibilityMap.json",
+        "kind": "relative",
+        "line": 36
+      },
+      {
+        "block_id": "b000015",
+        "label": "separation report",
+        "target": "docs/ResponsibilitySeparation-20261029.md",
+        "kind": "relative",
+        "line": 37
+      },
+      {
+        "block_id": "b000021",
         "label": "core ownership and lifetime contracts",
         "target": "docs/Object3DEngine.md",
         "kind": "relative",
-        "line": 41
+        "line": 50
       },
       {
-        "block_id": "b000031",
+        "block_id": "b000033",
         "label": "DNA contracts",
         "target": "docs/DnaRig.md",
         "kind": "relative",
-        "line": 68
+        "line": 77
       },
       {
-        "block_id": "b000031",
+        "block_id": "b000033",
         "label": "authoring topology",
         "target": "docs/MeshTopology.md",
         "kind": "relative",
-        "line": 68
+        "line": 77
       },
       {
-        "block_id": "b000031",
+        "block_id": "b000033",
         "label": "edited DNA serialization",
         "target": "docs/DnaEditing.md",
         "kind": "relative",
-        "line": 69
-      },
-      {
-        "block_id": "b000037",
-        "label": "humanoid characterization",
-        "target": "docs/HumanoidCharacterization.md",
-        "kind": "relative",
-        "line": 79
-      },
-      {
-        "block_id": "b000037",
-        "label": "Human joint naming plans",
-        "target": "docs/HumanJointNaming.md",
-        "kind": "relative",
-        "line": 79
-      },
-      {
-        "block_id": "b000039",
-        "label": "template contracts",
-        "target": "docs/CharacterTemplate.md",
-        "kind": "relative",
-        "line": 86
-      },
-      {
-        "block_id": "b000041",
-        "label": "GLB document decoding",
-        "target": "docs/GlbDocument.md",
-        "kind": "relative",
-        "line": 91
-      },
-      {
-        "block_id": "b000041",
-        "label": "GLB asset import",
-        "target": "docs/GlbImport.md",
-        "kind": "relative",
-        "line": 93
+        "line": 78
       },
       {
         "block_id": "b000043",
-        "label": "human skin catalogue",
-        "target": "docs/FaceAssets.md",
+        "label": "humanoid characterization",
+        "target": "docs/HumanoidCharacterization.md",
         "kind": "relative",
-        "line": 99
+        "line": 101
+      },
+      {
+        "block_id": "b000043",
+        "label": "Human joint naming plans",
+        "target": "docs/HumanJointNaming.md",
+        "kind": "relative",
+        "line": 101
       },
       {
         "block_id": "b000045",
+        "label": "template contracts",
+        "target": "docs/CharacterTemplate.md",
+        "kind": "relative",
+        "line": 108
+      },
+      {
+        "block_id": "b000047",
+        "label": "GLB document decoding",
+        "target": "docs/GlbDocument.md",
+        "kind": "relative",
+        "line": 113
+      },
+      {
+        "block_id": "b000047",
+        "label": "GLB asset import",
+        "target": "docs/GlbImport.md",
+        "kind": "relative",
+        "line": 115
+      },
+      {
+        "block_id": "b000049",
+        "label": "human skin catalogue",
+        "target": "docs/FaceAssets.md",
+        "kind": "relative",
+        "line": 123
+      },
+      {
+        "block_id": "b000051",
         "label": "edit layer contracts",
         "target": "docs/EditLayers.md",
         "kind": "relative",
-        "line": 110
+        "line": 134
       },
       {
-        "block_id": "b000057",
+        "block_id": "b000051",
+        "label": "source layout",
+        "target": "docs/SourceLayout.md",
+        "kind": "relative",
+        "line": 137
+      },
+      {
+        "block_id": "b000063",
         "label": "NSCharacter contracts, completion gates and remaining work",
         "target": "docs/NSCharacter.md",
         "kind": "relative",
-        "line": 161
-      },
-      {
-        "block_id": "b000059",
-        "label": "FBX authoring contracts",
-        "target": "docs/FbxAuthoring.md",
-        "kind": "relative",
-        "line": 171
-      },
-      {
-        "block_id": "b000059",
-        "label": "morph normal contracts",
-        "target": "docs/MorphNormals.md",
-        "kind": "relative",
-        "line": 171
-      },
-      {
-        "block_id": "b000061",
-        "label": "GLB point identity data",
-        "target": "docs/GlbPointIdentity.md",
-        "kind": "relative",
-        "line": 173
-      },
-      {
-        "block_id": "b000063",
-        "label": "merge external triangle edits",
-        "target": "docs/ExternalTriangleEdits.md",
-        "kind": "relative",
-        "line": 180
-      },
-      {
-        "block_id": "b000063",
-        "label": "GLB external-edit provenance",
-        "target": "docs/GlbExternalEdits.md",
-        "kind": "relative",
-        "line": 182
+        "line": 187
       },
       {
         "block_id": "b000065",
-        "label": "tangent generation and interchange",
-        "target": "docs/MeshTangents.md",
+        "label": "FBX authoring contracts",
+        "target": "docs/FbxAuthoring.md",
         "kind": "relative",
-        "line": 190
+        "line": 197
+      },
+      {
+        "block_id": "b000065",
+        "label": "morph normal contracts",
+        "target": "docs/MorphNormals.md",
+        "kind": "relative",
+        "line": 197
       },
       {
         "block_id": "b000067",
-        "label": "authored GLB tangent contracts",
-        "target": "docs/GlbAuthoredTangents.md",
+        "label": "GLB point identity data",
+        "target": "docs/GlbPointIdentity.md",
         "kind": "relative",
-        "line": 198
+        "line": 199
+      },
+      {
+        "block_id": "b000069",
+        "label": "merge external triangle edits",
+        "target": "docs/ExternalTriangleEdits.md",
+        "kind": "relative",
+        "line": 206
+      },
+      {
+        "block_id": "b000069",
+        "label": "GLB external-edit provenance",
+        "target": "docs/GlbExternalEdits.md",
+        "kind": "relative",
+        "line": 208
+      },
+      {
+        "block_id": "b000071",
+        "label": "tangent generation and interchange",
+        "target": "docs/MeshTangents.md",
+        "kind": "relative",
+        "line": 216
       },
       {
         "block_id": "b000073",
+        "label": "authored GLB tangent contracts",
+        "target": "docs/GlbAuthoredTangents.md",
+        "kind": "relative",
+        "line": 224
+      },
+      {
+        "block_id": "b000079",
         "label": "FBX image resolution",
         "target": "docs/FbxImageResolution.md",
-        "kind": "relative",
-        "line": 218
-      },
-      {
-        "block_id": "b000077",
-        "label": "project contracts",
-        "target": "docs/Object3DProject.md",
-        "kind": "relative",
-        "line": 229
-      },
-      {
-        "block_id": "b000079",
-        "label": "progressive morph importer",
-        "target": "docs/ProgressiveMorphRig.md",
-        "kind": "relative",
-        "line": 231
-      },
-      {
-        "block_id": "b000079",
-        "label": "progressive animation path",
-        "target": "docs/ProgressiveMorphAnimation.md",
-        "kind": "relative",
-        "line": 231
-      },
-      {
-        "block_id": "b000081",
-        "label": "human accessories",
-        "target": "docs/HumanAccessories.md",
-        "kind": "relative",
-        "line": 233
-      },
-      {
-        "block_id": "b000083",
-        "label": "Editor rig following",
-        "target": "docs/EditorRigFollow.md",
-        "kind": "relative",
-        "line": 235
-      },
-      {
-        "block_id": "b000085",
-        "label": "Instance transfer",
-        "target": "docs/InstanceTransfer.md",
-        "kind": "relative",
-        "line": 237
-      },
-      {
-        "block_id": "b000087",
-        "label": "skin and surface contracts",
-        "target": "docs/SkinSurface.md",
         "kind": "relative",
         "line": 244
       },
       {
-        "block_id": "b000089",
-        "label": "collision queries",
-        "target": "docs/SurfaceCollision.md",
+        "block_id": "b000083",
+        "label": "project contracts",
+        "target": "docs/Object3DProject.md",
         "kind": "relative",
-        "line": 252
+        "line": 255
+      },
+      {
+        "block_id": "b000085",
+        "label": "progressive morph importer",
+        "target": "docs/ProgressiveMorphRig.md",
+        "kind": "relative",
+        "line": 257
+      },
+      {
+        "block_id": "b000085",
+        "label": "progressive animation path",
+        "target": "docs/ProgressiveMorphAnimation.md",
+        "kind": "relative",
+        "line": 257
+      },
+      {
+        "block_id": "b000087",
+        "label": "human accessories",
+        "target": "docs/HumanAccessories.md",
+        "kind": "relative",
+        "line": 259
       },
       {
         "block_id": "b000089",
-        "label": "surface fitting",
-        "target": "docs/SurfaceFitting.md",
-        "kind": "relative",
-        "line": 253
-      },
-      {
-        "block_id": "b000091",
-        "label": "evaluated edit layers",
-        "target": "docs/EvaluatedEditLayers.md",
-        "kind": "relative",
-        "line": 260
-      },
-      {
-        "block_id": "b000091",
-        "label": "automatic fitting and dependency contracts",
-        "target": "docs/AutomaticSurfaceFitting.md",
+        "label": "Editor rig following",
+        "target": "docs/EditorRigFollow.md",
         "kind": "relative",
         "line": 261
       },
       {
-        "block_id": "b000093",
-        "label": "painting contracts",
-        "target": "docs/MeshPainting.md",
+        "block_id": "b000091",
+        "label": "Instance transfer",
+        "target": "docs/InstanceTransfer.md",
         "kind": "relative",
-        "line": 266
+        "line": 263
       },
       {
         "block_id": "b000093",
-        "label": "Point-mask projection",
-        "target": "docs/MeshMaskProjection.md",
-        "kind": "relative",
-        "line": 267
-      },
-      {
-        "block_id": "b000095",
-        "label": "skeletal editing",
-        "target": "docs/SkeletonEditing.md",
+        "label": "skin and surface contracts",
+        "target": "docs/SkinSurface.md",
         "kind": "relative",
         "line": 270
       },
       {
         "block_id": "b000095",
-        "label": "Skeleton scale profiles",
-        "target": "docs/SkeletonScale.md",
+        "label": "collision queries",
+        "target": "docs/SurfaceCollision.md",
         "kind": "relative",
-        "line": 274
+        "line": 278
       },
       {
-        "block_id": "b000099",
-        "label": "Dual-quaternion skinning",
-        "target": "docs/DualQuaternionSkinning.md",
+        "block_id": "b000095",
+        "label": "surface fitting",
+        "target": "docs/SurfaceFitting.md",
+        "kind": "relative",
+        "line": 279
+      },
+      {
+        "block_id": "b000097",
+        "label": "evaluated edit layers",
+        "target": "docs/EvaluatedEditLayers.md",
         "kind": "relative",
         "line": 286
       },
       {
-        "block_id": "b000099",
-        "label": "GLB animation baking",
-        "target": "docs/GlbAnimationBake.md",
+        "block_id": "b000097",
+        "label": "automatic fitting and dependency contracts",
+        "target": "docs/AutomaticSurfaceFitting.md",
         "kind": "relative",
-        "line": 289
+        "line": 287
       },
       {
         "block_id": "b000099",
-        "label": "Core clip application",
-        "target": "docs/Object3DAnimation.md",
+        "label": "painting contracts",
+        "target": "docs/MeshPainting.md",
+        "kind": "relative",
+        "line": 292
+      },
+      {
+        "block_id": "b000099",
+        "label": "Point-mask projection",
+        "target": "docs/MeshMaskProjection.md",
         "kind": "relative",
         "line": 293
       },
       {
-        "block_id": "b000099",
+        "block_id": "b000101",
+        "label": "skeletal editing",
+        "target": "docs/SkeletonEditing.md",
+        "kind": "relative",
+        "line": 296
+      },
+      {
+        "block_id": "b000101",
+        "label": "Skeleton scale profiles",
+        "target": "docs/SkeletonScale.md",
+        "kind": "relative",
+        "line": 300
+      },
+      {
+        "block_id": "b000105",
+        "label": "Dual-quaternion skinning",
+        "target": "docs/DualQuaternionSkinning.md",
+        "kind": "relative",
+        "line": 312
+      },
+      {
+        "block_id": "b000105",
+        "label": "GLB animation baking",
+        "target": "docs/GlbAnimationBake.md",
+        "kind": "relative",
+        "line": 315
+      },
+      {
+        "block_id": "b000105",
+        "label": "Core clip application",
+        "target": "docs/Object3DAnimation.md",
+        "kind": "relative",
+        "line": 319
+      },
+      {
+        "block_id": "b000105",
         "label": "Project animation storage",
         "target": "docs/ProjectAnimation.md",
         "kind": "relative",
-        "line": 295
+        "line": 321
       },
       {
-        "block_id": "b000099",
+        "block_id": "b000105",
         "label": "Automatic corrective generation",
         "target": "docs/AutomaticCorrectives.md",
         "kind": "relative",
-        "line": 298
+        "line": 324
       },
       {
-        "block_id": "b000099",
+        "block_id": "b000105",
         "label": "Screen-space point selection",
         "target": "docs/MeshScreenSelection.md",
         "kind": "relative",
-        "line": 302
+        "line": 328
       },
       {
-        "block_id": "b000099",
+        "block_id": "b000105",
         "label": "Selection transfer",
         "target": "docs/SelectionTransfer.md",
         "kind": "relative",
-        "line": 305
+        "line": 331
       },
       {
-        "block_id": "b000101",
+        "block_id": "b000107",
         "label": "pose corrective contracts",
         "target": "docs/PoseCorrectives.md",
         "kind": "relative",
-        "line": 316
+        "line": 342
       },
       {
-        "block_id": "b000101",
+        "block_id": "b000107",
         "label": "corrective animation baking",
         "target": "docs/PoseCorrectiveAnimation.md",
         "kind": "relative",
-        "line": 320
+        "line": 346
       },
       {
-        "block_id": "b000105",
+        "block_id": "b000111",
         "label": "runtime contracts",
         "target": "docs/Actor.md",
         "kind": "relative",
-        "line": 328
+        "line": 354
       },
       {
-        "block_id": "b000105",
+        "block_id": "b000111",
         "label": "character runtime",
         "target": "docs/Character.md",
         "kind": "relative",
-        "line": 328
+        "line": 354
       },
       {
-        "block_id": "b000105",
+        "block_id": "b000111",
         "label": "USD placement",
         "target": "docs/USD.md",
         "kind": "relative",
-        "line": 329
+        "line": 355
       },
       {
-        "block_id": "b000105",
+        "block_id": "b000111",
         "label": "Windows build instructions",
         "target": "docs/WindowsBuildAndRun.md",
         "kind": "relative",
-        "line": 329
+        "line": 355
       },
       {
-        "block_id": "b000123",
+        "block_id": "b000129",
         "label": "the control contract",
         "target": "docs/TemplateControls.md",
         "kind": "relative",
-        "line": 372
+        "line": 398
       },
       {
-        "block_id": "b000129",
+        "block_id": "b000135",
         "label": "Blender adapter",
         "target": "example/BlenderExternalEdits.py",
         "kind": "relative",
-        "line": 384
+        "line": 410
       },
       {
-        "block_id": "b000129",
+        "block_id": "b000135",
         "label": "the external editing contract",
         "target": "docs/ExternalEdits.md",
         "kind": "relative",
-        "line": 387
+        "line": 413
       },
       {
-        "block_id": "b000143",
+        "block_id": "b000149",
         "label": "LICENSE",
         "target": "LICENSE",
         "kind": "relative",
-        "line": 414
+        "line": 440
       },
       {
-        "block_id": "b000143",
+        "block_id": "b000149",
         "label": "third-party provenance and hashes",
         "target": "src/third_party/ufbx/PROVENANCE.md",
         "kind": "relative",
-        "line": 416
-      },
-      {
-        "block_id": "b000147",
-        "label": "native projects",
-        "target": "docs/Object3DProject.md",
-        "kind": "relative",
-        "line": 428
-      },
-      {
-        "block_id": "b000147",
-        "label": "face assets and ownership",
-        "target": "docs/FaceAssets.md",
-        "kind": "relative",
-        "line": 430
-      },
-      {
-        "block_id": "b000149",
-        "label": "format contract",
-        "target": "docs/Object3DProject.md",
-        "kind": "relative",
-        "line": 439
-      },
-      {
-        "block_id": "b000149",
-        "label": "human morphology",
-        "target": "docs/HumanMorphology.md",
-        "kind": "relative",
-        "line": 439
-      },
-      {
-        "block_id": "b000151",
-        "label": "face pose rigs",
-        "target": "docs/FacePoseRig.md",
-        "kind": "relative",
-        "line": 449
+        "line": 442
       },
       {
         "block_id": "b000153",
-        "label": "symmetry contracts and application evidence",
-        "target": "docs/MeshSymmetry.md",
+        "label": "native projects",
+        "target": "docs/Object3DProject.md",
         "kind": "relative",
-        "line": 458
+        "line": 454
+      },
+      {
+        "block_id": "b000153",
+        "label": "face assets and ownership",
+        "target": "docs/FaceAssets.md",
+        "kind": "relative",
+        "line": 456
       },
       {
         "block_id": "b000155",
-        "label": "collision-correction fairing",
-        "target": "docs/SurfaceFairing.md",
+        "label": "format contract",
+        "target": "docs/Object3DProject.md",
         "kind": "relative",
-        "line": 460
+        "line": 465
+      },
+      {
+        "block_id": "b000155",
+        "label": "human morphology",
+        "target": "docs/HumanMorphology.md",
+        "kind": "relative",
+        "line": 465
       },
       {
         "block_id": "b000157",
-        "label": "characterization and triangle-query checkpoint",
-        "target": "docs/CharacterizationProjectionVerification-20261027.json",
+        "label": "face pose rigs",
+        "target": "docs/FacePoseRig.md",
         "kind": "relative",
-        "line": 462
+        "line": 475
       },
       {
         "block_id": "b000159",
-        "label": "pose snapshots and descendant-aware aiming",
-        "target": "docs/PoseSnapshots.md",
+        "label": "symmetry contracts and application evidence",
+        "target": "docs/MeshSymmetry.md",
         "kind": "relative",
-        "line": 470
-      },
-      {
-        "block_id": "b000159",
-        "label": "human direction rules",
-        "target": "docs/HumanPoseDirections.md",
-        "kind": "relative",
-        "line": 477
+        "line": 484
       },
       {
         "block_id": "b000161",
-        "label": "pose snapshot checkpoint",
-        "target": "docs/PoseSnapshotVerification-20261027.json",
+        "label": "collision-correction fairing",
+        "target": "docs/SurfaceFairing.md",
         "kind": "relative",
-        "line": 479
+        "line": 486
       },
       {
         "block_id": "b000163",
-        "label": "joint frames",
-        "target": "docs/PoseFrames.md",
+        "label": "characterization and triangle-query checkpoint",
+        "target": "docs/CharacterizationProjectionVerification-20261027.json",
         "kind": "relative",
-        "line": 487
+        "line": 488
       },
       {
         "block_id": "b000165",
-        "label": "joint-frame checkpoint",
-        "target": "docs/JointFrameVerification-20261027.json",
+        "label": "pose snapshots and descendant-aware aiming",
+        "target": "docs/PoseSnapshots.md",
         "kind": "relative",
-        "line": 495
+        "line": 496
+      },
+      {
+        "block_id": "b000165",
+        "label": "human direction rules",
+        "target": "docs/HumanPoseDirections.md",
+        "kind": "relative",
+        "line": 503
       },
       {
         "block_id": "b000167",
-        "label": "human reference-pose planner",
-        "target": "docs/HumanPosePlanner.md",
+        "label": "pose snapshot checkpoint",
+        "target": "docs/PoseSnapshotVerification-20261027.json",
         "kind": "relative",
-        "line": 504
-      },
-      {
-        "block_id": "b000167",
-        "label": "native verification record",
-        "target": "docs/HumanPosePlannerVerification-20261027.md",
-        "kind": "relative",
-        "line": 504
+        "line": 505
       },
       {
         "block_id": "b000169",
-        "label": "reference-pose programs",
-        "target": "docs/PoseReference.md",
+        "label": "joint frames",
+        "target": "docs/PoseFrames.md",
         "kind": "relative",
-        "line": 506
+        "line": 513
       },
       {
         "block_id": "b000171",
-        "label": "pose retargeting",
-        "target": "docs/PoseRetarget.md",
+        "label": "joint-frame checkpoint",
+        "target": "docs/JointFrameVerification-20261027.json",
         "kind": "relative",
-        "line": 508
+        "line": 521
       },
       {
         "block_id": "b000173",
-        "label": "animation retargeting",
-        "target": "docs/AnimationRetarget.md",
+        "label": "human reference-pose planner",
+        "target": "docs/HumanPosePlanner.md",
         "kind": "relative",
-        "line": 510
+        "line": 530
       },
       {
         "block_id": "b000173",
-        "label": "GLB animation export",
-        "target": "docs/GlbAnimation.md",
+        "label": "native verification record",
+        "target": "docs/HumanPosePlannerVerification-20261027.md",
         "kind": "relative",
-        "line": 510
-      },
-      {
-        "block_id": "b000173",
-        "label": "GLB animation import",
-        "target": "docs/GlbImport.md",
-        "kind": "relative",
-        "line": 510
-      },
-      {
-        "block_id": "b000173",
-        "label": "baked to core clips",
-        "target": "docs/GlbAnimationBake.md",
-        "kind": "relative",
-        "line": 510
-      },
-      {
-        "block_id": "b000173",
-        "label": "FBX animation export",
-        "target": "docs/FbxAnimation.md",
-        "kind": "relative",
-        "line": 510
-      },
-      {
-        "block_id": "b000173",
-        "label": "FBX animation import",
-        "target": "docs/FbxAnimationImport.md",
-        "kind": "relative",
-        "line": 510
+        "line": 530
       },
       {
         "block_id": "b000175",
-        "label": "deformation snapshots",
-        "target": "docs/DeformationSnapshots.md",
-        "kind": "relative",
-        "line": 512
-      },
-      {
-        "block_id": "b000177",
-        "label": "morph-channel rigs",
-        "target": "docs/MorphChannelRig.md",
-        "kind": "relative",
-        "line": 514
-      },
-      {
-        "block_id": "b000179",
-        "label": "reference-pose checkpoint",
-        "target": "docs/PoseReferenceVerification-20261027.json",
-        "kind": "relative",
-        "line": 516
-      },
-      {
-        "block_id": "b000181",
-        "label": "rig control sampling",
-        "target": "docs/RigControlSamples.md",
-        "kind": "relative",
-        "line": 518
-      },
-      {
-        "block_id": "b000183",
-        "label": "GLB import",
-        "target": "docs/GlbImport.md",
-        "kind": "relative",
-        "line": 520
-      },
-      {
-        "block_id": "b000185",
-        "label": "material surfaces",
-        "target": "docs/MaterialSurface.md",
-        "kind": "relative",
-        "line": 522
-      },
-      {
-        "block_id": "b000187",
-        "label": "Automatic convention detection",
-        "target": "docs/HumanoidCharacterization.md",
-        "kind": "relative",
-        "line": 524
-      },
-      {
-        "block_id": "b000187",
-        "label": "reference-pose aims",
+        "label": "reference-pose programs",
         "target": "docs/PoseReference.md",
-        "kind": "relative",
-        "line": 524
-      },
-      {
-        "block_id": "b000189",
-        "label": "rig sampling verification record",
-        "target": "docs/RigControlSamplesVerification-20261027.md",
-        "kind": "relative",
-        "line": 526
-      },
-      {
-        "block_id": "b000191",
-        "label": "resource paths and provenance",
-        "target": "docs/Resources.md",
-        "kind": "relative",
-        "line": 528
-      },
-      {
-        "block_id": "b000195",
-        "label": "multiple UV sets",
-        "target": "docs/MultipleUvSets.md",
         "kind": "relative",
         "line": 532
       },
       {
-        "block_id": "b000197",
-        "label": "named point selections",
-        "target": "docs/NamedPointSelections.md",
+        "block_id": "b000177",
+        "label": "pose retargeting",
+        "target": "docs/PoseRetarget.md",
         "kind": "relative",
         "line": 534
       },
       {
-        "block_id": "b000199",
-        "label": "normal-map bindings",
-        "target": "docs/NormalMaps.md",
+        "block_id": "b000179",
+        "label": "animation retargeting",
+        "target": "docs/AnimationRetarget.md",
         "kind": "relative",
         "line": 536
       },
       {
-        "block_id": "b000201",
-        "label": "surface-geodesic skin binding",
-        "target": "docs/SurfaceGeodesicSkin.md",
+        "block_id": "b000179",
+        "label": "GLB animation export",
+        "target": "docs/GlbAnimation.md",
+        "kind": "relative",
+        "line": 536
+      },
+      {
+        "block_id": "b000179",
+        "label": "GLB animation import",
+        "target": "docs/GlbImport.md",
+        "kind": "relative",
+        "line": 536
+      },
+      {
+        "block_id": "b000179",
+        "label": "baked to core clips",
+        "target": "docs/GlbAnimationBake.md",
+        "kind": "relative",
+        "line": 536
+      },
+      {
+        "block_id": "b000179",
+        "label": "FBX animation export",
+        "target": "docs/FbxAnimation.md",
+        "kind": "relative",
+        "line": 536
+      },
+      {
+        "block_id": "b000179",
+        "label": "FBX animation import",
+        "target": "docs/FbxAnimationImport.md",
+        "kind": "relative",
+        "line": 536
+      },
+      {
+        "block_id": "b000181",
+        "label": "deformation snapshots",
+        "target": "docs/DeformationSnapshots.md",
         "kind": "relative",
         "line": 538
       },
       {
-        "block_id": "b000201",
-        "label": "branch-aware envelopes from an existing bind skeleton",
-        "target": "docs/SkeletonEnvelopes.md",
+        "block_id": "b000183",
+        "label": "morph-channel rigs",
+        "target": "docs/MorphChannelRig.md",
+        "kind": "relative",
+        "line": 540
+      },
+      {
+        "block_id": "b000185",
+        "label": "reference-pose checkpoint",
+        "target": "docs/PoseReferenceVerification-20261027.json",
+        "kind": "relative",
+        "line": 542
+      },
+      {
+        "block_id": "b000187",
+        "label": "rig control sampling",
+        "target": "docs/RigControlSamples.md",
         "kind": "relative",
         "line": 544
       },
       {
-        "block_id": "b000203",
-        "label": "Template rig transfer",
-        "target": "docs/TemplateRigTransfer.md",
+        "block_id": "b000189",
+        "label": "GLB import",
+        "target": "docs/GlbImport.md",
+        "kind": "relative",
+        "line": 546
+      },
+      {
+        "block_id": "b000191",
+        "label": "material surfaces",
+        "target": "docs/MaterialSurface.md",
         "kind": "relative",
         "line": 548
       },
       {
-        "block_id": "b000205",
-        "label": "surface-based template shape fitting",
-        "target": "docs/TemplateShapeFit.md",
+        "block_id": "b000193",
+        "label": "Automatic convention detection",
+        "target": "docs/HumanoidCharacterization.md",
         "kind": "relative",
-        "line": 561
+        "line": 550
+      },
+      {
+        "block_id": "b000193",
+        "label": "reference-pose aims",
+        "target": "docs/PoseReference.md",
+        "kind": "relative",
+        "line": 550
+      },
+      {
+        "block_id": "b000195",
+        "label": "rig sampling verification record",
+        "target": "docs/RigControlSamplesVerification-20261027.md",
+        "kind": "relative",
+        "line": 552
+      },
+      {
+        "block_id": "b000197",
+        "label": "resource paths and provenance",
+        "target": "docs/Resources.md",
+        "kind": "relative",
+        "line": 554
+      },
+      {
+        "block_id": "b000201",
+        "label": "multiple UV sets",
+        "target": "docs/MultipleUvSets.md",
+        "kind": "relative",
+        "line": 558
+      },
+      {
+        "block_id": "b000203",
+        "label": "named point selections",
+        "target": "docs/NamedPointSelections.md",
+        "kind": "relative",
+        "line": 560
       },
       {
         "block_id": "b000205",
-        "label": "adapt a template to a new mesh",
-        "target": "docs/TemplateAdapt.md",
+        "label": "normal-map bindings",
+        "target": "docs/NormalMaps.md",
+        "kind": "relative",
+        "line": 562
+      },
+      {
+        "block_id": "b000207",
+        "label": "surface-geodesic skin binding",
+        "target": "docs/SurfaceGeodesicSkin.md",
         "kind": "relative",
         "line": 564
       },
       {
         "block_id": "b000207",
-        "label": "logical morph channels",
-        "target": "docs/LogicalMorphChannels.md",
+        "label": "branch-aware envelopes from an existing bind skeleton",
+        "target": "docs/SkeletonEnvelopes.md",
+        "kind": "relative",
+        "line": 570
+      },
+      {
+        "block_id": "b000209",
+        "label": "Template rig transfer",
+        "target": "docs/TemplateRigTransfer.md",
+        "kind": "relative",
+        "line": 574
+      },
+      {
+        "block_id": "b000211",
+        "label": "surface-based template shape fitting",
+        "target": "docs/TemplateShapeFit.md",
+        "kind": "relative",
+        "line": 587
+      },
+      {
+        "block_id": "b000211",
+        "label": "adapt a template to a new mesh",
+        "target": "docs/TemplateAdapt.md",
         "kind": "relative",
         "line": 590
       },
       {
-        "block_id": "b000209",
+        "block_id": "b000213",
+        "label": "logical morph channels",
+        "target": "docs/LogicalMorphChannels.md",
+        "kind": "relative",
+        "line": 616
+      },
+      {
+        "block_id": "b000215",
         "label": "base normal editing",
         "target": "docs/BaseNormalEditing.md",
         "kind": "relative",
-        "line": 592
+        "line": 618
       },
       {
-        "block_id": "b000211",
+        "block_id": "b000217",
         "label": "default morph weights",
         "target": "docs/DefaultMorphWeights.md",
         "kind": "relative",
-        "line": 595
+        "line": 621
       },
       {
-        "block_id": "b000213",
+        "block_id": "b000219",
         "label": "GLB multi-skin importer",
         "target": "docs/GlbMultiSkin.md",
         "kind": "relative",
-        "line": 597
+        "line": 623
       },
       {
-        "block_id": "b000218",
+        "block_id": "b000224",
         "label": "AGENT.md",
         "target": "AGENT.md",
         "kind": "relative",
-        "line": 603
+        "line": 629
       },
       {
-        "block_id": "b000218",
+        "block_id": "b000224",
         "label": "documentation index",
         "target": "docs/README.md",
         "kind": "relative",
-        "line": 604
+        "line": 630
       },
       {
-        "block_id": "b000218",
+        "block_id": "b000224",
         "label": "agent index",
         "target": "docs/agent-index.json",
         "kind": "relative",
-        "line": 605
+        "line": 631
       }
     ],
     "tables": [
       {
-        "block_id": "b000047",
+        "block_id": "b000053",
         "columns": [
           "Object",
           "Responsibility"

@@ -10,8 +10,8 @@
   },
   "source": {
     "path": "docs/FbxAnimationImport.md",
-    "sha256": "85c0c68d39d2cdfdb52e1330ee61ae11be1c4714f03d174ffa104ef51a774930",
-    "bytes": 7541,
+    "sha256": "854b3e6c73d1e51fd1c1c9bdf402ca812c64ed32cff9503d634725e8ddf575d2",
+    "bytes": 7760,
     "line_count": 53,
     "encoding": "utf-8",
     "language": "ko"
@@ -215,7 +215,7 @@
       "kind": "paragraph",
       "start_line": 27,
       "end_line": 27,
-      "raw": "가져오기와 클립 구성이 실패하면 새 에셋을 엔진에 남기지 않는다. 입력 바이트 외의 외부 파일을 파서가 열지 않는다. 이미지 해석기를 명시한 경우는 기존 `FbxImportOptions` 계약을 따른다.\n"
+      "raw": "`Object3DFbxAnimationStage`는 에셋 생성 전에 임시 골격으로 표본 클립을 검증하고, 에셋 생성 후 실제 골격과 메시에서 모프 대응을 확인해 클립을 준비한다. 준비 도중 실패하면 부분 클립은 게시하지 않으며 새 에셋을 엔진에서 제거한다. 입력 바이트 외의 외부 파일을 파서가 열지 않는다. 이미지 해석기를 명시한 경우는 기존 `FbxImportOptions` 계약을 따른다.\n"
     },
     {
       "id": "b000028",

@@ -502,6 +502,22 @@ void roundtrip()
     CHECK(close(normalMaterials[1].normalScale,.6)&&!normalResult.warnings.empty());
     CHECK(normalResult.object.get().data().meshes[0].topology->sourceGlbTangents&&
           topologyGlbTangentsValid(*normalResult.object.get().data().meshes[0].topology));
+    // Multiple material slots referencing one external image share the import
+    // cache and must not consume two resolver requests or image-byte budgets.
+    auto shared=sample();shared.images.emplace_back("Shared",png());
+    shared.materials[0].baseColorImage=0;shared.materials[0].baseColorUvSet="UVMap_1";
+    shared.materials[0].normalImage=0;shared.materials[0].normalUvSet="UVMap_1";shared.materials[0].normalScale=.6;
+    const auto sharedSource=engine.createObject(std::move(shared));const auto sharedBytes=exportObject3DGlb(sharedSource.get());
+    const auto sharedDocument=GlbDocument::parse(sharedBytes);const auto sharedJson=sharedDocument.json();
+    const auto sharedAt=sharedJson.find("\"mimeType\":\"image/png\",\"bufferView\":");CHECK(sharedAt!=std::string_view::npos);
+    const auto sharedEnd=sharedJson.find('}',sharedAt);CHECK(sharedEnd!=std::string_view::npos);
+    const auto sharedExternal=changeJson(sharedBytes,sharedJson.substr(sharedAt,sharedEnd-sharedAt),"\"uri\":\"textures/shared.png\"");
+    Resolver sharedResolver;GlbImportOptions sharedOptions;sharedOptions.imageResolver=&sharedResolver;
+    sharedOptions.maximumImageResolverRequests=1;sharedOptions.maximumImageBytes=png().size();
+    const auto sharedResult=importObject3DGlb(engine.reference(),sharedExternal,sharedOptions);
+    const auto &sharedData=sharedResult.object.get().data();
+    CHECK(sharedResolver.calls==1&&sharedData.images.size()==1&&sharedData.materials[0].normalImage==sharedData.materials[0].baseColorImage);
+    CHECK(sharedData.materials[0].normalImage.has_value()&&close(sharedData.materials[0].normalScale,.6));
 #if IIACTOROBJECT_HAS_NSCHARACTER
     auto character=NSCharacter::importGlb(engine.reference(),exportObject3DGlb(source.get()));
     CHECK(character.asset&&character.asset->valid()&&engine.reference().owns(character.asset->object()));
@@ -678,6 +694,8 @@ void multiSkin()
     rejects([&]{(void)importObject3DGlb(engine.reference(),splitRoots);});
     const auto duplicate=changeJson(input,"\"joints\":[6,0]","\"joints\":[6,6]");
     rejects([&]{(void)importObject3DGlb(engine.reference(),duplicate);});
+    const auto emptyJoints=changeJson(input,"\"joints\":[6,0]","\"joints\":[]");
+    rejects([&]{(void)importObject3DGlb(engine.reference(),emptyJoints);});
     auto differentBinds=input;const auto bin=20+getU32(differentBinds,12)+8;
     setU32(differentBinds,bin+216+64+48,std::bit_cast<std::uint32_t>(3.f));
     rejects([&]{(void)importObject3DGlb(engine.reference(),differentBinds);});
@@ -723,6 +741,7 @@ void validation()
     allow={};allow.maximumVertices=3;rejects([&]{(void)importObject3DGlb(engine.reference(),bytes,allow);});
     allow={};allow.maximumBones=2;rejects([&]{(void)importObject3DGlb(engine.reference(),bytes,allow);});
     allow={};allow.maximumPrimitives=1;rejects([&]{(void)importObject3DGlb(engine.reference(),bytes,allow);});
+    allow={};allow.maximumTriangles=1;rejects([&]{(void)importObject3DGlb(engine.reference(),bytes,allow);});
     allow={};allow.maximumMorphDeltas=3;rejects([&]{(void)importObject3DGlb(engine.reference(),bytes,allow);});
     const auto duplicate=changeJson(independentFixture(),"\"joints\":[1,0]","\"joints\":[1,1]");
     rejects([&]{(void)importObject3DGlb(engine.reference(),duplicate);});
@@ -743,6 +762,15 @@ void validation()
     rejects([&]{(void)importObject3DGlb(engine.reference(),nonunit);});
     const auto duplicateParent=changeJson(independentFixture(),"\"children\":[0,2]","\"children\":[0,0]");
     rejects([&]{(void)importObject3DGlb(engine.reference(),duplicateParent);});
+    const auto duplicateRoots=changeJson(independentFixture(),"\"scenes\":[{\"nodes\":[3]}]",
+        "\"scenes\":[{\"nodes\":[3,3]}]");
+    const auto beforeSceneFailure=engine.reference().objectCount();
+    rejects([&]{(void)importObject3DGlb(engine.reference(),duplicateRoots);});
+    CHECK(engine.reference().objectCount()==beforeSceneFailure);
+    const auto mixedTransform=changeJson(independentFixture(),"\"name\":\"Child\",\"translation\":[0,1,0]",
+        "\"name\":\"Child\",\"translation\":[0,1,0],\"matrix\":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]");
+    rejects([&]{(void)importObject3DGlb(engine.reference(),mixedTransform);});
+    CHECK(engine.reference().objectCount()==beforeSceneFailure);
     std::mt19937 random(0x474c5446);const auto seed=independentFixture();std::size_t accepted=0,rejected=0;
     GlbImportOptions bounded;bounded.maximumVertices=100;bounded.maximumTriangles=100;bounded.maximumBones=32;
     bounded.document.maximumAccessorValues=5000;bounded.document.maximumSparseEntries=100;

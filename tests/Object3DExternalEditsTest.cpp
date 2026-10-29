@@ -101,6 +101,11 @@ void fbxIdentity()
 {
     Scene s;FbxExportOptions exportOptions;exportOptions.externalDocument=s.ids.document;auto bytes=exportObject3DFbx(s.source.get(),exportOptions);FbxImportOptions importOptions;importOptions.restoreAuthoringMetadata=false;auto imported=importObject3DFbx(s.engine.reference(),bytes,importOptions);
     CHECK(imported.externalIdentity.document==s.ids.document&&imported.externalIdentity.bones.size()==3&&imported.externalIdentity.meshes.size()==1&&imported.externalIdentity.materials.size()==1);CHECK(imported.externalIdentity.meshes[0].points.size()==5&&imported.externalIdentity.meshes[0].polygons.size()==1&&imported.externalIdentity.meshes[0].corners.size()==4&&imported.externalIdentity.meshes[0].morphs.size()==1);
+    const auto authored=importObject3DFbx(s.engine.reference(),bytes);
+    CHECK(authored.externalIdentity.document==s.ids.document&&authored.externalIdentity.meshes.size()==1);
+    CHECK(authored.externalIdentity.meshes[0].points==s.ids.meshes[0].points);
+    CHECK(authored.externalIdentity.meshes[0].polygons==s.ids.meshes[0].polygons);
+    CHECK(authored.externalIdentity.meshes[0].corners==s.ids.meshes[0].corners);
 }
 void glbTriangles()
 {
@@ -707,6 +712,11 @@ void reordered()
 void malformedProtocol()
 {
     Scene s;FbxExportOptions options;options.externalDocument=s.ids.document;auto bytes=exportObject3DFbx(s.source.get(),options);const std::string_view ids="0,1,2,3,4";auto found=std::search(bytes.begin(),bytes.end(),ids.begin(),ids.end());CHECK(found!=bytes.end());found[8]='x';const auto count=s.engine.objectCount();rejects([&]{(void)importObject3DFbx(s.engine.reference(),bytes);});CHECK(s.engine.objectCount()==count);
+    bytes=exportObject3DFbx(s.source.get(),options);found=std::search(bytes.begin(),bytes.end(),ids.begin(),ids.end());CHECK(found!=bytes.end());found[8]='3';
+    bool disagreed=false;
+    try{(void)importObject3DFbx(s.engine.reference(),bytes);}
+    catch(const std::invalid_argument &error){disagreed=std::string_view(error.what()).find("Authoring metadata and external point IDs disagree")!=std::string_view::npos;}
+    CHECK(disagreed&&s.engine.objectCount()==count);
 }
 void surfaceChain()
 {

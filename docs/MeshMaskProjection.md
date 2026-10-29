@@ -2,6 +2,8 @@
 
 공용 3D 엔진의 `projectMeshPointMasks`는 기준 에셋의 점별 선택 가중치를 대상 에셋의 가장 가까운 **기준 삼각형**에 투영한다. 두 에셋은 미리 같은 오브젝트 좌표계와 유사한 자세로 정렬되어 있어야 한다. 함수는 마스크 값과 진단 보고서만 반환하며 에셋·편집 세션을 변경하거나 소유하지 않는다. `NSCharacter`의 에디터도 본체 세션과 이 결과를 사용할 수 있다.
 
+`MeshMaskProjectionCore.h`는 원본과 대상의 `Object3DData`를 직접 받는 단일·일괄 계산을 제공한다. `MeshMaskProjectionAsset.h`는 기존 에셋 호출을 같은 계산에 연결한다. 기존 `MeshMaskProjection.h`도 두 경로를 제공하며 어느 경로도 입력을 소유하거나 변경하지 않는다.
+
 ```cpp
 #include <iiActorObject/MeshMaskProjection.h>
 #include <array>

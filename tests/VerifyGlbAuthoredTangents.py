@@ -208,6 +208,13 @@ def point_id(value):
 
 
 baseline, baseline_binary = load("export")
+for mode, point_count in (("identity_roundtrip", 4), ("identity_skin_roundtrip", 6)):
+    restored, payload = load(mode)
+    metadata = restored["meshes"][0]["extras"]["iiActorObjectPoints"]
+    restored_view = restored["bufferViews"][metadata["bufferView"]]
+    offset = restored_view.get("byteOffset", 0)
+    assert payload[offset:offset + 8] == b"iiGLPT\0\0"
+    assert struct.unpack_from("<I", payload, offset + 12)[0] == point_count
 mesh = baseline["meshes"][0]
 identity = mesh["extras"]["iiActorObjectPoints"]
 assert identity["version"] == 1

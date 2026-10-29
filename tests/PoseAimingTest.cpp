@@ -1,5 +1,5 @@
 #include <iiActorObject/PoseAiming.h>
-#include "../src/iiActorObject/CharacterMath.h"
+#include "../src/Core/CharacterMath.h"
 #include <array>
 #include <iostream>
 #include <limits>

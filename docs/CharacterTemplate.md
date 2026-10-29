@@ -4,7 +4,13 @@
 
 `Object3DEngine`이 `Object3DTemplate`과 중립 에셋·희소 변형 타깃·관절 기준점 자료를 소유한다. `Object3DTemplateHandle`은 참조 토큰이며 엔진 수명을 연장하지 않는다. `NSCharacter::CharacterTemplate`의 유일한 상태는 이 핸들이다. 생성한 `CharacterAsset` 역시 본체 에셋을 참조한다. 템플릿 제거는 기존 생성 에셋을 제거하지 않지만 엔진 소멸은 모든 참조를 만료시킨다.
 
-범용 템플릿·OBJ·희소 타깃·관절 재바인딩 계산은 본체 `src/iiActorObject/`에 있다. NSCharacter에는 인체 자료의 임시 해석과 참조 인터페이스만 둔다. 공용 기능은 `IIACTOROBJECT_WITH_NSCHARACTER=OFF`에서도 빌드된다. 인체 JSON 해석은 자체 C++23 SDK `iiJson`을 비공개 의존성으로 재사용한다. NSCharacter를 끄면 이 의존성도 사라진다. 공유 소비자에게 JSON 헤더를 노출하지 않으며 정적 패키지는 `iiJson`과 `iiSDKCore::Contracts`를 찾아 링크한다. Qt와 MakeHuman 애플리케이션 코드는 사용하지 않는다.
+범용 템플릿·OBJ·희소 타깃·관절 재바인딩 계산은 본체 `src/Authoring/`과 `src/Interchange/` 등 책임별 디렉터리에 있다. NSCharacter에는 인체 자료의 임시 해석과 참조 인터페이스만 둔다. 공용 기능은 `IIACTOROBJECT_WITH_NSCHARACTER=OFF`에서도 빌드된다. 인체 자료와 공용 GLB의 JSON 해석은 자체 C++23 SDK `iiJson`을 비공개 의존성으로 재사용한다. 따라서 NSCharacter를 꺼도 공용 GLB 때문에 `iiJson`은 필요하다. 공유 소비자에게 JSON 헤더를 노출하지 않으며 정적 패키지는 `iiJson`과 `iiSDKCore::Contracts`를 찾아 링크한다. Qt와 MakeHuman 애플리케이션 코드는 사용하지 않는다.
+
+## 책임별 인터페이스
+
+`CharacterTemplateCore.h`는 본체 소유 템플릿을 참조하는 `CharacterTemplate`과 생성·편집·리그 위임 API를 제공한다. `HumanAccessories.h`는 부속 목록과 교체 입력·작업을 제공하며, `MakeHumanTemplate.h`는 인체 자료를 읽고 템플릿을 구성하는 옵션과 로더를 제공한다. 기존 `CharacterTemplate.h`는 이 공개 경로를 함께 포함하는 호환 진입점이다. 세 헤더는 설치된 패키지에서 각각 직접 포함할 수 있다.
+
+로더 내부에서는 안전한 자료 읽기, 부속 카탈로그, 골격 해석, 체형 조절, 표정, 부속 구성을 각각 별도 구현으로 분리한다. 이들은 임시 로딩 작업을 처리하며 완성된 에셋·템플릿·리그는 계속 본체 엔진이 소유한다. 인체 계층은 별도 CMake 객체 타깃으로 컴파일된 후 기존 SDK 라이브러리에 포함된다. 독립적으로 배포되는 라이브러리는 아니다. [책임 분리 보고서](ResponsibilitySeparation-20261029.md)는 전체 분류와 남은 결합을 기록한다.
 
 ## 생성과 편집 계약
 

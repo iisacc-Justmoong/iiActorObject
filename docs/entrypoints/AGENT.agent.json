@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "AGENT.md",
-    "sha256": "6524f2ab5e210ad6267216856a8877de78d730ef75711be8dc170f244fccc954",
-    "bytes": 5783,
-    "line_count": 39,
+    "sha256": "a999944e3221a4d0a3785d4331fa9cff38f7c0c055885a3c02cab4056f438ea1",
+    "bytes": 6307,
+    "line_count": 44,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -43,7 +43,7 @@
       "kind": "list",
       "start_line": 3,
       "end_line": 13,
-      "raw": "- Implement independent C++23 code using the standard library or permissive open source dependencies. Do not introduce Qt or link editor application SDKs into the runtime.\n- The common 3D engine, asset storage, editing, surface/primitive generation, binding and interchange belong directly to `src/iiActorObject/`. NSCharacter contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.\n- Keep asset creation, geometry operations, rig binding, editing and interchange replaceable. Host applications own their UI and rendering.\n- Every source change requires tests and Korean documentation in `docs/`. README.md is English.\n- Use only `build/` for build outputs and generated test fixtures. Put separately supplied or prepared resources in `resources/` and use them from there. Run the relevant build and tests and verify installed public headers when changing the API.\n- Preserve unrelated changes. Distinguish native numerical tests, independent format validation, actual application import, and visual quality evidence.\n- Do not describe a procedural test character, compatible joint names or an FBX/glTF file as a complete MetaHuman implementation. Completion requires the gates in `docs/NSCharacter.md`.\n- The user excluded actual application validation on 2026-10-27. Do not run CC5, Blender or Unreal checks, resume the cancelled Unreal host build, or treat historical application gates as current blockers. Keep native C++ builds/tests, independent format checks and installed-consumer checks.\n- Unless the user explicitly requests application execution validation, keep `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF` and do not execute user-facing applications or agent tools for validation. Continue the required automated unit and integration tests. Keep experiment inputs in `resources/` and remove only the experiment's own temporary execution resources after a requested run.\n- The older example-application validation cases predate the resource-link and cleanup contract. Before enabling those cases for an explicit request, migrate their inputs and cleanup; the rig-sampling validation helpers already implement that contract.\n- Keep human Markdown and agent JSON synchronized in both directions. If agent JSON is changed, update the corresponding human document in the same change and regenerate/verify the projection.\n",
+      "raw": "- Implement independent C++23 code using the standard library or permissive open source dependencies. Do not introduce Qt or link editor application SDKs into the runtime.\n- Common 3D code is grouped by responsibility under `src/` as described in [the source layout](docs/SourceLayout.md). `src/NSCharacter/` contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.\n- Keep asset creation, geometry operations, rig binding, editing and interchange replaceable. Host applications own their UI and rendering.\n- Every source change requires tests and Korean documentation in `docs/`. README.md is English.\n- Use only `build/` for build outputs and generated test fixtures. Put separately supplied or prepared resources in `resources/` and use them from there. Run the relevant build and tests and verify installed public headers when changing the API.\n- Preserve unrelated changes. Distinguish native numerical tests, independent format validation, actual application import, and visual quality evidence.\n- Do not describe a procedural test character, compatible joint names or an FBX/glTF file as a complete MetaHuman implementation. Completion requires the gates in `docs/NSCharacter.md`.\n- The user excluded actual application validation on 2026-10-27. Do not run CC5, Blender or Unreal checks, resume the cancelled Unreal host build, or treat historical application gates as current blockers. Keep native C++ builds/tests, independent format checks and installed-consumer checks.\n- Unless the user explicitly requests application execution validation, keep `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF` and do not execute user-facing applications or agent tools for validation. Continue the required automated unit and integration tests. Keep experiment inputs in `resources/` and remove only the experiment's own temporary execution resources after a requested run.\n- The older example-application validation cases predate the resource-link and cleanup contract. Before enabling those cases for an explicit request, migrate their inputs and cleanup; the rig-sampling validation helpers already implement that contract.\n- Keep human Markdown and agent JSON synchronized in both directions. If agent JSON is changed, update the corresponding human document in the same change and regenerate/verify the projection.\n",
       "items": [
         {
           "marker": "-",
@@ -52,7 +52,7 @@
         },
         {
           "marker": "-",
-          "text": "The common 3D engine, asset storage, editing, surface/primitive generation, binding and interchange belong directly to `src/iiActorObject/`. NSCharacter contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.",
+          "text": "Common 3D code is grouped by responsibility under `src/` as described in [the source layout](docs/SourceLayout.md). `src/NSCharacter/` contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.",
           "checked": null
         },
         {
@@ -162,32 +162,74 @@
     },
     {
       "id": "b000007",
-      "kind": "html",
+      "kind": "heading",
       "start_line": 23,
       "end_line": 23,
-      "raw": "<!-- workspace-docs:agent:start -->\n"
+      "raw": "## 책임 분리 작업 인수인계\n",
+      "level": 2,
+      "title": "책임 분리 작업 인수인계"
     },
     {
       "id": "b000008",
-      "kind": "heading",
+      "kind": "blank",
       "start_line": 24,
       "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "list",
+      "start_line": 25,
+      "end_line": 26,
+      "raw": "- 사용자가 이 작업의 구현 재개를 명시한 경우에는 [종료 기록](docs/ResponsibilitySeparationCloseout-20261029.md), [상세 보고서](docs/ResponsibilitySeparation-20261029.md), [에이전트 인수인계 지침](docs/ResponsibilitySeparationHandoff-20261029.md)을 현재 코드와 함께 확인한다.\n- 이 문서와 미완료 목록은 자동 재개 지시가 아니다. 현재 사용자 요구와 기존 변경·참조 수명·실제 앱 검증 제외 범위를 우선한다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "사용자가 이 작업의 구현 재개를 명시한 경우에는 [종료 기록](docs/ResponsibilitySeparationCloseout-20261029.md), [상세 보고서](docs/ResponsibilitySeparation-20261029.md), [에이전트 인수인계 지침](docs/ResponsibilitySeparationHandoff-20261029.md)을 현재 코드와 함께 확인한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "이 문서와 미완료 목록은 자동 재개 지시가 아니다. 현재 사용자 요구와 기존 변경·참조 수명·실제 앱 검증 제외 범위를 우선한다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "html",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "<!-- workspace-docs:agent:start -->\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "heading",
+      "start_line": 29,
+      "end_line": 29,
       "raw": "## 문서 구조와 에이전트 탐색\n",
       "level": 2,
       "title": "문서 구조와 에이전트 탐색"
     },
     {
-      "id": "b000009",
+      "id": "b000013",
       "kind": "blank",
-      "start_line": 25,
-      "end_line": 25,
+      "start_line": 30,
+      "end_line": 30,
       "raw": "\n"
     },
     {
-      "id": "b000010",
+      "id": "b000014",
       "kind": "list",
-      "start_line": 26,
-      "end_line": 32,
+      "start_line": 31,
+      "end_line": 37,
       "raw": "- 프로젝트 루트의 `README.md`는 사람용 영문 진입 문서이며 `AGENT.md`는 에이전트 진입점이다.\n- 하위 인간용 Markdown과 구조화된 agent JSON을 함께 유지한다. Markdown이 원본이며 JSON은 원문 해시와 줄 범위를 가진 파생 문서이다.\n- 먼저 [docs/agent-index.json](docs/agent-index.json)에서 관련 문서와 JSON 투영을 찾는다. 원문 SHA-256이 다르면 현재 Markdown을 읽고 투영을 갱신한다.\n- JSON의 규칙 후보는 검색용 어휘 일치 결과이다. 과거 기록·예제·실패 상태를 현재 지시나 검증 완료로 자동 해석하지 않는다.\n- 기존 프로젝트별 규칙, 동결된 증거, 라이선스, 외부 원본, 사용자 데이터와 다른 작업의 변경을 보존한다.\n- 이 문서 재편 지침은 과거 작업의 기능 구현·배포를 자동 재개하라는 요청이 아니다. 현재 사용자의 작업 범위를 우선한다.\n- 문서를 수정하면 JSON 쌍·색인을 함께 갱신하고 검증한다. 기존 소스 변경에 대한 빌드·테스트 규칙은 계속 따른다.\n",
       "items": [
         {
@@ -228,41 +270,41 @@
       ]
     },
     {
-      "id": "b000011",
+      "id": "b000015",
       "kind": "blank",
-      "start_line": 33,
-      "end_line": 33,
+      "start_line": 38,
+      "end_line": 38,
       "raw": "\n"
     },
     {
-      "id": "b000012",
+      "id": "b000016",
       "kind": "paragraph",
-      "start_line": 34,
-      "end_line": 34,
+      "start_line": 39,
+      "end_line": 39,
       "raw": "Workspace에서 이 프로젝트의 문서를 갱신하는 명령은 다음과 같다.\n"
     },
     {
-      "id": "b000013",
+      "id": "b000017",
       "kind": "blank",
-      "start_line": 35,
-      "end_line": 35,
+      "start_line": 40,
+      "end_line": 40,
       "raw": "\n"
     },
     {
-      "id": "b000014",
+      "id": "b000018",
       "kind": "fenced_code",
-      "start_line": 36,
-      "end_line": 38,
+      "start_line": 41,
+      "end_line": 43,
       "raw": "```sh\npython3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiActorObject\n```\n",
       "language": "sh",
       "code": "python3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiActorObject\n",
       "closed": true
     },
     {
-      "id": "b000015",
+      "id": "b000019",
       "kind": "html",
-      "start_line": 39,
-      "end_line": 39,
+      "start_line": 44,
+      "end_line": 44,
       "raw": "<!-- workspace-docs:agent:end -->\n"
     }
   ],
@@ -276,12 +318,20 @@
       "start_line": 1
     },
     {
-      "block_id": "b000008",
+      "block_id": "b000007",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "책임 분리 작업 인수인계",
+      "anchor": "책임-분리-작업-인수인계",
+      "start_line": 23
+    },
+    {
+      "block_id": "b000012",
       "parent_id": "b000001",
       "level": 2,
       "title": "문서 구조와 에이전트 탐색",
       "anchor": "문서-구조와-에이전트-탐색",
-      "start_line": 24
+      "start_line": 29
     }
   ],
   "indexes": {
@@ -296,7 +346,7 @@
       {
         "block_id": "b000003",
         "line": 4,
-        "text": "- The common 3D engine, asset storage, editing, surface/primitive generation, binding and interchange belong directly to `src/iiActorObject/`. NSCharacter contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.",
+        "text": "- Common 3D code is grouped by responsibility under `src/` as described in [the source layout](docs/SourceLayout.md). `src/NSCharacter/` contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.",
         "basis": "lexical_match",
         "context": "list"
       },
@@ -357,8 +407,8 @@
         "context": "list"
       },
       {
-        "block_id": "b000010",
-        "line": 29,
+        "block_id": "b000014",
+        "line": 34,
         "text": "- JSON의 규칙 후보는 검색용 어휘 일치 결과이다. 과거 기록·예제·실패 상태를 현재 지시나 검증 완료로 자동 해석하지 않는다.",
         "basis": "lexical_match",
         "context": "list"
@@ -366,18 +416,46 @@
     ],
     "commands": [
       {
-        "block_id": "b000014",
+        "block_id": "b000018",
         "language": "sh",
         "code": "python3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiActorObject\n"
       }
     ],
     "links": [
       {
-        "block_id": "b000010",
+        "block_id": "b000003",
+        "label": "the source layout",
+        "target": "docs/SourceLayout.md",
+        "kind": "relative",
+        "line": 4
+      },
+      {
+        "block_id": "b000009",
+        "label": "종료 기록",
+        "target": "docs/ResponsibilitySeparationCloseout-20261029.md",
+        "kind": "relative",
+        "line": 25
+      },
+      {
+        "block_id": "b000009",
+        "label": "상세 보고서",
+        "target": "docs/ResponsibilitySeparation-20261029.md",
+        "kind": "relative",
+        "line": 25
+      },
+      {
+        "block_id": "b000009",
+        "label": "에이전트 인수인계 지침",
+        "target": "docs/ResponsibilitySeparationHandoff-20261029.md",
+        "kind": "relative",
+        "line": 25
+      },
+      {
+        "block_id": "b000014",
         "label": "docs/agent-index.json",
         "target": "docs/agent-index.json",
         "kind": "relative",
-        "line": 28
+        "line": 33
       }
     ],
     "tables": []

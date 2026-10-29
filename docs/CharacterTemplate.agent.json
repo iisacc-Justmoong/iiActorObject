@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/CharacterTemplate.md",
-    "sha256": "ae1f1f70074162f831436b12b9798f9d1576f72a13f471434b2a4464f87abe97",
-    "bytes": 9566,
-    "line_count": 65,
+    "sha256": "d595f2c48ea16cbb4a8c59bf101a90fc16fed7d4da6fb790fdda95ec85726a7e",
+    "bytes": 10772,
+    "line_count": 71,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -73,7 +73,7 @@
       "kind": "paragraph",
       "start_line": 7,
       "end_line": 7,
-      "raw": "범용 템플릿·OBJ·희소 타깃·관절 재바인딩 계산은 본체 `src/iiActorObject/`에 있다. NSCharacter에는 인체 자료의 임시 해석과 참조 인터페이스만 둔다. 공용 기능은 `IIACTOROBJECT_WITH_NSCHARACTER=OFF`에서도 빌드된다. 인체 JSON 해석은 자체 C++23 SDK `iiJson`을 비공개 의존성으로 재사용한다. NSCharacter를 끄면 이 의존성도 사라진다. 공유 소비자에게 JSON 헤더를 노출하지 않으며 정적 패키지는 `iiJson`과 `iiSDKCore::Contracts`를 찾아 링크한다. Qt와 MakeHuman 애플리케이션 코드는 사용하지 않는다.\n"
+      "raw": "범용 템플릿·OBJ·희소 타깃·관절 재바인딩 계산은 본체 `src/Authoring/`과 `src/Interchange/` 등 책임별 디렉터리에 있다. NSCharacter에는 인체 자료의 임시 해석과 참조 인터페이스만 둔다. 공용 기능은 `IIACTOROBJECT_WITH_NSCHARACTER=OFF`에서도 빌드된다. 인체 자료와 공용 GLB의 JSON 해석은 자체 C++23 SDK `iiJson`을 비공개 의존성으로 재사용한다. 따라서 NSCharacter를 꺼도 공용 GLB 때문에 `iiJson`은 필요하다. 공유 소비자에게 JSON 헤더를 노출하지 않으며 정적 패키지는 `iiJson`과 `iiSDKCore::Contracts`를 찾아 링크한다. Qt와 MakeHuman 애플리케이션 코드는 사용하지 않는다.\n"
     },
     {
       "id": "b000008",
@@ -87,9 +87,9 @@
       "kind": "heading",
       "start_line": 9,
       "end_line": 9,
-      "raw": "## 생성과 편집 계약\n",
+      "raw": "## 책임별 인터페이스\n",
       "level": 2,
-      "title": "생성과 편집 계약"
+      "title": "책임별 인터페이스"
     },
     {
       "id": "b000010",
@@ -103,7 +103,7 @@
       "kind": "paragraph",
       "start_line": 11,
       "end_line": 11,
-      "raw": "`Object3DTemplateDefinition`은 중립 에셋 참조, `TemplateTarget`, `TemplateJointBinding`과 선택적인 조절·드라이버 정의를 받는다. 타깃은 원본 control-point ID에 대한 희소 위치 변화이며 기본 가중치는 0~1이다. [의미 조절과 복합 드라이버](TemplateControls.md)는 양방향 슬라이더·곡선 응답·여러 입력 축의 곱을 본체에서 계산한다. 카탈로그는 런타임 표정 모프와 별개이므로 수백 개의 생성용 타깃을 렌더 메시마다 확장하지 않는다.\n"
+      "raw": "`CharacterTemplateCore.h`는 본체 소유 템플릿을 참조하는 `CharacterTemplate`과 생성·편집·리그 위임 API를 제공한다. `HumanAccessories.h`는 부속 목록과 교체 입력·작업을 제공하며, `MakeHumanTemplate.h`는 인체 자료를 읽고 템플릿을 구성하는 옵션과 로더를 제공한다. 기존 `CharacterTemplate.h`는 이 공개 경로를 함께 포함하는 호환 진입점이다. 세 헤더는 설치된 패키지에서 각각 직접 포함할 수 있다.\n"
     },
     {
       "id": "b000012",
@@ -117,7 +117,7 @@
       "kind": "paragraph",
       "start_line": 13,
       "end_line": 13,
-      "raw": "`generate(values)`는 항상 중립 자료에서 새 에셋을 계산한다. 누적 슬라이더 오차가 없으며 같은 입력은 같은 소스 위치와 토폴로지를 갖는다. 알 수 없는 이름, 중복 입력, 비유한 값과 범위 밖 가중치를 거부한다. 실패한 생성은 에셋을 게시하지 않는다. 최대 4,096개 타깃과 1,600만 개 희소 변위를 허용한다. 타깃 조합의 해부학적 유효성은 별도의 인체 규칙에 속한다.\n"
+      "raw": "로더 내부에서는 안전한 자료 읽기, 부속 카탈로그, 골격 해석, 체형 조절, 표정, 부속 구성을 각각 별도 구현으로 분리한다. 이들은 임시 로딩 작업을 처리하며 완성된 에셋·템플릿·리그는 계속 본체 엔진이 소유한다. 인체 계층은 별도 CMake 객체 타깃으로 컴파일된 후 기존 SDK 라이브러리에 포함된다. 독립적으로 배포되는 라이브러리는 아니다. [책임 분리 보고서](ResponsibilitySeparation-20261029.md)는 전체 분류와 남은 결합을 기록한다.\n"
     },
     {
       "id": "b000014",
@@ -128,10 +128,12 @@
     },
     {
       "id": "b000015",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 15,
       "end_line": 15,
-      "raw": "`snapshot(values)`는 같은 생성 계산을 에셋 등록 없이 값으로 평가하고 작성용 점과 파생 렌더 메시·UV·머티리얼 캐시를 동기화한다. 이 값은 본체가 제공하는 임시 계산 결과이며 템플릿이나 원본 에셋을 소유하지 않는다.\n"
+      "raw": "## 생성과 편집 계약\n",
+      "level": 2,
+      "title": "생성과 편집 계약"
     },
     {
       "id": "b000016",
@@ -145,7 +147,7 @@
       "kind": "paragraph",
       "start_line": 17,
       "end_line": 17,
-      "raw": "관절 head·tail은 원본 정점 집합의 중심이다. 작성용 토폴로지가 없으면 렌더 정점 ID로 앵커를 지정할 수 있다. 선택적인 세 기준점의 평면 법선이 회전 기준이다. 본의 +Y 축을 tail에 맞추고 부모 역행렬로 로컬 위치·회전을 계산한다. 평면이 방향과 평행하면 결정적인 보조 축을 사용한다. 영 길이 본과 비단위 bind scale은 거부한다. 본체 함수 `bindObject3DTemplateJoints`는 실패 시 기존 본 배열을 유지한다. 메시 정점이 아닌 오브젝트 좌표를 사용하는 경우에는 동일한 계산을 `bindObject3DJointFrames`로 직접 적용할 수 있다. 원본 앱의 전용 roll 규약과 동일하다는 주장은 하지 않는다.\n"
+      "raw": "`Object3DTemplateDefinition`은 중립 에셋 참조, `TemplateTarget`, `TemplateJointBinding`과 선택적인 조절·드라이버 정의를 받는다. 타깃은 원본 control-point ID에 대한 희소 위치 변화이며 기본 가중치는 0~1이다. [의미 조절과 복합 드라이버](TemplateControls.md)는 양방향 슬라이더·곡선 응답·여러 입력 축의 곱을 본체에서 계산한다. 카탈로그는 런타임 표정 모프와 별개이므로 수백 개의 생성용 타깃을 렌더 메시마다 확장하지 않는다.\n"
     },
     {
       "id": "b000018",
@@ -159,7 +161,7 @@
       "kind": "paragraph",
       "start_line": 19,
       "end_line": 19,
-      "raw": "생성 후의 정점·가중치·모프·관절 편집은 `Object3DEditor`와 `CharacterEditor`를 사용한다. `CharacterTemplate::edit` 또는 본체 `editTemplate`은 파라미터와 후속 수작업 편집을 계층화하여 재계산한다. 계층별 활성 상태·강도·순서와 undo·redo를 제공한다. [비파괴 편집 계약](EditLayers.md)을 따른다. 일반 `generate`는 독립된 결과 에셋을 만든다.\n"
+      "raw": "`generate(values)`는 항상 중립 자료에서 새 에셋을 계산한다. 누적 슬라이더 오차가 없으며 같은 입력은 같은 소스 위치와 토폴로지를 갖는다. 알 수 없는 이름, 중복 입력, 비유한 값과 범위 밖 가중치를 거부한다. 실패한 생성은 에셋을 게시하지 않는다. 최대 4,096개 타깃과 1,600만 개 희소 변위를 허용한다. 타깃 조합의 해부학적 유효성은 별도의 인체 규칙에 속한다.\n"
     },
     {
       "id": "b000020",
@@ -170,12 +172,10 @@
     },
     {
       "id": "b000021",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 21,
       "end_line": 21,
-      "raw": "## 원본 작성 자료\n",
-      "level": 2,
-      "title": "원본 작성 자료"
+      "raw": "`snapshot(values)`는 같은 생성 계산을 에셋 등록 없이 값으로 평가하고 작성용 점과 파생 렌더 메시·UV·머티리얼 캐시를 동기화한다. 이 값은 본체가 제공하는 임시 계산 결과이며 템플릿이나 원본 에셋을 소유하지 않는다.\n"
     },
     {
       "id": "b000022",
@@ -189,7 +189,7 @@
       "kind": "paragraph",
       "start_line": 23,
       "end_line": 23,
-      "raw": "`parseObject3DObj`는 위치·UV·법선 분리 인덱스, 양수·음수 상대 인덱스, 폴리곤과 그룹을 읽는다. 위치·UV·layout·폴리곤 ID를 압축하지 않는다. `MeshTopologyDefinition::polygonGroups`는 그룹을, `hiddenPolygons`는 렌더링 제외 face ID를 보관한다. 보조 면을 숨겨도 관절 기준점과 타깃 ID는 유효하다. 작성용 인접 관계는 숨긴 면도 포함한다.\n"
+      "raw": "관절 head·tail은 원본 정점 집합의 중심이다. 작성용 토폴로지가 없으면 렌더 정점 ID로 앵커를 지정할 수 있다. 선택적인 세 기준점의 평면 법선이 회전 기준이다. 본의 +Y 축을 tail에 맞추고 부모 역행렬로 로컬 위치·회전을 계산한다. 평면이 방향과 평행하면 결정적인 보조 축을 사용한다. 영 길이 본과 비단위 bind scale은 거부한다. 본체 함수 `bindObject3DTemplateJoints`는 실패 시 기존 본 배열을 유지한다. 메시 정점이 아닌 오브젝트 좌표를 사용하는 경우에는 동일한 계산을 `bindObject3DJointFrames`로 직접 적용할 수 있다. 원본 앱의 전용 roll 규약과 동일하다는 주장은 하지 않는다.\n"
     },
     {
       "id": "b000024",
@@ -203,7 +203,7 @@
       "kind": "paragraph",
       "start_line": 25,
       "end_line": 25,
-      "raw": "OBJ는 순차 정의된 `v`, `vt`, `vn`, `g`, `f`를 지원한다. `o`, `s`, `usemtl`, `mtllib`은 형상 파싱에 영향을 주지 않는 레코드로 처리하고 외부 파일은 읽지 않는다. 머티리얼·smoothing group 의미 보존, RGB 정점 색, 자유 곡면과 forward reference는 미지원이다. 법선이 없으면 원본 위치별 평활 법선을 재계산한다. UV·법선의 혼합 누락은 거부한다. 기본 제한은 64 MiB, 위치 200만 개, 코너 800만 개이다. 타깃 형식은 `원본정점ID dx dy dz`이며 중복 ID를 거부한다.\n"
+      "raw": "생성 후의 정점·가중치·모프·관절 편집은 `Object3DEditor`와 `CharacterEditor`를 사용한다. `CharacterTemplate::edit` 또는 본체 `editTemplate`은 파라미터와 후속 수작업 편집을 계층화하여 재계산한다. 계층별 활성 상태·강도·순서와 undo·redo를 제공한다. [비파괴 편집 계약](EditLayers.md)을 따른다. 일반 `generate`는 독립된 결과 에셋을 만든다.\n"
     },
     {
       "id": "b000026",
@@ -217,9 +217,9 @@
       "kind": "heading",
       "start_line": 27,
       "end_line": 27,
-      "raw": "## CC0 인체 자료\n",
+      "raw": "## 원본 작성 자료\n",
       "level": 2,
-      "title": "CC0 인체 자료"
+      "title": "원본 작성 자료"
     },
     {
       "id": "b000028",
@@ -233,7 +233,7 @@
       "kind": "paragraph",
       "start_line": 29,
       "end_line": 29,
-      "raw": "`resources/MakeHuman`은 공식 커밋 `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`의 수정 없는 그래픽 자료이다. [라이선스 구분](../resources/MakeHuman/LICENSE.md), [CC0 본문](../resources/MakeHuman/LICENSE.ASSETS.md), [경로·해시](../resources/MakeHuman/UPSTREAM-SHA256.json)를 포함한다. 위치 19,158개, UV 21,334개, 폴리곤 18,486개, 본 163개·스킨과 선택 타깃 472개이다. 기본 렌더링은 `body`의 사각형 13,378개를 사용한다. 보조 의상·눈·치아·혀·관절 표면은 보존하되 숨긴다.\n"
+      "raw": "`parseObject3DObj`는 위치·UV·법선 분리 인덱스, 양수·음수 상대 인덱스, 폴리곤과 그룹을 읽는다. 위치·UV·layout·폴리곤 ID를 압축하지 않는다. `MeshTopologyDefinition::polygonGroups`는 그룹을, `hiddenPolygons`는 렌더링 제외 face ID를 보관한다. 보조 면을 숨겨도 관절 기준점과 타깃 ID는 유효하다. 작성용 인접 관계는 숨긴 면도 포함한다.\n"
     },
     {
       "id": "b000030",
@@ -247,7 +247,7 @@
       "kind": "paragraph",
       "start_line": 31,
       "end_line": 31,
-      "raw": "`loadMakeHumanTemplate(engine.reference(), directory)`는 지정한 디렉터리 안의 명시된 자료만 읽는다. 상대 경로와 심볼릭 링크의 디렉터리 탈출을 거부하고 총 읽기량은 기본 256 MiB이다. 원본 좌표를 기본 0.1배하여 미터로 바꾸고 발을 Y=0에 맞춘다. 파일과 JSON은 로딩 중에만 임시로 보관하며 완료된 중립 자료·타깃·관절 정의는 본체로 이동한다.\n"
+      "raw": "OBJ는 순차 정의된 `v`, `vt`, `vn`, `g`, `f`를 지원한다. `o`, `s`, `usemtl`, `mtllib`은 형상 파싱에 영향을 주지 않는 레코드로 처리하고 외부 파일은 읽지 않는다. 머티리얼·smoothing group 의미 보존, RGB 정점 색, 자유 곡면과 forward reference는 미지원이다. 법선이 없으면 원본 위치별 평활 법선을 재계산한다. UV·법선의 혼합 누락은 거부한다. 기본 제한은 64 MiB, 위치 200만 개, 코너 800만 개이다. 타깃 형식은 `원본정점ID dx dy dz`이며 중복 ID를 거부한다.\n"
     },
     {
       "id": "b000032",
@@ -258,57 +258,57 @@
     },
     {
       "id": "b000033",
-      "kind": "fenced_code",
+      "kind": "heading",
       "start_line": 33,
-      "end_line": 41,
-      "raw": "```cpp\niiActorObject::Object3DEngine engine;\nauto human = iiActorObject::NSCharacter::loadMakeHumanTemplate(\n    engine.reference(), \"/path/to/share/iiActorObject/templates/MakeHuman\");\nconst std::array values{\n    iiActorObject::TemplateValue{\"armslegs/upperlegs-height-incr\", .5},\n    iiActorObject::TemplateValue{\"nose/nose-scale-vert-incr\", .4}};\nauto character = human.generate(values);\n```\n",
-      "language": "cpp",
-      "code": "iiActorObject::Object3DEngine engine;\nauto human = iiActorObject::NSCharacter::loadMakeHumanTemplate(\n    engine.reference(), \"/path/to/share/iiActorObject/templates/MakeHuman\");\nconst std::array values{\n    iiActorObject::TemplateValue{\"armslegs/upperlegs-height-incr\", .5},\n    iiActorObject::TemplateValue{\"nose/nose-scale-vert-incr\", .4}};\nauto character = human.generate(values);\n",
-      "closed": true
+      "end_line": 33,
+      "raw": "## CC0 인체 자료\n",
+      "level": 2,
+      "title": "CC0 인체 자료"
     },
     {
       "id": "b000034",
       "kind": "blank",
-      "start_line": 42,
-      "end_line": 42,
+      "start_line": 34,
+      "end_line": 34,
       "raw": "\n"
     },
     {
       "id": "b000035",
       "kind": "paragraph",
-      "start_line": 43,
-      "end_line": 43,
-      "raw": "원본 타깃 목록은 `human.program().get().definition().targets`, 의미 조절 목록은 `human.controls()`로 조회한다. 원본 이름은 `부위/원본파일명`이며 확장자를 제외한다. 의미 조절은 `model/` 접두사·표시 이름·그룹과 조절 범위를 제공하며 같은 `TemplateValue`로 입력한다. 예를 들어 `model/nose/nose-scale-vert-decr-incr=-0.4`는 코의 세로 축소 타깃을 0.4만큼 적용한다. 원본 타깃과 의미 조절을 함께 입력하면 해당 타깃 기여도를 더하며 최종 범위 초과는 거부한다. `MakeHumanTemplateOptions::semanticControls=false`는 원본 타깃만 가진 프로그램을 만든다.\n"
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "`resources/MakeHuman`은 공식 커밋 `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`의 수정 없는 그래픽 자료이다. [라이선스 구분](../resources/MakeHuman/LICENSE.md), [CC0 본문](../resources/MakeHuman/LICENSE.ASSETS.md), [경로·해시](../resources/MakeHuman/UPSTREAM-SHA256.json)를 포함한다. 위치 19,158개, UV 21,334개, 폴리곤 18,486개, 본 163개·스킨과 선택 타깃 472개이다. 기본 렌더링은 `body`의 사각형 13,378개를 사용한다. 보조 의상·눈·치아·혀·관절 표면은 보존하되 숨긴다.\n"
     },
     {
       "id": "b000036",
       "kind": "blank",
-      "start_line": 44,
-      "end_line": 44,
+      "start_line": 36,
+      "end_line": 36,
       "raw": "\n"
     },
     {
       "id": "b000037",
       "kind": "paragraph",
-      "start_line": 45,
-      "end_line": 45,
-      "raw": "[표면 연결](SkinSurface.md)은 의상·부속 메시를 현재 모양에 부착하고 생성 파라미터와 몸·의상 조형을 함께 유지한다. 이후 일부 CC0 머리카락·의상·눈썹·속눈썹의 선택과 몸 가림을 [인체 부속 자산](HumanAccessories.md)에 추가했다. 동적 자산 교체, 충돌 fitting과 제작용 외형·MetaHuman 토폴로지는 남아 있다.\n"
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "`loadMakeHumanTemplate(engine.reference(), directory)`는 지정한 디렉터리 안의 명시된 자료만 읽는다. 상대 경로와 심볼릭 링크의 디렉터리 탈출을 거부하고 총 읽기량은 기본 256 MiB이다. 원본 좌표를 기본 0.1배하여 미터로 바꾸고 발을 Y=0에 맞춘다. 파일과 JSON은 로딩 중에만 임시로 보관하며 완료된 중립 자료·타깃·관절 정의는 본체로 이동한다.\n"
     },
     {
       "id": "b000038",
       "kind": "blank",
-      "start_line": 46,
-      "end_line": 46,
+      "start_line": 38,
+      "end_line": 38,
       "raw": "\n"
     },
     {
       "id": "b000039",
-      "kind": "heading",
-      "start_line": 47,
+      "kind": "fenced_code",
+      "start_line": 39,
       "end_line": 47,
-      "raw": "## 실행과 검사\n",
-      "level": 2,
-      "title": "실행과 검사"
+      "raw": "```cpp\niiActorObject::Object3DEngine engine;\nauto human = iiActorObject::NSCharacter::loadMakeHumanTemplate(\n    engine.reference(), \"/path/to/share/iiActorObject/templates/MakeHuman\");\nconst std::array values{\n    iiActorObject::TemplateValue{\"armslegs/upperlegs-height-incr\", .5},\n    iiActorObject::TemplateValue{\"nose/nose-scale-vert-incr\", .4}};\nauto character = human.generate(values);\n```\n",
+      "language": "cpp",
+      "code": "iiActorObject::Object3DEngine engine;\nauto human = iiActorObject::NSCharacter::loadMakeHumanTemplate(\n    engine.reference(), \"/path/to/share/iiActorObject/templates/MakeHuman\");\nconst std::array values{\n    iiActorObject::TemplateValue{\"armslegs/upperlegs-height-incr\", .5},\n    iiActorObject::TemplateValue{\"nose/nose-scale-vert-incr\", .4}};\nauto character = human.generate(values);\n",
+      "closed": true
     },
     {
       "id": "b000040",
@@ -319,55 +319,57 @@
     },
     {
       "id": "b000041",
-      "kind": "fenced_code",
+      "kind": "paragraph",
       "start_line": 49,
-      "end_line": 55,
-      "raw": "```sh\ncmake -S . -B build -DCMAKE_PREFIX_PATH=\"/path/to/iiJson;/path/to/iiSDKCore\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectTemplateCharacter resources/MakeHuman build/human/Custom.glb \\\n  armslegs/upperlegs-height-incr=0.5 nose/nose-scale-vert-incr=0.4\n```\n",
-      "language": "sh",
-      "code": "cmake -S . -B build -DCMAKE_PREFIX_PATH=\"/path/to/iiJson;/path/to/iiSDKCore\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectTemplateCharacter resources/MakeHuman build/human/Custom.glb \\\n  armslegs/upperlegs-height-incr=0.5 nose/nose-scale-vert-incr=0.4\n",
-      "closed": true
+      "end_line": 49,
+      "raw": "원본 타깃 목록은 `human.program().get().definition().targets`, 의미 조절 목록은 `human.controls()`로 조회한다. 원본 이름은 `부위/원본파일명`이며 확장자를 제외한다. 의미 조절은 `model/` 접두사·표시 이름·그룹과 조절 범위를 제공하며 같은 `TemplateValue`로 입력한다. 예를 들어 `model/nose/nose-scale-vert-decr-incr=-0.4`는 코의 세로 축소 타깃을 0.4만큼 적용한다. 원본 타깃과 의미 조절을 함께 입력하면 해당 타깃 기여도를 더하며 최종 범위 초과는 거부한다. `MakeHumanTemplateOptions::semanticControls=false`는 원본 타깃만 가진 프로그램을 만든다.\n"
     },
     {
       "id": "b000042",
       "kind": "blank",
-      "start_line": 56,
-      "end_line": 56,
+      "start_line": 50,
+      "end_line": 50,
       "raw": "\n"
     },
     {
       "id": "b000043",
       "kind": "paragraph",
-      "start_line": 57,
-      "end_line": 57,
-      "raw": "테스트는 원본 ID·숨김 면 보존, 타깃 조합, 관절 이동, bind 포즈 표면 일치, 팔 스킨 변형, 비누적 재생성, 입력 실패와 소유권 만료를 검사한다. Blender 검사는 GLB·FBX·편집 GLB의 본·삼각형 수·바인드 일치와 팔 변형을 검사한다. CC5·Unreal·MetaHuman 적용과 최종 시각 품질은 별도 완료 조건이다.\n"
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "[표면 연결](SkinSurface.md)은 의상·부속 메시를 현재 모양에 부착하고 생성 파라미터와 몸·의상 조형을 함께 유지한다. 이후 일부 CC0 머리카락·의상·눈썹·속눈썹의 선택과 몸 가림을 [인체 부속 자산](HumanAccessories.md)에 추가했다. 동적 자산 교체, 충돌 fitting과 제작용 외형·MetaHuman 토폴로지는 남아 있다.\n"
     },
     {
       "id": "b000044",
       "kind": "blank",
-      "start_line": 58,
-      "end_line": 58,
+      "start_line": 52,
+      "end_line": 52,
       "raw": "\n"
     },
     {
       "id": "b000045",
-      "kind": "paragraph",
-      "start_line": 59,
-      "end_line": 59,
-      "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
+      "kind": "heading",
+      "start_line": 53,
+      "end_line": 53,
+      "raw": "## 실행과 검사\n",
+      "level": 2,
+      "title": "실행과 검사"
     },
     {
       "id": "b000046",
       "kind": "blank",
-      "start_line": 60,
-      "end_line": 60,
+      "start_line": 54,
+      "end_line": 54,
       "raw": "\n"
     },
     {
       "id": "b000047",
-      "kind": "paragraph",
-      "start_line": 61,
+      "kind": "fenced_code",
+      "start_line": 55,
       "end_line": 61,
-      "raw": "[매크로 형상](HumanMorphology.md)은 별도 CC0 타깃 348개를 기존 472개에 연결한다. `macroAssets`와 `faceAssets`를 함께 지정할 수 있으며 총 읽기량 예산을 공유한다. 기본 혼합의 중립 반영과 접지, 모든 그래픽 타깃·드라이버와 부속 자료의 소유자는 본체이다.\n"
+      "raw": "```sh\ncmake -S . -B build -DCMAKE_PREFIX_PATH=\"/path/to/iiJson;/path/to/iiSDKCore\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectTemplateCharacter resources/MakeHuman build/human/Custom.glb \\\n  armslegs/upperlegs-height-incr=0.5 nose/nose-scale-vert-incr=0.4\n```\n",
+      "language": "sh",
+      "code": "cmake -S . -B build -DCMAKE_PREFIX_PATH=\"/path/to/iiJson;/path/to/iiSDKCore\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectTemplateCharacter resources/MakeHuman build/human/Custom.glb \\\n  armslegs/upperlegs-height-incr=0.5 nose/nose-scale-vert-incr=0.4\n",
+      "closed": true
     },
     {
       "id": "b000048",
@@ -381,7 +383,7 @@
       "kind": "paragraph",
       "start_line": 63,
       "end_line": 63,
-      "raw": "[얼굴 포즈 리그](FacePoseRig.md)는 별도 CC0 표현 자료를 `expressionAssets`로 연결한다. 본체의 포즈 프로그램·세션을 참조하는 `generateRigged`와 편집 후 재연결, 명시적인 모프 스냅샷 베이크를 제공한다. 포즈 프로그램은 프로젝트 버전 8부터 보관하며 현재 버전 선택과 복원 계약은 [프로젝트 형식](Object3DProject.md)을 따른다. 과거의 날짜별 보고서는 그 단계의 소스 스냅샷이다.\n"
+      "raw": "테스트는 원본 ID·숨김 면 보존, 타깃 조합, 관절 이동, bind 포즈 표면 일치, 팔 스킨 변형, 비누적 재생성, 입력 실패와 소유권 만료를 검사한다. Blender 검사는 GLB·FBX·편집 GLB의 본·삼각형 수·바인드 일치와 팔 변형을 검사한다. CC5·Unreal·MetaHuman 적용과 최종 시각 품질은 별도 완료 조건이다.\n"
     },
     {
       "id": "b000050",
@@ -395,6 +397,48 @@
       "kind": "paragraph",
       "start_line": 65,
       "end_line": 65,
+      "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
+    },
+    {
+      "id": "b000052",
+      "kind": "blank",
+      "start_line": 66,
+      "end_line": 66,
+      "raw": "\n"
+    },
+    {
+      "id": "b000053",
+      "kind": "paragraph",
+      "start_line": 67,
+      "end_line": 67,
+      "raw": "[매크로 형상](HumanMorphology.md)은 별도 CC0 타깃 348개를 기존 472개에 연결한다. `macroAssets`와 `faceAssets`를 함께 지정할 수 있으며 총 읽기량 예산을 공유한다. 기본 혼합의 중립 반영과 접지, 모든 그래픽 타깃·드라이버와 부속 자료의 소유자는 본체이다.\n"
+    },
+    {
+      "id": "b000054",
+      "kind": "blank",
+      "start_line": 68,
+      "end_line": 68,
+      "raw": "\n"
+    },
+    {
+      "id": "b000055",
+      "kind": "paragraph",
+      "start_line": 69,
+      "end_line": 69,
+      "raw": "[얼굴 포즈 리그](FacePoseRig.md)는 별도 CC0 표현 자료를 `expressionAssets`로 연결한다. 본체의 포즈 프로그램·세션을 참조하는 `generateRigged`와 편집 후 재연결, 명시적인 모프 스냅샷 베이크를 제공한다. 포즈 프로그램은 프로젝트 버전 8부터 보관하며 현재 버전 선택과 복원 계약은 [프로젝트 형식](Object3DProject.md)을 따른다. 과거의 날짜별 보고서는 그 단계의 소스 스냅샷이다.\n"
+    },
+    {
+      "id": "b000056",
+      "kind": "blank",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "\n"
+    },
+    {
+      "id": "b000057",
+      "kind": "paragraph",
+      "start_line": 71,
+      "end_line": 71,
       "raw": "기본 에셋에 [기준 자세 프로그램](PoseReference.md)이 있으면 새 생성물과 최초 편집 세션이 상속한다. 이후 세션의 설정·해제는 파라미터 재계산에도 보존된다. 계산은 본체의 최종 바인드 골격에서 수행한다.\n"
     }
   ],
@@ -419,33 +463,41 @@
       "block_id": "b000009",
       "parent_id": "b000001",
       "level": 2,
-      "title": "생성과 편집 계약",
-      "anchor": "생성과-편집-계약",
+      "title": "책임별 인터페이스",
+      "anchor": "책임별-인터페이스",
       "start_line": 9
     },
     {
-      "block_id": "b000021",
+      "block_id": "b000015",
       "parent_id": "b000001",
       "level": 2,
-      "title": "원본 작성 자료",
-      "anchor": "원본-작성-자료",
-      "start_line": 21
+      "title": "생성과 편집 계약",
+      "anchor": "생성과-편집-계약",
+      "start_line": 15
     },
     {
       "block_id": "b000027",
       "parent_id": "b000001",
       "level": 2,
-      "title": "CC0 인체 자료",
-      "anchor": "cc0-인체-자료",
+      "title": "원본 작성 자료",
+      "anchor": "원본-작성-자료",
       "start_line": 27
     },
     {
-      "block_id": "b000039",
+      "block_id": "b000033",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "CC0 인체 자료",
+      "anchor": "cc0-인체-자료",
+      "start_line": 33
+    },
+    {
+      "block_id": "b000045",
       "parent_id": "b000001",
       "level": 2,
       "title": "실행과 검사",
       "anchor": "실행과-검사",
-      "start_line": 47
+      "start_line": 53
     }
   ],
   "indexes": {
@@ -460,41 +512,41 @@
       {
         "block_id": "b000007",
         "line": 7,
-        "text": "범용 템플릿·OBJ·희소 타깃·관절 재바인딩 계산은 본체 `src/iiActorObject/`에 있다. NSCharacter에는 인체 자료의 임시 해석과 참조 인터페이스만 둔다. 공용 기능은 `IIACTOROBJECT_WITH_NSCHARACTER=OFF`에서도 빌드된다. 인체 JSON 해석은 자체 C++23 SDK `iiJson`을 비공개 의존성으로 재사용한다. NSCharacter를 끄면 이 의존성도 사라진다. 공유 소비자에게 JSON 헤더를 노출하지 않으며 정적 패키지는 `iiJson`과 `iiSDKCore::Contracts`를 찾아 링크한다. Qt와 MakeHuman 애플리케이션 코드는 사용하지 않는다.",
-        "basis": "lexical_match",
-        "context": "paragraph"
-      },
-      {
-        "block_id": "b000011",
-        "line": 11,
-        "text": "`Object3DTemplateDefinition`은 중립 에셋 참조, `TemplateTarget`, `TemplateJointBinding`과 선택적인 조절·드라이버 정의를 받는다. 타깃은 원본 control-point ID에 대한 희소 위치 변화이며 기본 가중치는 0~1이다. [의미 조절과 복합 드라이버](TemplateControls.md)는 양방향 슬라이더·곡선 응답·여러 입력 축의 곱을 본체에서 계산한다. 카탈로그는 런타임 표정 모프와 별개이므로 수백 개의 생성용 타깃을 렌더 메시마다 확장하지 않는다.",
-        "basis": "lexical_match",
-        "context": "paragraph"
-      },
-      {
-        "block_id": "b000013",
-        "line": 13,
-        "text": "`generate(values)`는 항상 중립 자료에서 새 에셋을 계산한다. 누적 슬라이더 오차가 없으며 같은 입력은 같은 소스 위치와 토폴로지를 갖는다. 알 수 없는 이름, 중복 입력, 비유한 값과 범위 밖 가중치를 거부한다. 실패한 생성은 에셋을 게시하지 않는다. 최대 4,096개 타깃과 1,600만 개 희소 변위를 허용한다. 타깃 조합의 해부학적 유효성은 별도의 인체 규칙에 속한다.",
-        "basis": "lexical_match",
-        "context": "paragraph"
-      },
-      {
-        "block_id": "b000015",
-        "line": 15,
-        "text": "`snapshot(values)`는 같은 생성 계산을 에셋 등록 없이 값으로 평가하고 작성용 점과 파생 렌더 메시·UV·머티리얼 캐시를 동기화한다. 이 값은 본체가 제공하는 임시 계산 결과이며 템플릿이나 원본 에셋을 소유하지 않는다.",
+        "text": "범용 템플릿·OBJ·희소 타깃·관절 재바인딩 계산은 본체 `src/Authoring/`과 `src/Interchange/` 등 책임별 디렉터리에 있다. NSCharacter에는 인체 자료의 임시 해석과 참조 인터페이스만 둔다. 공용 기능은 `IIACTOROBJECT_WITH_NSCHARACTER=OFF`에서도 빌드된다. 인체 자료와 공용 GLB의 JSON 해석은 자체 C++23 SDK `iiJson`을 비공개 의존성으로 재사용한다. 따라서 NSCharacter를 꺼도 공용 GLB 때문에 `iiJson`은 필요하다. 공유 소비자에게 JSON 헤더를 노출하지 않으며 정적 패키지는 `iiJson`과 `iiSDKCore::Contracts`를 찾아 링크한다. Qt와 MakeHuman 애플리케이션 코드는 사용하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
         "block_id": "b000017",
         "line": 17,
-        "text": "관절 head·tail은 원본 정점 집합의 중심이다. 작성용 토폴로지가 없으면 렌더 정점 ID로 앵커를 지정할 수 있다. 선택적인 세 기준점의 평면 법선이 회전 기준이다. 본의 +Y 축을 tail에 맞추고 부모 역행렬로 로컬 위치·회전을 계산한다. 평면이 방향과 평행하면 결정적인 보조 축을 사용한다. 영 길이 본과 비단위 bind scale은 거부한다. 본체 함수 `bindObject3DTemplateJoints`는 실패 시 기존 본 배열을 유지한다. 메시 정점이 아닌 오브젝트 좌표를 사용하는 경우에는 동일한 계산을 `bindObject3DJointFrames`로 직접 적용할 수 있다. 원본 앱의 전용 roll 규약과 동일하다는 주장은 하지 않는다.",
+        "text": "`Object3DTemplateDefinition`은 중립 에셋 참조, `TemplateTarget`, `TemplateJointBinding`과 선택적인 조절·드라이버 정의를 받는다. 타깃은 원본 control-point ID에 대한 희소 위치 변화이며 기본 가중치는 0~1이다. [의미 조절과 복합 드라이버](TemplateControls.md)는 양방향 슬라이더·곡선 응답·여러 입력 축의 곱을 본체에서 계산한다. 카탈로그는 런타임 표정 모프와 별개이므로 수백 개의 생성용 타깃을 렌더 메시마다 확장하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 19,
+        "text": "`generate(values)`는 항상 중립 자료에서 새 에셋을 계산한다. 누적 슬라이더 오차가 없으며 같은 입력은 같은 소스 위치와 토폴로지를 갖는다. 알 수 없는 이름, 중복 입력, 비유한 값과 범위 밖 가중치를 거부한다. 실패한 생성은 에셋을 게시하지 않는다. 최대 4,096개 타깃과 1,600만 개 희소 변위를 허용한다. 타깃 조합의 해부학적 유효성은 별도의 인체 규칙에 속한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000021",
+        "line": 21,
+        "text": "`snapshot(values)`는 같은 생성 계산을 에셋 등록 없이 값으로 평가하고 작성용 점과 파생 렌더 메시·UV·머티리얼 캐시를 동기화한다. 이 값은 본체가 제공하는 임시 계산 결과이며 템플릿이나 원본 에셋을 소유하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
         "block_id": "b000023",
         "line": 23,
+        "text": "관절 head·tail은 원본 정점 집합의 중심이다. 작성용 토폴로지가 없으면 렌더 정점 ID로 앵커를 지정할 수 있다. 선택적인 세 기준점의 평면 법선이 회전 기준이다. 본의 +Y 축을 tail에 맞추고 부모 역행렬로 로컬 위치·회전을 계산한다. 평면이 방향과 평행하면 결정적인 보조 축을 사용한다. 영 길이 본과 비단위 bind scale은 거부한다. 본체 함수 `bindObject3DTemplateJoints`는 실패 시 기존 본 배열을 유지한다. 메시 정점이 아닌 오브젝트 좌표를 사용하는 경우에는 동일한 계산을 `bindObject3DJointFrames`로 직접 적용할 수 있다. 원본 앱의 전용 roll 규약과 동일하다는 주장은 하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 29,
         "text": "`parseObject3DObj`는 위치·UV·법선 분리 인덱스, 양수·음수 상대 인덱스, 폴리곤과 그룹을 읽는다. 위치·UV·layout·폴리곤 ID를 압축하지 않는다. `MeshTopologyDefinition::polygonGroups`는 그룹을, `hiddenPolygons`는 렌더링 제외 face ID를 보관한다. 보조 면을 숨겨도 관절 기준점과 타깃 ID는 유효하다. 작성용 인접 관계는 숨긴 면도 포함한다.",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -502,95 +554,102 @@
     ],
     "commands": [
       {
-        "block_id": "b000041",
+        "block_id": "b000047",
         "language": "sh",
         "code": "cmake -S . -B build -DCMAKE_PREFIX_PATH=\"/path/to/iiJson;/path/to/iiSDKCore\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\nbuild/iiActorObjectTemplateCharacter resources/MakeHuman build/human/Custom.glb \\\n  armslegs/upperlegs-height-incr=0.5 nose/nose-scale-vert-incr=0.4\n"
       }
     ],
     "links": [
       {
-        "block_id": "b000011",
+        "block_id": "b000013",
+        "label": "책임 분리 보고서",
+        "target": "ResponsibilitySeparation-20261029.md",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000017",
         "label": "의미 조절과 복합 드라이버",
         "target": "TemplateControls.md",
         "kind": "relative",
-        "line": 11
+        "line": 17
       },
       {
-        "block_id": "b000019",
+        "block_id": "b000025",
         "label": "비파괴 편집 계약",
         "target": "EditLayers.md",
         "kind": "relative",
-        "line": 19
+        "line": 25
       },
       {
-        "block_id": "b000029",
+        "block_id": "b000035",
         "label": "라이선스 구분",
         "target": "../resources/MakeHuman/LICENSE.md",
         "kind": "relative",
-        "line": 29
+        "line": 35
       },
       {
-        "block_id": "b000029",
+        "block_id": "b000035",
         "label": "CC0 본문",
         "target": "../resources/MakeHuman/LICENSE.ASSETS.md",
         "kind": "relative",
-        "line": 29
+        "line": 35
       },
       {
-        "block_id": "b000029",
+        "block_id": "b000035",
         "label": "경로·해시",
         "target": "../resources/MakeHuman/UPSTREAM-SHA256.json",
         "kind": "relative",
-        "line": 29
+        "line": 35
       },
       {
-        "block_id": "b000037",
+        "block_id": "b000043",
         "label": "표면 연결",
         "target": "SkinSurface.md",
         "kind": "relative",
-        "line": 45
+        "line": 51
       },
       {
-        "block_id": "b000037",
+        "block_id": "b000043",
         "label": "인체 부속 자산",
         "target": "HumanAccessories.md",
         "kind": "relative",
-        "line": 45
-      },
-      {
-        "block_id": "b000045",
-        "label": "얼굴 부속·이미지 연결",
-        "target": "FaceAssets.md",
-        "kind": "relative",
-        "line": 59
-      },
-      {
-        "block_id": "b000047",
-        "label": "매크로 형상",
-        "target": "HumanMorphology.md",
-        "kind": "relative",
-        "line": 61
-      },
-      {
-        "block_id": "b000049",
-        "label": "얼굴 포즈 리그",
-        "target": "FacePoseRig.md",
-        "kind": "relative",
-        "line": 63
-      },
-      {
-        "block_id": "b000049",
-        "label": "프로젝트 형식",
-        "target": "Object3DProject.md",
-        "kind": "relative",
-        "line": 63
+        "line": 51
       },
       {
         "block_id": "b000051",
+        "label": "얼굴 부속·이미지 연결",
+        "target": "FaceAssets.md",
+        "kind": "relative",
+        "line": 65
+      },
+      {
+        "block_id": "b000053",
+        "label": "매크로 형상",
+        "target": "HumanMorphology.md",
+        "kind": "relative",
+        "line": 67
+      },
+      {
+        "block_id": "b000055",
+        "label": "얼굴 포즈 리그",
+        "target": "FacePoseRig.md",
+        "kind": "relative",
+        "line": 69
+      },
+      {
+        "block_id": "b000055",
+        "label": "프로젝트 형식",
+        "target": "Object3DProject.md",
+        "kind": "relative",
+        "line": 69
+      },
+      {
+        "block_id": "b000057",
         "label": "기준 자세 프로그램",
         "target": "PoseReference.md",
         "kind": "relative",
-        "line": 65
+        "line": 71
       }
     ],
     "tables": []

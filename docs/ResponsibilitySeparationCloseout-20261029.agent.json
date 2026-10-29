@@ -1,0 +1,756 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:db675eeb025a83e482efda9fb93c38796acf25ce863ee14d8390368cf25453ad",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/ResponsibilitySeparationCloseout-20261029.md",
+    "sha256": "c6e3cbcef47364d9e7b641766df060e5ce8fd20dc7b0bf19e8d1bdb0d93ccdcc",
+    "bytes": 10365,
+    "line_count": 70,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "iiActorObject 책임 분리 작업 종료 기록",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiActorObject 책임 분리 작업 종료 기록\n",
+      "level": 1,
+      "title": "iiActorObject 책임 분리 작업 종료 기록"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "quote",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "> 이 기록의 기존 소스 경로는 당시 상태이다. 현재 경로는 [책임별 소스 배치](SourceLayout.md)를 따른다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 작업 범위와 종료 기준\n",
+      "level": 2,
+      "title": "작업 범위와 종료 기준"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "이 기록은 2026-10-29에 사용자가 요청한 **현재까지의 작업만 마무리하고 종료**하는 시점의 범위를 설명한다. 대상은 `SDK/iiActorObject`와 그 하위 `NSCharacter`에서 이미 구현된 기능이다. 새로운 캐릭터 제작 기능, 원본 상용 프로그램의 복원, 사용자용 애플리케이션 실행은 이번 종료 범위에 포함하지 않는다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "[상세 작업 보고서](ResponsibilitySeparation-20261029.md)에는 각 분리 단계와 검사 이력을 보관한다. 다음 작업자가 재개 요청을 받았을 때 사용할 구체적인 절차와 계약은 [에이전트 인수인계 지침](ResponsibilitySeparationHandoff-20261029.md)에 있다. [책임 목록](../resources/architecture/ResponsibilityMap.json)은 `src/iiActorObject` 아래 C++ 소스·헤더 **490개를 127개 책임 그룹**으로 분류한다. `src/third_party`와 루트 통합 헤더는 이 수에 포함하지 않는다. 이 수는 파일 분류의 범위이며, 모든 함수가 완전히 분리되었거나 127개 독립 배포 라이브러리가 만들어졌다는 뜻은 아니다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "## 현재까지 수행한 작업\n",
+      "level": 2,
+      "title": "현재까지 수행한 작업"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "list",
+      "start_line": 13,
+      "end_line": 17,
+      "raw": "- 공용 3D 에셋, 편집 세션과 리그의 장기 소유는 `iiActorObject`의 `Object3DEngine`에 유지하고, `NSCharacter`는 본체 참조를 사용하도록 경계를 정리했다. 인체 계층은 별도 CMake 객체 타깃으로 컴파일되지만 최종 SDK 라이브러리에 합쳐진다.\n- 메시·골격·변형·선택·표면 처리, 템플릿, 프로젝트 저장과 형식 교환의 기존 기능을 책임 목록에 분류했다. 여러 계산, 값 자료, 검증기, 형식 판독기·기록기와 어댑터를 별도 소스와 객체 타깃으로 분리했다.\n- FBX 장면의 메시 판독과 애니메이션 준비를 별도 처리기로 분리했다. 실패 시 미완성 결과는 버리고 새로 등록한 에셋은 기존 가져오기 조정자가 정리한다.\n- 프로젝트의 이력·리그 수집은 `Object3DProjectCapture.cpp`, 그래프 복원은 `Object3DProjectRestore.cpp`로 분리했다. 선택 이력의 형식 버전, 선택 상태 동일성과 메시 제거·추가·혼합 재배치 검사는 `Object3DProjectHistorySelection.h/.cpp`가 엔진 없이 수행한다. 이 두 어댑터는 여전히 편집기와 엔진을 사용하며, 성공한 복원만 게시하고 실패하면 기존 엔진 상태와 ID를 복구하는 계약을 유지한다.\n- 변경은 C++23과 기존 표준·오픈소스 의존성을 이용했으며 이번 변경에 Qt 의존성은 추가하지 않았다. 기존 공개 호출 경로는 유지했다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "공용 3D 에셋, 편집 세션과 리그의 장기 소유는 `iiActorObject`의 `Object3DEngine`에 유지하고, `NSCharacter`는 본체 참조를 사용하도록 경계를 정리했다. 인체 계층은 별도 CMake 객체 타깃으로 컴파일되지만 최종 SDK 라이브러리에 합쳐진다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "메시·골격·변형·선택·표면 처리, 템플릿, 프로젝트 저장과 형식 교환의 기존 기능을 책임 목록에 분류했다. 여러 계산, 값 자료, 검증기, 형식 판독기·기록기와 어댑터를 별도 소스와 객체 타깃으로 분리했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "FBX 장면의 메시 판독과 애니메이션 준비를 별도 처리기로 분리했다. 실패 시 미완성 결과는 버리고 새로 등록한 에셋은 기존 가져오기 조정자가 정리한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "프로젝트의 이력·리그 수집은 `Object3DProjectCapture.cpp`, 그래프 복원은 `Object3DProjectRestore.cpp`로 분리했다. 선택 이력의 형식 버전, 선택 상태 동일성과 메시 제거·추가·혼합 재배치 검사는 `Object3DProjectHistorySelection.h/.cpp`가 엔진 없이 수행한다. 이 두 어댑터는 여전히 편집기와 엔진을 사용하며, 성공한 복원만 게시하고 실패하면 기존 엔진 상태와 ID를 복구하는 계약을 유지한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "변경은 C++23과 기존 표준·오픈소스 의존성을 이용했으며 이번 변경에 Qt 의존성은 추가하지 않았다. 기존 공개 호출 경로는 유지했다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 기능별 책임과 현재 경계\n",
+      "level": 2,
+      "title": "기능별 책임과 현재 경계"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "table",
+      "start_line": 21,
+      "end_line": 30,
+      "raw": "| 책임 | 주요 코드 | 현 시점의 판정 |\n| --- | --- | --- |\n| 공용 자원과 수명 | `Object3DEngine.h/.cpp`, `Object3DEngineState.h`, `Object3DEngineAuthoring.cpp` | 엔진이 에셋·편집기·리그·템플릿을 소유한다. 핸들과 인체 뷰는 본체를 참조한다. 엔진 상태와 작성 계층의 추가 경계 검토는 남는다. |\n| 메시·골격·변형 | `Object3DData.h`, `Object3DMesh.h`, `MeshTopologyCore.h`, `Skeleton.h`, `SkeletalMeshCore.h` | 작성용 source point·topology와 본 ID를 정본으로 유지한다. 해당 그룹은 분류되었지만 전체 함수가 각각 독립 패키지인 것은 아니다. |\n| 인체 생성·편집 뷰 | `NSCharacter/CharacterAsset.*`, `CharacterEditor.*`, `CharacterTemplateCore.*`, `MakeHumanTemplate.*` | 공용 소유권은 본체에 남고 인체 기능은 별도 객체 타깃으로 컴파일된다. 넓은 위임 API와 독립 배포는 남는다. |\n| 프로젝트 값과 형식 | `Object3DProjectArchive.h`, `Object3DProjectVersion.*`, `Object3DProjectCodec.*` | 엔진 핸들 대신 그래프 값과 인덱스로 저장한다. 형식·버전과 엔진 게시를 구분한다. |\n| 프로젝트 수집·복원 | `Object3DProjectCapture.cpp`, `Object3DProjectRestore.cpp`, `Object3DProjectHistorySelection.*` | 수집·복원 어댑터와 선택 전이 검증을 별도 타깃으로 나눴다. 어댑터 안의 이력·리그·레이어 조합은 추가 분리 여지가 있다. |\n| FBX 입력·출력 | `Object3DFbxImport.cpp`, `Object3DFbxMeshSceneRead.*`, `Object3DFbxAnimationStage.*`, `Object3DFbx.cpp`, `Object3DFbxGeometryRegistry.*` | 파싱과 형상·모프·탄젠트, 노드 기록 등은 분리했으나 전체 입력·출력 조정은 남는다. |\n| GLB 입력·출력 | `Object3DGlbMesh.cpp`, `Object3DInterchange.cpp` 및 `Object3DGlb*` 처리기 | primitive와 메시·재질·버퍼 등 여러 단계는 나뉘었다. 최종 메시 조립과 형식별 전체 조정은 남는다. |\n| 템플릿 표면 변경 | `Object3DTemplateSurfaceSwap.cpp`, `Object3DTemplateSurfaceSlots.*`, `Object3DTemplateSurfaceEditRemap.*`, `Object3DTemplateSurfaceFollowers.*` | 슬롯·마스크·추종 등의 계산은 일부 분리했다. 편집 레이어·자원과 이력 게시 조정은 남는다. |\n",
+      "columns": [
+        "책임",
+        "주요 코드",
+        "현 시점의 판정"
+      ],
+      "rows": [
+        [
+          "공용 자원과 수명",
+          "`Object3DEngine.h/.cpp`, `Object3DEngineState.h`, `Object3DEngineAuthoring.cpp`",
+          "엔진이 에셋·편집기·리그·템플릿을 소유한다. 핸들과 인체 뷰는 본체를 참조한다. 엔진 상태와 작성 계층의 추가 경계 검토는 남는다."
+        ],
+        [
+          "메시·골격·변형",
+          "`Object3DData.h`, `Object3DMesh.h`, `MeshTopologyCore.h`, `Skeleton.h`, `SkeletalMeshCore.h`",
+          "작성용 source point·topology와 본 ID를 정본으로 유지한다. 해당 그룹은 분류되었지만 전체 함수가 각각 독립 패키지인 것은 아니다."
+        ],
+        [
+          "인체 생성·편집 뷰",
+          "`NSCharacter/CharacterAsset.*`, `CharacterEditor.*`, `CharacterTemplateCore.*`, `MakeHumanTemplate.*`",
+          "공용 소유권은 본체에 남고 인체 기능은 별도 객체 타깃으로 컴파일된다. 넓은 위임 API와 독립 배포는 남는다."
+        ],
+        [
+          "프로젝트 값과 형식",
+          "`Object3DProjectArchive.h`, `Object3DProjectVersion.*`, `Object3DProjectCodec.*`",
+          "엔진 핸들 대신 그래프 값과 인덱스로 저장한다. 형식·버전과 엔진 게시를 구분한다."
+        ],
+        [
+          "프로젝트 수집·복원",
+          "`Object3DProjectCapture.cpp`, `Object3DProjectRestore.cpp`, `Object3DProjectHistorySelection.*`",
+          "수집·복원 어댑터와 선택 전이 검증을 별도 타깃으로 나눴다. 어댑터 안의 이력·리그·레이어 조합은 추가 분리 여지가 있다."
+        ],
+        [
+          "FBX 입력·출력",
+          "`Object3DFbxImport.cpp`, `Object3DFbxMeshSceneRead.*`, `Object3DFbxAnimationStage.*`, `Object3DFbx.cpp`, `Object3DFbxGeometryRegistry.*`",
+          "파싱과 형상·모프·탄젠트, 노드 기록 등은 분리했으나 전체 입력·출력 조정은 남는다."
+        ],
+        [
+          "GLB 입력·출력",
+          "`Object3DGlbMesh.cpp`, `Object3DInterchange.cpp` 및 `Object3DGlb*` 처리기",
+          "primitive와 메시·재질·버퍼 등 여러 단계는 나뉘었다. 최종 메시 조립과 형식별 전체 조정은 남는다."
+        ],
+        [
+          "템플릿 표면 변경",
+          "`Object3DTemplateSurfaceSwap.cpp`, `Object3DTemplateSurfaceSlots.*`, `Object3DTemplateSurfaceEditRemap.*`, `Object3DTemplateSurfaceFollowers.*`",
+          "슬롯·마스크·추종 등의 계산은 일부 분리했다. 편집 레이어·자원과 이력 게시 조정은 남는다."
+        ]
+      ]
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "각 경계의 계약, 테스트와 재개 시 확인 순서는 [에이전트 인수인계 지침](ResponsibilitySeparationHandoff-20261029.md)의 3~9절에 기록했다. 종료 당시의 구체적인 분리 이력은 [상세 작업 보고서](ResponsibilitySeparation-20261029.md)를 따른다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "heading",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "## 검증한 범위\n",
+      "level": 2,
+      "title": "검증한 범위"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "프로젝트 수집·복원 분리 후 macOS에서 다음 검사를 수행했다. 자동 검사와 형식 판독은 실제 상용 앱에서의 동작이나 제작물의 시각 품질을 증명하지 않는다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "table",
+      "start_line": 38,
+      "end_line": 43,
+      "raw": "| 구성 | 프로젝트·선택·표면 관련 검사 | 엔진 소유권·수거 등 추가 검사 |\n| --- | ---: | ---: |\n| 공유 라이브러리 | 74개 통과 | 5개 통과 |\n| NSCharacter 없는 본체 전용 | 71개 통과 | 4개 통과 |\n| 정적 라이브러리 | 72개 통과 | 5개 통과 |\n| AddressSanitizer·UndefinedBehaviorSanitizer | 72개 통과 | 5개 통과 |\n",
+      "columns": [
+        "구성",
+        "프로젝트·선택·표면 관련 검사",
+        "엔진 소유권·수거 등 추가 검사"
+      ],
+      "rows": [
+        [
+          "공유 라이브러리",
+          "74개 통과",
+          "5개 통과"
+        ],
+        [
+          "NSCharacter 없는 본체 전용",
+          "71개 통과",
+          "4개 통과"
+        ],
+        [
+          "정적 라이브러리",
+          "72개 통과",
+          "5개 통과"
+        ],
+        [
+          "AddressSanitizer·UndefinedBehaviorSanitizer",
+          "72개 통과",
+          "5개 통과"
+        ]
+      ]
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 45,
+      "end_line": 45,
+      "raw": "공유 구성의 관련 검사에는 CC0 인체 데이터를 사용하는 네이티브 프로젝트 복원·선택 이전이 포함된다. 새 선택 이력 독립 검사는 저장 형식 버전 28·33·34·35와 잘못된 선택·재배치를 검사한다. 검증용 별도 설치 경로를 사용한 공유·본체 전용·정적·숨김 정적 소비자 검사도 각각 8개 통과했다. DNA 포함 라이브러리를 빌드하고 기존 시험 실행 파일로 합성 DNA 프로젝트 복원과 독립 판독, 실패 복구 등 5개 검사를 통과했다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 46,
+      "end_line": 46,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 47,
+      "end_line": 47,
+      "raw": "모프·기본 모프 프로젝트 2개와 표면 변경 프로젝트 8개의 저장 결과는 기존 표본과 바이트가 같았다. 제한된 표본 비교이며 모든 입력의 호환성이나 바이너리 ABI를 증명하지 않는다. 전체 등록 테스트를 마지막 변경 후 다시 실행하지 않았고, 오류 탐지 구성의 누수 검사는 비활성화했다. Windows·Linux와 CC5·Blender·Unreal 등 실제 앱은 검사하지 않았다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 48,
+      "end_line": 48,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 49,
+      "end_line": 49,
+      "raw": "이 검증의 별도 설치 경로는 프로젝트의 `build/` 아래에 있다. 이번 종료 작업에서 `~/.local`의 설치본을 갱신하거나 설치 상태를 확인하지 않았다.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 50,
+      "end_line": 50,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "heading",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "## 2026-10-29 인수인계 문서 보강 시 확인한 자료\n",
+      "level": 2,
+      "title": "2026-10-29 인수인계 문서 보강 시 확인한 자료"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 52,
+      "end_line": 52,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 53,
+      "end_line": 53,
+      "raw": "종료 이후 사용자의 문서 상세화 요청에 따라 [에이전트 인수인계 지침](ResponsibilitySeparationHandoff-20261029.md)을 작성하고 코드·캐시·기록된 자료 위치를 읽어 대조했다. 이 문서 작업에서는 소스 변경, 빌드 또는 테스트 실행을 하지 않았다. 기존 기록의 DNA 포함 구성 마지막 검사 로그와 네 설치 소비자의 각 8개 검사 로그가 `build/` 아래에 남아 있는 것도 확인했다. 표면 변경 8개와 모프 프로젝트 2개의 저장 표본은 보존된 기준 파일과 다시 비교해 바이트가 같았다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 54,
+      "end_line": 54,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 55,
+      "end_line": 55,
+      "raw": "다만 테스트 이름만 조회한 `ctest -N`이 공유 구성의 `build/glb-import-ninja/Testing/Temporary/LastTest.log`를 빈 시작·종료 기록으로 갱신했다. 이전 공유 구성 74개 결과의 상세를 그 임시 로그에서 재확인할 수는 없다. 과거 결과를 현재 재실행 결과로 해석하지 않으며, 증거 위치와 그 한계는 인수인계 지침 11절에 정리했다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 56,
+      "end_line": 56,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "heading",
+      "start_line": 57,
+      "end_line": 57,
+      "raw": "## 남겨 둔 영역\n",
+      "level": 2,
+      "title": "남겨 둔 영역"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 58,
+      "end_line": 58,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 59,
+      "end_line": 59,
+      "raw": "아래는 이미 개발된 영역에서 향후 검토·분리할 수 있도록 남긴 항목이다. 이번 종료 시점에 완료한 것으로 간주하지 않는다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 60,
+      "end_line": 60,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "list",
+      "start_line": 61,
+      "end_line": 66,
+      "raw": "1. **엔진과 작성 계층:** 엔진 내부 상태와 공개 진입점이 여전히 편집 세션·템플릿의 소유 계약을 알고 있다. 수명과 실제 링크 관계까지 포함한 추가 경계 검토가 남아 있다.\n2. **FBX·GLB 조정:** FBX 출력의 메시별 형상·스킨·모프 조합, FBX 입력의 전체 등록 조정, GLB 메시 조립과 최종 게시에는 여러 처리 단계가 남아 있다.\n3. **프로젝트:** 수집 어댑터 안의 편집 이력 수집과 리그 드라이버 식별, 복원 어댑터 안의 템플릿·레이어·리그 구성은 추가로 나눌 여지가 있다. 실패 시 원상 복구와 기존 파일의 해석을 유지해야 한다.\n4. **템플릿 표면 변경:** 표면 슬롯과 자원·선택·마스크·추종 계산은 일부 분리했지만, 편집 레이어·자원 매핑·템플릿 통합·엔진 및 undo/redo 게시를 조정하는 부분이 남아 있다.\n5. **인체 API와 패키지:** `CharacterTemplateCore`·`CharacterEditor`의 넓은 위임 인터페이스와 인체 계층의 독립 설치·교체는 구현 완료 상태가 아니다. 현재 인체 객체 타깃은 최종 라이브러리에 합쳐진다.\n6. **검증의 한계:** 조건부 전처리와 실제 링크·실행을 모두 푼 의존성 분석, 전체 회귀 검사, Windows·Linux 빌드 및 실제 대상 앱 호환성은 이번 결과에 포함되지 않는다.\n",
+      "items": [
+        {
+          "marker": "1.",
+          "text": "**엔진과 작성 계층:** 엔진 내부 상태와 공개 진입점이 여전히 편집 세션·템플릿의 소유 계약을 알고 있다. 수명과 실제 링크 관계까지 포함한 추가 경계 검토가 남아 있다.",
+          "checked": null
+        },
+        {
+          "marker": "2.",
+          "text": "**FBX·GLB 조정:** FBX 출력의 메시별 형상·스킨·모프 조합, FBX 입력의 전체 등록 조정, GLB 메시 조립과 최종 게시에는 여러 처리 단계가 남아 있다.",
+          "checked": null
+        },
+        {
+          "marker": "3.",
+          "text": "**프로젝트:** 수집 어댑터 안의 편집 이력 수집과 리그 드라이버 식별, 복원 어댑터 안의 템플릿·레이어·리그 구성은 추가로 나눌 여지가 있다. 실패 시 원상 복구와 기존 파일의 해석을 유지해야 한다.",
+          "checked": null
+        },
+        {
+          "marker": "4.",
+          "text": "**템플릿 표면 변경:** 표면 슬롯과 자원·선택·마스크·추종 계산은 일부 분리했지만, 편집 레이어·자원 매핑·템플릿 통합·엔진 및 undo/redo 게시를 조정하는 부분이 남아 있다.",
+          "checked": null
+        },
+        {
+          "marker": "5.",
+          "text": "**인체 API와 패키지:** `CharacterTemplateCore`·`CharacterEditor`의 넓은 위임 인터페이스와 인체 계층의 독립 설치·교체는 구현 완료 상태가 아니다. 현재 인체 객체 타깃은 최종 라이브러리에 합쳐진다.",
+          "checked": null
+        },
+        {
+          "marker": "6.",
+          "text": "**검증의 한계:** 조건부 전처리와 실제 링크·실행을 모두 푼 의존성 분석, 전체 회귀 검사, Windows·Linux 빌드 및 실제 대상 앱 호환성은 이번 결과에 포함되지 않는다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 67,
+      "end_line": 67,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "heading",
+      "start_line": 68,
+      "end_line": 68,
+      "raw": "## 작업물 보존 상태\n",
+      "level": 2,
+      "title": "작업물 보존 상태"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 69,
+      "end_line": 69,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "paragraph",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "소스·테스트·문서 변경은 현재 작업 디렉터리에 저장되어 있다. 기존 변경 사항을 보존했으며 이번 종료 시점에 커밋이나 배포는 하지 않았다. 이 기록은 현재 중단 지점의 보고서이며, 남은 항목을 자동으로 재개하라는 지시가 아니다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiActorObject 책임 분리 작업 종료 기록",
+      "anchor": "iiactorobject-책임-분리-작업-종료-기록",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "작업 범위와 종료 기준",
+      "anchor": "작업-범위와-종료-기준",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "현재까지 수행한 작업",
+      "anchor": "현재까지-수행한-작업",
+      "start_line": 11
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "기능별 책임과 현재 경계",
+      "anchor": "기능별-책임과-현재-경계",
+      "start_line": 19
+    },
+    {
+      "block_id": "b000021",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검증한 범위",
+      "anchor": "검증한-범위",
+      "start_line": 34
+    },
+    {
+      "block_id": "b000033",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "2026-10-29 인수인계 문서 보강 시 확인한 자료",
+      "anchor": "2026-10-29-인수인계-문서-보강-시-확인한-자료",
+      "start_line": 51
+    },
+    {
+      "block_id": "b000039",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남겨 둔 영역",
+      "anchor": "남겨-둔-영역",
+      "start_line": 57
+    },
+    {
+      "block_id": "b000045",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "작업물 보존 상태",
+      "anchor": "작업물-보존-상태",
+      "start_line": 68
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 7,
+        "text": "이 기록은 2026-10-29에 사용자가 요청한 **현재까지의 작업만 마무리하고 종료**하는 시점의 범위를 설명한다. 대상은 `SDK/iiActorObject`와 그 하위 `NSCharacter`에서 이미 구현된 기능이다. 새로운 캐릭터 제작 기능, 원본 상용 프로그램의 복원, 사용자용 애플리케이션 실행은 이번 종료 범위에 포함하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000009",
+        "line": 9,
+        "text": "[상세 작업 보고서](ResponsibilitySeparation-20261029.md)에는 각 분리 단계와 검사 이력을 보관한다. 다음 작업자가 재개 요청을 받았을 때 사용할 구체적인 절차와 계약은 [에이전트 인수인계 지침](ResponsibilitySeparationHandoff-20261029.md)에 있다. [책임 목록](../resources/architecture/ResponsibilityMap.json)은 `src/iiActorObject` 아래 C++ 소스·헤더 **490개를 127개 책임 그룹**으로 분류한다. `src/third_party`와 루트 통합 헤더는 이 수에 포함하지 않는다. 이 수는 파일 분류의 범위이며, 모든 함수가 완전히 분리되었거나 127개 독립 배포 라이브러리가 만들어졌다는 뜻은 아니다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 36,
+        "text": "프로젝트 수집·복원 분리 후 macOS에서 다음 검사를 수행했다. 자동 검사와 형식 판독은 실제 상용 앱에서의 동작이나 제작물의 시각 품질을 증명하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 47,
+        "text": "모프·기본 모프 프로젝트 2개와 표면 변경 프로젝트 8개의 저장 결과는 기존 표본과 바이트가 같았다. 제한된 표본 비교이며 모든 입력의 호환성이나 바이너리 ABI를 증명하지 않는다. 전체 등록 테스트를 마지막 변경 후 다시 실행하지 않았고, 오류 탐지 구성의 누수 검사는 비활성화했다. Windows·Linux와 CC5·Blender·Unreal 등 실제 앱은 검사하지 않았다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000041",
+        "line": 59,
+        "text": "아래는 이미 개발된 영역에서 향후 검토·분리할 수 있도록 남긴 항목이다. 이번 종료 시점에 완료한 것으로 간주하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000043",
+        "line": 63,
+        "text": "3. **프로젝트:** 수집 어댑터 안의 편집 이력 수집과 리그 드라이버 식별, 복원 어댑터 안의 템플릿·레이어·리그 구성은 추가로 나눌 여지가 있다. 실패 시 원상 복구와 기존 파일의 해석을 유지해야 한다.",
+        "basis": "lexical_match",
+        "context": "list"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000003",
+        "label": "책임별 소스 배치",
+        "target": "SourceLayout.md",
+        "kind": "relative",
+        "line": 3
+      },
+      {
+        "block_id": "b000009",
+        "label": "상세 작업 보고서",
+        "target": "ResponsibilitySeparation-20261029.md",
+        "kind": "relative",
+        "line": 9
+      },
+      {
+        "block_id": "b000009",
+        "label": "에이전트 인수인계 지침",
+        "target": "ResponsibilitySeparationHandoff-20261029.md",
+        "kind": "relative",
+        "line": 9
+      },
+      {
+        "block_id": "b000009",
+        "label": "책임 목록",
+        "target": "../resources/architecture/ResponsibilityMap.json",
+        "kind": "relative",
+        "line": 9
+      },
+      {
+        "block_id": "b000019",
+        "label": "에이전트 인수인계 지침",
+        "target": "ResponsibilitySeparationHandoff-20261029.md",
+        "kind": "relative",
+        "line": 32
+      },
+      {
+        "block_id": "b000019",
+        "label": "상세 작업 보고서",
+        "target": "ResponsibilitySeparation-20261029.md",
+        "kind": "relative",
+        "line": 32
+      },
+      {
+        "block_id": "b000035",
+        "label": "에이전트 인수인계 지침",
+        "target": "ResponsibilitySeparationHandoff-20261029.md",
+        "kind": "relative",
+        "line": 53
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000017",
+        "columns": [
+          "책임",
+          "주요 코드",
+          "현 시점의 판정"
+        ],
+        "rows": [
+          [
+            "공용 자원과 수명",
+            "`Object3DEngine.h/.cpp`, `Object3DEngineState.h`, `Object3DEngineAuthoring.cpp`",
+            "엔진이 에셋·편집기·리그·템플릿을 소유한다. 핸들과 인체 뷰는 본체를 참조한다. 엔진 상태와 작성 계층의 추가 경계 검토는 남는다."
+          ],
+          [
+            "메시·골격·변형",
+            "`Object3DData.h`, `Object3DMesh.h`, `MeshTopologyCore.h`, `Skeleton.h`, `SkeletalMeshCore.h`",
+            "작성용 source point·topology와 본 ID를 정본으로 유지한다. 해당 그룹은 분류되었지만 전체 함수가 각각 독립 패키지인 것은 아니다."
+          ],
+          [
+            "인체 생성·편집 뷰",
+            "`NSCharacter/CharacterAsset.*`, `CharacterEditor.*`, `CharacterTemplateCore.*`, `MakeHumanTemplate.*`",
+            "공용 소유권은 본체에 남고 인체 기능은 별도 객체 타깃으로 컴파일된다. 넓은 위임 API와 독립 배포는 남는다."
+          ],
+          [
+            "프로젝트 값과 형식",
+            "`Object3DProjectArchive.h`, `Object3DProjectVersion.*`, `Object3DProjectCodec.*`",
+            "엔진 핸들 대신 그래프 값과 인덱스로 저장한다. 형식·버전과 엔진 게시를 구분한다."
+          ],
+          [
+            "프로젝트 수집·복원",
+            "`Object3DProjectCapture.cpp`, `Object3DProjectRestore.cpp`, `Object3DProjectHistorySelection.*`",
+            "수집·복원 어댑터와 선택 전이 검증을 별도 타깃으로 나눴다. 어댑터 안의 이력·리그·레이어 조합은 추가 분리 여지가 있다."
+          ],
+          [
+            "FBX 입력·출력",
+            "`Object3DFbxImport.cpp`, `Object3DFbxMeshSceneRead.*`, `Object3DFbxAnimationStage.*`, `Object3DFbx.cpp`, `Object3DFbxGeometryRegistry.*`",
+            "파싱과 형상·모프·탄젠트, 노드 기록 등은 분리했으나 전체 입력·출력 조정은 남는다."
+          ],
+          [
+            "GLB 입력·출력",
+            "`Object3DGlbMesh.cpp`, `Object3DInterchange.cpp` 및 `Object3DGlb*` 처리기",
+            "primitive와 메시·재질·버퍼 등 여러 단계는 나뉘었다. 최종 메시 조립과 형식별 전체 조정은 남는다."
+          ],
+          [
+            "템플릿 표면 변경",
+            "`Object3DTemplateSurfaceSwap.cpp`, `Object3DTemplateSurfaceSlots.*`, `Object3DTemplateSurfaceEditRemap.*`, `Object3DTemplateSurfaceFollowers.*`",
+            "슬롯·마스크·추종 등의 계산은 일부 분리했다. 편집 레이어·자원과 이력 게시 조정은 남는다."
+          ]
+        ]
+      },
+      {
+        "block_id": "b000025",
+        "columns": [
+          "구성",
+          "프로젝트·선택·표면 관련 검사",
+          "엔진 소유권·수거 등 추가 검사"
+        ],
+        "rows": [
+          [
+            "공유 라이브러리",
+            "74개 통과",
+            "5개 통과"
+          ],
+          [
+            "NSCharacter 없는 본체 전용",
+            "71개 통과",
+            "4개 통과"
+          ],
+          [
+            "정적 라이브러리",
+            "72개 통과",
+            "5개 통과"
+          ],
+          [
+            "AddressSanitizer·UndefinedBehaviorSanitizer",
+            "72개 통과",
+            "5개 통과"
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

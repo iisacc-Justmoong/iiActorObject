@@ -1,5 +1,7 @@
 # FBX 점진 모프 애니메이션
 
+점진 제어 곡선 이름과 샘플 적용은 `Object3DProgressiveMorphCore.h`에 속하며, FBX 테이크 입력·출력은 `Object3DProgressiveMorphInterchange.h`에 속한다. 기존 `Object3DProgressiveMorph.h`는 두 인터페이스와 이전 프로젝트 진입점을 함께 제공한다.
+
 ## 입출력과 소유권
 
 `importObject3DFbxWithProgressiveMorphsAndAnimations(engine, bytes, options)`는 FBX 에셋, 점진 모프 리그와 모든 애니메이션 테이크를 함께 가져온다. 반환된 각 `FbxImportedAnimation`에는 클립, 원본 시작 시각과 일반 모프의 메시·타깃별 `morphBindings`가 있다. 골격과 일반 모프뿐 아니라 점진 채널의 `DeformPercent`도 클립의 스칼라 곡선이 된다. 원본 시작 시각은 `sourceStartSeconds`에 보관하고 클립의 시간은 0부터 시작한다. `NSCharacter::importFbxWithProgressiveMorphsAndAnimations`는 같은 본체 에셋과 리그의 참조를 제공한다. 3D 에셋과 리그의 소유자는 `Object3DEngine`이다.
@@ -23,6 +25,10 @@ FBX 장면 및 레이어 평가, 본·모프 계산, 허용 오차와 예산은 
 ## FBX 애니메이션 출력
 
 `exportObject3DFbxWithProgressiveMorphs(rig, clip, options)`는 리그의 점진 형상과 클립 하나를 FBX에 기록한다. 예약 곡선은 해당 점진 채널의 `DeformPercent`에 연결한다. 일반 모프는 `FbxAnimationExportOptions::indexedBindings` 또는 명시적인 이름 일치 옵션으로 연결한다. 미연결 일반 스칼라 곡선은 기본적으로 거부하며 `allowDiscardScalarCurves`를 사용한 경우 결과 경고를 확인해야 한다. 예약 곡선의 제어 이름을 찾을 수 없으면 손실 허용 옵션과 무관하게 거부한다.
+
+하나의 제어가 서로 다른 여러 메시를 구동하면 FBX의 각 메시 채널에 같은 제어 곡선을 쓴다. SDK 공동 제어 메타데이터가 보존된 파일을 전용 입력으로 읽을 때는 채널의 모든 원본 키 시각과 표본 검사 지점에서 평가값을 비교한다. 다른 값이 발견되면 조용히 하나로 합치지 않고 가져오기를 거부한다. 비교 한도는 점진 형상 간격을 반영한 모프 오차 기준이다. 이는 검사한 이산 시점의 보장이며 곡선의 연속 구간 전체가 수학적으로 동일하다는 증명은 아니다. 메타데이터가 없거나 복원을 끄면 메시별 채널과 곡선은 각각 별도의 제어로 가져온다.
+
+중간 형상이 해당 메시에 없으면 [점진 모프 계약](ProgressiveMorphRig.md)의 중립 형상을 사용하므로, 다른 중간 형상으로 보간하는 동안에도 메시별 변위가 유지된다. 여러 테이크도 각 메시의 채널에 동일한 제어 곡선을 기록한다.
 
 단일 클립 오버로드는 `Take`라는 이름과 0초 시작 시각을 사용한다. 가져온 `FbxImportedAnimation` 목록 또는 복원된 `Object3DProjectAnimation` 목록을 전달하는 오버로드는 여러 테이크의 이름, 각 시작 시각, 클립과 개별 `morphBindings`를 하나의 FBX에 기록한다. 첫 테이크가 현재 테이크가 된다. 프로젝트 클립은 리그와 같은 에셋에 속해야 한다. 프로젝트에 원본 시작 시각이 없으면 0초를 사용하고 경고한다. `NSCharacter::exportFbxWithProgressiveMorphs`도 동일한 두 목록을 지원한다.
 

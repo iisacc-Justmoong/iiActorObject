@@ -128,5 +128,5 @@ else()
     target_compile_options(iiActorObjectRigLogic PRIVATE -w)
 endif()
 target_sources(iiActorObject PRIVATE $<TARGET_OBJECTS:iiActorObjectRigLogic>
-    src/iiActorObject/Object3DDnaPreflight.cpp)
+    src/Interchange/Object3DDnaPreflight.cpp)
 target_include_directories(iiActorObject SYSTEM PRIVATE "${_iiao_rl_root}/include" "${_iiao_rl_root}/src")

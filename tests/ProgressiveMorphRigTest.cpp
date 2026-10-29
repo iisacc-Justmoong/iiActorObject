@@ -9,6 +9,7 @@
 #include "../src/third_party/ufbx/ufbx.h"
 #include <algorithm>
 #include <array>
+#include <bit>
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -23,6 +24,8 @@
 using namespace iiActorObject;
 #define CHECK(x) do{if(!(x))throw std::runtime_error(#x);}while(false)
 template<class F>void rejects(F f){bool caught=false;try{f();}catch(const std::exception&){caught=true;}CHECK(caught);}
+template<class F>void rejectsWith(F f,std::string_view expected)
+{bool caught=false;try{f();}catch(const std::exception &e){caught=std::string_view(e.what()).find(expected)!=std::string_view::npos;}CHECK(caught);}
 bool close(double a,double b){return std::abs(a-b)<1e-10*std::max({1.,std::abs(a),std::abs(b)});}
 Object3DData data()
 {
@@ -77,22 +80,28 @@ void curve()
     const auto invalid=engine.createObject(changed);const auto count=engine.rigCount();
     rejects([&]{(void)rig.get().cloneFor(invalid);});CHECK(engine.rigCount()==count);
 }
-void split()
+void split(std::string_view emit={})
 {
-    auto input=data();auto second=input.meshes.front();second.name="Face2";
+    auto input=data();input.meshes.front().morphDefaults={{"PositiveNear",.5},{"Blink",.1}};
+    auto second=input.meshes.front();second.name="Face2";
     second.geometry.vertices[0].position.z=.3;
     second.geometry.vertices[0].weights={{1,1}};
     second.geometry.morphTargets[2].deltas[0].position.y=.9;
     second.geometry.morphTargets.pop_back();
+    second.morphDefaults={{"PositiveNear",.5}};
     auto third=input.meshes.front();third.name="Face3";
     third.geometry.vertices[0].position.z=.6;
     third.geometry.morphTargets.erase(third.geometry.morphTargets.begin(),third.geometry.morphTargets.end()-1);
     third.geometry.morphTargets.push_back({"Other",{{0,{0,.2,0},{}}}});
+    third.morphDefaults={{"Blink",.1}};
     input.meshes.push_back(std::move(second));input.meshes.push_back(std::move(third));
-    auto p=program();p.channels[0].defaultValue=0;
+    auto p=program();p.channels[1].defaultValue=.1;
     Object3DEngine engine;const auto object=engine.createObject(std::move(input));
     const auto rig=createObject3DProgressiveMorphRig(object,p);
     const auto bytes=exportObject3DFbxWithProgressiveMorphs(rig);
+    const auto output=[](const auto &value)
+    {for(const auto byte:value)std::cout<<std::hex<<std::setw(2)<<std::setfill('0')<<static_cast<unsigned>(byte);std::cout<<'\n';};
+    if(emit=="static"){output(bytes.bytes);return;}
     ufbx_error error{};ufbx_load_opts strict{};strict.file_format=UFBX_FILE_FORMAT_FBX;strict.strict=true;
     using Scene=std::unique_ptr<ufbx_scene,decltype(&ufbx_free_scene)>;
     Scene scene(ufbx_load_memory(bytes.bytes.data(),bytes.bytes.size(),&strict,&error),ufbx_free_scene);
@@ -122,9 +131,35 @@ void split()
     const auto restored=inspectObject3DProgressiveMorphRig(round.rig);
     CHECK(restored.channels.size()==2&&restored.channels[0].sourceMeshes.size()==2&&restored.channels[1].sourceMeshes.size()==2);
     auto actor=round.asset.object.get().instantiate();
+    const auto defaults=std::map<std::string,double>{{"Face",.165},{"Face2",.45},{"Face3",.04}};
+    for(auto *component:actor->components())if(auto *mesh=dynamic_cast<SkeletalMeshComponent *>(component))
+        CHECK(close(mesh->deformedVertices()[0].position.y,defaults.at(mesh->name())));
     round.rig.get().applyTo(*actor,round.rig.get().evaluateNamed(std::array{NamedRigControl{"Expression",.55},NamedRigControl{"Blink",.2}}));
     for(auto *component:actor->components())if(auto *mesh=dynamic_cast<SkeletalMeshComponent *>(component))
         CHECK(close(mesh->deformedVertices()[0].position.y,expected.at(mesh->name())));
+    FbxImportOptions noMetadata;noMetadata.restoreAuthoringMetadata=false;
+    Object3DEngine separateEngine;const auto separate=importObject3DFbxWithProgressiveMorphs(separateEngine.reference(),bytes.bytes,noMetadata);
+    CHECK(inspectObject3DProgressiveMorphRig(separate.rig).channels.size()==4&&!separate.asset.warnings.empty());
+    auto incomplete=bytes.bytes;const std::string_view sizeMarker="iiActorObjectProgressiveGroupSize";
+    const auto found=std::search(incomplete.begin(),incomplete.end(),sizeMarker.begin(),sizeMarker.end());CHECK(found!=incomplete.end());
+    const auto offset=static_cast<std::size_t>(found-incomplete.begin())+sizeMarker.size();
+    CHECK(offset+5<=incomplete.size()&&incomplete[offset]=='I'&&incomplete[offset+1]==2);incomplete[offset+1]=3;
+    const auto objectCount=roundEngine.objectCount(),rigCount=roundEngine.rigCount();
+    rejectsWith([&]{(void)importObject3DFbxWithProgressiveMorphs(roundEngine.reference(),incomplete);},"Conflicting FBX progressive control group metadata");
+    auto missingField=bytes.bytes;const auto missing=std::search(missingField.begin(),missingField.end(),sizeMarker.begin(),sizeMarker.end());
+    CHECK(missing!=missingField.end());*(missing+sizeMarker.size()-1)='X';
+    rejectsWith([&]{(void)importObject3DFbxWithProgressiveMorphs(roundEngine.reference(),missingField);},"Incomplete FBX progressive control group metadata");
+    auto differentKeys=bytes.bytes;const std::string_view fullWeights="FullWeights";
+    auto weight=std::search(differentKeys.begin(),differentKeys.end(),fullWeights.begin(),fullWeights.end());CHECK(weight!=differentKeys.end());
+    weight=std::search(weight+fullWeights.size(),differentKeys.end(),fullWeights.begin(),fullWeights.end());CHECK(weight!=differentKeys.end());
+    weight=std::search(weight+fullWeights.size(),differentKeys.end(),fullWeights.begin(),fullWeights.end());CHECK(weight!=differentKeys.end());
+    const auto weightsStart=static_cast<std::size_t>(weight-differentKeys.begin())+fullWeights.size();
+    CHECK(weightsStart+37<=differentKeys.size()&&differentKeys[weightsStart]=='d'&&differentKeys[weightsStart+1]>=5);
+    const auto changedWeight=std::bit_cast<std::uint64_t>(31.0);
+    for(unsigned i=0;i<8;++i)differentKeys[weightsStart+29+i]=static_cast<std::uint8_t>(changedWeight>>(8*i));
+    rejectsWith([&]{(void)importObject3DFbxWithProgressiveMorphs(roundEngine.reference(),differentKeys);},"Conflicting FBX progressive channel instances");
+    rejectsWith([&]{(void)importObject3DFbx(roundEngine.reference(),bytes.bytes);},"shared progressive controls require the progressive import path");
+    CHECK(roundEngine.objectCount()==objectCount&&roundEngine.rigCount()==rigCount);
 
     const auto expr=object3DProgressiveControlCurveName("Expression"),blink=object3DProgressiveControlCurveName("Blink");
     AnimationClip clip(object.get().skeleton(),2,{},{{expr,{{0,0},{1,.55},{2,1}}},
@@ -132,6 +167,7 @@ void split()
     const std::array bindings{AnimationMorphBinding{2,2,1}};
     FbxAnimationExportOptions options;options.indexedBindings=bindings;
     const auto animated=exportObject3DFbxWithProgressiveMorphs(rig,clip,options);
+    if(emit=="animated"){output(animated.bytes);return;}
     Scene animatedScene(ufbx_load_memory(animated.bytes.data(),animated.bytes.size(),&strict,&error),ufbx_free_scene);
     CHECK(animatedScene&&animatedScene->anim_stacks.count==1);
     for(const auto *channel:animatedScene->blend_channels)
@@ -147,6 +183,180 @@ void split()
     applyObject3DProgressiveAnimationClip(loaded.rig,*loaded.animations[0].clip,loaded.animations[0].morphBindings,1,moved->pose(),meshes);
     for(auto *mesh:meshes)
         CHECK(close(mesh->deformedVertices()[0].position.y,expected.at(mesh->name())+(mesh->name()=="Face3"?.1:0)));
+    FbxAnimationImportOptions separatedOptions;separatedOptions.geometry.restoreAuthoringMetadata=false;
+    Object3DEngine separatedEngine;const auto separated=importObject3DFbxWithProgressiveMorphsAndAnimations(separatedEngine.reference(),animated.bytes,separatedOptions);
+    CHECK(inspectObject3DProgressiveMorphRig(separated.rig).channels.size()==4&&separated.animations.size()==1);
+    auto separatedActor=separated.asset.object.get().instantiate();std::vector<SkeletalMeshComponent*> separatedParts;
+    for(auto *component:separatedActor->components())if(auto *mesh=dynamic_cast<SkeletalMeshComponent *>(component))separatedParts.push_back(mesh);
+    applyObject3DProgressiveAnimationClip(separated.rig,*separated.animations[0].clip,
+        separated.animations[0].morphBindings,1,separatedActor->pose(),separatedParts);
+    for(auto *mesh:separatedParts)
+        CHECK(close(mesh->deformedVertices()[0].position.y,expected.at(mesh->name())+(mesh->name()=="Face3"?.1:0)));
+    auto divergent=animated.bytes;const std::string_view marker="KeyValueFloat";
+    const auto first=std::search(divergent.begin(),divergent.end(),marker.begin(),marker.end());CHECK(first!=divergent.end());
+    const auto secondCurve=std::search(first+marker.size(),divergent.end(),marker.begin(),marker.end());CHECK(secondCurve!=divergent.end());
+    const auto arrayStart=static_cast<std::size_t>(secondCurve-divergent.begin())+marker.size();
+    CHECK(arrayStart+25<=divergent.size()&&divergent[arrayStart]=='f'&&divergent[arrayStart+1]>=3);
+    // This difference is below the ordinary morph tolerance but above the
+    // tighter tolerance required by the channel's in-between spacing.
+    const auto bits=std::bit_cast<std::uint32_t>(55.005f);
+    for(unsigned i=0;i<4;++i)divergent[arrayStart+17+i]=static_cast<std::uint8_t>(bits>>(8*i));
+    const auto beforeObjects=animatedEngine.objectCount(),beforeRigs=animatedEngine.rigCount();
+    rejectsWith([&]{(void)importObject3DFbxWithProgressiveMorphsAndAnimations(animatedEngine.reference(),divergent);},"Matching FBX morph channels carry different animation values");
+    CHECK(animatedEngine.objectCount()==beforeObjects&&animatedEngine.rigCount()==beforeRigs);
+    auto copy=std::make_shared<AnimationClip>(clip);
+    const std::array takes{FbxImportedAnimation{"First",-1,copy,{bindings.begin(),bindings.end()}},
+                           FbxImportedAnimation{"Second",4,copy,{bindings.begin(),bindings.end()}}};
+    const auto combined=exportObject3DFbxWithProgressiveMorphs(rig,std::span(takes));
+    Object3DEngine multiEngine;const auto multi=importObject3DFbxWithProgressiveMorphsAndAnimations(multiEngine.reference(),combined.bytes);
+    CHECK(multi.animations.size()==2&&multi.animations[0].name=="First"&&multi.animations[1].name=="Second");
+    CHECK(close(multi.animations[0].sourceStartSeconds,-1)&&close(multi.animations[1].sourceStartSeconds,4));
+    auto multiActor=multi.asset.object.get().instantiate();std::vector<SkeletalMeshComponent*> multiMeshes;
+    for(auto *component:multiActor->components())if(auto *mesh=dynamic_cast<SkeletalMeshComponent *>(component))multiMeshes.push_back(mesh);
+    for(const auto &take:multi.animations)
+    {
+        applyObject3DProgressiveAnimationClip(multi.rig,*take.clip,take.morphBindings,1,multiActor->pose(),multiMeshes);
+        for(auto *mesh:multiMeshes)
+            CHECK(close(mesh->deformedVertices()[0].position.y,expected.at(mesh->name())+(mesh->name()=="Face3"?.1:0)));
+    }
+}
+void sparse(std::string_view emit={})
+{
+    auto input=data();auto &body=input.meshes[0];body.geometry.morphTargets.clear();
+    body.geometry.morphTargets={{"Mid",{{0,{0,.2,0},{}}}},{"Full",{{0,{0,.4,0},{}}}}};
+    body.morphDefaults={{"Mid",.5}};
+    auto face=body;face.name="Face2";face.geometry.vertices[0].position.z=.2;
+    face.geometry.morphTargets={{"Negative",{{0,{0,-.5,0},{}}}},{"Mid",{{0,{0,.6,0},{}}}}};
+    auto brows=body;brows.name="Face3";brows.geometry.vertices[0].position.z=.4;
+    brows.geometry.morphTargets={{"Full",{{0,{0,.8,0},{}}}},{"Other",{{0,{0,.3,0},{}}}}};
+    brows.morphDefaults={{"Other",.1}};
+    input.meshes.push_back(std::move(face));input.meshes.push_back(std::move(brows));
+    ProgressiveMorphProgram program{{{"Sparse",.25,{{"Negative",-1},{"Mid",.5},{"Full",1}}},
+                                      {"Overlay",0,{{"Mid",1}}}}};
+    Object3DEngine engine;const auto object=engine.createObject(std::move(input));
+    const auto rig=createObject3DProgressiveMorphRig(object,program);
+    const auto fbx=exportObject3DFbxWithProgressiveMorphs(rig);
+    const auto output=[](const auto &value)
+    {for(const auto byte:value)std::cout<<std::hex<<std::setw(2)<<std::setfill('0')<<static_cast<unsigned>(byte);std::cout<<'\n';};
+    if(emit=="static"){output(fbx.bytes);return;}
+    using Scene=std::unique_ptr<ufbx_scene,decltype(&ufbx_free_scene)>;
+    ufbx_load_opts strict{};strict.file_format=UFBX_FILE_FORMAT_FBX;strict.strict=true;ufbx_error error{};
+    Scene scene(ufbx_load_memory(fbx.bytes.data(),fbx.bytes.size(),&strict,&error),ufbx_free_scene);
+    CHECK(scene&&scene->meshes.count==3);
+    std::vector<ufbx_prop_override_desc> overrides;
+    for(const auto *channel:scene->blend_channels)if(std::string_view(channel->name.data,channel->name.length)=="Sparse"||
+                                                    std::string_view(channel->name.data,channel->name.length)=="Overlay")
+    {ufbx_prop_override_desc value{};value.element_id=channel->element_id;value.prop_name={"DeformPercent",13};overrides.push_back(value);}
+    CHECK(overrides.size()==5);
+    Object3DEngine target;const auto restored=importObject3DFbxWithProgressiveMorphs(target.reference(),fbx.bytes);
+    const auto restoredProgram=inspectObject3DProgressiveMorphRig(restored.rig);
+    CHECK(restoredProgram.channels.size()==2&&restoredProgram.channels[0].sourceMeshes.empty()&&
+          restoredProgram.channels[0].keys.size()==3&&restoredProgram.channels[1].sourceMeshes.size()==2);
+    const auto &meshes=restored.asset.object.get().data().meshes;
+    const std::map<std::string,std::array<bool,3>> membership{{"Face",{false,true,true}},
+        {"Face2",{true,true,false}},{"Face3",{false,false,true}}};
+    for(const auto &part:meshes)for(std::size_t k=0;k<3;++k)
+    {
+        const auto &targetName=restoredProgram.channels[0].keys[k].target;
+        const bool found=std::any_of(part.geometry.morphTargets.begin(),part.geometry.morphTargets.end(),
+            [&](const auto &m){return m.name==targetName;});
+        CHECK(found==membership.at(part.name)[k]);
+    }
+    auto sourceActor=object.get().instantiate(),targetActor=restored.asset.object.get().instantiate();
+    for(const double value:{-1.25,-1.,-.5,0.,.25,.5,.75,1.,1.25})
+    {
+        rig.get().applyTo(*sourceActor,rig.get().evaluateNamed(std::array{NamedRigControl{"Sparse",value},NamedRigControl{"Overlay",.15}}));
+        restored.rig.get().applyTo(*targetActor,restored.rig.get().evaluateNamed(std::array{NamedRigControl{"Sparse",value},NamedRigControl{"Overlay",.15}}));
+        std::map<std::string,double> expected;
+        for(auto *c:sourceActor->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(c))
+            expected.emplace(part->name(),part->deformedVertices()[0].position.y);
+        for(auto *c:targetActor->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(c))
+            CHECK(close(part->deformedVertices()[0].position.y,expected.at(part->name())));
+        for(auto &entry:overrides)
+        {
+            CHECK(entry.element_id<scene->elements.count);
+            const auto *channel=ufbx_as_blend_channel(scene->elements.data[entry.element_id]);CHECK(channel);
+            entry.value.x=std::string_view(channel->name.data,channel->name.length)=="Sparse"?value*100:15;
+        }
+        ufbx_anim_opts opts{};opts.prop_overrides={overrides.data(),overrides.size()};
+        std::unique_ptr<ufbx_anim,decltype(&ufbx_free_anim)> animation(ufbx_create_anim(scene.get(),&opts,&error),ufbx_free_anim);
+        CHECK(animation);Scene evaluated(ufbx_evaluate_scene(scene.get(),animation.get(),0,nullptr,&error),ufbx_free_scene);CHECK(evaluated);
+        for(const auto *node:evaluated->nodes)if(node->mesh)
+        {
+            const std::string name(node->name.data,node->name.length);CHECK(node->mesh->blend_deformers.count==1);
+            const auto offset=ufbx_get_blend_vertex_offset(node->mesh->blend_deformers[0],0);
+            CHECK(close(node->mesh->vertices[0].y+offset.y,expected.at(name)));
+        }
+    }
+    const auto editor=target.editObject(restored.asset.object);const auto project=exportObject3DProject(editor,std::array{restored.rig});
+    Object3DEngine projectEngine;const auto projectRound=importObject3DProject(projectEngine.reference(),project);
+    CHECK(projectRound.rigs.size()==1&&inspectObject3DProgressiveMorphRig(projectRound.rigs[0])==restoredProgram);
+    const std::string_view presenceMarker="iiActorObjectProgressivePresence";
+    const auto locate=[&](auto &bytes)
+    {
+        const auto found=std::search(bytes.begin(),bytes.end(),presenceMarker.begin(),presenceMarker.end());CHECK(found!=bytes.end());
+        const auto position=static_cast<std::size_t>(found-bytes.begin())+presenceMarker.size();
+        CHECK(position+17<=bytes.size()&&bytes[position]=='R'&&bytes[position+1]==12);return position;
+    };
+    const auto count=target.objectCount(),rigCount=target.rigCount();
+    auto badFlag=fbx.bytes;auto position=locate(badFlag);badFlag[position+5]=2;
+    rejectsWith([&]{(void)importObject3DFbxWithProgressiveMorphs(target.reference(),badFlag);},"Invalid FBX progressive sparse-key presence");
+    auto hiddenShape=fbx.bytes;position=locate(hiddenShape);CHECK(hiddenShape[position+9]==1);hiddenShape[position+9]=0;
+    rejectsWith([&]{(void)importObject3DFbxWithProgressiveMorphs(target.reference(),hiddenShape);},"neutral placeholder contains shape data");
+    auto missingField=fbx.bytes;position=locate(missingField);missingField[position-1]='X';
+    rejectsWith([&]{(void)importObject3DFbxWithProgressiveMorphs(target.reference(),missingField);},"Incomplete FBX progressive sparse-key metadata");
+    CHECK(target.objectCount()==count&&target.rigCount()==rigCount);
+    const auto curve=object3DProgressiveControlCurveName("Sparse");
+    const AnimationClip clip(object.get().skeleton(),2,{},{{curve,{{0,-1},{1,.75},{2,1}}},
+        {object3DProgressiveControlCurveName("Overlay"),{{0,0},{1,.15},{2,.3}}}});
+    const auto animated=exportObject3DFbxWithProgressiveMorphs(rig,clip);
+    if(emit=="animated"){output(animated.bytes);return;}
+    Object3DEngine animationEngine;const auto loaded=importObject3DFbxWithProgressiveMorphsAndAnimations(animationEngine.reference(),animated.bytes);
+    CHECK(loaded.animations.size()==1&&inspectObject3DProgressiveMorphRig(loaded.rig).channels[0].sourceMeshes.empty());
+    auto animatedActor=loaded.asset.object.get().instantiate();std::vector<SkeletalMeshComponent *> parts;
+    for(auto *component:animatedActor->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(component))parts.push_back(part);
+    applyObject3DProgressiveAnimationClip(loaded.rig,*loaded.animations[0].clip,loaded.animations[0].morphBindings,1,animatedActor->pose(),parts);
+    const std::map<std::string,double> expected{{"Face",.33},{"Face2",.39},{"Face3",.43}};
+    for(auto *part:parts)CHECK(close(part->deformedVertices()[0].position.y,expected.at(part->name())));
+    FbxAnimationImportOptions noMetadata;noMetadata.geometry.restoreAuthoringMetadata=false;
+    Object3DEngine separateEngine;const auto separate=importObject3DFbxWithProgressiveMorphsAndAnimations(separateEngine.reference(),animated.bytes,noMetadata);
+    CHECK(inspectObject3DProgressiveMorphRig(separate.rig).channels.size()==5&&!separate.asset.warnings.empty());
+    auto separateActor=separate.asset.object.get().instantiate();std::vector<SkeletalMeshComponent *> separateParts;
+    for(auto *component:separateActor->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(component))separateParts.push_back(part);
+    applyObject3DProgressiveAnimationClip(separate.rig,*separate.animations[0].clip,separate.animations[0].morphBindings,1,separateActor->pose(),separateParts);
+    for(auto *part:separateParts)CHECK(close(part->deformedVertices()[0].position.y,expected.at(part->name())));
+    auto copy=std::make_shared<AnimationClip>(clip);
+    const std::array takes{FbxImportedAnimation{"Before",-2,copy,{}},FbxImportedAnimation{"After",3,copy,{}}};
+    const auto multiFbx=exportObject3DFbxWithProgressiveMorphs(rig,std::span(takes));
+    Object3DEngine multiEngine;const auto multi=importObject3DFbxWithProgressiveMorphsAndAnimations(multiEngine.reference(),multiFbx.bytes);
+    CHECK(multi.animations.size()==2&&close(multi.animations[0].sourceStartSeconds,-2)&&close(multi.animations[1].sourceStartSeconds,3));
+    auto multiActor=multi.asset.object.get().instantiate();std::vector<SkeletalMeshComponent *> multiParts;
+    for(auto *component:multiActor->components())if(auto *part=dynamic_cast<SkeletalMeshComponent *>(component))multiParts.push_back(part);
+    for(const auto &take:multi.animations)
+    {
+        applyObject3DProgressiveAnimationClip(multi.rig,*take.clip,take.morphBindings,1,multiActor->pose(),multiParts);
+        for(auto *part:multiParts)CHECK(close(part->deformedVertices()[0].position.y,expected.at(part->name())));
+    }
+}
+void sparseLimits()
+{
+    constexpr std::size_t count=4001;auto input=data();auto prototype=input.meshes[0];input.meshes.clear();
+    prototype.geometry.morphTargets.clear();ProgressiveMorphChannel channel;channel.name="Sparse";
+    for(std::size_t i=0;i<count;++i)
+    {
+        auto mesh=prototype;mesh.name="Mesh_"+std::to_string(i);const auto target="Key_"+std::to_string(i);
+        mesh.geometry.morphTargets={{target,{{0,{0,.01,0},{}}}},{"All",{{0,{0,.02,0},{}}}}};
+        input.meshes.push_back(std::move(mesh));channel.keys.push_back({target,static_cast<double>(i+1)});
+    }
+    Object3DEngine engine;const auto object=engine.createObject(std::move(input));
+    const auto sparseRig=createObject3DProgressiveMorphRig(object,{{channel}});
+    const auto objects=engine.objectCount(),rigs=engine.rigCount();
+    rejectsWith([&]{(void)exportObject3DFbxWithProgressiveMorphs(sparseRig);},"Progressive FBX key instance limit");
+    CHECK(engine.objectCount()==objects&&engine.rigCount()==rigs);
+    ProgressiveMorphProgram many;
+    for(std::size_t i=0;i<17;++i)many.channels.push_back({"Control_"+std::to_string(i),0,{{"All",1}}});
+    const auto manyRig=createObject3DProgressiveMorphRig(object,many);
+    rejectsWith([&]{(void)exportObject3DFbxWithProgressiveMorphs(manyRig);},"Progressive FBX mesh reference limit");
 }
 void invalid()
 {
@@ -338,17 +548,25 @@ void exported(const char *path,bool emit=false)
     CHECK(instancePositions.size()==2&&close(instancePositions[0],.25)&&close(instancePositions[1],.25));
     auto diverged=instanced;diverged.meshes[1].geometry.morphTargets[2].deltas[0].position.y=.9;
     const auto divergedRig=createObject3DProgressiveMorphRig(engine.createObject(diverged),instanceProgram);
-    rejects([&]{(void)exportObject3DFbxWithProgressiveMorphs(divergedRig);});
+    const auto splitExport=[&](const Object3DRigHandle &value)
+    {
+        const auto encoded=exportObject3DFbxWithProgressiveMorphs(value);
+        Scene parsed(ufbx_load_memory(encoded.bytes.data(),encoded.bytes.size(),&strict,&error),ufbx_free_scene);
+        CHECK(parsed&&parsed->meshes.count==2);
+        Object3DEngine target;const auto loaded=importObject3DFbxWithProgressiveMorphs(target.reference(),encoded.bytes);
+        CHECK(loaded.rig.valid()&&inspectObject3DProgressiveMorphRig(loaded.rig).channels.size()==2);
+    };
+    splitExport(divergedRig);
     auto differentWeights=instanced;differentWeights.meshes[1].geometry.vertices[0].weights={{1,1}};
     const auto differentWeightsRig=createObject3DProgressiveMorphRig(engine.createObject(differentWeights),instanceProgram);
-    rejects([&]{(void)exportObject3DFbxWithProgressiveMorphs(differentWeightsRig);});
+    splitExport(differentWeightsRig);
     auto independentMorph=instanced;
     for(auto &mesh:independentMorph.meshes)mesh.geometry.morphTargets.push_back({"Other",{{0,{0,.1,0},{}}}});
     const auto independentRig=createObject3DProgressiveMorphRig(engine.createObject(independentMorph),instanceProgram);
-    rejects([&]{(void)exportObject3DFbxWithProgressiveMorphs(independentRig);});
+    splitExport(independentRig);
     auto overlapping=instanced;overlapping.meshes[1].geometry.morphTargets.pop_back();
     const auto overlappingRig=createObject3DProgressiveMorphRig(engine.createObject(overlapping),instanceProgram);
-    rejects([&]{(void)exportObject3DFbxWithProgressiveMorphs(overlappingRig);});
+    splitExport(overlappingRig);
     auto singleData=data();ProgressiveMorphProgram single{{{"Only",0,{{"Blink",1}}}}};
     const auto singleObject=engine.createObject(singleData);const auto singleRig=createObject3DProgressiveMorphRig(singleObject,single);
     const auto singleBytes=exportObject3DFbxWithProgressiveMorphs(singleRig);
@@ -596,7 +814,9 @@ void emitShared(const char *path)
 int main(int argc,char **argv)
 {
     try{if(argc<2)return 2;const std::string_view mode=argv[1];
-        if(mode=="curve")curve();else if(mode=="invalid")invalid();else if(mode=="project")project();else if(mode=="split")split();
+        if(mode=="curve")curve();else if(mode=="invalid")invalid();else if(mode=="project")project();else if(mode=="split")split();else if(mode=="sparse")sparse();else if(mode=="sparse_limits")sparseLimits();
+        else if(mode=="emit_split"){split("static");return 0;}else if(mode=="emit_split_animated"){split("animated");return 0;}
+        else if(mode=="emit_sparse"){sparse("static");return 0;}else if(mode=="emit_sparse_animated"){sparse("animated");return 0;}
         else if(mode=="lifetime")lifetime();else if(mode=="archive"){archive();return 0;}else if(mode=="reject_archive")rejectedArchive();
         else if(mode=="reference"&&argc==3)reference(argv[2]);
         else if(mode=="import"&&argc==3)imported(argv[2]);

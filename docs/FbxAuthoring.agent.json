@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/FbxAuthoring.md",
-    "sha256": "659e73304af3e944decc731fa38ad2399b9e0306e4b805597916030f19ffe560",
-    "bytes": 11963,
-    "line_count": 72,
+    "sha256": "0371bd83532d9d37d635450e87cc8b74961f1e07b706c6ea88bae5840a4632bf",
+    "bytes": 17982,
+    "line_count": 86,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -87,9 +87,9 @@
       "kind": "heading",
       "start_line": 9,
       "end_line": 9,
-      "raw": "## 자료와 ID\n",
+      "raw": "## 출력 책임 경계\n",
       "level": 2,
-      "title": "자료와 ID"
+      "title": "출력 책임 경계"
     },
     {
       "id": "b000010",
@@ -103,7 +103,7 @@
       "kind": "paragraph",
       "start_line": 11,
       "end_line": 11,
-      "raw": "`Object3DMesh::topology`가 원본 제어점과 작성용 연결을 보관한다. 위치·UV·법선의 분리 인덱스와 사용하지 않는 제어점·속성을 유지한다. 원본 폴리곤을 삼각형으로 바꾸지 않고 `MeshTopologyDefinition::polygons`에 보관하며, 렌더 삼각형만 별도로 계산한다. UV·법선 값이 같아도 서로 다른 원본 속성 ID를 합치지 않는다.\n"
+      "raw": "FBX 7.4의 정수·문자열·배열 속성과 노드의 바이너리 인코딩은 `Object3DFbxBinary.h/.cpp`와 `iiActorObjectFbxBinary` 객체 타깃이 담당한다. 이 내부 모듈은 장면·메시·에셋이나 외부 앱 SDK에 의존하지 않는다. 작성용 토폴로지 메타데이터의 판독과 기록은 각각 `Object3DFbxTopologyRead`, `Object3DFbxTopologyWrite`가 담당하며, 공통 DOM 값 판독은 `Object3DFbxMetadata`가 제공한다. 입력 상한과 누락된 자료를 검증하고 유효하지 않은 버퍼와 레이아웃을 거부한다. 이들은 메시 자료와 고정된 ufbx를 사용하고 에셋·장면·엔진을 소유하지 않는다. 공통 속성·모델 변환·레이어 노드는 `Object3DFbxSceneNodes`가 구성한다. 이미지·텍스처·재질 노드와 그 연결은 재질·이미지 자료를 빌려 쓰는 `Object3DFbxResourceWrite`가 구성한다. 스킨 방식·본 클러스터·바인드 행렬은 `Object3DFbxSkinWrite`가 점별 가중치와 본 자료를 빌려 기록한다. 모프 위치·법선 투영과 Shape 노드 기록은 `Object3DFbxMorphWrite`가 담당한다. 메시 형상과 UV·탄젠트 노드는 `Object3DFbxGeometryWrite`가 `Object3DMesh` 자료와 외부에서 계산한 탄젠트 자료를 받아 구성한다. 메시 자료는 에셋·골격·포즈에 의존하지 않는 `Object3DMesh.h`에서도 직접 사용할 수 있다. 일반·점진 모프의 채널·Shape·애니메이션 연결은 `Object3DFbxMorphChannelsWrite`가 기록한다. 모프 기록에 필요한 토폴로지 레이아웃이나 점진 채널이 빠지면 오류이며, 파생 법선과 공유 형상 비교의 누적 작업량도 제한한다. 기록 또는 비교가 실패하면 상위 출력기가 부분적으로 만들어진 임시 결과를 폐기한다. 여러 메시가 점진 형상을 공유할 수 있는지는 `Object3DFbxSharedGeometry`가 형상·스킨·모프 자료와 작업량 한도를 대조한다. 전체 장면 조정은 기존 FBX 출력 경로가 담당하며, 최종 SDK는 기존처럼 하나의 라이브러리로 배포한다. 이 경계는 독립 설치 API를 뜻하지 않는다.\n"
     },
     {
       "id": "b000012",
@@ -117,7 +117,7 @@
       "kind": "paragraph",
       "start_line": 13,
       "end_line": 13,
-      "raw": "`MeshTopologyLayout::trianglePolygons()`는 렌더 삼각형에서 원본 폴리곤 ID로 가는 대응이다. `polygonMaterials`는 각 원본 폴리곤의 전역 머티리얼 ID이며, 비어 있으면 `Object3DMesh::material`을 사용한다. 파생 `Object3DMesh::triangleMaterials`는 삼각형별 ID이다. 본체가 캐시를 만들고 머티리얼 범위와 개수를 검사한다. 작성용 자료가 없는 메시도 `triangleMaterials`를 직접 사용할 수 있다. 이 값의 비파괴 편집은 기존 보정 계층에 보관한다.\n"
+      "raw": "FBX 골격의 포함 본과 부모 순서 결정, 여러 루트의 결합, 바인드 변환 복원과 외부 관절 ID 확인은 `Object3DFbxSkeleton`이 담당한다. 판독 결과는 본체 자료와 장면 노드에 대한 임시 참조이며 에셋 등록이나 엔진 소유권을 갖지 않는다. 상한이 잘못되거나 계층이 순환하고 관절 변환을 허용 오차 안에서 표현할 수 없으면 실패한다. 출력은 `Object3DFbxSkeletonWrite`가 계산된 본·바인드 행렬을 빌려 ID, 부모, 의미와 포즈 노드를 작성한다. 외부 본 ID 속성은 필요한 경우 호출자가 제공하는 함수로 작성한다. 부모가 배열에서 나중에 있어도 원본 ID 순서를 보존하며 잘못된 부모·순환·누락된 행렬과 포즈·ID 한도 초과를 거부한다. 정적 객체의 합성 루트는 본 노드로 출력하지 않는다. 골격 기록기와 스킨 클러스터 기록기가 공유하는 본·행렬 값은 `Object3DFbxSkinData.h`에 있으며, 반환된 본 이름 참조는 원본 본 자료의 수명을 따른다. 기록 중 오류가 나면 상위 출력기는 임시 노드와 ID를 폐기한다.\n"
     },
     {
       "id": "b000014",
@@ -131,7 +131,7 @@
       "kind": "paragraph",
       "start_line": 15,
       "end_line": 15,
-      "raw": "FBX 출력은 작성용 폴리곤과 제어점을 사용한다. UV·법선은 IndexToDirect 형식으로 작성하여 경계와 사용하지 않는 원본 속성을 유지한다. GLB는 같은 정점·스킨·모프 accessor를 공유하는 머티리얼별 primitive를 작성한다. GLB는 렌더 결과의 교환이며 원본 사각형·숨김 face·작성용 ID의 보존 형식이 아니다.\n"
+      "raw": "FBX의 외부 문서 토큰과 메시·점·면·모프 식별정보는 별도 판독기가 작성용 토폴로지와 대조한다. 장면의 이름·객체 종류·리그 표본 메타데이터 판독도 분리되어 있으며 표본 복호화는 호출자가 제공한다. 두 처리는 엔진을 소유하지 않고, 가져오기 조정자가 검증된 임시 자료를 본체에 게시한다. 출력 시 외부 문서·본·메시·점·면·모프 속성은 `Object3DFbxExternalIdentityWrite`가 생성한다. 작성용 면이 있는 메시의 숨김과 반전 순서를 보존하며 레이아웃이 없으면 거부한다. 장면 이름·종류, 본 의미와 리그 표본 노드는 `Object3DFbxSceneMetadataWrite`가 생성하고 표본 바이트는 호출자가 제공한다. 출력 중 오류가 나면 상위 조정자가 임시 결과를 폐기한다.\n"
     },
     {
       "id": "b000016",
@@ -142,12 +142,10 @@
     },
     {
       "id": "b000017",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 17,
       "end_line": 17,
-      "raw": "## 재질 표면 설정\n",
-      "level": 2,
-      "title": "재질 표면 설정"
+      "raw": "바인드 포즈의 개수와 노드 기록은 골격과 메시가 함께 쓰는 `Object3DFbxPoseWrite`가 담당한다. 메시 모델의 형상·재질·포즈 연결은 `Object3DFbxMeshSceneWrite`가 기록하며 식별 속성은 호출자가 제공한다. `Object3DFbxGeometryRegistry`는 추가 전용 임시 노드에서 선행 형상을 찾아 공유 가능성을 검사한다. 선행 형상이 없거나 호환되지 않으면 점진 모프 출력기는 기존처럼 분리된 형상으로 다시 시도한다. 이 내부 처리기는 메시나 엔진의 소유권을 갖지 않는다.\n"
     },
     {
       "id": "b000018",
@@ -158,10 +156,12 @@
     },
     {
       "id": "b000019",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 19,
       "end_line": 19,
-      "raw": "[재질 표면 계약](MaterialSurface.md)의 알파 방식·임계값·양면 여부와 원본 기본색 알파는 필요한 경우 SDK 전용 FBX 머티리얼 속성으로 보존한다. `Opaque`의 표준 FBX 불투명도는 1로 출력하며 원래 알파는 별도 속성에 기록한다. SDK 재입력은 네 속성이 모두 유효할 때 복원하고 불완전하거나 잘못된 확장을 거부한다. 표준 불투명도가 확장과 다르면 기본 가져오기를 거부해 외부 수정값을 조용히 덮지 않는다. 작성용 보조 자료 복원을 끄면 재질 확장도 무시하고 표준값을 사용하며 경고한다. 표준 FBX 불투명도는 알파 마스크 임계값이나 양면 셰이더와 동등하지 않으며 다른 앱의 해석과 재출력은 검증하지 않았다.\n"
+      "raw": "## 자료와 ID\n",
+      "level": 2,
+      "title": "자료와 ID"
     },
     {
       "id": "b000020",
@@ -172,12 +172,10 @@
     },
     {
       "id": "b000021",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 21,
       "end_line": 21,
-      "raw": "## 스키닝 방식\n",
-      "level": 2,
-      "title": "스키닝 방식"
+      "raw": "`Object3DMesh::topology`가 원본 제어점과 작성용 연결을 보관한다. 위치·UV·법선의 분리 인덱스와 사용하지 않는 제어점·속성을 유지한다. 원본 폴리곤을 삼각형으로 바꾸지 않고 `MeshTopologyDefinition::polygons`에 보관하며, 렌더 삼각형만 별도로 계산한다. UV·법선 값이 같아도 서로 다른 원본 속성 ID를 합치지 않는다.\n"
     },
     {
       "id": "b000022",
@@ -191,7 +189,7 @@
       "kind": "paragraph",
       "start_line": 23,
       "end_line": 23,
-      "raw": "선형, 듀얼 쿼터니언, 점별 선형·DQ 혼합을 FBX 스킨 디포머의 `SkinningType`과 `Indexes`·`BlendWeights`로 읽고 쓴다. 모든 작성 점의 혼합값을 기록하며 누락된 입력 점은 0으로 처리한다. 중복·범위 밖 인덱스, 비유한 값, 불완전하거나 길이가 다른 배열, 방식과 모순되는 값을 거부한다. 정적 에셋에는 FBX 스킨 디포머가 없으므로 비선형 프로필 출력은 거부한다. FBX 기능 지원과 대상 앱에서 동일하게 작동하는지는 별개의 문제이다.\n"
+      "raw": "`MeshTopologyLayout::trianglePolygons()`는 렌더 삼각형에서 원본 폴리곤 ID로 가는 대응이다. `polygonMaterials`는 각 원본 폴리곤의 전역 머티리얼 ID이며, 비어 있으면 `Object3DMesh::material`을 사용한다. 파생 `Object3DMesh::triangleMaterials`는 삼각형별 ID이다. 본체가 캐시를 만들고 머티리얼 범위와 개수를 검사한다. 작성용 자료가 없는 메시도 `triangleMaterials`를 직접 사용할 수 있다. 이 값의 비파괴 편집은 기존 보정 계층에 보관한다.\n"
     },
     {
       "id": "b000024",
@@ -202,12 +200,10 @@
     },
     {
       "id": "b000025",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 25,
       "end_line": 25,
-      "raw": "## 숨김 면과 확장 정보\n",
-      "level": 2,
-      "title": "숨김 면과 확장 정보"
+      "raw": "FBX 출력은 작성용 폴리곤과 제어점을 사용한다. UV·법선은 IndexToDirect 형식으로 작성하여 경계와 사용하지 않는 원본 속성을 유지한다. GLB는 같은 정점·스킨·모프 accessor를 공유하는 머티리얼별 primitive를 작성한다. GLB는 렌더 결과의 교환이며 원본 사각형·숨김 face·작성용 ID의 보존 형식이 아니다.\n"
     },
     {
       "id": "b000026",
@@ -218,10 +214,12 @@
     },
     {
       "id": "b000027",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 27,
       "end_line": 27,
-      "raw": "표준 FBX geometry에는 보이는 폴리곤만 작성한다. 숨긴 관절·의상 보조 표면이 외부 앱에 실제 면으로 표시되지 않게 하기 위함이다. 모든 원본 제어점은 표준 `Vertices`에 남기므로 외부 앱에는 사용하지 않는 정점이 있을 수 있다.\n"
+      "raw": "## 재질 표면 설정\n",
+      "level": 2,
+      "title": "재질 표면 설정"
     },
     {
       "id": "b000028",
@@ -235,7 +233,7 @@
       "kind": "paragraph",
       "start_line": 29,
       "end_line": 29,
-      "raw": "geometry의 `iiActorObjectTopology` 버전 1 확장은 다음 자료를 보관한다.\n"
+      "raw": "[재질 표면 계약](MaterialSurface.md)의 알파 방식·임계값·양면 여부와 원본 기본색 알파는 필요한 경우 SDK 전용 FBX 머티리얼 속성으로 보존한다. `Opaque`의 표준 FBX 불투명도는 1로 출력하며 원래 알파는 별도 속성에 기록한다. SDK 재입력은 네 속성이 모두 유효할 때 복원하고 불완전하거나 잘못된 확장을 거부한다. 표준 불투명도가 확장과 다르면 기본 가져오기를 거부해 외부 수정값을 조용히 덮지 않는다. 작성용 보조 자료 복원을 끄면 재질 확장도 무시하고 표준값을 사용하며 경고한다. 표준 FBX 불투명도는 알파 마스크 임계값이나 양면 셰이더와 동등하지 않으며 다른 앱의 해석과 재출력은 검증하지 않았다.\n"
     },
     {
       "id": "b000030",
@@ -246,9 +244,97 @@
     },
     {
       "id": "b000031",
-      "kind": "list",
+      "kind": "heading",
       "start_line": 31,
+      "end_line": 31,
+      "raw": "## 스키닝 방식\n",
+      "level": 2,
+      "title": "스키닝 방식"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 33,
       "end_line": 33,
+      "raw": "FBX 점별 본 영향과 스키닝 혼합값의 해석은 `Object3DFbxSkin`이 담당한다. 이 내부 모듈은 메시·관절 대응 자료를 빌려 쓰며 결과를 본체 에셋에 게시하지 않는다. 희소 혼합값은 원본 점 순서로 펼치고 같은 본으로 연결된 영향은 합산한다. 잘못된 배열 범위·본 연결·중복 혼합점과 순환된 강체 부모 경로를 거부한다.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "선형, 듀얼 쿼터니언, 점별 선형·DQ 혼합을 FBX 스킨 디포머의 `SkinningType`과 `Indexes`·`BlendWeights`로 읽고 쓴다. 모든 작성 점의 혼합값을 기록하며 누락된 입력 점은 0으로 처리한다. 중복·범위 밖 인덱스, 비유한 값, 불완전하거나 길이가 다른 배열, 방식과 모순되는 값을 거부한다. 정적 에셋에는 FBX 스킨 디포머가 없으므로 비선형 프로필 출력은 거부한다. FBX 기능 지원과 대상 앱에서 동일하게 작동하는지는 별개의 문제이다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "heading",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "## 숨김 면과 확장 정보\n",
+      "level": 2,
+      "title": "숨김 면과 확장 정보"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "표준 FBX geometry에는 보이는 폴리곤만 작성한다. 숨긴 관절·의상 보조 표면이 외부 앱에 실제 면으로 표시되지 않게 하기 위함이다. 모든 원본 제어점은 표준 `Vertices`에 남기므로 외부 앱에는 사용하지 않는 정점이 있을 수 있다.\n"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "geometry의 `iiActorObjectTopology` 버전 1 확장은 다음 자료를 보관한다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "list",
+      "start_line": 43,
+      "end_line": 45,
       "raw": "- 원본 형식·메시 ID, 위치·UV·법선 수와 winding이다.\n- 모든 layout과 폴리곤, 원본 그룹·머티리얼·숨김 face, 렌더 대응이다.\n- 빈 원본 스킨 행의 제어점 ID이다. 정적 객체의 묵시적 루트 바인딩과 원본 빈 행을 구분한다.\n",
       "items": [
         {
@@ -269,92 +355,6 @@
       ]
     },
     {
-      "id": "b000032",
-      "kind": "blank",
-      "start_line": 34,
-      "end_line": 34,
-      "raw": "\n"
-    },
-    {
-      "id": "b000033",
-      "kind": "paragraph",
-      "start_line": 35,
-      "end_line": 35,
-      "raw": "큰 정수 목록과 그룹은 하나의 raw blob으로 보관한다. 정수는 little-endian uint32이며 그룹은 uint32 길이와 UTF-8 바이트의 연속이다. ufbx는 수정하지 않고 retained DOM의 원시 값을 읽는다. 임의 파일 경로나 실행 코드를 포함하지 않는다.\n"
-    },
-    {
-      "id": "b000034",
-      "kind": "blank",
-      "start_line": 36,
-      "end_line": 36,
-      "raw": "\n"
-    },
-    {
-      "id": "b000035",
-      "kind": "paragraph",
-      "start_line": 37,
-      "end_line": 37,
-      "raw": "복원 시 속성 수·보이는 폴리곤의 코너 대응·머티리얼 슬롯·빈 스킨 행을 실제 표준 FBX와 대조한다. 맞지 않는 확장 자료를 조용히 적용하지 않는다. 외부 앱에서 연결·UV 인덱스·스킨을 바꾸어 확장이 낡았다면 기본 복원은 실패한다. 호출자가 `FbxImportOptions::restoreAuthoringMetadata=false`를 지정하면 현재 표준 FBX 구조로 읽고 경고를 받는다. 외부 앱이 이 확장을 삭제하거나 재정렬한 뒤에도 원래 작성용 ID가 보존된다고 주장하지 않는다.\n"
-    },
-    {
-      "id": "b000036",
-      "kind": "blank",
-      "start_line": 38,
-      "end_line": 38,
-      "raw": "\n"
-    },
-    {
-      "id": "b000037",
-      "kind": "heading",
-      "start_line": 39,
-      "end_line": 39,
-      "raw": "## 스킨과 모프\n",
-      "level": 2,
-      "title": "스킨과 모프"
-    },
-    {
-      "id": "b000038",
-      "kind": "blank",
-      "start_line": 40,
-      "end_line": 40,
-      "raw": "\n"
-    },
-    {
-      "id": "b000039",
-      "kind": "paragraph",
-      "start_line": 41,
-      "end_line": 41,
-      "raw": "스킨은 원본 제어점에 저장하며 영향 수를 4개나 8개로 절단하지 않는다. 스킨이 없는 부착 메시는 가장 가까운 본 조상 또는 루트로 강체 바인딩한다. 스킨에 남은 빈 행은 원본에서 빈 상태로 보존하고 렌더 시 본체의 루트 규약을 따른다. 음의 geometry scale에서는 winding과 역전치 법선을 함께 처리한다.\n"
-    },
-    {
-      "id": "b000040",
-      "kind": "blank",
-      "start_line": 42,
-      "end_line": 42,
-      "raw": "\n"
-    },
-    {
-      "id": "b000041",
-      "kind": "paragraph",
-      "start_line": 43,
-      "end_line": 43,
-      "raw": "작성용 모프는 원본 제어점 위치 델타와 target ID를 사용한다. 일반 보존용 FBX는 blend channel의 `iiSourceName`·`iiSourceTarget`에 원래 논리 이름과 ID를 보관하고, 같은 이름의 여러 레코드를 `_SourceN`으로 구분한다. SDK 재입력은 논리 이름과 원본 ID를 복원한다. 외부 편집용 문서 토큰을 지정한 FBX는 이와 달리 같은 이름의 레코드를 하나의 표준 채널로 투영한다. 원본 분할은 FBX에 없으므로 원본 프로젝트와 함께 사용한다. [논리 모프 계약](LogicalMorphChannels.md)을 따른다.\n"
-    },
-    {
-      "id": "b000042",
-      "kind": "blank",
-      "start_line": 44,
-      "end_line": 44,
-      "raw": "\n"
-    },
-    {
-      "id": "b000043",
-      "kind": "paragraph",
-      "start_line": 45,
-      "end_line": 45,
-      "raw": "모프의 명시적 법선은 원본 layout ID에 보관하며 위치에서 계산하는 법선과 구분한다. 표준 FBX Shape의 제어점 법선 델타를 변환·보존하고, 경계 양쪽에 서로 다른 델타가 필요하면 기본 출력은 거부한다. `FbxExportOptions::allowMorphNormalMetadata=true`는 표준 투영과 정확한 SDK 확장 자료를 함께 출력한다. 확장 미복원 시 투영 손실을 경고한다. 계산형·명시형·빈 명시형과 비균등 스케일의 규약은 [모프 법선 계약](MorphNormals.md)에 있다. [FBX 탄젠트 계약](FbxTangents.md)은 UV별 기준 기저와 폴리곤 투영 한계를 설명하며, 연결된 원본 탄젠트는 기준 상태와 함께 보존하고 모프 탄젠트 보존은 남아 있다.\n"
-    },
-    {
       "id": "b000044",
       "kind": "blank",
       "start_line": 46,
@@ -366,7 +366,7 @@
       "kind": "paragraph",
       "start_line": 47,
       "end_line": 47,
-      "raw": "원본 DNA를 가져와 상세 편집한 뒤 이 SDK의 FBX를 경유하면 source format·메시 ID·layout·폴리곤·target ID를 복원하여 기존 RigLogic 세션을 새 에셋에 연결하고 DNA로 저장할 수 있다. 이 경로는 SDK의 확장이 유지된 경우이다. Blender·CC5·Unreal의 재출력에 대해 같은 원본 ID 복원을 보장하는 근거가 아니다.\n"
+      "raw": "큰 정수 목록과 그룹은 하나의 raw blob으로 보관한다. 정수는 little-endian uint32이며 그룹은 uint32 길이와 UTF-8 바이트의 연속이다. ufbx는 수정하지 않고 retained DOM의 원시 값을 읽는다. 임의 파일 경로나 실행 코드를 포함하지 않는다.\n"
     },
     {
       "id": "b000046",
@@ -377,12 +377,10 @@
     },
     {
       "id": "b000047",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 49,
       "end_line": 49,
-      "raw": "## 입력 제한과 미지원 자료\n",
-      "level": 2,
-      "title": "입력 제한과 미지원 자료"
+      "raw": "복원 시 속성 수·보이는 폴리곤의 코너 대응·머티리얼 슬롯·빈 스킨 행을 실제 표준 FBX와 대조한다. 맞지 않는 확장 자료를 조용히 적용하지 않는다. 외부 앱에서 연결·UV 인덱스·스킨을 바꾸어 확장이 낡았다면 기본 복원은 실패한다. 호출자가 `FbxImportOptions::restoreAuthoringMetadata=false`를 지정하면 현재 표준 FBX 구조로 읽고 경고를 받는다. 외부 앱이 이 확장을 삭제하거나 재정렬한 뒤에도 원래 작성용 ID가 보존된다고 주장하지 않는다.\n"
     },
     {
       "id": "b000048",
@@ -393,10 +391,12 @@
     },
     {
       "id": "b000049",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 51,
       "end_line": 51,
-      "raw": "기본 제한은 파일 256 MiB, 전체 제어점과 렌더 정점 각각 200만 개, 본 4,096개, 메시별 모프 4,096개, 폴리곤 200만 개, 코너 800만 개이다. 파서는 기존과 같이 파일 제한의 네 배까지 임시·결과 메모리를 제한한다. 작성용 인덱스·코너·확장 blob도 별도로 검사한다.\n"
+      "raw": "## 스킨과 모프\n",
+      "level": 2,
+      "title": "스킨과 모프"
     },
     {
       "id": "b000050",
@@ -410,7 +410,7 @@
       "kind": "paragraph",
       "start_line": 53,
       "end_line": 53,
-      "raw": "각 면은 3~256개 코너의 단순 폴리곤이어야 한다. 빈 보조 mesh는 경고 후 제외한다. [여러 UV 세트](MultipleUvSets.md)는 세트별 seam과 이름을 보관한다. 외부 텍스처와 내장 PNG 외 이미지는 [호스트 이미지 해석기](FbxImageResolution.md)를 통해 제공할 수 있다. 입력의 정점 색·애니메이션 take·앱 제약·geometry cache는 현재 편집 프로필의 범위 밖이며 경고로 구분한다. 별도의 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 연결한 모프 곡선을 작성하고, [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크의 본·모프 표본을 반환한다. 여러 스킨 디포머·지원하지 않는 스키닝 방식·progressive morph·표현 불가능한 본 shear는 거부한다. 원본 앱의 모든 FBX 기능을 복원한 것으로 해석하지 않는다.\n"
+      "raw": "스킨은 원본 제어점에 저장하며 영향 수를 4개나 8개로 절단하지 않는다. 스킨이 없는 부착 메시는 가장 가까운 본 조상 또는 루트로 강체 바인딩한다. 스킨에 남은 빈 행은 원본에서 빈 상태로 보존하고 렌더 시 본체의 루트 규약을 따른다. 음의 geometry scale에서는 winding과 역전치 법선을 함께 처리한다.\n"
     },
     {
       "id": "b000052",
@@ -421,12 +421,10 @@
     },
     {
       "id": "b000053",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 55,
       "end_line": 55,
-      "raw": "## 검증과 남은 적용\n",
-      "level": 2,
-      "title": "검증과 남은 적용"
+      "raw": "FBX 입력의 메시 점·스킨·UV·폴리곤과 작성용 토폴로지 구성은 `Object3DFbxGeometryRead`가 담당하며 입력 실패 시 누적 예산을 변경하지 않는다. FBX 형상의 점·법선 델타 판독과 변환은 `Object3DFbxMorphShape`가 일반 및 점진 모프 양쪽에 제공한다. 작성용 법선과 표준 형상의 불일치, 잘못된 배열과 비유한 값을 거부한다. 일반·점진 채널과 여러 메시의 프로그램 연결은 `Object3DFbxMorphChannelRead`가 담당한다. `Object3DFbxMeshSceneRead`는 장면의 메시를 순회하며 이 처리기와 형상·탄젠트·식별정보 판독을 조합한다. 실패 시 임시 결과는 폐기하며 엔진 게시는 가져오기 조정자가 담당한다.\n"
     },
     {
       "id": "b000054",
@@ -440,7 +438,7 @@
       "kind": "paragraph",
       "start_line": 57,
       "end_line": 57,
-      "raw": "네이티브 검사는 UV seam, 원본 ID·사용하지 않는 속성·숨김 면·빈 스킨 행·동일 이름의 복수 target ID·면별 머티리얼·정적 메시·음의 scale·낡은 확장 거부를 확인한다. 독립 ASCII FBX에서 사각형과 사용하지 않는 점을 읽는 검사도 포함한다.\n"
+      "raw": "작성용 모프는 원본 제어점 위치 델타와 target ID를 사용한다. 일반 보존용 FBX는 blend channel의 `iiSourceName`·`iiSourceTarget`에 원래 논리 이름과 ID를 보관하고, 같은 이름의 여러 레코드를 `_SourceN`으로 구분한다. SDK 재입력은 논리 이름과 원본 ID를 복원한다. 외부 편집용 문서 토큰을 지정한 FBX는 이와 달리 같은 이름의 레코드를 하나의 표준 채널로 투영한다. 원본 분할은 FBX에 없으므로 원본 프로젝트와 함께 사용한다. [논리 모프 계약](LogicalMorphChannels.md)을 따른다.\n"
     },
     {
       "id": "b000056",
@@ -454,85 +452,187 @@
       "kind": "paragraph",
       "start_line": 59,
       "end_line": 59,
-      "raw": "별도 DNA reader로 DNA→편집→FBX→SDK→DNA의 위치·연결·기준 골격·behavior를 검사한다. 실제 Blender에서는 FBX 제어점·사각형·머티리얼·shape key·스킨을 검사하고, 인체 FBX의 제어점 19,158개와 사각형 13,378개가 보존되는지 확인한다. CC5·Unreal의 실제 characterization·애니메이션·재출력과 제작용 MetaHuman 적용은 별도 완료 조건이다.\n"
+      "raw": "모프의 명시적 법선은 원본 layout ID에 보관하며 위치에서 계산하는 법선과 구분한다. 표준 FBX Shape의 제어점 법선 델타를 변환·보존하고, 경계 양쪽에 서로 다른 델타가 필요하면 기본 출력은 거부한다. `FbxExportOptions::allowMorphNormalMetadata=true`는 표준 투영과 정확한 SDK 확장 자료를 함께 출력한다. 확장 미복원 시 투영 손실을 경고한다. 계산형·명시형·빈 명시형과 비균등 스케일의 규약은 [모프 법선 계약](MorphNormals.md)에 있다. [FBX 탄젠트 계약](FbxTangents.md)은 UV별 기준 기저와 폴리곤 투영 한계를 설명하며, 연결된 원본 탄젠트는 기준 상태와 함께 보존하고 모프 탄젠트 보존은 남아 있다.\n"
     },
     {
       "id": "b000058",
-      "kind": "heading",
+      "kind": "blank",
       "start_line": 60,
       "end_line": 60,
-      "raw": "# FBX 관절 행렬의 수치 허용값\n",
-      "level": 1,
-      "title": "FBX 관절 행렬의 수치 허용값"
+      "raw": "\n"
     },
     {
       "id": "b000059",
-      "kind": "blank",
+      "kind": "paragraph",
       "start_line": 61,
       "end_line": 61,
-      "raw": "\n"
+      "raw": "원본 DNA를 가져와 상세 편집한 뒤 이 SDK의 FBX를 경유하면 source format·메시 ID·layout·폴리곤·target ID를 복원하여 기존 RigLogic 세션을 새 에셋에 연결하고 DNA로 저장할 수 있다. 이 경로는 SDK의 확장이 유지된 경우이다. Blender·CC5·Unreal의 재출력에 대해 같은 원본 ID 복원을 보장하는 근거가 아니다.\n"
     },
     {
       "id": "b000060",
-      "kind": "paragraph",
+      "kind": "blank",
       "start_line": 62,
       "end_line": 62,
-      "raw": "`FbxImportOptions::maximumJointMatrixError`의 기본값은 기존과 같은 `1e-7`이다. SRT로 재구성한 관절 행렬과 입력 행렬의 각 원소 차이를 `max(1, abs(input))`로 나눈 최대값을 사용한다. Blender의 float 계산을 거친 파일처럼 작은 수치 오차가 있는 경우 호출자가 명시적으로 `1e-6` 등을 선택할 수 있다. 유한한 0~`1e-3` 범위만 허용하며 그 범위를 넘는 실제 전단은 계속 거부한다.\n"
-    },
-    {
-      "id": "b000061",
-      "kind": "blank",
-      "start_line": 63,
-      "end_line": 63,
       "raw": "\n"
     },
     {
+      "id": "b000061",
+      "kind": "heading",
+      "start_line": 63,
+      "end_line": 63,
+      "raw": "## 입력 제한과 미지원 자료\n",
+      "level": 2,
+      "title": "입력 제한과 미지원 자료"
+    },
+    {
       "id": "b000062",
-      "kind": "paragraph",
+      "kind": "blank",
       "start_line": 64,
       "end_line": 64,
-      "raw": "`Object3DImport::maximumJointMatrixError`는 실제로 관측한 최대 오차이다. 기본 허용값을 넘는 재구성을 수락하면 관절 이름과 최대 오차를 warnings에 한 번 기록한다. 임의 전단을 SRT로 조용히 바꾸지 않으며, 범위 밖 행렬·잘못된 옵션은 본체에 자산을 등록하기 전에 실패한다. `FbxImportPrecisionTest`가 기본 거부·명시적 수락과 진단·실제 전단 거부·실패 원자성을 검사한다.\n"
+      "raw": "\n"
     },
     {
       "id": "b000063",
-      "kind": "blank",
+      "kind": "paragraph",
       "start_line": 65,
-      "end_line": 66,
-      "raw": "\n\n"
+      "end_line": 65,
+      "raw": "기본 제한은 파일 256 MiB, 전체 제어점과 렌더 정점 각각 200만 개, 본 4,096개, 메시별 모프 4,096개, 폴리곤 200만 개, 코너 800만 개이다. 파서는 기존과 같이 파일 제한의 네 배까지 임시·결과 메모리를 제한한다. 작성용 인덱스·코너·확장 blob도 별도로 검사한다.\n"
     },
     {
       "id": "b000064",
-      "kind": "paragraph",
-      "start_line": 67,
-      "end_line": 67,
-      "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
+      "kind": "blank",
+      "start_line": 66,
+      "end_line": 66,
+      "raw": "\n"
     },
     {
       "id": "b000065",
+      "kind": "paragraph",
+      "start_line": 67,
+      "end_line": 67,
+      "raw": "각 면은 3~256개 코너의 단순 폴리곤이어야 한다. 빈 보조 mesh는 경고 후 제외한다. [여러 UV 세트](MultipleUvSets.md)는 세트별 seam과 이름을 보관한다. 외부 텍스처와 내장 PNG 외 이미지는 [호스트 이미지 해석기](FbxImageResolution.md)를 통해 제공할 수 있다. 입력의 정점 색·애니메이션 take·앱 제약·geometry cache는 현재 편집 프로필의 범위 밖이며 경고로 구분한다. 별도의 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 연결한 모프 곡선을 작성하고, [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크의 본·모프 표본을 반환한다. 여러 스킨 디포머·지원하지 않는 스키닝 방식·progressive morph·표현 불가능한 본 shear는 거부한다. 원본 앱의 모든 FBX 기능을 복원한 것으로 해석하지 않는다.\n"
+    },
+    {
+      "id": "b000066",
       "kind": "blank",
       "start_line": 68,
       "end_line": 68,
       "raw": "\n"
     },
     {
-      "id": "b000066",
-      "kind": "paragraph",
+      "id": "b000067",
+      "kind": "heading",
       "start_line": 69,
       "end_line": 69,
-      "raw": "[기준 자세 프로그램](PoseReference.md)이 있는 정본은 프로그램의 의미를 누락시키지 않도록 직접 FBX 출력 시 오류이다. `createReferenceObject3DPoseSnapshot`으로 별도 교환 에셋을 만든 뒤 출력하며, 원본 편집 자료와 리그는 보존한다.\n"
-    },
-    {
-      "id": "b000067",
-      "kind": "blank",
-      "start_line": 70,
-      "end_line": 71,
-      "raw": "\n\n"
+      "raw": "## 검증과 남은 적용\n",
+      "level": 2,
+      "title": "검증과 남은 적용"
     },
     {
       "id": "b000068",
+      "kind": "blank",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "\n"
+    },
+    {
+      "id": "b000069",
       "kind": "paragraph",
+      "start_line": 71,
+      "end_line": 71,
+      "raw": "네이티브 검사는 UV seam, 원본 ID·사용하지 않는 속성·숨김 면·빈 스킨 행·동일 이름의 복수 target ID·면별 머티리얼·정적 메시·음의 scale·낡은 확장 거부를 확인한다. 독립 ASCII FBX에서 사각형과 사용하지 않는 점을 읽는 검사도 포함한다.\n"
+    },
+    {
+      "id": "b000070",
+      "kind": "blank",
       "start_line": 72,
       "end_line": 72,
+      "raw": "\n"
+    },
+    {
+      "id": "b000071",
+      "kind": "paragraph",
+      "start_line": 73,
+      "end_line": 73,
+      "raw": "별도 DNA reader로 DNA→편집→FBX→SDK→DNA의 위치·연결·기준 골격·behavior를 검사한다. 실제 Blender에서는 FBX 제어점·사각형·머티리얼·shape key·스킨을 검사하고, 인체 FBX의 제어점 19,158개와 사각형 13,378개가 보존되는지 확인한다. CC5·Unreal의 실제 characterization·애니메이션·재출력과 제작용 MetaHuman 적용은 별도 완료 조건이다.\n"
+    },
+    {
+      "id": "b000072",
+      "kind": "heading",
+      "start_line": 74,
+      "end_line": 74,
+      "raw": "# FBX 관절 행렬의 수치 허용값\n",
+      "level": 1,
+      "title": "FBX 관절 행렬의 수치 허용값"
+    },
+    {
+      "id": "b000073",
+      "kind": "blank",
+      "start_line": 75,
+      "end_line": 75,
+      "raw": "\n"
+    },
+    {
+      "id": "b000074",
+      "kind": "paragraph",
+      "start_line": 76,
+      "end_line": 76,
+      "raw": "`FbxImportOptions::maximumJointMatrixError`의 기본값은 기존과 같은 `1e-7`이다. SRT로 재구성한 관절 행렬과 입력 행렬의 각 원소 차이를 `max(1, abs(input))`로 나눈 최대값을 사용한다. Blender의 float 계산을 거친 파일처럼 작은 수치 오차가 있는 경우 호출자가 명시적으로 `1e-6` 등을 선택할 수 있다. 유한한 0~`1e-3` 범위만 허용하며 그 범위를 넘는 실제 전단은 계속 거부한다.\n"
+    },
+    {
+      "id": "b000075",
+      "kind": "blank",
+      "start_line": 77,
+      "end_line": 77,
+      "raw": "\n"
+    },
+    {
+      "id": "b000076",
+      "kind": "paragraph",
+      "start_line": 78,
+      "end_line": 78,
+      "raw": "`Object3DImport::maximumJointMatrixError`는 실제로 관측한 최대 오차이다. 기본 허용값을 넘는 재구성을 수락하면 관절 이름과 최대 오차를 warnings에 한 번 기록한다. 임의 전단을 SRT로 조용히 바꾸지 않으며, 범위 밖 행렬·잘못된 옵션은 본체에 자산을 등록하기 전에 실패한다. `FbxImportPrecisionTest`가 기본 거부·명시적 수락과 진단·실제 전단 거부·실패 원자성을 검사한다.\n"
+    },
+    {
+      "id": "b000077",
+      "kind": "blank",
+      "start_line": 79,
+      "end_line": 80,
+      "raw": "\n\n"
+    },
+    {
+      "id": "b000078",
+      "kind": "paragraph",
+      "start_line": 81,
+      "end_line": 81,
+      "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
+    },
+    {
+      "id": "b000079",
+      "kind": "blank",
+      "start_line": 82,
+      "end_line": 82,
+      "raw": "\n"
+    },
+    {
+      "id": "b000080",
+      "kind": "paragraph",
+      "start_line": 83,
+      "end_line": 83,
+      "raw": "[기준 자세 프로그램](PoseReference.md)이 있는 정본은 프로그램의 의미를 누락시키지 않도록 직접 FBX 출력 시 오류이다. `createReferenceObject3DPoseSnapshot`으로 별도 교환 에셋을 만든 뒤 출력하며, 원본 편집 자료와 리그는 보존한다.\n"
+    },
+    {
+      "id": "b000081",
+      "kind": "blank",
+      "start_line": 84,
+      "end_line": 85,
+      "raw": "\n\n"
+    },
+    {
+      "id": "b000082",
+      "kind": "paragraph",
+      "start_line": 86,
+      "end_line": 86,
       "raw": "[메시의 기본 모프 값](DefaultMorphWeights.md)은 FBX `DeformPercent`로 교환하며, 같은 논리 채널을 구성하는 원본 레코드들의 값이 다르면 가져오기를 거부한다.\n"
     }
   ],
@@ -557,65 +657,73 @@
       "block_id": "b000009",
       "parent_id": "b000001",
       "level": 2,
-      "title": "자료와 ID",
-      "anchor": "자료와-id",
+      "title": "출력 책임 경계",
+      "anchor": "출력-책임-경계",
       "start_line": 9
     },
     {
-      "block_id": "b000017",
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "자료와 ID",
+      "anchor": "자료와-id",
+      "start_line": 19
+    },
+    {
+      "block_id": "b000027",
       "parent_id": "b000001",
       "level": 2,
       "title": "재질 표면 설정",
       "anchor": "재질-표면-설정",
-      "start_line": 17
+      "start_line": 27
     },
     {
-      "block_id": "b000021",
+      "block_id": "b000031",
       "parent_id": "b000001",
       "level": 2,
       "title": "스키닝 방식",
       "anchor": "스키닝-방식",
-      "start_line": 21
-    },
-    {
-      "block_id": "b000025",
-      "parent_id": "b000001",
-      "level": 2,
-      "title": "숨김 면과 확장 정보",
-      "anchor": "숨김-면과-확장-정보",
-      "start_line": 25
+      "start_line": 31
     },
     {
       "block_id": "b000037",
       "parent_id": "b000001",
       "level": 2,
-      "title": "스킨과 모프",
-      "anchor": "스킨과-모프",
-      "start_line": 39
+      "title": "숨김 면과 확장 정보",
+      "anchor": "숨김-면과-확장-정보",
+      "start_line": 37
     },
     {
-      "block_id": "b000047",
+      "block_id": "b000049",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "스킨과 모프",
+      "anchor": "스킨과-모프",
+      "start_line": 51
+    },
+    {
+      "block_id": "b000061",
       "parent_id": "b000001",
       "level": 2,
       "title": "입력 제한과 미지원 자료",
       "anchor": "입력-제한과-미지원-자료",
-      "start_line": 49
+      "start_line": 63
     },
     {
-      "block_id": "b000053",
+      "block_id": "b000067",
       "parent_id": "b000001",
       "level": 2,
       "title": "검증과 남은 적용",
       "anchor": "검증과-남은-적용",
-      "start_line": 55
+      "start_line": 69
     },
     {
-      "block_id": "b000058",
+      "block_id": "b000072",
       "parent_id": null,
       "level": 1,
       "title": "FBX 관절 행렬의 수치 허용값",
       "anchor": "fbx-관절-행렬의-수치-허용값",
-      "start_line": 60
+      "start_line": 74
     }
   ],
   "indexes": {
@@ -635,29 +743,57 @@
         "context": "paragraph"
       },
       {
+        "block_id": "b000011",
+        "line": 11,
+        "text": "FBX 7.4의 정수·문자열·배열 속성과 노드의 바이너리 인코딩은 `Object3DFbxBinary.h/.cpp`와 `iiActorObjectFbxBinary` 객체 타깃이 담당한다. 이 내부 모듈은 장면·메시·에셋이나 외부 앱 SDK에 의존하지 않는다. 작성용 토폴로지 메타데이터의 판독과 기록은 각각 `Object3DFbxTopologyRead`, `Object3DFbxTopologyWrite`가 담당하며, 공통 DOM 값 판독은 `Object3DFbxMetadata`가 제공한다. 입력 상한과 누락된 자료를 검증하고 유효하지 않은 버퍼와 레이아웃을 거부한다. 이들은 메시 자료와 고정된 ufbx를 사용하고 에셋·장면·엔진을 소유하지 않는다. 공통 속성·모델 변환·레이어 노드는 `Object3DFbxSceneNodes`가 구성한다. 이미지·텍스처·재질 노드와 그 연결은 재질·이미지 자료를 빌려 쓰는 `Object3DFbxResourceWrite`가 구성한다. 스킨 방식·본 클러스터·바인드 행렬은 `Object3DFbxSkinWrite`가 점별 가중치와 본 자료를 빌려 기록한다. 모프 위치·법선 투영과 Shape 노드 기록은 `Object3DFbxMorphWrite`가 담당한다. 메시 형상과 UV·탄젠트 노드는 `Object3DFbxGeometryWrite`가 `Object3DMesh` 자료와 외부에서 계산한 탄젠트 자료를 받아 구성한다. 메시 자료는 에셋·골격·포즈에 의존하지 않는 `Object3DMesh.h`에서도 직접 사용할 수 있다. 일반·점진 모프의 채널·Shape·애니메이션 연결은 `Object3DFbxMorphChannelsWrite`가 기록한다. 모프 기록에 필요한 토폴로지 레이아웃이나 점진 채널이 빠지면 오류이며, 파생 법선과 공유 형상 비교의 누적 작업량도 제한한다. 기록 또는 비교가 실패하면 상위 출력기가 부분적으로 만들어진 임시 결과를 폐기한다. 여러 메시가 점진 형상을 공유할 수 있는지는 `Object3DFbxSharedGeometry`가 형상·스킨·모프 자료와 작업량 한도를 대조한다. 전체 장면 조정은 기존 FBX 출력 경로가 담당하며, 최종 SDK는 기존처럼 하나의 라이브러리로 배포한다. 이 경계는 독립 설치 API를 뜻하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 13,
+        "text": "FBX 골격의 포함 본과 부모 순서 결정, 여러 루트의 결합, 바인드 변환 복원과 외부 관절 ID 확인은 `Object3DFbxSkeleton`이 담당한다. 판독 결과는 본체 자료와 장면 노드에 대한 임시 참조이며 에셋 등록이나 엔진 소유권을 갖지 않는다. 상한이 잘못되거나 계층이 순환하고 관절 변환을 허용 오차 안에서 표현할 수 없으면 실패한다. 출력은 `Object3DFbxSkeletonWrite`가 계산된 본·바인드 행렬을 빌려 ID, 부모, 의미와 포즈 노드를 작성한다. 외부 본 ID 속성은 필요한 경우 호출자가 제공하는 함수로 작성한다. 부모가 배열에서 나중에 있어도 원본 ID 순서를 보존하며 잘못된 부모·순환·누락된 행렬과 포즈·ID 한도 초과를 거부한다. 정적 객체의 합성 루트는 본 노드로 출력하지 않는다. 골격 기록기와 스킨 클러스터 기록기가 공유하는 본·행렬 값은 `Object3DFbxSkinData.h`에 있으며, 반환된 본 이름 참조는 원본 본 자료의 수명을 따른다. 기록 중 오류가 나면 상위 출력기는 임시 노드와 ID를 폐기한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
         "block_id": "b000033",
-        "line": 35,
+        "line": 33,
+        "text": "FBX 점별 본 영향과 스키닝 혼합값의 해석은 `Object3DFbxSkin`이 담당한다. 이 내부 모듈은 메시·관절 대응 자료를 빌려 쓰며 결과를 본체 에셋에 게시하지 않는다. 희소 혼합값은 원본 점 순서로 펼치고 같은 본으로 연결된 영향은 합산한다. 잘못된 배열 범위·본 연결·중복 혼합점과 순환된 강체 부모 경로를 거부한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000045",
+        "line": 47,
         "text": "큰 정수 목록과 그룹은 하나의 raw blob으로 보관한다. 정수는 little-endian uint32이며 그룹은 uint32 길이와 UTF-8 바이트의 연속이다. ufbx는 수정하지 않고 retained DOM의 원시 값을 읽는다. 임의 파일 경로나 실행 코드를 포함하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000035",
-        "line": 37,
+        "block_id": "b000047",
+        "line": 49,
         "text": "복원 시 속성 수·보이는 폴리곤의 코너 대응·머티리얼 슬롯·빈 스킨 행을 실제 표준 FBX와 대조한다. 맞지 않는 확장 자료를 조용히 적용하지 않는다. 외부 앱에서 연결·UV 인덱스·스킨을 바꾸어 확장이 낡았다면 기본 복원은 실패한다. 호출자가 `FbxImportOptions::restoreAuthoringMetadata=false`를 지정하면 현재 표준 FBX 구조로 읽고 경고를 받는다. 외부 앱이 이 확장을 삭제하거나 재정렬한 뒤에도 원래 작성용 ID가 보존된다고 주장하지 않는다.",
-        "basis": "lexical_match",
-        "context": "paragraph"
-      },
-      {
-        "block_id": "b000039",
-        "line": 41,
-        "text": "스킨은 원본 제어점에 저장하며 영향 수를 4개나 8개로 절단하지 않는다. 스킨이 없는 부착 메시는 가장 가까운 본 조상 또는 루트로 강체 바인딩한다. 스킨에 남은 빈 행은 원본에서 빈 상태로 보존하고 렌더 시 본체의 루트 규약을 따른다. 음의 geometry scale에서는 winding과 역전치 법선을 함께 처리한다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
         "block_id": "b000051",
         "line": 53,
+        "text": "스킨은 원본 제어점에 저장하며 영향 수를 4개나 8개로 절단하지 않는다. 스킨이 없는 부착 메시는 가장 가까운 본 조상 또는 루트로 강체 바인딩한다. 스킨에 남은 빈 행은 원본에서 빈 상태로 보존하고 렌더 시 본체의 루트 규약을 따른다. 음의 geometry scale에서는 winding과 역전치 법선을 함께 처리한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000053",
+        "line": 55,
+        "text": "FBX 입력의 메시 점·스킨·UV·폴리곤과 작성용 토폴로지 구성은 `Object3DFbxGeometryRead`가 담당하며 입력 실패 시 누적 예산을 변경하지 않는다. FBX 형상의 점·법선 델타 판독과 변환은 `Object3DFbxMorphShape`가 일반 및 점진 모프 양쪽에 제공한다. 작성용 법선과 표준 형상의 불일치, 잘못된 배열과 비유한 값을 거부한다. 일반·점진 채널과 여러 메시의 프로그램 연결은 `Object3DFbxMorphChannelRead`가 담당한다. `Object3DFbxMeshSceneRead`는 장면의 메시를 순회하며 이 처리기와 형상·탄젠트·식별정보 판독을 조합한다. 실패 시 임시 결과는 폐기하며 엔진 게시는 가져오기 조정자가 담당한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000065",
+        "line": 67,
         "text": "각 면은 3~256개 코너의 단순 폴리곤이어야 한다. 빈 보조 mesh는 경고 후 제외한다. [여러 UV 세트](MultipleUvSets.md)는 세트별 seam과 이름을 보관한다. 외부 텍스처와 내장 PNG 외 이미지는 [호스트 이미지 해석기](FbxImageResolution.md)를 통해 제공할 수 있다. 입력의 정점 색·애니메이션 take·앱 제약·geometry cache는 현재 편집 프로필의 범위 밖이며 경고로 구분한다. 별도의 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 연결한 모프 곡선을 작성하고, [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크의 본·모프 표본을 반환한다. 여러 스킨 디포머·지원하지 않는 스키닝 방식·progressive morph·표현 불가능한 본 shear는 거부한다. 원본 앱의 모든 FBX 기능을 복원한 것으로 해석하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -666,81 +802,81 @@
     "commands": [],
     "links": [
       {
-        "block_id": "b000019",
+        "block_id": "b000029",
         "label": "재질 표면 계약",
         "target": "MaterialSurface.md",
         "kind": "relative",
-        "line": 19
+        "line": 29
       },
       {
-        "block_id": "b000041",
+        "block_id": "b000055",
         "label": "논리 모프 계약",
         "target": "LogicalMorphChannels.md",
         "kind": "relative",
-        "line": 43
+        "line": 57
       },
       {
-        "block_id": "b000043",
+        "block_id": "b000057",
         "label": "모프 법선 계약",
         "target": "MorphNormals.md",
         "kind": "relative",
-        "line": 45
+        "line": 59
       },
       {
-        "block_id": "b000043",
+        "block_id": "b000057",
         "label": "FBX 탄젠트 계약",
         "target": "FbxTangents.md",
         "kind": "relative",
-        "line": 45
+        "line": 59
       },
       {
-        "block_id": "b000051",
+        "block_id": "b000065",
         "label": "여러 UV 세트",
         "target": "MultipleUvSets.md",
-        "kind": "relative",
-        "line": 53
-      },
-      {
-        "block_id": "b000051",
-        "label": "호스트 이미지 해석기",
-        "target": "FbxImageResolution.md",
-        "kind": "relative",
-        "line": 53
-      },
-      {
-        "block_id": "b000051",
-        "label": "FBX 애니메이션 출력",
-        "target": "FbxAnimation.md",
-        "kind": "relative",
-        "line": 53
-      },
-      {
-        "block_id": "b000051",
-        "label": "애니메이션 포함 가져오기",
-        "target": "FbxAnimationImport.md",
-        "kind": "relative",
-        "line": 53
-      },
-      {
-        "block_id": "b000064",
-        "label": "얼굴 부속·이미지 연결",
-        "target": "FaceAssets.md",
         "kind": "relative",
         "line": 67
       },
       {
-        "block_id": "b000066",
+        "block_id": "b000065",
+        "label": "호스트 이미지 해석기",
+        "target": "FbxImageResolution.md",
+        "kind": "relative",
+        "line": 67
+      },
+      {
+        "block_id": "b000065",
+        "label": "FBX 애니메이션 출력",
+        "target": "FbxAnimation.md",
+        "kind": "relative",
+        "line": 67
+      },
+      {
+        "block_id": "b000065",
+        "label": "애니메이션 포함 가져오기",
+        "target": "FbxAnimationImport.md",
+        "kind": "relative",
+        "line": 67
+      },
+      {
+        "block_id": "b000078",
+        "label": "얼굴 부속·이미지 연결",
+        "target": "FaceAssets.md",
+        "kind": "relative",
+        "line": 81
+      },
+      {
+        "block_id": "b000080",
         "label": "기준 자세 프로그램",
         "target": "PoseReference.md",
         "kind": "relative",
-        "line": 69
+        "line": 83
       },
       {
-        "block_id": "b000068",
+        "block_id": "b000082",
         "label": "메시의 기본 모프 값",
         "target": "DefaultMorphWeights.md",
         "kind": "relative",
-        "line": 72
+        "line": 86
       }
     ],
     "tables": []

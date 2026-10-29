@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/GlbAnimation.md",
-    "sha256": "cf109f694feaf1356f45850528d56dcc571f22de69b5879e925ee93e9d776db4",
-    "bytes": 7377,
-    "line_count": 51,
+    "sha256": "92665e356a5be1cf46a143ae1a4807b609c0aaea9b941eab73943df28c1244e7",
+    "bytes": 7765,
+    "line_count": 53,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -110,12 +110,10 @@
     },
     {
       "id": "b000013",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 13,
       "end_line": 13,
-      "raw": "## 여러 메시의 모프 곡선\n",
-      "level": 2,
-      "title": "여러 메시의 모프 곡선"
+      "raw": "GLB 애니메이션 옵션과 모프 바인딩 자료는 `<iiActorObject/Object3DGlbAnimationOptions.h>`에서 직접 사용할 수 있고 기존 교환 헤더도 이를 포함한다. 내부 애니메이션 작성기는 메시 자료와 클립·골격 참조를 받아 키와 모프 바인딩을 검사하고 채널을 기록한다. 엔진과 에셋 소유는 호출자에게 남는다.\n"
     },
     {
       "id": "b000014",
@@ -126,27 +124,29 @@
     },
     {
       "id": "b000015",
-      "kind": "fenced_code",
+      "kind": "heading",
       "start_line": 15,
-      "end_line": 27,
-      "raw": "```cpp\n#include <array>\n#include <iiActorObject/Object3DInterchange.h>\n\nconst std::array bindings{\n    iiActorObject::GlbMorphCurveBinding{\"eyeControl\", \"eyeBlinkLeft\", \"Face\"},\n    iiActorObject::GlbMorphCurveBinding{\"mouthControl\", \"tongueOut\"}\n};\niiActorObject::GlbMorphAnimationOptions morph;\nmorph.bindings = bindings;\nmorph.matchUnmappedCurvesByName = true;\nconst auto bytes = iiActorObject::exportObject3DGlb(asset, clip, {}, morph);\n```\n",
-      "language": "cpp",
-      "code": "#include <array>\n#include <iiActorObject/Object3DInterchange.h>\n\nconst std::array bindings{\n    iiActorObject::GlbMorphCurveBinding{\"eyeControl\", \"eyeBlinkLeft\", \"Face\"},\n    iiActorObject::GlbMorphCurveBinding{\"mouthControl\", \"tongueOut\"}\n};\niiActorObject::GlbMorphAnimationOptions morph;\nmorph.bindings = bindings;\nmorph.matchUnmappedCurvesByName = true;\nconst auto bytes = iiActorObject::exportObject3DGlb(asset, clip, {}, morph);\n",
-      "closed": true
+      "end_line": 15,
+      "raw": "## 여러 메시의 모프 곡선\n",
+      "level": 2,
+      "title": "여러 메시의 모프 곡선"
     },
     {
       "id": "b000016",
       "kind": "blank",
-      "start_line": 28,
-      "end_line": 28,
+      "start_line": 16,
+      "end_line": 16,
       "raw": "\n"
     },
     {
       "id": "b000017",
-      "kind": "paragraph",
-      "start_line": 29,
+      "kind": "fenced_code",
+      "start_line": 17,
       "end_line": 29,
-      "raw": "명시적 대응은 곡선 이름과 모프 이름을 대소문자까지 정확히 지정한다. 선택적인 세 번째 필드는 대상 메시 이름이며, 생략하면 해당 모프가 있는 모든 메시를 대상으로 한다. 하나의 곡선은 여러 메시나 모프를 구동할 수 있고, 같은 모프 이름이어도 메시를 지정하면 서로 다른 곡선으로 제어할 수 있다. 같은 메시의 같은 모프에 둘 이상의 곡선을 지정하거나 중복·누락된 이름을 지정하면 거부한다. `matchUnmappedCurvesByName`은 명시적 대응이 없는 곡선에 한해 같은 이름의 모프를 모든 메시에서 찾는다. 자동 대응이 이미 지정된 메시의 모프와 충돌하면 거부한다.\n"
+      "raw": "```cpp\n#include <array>\n#include <iiActorObject/Object3DInterchange.h>\n\nconst std::array bindings{\n    iiActorObject::GlbMorphCurveBinding{\"eyeControl\", \"eyeBlinkLeft\", \"Face\"},\n    iiActorObject::GlbMorphCurveBinding{\"mouthControl\", \"tongueOut\"}\n};\niiActorObject::GlbMorphAnimationOptions morph;\nmorph.bindings = bindings;\nmorph.matchUnmappedCurvesByName = true;\nconst auto bytes = iiActorObject::exportObject3DGlb(asset, clip, {}, morph);\n```\n",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iiActorObject/Object3DInterchange.h>\n\nconst std::array bindings{\n    iiActorObject::GlbMorphCurveBinding{\"eyeControl\", \"eyeBlinkLeft\", \"Face\"},\n    iiActorObject::GlbMorphCurveBinding{\"mouthControl\", \"tongueOut\"}\n};\niiActorObject::GlbMorphAnimationOptions morph;\nmorph.bindings = bindings;\nmorph.matchUnmappedCurvesByName = true;\nconst auto bytes = iiActorObject::exportObject3DGlb(asset, clip, {}, morph);\n",
+      "closed": true
     },
     {
       "id": "b000018",
@@ -160,7 +160,7 @@
       "kind": "paragraph",
       "start_line": 31,
       "end_line": 31,
-      "raw": "`NSCharacter::exportGlb(character, clip, options, morph)`는 같은 코어 출력을 캐릭터 참조에서 호출하는 편의 오버로드다. 캐릭터 계층에 메시나 엔진 소유권을 복제하지 않는다.\n"
+      "raw": "명시적 대응은 곡선 이름과 모프 이름을 대소문자까지 정확히 지정한다. 선택적인 세 번째 필드는 대상 메시 이름이며, 생략하면 해당 모프가 있는 모든 메시를 대상으로 한다. 하나의 곡선은 여러 메시나 모프를 구동할 수 있고, 같은 모프 이름이어도 메시를 지정하면 서로 다른 곡선으로 제어할 수 있다. 같은 메시의 같은 모프에 둘 이상의 곡선을 지정하거나 중복·누락된 이름을 지정하면 거부한다. `matchUnmappedCurvesByName`은 명시적 대응이 없는 곡선에 한해 같은 이름의 모프를 모든 메시에서 찾는다. 자동 대응이 이미 지정된 메시의 모프와 충돌하면 거부한다.\n"
     },
     {
       "id": "b000020",
@@ -174,7 +174,7 @@
       "kind": "paragraph",
       "start_line": 33,
       "end_line": 33,
-      "raw": "각 메시에는 glTF `weights` 채널을 하나만 기록한다. 해당 메시의 곡선 시간 키를 합집합으로 모으고 0과 클립 끝을 포함한 뒤 각 키에서 모든 연결 곡선을 선형 보간해 타깃 순서대로 기록한다. 연결되지 않은 타깃은 해당 메시가 보관한 [기본 모프 값](DefaultMorphWeights.md)을 사용하며, 지정되지 않았다면 0이다. 같은 곡선이 여러 메시를 구동하면 각 메시의 가중치 배열에 반영한다. 음수나 1을 넘는 유한 모프 값도 자르지 않는다. float32 범위 밖의 값이나 0이 아닌 값의 float32 소실, 서로 다른 시간이 float32에서 충돌하는 경우에는 거부한다.\n"
+      "raw": "`NSCharacter::exportGlb(character, clip, options, morph)`는 같은 코어 출력을 캐릭터 참조에서 호출하는 편의 오버로드다. 캐릭터 계층에 메시나 엔진 소유권을 복제하지 않는다.\n"
     },
     {
       "id": "b000022",
@@ -188,7 +188,7 @@
       "kind": "paragraph",
       "start_line": 35,
       "end_line": 35,
-      "raw": "`maximumWeightValues`는 모든 메시의 출력 모프 값 개수, `maximumCurveKeyVisits`는 메시별로 시간 합집합을 만드는 데 읽은 원본 키 개수를 제한한다. 같은 메시에서 한 곡선을 여러 타깃에 연결해도 키는 한 번 센다. 두 기본값은 각각 16,000,000이며 허용 범위는 1~100,000,000이다. `maximumMappingEntries`는 곡선·명시적 대응·에셋의 메시별 모프 타깃 개수의 합을 인덱싱 전에 제한한다. 기본값은 1,000,000, 허용 범위는 1~10,000,000이다. 각 출력 배열에는 메시의 비활성 타깃 값도 들어가므로 메시 수·타깃 수·시간 키가 많으면 이 예산에 도달할 수 있다. 원본 곡선의 선형 보간과 GLB의 부동소수점 반올림 범위를 제외한 별도의 재질·리그 컨트롤 의미는 추론하지 않는다.\n"
+      "raw": "각 메시에는 glTF `weights` 채널을 하나만 기록한다. 해당 메시의 곡선 시간 키를 합집합으로 모으고 0과 클립 끝을 포함한 뒤 각 키에서 모든 연결 곡선을 선형 보간해 타깃 순서대로 기록한다. 연결되지 않은 타깃은 해당 메시가 보관한 [기본 모프 값](DefaultMorphWeights.md)을 사용하며, 지정되지 않았다면 0이다. 같은 곡선이 여러 메시를 구동하면 각 메시의 가중치 배열에 반영한다. 음수나 1을 넘는 유한 모프 값도 자르지 않는다. float32 범위 밖의 값이나 0이 아닌 값의 float32 소실, 서로 다른 시간이 float32에서 충돌하는 경우에는 거부한다.\n"
     },
     {
       "id": "b000024",
@@ -199,27 +199,27 @@
     },
     {
       "id": "b000025",
-      "kind": "fenced_code",
+      "kind": "paragraph",
       "start_line": 37,
-      "end_line": 45,
-      "raw": "```cpp\n#include <iiActorObject/AnimationRetarget.h>\n#include <iiActorObject/Object3DInterchange.h>\n\nauto clip = iiActorObject::retargetAnimation(source, sourceReference, targetReference,\n                                              jointPairs, sampleTimes);\nauto bytes = iiActorObject::exportObject3DGlb(targetAsset, clip);\n// 호스트가 bytes를 저장한다.\n```\n",
-      "language": "cpp",
-      "code": "#include <iiActorObject/AnimationRetarget.h>\n#include <iiActorObject/Object3DInterchange.h>\n\nauto clip = iiActorObject::retargetAnimation(source, sourceReference, targetReference,\n                                              jointPairs, sampleTimes);\nauto bytes = iiActorObject::exportObject3DGlb(targetAsset, clip);\n// 호스트가 bytes를 저장한다.\n",
-      "closed": true
+      "end_line": 37,
+      "raw": "`maximumWeightValues`는 모든 메시의 출력 모프 값 개수, `maximumCurveKeyVisits`는 메시별로 시간 합집합을 만드는 데 읽은 원본 키 개수를 제한한다. 같은 메시에서 한 곡선을 여러 타깃에 연결해도 키는 한 번 센다. 두 기본값은 각각 16,000,000이며 허용 범위는 1~100,000,000이다. `maximumMappingEntries`는 곡선·명시적 대응·에셋의 메시별 모프 타깃 개수의 합을 인덱싱 전에 제한한다. 기본값은 1,000,000, 허용 범위는 1~10,000,000이다. 각 출력 배열에는 메시의 비활성 타깃 값도 들어가므로 메시 수·타깃 수·시간 키가 많으면 이 예산에 도달할 수 있다. 원본 곡선의 선형 보간과 GLB의 부동소수점 반올림 범위를 제외한 별도의 재질·리그 컨트롤 의미는 추론하지 않는다.\n"
     },
     {
       "id": "b000026",
       "kind": "blank",
-      "start_line": 46,
-      "end_line": 46,
+      "start_line": 38,
+      "end_line": 38,
       "raw": "\n"
     },
     {
       "id": "b000027",
-      "kind": "paragraph",
-      "start_line": 47,
+      "kind": "fenced_code",
+      "start_line": 39,
       "end_line": 47,
-      "raw": "`indexedBindings`는 곡선·메시·논리 모프의 인덱스를 직접 지정하며, 같은 이름의 모프가 서로 다른 메시에서 다른 곡선을 가질 때 사용할 수 있다. 기존 이름 대응과 동일 타깃에 중복 지정하면 거부한다. [GLB 클립 변환](GlbAnimationBake.md)은 이 대응을 함께 반환한다.\n"
+      "raw": "```cpp\n#include <iiActorObject/AnimationRetarget.h>\n#include <iiActorObject/Object3DInterchange.h>\n\nauto clip = iiActorObject::retargetAnimation(source, sourceReference, targetReference,\n                                              jointPairs, sampleTimes);\nauto bytes = iiActorObject::exportObject3DGlb(targetAsset, clip);\n// 호스트가 bytes를 저장한다.\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/AnimationRetarget.h>\n#include <iiActorObject/Object3DInterchange.h>\n\nauto clip = iiActorObject::retargetAnimation(source, sourceReference, targetReference,\n                                              jointPairs, sampleTimes);\nauto bytes = iiActorObject::exportObject3DGlb(targetAsset, clip);\n// 호스트가 bytes를 저장한다.\n",
+      "closed": true
     },
     {
       "id": "b000028",
@@ -233,7 +233,7 @@
       "kind": "paragraph",
       "start_line": 49,
       "end_line": 49,
-      "raw": "이 계약은 GLB 구조·샘플의 독립 검사이며 CC5·Blender·Unreal 실행이나 실제 가져오기를 검사하지 않는다. 별도의 [GLB 애니메이션 입력](GlbImport.md)은 원본 채널과 보간을 유지하며 본체 자세·메시별 모프를 샘플링한다. 지원되는 채널은 클립으로 표본화해 다시 출력할 수 있으나 원본 접선과 DCC 리그는 직접 보존하지 않는다. [FBX 애니메이션 출력](FbxAnimation.md)과 [입력](FbxAnimationImport.md)은 별도의 경로다. 앱별 리그 호환은 별도 작업이다.\n"
+      "raw": "`indexedBindings`는 곡선·메시·논리 모프의 인덱스를 직접 지정하며, 같은 이름의 모프가 서로 다른 메시에서 다른 곡선을 가질 때 사용할 수 있다. 기존 이름 대응과 동일 타깃에 중복 지정하면 거부한다. [GLB 클립 변환](GlbAnimationBake.md)은 이 대응을 함께 반환한다.\n"
     },
     {
       "id": "b000030",
@@ -247,6 +247,20 @@
       "kind": "paragraph",
       "start_line": 51,
       "end_line": 51,
+      "raw": "이 계약은 GLB 구조·샘플의 독립 검사이며 CC5·Blender·Unreal 실행이나 실제 가져오기를 검사하지 않는다. 별도의 [GLB 애니메이션 입력](GlbImport.md)은 원본 채널과 보간을 유지하며 본체 자세·메시별 모프를 샘플링한다. 지원되는 채널은 클립으로 표본화해 다시 출력할 수 있으나 원본 접선과 DCC 리그는 직접 보존하지 않는다. [FBX 애니메이션 출력](FbxAnimation.md)과 [입력](FbxAnimationImport.md)은 별도의 경로다. 앱별 리그 호환은 별도 작업이다.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 52,
+      "end_line": 52,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 53,
+      "end_line": 53,
       "raw": "모프 애니메이션의 테스트와 잔여 한계는 [2026-10-28 검증 기록](GlbMorphAnimationVerification-20261028.md)에 있다.\n"
     }
   ],
@@ -260,12 +274,12 @@
       "start_line": 1
     },
     {
-      "block_id": "b000013",
+      "block_id": "b000015",
       "parent_id": "b000001",
       "level": 2,
       "title": "여러 메시의 모프 곡선",
       "anchor": "여러-메시의-모프-곡선",
-      "start_line": 13
+      "start_line": 15
     }
   ],
   "indexes": {
@@ -285,22 +299,22 @@
         "context": "paragraph"
       },
       {
-        "block_id": "b000019",
-        "line": 31,
+        "block_id": "b000021",
+        "line": 33,
         "text": "`NSCharacter::exportGlb(character, clip, options, morph)`는 같은 코어 출력을 캐릭터 참조에서 호출하는 편의 오버로드다. 캐릭터 계층에 메시나 엔진 소유권을 복제하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000023",
-        "line": 35,
+        "block_id": "b000025",
+        "line": 37,
         "text": "`maximumWeightValues`는 모든 메시의 출력 모프 값 개수, `maximumCurveKeyVisits`는 메시별로 시간 합집합을 만드는 데 읽은 원본 키 개수를 제한한다. 같은 메시에서 한 곡선을 여러 타깃에 연결해도 키는 한 번 센다. 두 기본값은 각각 16,000,000이며 허용 범위는 1~100,000,000이다. `maximumMappingEntries`는 곡선·명시적 대응·에셋의 메시별 모프 타깃 개수의 합을 인덱싱 전에 제한한다. 기본값은 1,000,000, 허용 범위는 1~10,000,000이다. 각 출력 배열에는 메시의 비활성 타깃 값도 들어가므로 메시 수·타깃 수·시간 키가 많으면 이 예산에 도달할 수 있다. 원본 곡선의 선형 보간과 GLB의 부동소수점 반올림 범위를 제외한 별도의 재질·리그 컨트롤 의미는 추론하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000029",
-        "line": 49,
+        "block_id": "b000031",
+        "line": 51,
         "text": "이 계약은 GLB 구조·샘플의 독립 검사이며 CC5·Blender·Unreal 실행이나 실제 가져오기를 검사하지 않는다. 별도의 [GLB 애니메이션 입력](GlbImport.md)은 원본 채널과 보간을 유지하며 본체 자세·메시별 모프를 샘플링한다. 지원되는 채널은 클립으로 표본화해 다시 출력할 수 있으나 원본 접선과 DCC 리그는 직접 보존하지 않는다. [FBX 애니메이션 출력](FbxAnimation.md)과 [입력](FbxAnimationImport.md)은 별도의 경로다. 앱별 리그 호환은 별도 작업이다.",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -323,46 +337,46 @@
         "line": 7
       },
       {
-        "block_id": "b000021",
+        "block_id": "b000023",
         "label": "기본 모프 값",
         "target": "DefaultMorphWeights.md",
         "kind": "relative",
-        "line": 33
+        "line": 35
       },
       {
-        "block_id": "b000027",
+        "block_id": "b000029",
         "label": "GLB 클립 변환",
         "target": "GlbAnimationBake.md",
-        "kind": "relative",
-        "line": 47
-      },
-      {
-        "block_id": "b000029",
-        "label": "GLB 애니메이션 입력",
-        "target": "GlbImport.md",
-        "kind": "relative",
-        "line": 49
-      },
-      {
-        "block_id": "b000029",
-        "label": "FBX 애니메이션 출력",
-        "target": "FbxAnimation.md",
-        "kind": "relative",
-        "line": 49
-      },
-      {
-        "block_id": "b000029",
-        "label": "입력",
-        "target": "FbxAnimationImport.md",
         "kind": "relative",
         "line": 49
       },
       {
         "block_id": "b000031",
+        "label": "GLB 애니메이션 입력",
+        "target": "GlbImport.md",
+        "kind": "relative",
+        "line": 51
+      },
+      {
+        "block_id": "b000031",
+        "label": "FBX 애니메이션 출력",
+        "target": "FbxAnimation.md",
+        "kind": "relative",
+        "line": 51
+      },
+      {
+        "block_id": "b000031",
+        "label": "입력",
+        "target": "FbxAnimationImport.md",
+        "kind": "relative",
+        "line": 51
+      },
+      {
+        "block_id": "b000033",
         "label": "2026-10-28 검증 기록",
         "target": "GlbMorphAnimationVerification-20261028.md",
         "kind": "relative",
-        "line": 51
+        "line": 53
       }
     ],
     "tables": []

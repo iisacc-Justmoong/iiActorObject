@@ -139,11 +139,15 @@ Markdown is the maintained human source. Agent JSON is a structured, source-trac
 | [`docs/ProgressiveMorphAnimationVerification-20261029.md`](ProgressiveMorphAnimationVerification-20261029.md) | [JSON](ProgressiveMorphAnimationVerification-20261029.agent.json) |
 | [`docs/ProgressiveMorphRig.md`](ProgressiveMorphRig.md) | [JSON](ProgressiveMorphRig.agent.json) |
 | [`docs/ProgressiveMorphVerification-20261029.md`](ProgressiveMorphVerification-20261029.md) | [JSON](ProgressiveMorphVerification-20261029.agent.json) |
+| [`docs/ProgressiveSplitVerification-20261029.md`](ProgressiveSplitVerification-20261029.md) | [JSON](ProgressiveSplitVerification-20261029.agent.json) |
 | [`docs/ProgressiveTakesVerification-20261029.md`](ProgressiveTakesVerification-20261029.md) | [JSON](ProgressiveTakesVerification-20261029.agent.json) |
 | [`docs/ProjectAnimation.md`](ProjectAnimation.md) | [JSON](ProjectAnimation.agent.json) |
 | [`docs/ProjectAnimationVerification-20261029.md`](ProjectAnimationVerification-20261029.md) | [JSON](ProjectAnimationVerification-20261029.agent.json) |
 | [`docs/ProjectIntegrityVerification-20261028.md`](ProjectIntegrityVerification-20261028.md) | [JSON](ProjectIntegrityVerification-20261028.agent.json) |
 | [`docs/Resources.md`](Resources.md) | [JSON](Resources.agent.json) |
+| [`docs/ResponsibilitySeparation-20261029.md`](ResponsibilitySeparation-20261029.md) | [JSON](ResponsibilitySeparation-20261029.agent.json) |
+| [`docs/ResponsibilitySeparationCloseout-20261029.md`](ResponsibilitySeparationCloseout-20261029.md) | [JSON](ResponsibilitySeparationCloseout-20261029.agent.json) |
+| [`docs/ResponsibilitySeparationHandoff-20261029.md`](ResponsibilitySeparationHandoff-20261029.md) | [JSON](ResponsibilitySeparationHandoff-20261029.agent.json) |
 | [`docs/RigControlSamples.md`](RigControlSamples.md) | [JSON](RigControlSamples.agent.json) |
 | [`docs/RigControlSamplesVerification-20261027.md`](RigControlSamplesVerification-20261027.md) | [JSON](RigControlSamplesVerification-20261027.agent.json) |
 | [`docs/RigSampleSkinningVerification-20261029.md`](RigSampleSkinningVerification-20261029.md) | [JSON](RigSampleSkinningVerification-20261029.agent.json) |
@@ -155,6 +159,7 @@ Markdown is the maintained human source. Agent JSON is a structured, source-trac
 | [`docs/SkeletonScale.md`](SkeletonScale.md) | [JSON](SkeletonScale.agent.json) |
 | [`docs/SkinSurface.md`](SkinSurface.md) | [JSON](SkinSurface.agent.json) |
 | [`docs/SkinningProfileTransferVerification-20261028.md`](SkinningProfileTransferVerification-20261028.md) | [JSON](SkinningProfileTransferVerification-20261028.agent.json) |
+| [`docs/SourceLayout.md`](SourceLayout.md) | [JSON](SourceLayout.agent.json) |
 | [`docs/SurfaceCollision.md`](SurfaceCollision.md) | [JSON](SurfaceCollision.agent.json) |
 | [`docs/SurfaceFairing.md`](SurfaceFairing.md) | [JSON](SurfaceFairing.agent.json) |
 | [`docs/SurfaceFitting.md`](SurfaceFitting.md) | [JSON](SurfaceFitting.agent.json) |

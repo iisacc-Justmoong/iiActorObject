@@ -21,6 +21,8 @@ auto corners = iiActorObject::calculateMeshCornerTangents(mesh.geometry, mesh.te
 
 GLB에서 가져온 원본 탄젠트와 모프 차이가 유효하면 [원본 탄젠트 계약](GlbAuthoredTangents.md)에 따라 우선 보존한다. 그 외에 노멀 텍스처가 있는 재질은 해당 재질이 선택한 UV 세트로 MikkTSpace를 계산한다. GLB에 기록하는 `1 - V` 좌표에서 계산하며, 면별 탄젠트를 보존하기 위해 해당 primitive의 정점을 코너별로 분리한다. 스킨의 모든 영향, UV 세트와 모프 위치·노멀 델타도 분리된 정점에 복제한다. 원본 탄젠트와 노멀 맵이 모두 없는 primitive는 기존 인덱스를 사용한다. 코너 분리로 GLB 크기가 커질 수 있고, GLB의 정점 번호는 편집 원본 ID의 보존 수단이 아니다.
 
+내부적으로 메시 탄젠트 계산, GLB 투영 계획, 프리미티브 기록과 원본 점 식별 속성 기록을 별도 객체 타깃으로 컴파일한다. 기록기는 계획 자료만 받고 에셋·엔진이나 계산기의 구현을 소유하지 않는다. 호출자가 임시 출력 버퍼의 수명을 관리하며 오류가 생기면 폐기한다. 이 타깃들은 기존 SDK 라이브러리에 포함되고 별도 설치 API는 아니다.
+
 각 모프 target에 대해서는 해당 target의 위치와 노멀을 적용하여 새 탄젠트를 계산하고, 기준 방향과의 XYZ 차이를 GLB morph `TANGENT`로 기록한다. 개별 target에 대한 표현이며 여러 target을 임의 비율로 섞은 경우의 비선형 재계산 결과와 정확히 같다고 보장하지 않는다. 노멀 맵이 선택한 UV가 재질마다 다르면 각각의 UV에서 계산한다. 모든 입력 면의 기존 삼각분할을 사용하므로, 원본 베이킹에 사용한 사각형 분할이 다르면 탄젠트 공간도 달라질 수 있다.
 
 계산은 면별 800만 코너, 메시 전체 코너 수와 모프 수의 곱 2억 5,600만, 재질별 모프 탄젠트 델타 200만 개로 제한한다. 범위 초과, 유효하지 않은 기저, GLB morph에서 표현할 수 없는 부호 변경 등의 경우 해당 primitive에서 탄젠트와 탄젠트 모프를 생략하고 위치·노멀·UV·스킨·기존 모프는 그대로 출력한다. 이때 primitive의 `extras.iiActorObjectTangentFallback`에 `corner_budget`, `morph_work_budget`, `morph_delta_budget`, `invalid_basis`, `morph_handedness` 중 하나를 기록한다. 노멀 맵이 없어 탄젠트를 계산하지 않은 경우에는 이 진단을 쓰지 않는다. 소비자는 노멀 텍스처 UV로 탄젠트를 재계산해야 한다. [glTF 2.0 명세](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html)는 탄젠트가 없을 때 이 방식의 MikkTSpace 계산을 권고한다. 가져가는 앱이 실제로 그렇게 처리하는지는 확인하지 않았다.

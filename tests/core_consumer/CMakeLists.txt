@@ -4,11 +4,69 @@ find_package(iiActorObject 0.2.1 CONFIG REQUIRED)
 add_executable(iiActorObjectCoreOnlyConsumer main.cpp)
 target_link_libraries(iiActorObjectCoreOnlyConsumer PRIVATE iiActorObject::iiActorObject)
 set_target_properties(iiActorObjectCoreOnlyConsumer PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyProgressiveHeaders
+    ../ProgressiveMorphDataHeaderTest.cpp ../ProgressiveMorphCoreHeaderTest.cpp ../ProgressiveMorphInterchangeHeaderTest.cpp
+    ../ProgressiveMorphCompatibilityHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyProgressiveHeaders PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyProgressiveHeaders PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyGlbAnimationOptions ../GlbAnimationOptionsHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyGlbAnimationOptions PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyGlbAnimationOptions PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyGlbImportOptions ../GlbImportOptionsHeaderTest.cpp ../GlbImageResolverHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyGlbImportOptions PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyGlbImportOptions PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyMeshHeaders
+    ../BoneIndexHeaderTest.cpp ../MeshDataHeaderTest.cpp ../MeshTopologyCoreHeaderTest.cpp
+    ../MeshGeometryCoreHeaderTest.cpp ../MeshCompatibilityHeaderTest.cpp
+    ../SurfaceBindingCoreHeaderTest.cpp ../SurfaceAttachmentHeaderTest.cpp
+    ../SurfaceCompatibilityHeaderTest.cpp ../Object3DDataHeaderTest.cpp ../Object3DMaterialHeaderTest.cpp ../Object3DMeshHeaderTest.cpp
+    ../Object3DAssetCompatibilityHeaderTest.cpp ../MeshSelectionCoreHeaderTest.cpp
+    ../MeshSelectionAssetHeaderTest.cpp ../MeshSelectionCompatibilityHeaderTest.cpp
+    ../SkeletalMeshCoreHeaderTest.cpp ../SkeletalMeshComponentHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyMeshHeaders PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyMeshHeaders PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyInstanceTransferHeaders
+    ../InstanceTransferCoreHeaderTest.cpp ../InstanceTransferEditorHeaderTest.cpp
+    ../InstanceTransferCompatibilityHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyInstanceTransferHeaders PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyInstanceTransferHeaders PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyRigSampleCatalogHeaders
+    ../RigSampleCatalogCoreHeaderTest.cpp ../RigSampleCatalogExportHeaderTest.cpp
+    ../RigSampleCatalogCompatibilityHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyRigSampleCatalogHeaders PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyRigSampleCatalogHeaders PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyFbxResolverHeader ../FbxResolverHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyFbxResolverHeader PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyFbxResolverHeader PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(iiActorObjectCoreOnlyProjectDataHeaders ../ProjectDataHeadersTest.cpp
+        ../ProjectDataMeshPointMaskHeaderTest.cpp ../ProjectDataMeshPointMaskValidationHeaderTest.cpp ../ProjectDataObject3DEditLayerDataHeaderTest.cpp ../ProjectDataObject3DPoseProgramDataHeaderTest.cpp ../ProjectDataObject3DProjectOptionsHeaderTest.cpp ../ProjectDataObject3DTemplateMorphDataHeaderTest.cpp ../ProjectDataObject3DTemplateTypesHeaderTest.cpp ../ProjectDataSurfaceFitSettingsHeaderTest.cpp ../ExternalIdentityHeaderTest.cpp)
+target_link_libraries(iiActorObjectCoreOnlyProjectDataHeaders PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyProjectDataHeaders PROPERTIES CXX_EXTENSIONS OFF)
 enable_testing()
+add_test(NAME iiActorObject.core_only_installed_project_data_headers COMMAND iiActorObjectCoreOnlyProjectDataHeaders)
+add_executable(iiActorObjectCoreOnlyMaskValidationConsumer ../PointMaskValidationInstalledConsumer.cpp)
+target_link_libraries(iiActorObjectCoreOnlyMaskValidationConsumer PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyMaskValidationConsumer PROPERTIES CXX_EXTENSIONS OFF)
+add_test(NAME iiActorObject.core_only_installed_mask_validation_consumer COMMAND iiActorObjectCoreOnlyMaskValidationConsumer)
+add_executable(iiActorObjectCoreOnlyTangentConsumer ../TangentInstalledConsumer.cpp)
+target_link_libraries(iiActorObjectCoreOnlyTangentConsumer PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObjectCoreOnlyTangentConsumer PROPERTIES CXX_EXTENSIONS OFF)
+add_test(NAME iiActorObject.core_only_installed_tangent_consumer COMMAND iiActorObjectCoreOnlyTangentConsumer)
+add_test(NAME iiActorObject.core_only_installed_fbx_resolver_header COMMAND iiActorObjectCoreOnlyFbxResolverHeader)
+add_test(NAME iiActorObject.core_only_installed_progressive_headers COMMAND iiActorObjectCoreOnlyProgressiveHeaders)
+add_test(NAME iiActorObject.core_only_installed_glb_animation_options COMMAND iiActorObjectCoreOnlyGlbAnimationOptions)
+add_test(NAME iiActorObject.core_only_installed_glb_import_options COMMAND iiActorObjectCoreOnlyGlbImportOptions)
+add_test(NAME iiActorObject.core_only_installed_mesh_headers COMMAND iiActorObjectCoreOnlyMeshHeaders)
+add_test(NAME iiActorObject.core_only_installed_instance_transfer_headers COMMAND iiActorObjectCoreOnlyInstanceTransferHeaders)
+add_test(NAME iiActorObject.core_only_installed_rig_sample_catalog_headers COMMAND iiActorObjectCoreOnlyRigSampleCatalogHeaders)
 add_test(NAME iiActorObject.core_only_installed_editor_rig_consumer COMMAND iiActorObjectCoreOnlyConsumer --editor-rig)
 add_test(NAME iiActorObject.core_only_installed_instance_transfer_consumer COMMAND iiActorObjectCoreOnlyConsumer --instance-transfer)
 if(WIN32)
-    set_tests_properties(iiActorObject.core_only_installed_editor_rig_consumer iiActorObject.core_only_installed_instance_transfer_consumer PROPERTIES
+    set_tests_properties(iiActorObject.core_only_installed_tangent_consumer PROPERTIES
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:iiActorObject::iiActorObject>")
+    set_tests_properties(iiActorObject.core_only_installed_fbx_resolver_header PROPERTIES
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:iiActorObject::iiActorObject>")
+    set_tests_properties(iiActorObject.core_only_installed_mask_validation_consumer iiActorObject.core_only_installed_project_data_headers iiActorObject.core_only_installed_progressive_headers iiActorObject.core_only_installed_glb_animation_options iiActorObject.core_only_installed_glb_import_options iiActorObject.core_only_installed_mesh_headers iiActorObject.core_only_installed_instance_transfer_headers iiActorObject.core_only_installed_rig_sample_catalog_headers iiActorObject.core_only_installed_editor_rig_consumer iiActorObject.core_only_installed_instance_transfer_consumer PROPERTIES
         ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:iiActorObject::iiActorObject>")
 endif()
 add_test(NAME iiActorObject.core_only_installed_consumer COMMAND iiActorObjectCoreOnlyConsumer)

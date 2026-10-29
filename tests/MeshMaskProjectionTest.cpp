@@ -44,6 +44,9 @@ void projection()
     const std::array expected{1.,.5,0.,.5,.5,0.};
     for(std::size_t i=0;i<expected.size();++i)CHECK(near(projected.masks[0].weights[i],expected[i]));
     CHECK(projected.projectedPoints==5&&projected.skippedUnusedPoints==1&&near(projected.maximumDistance,0));
+    const auto fromData=projectMeshPointMasks(a.get().data(),b.get().data(),std::span(&sourceMask,1),pairs);
+    CHECK(fromData.masks==projected.masks&&fromData.projectedPoints==projected.projectedPoints&&
+          fromData.skippedUnusedPoints==projected.skippedUnusedPoints);
     CHECK(projected.nodeVisits>0&&projected.triangleTests>0);
     MeshMaskProjectionOptions exact;exact.maximumDistance=0;
     const auto exactResult=projectMeshPointMasks(a.get(),b.get(),std::span(&sourceMask,1),pairs,exact);

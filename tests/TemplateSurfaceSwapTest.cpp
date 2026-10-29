@@ -5,7 +5,9 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <fstream>
 #include <iostream>
+#include <iterator>
 #include <sstream>
 #include <stdexcept>
 
@@ -13,6 +15,13 @@ using namespace iiActorObject;
 #define CHECK(x) do{if(!(x))throw std::runtime_error(#x);}while(false)
 template<class F>void rejects(F f){bool caught=false;try{f();}catch(const std::exception&){caught=true;}CHECK(caught);}
 bool near(double a,double b){return std::abs(a-b)<1e-10;}
+void writeFixture(const char *path,const std::vector<std::uint8_t> &bytes)
+{
+    if(!path||!*path||std::string_view(path)=="-")return;
+    std::ofstream fixture(path,std::ios::binary|std::ios::trunc);
+    fixture.write(reinterpret_cast<const char *>(bytes.data()),static_cast<std::streamsize>(bytes.size()));
+    if(!fixture)throw std::runtime_error("Could not write surface fixture");
+}
 void repairChecksum(std::vector<std::uint8_t> &bytes)
 {
     std::uint32_t crc=0xffffffffU;
@@ -43,7 +52,7 @@ Object3DTemplateHandle makeTemplate(Object3DEngine &engine,bool alternative,bool
     if(grounding)definition.grounding=TemplateGrounding{};
     return engine.createTemplate(std::move(definition));
 }
-void swapping()
+void swapping(const char *fixturePath=nullptr)
 {
     Object3DEngine engine;const auto original=makeTemplate(engine,false),alternative=makeTemplate(engine,true,true);
     auto editor=engine.editTemplate(original,std::array{TemplateValue{"height",.5}});
@@ -69,7 +78,8 @@ void swapping()
     CHECK(near(editor.get().object().get().data().meshes[1].topology->points[2].position.y,1.2));
     CHECK(editor.get().object().get().data().meshes[1].topology->points[2].weights[0].bone==1);
     CHECK(editor.get().undo());
-    Object3DEngine restored;auto project=importObject3DProject(restored.reference(),exportObject3DProject(editor));
+    const auto bytes=exportObject3DProject(editor);writeFixture(fixturePath,bytes);
+    Object3DEngine restored;auto project=importObject3DProject(restored.reference(),bytes);
     CHECK(project.editor.get().undo()&&project.editor.get().object().get().data().meshes[1].name=="Old surface");
     CHECK(project.editor.get().redo()&&project.editor.get().object().get().data().meshes[1].name=="New surface");
     CHECK(project.editor.get().pointSelection("Body")[0].weights[4]==1&&previous.valid());
@@ -95,6 +105,46 @@ void safeguards()
     Object3DEngine foreign;auto other=makeTemplate(foreign,true);
     rejects([&]{(void)editor.get().replaceTemplateSurfaces(other,std::array<std::size_t,1>{1},std::array<std::size_t,1>{0});});
     rejects([&]{(void)editor.get().replaceTemplateSurfaces(alternative,std::array<std::size_t,2>{1,1},std::array<std::size_t,1>{0});});
+}
+void replacementResources(const char *fixturePath,const char *firstPath,const char *secondPath)
+{
+    const auto read=[](const char *path)
+    {
+        std::ifstream input(path,std::ios::binary);
+        if(!input)throw std::runtime_error("Missing replacement resource fixture");
+        return std::vector<std::uint8_t>{std::istreambuf_iterator<char>(input),{}};
+    };
+    const auto blue=read(firstPath),checker=read(secondPath);
+    Object3DEngine engine;
+    const auto create=[&](bool alternative)
+    {
+        const auto original=makeTemplate(engine,alternative);
+        auto definition=original.get().definition();auto data=definition.base.get().data();
+        data.images.emplace_back(alternative?"Unused":"Old color",blue);
+        if(alternative)data.images.emplace_back("New color",checker);
+        data.materials[1].baseColorImage=alternative?1:0;
+        definition.base=engine.createObject(std::move(data));
+        return engine.createTemplate(std::move(definition));
+    };
+    const auto original=create(false),alternative=create(true);auto editor=engine.editTemplate(original);
+    auto bodySurface=editor.get().object().get().data().materials[0].surface;bodySurface.doubleSided=true;
+    CHECK(editor.get().setMaterialSurface(0,bodySurface));
+    CHECK(editor.get().replaceTemplateSurfaces(alternative,std::array<std::size_t,1>{1}));
+    const auto &result=editor.get().object().get().data();
+    CHECK(result.materials[0].surface.doubleSided&&result.materials[1].baseColorImage==0);
+    CHECK(result.materials[1].name=="New material"&&result.images[0].name()=="New color");
+    CHECK(result.images[0]==alternative.get().definition().base.get().data().images[1]);
+    CHECK(editor.get().undo());
+    auto badDefinition=alternative.get().definition();auto bad=badDefinition.base.get().data();
+    bad.materials[0].baseColorImage=1;badDefinition.base=engine.createObject(std::move(bad));
+    const auto shared=engine.createTemplate(std::move(badDefinition));
+    const auto revision=editor.get().revision();const auto objects=engine.objectCount(),programs=engine.templateCount();
+    rejects([&]{(void)editor.get().replaceTemplateSurfaces(shared,std::array<std::size_t,1>{1});});
+    CHECK(editor.get().revision()==revision&&engine.objectCount()==objects&&engine.templateCount()==programs);
+    CHECK(editor.get().redo()&&editor.get().object().get().data().images[0].name()=="New color");
+    const auto encoded=exportObject3DProject(editor);writeFixture(fixturePath,encoded);
+    Object3DEngine restored;auto project=importObject3DProject(restored.reference(),encoded);
+    CHECK(project.editor.get().object().get().data().images[0].name()=="New color");
 }
 std::size_t archiveSize(bool large,unsigned swaps)
 {
@@ -178,7 +228,7 @@ Object3DTemplateHandle frameTemplate(Object3DEngine &engine,bool hidden,bool fir
     Object3DTemplateDefinition definition;definition.base=engine.createObject(std::move(data));definition.surfaces=std::move(bindings);
     definition.targets={{"height",0,{{5,{0,.1,0}}}}};return engine.createTemplate(std::move(definition));
 }
-void visibilityTriangles()
+void visibilityTriangles(const char *fixturePath=nullptr)
 {
     Object3DEngine engine;const auto old=frameTemplate(engine,false,false),next=frameTemplate(engine,true,false);
     auto reference=engine.editTemplate(old);reference.get().moveControlPoints(0,std::array{TopologyPointMove{5,{0,0,.02}}});
@@ -193,7 +243,8 @@ void visibilityTriangles()
         CHECK(std::hypot(p.x-before[i].position.x,p.y-before[i].position.y,p.z-before[i].position.z)<1e-10);
     }
     CHECK(editor.get().undo()&&editor.get().redo());
-    Object3DEngine restored;auto project=importObject3DProject(restored.reference(),exportObject3DProject(editor));
+    const auto bytes=exportObject3DProject(editor);writeFixture(fixturePath,bytes);
+    Object3DEngine restored;auto project=importObject3DProject(restored.reference(),bytes);
     project.editor.get().setTemplateValues(std::array{TemplateValue{"height",1}});
     for(std::size_t i=0;i<expected.size();++i)
     {
@@ -243,7 +294,7 @@ Object3DTemplateHandle removalTemplate(Object3DEngine &engine,bool removeFirst,b
     Object3DTemplateDefinition definition;definition.base=engine.createObject(std::move(data));definition.surfaces=std::move(bindings);
     definition.targets={{"height",0,{{2,{0,.1,0}}}}};return engine.createTemplate(std::move(definition));
 }
-void removal()
+void removal(const char *fixturePath=nullptr)
 {
     Object3DEngine engine;const auto old=removalTemplate(engine,false),next=removalTemplate(engine,true);
     auto editor=engine.editTemplate(old);editor.get().moveControlPoints(0,std::array{TopologyPointMove{0,{0,0,.02}}});
@@ -261,7 +312,7 @@ void removal()
     CHECK(near(editor.get().object().get().data().meshes[1].topology->points[1].position.z,part.z));
     CHECK(editor.get().layerPointMasks(layer)[0].mesh==1&&editor.get().layerPointMasks(layer)[0].weights[1]==1);
     CHECK(editor.get().pointSelection("Body and B")[1].mesh==1&&editor.get().pointSelection("Body and B")[1].weights[1]==1);
-    const auto bytes=exportObject3DProject(editor);CHECK(bytes[8]==33);
+    const auto bytes=exportObject3DProject(editor);CHECK(bytes[8]==33);writeFixture(fixturePath,bytes);
     std::vector<std::uint8_t> marker{4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0};
     auto broken=bytes;const auto found=std::search(broken.begin()+24,broken.end(),marker.begin(),marker.end());
     CHECK(found!=broken.end()&&std::search(found+1,broken.end(),marker.begin(),marker.end())==broken.end());
@@ -300,7 +351,7 @@ void removal()
     const auto beforeRevision=dependent.get().revision();rejects([&]{(void)dependent.get().removeTemplateSurfaces(next,std::array<std::size_t,1>{1});});
     CHECK(dependent.get().revision()==beforeRevision&&dependent.get().object().get().data().meshes.size()==4);
 }
-void addition()
+void addition(const char *fixturePath=nullptr)
 {
     Object3DEngine engine;const auto old=removalTemplate(engine,true),next=removalTemplate(engine,false);
     const auto variant=removalTemplate(engine,false,false,true);
@@ -321,7 +372,7 @@ void addition()
     CHECK(editor.get().pointSelection("Body and B")[1].mesh==2&&editor.get().layerPointMasks(layer)[0].mesh==2);
     CHECK(editor.get().replaceTemplateSurfaces(variant,std::array<std::size_t,1>{1}));
     CHECK(editor.get().object().get().data().meshes[1].name=="AltA"&&editor.get().undo());
-    const auto bytes=exportObject3DProject(editor);CHECK(bytes[8]==34);
+    const auto bytes=exportObject3DProject(editor);CHECK(bytes[8]==34);writeFixture(fixturePath,bytes);
     const std::vector<std::uint8_t> marker{3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0};
     auto damaged=bytes;const auto found=std::search(damaged.begin()+24,damaged.end(),marker.begin(),marker.end());
     CHECK(found!=damaged.end()&&std::search(found+1,damaged.end(),marker.begin(),marker.end())==damaged.end());
@@ -357,7 +408,7 @@ Object3DTemplateHandle additionGraphTemplate(Object3DEngine &engine,bool parts)
     Object3DTemplateDefinition definition;definition.base=engine.createObject(std::move(data));definition.surfaces=std::move(bindings);
     return engine.createTemplate(std::move(definition));
 }
-void additionGraph()
+void additionGraph(const char *fixturePath=nullptr)
 {
     Object3DEngine engine;const auto body=additionGraphTemplate(engine,false),candidate=additionGraphTemplate(engine,true);
     auto editor=engine.editTemplate(body);editor.get().setControlWeights(0,std::array{TopologyPointWeights{0,{{1,1}}}});
@@ -370,7 +421,8 @@ void additionGraph()
     }
     CHECK(editor.get().object().get().data().meshes[2].topology->morphTargets[0].name=="Lift");
     CHECK(editor.get().object().get().data().meshes[2].geometry.morphTargets[0].name=="Lift");
-    Object3DEngine restored;auto project=importObject3DProject(restored.reference(),exportObject3DProject(editor));
+    const auto graphBytes=exportObject3DProject(editor);writeFixture(fixturePath,graphBytes);
+    Object3DEngine restored;auto project=importObject3DProject(restored.reference(),graphBytes);
     CHECK(project.editor.get().object().get().data().meshes[2].topology->morphTargets[0].name=="Lift");
     auto changed=candidate.get().definition();changed.targets.push_back({"Unsupported",1,{{0,{0,.01,0}}}});
     const auto invalid=engine.createTemplate(std::move(changed));auto clean=engine.editTemplate(body);
@@ -404,7 +456,7 @@ Object3DTemplateHandle compositionTemplate(Object3DEngine &engine,std::initializ
     Object3DTemplateDefinition definition;definition.base=engine.createObject(std::move(data));definition.surfaces=std::move(bindings);
     definition.targets={{"height",0,{{2,{0,.1,0}}}}};return engine.createTemplate(std::move(definition));
 }
-void composition()
+void composition(const char *fixturePath=nullptr,bool captureDiscard=false)
 {
     Object3DEngine engine;const auto old=compositionTemplate(engine,{"A","B","C"}),next=compositionTemplate(engine,{"B","D","C","E"});
     auto editor=engine.editTemplate(old);editor.get().moveControlPoints(0,std::array{TopologyPointMove{0,{0,0,.02}}});
@@ -422,6 +474,7 @@ void composition()
     CHECK(data.meshes[2].topology->points[0].weights[0].bone==1&&data.meshes[4].topology->points[0].weights[0].bone==1);
     CHECK(editor.get().pointSelection("Retained")[1].mesh==1&&editor.get().layerPointMasks(layer)[0].mesh==1);
     const auto bytes=exportObject3DProject(editor);CHECK(bytes[8]==35);
+    if(!captureDiscard)writeFixture(fixturePath,bytes);
     const std::vector<std::uint8_t> marker{4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0};
     auto damaged=bytes;const auto found=std::search(damaged.begin()+24,damaged.end(),marker.begin(),marker.end());
     CHECK(found!=damaged.end()&&std::search(found+1,damaged.end(),marker.begin(),marker.end())==damaged.end());
@@ -441,7 +494,9 @@ void composition()
     CHECK(protectedEditor.get().revision()==before&&engine.objectCount()==objects&&engine.templateCount()==programs);
     CHECK(protectedEditor.get().changeTemplateSurfaces(next,std::array<std::size_t,1>{1},std::array<std::size_t,2>{2,4},{},TemplateSurfaceRemovalOptions{true}));
     CHECK(protectedEditor.get().pointSelection("Removed").empty());
-    Object3DEngine discarded;auto restored=importObject3DProject(discarded.reference(),exportObject3DProject(protectedEditor));
+    const auto discardedBytes=exportObject3DProject(protectedEditor);
+    if(captureDiscard)writeFixture(fixturePath,discardedBytes);
+    Object3DEngine discarded;auto restored=importObject3DProject(discarded.reference(),discardedBytes);
     CHECK(restored.editor.get().pointSelection("Removed").empty()&&restored.editor.get().undo());
     CHECK(restored.editor.get().pointSelection("Removed")[0].mesh==1);
     auto invalid=engine.editTemplate(old);const auto invalidRevision=invalid.get().revision();
@@ -466,6 +521,6 @@ void composition()
 }
 int main(int argc,char **argv)
 {
-    try{if(argc!=2)return 2;const std::string_view mode=argv[1];if(mode=="swap")swapping();else if(mode=="safeguards")safeguards();else if(mode=="sharing")sharing();else if(mode=="grounding")grounding();else if(mode=="visibility_triangles")visibilityTriangles();else if(mode=="removal")removal();else if(mode=="addition")addition();else if(mode=="addition_graph")additionGraph();else if(mode=="composition")composition();else return 2;}
+    try{if(argc!=2&&argc!=3&&argc!=5)return 2;const std::string_view mode=argv[1];if(argc==5){if(mode!="replacement_resources")return 2;replacementResources(argv[2],argv[3],argv[4]);return 0;}if(argc==3&&mode!="swap"&&mode!="visibility_triangles"&&mode!="composition"&&mode!="composition_discard"&&mode!="addition"&&mode!="addition_graph"&&mode!="removal")return 2;if(mode=="swap")swapping(argc==3?argv[2]:nullptr);else if(mode=="safeguards")safeguards();else if(mode=="sharing")sharing();else if(mode=="grounding")grounding();else if(mode=="visibility_triangles")visibilityTriangles(argc==3?argv[2]:nullptr);else if(mode=="removal")removal(argc==3?argv[2]:nullptr);else if(mode=="addition")addition(argc==3?argv[2]:nullptr);else if(mode=="addition_graph")additionGraph(argc==3?argv[2]:nullptr);else if(mode=="composition"||mode=="composition_discard")composition(argc==3?argv[2]:nullptr,mode=="composition_discard");else return 2;}
     catch(const std::exception &error){std::cerr<<error.what()<<'\n';return 1;}
 }

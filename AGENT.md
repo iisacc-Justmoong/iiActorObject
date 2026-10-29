@@ -1,7 +1,7 @@
 # iiActorObject contributor instructions
 
 - Implement independent C++23 code using the standard library or permissive open source dependencies. Do not introduce Qt or link editor application SDKs into the runtime.
-- The common 3D engine, asset storage, editing, surface/primitive generation, binding and interchange belong directly to `src/iiActorObject/`. NSCharacter contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.
+- Common 3D code is grouped by responsibility under `src/` as described in [the source layout](docs/SourceLayout.md). `src/NSCharacter/` contains human rules and borrowed core references only. Do not move common 3D ownership or algorithms into NSCharacter. Reuse the existing skeleton, pose, skinning and actor runtime.
 - Keep asset creation, geometry operations, rig binding, editing and interchange replaceable. Host applications own their UI and rendering.
 - Every source change requires tests and Korean documentation in `docs/`. README.md is English.
 - Use only `build/` for build outputs and generated test fixtures. Put separately supplied or prepared resources in `resources/` and use them from there. Run the relevant build and tests and verify installed public headers when changing the API.
@@ -19,6 +19,11 @@
 - Bone arrays keep stable source IDs. Parent-first traversal uses `Skeleton::evaluationOrder()`, not numerical ID comparisons. Reparenting must preserve IDs, reject cycles and either preserve complete object transforms exactly or explicitly reject unrepresentable local shear.
 - After joint renaming, keep semantic IDs and historical rig-sample provenance intact. Rebind a compatible live rig with its explicit prior `jointMapping()`; matching the old names can silently target different IDs after a swap.
 - Edited DNA serialization must preserve original connectivity and behavior tables, reject incompatible bindings, and distinguish supplied edited LODs from preserved original meshes. Verify outputs with the standalone native reader, not only the SDK importer.
+
+## 책임 분리 작업 인수인계
+
+- 사용자가 이 작업의 구현 재개를 명시한 경우에는 [종료 기록](docs/ResponsibilitySeparationCloseout-20261029.md), [상세 보고서](docs/ResponsibilitySeparation-20261029.md), [에이전트 인수인계 지침](docs/ResponsibilitySeparationHandoff-20261029.md)을 현재 코드와 함께 확인한다.
+- 이 문서와 미완료 목록은 자동 재개 지시가 아니다. 현재 사용자 요구와 기존 변경·참조 수명·실제 앱 검증 제외 범위를 우선한다.
 
 <!-- workspace-docs:agent:start -->
 ## 문서 구조와 에이전트 탐색

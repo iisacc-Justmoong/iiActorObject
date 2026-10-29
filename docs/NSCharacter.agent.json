@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/NSCharacter.md",
-    "sha256": "e98c540f7c903cff6ed7b8ab8050c37385e1922ae892b6f5fe23e8890ff4a896",
-    "bytes": 37661,
-    "line_count": 156,
+    "sha256": "c672833eb9eb5eacb342a604885c2ae22125b5752cf81418d5d28a7cb3943f59",
+    "bytes": 38412,
+    "line_count": 158,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -59,7 +59,7 @@
       "kind": "paragraph",
       "start_line": 5,
       "end_line": 5,
-      "raw": "요구사항은 CC5 수준의 생성·상세 편집을 제공하고, CC5·Blender·Unreal에서 메시와 리그를 사용할 수 있게 하며 MetaHuman을 목표로 하는 독립 C++23 엔진이다. 캐릭터 계층의 위치는 `src/iiActorObject/NSCharacter/`이다. 공용 3D 엔진의 소유자는 iiActorObject 본체의 `Object3DEngine`이며 NSCharacter는 이를 참조한다. [공용 소유권 계약](Object3DEngine.md)을 따른다. 기존 `Skeleton`, `Pose`, `SkeletalMesh`, `CharacterRig`, `iiCharacter`를 재사용한다. Qt와 대상 상용 앱의 코드·에셋은 포함하지 않는다. 공개 CC0 인체 자료의 출처는 별도 패키지에 기록한다.\n"
+      "raw": "요구사항은 CC5 수준의 생성·상세 편집을 제공하고, CC5·Blender·Unreal에서 메시와 리그를 사용할 수 있게 하며 MetaHuman을 목표로 하는 독립 C++23 엔진이다. 캐릭터 계층의 위치는 `src/NSCharacter/`이다. 공용 3D 엔진의 소유자는 iiActorObject 본체의 `Object3DEngine`이며 NSCharacter는 이를 참조한다. [공용 소유권 계약](Object3DEngine.md)을 따른다. 기존 `Skeleton`, `Pose`, `SkeletalMesh`, `CharacterRig`, `iiCharacter`를 재사용한다. Qt와 대상 상용 앱의 코드·에셋은 포함하지 않는다. 공개 CC0 인체 자료의 출처는 별도 패키지에 기록한다.\n"
     },
     {
       "id": "b000006",
@@ -155,9 +155,23 @@
     },
     {
       "id": "b000015",
-      "kind": "table",
+      "kind": "paragraph",
       "start_line": 25,
-      "end_line": 40,
+      "end_line": 25,
+      "raw": "인체 계층은 `iiActorObjectNSCharacter` CMake 객체 타깃으로 별도 컴파일되지만 배포되는 라이브러리는 기존 `iiActorObject` 하나다. 본체의 공용 3D 자료와 리그 소유권은 변경되지 않는다. 템플릿 참조는 `CharacterTemplateCore.h`, 부속 목록·변경은 `HumanAccessories.h`, MakeHuman 자료 구성은 `MakeHumanTemplate.h`로 직접 사용할 수 있다. 기존 `CharacterTemplate.h`는 세 인터페이스를 모으는 호환 진입점이다. [책임 분리 보고서](ResponsibilitySeparation-20261029.md)와 [기계 판독 책임 목록](../resources/architecture/ResponsibilityMap.json)에서 전체 파일 분류, 검사 범위와 남은 공용 계층 결합을 확인할 수 있다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "table",
+      "start_line": 27,
+      "end_line": 42,
       "raw": "| 객체 | 책임 |\n| --- | --- |\n| `CharacterData`, `CharacterMesh`, `CharacterMaterial` | 본체의 공용 입력 자료 타입에 대한 별칭이다. |\n| `CharacterAsset` | 본체가 소유한 공용 에셋을 참조한다. 별도의 메시·골격·머티리얼 버퍼를 갖지 않는다. |\n| `HumanoidGenerator` | 독립적인 인체 표면·시맨틱 관절·스킨과 얼굴 모프를 생성한다. |\n| `CharacterTemplate` | 본체 소유 템플릿의 참조이며 CC0 체형·얼굴 변형과 관절 재계산을 연결한다. |\n| `HumanSkinSelection` | CC0 피부 목록에서 선택한 이미지와 대상 메시를 지정하는 일시적 입력이다. 실제 이미지·재질·편집 이력은 본체가 소유한다. |\n| `AutoRigger` | 본체 `SkinBinder`의 참조 별칭이다. |\n| `CharacterEditor` | 본체가 소유한 공용 편집 세션을 참조하고 캐릭터 뷰를 연결한다. |\n| `HumanJointMapping` | 본체 에셋의 참조와 인체 역할 대응 메타데이터이다. 필수 누락·본 계층과 CC5 본 대응 출력에 사용한다. |\n| `detectHumanSkeletonConvention` | 정확한 본 이름과 부모 계층에서 완전한 내장 규칙 후보를 찾고, 서로 다른 대응은 자동 선택하지 않는다. |\n| `exportGlb` | 골격·역 바인드·모프·UV·PBR과 선택적 골격·모프 애니메이션을 GLB 2.0으로 전달한다. |\n| `importGlb` | 지원되는 GLB 장면·스킨·모프를 본체 소유 에셋으로 가져오고 캐릭터 참조와 관절 대응을 반환한다. |\n| `exportFbx` | Autodesk SDK 없이 Binary FBX 7.4의 스킨 클러스터·기준 포즈·모프 채널과 선택적인 골격·표정 클립을 작성한다. |\n| `importFbx` | MIT ufbx 어댑터로 FBX의 축·단위·골격·스킨·UV·모프를 독립 에셋으로 변환한다. |\n| `importFbxWithAnimations` | 본체가 소유한 에셋의 캐릭터 참조, 여러 클립, 경고와 외부 식별 정보를 반환한다. |\n",
       "columns": [
         "객체",
@@ -223,20 +237,6 @@
       ]
     },
     {
-      "id": "b000016",
-      "kind": "blank",
-      "start_line": 41,
-      "end_line": 41,
-      "raw": "\n"
-    },
-    {
-      "id": "b000017",
-      "kind": "paragraph",
-      "start_line": 42,
-      "end_line": 42,
-      "raw": "`CharacterEditor::transferWeightsWithNormalTies`는 본체의 [방향을 고려한 스킨 전사](SkinSurface.md)를 호출한다. 원본 캐릭터와 편집 세션은 모두 살아 있는 본체 엔진의 참조이며, 가중치·프로필 변경과 undo·레이어·프로젝트 이력은 본체가 소유한다. 방향이 모호한 표면에는 최근접 결과가 유지되므로 인체 의미 대응을 보장하지 않는다.\n"
-    },
-    {
       "id": "b000018",
       "kind": "blank",
       "start_line": 43,
@@ -248,7 +248,7 @@
       "kind": "paragraph",
       "start_line": 44,
       "end_line": 44,
-      "raw": "본체의 [GLB 자산 입력](GlbImport.md)은 문서 판독을 바탕으로 지원되는 메시·리그·스킨·모프를 편집 가능한 본체 객체로 변환한다. 같은 메시의 재질별 프리미티브가 서로 다른 법선·UV 구성을 가져도 원본 점과 사용 가능한 속성을 유지하며, 사용하지 않는 누락 UV와 생성한 법선은 경고한다. 텍스처에 필요한 UV가 없으면 거부한다. [여러 스킨](GlbMultiSkin.md)의 공유 관절과 스킨별 대응을 본체에서 통합하며, 정적 소품이 섞이면 기준 변환을 굽고 가장 가까운 원본 관절 또는 인공 루트에 고정한다. `importGlbWithAnimations`는 원본 채널과 노드 대응을 함께 반환하고, 본체의 샘플러가 자세와 메시별 모프를 계산한다. 지원되는 원본 채널은 [클립 변환](GlbAnimationBake.md)으로 본체 클립과 메시별 모프 대응에 표본화할 수 있으며, 스킨별 역 바인드와 정적 노드 애니메이션의 표현 한계는 별도 계약에 명시한다.\n"
+      "raw": "`CharacterEditor::transferWeightsWithNormalTies`는 본체의 [방향을 고려한 스킨 전사](SkinSurface.md)를 호출한다. 원본 캐릭터와 편집 세션은 모두 살아 있는 본체 엔진의 참조이며, 가중치·프로필 변경과 undo·레이어·프로젝트 이력은 본체가 소유한다. 방향이 모호한 표면에는 최근접 결과가 유지되므로 인체 의미 대응을 보장하지 않는다.\n"
     },
     {
       "id": "b000020",
@@ -262,7 +262,7 @@
       "kind": "paragraph",
       "start_line": 46,
       "end_line": 46,
-      "raw": "[피부 프리셋](FaceAssets.md)은 공식 CC0 인체 UV 이미지 20개 중 명시적으로 선택한 하나를 생성 시 적용하거나 기존 캐릭터 편집 이력에 추가한다. 체형 입력으로 피부를 추론하지 않으며 원본 셰이더나 최종 피부 품질을 재현했다고 주장하지 않는다.\n"
+      "raw": "본체의 [GLB 자산 입력](GlbImport.md)은 문서 판독을 바탕으로 지원되는 메시·리그·스킨·모프를 편집 가능한 본체 객체로 변환한다. 같은 메시의 재질별 프리미티브가 서로 다른 법선·UV 구성을 가져도 원본 점과 사용 가능한 속성을 유지하며, 사용하지 않는 누락 UV와 생성한 법선은 경고한다. 텍스처에 필요한 UV가 없으면 거부한다. [여러 스킨](GlbMultiSkin.md)의 공유 관절과 스킨별 대응을 본체에서 통합하며, 정적 소품이 섞이면 기준 변환을 굽고 가장 가까운 원본 관절 또는 인공 루트에 고정한다. `importGlbWithAnimations`는 원본 채널과 노드 대응을 함께 반환하고, 본체의 샘플러가 자세와 메시별 모프를 계산한다. 지원되는 원본 채널은 [클립 변환](GlbAnimationBake.md)으로 본체 클립과 메시별 모프 대응에 표본화할 수 있으며, 스킨별 역 바인드와 정적 노드 애니메이션의 표현 한계는 별도 계약에 명시한다.\n"
     },
     {
       "id": "b000022",
@@ -276,7 +276,7 @@
       "kind": "paragraph",
       "start_line": 48,
       "end_line": 48,
-      "raw": "[인체 부속 선택](HumanAccessories.md)은 CC0 머리카락·의상·눈썹·속눈썹을 선택해 작성된 제어점 대응과 스킨, 몸 면 가림, 기본색·노멀 이미지를 본체 템플릿에 연결한다. 편집 중 부속을 추가·제거하거나 같은 슬롯과 분류의 대체 자산으로 교체할 수 있으며 형상 추종과 편집 이력은 본체가 소유한다. 편집한 부속의 형상 전사, 천·머리카락 물리와 제작용 외형 품질은 추가 작업이다.\n"
+      "raw": "[피부 프리셋](FaceAssets.md)은 공식 CC0 인체 UV 이미지 20개 중 명시적으로 선택한 하나를 생성 시 적용하거나 기존 캐릭터 편집 이력에 추가한다. 체형 입력으로 피부를 추론하지 않으며 원본 셰이더나 최종 피부 품질을 재현했다고 주장하지 않는다.\n"
     },
     {
       "id": "b000024",
@@ -290,7 +290,7 @@
       "kind": "paragraph",
       "start_line": 50,
       "end_line": 50,
-      "raw": "FBX 입력은 외부 경로를 읽지 않으며 입력 크기·정점·본·모프·파서 메모리를 제한한다. 원본 제어점·폴리곤·UV·법선 ID를 작성용 자료로 유지하고, 면별 머티리얼은 같은 메시 안에서 보관한다. [FBX 작성용 계약](FbxAuthoring.md)을 따른다. 선형·DQ·혼합 스키닝의 방식과 점별 혼합값을 보존하며, 표현할 수 없는 관절 shear와 여러 스킨 디포머는 명시적으로 거부한다. 기본 FBX 입력은 progressive morph를 거부하며, 별도의 [점진 모프 교환 API](ProgressiveMorphRig.md)는 중간 형상과 정적 제어 리그를 가져오고 단일 메시 또는 동일한 메시 인스턴스들이 공유하는 채널을 내보낸다. [점진 애니메이션 교환](ProgressiveMorphAnimation.md)은 골격·일반 표정·점진 제어를 함께 연결한다. 서로 다른 메시가 공유하는 채널의 출력은 남아 있다. 입력의 애니메이션 take·원본 앱 제약·지원하지 않는 텍스처 슬롯은 경고를 반환한다. 본체의 별도 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 이름을 연결한 모프 곡선을 작성한다. [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크와 본·표정 곡선을 본체 클립으로 표본화한다. 내장 PNG 기본색 자원은 [얼굴 부속 계약](FaceAssets.md)에 따라 읽으며, [호스트 해석기](FbxImageResolution.md)는 외부 이미지와 내장 PNG 외 자료를 PNG로 제공한다. 원본 자료가 모두 보존된 것처럼 조용히 처리하지 않는다.\n"
+      "raw": "[인체 부속 선택](HumanAccessories.md)은 CC0 머리카락·의상·눈썹·속눈썹을 선택해 작성된 제어점 대응과 스킨, 몸 면 가림, 기본색·노멀 이미지를 본체 템플릿에 연결한다. 편집 중 부속을 추가·제거하거나 같은 슬롯과 분류의 대체 자산으로 교체할 수 있으며 형상 추종과 편집 이력은 본체가 소유한다. 편집한 부속의 형상 전사, 천·머리카락 물리와 제작용 외형 품질은 추가 작업이다.\n"
     },
     {
       "id": "b000026",
@@ -304,7 +304,7 @@
       "kind": "paragraph",
       "start_line": 52,
       "end_line": 52,
-      "raw": "ufbx는 `v0.20.0`, 커밋 `a63ff0a47485328880b3300e7bcdf01413343a45`의 수정 없는 소스이며 MIT 대안을 선택하였다. 원래 `ufbx.c`를 `ufbx.cpp`로 이름만 바꿔 C++23으로 컴파일한다. [출처와 해시](../src/third_party/ufbx/PROVENANCE.md)를 따른다. 자체 작성 코드는 C++23이며 Python은 외부 형식·앱 검증에만 사용한다.\n"
+      "raw": "FBX 입력은 외부 경로를 읽지 않으며 입력 크기·정점·본·모프·파서 메모리를 제한한다. 원본 제어점·폴리곤·UV·법선 ID를 작성용 자료로 유지하고, 면별 머티리얼은 같은 메시 안에서 보관한다. [FBX 작성용 계약](FbxAuthoring.md)을 따른다. 선형·DQ·혼합 스키닝의 방식과 점별 혼합값을 보존하며, 표현할 수 없는 관절 shear와 여러 스킨 디포머는 명시적으로 거부한다. 기본 FBX 입력은 progressive morph를 거부하며, 별도의 [점진 모프 교환 API](ProgressiveMorphRig.md)는 중간 형상과 정적 제어 리그를 가져오고 여러 메시가 공유하는 채널을 내보낸다. 서로 다른 메시의 FBX 채널을 SDK의 공동 제어로 복원하려면 작성용 메타데이터가 유지되어야 한다. [점진 애니메이션 교환](ProgressiveMorphAnimation.md)은 골격·일반 표정·점진 제어를 함께 연결한다. 입력의 애니메이션 take·원본 앱 제약·지원하지 않는 텍스처 슬롯은 경고를 반환한다. 본체의 별도 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 이름을 연결한 모프 곡선을 작성한다. [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크와 본·표정 곡선을 본체 클립으로 표본화한다. 내장 PNG 기본색 자원은 [얼굴 부속 계약](FaceAssets.md)에 따라 읽으며, [호스트 해석기](FbxImageResolution.md)는 외부 이미지와 내장 PNG 외 자료를 PNG로 제공한다. 원본 자료가 모두 보존된 것처럼 조용히 처리하지 않는다.\n"
     },
     {
       "id": "b000028",
@@ -318,7 +318,7 @@
       "kind": "paragraph",
       "start_line": 54,
       "end_line": 54,
-      "raw": "호스트가 UI와 렌더러를 소유한다. 생성·편집 코어는 Blender, Unreal, CC5의 런타임에 의존하지 않는다. 교환 경로와 외부 앱 검증은 별도 경계이다. 좌표는 오른손, Y 위쪽, 미터이며 표준 런타임의 행렬·스키닝 규약을 그대로 사용한다.\n"
+      "raw": "ufbx는 `v0.20.0`, 커밋 `a63ff0a47485328880b3300e7bcdf01413343a45`의 수정 없는 소스이며 MIT 대안을 선택하였다. 원래 `ufbx.c`를 `ufbx.cpp`로 이름만 바꿔 C++23으로 컴파일한다. [출처와 해시](../src/third_party/ufbx/PROVENANCE.md)를 따른다. 자체 작성 코드는 C++23이며 Python은 외부 형식·앱 검증에만 사용한다.\n"
     },
     {
       "id": "b000030",
@@ -332,7 +332,7 @@
       "kind": "paragraph",
       "start_line": 56,
       "end_line": 56,
-      "raw": "본체의 `Object3DAsset`은 원본 ID를 유지하는 단일 루트 골격, 삼각형 인덱스, 유한 정점, 유효한 가중치·모프·UV·머티리얼·시맨틱을 검사한다. `CharacterEditor`의 실패한 편집은 현재 스냅샷과 revision을 바꾸지 않는다. 되돌리기 이후의 새 편집은 redo 이력을 제거한다. 렌더러는 본체 엔진이 살아 있는 동안 이전 에셋의 참조를 유지하여 새 편집과 독립적으로 사용할 수 있다. 엔진의 명시적 제거·소멸은 참조를 만료시킨다. 엔진은 숨은 전역 객체로 만들지 않으며 `HumanoidGenerator::generate(engine, ...)`, `importFbx(engine, ...)`처럼 호출자가 지정한다.\n"
+      "raw": "호스트가 UI와 렌더러를 소유한다. 생성·편집 코어는 Blender, Unreal, CC5의 런타임에 의존하지 않는다. 교환 경로와 외부 앱 검증은 별도 경계이다. 좌표는 오른손, Y 위쪽, 미터이며 표준 런타임의 행렬·스키닝 규약을 그대로 사용한다.\n"
     },
     {
       "id": "b000032",
@@ -346,7 +346,7 @@
       "kind": "paragraph",
       "start_line": 58,
       "end_line": 58,
-      "raw": "자동 바인딩은 관절 엔벌로프의 기하 거리 방식과 [표면 간선 최단 경로 방식](SurfaceGeodesicSkin.md)을 제공한다. 후자는 자동 또는 명시적 표면 시드와 미도달 정책을 사용한다. [골격 기반 추정](SkeletonEnvelopes.md)은 기존 바인드 자세와 모든 자식 분기에서 선분을 만들며 편집기에 한 번에 적용할 수 있다. 프로시저 인체 생성기는 자체 골격 엔벌로프를 사용하여 표면 바인딩을 선택할 수 있으며 기본값은 기존 기하 거리 방식이다. 임의 스캔에서 관절을 추론하는 AI 모델이나 voxel-geodesic 해법은 아직 아니다. 인체 생성기는 독자 프로시저 인체를 생성하며 기존 상용 베이스 메시의 품질을 주장하지 않는다. 같은 생성 해상도에서 체형을 바꾸면 정점 순서를 유지하도록 구성한다.\n"
+      "raw": "본체의 `Object3DAsset`은 원본 ID를 유지하는 단일 루트 골격, 삼각형 인덱스, 유한 정점, 유효한 가중치·모프·UV·머티리얼·시맨틱을 검사한다. `CharacterEditor`의 실패한 편집은 현재 스냅샷과 revision을 바꾸지 않는다. 되돌리기 이후의 새 편집은 redo 이력을 제거한다. 렌더러는 본체 엔진이 살아 있는 동안 이전 에셋의 참조를 유지하여 새 편집과 독립적으로 사용할 수 있다. 엔진의 명시적 제거·소멸은 참조를 만료시킨다. 엔진은 숨은 전역 객체로 만들지 않으며 `HumanoidGenerator::generate(engine, ...)`, `importFbx(engine, ...)`처럼 호출자가 지정한다.\n"
     },
     {
       "id": "b000034",
@@ -360,7 +360,7 @@
       "kind": "paragraph",
       "start_line": 60,
       "end_line": 60,
-      "raw": "본체의 [듀얼 쿼터니언 스키닝](DualQuaternionSkinning.md)은 원본 점별 프로필을 에셋·편집 이력·네이티브 프로젝트·FBX에 보존하고 액터에 자동 적용한다. 템플릿 리그 전사는 점 대응 또는 표면 투영으로 프로필을 옮기며, 포즈·모프 스냅샷은 작성된 프로필을 사용한다. 인스턴스별 임시 선택과 GLB·DNA의 제한은 해당 문서를 따른다.\n"
+      "raw": "자동 바인딩은 관절 엔벌로프의 기하 거리 방식과 [표면 간선 최단 경로 방식](SurfaceGeodesicSkin.md)을 제공한다. 후자는 자동 또는 명시적 표면 시드와 미도달 정책을 사용한다. [골격 기반 추정](SkeletonEnvelopes.md)은 기존 바인드 자세와 모든 자식 분기에서 선분을 만들며 편집기에 한 번에 적용할 수 있다. 프로시저 인체 생성기는 자체 골격 엔벌로프를 사용하여 표면 바인딩을 선택할 수 있으며 기본값은 기존 기하 거리 방식이다. 임의 스캔에서 관절을 추론하는 AI 모델이나 voxel-geodesic 해법은 아직 아니다. 인체 생성기는 독자 프로시저 인체를 생성하며 기존 상용 베이스 메시의 품질을 주장하지 않는다. 같은 생성 해상도에서 체형을 바꾸면 정점 순서를 유지하도록 구성한다.\n"
     },
     {
       "id": "b000036",
@@ -374,7 +374,7 @@
       "kind": "paragraph",
       "start_line": 62,
       "end_line": 62,
-      "raw": "[템플릿 리그 전사](TemplateRigTransfer.md)는 정적 메시를 대상으로 본체가 소유한 새 스켈레탈 에셋을 만든다. 같은 점 ID의 메시에는 템플릿 앵커와 가중치를 적용하며, 다른 토폴로지에는 수동 대상 앵커 또는 [가까운 표면을 통한 자동 앵커 투영](TemplateRigProjection.md)과 표면 스킨 전사를 사용한다. 선택적인 회전·경계 추정은 수직축 방향이 다른 대상도 정렬하지만 유사한 자세를 요구한다. 자동 인체 랜드마크 추론과 임의 스캔의 전체 제작용 리깅은 남아 있다.\n"
+      "raw": "본체의 [듀얼 쿼터니언 스키닝](DualQuaternionSkinning.md)은 원본 점별 프로필을 에셋·편집 이력·네이티브 프로젝트·FBX에 보존하고 액터에 자동 적용한다. 템플릿 리그 전사는 점 대응 또는 표면 투영으로 프로필을 옮기며, 포즈·모프 스냅샷은 작성된 프로필을 사용한다. 인스턴스별 임시 선택과 GLB·DNA의 제한은 해당 문서를 따른다.\n"
     },
     {
       "id": "b000038",
@@ -388,7 +388,7 @@
       "kind": "paragraph",
       "start_line": 64,
       "end_line": 64,
-      "raw": "[다른 메시의 편집용 템플릿화](TemplateAdapt.md)는 본체 엔진에 원본 형상 타깃·조절·관절 기준을 전사한 새 템플릿을 만든다. 렌더 메시의 작성용 토폴로지 승격과 선택적 런타임 모프 출력도 본체가 담당한다. NSCharacter는 새 템플릿 핸들만 참조하며 이 결과를 임의 인체에 대한 해부학적 자동 리깅이나 앱 호환성의 증거로 해석하지 않는다.\n"
+      "raw": "[템플릿 리그 전사](TemplateRigTransfer.md)는 정적 메시를 대상으로 본체가 소유한 새 스켈레탈 에셋을 만든다. 같은 점 ID의 메시에는 템플릿 앵커와 가중치를 적용하며, 다른 토폴로지에는 수동 대상 앵커 또는 [가까운 표면을 통한 자동 앵커 투영](TemplateRigProjection.md)과 표면 스킨 전사를 사용한다. 선택적인 회전·경계 추정은 수직축 방향이 다른 대상도 정렬하지만 유사한 자세를 요구한다. 자동 인체 랜드마크 추론과 임의 스캔의 전체 제작용 리깅은 남아 있다.\n"
     },
     {
       "id": "b000040",
@@ -402,7 +402,7 @@
       "kind": "paragraph",
       "start_line": 66,
       "end_line": 66,
-      "raw": "[점 선택 마스크 투영](MeshMaskProjection.md)은 서로 다른 토폴로지의 정렬된 표면 사이에 선택 가중치를 전사하고 별도의 대상 편집 세션에 적용한다. 근접 기하를 이용하는 추정이며 본체가 결과를 계산한다.\n"
+      "raw": "[다른 메시의 편집용 템플릿화](TemplateAdapt.md)는 본체 엔진에 원본 형상 타깃·조절·관절 기준을 전사한 새 템플릿을 만든다. 렌더 메시의 작성용 토폴로지 승격과 선택적 런타임 모프 출력도 본체가 담당한다. NSCharacter는 새 템플릿 핸들만 참조하며 이 결과를 임의 인체에 대한 해부학적 자동 리깅이나 앱 호환성의 증거로 해석하지 않는다.\n"
     },
     {
       "id": "b000042",
@@ -416,7 +416,7 @@
       "kind": "paragraph",
       "start_line": 68,
       "end_line": 68,
-      "raw": "대응된 눈·치아·혀와 지정된 의상은 템플릿의 [표면 추종 관계](TemplateAdapt.md)를 통해 체형 변경을 따라갈 수 있다. 원본 점 ID를 유지한 부속은 작성된 기준점 연결을 보존하고, 부모 토폴로지가 달라진 경우 해당 기준점을 투영한다. 부속의 토폴로지까지 달라졌을 때는 표면 기반 근사다. 명시적 추종 메시의 스킨 전사에는 별도의 DQ 프로필 정책을 선택할 수 있다. 선택한 템플릿 입력의 끝점은 [모프 샘플](TemplateMorphBaking.md)로 베이크하여 움직인 부속의 변위도 출력할 수 있다. 본체 런타임은 살아 있는 원본 템플릿으로 인스턴스 관절 바인드와 역바인드도 갱신한다. 외부 호스트에서 여러 메시의 모프 제어를 연결하고 관절 바인드 변화를 반영하는 일은 별도이다.\n"
+      "raw": "[점 선택 마스크 투영](MeshMaskProjection.md)은 서로 다른 토폴로지의 정렬된 표면 사이에 선택 가중치를 전사하고 별도의 대상 편집 세션에 적용한다. 근접 기하를 이용하는 추정이며 본체가 결과를 계산한다.\n"
     },
     {
       "id": "b000044",
@@ -430,7 +430,7 @@
       "kind": "paragraph",
       "start_line": 70,
       "end_line": 70,
-      "raw": "프로시저 생성기의 저해상도 표면에서는 정점 표본보다 작은 손가락이 떨어진 조각이 되는 것을 막도록 해당 부위의 최소 반경을 표본 간격에 맞춘다. 따라서 작은 손가락 간격이 합쳐질 수 있다. 몸체는 닫힌 단일 연결 표면으로 검사하지만, 이는 해부학적 디테일이나 최종 편집 토폴로지의 품질 판정과 다르다. 기본 UV는 단순 투영이며 제작용 UV 아틀라스가 아니다. 얼굴 모프를 생성하면 간단한 혀 메시와 턱 스킨·`tongueOut` 및 턱 모프를 함께 만든다. 몸체의 `tongueOut`은 비어 있고 해당 변형은 혀 메시에서 수행한다. [여러 메시 모프 제어](MorphChannelRig.md)는 얼굴과 혀의 같은 이름 채널을 하나의 정규화된 제어로 묶는다. [GLB 모프 애니메이션 출력](GlbAnimation.md)은 명시적 대응으로 같은 곡선을 여러 메시의 가중치 트랙에 기록한다. 절차적 구강의 관통 처리와 제작용 외형은 남아 있다.\n"
+      "raw": "대응된 눈·치아·혀와 지정된 의상은 템플릿의 [표면 추종 관계](TemplateAdapt.md)를 통해 체형 변경을 따라갈 수 있다. 원본 점 ID를 유지한 부속은 작성된 기준점 연결을 보존하고, 부모 토폴로지가 달라진 경우 해당 기준점을 투영한다. 부속의 토폴로지까지 달라졌을 때는 표면 기반 근사다. 명시적 추종 메시의 스킨 전사에는 별도의 DQ 프로필 정책을 선택할 수 있다. 선택한 템플릿 입력의 끝점은 [모프 샘플](TemplateMorphBaking.md)로 베이크하여 움직인 부속의 변위도 출력할 수 있다. 본체 런타임은 살아 있는 원본 템플릿으로 인스턴스 관절 바인드와 역바인드도 갱신한다. 외부 호스트에서 여러 메시의 모프 제어를 연결하고 관절 바인드 변화를 반영하는 일은 별도이다.\n"
     },
     {
       "id": "b000046",
@@ -444,7 +444,7 @@
       "kind": "paragraph",
       "start_line": 72,
       "end_line": 72,
-      "raw": "스킨 런타임과 FBX는 원본의 유효한 가중치를 보존하며 GLB도 필요한 만큼 `JOINTS_n`·`WEIGHTS_n`을 작성한다. 4개 또는 8개로 자동 절단하지 않는다. 자동 바인딩과 가중치 평활화에서만 호출자가 1~32개의 최대 영향 수를 명시한다. 12개 본의 가중치를 가진 독립 fixture에서 실제 Blender 변형과 FBX 재입력을 검사한다. 외부 앱의 자체 가져오기 설정이 가중치를 제한하는지 여부는 별도 확인해야 한다.\n"
+      "raw": "프로시저 생성기의 저해상도 표면에서는 정점 표본보다 작은 손가락이 떨어진 조각이 되는 것을 막도록 해당 부위의 최소 반경을 표본 간격에 맞춘다. 따라서 작은 손가락 간격이 합쳐질 수 있다. 몸체는 닫힌 단일 연결 표면으로 검사하지만, 이는 해부학적 디테일이나 최종 편집 토폴로지의 품질 판정과 다르다. 기본 UV는 단순 투영이며 제작용 UV 아틀라스가 아니다. 얼굴 모프를 생성하면 간단한 혀 메시와 턱 스킨·`tongueOut` 및 턱 모프를 함께 만든다. 몸체의 `tongueOut`은 비어 있고 해당 변형은 혀 메시에서 수행한다. [여러 메시 모프 제어](MorphChannelRig.md)는 얼굴과 혀의 같은 이름 채널을 하나의 정규화된 제어로 묶는다. [GLB 모프 애니메이션 출력](GlbAnimation.md)은 명시적 대응으로 같은 곡선을 여러 메시의 가중치 트랙에 기록한다. 절차적 구강의 관통 처리와 제작용 외형은 남아 있다.\n"
     },
     {
       "id": "b000048",
@@ -458,7 +458,7 @@
       "kind": "paragraph",
       "start_line": 74,
       "end_line": 74,
-      "raw": "현재 머티리얼 교환 범위는 기본 색·불투명도·거칠기·금속성 상수와 PNG 기본색·노멀 맵이다. FBX의 외부 이미지는 호스트가 제공하며 지원 형식의 변환은 선택 사항이다. [노멀 맵 계약](NormalMaps.md)의 FBX 강도와 탄젠트 제한을 따른다. 본체는 [재질의 알파 방식·임계값·양면 여부](MaterialSurface.md)를 보존하고 NSCharacter는 편집을 위임한다. GLB에는 표준 속성으로 기록하며, FBX에서는 표준 불투명도와 별도의 SDK 전용 속성으로 보존한다. FBX의 거칠기·금속성도 독립 메타데이터로 보존한다. 외부 앱의 셰이더 해석, 복잡한 셰이더 그래프나 전체 재질 슬롯의 복원을 보장하지 않는다.\n"
+      "raw": "스킨 런타임과 FBX는 원본의 유효한 가중치를 보존하며 GLB도 필요한 만큼 `JOINTS_n`·`WEIGHTS_n`을 작성한다. 4개 또는 8개로 자동 절단하지 않는다. 자동 바인딩과 가중치 평활화에서만 호출자가 1~32개의 최대 영향 수를 명시한다. 12개 본의 가중치를 가진 독립 fixture에서 실제 Blender 변형과 FBX 재입력을 검사한다. 외부 앱의 자체 가져오기 설정이 가중치를 제한하는지 여부는 별도 확인해야 한다.\n"
     },
     {
       "id": "b000050",
@@ -469,12 +469,10 @@
     },
     {
       "id": "b000051",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 76,
       "end_line": 76,
-      "raw": "## 외부 형식의 근거\n",
-      "level": 2,
-      "title": "외부 형식의 근거"
+      "raw": "현재 머티리얼 교환 범위는 기본 색·불투명도·거칠기·금속성 상수와 PNG 기본색·노멀 맵이다. FBX의 외부 이미지는 호스트가 제공하며 지원 형식의 변환은 선택 사항이다. [노멀 맵 계약](NormalMaps.md)의 FBX 강도와 탄젠트 제한을 따른다. 본체는 [재질의 알파 방식·임계값·양면 여부](MaterialSurface.md)를 보존하고 NSCharacter는 편집을 위임한다. GLB에는 표준 속성으로 기록하며, FBX에서는 표준 불투명도와 별도의 SDK 전용 속성으로 보존한다. FBX의 거칠기·금속성도 독립 메타데이터로 보존한다. 외부 앱의 셰이더 해석, 복잡한 셰이더 그래프나 전체 재질 슬롯의 복원을 보장하지 않는다.\n"
     },
     {
       "id": "b000052",
@@ -485,9 +483,25 @@
     },
     {
       "id": "b000053",
-      "kind": "list",
+      "kind": "heading",
       "start_line": 78,
-      "end_line": 81,
+      "end_line": 78,
+      "raw": "## 외부 형식의 근거\n",
+      "level": 2,
+      "title": "외부 형식의 근거"
+    },
+    {
+      "id": "b000054",
+      "kind": "blank",
+      "start_line": 79,
+      "end_line": 79,
+      "raw": "\n"
+    },
+    {
+      "id": "b000055",
+      "kind": "list",
+      "start_line": 80,
+      "end_line": 83,
       "raw": "- [CC5 가져오기](https://manual.reallusion.com/Character-Creator-5/Content/ENU/5.0/09-Pipeline/Importing-Methods.htm)는 FBX 캐릭터와 OBJ 소품을 구분한다. GLB 출력만으로 CC5 호환이라고 판단할 수 없다.\n- [Unreal FBX 스켈레탈 파이프라인](https://dev.epicgames.com/documentation/en-us/unreal-engine/fbx-skeletal-mesh-pipeline-in-unreal-engine)은 스켈레탈 메시와 모프·LOD를 지원한다.\n- [MetaHuman From Template](https://dev.epicgames.com/documentation/metahuman/metahuman-creator-from-template-tool-in-unreal-engine)은 표준 토폴로지 또는 UV 요건을 가진다.\n- [MetaHuman From Custom Mesh](https://dev.epicgames.com/documentation/metahuman/metahuman-creator-from-custom-mesh-tool-in-unreal-engine)는 임의 인체 메시에서 표준 MetaHuman 토폴로지·리그를 생성하는 별도 경로이다.\n",
       "items": [
         {
@@ -513,22 +527,6 @@
       ]
     },
     {
-      "id": "b000054",
-      "kind": "blank",
-      "start_line": 82,
-      "end_line": 82,
-      "raw": "\n"
-    },
-    {
-      "id": "b000055",
-      "kind": "heading",
-      "start_line": 83,
-      "end_line": 83,
-      "raw": "## 현재 진행 상태\n",
-      "level": 2,
-      "title": "현재 진행 상태"
-    },
-    {
       "id": "b000056",
       "kind": "blank",
       "start_line": 84,
@@ -537,10 +535,12 @@
     },
     {
       "id": "b000057",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 85,
       "end_line": 85,
-      "raw": "FBX 작성용 구조 단계는 `FbxAuthoringVerification-20261026.json`에 기록한다. 원본 제어점·사각형·UV 경계·면별 머티리얼·숨김 면과 SDK 확장의 복원, 실제 Blender 및 DNA 재저장을 포함한다. 이어진 [명시적 모프 법선](MorphNormals.md)은 본체에서 스킨·편집·FBX·GLB에 연결하며 DNA의 손실 정책을 명시한다. 외부 앱의 법선 지원과 재출력 ID는 별도 검증 범위이다.\n"
+      "raw": "## 현재 진행 상태\n",
+      "level": 2,
+      "title": "현재 진행 상태"
     },
     {
       "id": "b000058",
@@ -554,7 +554,7 @@
       "kind": "paragraph",
       "start_line": 87,
       "end_line": 87,
-      "raw": "템플릿 파라미터와 비파괴 편집 계층 단계는 `EditLayersVerification-20261026.json`에 기록한다. 파라미터 재계산 후 상세 편집 유지, 실제 인체·Blender 교환, 계층 결과의 DNA 저장과 독립 reader 확인을 포함한다. 이어진 [자체 프로젝트 저장](Object3DProject.md)은 본체 에셋·템플릿·파라미터·계층·undo/redo·선택 DNA 프로그램을 새 엔진에서 복원한다. 계층의 점 마스크는 [브러시 단계](MeshPainting.md)에 추가하였고 계층 그룹은 후속 작업이다.\n"
+      "raw": "FBX 작성용 구조 단계는 `FbxAuthoringVerification-20261026.json`에 기록한다. 원본 제어점·사각형·UV 경계·면별 머티리얼·숨김 면과 SDK 확장의 복원, 실제 Blender 및 DNA 재저장을 포함한다. 이어진 [명시적 모프 법선](MorphNormals.md)은 본체에서 스킨·편집·FBX·GLB에 연결하며 DNA의 손실 정책을 명시한다. 외부 앱의 법선 지원과 재출력 ID는 별도 검증 범위이다.\n"
     },
     {
       "id": "b000060",
@@ -568,7 +568,7 @@
       "kind": "paragraph",
       "start_line": 89,
       "end_line": 89,
-      "raw": "본체 소유 인체 템플릿 단계의 검증은 `CharacterTemplateVerification-20261026.json`에 기록한다. 원본 위치·UV·face를 유지한 CC0 베이스의 생성·관절 재계산과 실제 Blender 교환 검사이다. 생성 자료의 출처는 `resources/MakeHuman/PROVENANCE.md`와 원본 해시 목록을 따른다.\n"
+      "raw": "템플릿 파라미터와 비파괴 편집 계층 단계는 `EditLayersVerification-20261026.json`에 기록한다. 파라미터 재계산 후 상세 편집 유지, 실제 인체·Blender 교환, 계층 결과의 DNA 저장과 독립 reader 확인을 포함한다. 이어진 [자체 프로젝트 저장](Object3DProject.md)은 본체 에셋·템플릿·파라미터·계층·undo/redo·선택 DNA 프로그램을 새 엔진에서 복원한다. 계층의 점 마스크는 [브러시 단계](MeshPainting.md)에 추가하였고 계층 그룹은 후속 작업이다.\n"
     },
     {
       "id": "b000062",
@@ -582,7 +582,7 @@
       "kind": "paragraph",
       "start_line": 91,
       "end_line": 91,
-      "raw": "생성·편집 코어와 FBX·GLB 교환 경로를 구현하였다. 전체 목표는 진행 중이다. 이전 생성·편집 단계는 `NSCharacterVerification-20261026.json`에 기록하였다. 초기 본체 소유권 변경 단계는 `Object3DOwnershipVerification-20261026.json`에, 현재 공유 라이브러리의 소유권 7개 검사와 코어 전용·설치 소비자의 재검증은 `Object3DOwnershipVerification-20261027.json`에 기록한다. 후자는 동시에 실행 중인 전체 공유·정적 검사 행렬의 완료를 뜻하지 않는다. 실제 DNA·RigLogic 연결 이후의 검증은 `DnaRigVerification-20261026.json`에 기록한다. 작성용 토폴로지·편집 DNA 단계는 `TopologyDnaVerification-20261026.json`에 기록한다. 이 기록들은 각각 해당 시점의 소스 스냅샷이다. 제작용 자료 계약과 최종 시각 품질에 필요한 작업은 남아 있다. 실제 앱 실행 검증은 사용자 지시에 따라 제외하며, 앱 호환성은 검증된 것으로 주장하지 않는다.\n"
+      "raw": "본체 소유 인체 템플릿 단계의 검증은 `CharacterTemplateVerification-20261026.json`에 기록한다. 원본 위치·UV·face를 유지한 CC0 베이스의 생성·관절 재계산과 실제 Blender 교환 검사이다. 생성 자료의 출처는 `resources/MakeHuman/PROVENANCE.md`와 원본 해시 목록을 따른다.\n"
     },
     {
       "id": "b000064",
@@ -596,7 +596,7 @@
       "kind": "paragraph",
       "start_line": 93,
       "end_line": 93,
-      "raw": "[의미 조절과 복합 드라이버](TemplateControls.md)는 본체에서 양방향·곡선·여러 입력 축을 계산한다. 포함된 인체 자료는 472개 원본 타깃을 250개 항목으로 연결하며 NSCharacter는 목록의 참조를 제공한다. 별도 매크로 자료 348개를 사용하는 [8축 형상 생성](HumanMorphology.md)을 추가하였다. 제작용 외형의 완료는 별도이다. 이 단계는 `TemplateControlsVerification-20261027.json`에 기록한다.\n"
+      "raw": "생성·편집 코어와 FBX·GLB 교환 경로를 구현하였다. 전체 목표는 진행 중이다. 이전 생성·편집 단계는 `NSCharacterVerification-20261026.json`에 기록하였다. 초기 본체 소유권 변경 단계는 `Object3DOwnershipVerification-20261026.json`에, 현재 공유 라이브러리의 소유권 7개 검사와 코어 전용·설치 소비자의 재검증은 `Object3DOwnershipVerification-20261027.json`에 기록한다. 후자는 동시에 실행 중인 전체 공유·정적 검사 행렬의 완료를 뜻하지 않는다. 실제 DNA·RigLogic 연결 이후의 검증은 `DnaRigVerification-20261026.json`에 기록한다. 작성용 토폴로지·편집 DNA 단계는 `TopologyDnaVerification-20261026.json`에 기록한다. 이 기록들은 각각 해당 시점의 소스 스냅샷이다. 제작용 자료 계약과 최종 시각 품질에 필요한 작업은 남아 있다. 실제 앱 실행 검증은 사용자 지시에 따라 제외하며, 앱 호환성은 검증된 것으로 주장하지 않는다.\n"
     },
     {
       "id": "b000066",
@@ -607,12 +607,10 @@
     },
     {
       "id": "b000067",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 95,
       "end_line": 95,
-      "raw": "### 남은 구현과 검증\n",
-      "level": 3,
-      "title": "남은 구현과 검증"
+      "raw": "[의미 조절과 복합 드라이버](TemplateControls.md)는 본체에서 양방향·곡선·여러 입력 축을 계산한다. 포함된 인체 자료는 472개 원본 타깃을 250개 항목으로 연결하며 NSCharacter는 목록의 참조를 제공한다. 별도 매크로 자료 348개를 사용하는 [8축 형상 생성](HumanMorphology.md)을 추가하였다. 제작용 외형의 완료는 별도이다. 이 단계는 `TemplateControlsVerification-20261027.json`에 기록한다.\n"
     },
     {
       "id": "b000068",
@@ -623,10 +621,12 @@
     },
     {
       "id": "b000069",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 97,
       "end_line": 97,
-      "raw": "[외부 앱 편집 병합](ExternalEdits.md)은 본체에서 원본 ID를 유지하며 기준/편집 FBX의 차이를 기존 파라미터와 보정 레이어에 연결한다. Blender의 정점 순서 변경·본 이름/부모 변경과 반복 레이어 교체는 이 경로로 검사한다. NSCharacter는 별도 저장소 없이 `CharacterEditor::applyExternalEdits`로 본체를 호출한다. [논리 모프 채널](LogicalMorphChannels.md)은 같은 이름의 원본 target을 외부 편집용 FBX에서 한 채널로 투영하고 원본 레코드 ID를 유지하며 차이를 병합한다. 이 단계의 결과는 `ExternalEditsVerification-20261026.json`에 기록하며 CC5·Unreal의 실제 적용 완료와 구분한다.\n"
+      "raw": "### 남은 구현과 검증\n",
+      "level": 3,
+      "title": "남은 구현과 검증"
     },
     {
       "id": "b000070",
@@ -640,7 +640,7 @@
       "kind": "paragraph",
       "start_line": 99,
       "end_line": 99,
-      "raw": "[GLB 외부 편집 자동 대응](GlbExternalEdits.md)은 작업 정보와 보존된 점 ID에서 원본 표시 삼각형과 코너를 찾아 같은 병합 경로에 전달한다. 원본 본 번호가 유지되면 본 이름과 스킨 슬롯이 바뀐 뒤에도 보이지 않는 점과 빈 스킨 행의 대응을 유지한다. 메시·본·머티리얼 자료와 이력은 계속 본체가 소유한다. 외부 도구가 식별 정보를 보존하는지는 검증하지 않았으며, 정보가 불충분하거나 topology가 달라진 경우 자동 병합을 거부한다.\n"
+      "raw": "[외부 앱 편집 병합](ExternalEdits.md)은 본체에서 원본 ID를 유지하며 기준/편집 FBX의 차이를 기존 파라미터와 보정 레이어에 연결한다. Blender의 정점 순서 변경·본 이름/부모 변경과 반복 레이어 교체는 이 경로로 검사한다. NSCharacter는 별도 저장소 없이 `CharacterEditor::applyExternalEdits`로 본체를 호출한다. [논리 모프 채널](LogicalMorphChannels.md)은 같은 이름의 원본 target을 외부 편집용 FBX에서 한 채널로 투영하고 원본 레코드 ID를 유지하며 차이를 병합한다. 이 단계의 결과는 `ExternalEditsVerification-20261026.json`에 기록하며 CC5·Unreal의 실제 적용 완료와 구분한다.\n"
     },
     {
       "id": "b000072",
@@ -651,9 +651,23 @@
     },
     {
       "id": "b000073",
-      "kind": "list",
+      "kind": "paragraph",
       "start_line": 101,
+      "end_line": 101,
+      "raw": "[GLB 외부 편집 자동 대응](GlbExternalEdits.md)은 작업 정보와 보존된 점 ID에서 원본 표시 삼각형과 코너를 찾아 같은 병합 경로에 전달한다. 원본 본 번호가 유지되면 본 이름과 스킨 슬롯이 바뀐 뒤에도 보이지 않는 점과 빈 스킨 행의 대응을 유지한다. 메시·본·머티리얼 자료와 이력은 계속 본체가 소유한다. 외부 도구가 식별 정보를 보존하는지는 검증하지 않았으며, 정보가 불충분하거나 topology가 달라진 경우 자동 병합을 거부한다.\n"
+    },
+    {
+      "id": "b000074",
+      "kind": "blank",
+      "start_line": 102,
       "end_line": 102,
+      "raw": "\n"
+    },
+    {
+      "id": "b000075",
+      "kind": "list",
+      "start_line": 103,
+      "end_line": 104,
       "raw": "1. **원본 템플릿 보존**: 본체 `MeshTopology`가 원본 위치·layout·폴리곤·UV·법선·모프 target ID를 보관한다. FBX에도 작성용 인덱스·사각형·숨김 면·빈 스킨 행의 복원과 면별 머티리얼을 연결하였다. SDK 확장이 유지된 DNA→FBX→DNA 재저장을 검사한다. 여러 편집 DNA LOD를 통합 저장하며 인덱스 연결을 바꾸면 거부한다. 명시적 모프 법선은 layout별로 유지하고 형식의 표현 한계를 거부·명시적 손실 옵션으로 구분한다. [면별 탄젠트 계산과 GLB 모프 출력](MeshTangents.md), [FBX 기준 탄젠트 출력](FbxTangents.md)을 추가했다. FBX에서 연결된 원본 탄젠트는 기준 상태와 함께 보존하며 FBX 모프 탄젠트 보존은 남아 있다. GLB의 원본 탄젠트와 모프 차이는 [별도 계약](GlbAuthoredTangents.md)에 따라 보존한다. 제작용 템플릿과 외부 앱 재출력도 추가 작업이다. 여러 UV 세트와 머티리얼 선택은 [별도 계약](MultipleUvSets.md) 및 [검증 기록](MultipleUvSetsVerification-20261028.md)을 따른다. [토폴로지 계약](MeshTopology.md), [FBX 계약](FbxAuthoring.md), [DNA 저장 계약](DnaEditing.md)을 따른다.\n2. **MetaHuman DNA와 실제 얼굴 리그**: 로컬 `/Volumes/Storage/Workspace/Reverse/Projects/Epic Games/OpenRigLogic`에는 Epic의 MIT 소스가 있다. 확인한 리비전은 `55756ac`, RigLogic `13.2.9-hotfix1`이며 UE 5.8.4 스냅샷이다. 해당 리비전의 MIT 소스를 수정 없이 포함하여 본체 DNA reader와 실제 RigLogic 평가를 연결하였다. DNA의 공용 메시·골격·실행 자료는 본체 엔진이 소유하며 NSCharacter는 참조한다. 독립 writer fixture로 GUI/raw·PSD·관절·모프·애니메이티드 맵·LOD·축 변환을 검사한다. 편집 DNA 저장은 본체 스냅샷과 native reader로 검증하였다. 제작용 DNA의 ML·RBF·twist/swing 회귀 데이터와 실제 MetaHuman 적용은 남아 있다. [DNA 계약](DnaRig.md)을 따른다. Python wrapper와 별도 상용 샘플 에셋은 포함하지 않는다.\n",
       "items": [
         {
@@ -669,20 +683,6 @@
       ]
     },
     {
-      "id": "b000074",
-      "kind": "blank",
-      "start_line": 103,
-      "end_line": 103,
-      "raw": "\n"
-    },
-    {
-      "id": "b000075",
-      "kind": "paragraph",
-      "start_line": 104,
-      "end_line": 104,
-      "raw": "   신경망 레이어의 경계 검사와 합성 단층·다층·leaky ReLU·LOD 평가 근거는 [DNA 신경망 검증 기록](DnaMlVerification-20261028.md)에 기록한다. 제작용 DNA와 확장 그래프 전체의 근거를 대신하지 않는다.\n"
-    },
-    {
       "id": "b000076",
       "kind": "blank",
       "start_line": 105,
@@ -694,7 +694,7 @@
       "kind": "paragraph",
       "start_line": 106,
       "end_line": 106,
-      "raw": "   합성 DNA의 twist·swing 회전과 잘못된 표의 처리는 [검증 기록](DnaTwistVerification-20261028.md)에, RBF 계산과 입력 경계는 [별도 기록](DnaRbfVerification-20261028.md)에 정리한다. 제작용 관절 변형 품질과 RBF 전체 검증은 별도이다.\n"
+      "raw": "   신경망 레이어의 경계 검사와 합성 단층·다층·leaky ReLU·LOD 평가 근거는 [DNA 신경망 검증 기록](DnaMlVerification-20261028.md)에 기록한다. 제작용 DNA와 확장 그래프 전체의 근거를 대신하지 않는다.\n"
     },
     {
       "id": "b000078",
@@ -708,13 +708,27 @@
       "kind": "paragraph",
       "start_line": 108,
       "end_line": 108,
-      "raw": "   ML 확장 그래프와 reader의 관절 표 선행 검사는 [검증 기록](DnaMlGraphVerification-20261028.md)에 정리한다. 제작용 그래프 전체의 호환성과 실제 앱 적용을 보장하지 않는다.\n"
+      "raw": "   합성 DNA의 twist·swing 회전과 잘못된 표의 처리는 [검증 기록](DnaTwistVerification-20261028.md)에, RBF 계산과 입력 경계는 [별도 기록](DnaRbfVerification-20261028.md)에 정리한다. 제작용 관절 변형 품질과 RBF 전체 검증은 별도이다.\n"
     },
     {
       "id": "b000080",
-      "kind": "list",
+      "kind": "blank",
       "start_line": 109,
-      "end_line": 112,
+      "end_line": 109,
+      "raw": "\n"
+    },
+    {
+      "id": "b000081",
+      "kind": "paragraph",
+      "start_line": 110,
+      "end_line": 110,
+      "raw": "   ML 확장 그래프와 reader의 관절 표 선행 검사는 [검증 기록](DnaMlGraphVerification-20261028.md)에 정리한다. 제작용 그래프 전체의 호환성과 실제 앱 적용을 보장하지 않는다.\n"
+    },
+    {
+      "id": "b000082",
+      "kind": "list",
+      "start_line": 111,
+      "end_line": 114,
       "raw": "3. **생성과 상세 편집의 확대**: CC0 베이스·163개 본·스킨과 472개 타깃을 본체 소유 템플릿에 연결하였다. [템플릿 계약](CharacterTemplate.md)을 따른다. 파라미터 재계산 후 조형·가중치·모프·UV·관절·머티리얼 수정을 유지하는 [비파괴 편집 계층](EditLayers.md)을 추가하였다. [표면 전사와 부착](SkinSurface.md)은 자동 스킨·대칭 가중치·의상 연결을 본체에서 계산하고 파라미터·몸 조형·의상 조형을 함께 유지한다. [점 선택·마스크·브러시](MeshPainting.md)는 원본 점의 영역·잠금·페인팅과 대칭 조형을 제공한다. [화면 영역 선택](MeshScreenSelection.md)은 투영·깊이와 변형된 렌더 위치를 원본 점 선택에 연결한다. [골격 상세 편집](SkeletonEditing.md)은 원본 본 ID를 유지하는 TRS·방향·재부모화와 자식 변환 보존을 본체에서 처리한다. [균일 스케일 교환](SkeletonScale.md)은 원본 편집 프로젝트와 앱용 단위 기준 골격 사이의 변환·프로파일을 제공한다. [매크로 형상 생성](HumanMorphology.md)은 원본 348개 타깃과 성인 기본 혼합·접지를 연결하였다. [형상 대칭과 모프 미러](MeshSymmetry.md)는 원본 점 대응·한쪽 복사·평균·명시적 모프 법선과 기존 편집 계층을 연결한다. [명시적인 의상 맞춤](SurfaceFitting.md)은 본체 충돌 인터페이스를 통해 닫힌 몸과의 점·삼각형 여유 거리를 확보한다. [자동 재맞춤](AutomaticSurfaceFitting.md)은 본체 템플릿의 설정을 통해 생성·체형 변경·몸과 의상 조형·프로젝트 복원에 연결한다. [관절 자세 보정 리그](PoseCorrectives.md)는 작성된 보정 모프를 관절 회전에 연결한다. [에셋 교체와 선택 이전](SelectionTransfer.md)은 다른 토폴로지로 여러 선택을 한 이력 단계에서 전사한다. 화면 선택 UI·의미 기반 선택 대응·편집 계층 그룹, 자기 충돌·동적 천·제작용 자동 보정 형상 생성은 추가 작업이다.\n4. **외형과 얼굴 구조**: 별도 CC0 눈·치아·혀와 PNG 3개를 작성 대응표·눈 본·구강 스킨에 연결하였다. 해부학적 형상, 독립 손가락·눈꺼풀·입술, 제작용 피부·눈·머리카락·의상의 전체 품질과 세밀한 얼굴 처리는 구현·검토해야 한다. 현재 생성물은 해당 품질을 판정할 수 있는 제작용 에셋이 아니다.\n5. **앱별 적용**: [휴머노이드 본 대응](HumanoidCharacterization.md)은 본체의 원본 본 ID·의미 태그에서 역할을 연결하고 CC5의 본 대응 구역을 작성한다. 이름 변경·누락·중복·부모 계층을 검사하며 메시·골격을 소유하지 않는다. CC5 본 대응과 FBX·GLB·DNA의 사용 가능 범위는 독립 형식 검사와 네이티브 수치 검사로 확인한다. CC5·Blender·Unreal의 실제 실행 및 가져오기는 현재 사용자 지시에 따라 제외하며 그 동작을 검증했다고 주장하지 않는다.\n6. **플랫폼과 최적화**: 현재 개발 머신의 macOS arm64 검사에 더하여 Windows·Linux의 실제 빌드·실행, 큰 템플릿의 메모리·편집 지연, 많은 캐릭터의 변형 비용을 확인해야 한다.\n",
       "items": [
         {
@@ -740,20 +754,6 @@
       ]
     },
     {
-      "id": "b000081",
-      "kind": "blank",
-      "start_line": 113,
-      "end_line": 113,
-      "raw": "\n"
-    },
-    {
-      "id": "b000082",
-      "kind": "paragraph",
-      "start_line": 114,
-      "end_line": 114,
-      "raw": "[인체 본 대응](HumanoidCharacterization.md)은 명시적으로 선택한 CC5 G5와 Blender 인간 메타리그의 이름을 본체 골격의 역할로 연결한다. [인체 기준 자세 계획](HumanPosePlanner.md)은 공통 발끝 본이 없는 MakeHuman 인체에서 다섯 발가락 시작점의 중심을 사용한다. 연산·에셋·이력은 본체 소유이며, 실제 앱의 제어 리그나 제작용 외형이 완성되었다는 뜻은 아니다.\n"
-    },
-    {
       "id": "b000083",
       "kind": "blank",
       "start_line": 115,
@@ -762,12 +762,10 @@
     },
     {
       "id": "b000084",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 116,
       "end_line": 116,
-      "raw": "### 재현\n",
-      "level": 3,
-      "title": "재현"
+      "raw": "[인체 본 대응](HumanoidCharacterization.md)은 명시적으로 선택한 CC5 G5와 Blender 인간 메타리그의 이름을 본체 골격의 역할로 연결한다. [인체 기준 자세 계획](HumanPosePlanner.md)은 공통 발끝 본이 없는 MakeHuman 인체에서 다섯 발가락 시작점의 중심을 사용한다. 연산·에셋·이력은 본체 소유이며, 실제 앱의 제어 리그나 제작용 외형이 완성되었다는 뜻은 아니다.\n"
     },
     {
       "id": "b000085",
@@ -778,27 +776,29 @@
     },
     {
       "id": "b000086",
-      "kind": "fenced_code",
+      "kind": "heading",
       "start_line": 118,
-      "end_line": 125,
-      "raw": "```sh\ncmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON \\\n  -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n```\n",
-      "language": "sh",
-      "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON \\\n  -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n",
-      "closed": true
+      "end_line": 118,
+      "raw": "### 재현\n",
+      "level": 3,
+      "title": "재현"
     },
     {
       "id": "b000087",
       "kind": "blank",
-      "start_line": 126,
-      "end_line": 126,
+      "start_line": 119,
+      "end_line": 119,
       "raw": "\n"
     },
     {
       "id": "b000088",
-      "kind": "paragraph",
-      "start_line": 127,
+      "kind": "fenced_code",
+      "start_line": 120,
       "end_line": 127,
-      "raw": "현재 검증은 네이티브 수치·독립 형식·설치 소비자로 한정하며 외부 앱을 실행하지 않는다. 과거 보고서의 Blender 결과는 당시의 기록이다. 제작용 외형의 최종 품질은 아직 확인되지 않았다.\n"
+      "raw": "```sh\ncmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON \\\n  -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n```\n",
+      "language": "sh",
+      "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON \\\n  -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n",
+      "closed": true
     },
     {
       "id": "b000089",
@@ -812,7 +812,7 @@
       "kind": "paragraph",
       "start_line": 129,
       "end_line": 129,
-      "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
+      "raw": "현재 검증은 네이티브 수치·독립 형식·설치 소비자로 한정하며 외부 앱을 실행하지 않는다. 과거 보고서의 Blender 결과는 당시의 기록이다. 제작용 외형의 최종 품질은 아직 확인되지 않았다.\n"
     },
     {
       "id": "b000091",
@@ -826,7 +826,7 @@
       "kind": "paragraph",
       "start_line": 131,
       "end_line": 131,
-      "raw": "[매크로 형상 생성](HumanMorphology.md)은 나이·성별 형상·근육·질량·키·비율·그래픽 계열의 8개 축을 본체의 곡선 곱 드라이버로 연결한다. 매크로 자료 사용 시 총 820개 타깃과 258개 조절을 사용한다. 이 기능을 추가한 프로젝트 버전 7부터 접지를 보존한다. 앞의 날짜별 보고서는 해당 단계의 역사적 스냅샷이며 현재 프로젝트 버전은 아래의 얼굴 포즈 리그 계약을 따른다.\n"
+      "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
     },
     {
       "id": "b000093",
@@ -840,7 +840,7 @@
       "kind": "paragraph",
       "start_line": 133,
       "end_line": 133,
-      "raw": "[얼굴 포즈 리그](FacePoseRig.md)는 별도 CC0 표현 자료를 `expressionAssets`로 연결한다. 본체의 포즈 프로그램·세션을 참조하는 `generateRigged`와 편집 후 재연결, 명시적인 모프 스냅샷 베이크를 제공한다. [편집 리그 참조](EditorRigFollow.md)는 본체 편집기를 따라 조회·평가 시 리그를 재연결한다. 포즈 프로그램은 프로젝트 버전 8부터 보관한다. 현재 입력은 버전 1~35이다. 혼합 표면 변경과 선택 대응이 있으면 버전 35를, 삽입에 따른 선택 대응이 있으면 버전 34를, 제거에 따른 선택 대응이 있으면 버전 33을, 명시적 접지 점이 있으면 버전 32를, 선택한 점진 모프 리그가 있으면 버전 31을, 그렇지 않고 여러 후손의 중심을 향하는 기준 자세가 있으면 버전 30을, 그렇지 않고 재질의 알파·양면 설정이 있으면 버전 29를, 그 외에 [에셋과 선택을 함께 이전한 이력](SelectionTransfer.md)이 있으면 버전 28을, 그렇지 않고 [애니메이션 클립을 명시적으로 저장](ProjectAnimation.md)하면 버전 27을 작성한다. 그렇지 않고 선택한 [관절 자세 보정 리그](PoseCorrectives.md)가 있으면 버전 26을 작성한다. 그렇지 않고 회전·스케일을 보존하는 control-point 추종 기저가 있으면 버전 25를 작성한다. 그렇지 않고 [GLB 원본 탄젠트와 모프 탄젠트](GlbAuthoredTangents.md)가 자산 또는 이력에 있으면 버전 24를 작성한다. 그렇지 않은 경우 기본 모프 값은 [별도 계약](DefaultMorphWeights.md)에 따라 버전 23으로 보존한다. 기본 모프 값이 없고 DQ·혼합 스키닝 프로필이 보존된 에셋이나 레이어에 있으면 버전 22를, 그렇지 않고 [템플릿 모프 리그](TemplateMorphBaking.md)를 선택하면 버전 21을, 그렇지 않고 [FBX 원본 탄젠트](FbxTangents.md)가 현재 자산이나 보존 이력에 있으면 버전 20을, 그렇지 않고 [기준 법선 보정](BaseNormalEditing.md)이 보존 이력에 있으면 버전 19를 작성한다. [노멀 맵](NormalMaps.md)의 이미지·UV 선택이나 기본값이 아닌 강도가 에셋 또는 보존 이력에 있으면 버전 18을, [명명 점 선택](NamedPointSelections.md)이 현재 상태나 보존 이력에 있으면 버전 17을, 선택이 없고 여러 UV 세트 또는 이름·머티리얼 UV 선택이 있으면 버전 16을 작성한다. 명시적 자세 제약 순서가 있으면 버전 15를, 리그 제어 샘플 출처만 있으면 버전 14를 작성한다. 기준 자세 프로그램이 보존 이력이나 템플릿에 있으면 버전 13을 작성한다. 비기본 형상 정리 설정이 있고 보존 이력에 새 최대 변 왜곡 제약 정책이 하나라도 있으면 버전 12, 모두 종전 정책이면 버전 11을 작성한다. 형상 정리가 없고 계산된 표면 위의 평가 계층이 있으면 버전 10, 자동 맞춤 규칙만 있으면 버전 9, 모두 없으면 버전 8이다. [형상 정리](SurfaceFairing.md)의 설정을 함께 보존한다. [평가 계층](EvaluatedEditLayers.md)의 의미를 보존한다. [프로젝트 형식](Object3DProject.md)에 상세 계약을 기록한다. 기존 날짜별 보고서는 그 단계의 소스 스냅샷이다.\n"
+      "raw": "[매크로 형상 생성](HumanMorphology.md)은 나이·성별 형상·근육·질량·키·비율·그래픽 계열의 8개 축을 본체의 곡선 곱 드라이버로 연결한다. 매크로 자료 사용 시 총 820개 타깃과 258개 조절을 사용한다. 이 기능을 추가한 프로젝트 버전 7부터 접지를 보존한다. 앞의 날짜별 보고서는 해당 단계의 역사적 스냅샷이며 현재 프로젝트 버전은 아래의 얼굴 포즈 리그 계약을 따른다.\n"
     },
     {
       "id": "b000095",
@@ -854,7 +854,7 @@
       "kind": "paragraph",
       "start_line": 135,
       "end_line": 135,
-      "raw": "[인체 역할 방향](HumanPoseDirections.md)은 원본 본 ID와 원하는 오브젝트 방향만 본체에 전달한다. 실행 포즈·스킨·모프·법선 변환과 새 스냅샷은 [본체 포즈 연산](PoseSnapshots.md)이 처리하며 NSCharacter가 해당 버퍼나 엔진을 소유하지 않는다. DQ 캐릭터를 GLB로 전달할 때는 본체의 [자세·모프 스냅샷](DeformationSnapshots.md)에서 선택적으로 선형 프로필을 만들 수 있다. 선택한 기준 자세에만 해당하며 다른 자세의 원본 DQ 변형을 보장하지 않는다. 정본 생성·편집·교환용 스냅샷을 구분하고, 기준 포즈 변경 후의 리그와 모션 재타깃은 명시적으로 진행한다. 이 확장의 검증은 `PoseSnapshotVerification-20261027.json`이며 제작용 MetaHuman 자료와 외형 품질 작업은 남아 있으며 앱 실행 검증은 제외한다.\n"
+      "raw": "[얼굴 포즈 리그](FacePoseRig.md)는 별도 CC0 표현 자료를 `expressionAssets`로 연결한다. 본체의 포즈 프로그램·세션을 참조하는 `generateRigged`와 편집 후 재연결, 명시적인 모프 스냅샷 베이크를 제공한다. [편집 리그 참조](EditorRigFollow.md)는 본체 편집기를 따라 조회·평가 시 리그를 재연결한다. 포즈 프로그램은 프로젝트 버전 8부터 보관한다. 현재 입력은 버전 1~35이다. 혼합 표면 변경과 선택 대응이 있으면 버전 35를, 삽입에 따른 선택 대응이 있으면 버전 34를, 제거에 따른 선택 대응이 있으면 버전 33을, 명시적 접지 점이 있으면 버전 32를, 선택한 점진 모프 리그가 있으면 버전 31을, 그렇지 않고 여러 후손의 중심을 향하는 기준 자세가 있으면 버전 30을, 그렇지 않고 재질의 알파·양면 설정이 있으면 버전 29를, 그 외에 [에셋과 선택을 함께 이전한 이력](SelectionTransfer.md)이 있으면 버전 28을, 그렇지 않고 [애니메이션 클립을 명시적으로 저장](ProjectAnimation.md)하면 버전 27을 작성한다. 그렇지 않고 선택한 [관절 자세 보정 리그](PoseCorrectives.md)가 있으면 버전 26을 작성한다. 그렇지 않고 회전·스케일을 보존하는 control-point 추종 기저가 있으면 버전 25를 작성한다. 그렇지 않고 [GLB 원본 탄젠트와 모프 탄젠트](GlbAuthoredTangents.md)가 자산 또는 이력에 있으면 버전 24를 작성한다. 그렇지 않은 경우 기본 모프 값은 [별도 계약](DefaultMorphWeights.md)에 따라 버전 23으로 보존한다. 기본 모프 값이 없고 DQ·혼합 스키닝 프로필이 보존된 에셋이나 레이어에 있으면 버전 22를, 그렇지 않고 [템플릿 모프 리그](TemplateMorphBaking.md)를 선택하면 버전 21을, 그렇지 않고 [FBX 원본 탄젠트](FbxTangents.md)가 현재 자산이나 보존 이력에 있으면 버전 20을, 그렇지 않고 [기준 법선 보정](BaseNormalEditing.md)이 보존 이력에 있으면 버전 19를 작성한다. [노멀 맵](NormalMaps.md)의 이미지·UV 선택이나 기본값이 아닌 강도가 에셋 또는 보존 이력에 있으면 버전 18을, [명명 점 선택](NamedPointSelections.md)이 현재 상태나 보존 이력에 있으면 버전 17을, 선택이 없고 여러 UV 세트 또는 이름·머티리얼 UV 선택이 있으면 버전 16을 작성한다. 명시적 자세 제약 순서가 있으면 버전 15를, 리그 제어 샘플 출처만 있으면 버전 14를 작성한다. 기준 자세 프로그램이 보존 이력이나 템플릿에 있으면 버전 13을 작성한다. 비기본 형상 정리 설정이 있고 보존 이력에 새 최대 변 왜곡 제약 정책이 하나라도 있으면 버전 12, 모두 종전 정책이면 버전 11을 작성한다. 형상 정리가 없고 계산된 표면 위의 평가 계층이 있으면 버전 10, 자동 맞춤 규칙만 있으면 버전 9, 모두 없으면 버전 8이다. [형상 정리](SurfaceFairing.md)의 설정을 함께 보존한다. [평가 계층](EvaluatedEditLayers.md)의 의미를 보존한다. [프로젝트 형식](Object3DProject.md)에 상세 계약을 기록한다. 기존 날짜별 보고서는 그 단계의 소스 스냅샷이다.\n"
     },
     {
       "id": "b000097",
@@ -868,7 +868,7 @@
       "kind": "paragraph",
       "start_line": 137,
       "end_line": 137,
-      "raw": "[인체 기준 자세 계획](HumanPosePlanner.md)은 지정 좌표축으로 팔·다리·발·손목과 손가락을 위한 순서 있는 규칙을 구성한다. 손가락의 기존 첫 구간 방향을 본체에서 측정하고 나머지 대응 구간을 정렬한다. 제작용 기준 회전이나 애니메이션 재타깃을 자동 복원하지 않는다.\n"
+      "raw": "[인체 역할 방향](HumanPoseDirections.md)은 원본 본 ID와 원하는 오브젝트 방향만 본체에 전달한다. 실행 포즈·스킨·모프·법선 변환과 새 스냅샷은 [본체 포즈 연산](PoseSnapshots.md)이 처리하며 NSCharacter가 해당 버퍼나 엔진을 소유하지 않는다. DQ 캐릭터를 GLB로 전달할 때는 본체의 [자세·모프 스냅샷](DeformationSnapshots.md)에서 선택적으로 선형 프로필을 만들 수 있다. 선택한 기준 자세에만 해당하며 다른 자세의 원본 DQ 변형을 보장하지 않는다. 정본 생성·편집·교환용 스냅샷을 구분하고, 기준 포즈 변경 후의 리그와 모션 재타깃은 명시적으로 진행한다. 이 확장의 검증은 `PoseSnapshotVerification-20261027.json`이며 제작용 MetaHuman 자료와 외형 품질 작업은 남아 있으며 앱 실행 검증은 제외한다.\n"
     },
     {
       "id": "b000099",
@@ -882,7 +882,7 @@
       "kind": "paragraph",
       "start_line": 139,
       "end_line": 139,
-      "raw": "자세 계획의 현재 네이티브·설치 소비자 근거와 누락된 발끝 역할은 [검증 기록](HumanPosePlannerVerification-20261027.md)에 구분하여 보관한다.\n"
+      "raw": "[인체 기준 자세 계획](HumanPosePlanner.md)은 지정 좌표축으로 팔·다리·발·손목과 손가락을 위한 순서 있는 규칙을 구성한다. 손가락의 기존 첫 구간 방향을 본체에서 측정하고 나머지 대응 구간을 정렬한다. 제작용 기준 회전이나 애니메이션 재타깃을 자동 복원하지 않는다.\n"
     },
     {
       "id": "b000101",
@@ -896,7 +896,7 @@
       "kind": "paragraph",
       "start_line": 141,
       "end_line": 141,
-      "raw": "[인체 역할 리타깃 대응](HumanPoseRetarget.md)은 두 매핑의 같은 역할을 본체 본 ID에 연결하고 누락을 보고한다. [본체 포즈 리타깃](PoseRetarget.md)은 기준 회전 차이와 명시적 축 변환을 적용한다. 비균일 스케일·반사·IK·접촉·제작 리그 보정은 이 초기 경로의 범위 밖이다.\n"
+      "raw": "자세 계획의 현재 네이티브·설치 소비자 근거와 누락된 발끝 역할은 [검증 기록](HumanPosePlannerVerification-20261027.md)에 구분하여 보관한다.\n"
     },
     {
       "id": "b000103",
@@ -910,7 +910,7 @@
       "kind": "paragraph",
       "start_line": 143,
       "end_line": 143,
-      "raw": "[자동 자세 보정](AutomaticCorrectives.md)은 인체 역할과 기준 방향에서 팔꿈치·무릎 샘플을 계획하고 본체에서 DQ 기준 보정 모프를 생성한다. 관절마다 여러 굽힘 각도를 선택적으로 계획할 수 있다. 제작용 해부학적 보정이나 외부 앱의 실시간 제어를 자동으로 복원한 것은 아니다.\n"
+      "raw": "[인체 역할 리타깃 대응](HumanPoseRetarget.md)은 두 매핑의 같은 역할을 본체 본 ID에 연결하고 누락을 보고한다. [본체 포즈 리타깃](PoseRetarget.md)은 기준 회전 차이와 명시적 축 변환을 적용한다. 비균일 스케일·반사·IK·접촉·제작 리그 보정은 이 초기 경로의 범위 밖이다.\n"
     },
     {
       "id": "b000105",
@@ -924,7 +924,7 @@
       "kind": "paragraph",
       "start_line": 145,
       "end_line": 145,
-      "raw": "[애니메이션 샘플 변환](AnimationRetarget.md)은 이 대응을 사용해 지정 시각의 본체 클립을 다른 골격의 새 클립으로 만든다. 본체가 결과 키를 소유하며 NSCharacter는 대응 규칙만 제공한다. [GLB 골격 애니메이션 출력](GlbAnimation.md)과 [FBX 애니메이션 교환](FbxAnimationImport.md)은 지원되는 클립을 전달한다. [본체 클립 적용](Object3DAnimation.md)은 가져온 클립의 본과 메시별 모프를 함께 적용한다. 실제 앱의 적용은 검증하지 않는다.\n"
+      "raw": "[자동 자세 보정](AutomaticCorrectives.md)은 인체 역할과 기준 방향에서 팔꿈치·무릎 샘플을 계획하고 본체에서 DQ 기준 보정 모프를 생성한다. 관절마다 여러 굽힘 각도를 선택적으로 계획할 수 있다. 제작용 해부학적 보정이나 외부 앱의 실시간 제어를 자동으로 복원한 것은 아니다.\n"
     },
     {
       "id": "b000107",
@@ -938,7 +938,7 @@
       "kind": "paragraph",
       "start_line": 147,
       "end_line": 147,
-      "raw": "[인체 프레임 규칙](HumanPoseDirections.md)의 손 기준은 공용 [프레임 연산](PoseFrames.md)에 연결된다. 기하 법선의 좌우 부호와 실제 손바닥 의미를 구분하고, 대상별 전신·손가락 기준 프레임과 리그 재타깃은 추가 작업이며 앱 실행 검증은 제외한다.\n"
+      "raw": "[애니메이션 샘플 변환](AnimationRetarget.md)은 이 대응을 사용해 지정 시각의 본체 클립을 다른 골격의 새 클립으로 만든다. 본체가 결과 키를 소유하며 NSCharacter는 대응 규칙만 제공한다. [GLB 골격 애니메이션 출력](GlbAnimation.md)과 [FBX 애니메이션 교환](FbxAnimationImport.md)은 지원되는 클립을 전달한다. [본체 클립 적용](Object3DAnimation.md)은 가져온 클립의 본과 메시별 모프를 함께 적용한다. 실제 앱의 적용은 검증하지 않는다.\n"
     },
     {
       "id": "b000109",
@@ -952,7 +952,7 @@
       "kind": "paragraph",
       "start_line": 149,
       "end_line": 149,
-      "raw": "관절 프레임 확장 단계는 [JointFrameVerification-20261027.json](JointFrameVerification-20261027.json)에 기록한다. 관련 선별 검사·코어 전체 묶음·네 설치 소비자를 합한 609회와 FBX 8개의 실제 Blender 검사가 통과하였다. 메시·골격·템플릿·편집 이력·리그 실행 자료의 소유자는 계속 iiActorObject 본체이며 NSCharacter는 인체 의미 규칙과 본체 참조만 유지한다.\n"
+      "raw": "[인체 프레임 규칙](HumanPoseDirections.md)의 손 기준은 공용 [프레임 연산](PoseFrames.md)에 연결된다. 기하 법선의 좌우 부호와 실제 손바닥 의미를 구분하고, 대상별 전신·손가락 기준 프레임과 리그 재타깃은 추가 작업이며 앱 실행 검증은 제외한다.\n"
     },
     {
       "id": "b000111",
@@ -966,7 +966,7 @@
       "kind": "paragraph",
       "start_line": 151,
       "end_line": 151,
-      "raw": "[편집 가능한 기준 자세](PoseReference.md)는 원본 메시·바인드를 유지하면서 초기 자세와 파라미터·골격 편집 뒤의 재계산을 연결한다. NSCharacter는 역할·방향·면 기준을 본체 프로그램으로 변환하며 프로그램·캐시·이력·프로젝트 v13은 본체 소유이다. [모션 재타깃](AnimationRetarget.md)은 명시적 표본으로 본체에서 계산하며 앱 실행 검증은 제외한다.\n"
+      "raw": "관절 프레임 확장 단계는 [JointFrameVerification-20261027.json](JointFrameVerification-20261027.json)에 기록한다. 관련 선별 검사·코어 전체 묶음·네 설치 소비자를 합한 609회와 FBX 8개의 실제 Blender 검사가 통과하였다. 메시·골격·템플릿·편집 이력·리그 실행 자료의 소유자는 계속 iiActorObject 본체이며 NSCharacter는 인체 의미 규칙과 본체 참조만 유지한다.\n"
     },
     {
       "id": "b000113",
@@ -980,7 +980,7 @@
       "kind": "paragraph",
       "start_line": 153,
       "end_line": 153,
-      "raw": "[기준 자세와 직접 얼굴 샘플링](PoseReference.md) 단계에서는 네 구성·소비자를 합한 751회와 실제 Blender 가져오기 16개가 통과하였다. 실제 템플릿의 성인·아동, 각 59개 얼굴 제어를 유지하며 본체가 생성·편집·프로젝트 v13·교환을 수행한다. 전체 CC5·Unreal·제작용 MetaHuman 목표의 완료 조건은 유지한다. 상세 범위는 [PoseReferenceVerification-20261027.json](PoseReferenceVerification-20261027.json)에 기록한다.\n"
+      "raw": "[편집 가능한 기준 자세](PoseReference.md)는 원본 메시·바인드를 유지하면서 초기 자세와 파라미터·골격 편집 뒤의 재계산을 연결한다. NSCharacter는 역할·방향·면 기준을 본체 프로그램으로 변환하며 프로그램·캐시·이력·프로젝트 v13은 본체 소유이다. [모션 재타깃](AnimationRetarget.md)은 명시적 표본으로 본체에서 계산하며 앱 실행 검증은 제외한다.\n"
     },
     {
       "id": "b000115",
@@ -993,7 +993,21 @@
       "id": "b000116",
       "kind": "paragraph",
       "start_line": 155,
+      "end_line": 155,
+      "raw": "[기준 자세와 직접 얼굴 샘플링](PoseReference.md) 단계에서는 네 구성·소비자를 합한 751회와 실제 Blender 가져오기 16개가 통과하였다. 실제 템플릿의 성인·아동, 각 59개 얼굴 제어를 유지하며 본체가 생성·편집·프로젝트 v13·교환을 수행한다. 전체 CC5·Unreal·제작용 MetaHuman 목표의 완료 조건은 유지한다. 상세 범위는 [PoseReferenceVerification-20261027.json](PoseReferenceVerification-20261027.json)에 기록한다.\n"
+    },
+    {
+      "id": "b000117",
+      "kind": "blank",
+      "start_line": 156,
       "end_line": 156,
+      "raw": "\n"
+    },
+    {
+      "id": "b000118",
+      "kind": "paragraph",
+      "start_line": 157,
+      "end_line": 158,
       "raw": "[리그 제어 일괄 샘플](RigControlSamples.md)은 본체 소유 에셋과 리그를 사용하며 NSCharacter는 새 본체 에셋의 참조만 보관한다. DQ와 점별 혼합 스킨의 숨겨진 원본 점·법선도 샘플링하며 필요하면 기준과 샘플 끝점을 유지하는 선형 출력 방식을 선택할 수 있다. 앱 실행 검증은 현재 사용자 지시에 따라 제외한다.\n현재 구현과 지침 변경 전후의 테스트 범위는 [리그 샘플 검증 기록](RigControlSamplesVerification-20261027.md)에 구분해 기록한다.\n"
     }
   ],
@@ -1023,36 +1037,36 @@
       "start_line": 23
     },
     {
-      "block_id": "b000051",
+      "block_id": "b000053",
       "parent_id": "b000001",
       "level": 2,
       "title": "외부 형식의 근거",
       "anchor": "외부-형식의-근거",
-      "start_line": 76
+      "start_line": 78
     },
     {
-      "block_id": "b000055",
+      "block_id": "b000057",
       "parent_id": "b000001",
       "level": 2,
       "title": "현재 진행 상태",
       "anchor": "현재-진행-상태",
-      "start_line": 83
+      "start_line": 85
     },
     {
-      "block_id": "b000067",
-      "parent_id": "b000055",
+      "block_id": "b000069",
+      "parent_id": "b000057",
       "level": 3,
       "title": "남은 구현과 검증",
       "anchor": "남은-구현과-검증",
-      "start_line": 95
+      "start_line": 97
     },
     {
-      "block_id": "b000084",
-      "parent_id": "b000055",
+      "block_id": "b000086",
+      "parent_id": "b000057",
       "level": 3,
       "title": "재현",
       "anchor": "재현",
-      "start_line": 116
+      "start_line": 118
     }
   ],
   "indexes": {
@@ -1060,7 +1074,7 @@
       {
         "block_id": "b000005",
         "line": 5,
-        "text": "요구사항은 CC5 수준의 생성·상세 편집을 제공하고, CC5·Blender·Unreal에서 메시와 리그를 사용할 수 있게 하며 MetaHuman을 목표로 하는 독립 C++23 엔진이다. 캐릭터 계층의 위치는 `src/iiActorObject/NSCharacter/`이다. 공용 3D 엔진의 소유자는 iiActorObject 본체의 `Object3DEngine`이며 NSCharacter는 이를 참조한다. [공용 소유권 계약](Object3DEngine.md)을 따른다. 기존 `Skeleton`, `Pose`, `SkeletalMesh`, `CharacterRig`, `iiCharacter`를 재사용한다. Qt와 대상 상용 앱의 코드·에셋은 포함하지 않는다. 공개 CC0 인체 자료의 출처는 별도 패키지에 기록한다.",
+        "text": "요구사항은 CC5 수준의 생성·상세 편집을 제공하고, CC5·Blender·Unreal에서 메시와 리그를 사용할 수 있게 하며 MetaHuman을 목표로 하는 독립 C++23 엔진이다. 캐릭터 계층의 위치는 `src/NSCharacter/`이다. 공용 3D 엔진의 소유자는 iiActorObject 본체의 `Object3DEngine`이며 NSCharacter는 이를 참조한다. [공용 소유권 계약](Object3DEngine.md)을 따른다. 기존 `Skeleton`, `Pose`, `SkeletalMesh`, `CharacterRig`, `iiCharacter`를 재사용한다. Qt와 대상 상용 앱의 코드·에셋은 포함하지 않는다. 공개 CC0 인체 자료의 출처는 별도 패키지에 기록한다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
@@ -1107,148 +1121,148 @@
         "context": "list"
       },
       {
-        "block_id": "b000015",
-        "line": 34,
+        "block_id": "b000017",
+        "line": 36,
         "text": "| `HumanJointMapping` | 본체 에셋의 참조와 인체 역할 대응 메타데이터이다. 필수 누락·본 계층과 CC5 본 대응 출력에 사용한다. |",
         "basis": "lexical_match",
         "context": "table"
       },
       {
-        "block_id": "b000015",
-        "line": 35,
+        "block_id": "b000017",
+        "line": 37,
         "text": "| `detectHumanSkeletonConvention` | 정확한 본 이름과 부모 계층에서 완전한 내장 규칙 후보를 찾고, 서로 다른 대응은 자동 선택하지 않는다. |",
         "basis": "lexical_match",
         "context": "table"
       },
       {
-        "block_id": "b000017",
-        "line": 42,
+        "block_id": "b000019",
+        "line": 44,
         "text": "`CharacterEditor::transferWeightsWithNormalTies`는 본체의 [방향을 고려한 스킨 전사](SkinSurface.md)를 호출한다. 원본 캐릭터와 편집 세션은 모두 살아 있는 본체 엔진의 참조이며, 가중치·프로필 변경과 undo·레이어·프로젝트 이력은 본체가 소유한다. 방향이 모호한 표면에는 최근접 결과가 유지되므로 인체 의미 대응을 보장하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000021",
-        "line": 46,
+        "block_id": "b000023",
+        "line": 48,
         "text": "[피부 프리셋](FaceAssets.md)은 공식 CC0 인체 UV 이미지 20개 중 명시적으로 선택한 하나를 생성 시 적용하거나 기존 캐릭터 편집 이력에 추가한다. 체형 입력으로 피부를 추론하지 않으며 원본 셰이더나 최종 피부 품질을 재현했다고 주장하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000025",
-        "line": 50,
-        "text": "FBX 입력은 외부 경로를 읽지 않으며 입력 크기·정점·본·모프·파서 메모리를 제한한다. 원본 제어점·폴리곤·UV·법선 ID를 작성용 자료로 유지하고, 면별 머티리얼은 같은 메시 안에서 보관한다. [FBX 작성용 계약](FbxAuthoring.md)을 따른다. 선형·DQ·혼합 스키닝의 방식과 점별 혼합값을 보존하며, 표현할 수 없는 관절 shear와 여러 스킨 디포머는 명시적으로 거부한다. 기본 FBX 입력은 progressive morph를 거부하며, 별도의 [점진 모프 교환 API](ProgressiveMorphRig.md)는 중간 형상과 정적 제어 리그를 가져오고 단일 메시 또는 동일한 메시 인스턴스들이 공유하는 채널을 내보낸다. [점진 애니메이션 교환](ProgressiveMorphAnimation.md)은 골격·일반 표정·점진 제어를 함께 연결한다. 서로 다른 메시가 공유하는 채널의 출력은 남아 있다. 입력의 애니메이션 take·원본 앱 제약·지원하지 않는 텍스처 슬롯은 경고를 반환한다. 본체의 별도 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 이름을 연결한 모프 곡선을 작성한다. [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크와 본·표정 곡선을 본체 클립으로 표본화한다. 내장 PNG 기본색 자원은 [얼굴 부속 계약](FaceAssets.md)에 따라 읽으며, [호스트 해석기](FbxImageResolution.md)는 외부 이미지와 내장 PNG 외 자료를 PNG로 제공한다. 원본 자료가 모두 보존된 것처럼 조용히 처리하지 않는다.",
+        "block_id": "b000027",
+        "line": 52,
+        "text": "FBX 입력은 외부 경로를 읽지 않으며 입력 크기·정점·본·모프·파서 메모리를 제한한다. 원본 제어점·폴리곤·UV·법선 ID를 작성용 자료로 유지하고, 면별 머티리얼은 같은 메시 안에서 보관한다. [FBX 작성용 계약](FbxAuthoring.md)을 따른다. 선형·DQ·혼합 스키닝의 방식과 점별 혼합값을 보존하며, 표현할 수 없는 관절 shear와 여러 스킨 디포머는 명시적으로 거부한다. 기본 FBX 입력은 progressive morph를 거부하며, 별도의 [점진 모프 교환 API](ProgressiveMorphRig.md)는 중간 형상과 정적 제어 리그를 가져오고 여러 메시가 공유하는 채널을 내보낸다. 서로 다른 메시의 FBX 채널을 SDK의 공동 제어로 복원하려면 작성용 메타데이터가 유지되어야 한다. [점진 애니메이션 교환](ProgressiveMorphAnimation.md)은 골격·일반 표정·점진 제어를 함께 연결한다. 입력의 애니메이션 take·원본 앱 제약·지원하지 않는 텍스처 슬롯은 경고를 반환한다. 본체의 별도 [FBX 애니메이션 출력](FbxAnimation.md)은 골격과 명시적으로 이름을 연결한 모프 곡선을 작성한다. [애니메이션 포함 가져오기](FbxAnimationImport.md)는 여러 테이크와 본·표정 곡선을 본체 클립으로 표본화한다. 내장 PNG 기본색 자원은 [얼굴 부속 계약](FaceAssets.md)에 따라 읽으며, [호스트 해석기](FbxImageResolution.md)는 외부 이미지와 내장 PNG 외 자료를 PNG로 제공한다. 원본 자료가 모두 보존된 것처럼 조용히 처리하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000029",
-        "line": 54,
+        "block_id": "b000031",
+        "line": 56,
         "text": "호스트가 UI와 렌더러를 소유한다. 생성·편집 코어는 Blender, Unreal, CC5의 런타임에 의존하지 않는다. 교환 경로와 외부 앱 검증은 별도 경계이다. 좌표는 오른손, Y 위쪽, 미터이며 표준 런타임의 행렬·스키닝 규약을 그대로 사용한다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000033",
-        "line": 58,
+        "block_id": "b000035",
+        "line": 60,
         "text": "자동 바인딩은 관절 엔벌로프의 기하 거리 방식과 [표면 간선 최단 경로 방식](SurfaceGeodesicSkin.md)을 제공한다. 후자는 자동 또는 명시적 표면 시드와 미도달 정책을 사용한다. [골격 기반 추정](SkeletonEnvelopes.md)은 기존 바인드 자세와 모든 자식 분기에서 선분을 만들며 편집기에 한 번에 적용할 수 있다. 프로시저 인체 생성기는 자체 골격 엔벌로프를 사용하여 표면 바인딩을 선택할 수 있으며 기본값은 기존 기하 거리 방식이다. 임의 스캔에서 관절을 추론하는 AI 모델이나 voxel-geodesic 해법은 아직 아니다. 인체 생성기는 독자 프로시저 인체를 생성하며 기존 상용 베이스 메시의 품질을 주장하지 않는다. 같은 생성 해상도에서 체형을 바꾸면 정점 순서를 유지하도록 구성한다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000039",
-        "line": 64,
+        "block_id": "b000041",
+        "line": 66,
         "text": "[다른 메시의 편집용 템플릿화](TemplateAdapt.md)는 본체 엔진에 원본 형상 타깃·조절·관절 기준을 전사한 새 템플릿을 만든다. 렌더 메시의 작성용 토폴로지 승격과 선택적 런타임 모프 출력도 본체가 담당한다. NSCharacter는 새 템플릿 핸들만 참조하며 이 결과를 임의 인체에 대한 해부학적 자동 리깅이나 앱 호환성의 증거로 해석하지 않는다.",
-        "basis": "lexical_match",
-        "context": "paragraph"
-      },
-      {
-        "block_id": "b000047",
-        "line": 72,
-        "text": "스킨 런타임과 FBX는 원본의 유효한 가중치를 보존하며 GLB도 필요한 만큼 `JOINTS_n`·`WEIGHTS_n`을 작성한다. 4개 또는 8개로 자동 절단하지 않는다. 자동 바인딩과 가중치 평활화에서만 호출자가 1~32개의 최대 영향 수를 명시한다. 12개 본의 가중치를 가진 독립 fixture에서 실제 Blender 변형과 FBX 재입력을 검사한다. 외부 앱의 자체 가져오기 설정이 가중치를 제한하는지 여부는 별도 확인해야 한다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
         "block_id": "b000049",
         "line": 74,
+        "text": "스킨 런타임과 FBX는 원본의 유효한 가중치를 보존하며 GLB도 필요한 만큼 `JOINTS_n`·`WEIGHTS_n`을 작성한다. 4개 또는 8개로 자동 절단하지 않는다. 자동 바인딩과 가중치 평활화에서만 호출자가 1~32개의 최대 영향 수를 명시한다. 12개 본의 가중치를 가진 독립 fixture에서 실제 Blender 변형과 FBX 재입력을 검사한다. 외부 앱의 자체 가져오기 설정이 가중치를 제한하는지 여부는 별도 확인해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000051",
+        "line": 76,
         "text": "현재 머티리얼 교환 범위는 기본 색·불투명도·거칠기·금속성 상수와 PNG 기본색·노멀 맵이다. FBX의 외부 이미지는 호스트가 제공하며 지원 형식의 변환은 선택 사항이다. [노멀 맵 계약](NormalMaps.md)의 FBX 강도와 탄젠트 제한을 따른다. 본체는 [재질의 알파 방식·임계값·양면 여부](MaterialSurface.md)를 보존하고 NSCharacter는 편집을 위임한다. GLB에는 표준 속성으로 기록하며, FBX에서는 표준 불투명도와 별도의 SDK 전용 속성으로 보존한다. FBX의 거칠기·금속성도 독립 메타데이터로 보존한다. 외부 앱의 셰이더 해석, 복잡한 셰이더 그래프나 전체 재질 슬롯의 복원을 보장하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000063",
-        "line": 91,
+        "block_id": "b000065",
+        "line": 93,
         "text": "생성·편집 코어와 FBX·GLB 교환 경로를 구현하였다. 전체 목표는 진행 중이다. 이전 생성·편집 단계는 `NSCharacterVerification-20261026.json`에 기록하였다. 초기 본체 소유권 변경 단계는 `Object3DOwnershipVerification-20261026.json`에, 현재 공유 라이브러리의 소유권 7개 검사와 코어 전용·설치 소비자의 재검증은 `Object3DOwnershipVerification-20261027.json`에 기록한다. 후자는 동시에 실행 중인 전체 공유·정적 검사 행렬의 완료를 뜻하지 않는다. 실제 DNA·RigLogic 연결 이후의 검증은 `DnaRigVerification-20261026.json`에 기록한다. 작성용 토폴로지·편집 DNA 단계는 `TopologyDnaVerification-20261026.json`에 기록한다. 이 기록들은 각각 해당 시점의 소스 스냅샷이다. 제작용 자료 계약과 최종 시각 품질에 필요한 작업은 남아 있다. 실제 앱 실행 검증은 사용자 지시에 따라 제외하며, 앱 호환성은 검증된 것으로 주장하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000073",
-        "line": 102,
+        "block_id": "b000075",
+        "line": 104,
         "text": "2. **MetaHuman DNA와 실제 얼굴 리그**: 로컬 `/Volumes/Storage/Workspace/Reverse/Projects/Epic Games/OpenRigLogic`에는 Epic의 MIT 소스가 있다. 확인한 리비전은 `55756ac`, RigLogic `13.2.9-hotfix1`이며 UE 5.8.4 스냅샷이다. 해당 리비전의 MIT 소스를 수정 없이 포함하여 본체 DNA reader와 실제 RigLogic 평가를 연결하였다. DNA의 공용 메시·골격·실행 자료는 본체 엔진이 소유하며 NSCharacter는 참조한다. 독립 writer fixture로 GUI/raw·PSD·관절·모프·애니메이티드 맵·LOD·축 변환을 검사한다. 편집 DNA 저장은 본체 스냅샷과 native reader로 검증하였다. 제작용 DNA의 ML·RBF·twist/swing 회귀 데이터와 실제 MetaHuman 적용은 남아 있다. [DNA 계약](DnaRig.md)을 따른다. Python wrapper와 별도 상용 샘플 에셋은 포함하지 않는다.",
         "basis": "lexical_match",
         "context": "list"
       },
       {
-        "block_id": "b000075",
-        "line": 104,
+        "block_id": "b000077",
+        "line": 106,
         "text": "신경망 레이어의 경계 검사와 합성 단층·다층·leaky ReLU·LOD 평가 근거는 [DNA 신경망 검증 기록](DnaMlVerification-20261028.md)에 기록한다. 제작용 DNA와 확장 그래프 전체의 근거를 대신하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000079",
-        "line": 108,
+        "block_id": "b000081",
+        "line": 110,
         "text": "ML 확장 그래프와 reader의 관절 표 선행 검사는 [검증 기록](DnaMlGraphVerification-20261028.md)에 정리한다. 제작용 그래프 전체의 호환성과 실제 앱 적용을 보장하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000080",
-        "line": 110,
+        "block_id": "b000082",
+        "line": 112,
         "text": "4. **외형과 얼굴 구조**: 별도 CC0 눈·치아·혀와 PNG 3개를 작성 대응표·눈 본·구강 스킨에 연결하였다. 해부학적 형상, 독립 손가락·눈꺼풀·입술, 제작용 피부·눈·머리카락·의상의 전체 품질과 세밀한 얼굴 처리는 구현·검토해야 한다. 현재 생성물은 해당 품질을 판정할 수 있는 제작용 에셋이 아니다.",
         "basis": "lexical_match",
         "context": "list"
       },
       {
-        "block_id": "b000080",
-        "line": 111,
+        "block_id": "b000082",
+        "line": 113,
         "text": "5. **앱별 적용**: [휴머노이드 본 대응](HumanoidCharacterization.md)은 본체의 원본 본 ID·의미 태그에서 역할을 연결하고 CC5의 본 대응 구역을 작성한다. 이름 변경·누락·중복·부모 계층을 검사하며 메시·골격을 소유하지 않는다. CC5 본 대응과 FBX·GLB·DNA의 사용 가능 범위는 독립 형식 검사와 네이티브 수치 검사로 확인한다. CC5·Blender·Unreal의 실제 실행 및 가져오기는 현재 사용자 지시에 따라 제외하며 그 동작을 검증했다고 주장하지 않는다.",
         "basis": "lexical_match",
         "context": "list"
       },
       {
-        "block_id": "b000080",
-        "line": 112,
+        "block_id": "b000082",
+        "line": 114,
         "text": "6. **플랫폼과 최적화**: 현재 개발 머신의 macOS arm64 검사에 더하여 Windows·Linux의 실제 빌드·실행, 큰 템플릿의 메모리·편집 지연, 많은 캐릭터의 변형 비용을 확인해야 한다.",
         "basis": "lexical_match",
         "context": "list"
       },
       {
-        "block_id": "b000088",
-        "line": 127,
+        "block_id": "b000090",
+        "line": 129,
         "text": "현재 검증은 네이티브 수치·독립 형식·설치 소비자로 한정하며 외부 앱을 실행하지 않는다. 과거 보고서의 Blender 결과는 당시의 기록이다. 제작용 외형의 최종 품질은 아직 확인되지 않았다.",
-        "basis": "lexical_match",
-        "context": "paragraph"
-      },
-      {
-        "block_id": "b000096",
-        "line": 135,
-        "text": "[인체 역할 방향](HumanPoseDirections.md)은 원본 본 ID와 원하는 오브젝트 방향만 본체에 전달한다. 실행 포즈·스킨·모프·법선 변환과 새 스냅샷은 [본체 포즈 연산](PoseSnapshots.md)이 처리하며 NSCharacter가 해당 버퍼나 엔진을 소유하지 않는다. DQ 캐릭터를 GLB로 전달할 때는 본체의 [자세·모프 스냅샷](DeformationSnapshots.md)에서 선택적으로 선형 프로필을 만들 수 있다. 선택한 기준 자세에만 해당하며 다른 자세의 원본 DQ 변형을 보장하지 않는다. 정본 생성·편집·교환용 스냅샷을 구분하고, 기준 포즈 변경 후의 리그와 모션 재타깃은 명시적으로 진행한다. 이 확장의 검증은 `PoseSnapshotVerification-20261027.json`이며 제작용 MetaHuman 자료와 외형 품질 작업은 남아 있으며 앱 실행 검증은 제외한다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
         "block_id": "b000098",
         "line": 137,
+        "text": "[인체 역할 방향](HumanPoseDirections.md)은 원본 본 ID와 원하는 오브젝트 방향만 본체에 전달한다. 실행 포즈·스킨·모프·법선 변환과 새 스냅샷은 [본체 포즈 연산](PoseSnapshots.md)이 처리하며 NSCharacter가 해당 버퍼나 엔진을 소유하지 않는다. DQ 캐릭터를 GLB로 전달할 때는 본체의 [자세·모프 스냅샷](DeformationSnapshots.md)에서 선택적으로 선형 프로필을 만들 수 있다. 선택한 기준 자세에만 해당하며 다른 자세의 원본 DQ 변형을 보장하지 않는다. 정본 생성·편집·교환용 스냅샷을 구분하고, 기준 포즈 변경 후의 리그와 모션 재타깃은 명시적으로 진행한다. 이 확장의 검증은 `PoseSnapshotVerification-20261027.json`이며 제작용 MetaHuman 자료와 외형 품질 작업은 남아 있으며 앱 실행 검증은 제외한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000100",
+        "line": 139,
         "text": "[인체 기준 자세 계획](HumanPosePlanner.md)은 지정 좌표축으로 팔·다리·발·손목과 손가락을 위한 순서 있는 규칙을 구성한다. 손가락의 기존 첫 구간 방향을 본체에서 측정하고 나머지 대응 구간을 정렬한다. 제작용 기준 회전이나 애니메이션 재타깃을 자동 복원하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000106",
-        "line": 145,
+        "block_id": "b000108",
+        "line": 147,
         "text": "[애니메이션 샘플 변환](AnimationRetarget.md)은 이 대응을 사용해 지정 시각의 본체 클립을 다른 골격의 새 클립으로 만든다. 본체가 결과 키를 소유하며 NSCharacter는 대응 규칙만 제공한다. [GLB 골격 애니메이션 출력](GlbAnimation.md)과 [FBX 애니메이션 교환](FbxAnimationImport.md)은 지원되는 클립을 전달한다. [본체 클립 적용](Object3DAnimation.md)은 가져온 클립의 본과 메시별 모프를 함께 적용한다. 실제 앱의 적용은 검증하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -1256,7 +1270,7 @@
     ],
     "commands": [
       {
-        "block_id": "b000086",
+        "block_id": "b000088",
         "language": "sh",
         "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON \\\n  -DIIACTOROBJECT_VALIDATE_CHARACTER_FORMATS=ON \\\n  -DIIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF \\\n  -DIIACTOROBJECT_BLENDER_EXECUTABLE=\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --no-tests=error\n"
       }
@@ -1270,751 +1284,765 @@
         "line": 5
       },
       {
-        "block_id": "b000017",
+        "block_id": "b000015",
+        "label": "책임 분리 보고서",
+        "target": "ResponsibilitySeparation-20261029.md",
+        "kind": "relative",
+        "line": 25
+      },
+      {
+        "block_id": "b000015",
+        "label": "기계 판독 책임 목록",
+        "target": "../resources/architecture/ResponsibilityMap.json",
+        "kind": "relative",
+        "line": 25
+      },
+      {
+        "block_id": "b000019",
         "label": "방향을 고려한 스킨 전사",
         "target": "SkinSurface.md",
-        "kind": "relative",
-        "line": 42
-      },
-      {
-        "block_id": "b000019",
-        "label": "GLB 자산 입력",
-        "target": "GlbImport.md",
-        "kind": "relative",
-        "line": 44
-      },
-      {
-        "block_id": "b000019",
-        "label": "여러 스킨",
-        "target": "GlbMultiSkin.md",
-        "kind": "relative",
-        "line": 44
-      },
-      {
-        "block_id": "b000019",
-        "label": "클립 변환",
-        "target": "GlbAnimationBake.md",
         "kind": "relative",
         "line": 44
       },
       {
         "block_id": "b000021",
-        "label": "피부 프리셋",
-        "target": "FaceAssets.md",
+        "label": "GLB 자산 입력",
+        "target": "GlbImport.md",
+        "kind": "relative",
+        "line": 46
+      },
+      {
+        "block_id": "b000021",
+        "label": "여러 스킨",
+        "target": "GlbMultiSkin.md",
+        "kind": "relative",
+        "line": 46
+      },
+      {
+        "block_id": "b000021",
+        "label": "클립 변환",
+        "target": "GlbAnimationBake.md",
         "kind": "relative",
         "line": 46
       },
       {
         "block_id": "b000023",
-        "label": "인체 부속 선택",
-        "target": "HumanAccessories.md",
+        "label": "피부 프리셋",
+        "target": "FaceAssets.md",
         "kind": "relative",
         "line": 48
       },
       {
         "block_id": "b000025",
-        "label": "FBX 작성용 계약",
-        "target": "FbxAuthoring.md",
-        "kind": "relative",
-        "line": 50
-      },
-      {
-        "block_id": "b000025",
-        "label": "점진 모프 교환 API",
-        "target": "ProgressiveMorphRig.md",
-        "kind": "relative",
-        "line": 50
-      },
-      {
-        "block_id": "b000025",
-        "label": "점진 애니메이션 교환",
-        "target": "ProgressiveMorphAnimation.md",
-        "kind": "relative",
-        "line": 50
-      },
-      {
-        "block_id": "b000025",
-        "label": "FBX 애니메이션 출력",
-        "target": "FbxAnimation.md",
-        "kind": "relative",
-        "line": 50
-      },
-      {
-        "block_id": "b000025",
-        "label": "애니메이션 포함 가져오기",
-        "target": "FbxAnimationImport.md",
-        "kind": "relative",
-        "line": 50
-      },
-      {
-        "block_id": "b000025",
-        "label": "얼굴 부속 계약",
-        "target": "FaceAssets.md",
-        "kind": "relative",
-        "line": 50
-      },
-      {
-        "block_id": "b000025",
-        "label": "호스트 해석기",
-        "target": "FbxImageResolution.md",
+        "label": "인체 부속 선택",
+        "target": "HumanAccessories.md",
         "kind": "relative",
         "line": 50
       },
       {
         "block_id": "b000027",
-        "label": "출처와 해시",
-        "target": "../src/third_party/ufbx/PROVENANCE.md",
+        "label": "FBX 작성용 계약",
+        "target": "FbxAuthoring.md",
         "kind": "relative",
         "line": 52
       },
       {
-        "block_id": "b000033",
-        "label": "표면 간선 최단 경로 방식",
-        "target": "SurfaceGeodesicSkin.md",
+        "block_id": "b000027",
+        "label": "점진 모프 교환 API",
+        "target": "ProgressiveMorphRig.md",
         "kind": "relative",
-        "line": 58
+        "line": 52
       },
       {
-        "block_id": "b000033",
-        "label": "골격 기반 추정",
-        "target": "SkeletonEnvelopes.md",
+        "block_id": "b000027",
+        "label": "점진 애니메이션 교환",
+        "target": "ProgressiveMorphAnimation.md",
         "kind": "relative",
-        "line": 58
+        "line": 52
+      },
+      {
+        "block_id": "b000027",
+        "label": "FBX 애니메이션 출력",
+        "target": "FbxAnimation.md",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000027",
+        "label": "애니메이션 포함 가져오기",
+        "target": "FbxAnimationImport.md",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000027",
+        "label": "얼굴 부속 계약",
+        "target": "FaceAssets.md",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000027",
+        "label": "호스트 해석기",
+        "target": "FbxImageResolution.md",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000029",
+        "label": "출처와 해시",
+        "target": "../src/third_party/ufbx/PROVENANCE.md",
+        "kind": "relative",
+        "line": 54
       },
       {
         "block_id": "b000035",
-        "label": "듀얼 쿼터니언 스키닝",
-        "target": "DualQuaternionSkinning.md",
+        "label": "표면 간선 최단 경로 방식",
+        "target": "SurfaceGeodesicSkin.md",
+        "kind": "relative",
+        "line": 60
+      },
+      {
+        "block_id": "b000035",
+        "label": "골격 기반 추정",
+        "target": "SkeletonEnvelopes.md",
         "kind": "relative",
         "line": 60
       },
       {
         "block_id": "b000037",
-        "label": "템플릿 리그 전사",
-        "target": "TemplateRigTransfer.md",
-        "kind": "relative",
-        "line": 62
-      },
-      {
-        "block_id": "b000037",
-        "label": "가까운 표면을 통한 자동 앵커 투영",
-        "target": "TemplateRigProjection.md",
+        "label": "듀얼 쿼터니언 스키닝",
+        "target": "DualQuaternionSkinning.md",
         "kind": "relative",
         "line": 62
       },
       {
         "block_id": "b000039",
-        "label": "다른 메시의 편집용 템플릿화",
-        "target": "TemplateAdapt.md",
+        "label": "템플릿 리그 전사",
+        "target": "TemplateRigTransfer.md",
+        "kind": "relative",
+        "line": 64
+      },
+      {
+        "block_id": "b000039",
+        "label": "가까운 표면을 통한 자동 앵커 투영",
+        "target": "TemplateRigProjection.md",
         "kind": "relative",
         "line": 64
       },
       {
         "block_id": "b000041",
-        "label": "점 선택 마스크 투영",
-        "target": "MeshMaskProjection.md",
+        "label": "다른 메시의 편집용 템플릿화",
+        "target": "TemplateAdapt.md",
         "kind": "relative",
         "line": 66
       },
       {
         "block_id": "b000043",
+        "label": "점 선택 마스크 투영",
+        "target": "MeshMaskProjection.md",
+        "kind": "relative",
+        "line": 68
+      },
+      {
+        "block_id": "b000045",
         "label": "표면 추종 관계",
         "target": "TemplateAdapt.md",
         "kind": "relative",
-        "line": 68
+        "line": 70
       },
       {
-        "block_id": "b000043",
+        "block_id": "b000045",
         "label": "모프 샘플",
         "target": "TemplateMorphBaking.md",
         "kind": "relative",
-        "line": 68
+        "line": 70
       },
       {
-        "block_id": "b000045",
+        "block_id": "b000047",
         "label": "여러 메시 모프 제어",
         "target": "MorphChannelRig.md",
         "kind": "relative",
-        "line": 70
+        "line": 72
       },
       {
-        "block_id": "b000045",
+        "block_id": "b000047",
         "label": "GLB 모프 애니메이션 출력",
         "target": "GlbAnimation.md",
         "kind": "relative",
-        "line": 70
+        "line": 72
       },
       {
-        "block_id": "b000049",
+        "block_id": "b000051",
         "label": "노멀 맵 계약",
         "target": "NormalMaps.md",
         "kind": "relative",
-        "line": 74
+        "line": 76
       },
       {
-        "block_id": "b000049",
+        "block_id": "b000051",
         "label": "재질의 알파 방식·임계값·양면 여부",
         "target": "MaterialSurface.md",
         "kind": "relative",
-        "line": 74
+        "line": 76
       },
       {
-        "block_id": "b000053",
+        "block_id": "b000055",
         "label": "CC5 가져오기",
         "target": "https://manual.reallusion.com/Character-Creator-5/Content/ENU/5.0/09-Pipeline/Importing-Methods.htm",
-        "kind": "external",
-        "line": 78
-      },
-      {
-        "block_id": "b000053",
-        "label": "Unreal FBX 스켈레탈 파이프라인",
-        "target": "https://dev.epicgames.com/documentation/en-us/unreal-engine/fbx-skeletal-mesh-pipeline-in-unreal-engine",
-        "kind": "external",
-        "line": 79
-      },
-      {
-        "block_id": "b000053",
-        "label": "MetaHuman From Template",
-        "target": "https://dev.epicgames.com/documentation/metahuman/metahuman-creator-from-template-tool-in-unreal-engine",
         "kind": "external",
         "line": 80
       },
       {
-        "block_id": "b000053",
-        "label": "MetaHuman From Custom Mesh",
-        "target": "https://dev.epicgames.com/documentation/metahuman/metahuman-creator-from-custom-mesh-tool-in-unreal-engine",
+        "block_id": "b000055",
+        "label": "Unreal FBX 스켈레탈 파이프라인",
+        "target": "https://dev.epicgames.com/documentation/en-us/unreal-engine/fbx-skeletal-mesh-pipeline-in-unreal-engine",
         "kind": "external",
         "line": 81
       },
       {
-        "block_id": "b000057",
+        "block_id": "b000055",
+        "label": "MetaHuman From Template",
+        "target": "https://dev.epicgames.com/documentation/metahuman/metahuman-creator-from-template-tool-in-unreal-engine",
+        "kind": "external",
+        "line": 82
+      },
+      {
+        "block_id": "b000055",
+        "label": "MetaHuman From Custom Mesh",
+        "target": "https://dev.epicgames.com/documentation/metahuman/metahuman-creator-from-custom-mesh-tool-in-unreal-engine",
+        "kind": "external",
+        "line": 83
+      },
+      {
+        "block_id": "b000059",
         "label": "명시적 모프 법선",
         "target": "MorphNormals.md",
         "kind": "relative",
-        "line": 85
+        "line": 87
       },
       {
-        "block_id": "b000059",
+        "block_id": "b000061",
         "label": "자체 프로젝트 저장",
         "target": "Object3DProject.md",
         "kind": "relative",
-        "line": 87
+        "line": 89
       },
       {
-        "block_id": "b000059",
+        "block_id": "b000061",
         "label": "브러시 단계",
         "target": "MeshPainting.md",
         "kind": "relative",
-        "line": 87
+        "line": 89
       },
       {
-        "block_id": "b000065",
+        "block_id": "b000067",
         "label": "의미 조절과 복합 드라이버",
         "target": "TemplateControls.md",
         "kind": "relative",
-        "line": 93
+        "line": 95
       },
       {
-        "block_id": "b000065",
+        "block_id": "b000067",
         "label": "8축 형상 생성",
         "target": "HumanMorphology.md",
         "kind": "relative",
-        "line": 93
-      },
-      {
-        "block_id": "b000069",
-        "label": "외부 앱 편집 병합",
-        "target": "ExternalEdits.md",
-        "kind": "relative",
-        "line": 97
-      },
-      {
-        "block_id": "b000069",
-        "label": "논리 모프 채널",
-        "target": "LogicalMorphChannels.md",
-        "kind": "relative",
-        "line": 97
+        "line": 95
       },
       {
         "block_id": "b000071",
-        "label": "GLB 외부 편집 자동 대응",
-        "target": "GlbExternalEdits.md",
+        "label": "외부 앱 편집 병합",
+        "target": "ExternalEdits.md",
+        "kind": "relative",
+        "line": 99
+      },
+      {
+        "block_id": "b000071",
+        "label": "논리 모프 채널",
+        "target": "LogicalMorphChannels.md",
         "kind": "relative",
         "line": 99
       },
       {
         "block_id": "b000073",
-        "label": "면별 탄젠트 계산과 GLB 모프 출력",
-        "target": "MeshTangents.md",
+        "label": "GLB 외부 편집 자동 대응",
+        "target": "GlbExternalEdits.md",
         "kind": "relative",
         "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "FBX 기준 탄젠트 출력",
-        "target": "FbxTangents.md",
-        "kind": "relative",
-        "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "별도 계약",
-        "target": "GlbAuthoredTangents.md",
-        "kind": "relative",
-        "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "별도 계약",
-        "target": "MultipleUvSets.md",
-        "kind": "relative",
-        "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "검증 기록",
-        "target": "MultipleUvSetsVerification-20261028.md",
-        "kind": "relative",
-        "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "토폴로지 계약",
-        "target": "MeshTopology.md",
-        "kind": "relative",
-        "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "FBX 계약",
-        "target": "FbxAuthoring.md",
-        "kind": "relative",
-        "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "DNA 저장 계약",
-        "target": "DnaEditing.md",
-        "kind": "relative",
-        "line": 101
-      },
-      {
-        "block_id": "b000073",
-        "label": "DNA 계약",
-        "target": "DnaRig.md",
-        "kind": "relative",
-        "line": 102
       },
       {
         "block_id": "b000075",
-        "label": "DNA 신경망 검증 기록",
-        "target": "DnaMlVerification-20261028.md",
+        "label": "면별 탄젠트 계산과 GLB 모프 출력",
+        "target": "MeshTangents.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "FBX 기준 탄젠트 출력",
+        "target": "FbxTangents.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "별도 계약",
+        "target": "GlbAuthoredTangents.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "별도 계약",
+        "target": "MultipleUvSets.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "검증 기록",
+        "target": "MultipleUvSetsVerification-20261028.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "토폴로지 계약",
+        "target": "MeshTopology.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "FBX 계약",
+        "target": "FbxAuthoring.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "DNA 저장 계약",
+        "target": "DnaEditing.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000075",
+        "label": "DNA 계약",
+        "target": "DnaRig.md",
         "kind": "relative",
         "line": 104
       },
       {
         "block_id": "b000077",
-        "label": "검증 기록",
-        "target": "DnaTwistVerification-20261028.md",
-        "kind": "relative",
-        "line": 106
-      },
-      {
-        "block_id": "b000077",
-        "label": "별도 기록",
-        "target": "DnaRbfVerification-20261028.md",
+        "label": "DNA 신경망 검증 기록",
+        "target": "DnaMlVerification-20261028.md",
         "kind": "relative",
         "line": 106
       },
       {
         "block_id": "b000079",
         "label": "검증 기록",
-        "target": "DnaMlGraphVerification-20261028.md",
+        "target": "DnaTwistVerification-20261028.md",
         "kind": "relative",
         "line": 108
       },
       {
-        "block_id": "b000080",
+        "block_id": "b000079",
+        "label": "별도 기록",
+        "target": "DnaRbfVerification-20261028.md",
+        "kind": "relative",
+        "line": 108
+      },
+      {
+        "block_id": "b000081",
+        "label": "검증 기록",
+        "target": "DnaMlGraphVerification-20261028.md",
+        "kind": "relative",
+        "line": 110
+      },
+      {
+        "block_id": "b000082",
         "label": "템플릿 계약",
         "target": "CharacterTemplate.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "비파괴 편집 계층",
-        "target": "EditLayers.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "표면 전사와 부착",
-        "target": "SkinSurface.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "점 선택·마스크·브러시",
-        "target": "MeshPainting.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "화면 영역 선택",
-        "target": "MeshScreenSelection.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "골격 상세 편집",
-        "target": "SkeletonEditing.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "균일 스케일 교환",
-        "target": "SkeletonScale.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "매크로 형상 생성",
-        "target": "HumanMorphology.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "형상 대칭과 모프 미러",
-        "target": "MeshSymmetry.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "명시적인 의상 맞춤",
-        "target": "SurfaceFitting.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "자동 재맞춤",
-        "target": "AutomaticSurfaceFitting.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "관절 자세 보정 리그",
-        "target": "PoseCorrectives.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "에셋 교체와 선택 이전",
-        "target": "SelectionTransfer.md",
-        "kind": "relative",
-        "line": 109
-      },
-      {
-        "block_id": "b000080",
-        "label": "휴머노이드 본 대응",
-        "target": "HumanoidCharacterization.md",
         "kind": "relative",
         "line": 111
       },
       {
         "block_id": "b000082",
-        "label": "인체 본 대응",
-        "target": "HumanoidCharacterization.md",
+        "label": "비파괴 편집 계층",
+        "target": "EditLayers.md",
         "kind": "relative",
-        "line": 114
+        "line": 111
       },
       {
         "block_id": "b000082",
+        "label": "표면 전사와 부착",
+        "target": "SkinSurface.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "점 선택·마스크·브러시",
+        "target": "MeshPainting.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "화면 영역 선택",
+        "target": "MeshScreenSelection.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "골격 상세 편집",
+        "target": "SkeletonEditing.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "균일 스케일 교환",
+        "target": "SkeletonScale.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "매크로 형상 생성",
+        "target": "HumanMorphology.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "형상 대칭과 모프 미러",
+        "target": "MeshSymmetry.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "명시적인 의상 맞춤",
+        "target": "SurfaceFitting.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "자동 재맞춤",
+        "target": "AutomaticSurfaceFitting.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "관절 자세 보정 리그",
+        "target": "PoseCorrectives.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "에셋 교체와 선택 이전",
+        "target": "SelectionTransfer.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000082",
+        "label": "휴머노이드 본 대응",
+        "target": "HumanoidCharacterization.md",
+        "kind": "relative",
+        "line": 113
+      },
+      {
+        "block_id": "b000084",
+        "label": "인체 본 대응",
+        "target": "HumanoidCharacterization.md",
+        "kind": "relative",
+        "line": 116
+      },
+      {
+        "block_id": "b000084",
         "label": "인체 기준 자세 계획",
         "target": "HumanPosePlanner.md",
         "kind": "relative",
-        "line": 114
-      },
-      {
-        "block_id": "b000090",
-        "label": "얼굴 부속·이미지 연결",
-        "target": "FaceAssets.md",
-        "kind": "relative",
-        "line": 129
+        "line": 116
       },
       {
         "block_id": "b000092",
-        "label": "매크로 형상 생성",
-        "target": "HumanMorphology.md",
+        "label": "얼굴 부속·이미지 연결",
+        "target": "FaceAssets.md",
         "kind": "relative",
         "line": 131
       },
       {
         "block_id": "b000094",
+        "label": "매크로 형상 생성",
+        "target": "HumanMorphology.md",
+        "kind": "relative",
+        "line": 133
+      },
+      {
+        "block_id": "b000096",
         "label": "얼굴 포즈 리그",
         "target": "FacePoseRig.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "편집 리그 참조",
         "target": "EditorRigFollow.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "에셋과 선택을 함께 이전한 이력",
         "target": "SelectionTransfer.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "애니메이션 클립을 명시적으로 저장",
         "target": "ProjectAnimation.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "관절 자세 보정 리그",
         "target": "PoseCorrectives.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "GLB 원본 탄젠트와 모프 탄젠트",
         "target": "GlbAuthoredTangents.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "별도 계약",
         "target": "DefaultMorphWeights.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "템플릿 모프 리그",
         "target": "TemplateMorphBaking.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "FBX 원본 탄젠트",
         "target": "FbxTangents.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "기준 법선 보정",
         "target": "BaseNormalEditing.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "노멀 맵",
         "target": "NormalMaps.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "명명 점 선택",
         "target": "NamedPointSelections.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "형상 정리",
         "target": "SurfaceFairing.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "평가 계층",
         "target": "EvaluatedEditLayers.md",
         "kind": "relative",
-        "line": 133
+        "line": 135
       },
       {
-        "block_id": "b000094",
+        "block_id": "b000096",
         "label": "프로젝트 형식",
         "target": "Object3DProject.md",
-        "kind": "relative",
-        "line": 133
-      },
-      {
-        "block_id": "b000096",
-        "label": "인체 역할 방향",
-        "target": "HumanPoseDirections.md",
-        "kind": "relative",
-        "line": 135
-      },
-      {
-        "block_id": "b000096",
-        "label": "본체 포즈 연산",
-        "target": "PoseSnapshots.md",
-        "kind": "relative",
-        "line": 135
-      },
-      {
-        "block_id": "b000096",
-        "label": "자세·모프 스냅샷",
-        "target": "DeformationSnapshots.md",
         "kind": "relative",
         "line": 135
       },
       {
         "block_id": "b000098",
-        "label": "인체 기준 자세 계획",
-        "target": "HumanPosePlanner.md",
+        "label": "인체 역할 방향",
+        "target": "HumanPoseDirections.md",
+        "kind": "relative",
+        "line": 137
+      },
+      {
+        "block_id": "b000098",
+        "label": "본체 포즈 연산",
+        "target": "PoseSnapshots.md",
+        "kind": "relative",
+        "line": 137
+      },
+      {
+        "block_id": "b000098",
+        "label": "자세·모프 스냅샷",
+        "target": "DeformationSnapshots.md",
         "kind": "relative",
         "line": 137
       },
       {
         "block_id": "b000100",
-        "label": "검증 기록",
-        "target": "HumanPosePlannerVerification-20261027.md",
+        "label": "인체 기준 자세 계획",
+        "target": "HumanPosePlanner.md",
         "kind": "relative",
         "line": 139
       },
       {
         "block_id": "b000102",
-        "label": "인체 역할 리타깃 대응",
-        "target": "HumanPoseRetarget.md",
-        "kind": "relative",
-        "line": 141
-      },
-      {
-        "block_id": "b000102",
-        "label": "본체 포즈 리타깃",
-        "target": "PoseRetarget.md",
+        "label": "검증 기록",
+        "target": "HumanPosePlannerVerification-20261027.md",
         "kind": "relative",
         "line": 141
       },
       {
         "block_id": "b000104",
-        "label": "자동 자세 보정",
-        "target": "AutomaticCorrectives.md",
+        "label": "인체 역할 리타깃 대응",
+        "target": "HumanPoseRetarget.md",
+        "kind": "relative",
+        "line": 143
+      },
+      {
+        "block_id": "b000104",
+        "label": "본체 포즈 리타깃",
+        "target": "PoseRetarget.md",
         "kind": "relative",
         "line": 143
       },
       {
         "block_id": "b000106",
-        "label": "애니메이션 샘플 변환",
-        "target": "AnimationRetarget.md",
-        "kind": "relative",
-        "line": 145
-      },
-      {
-        "block_id": "b000106",
-        "label": "GLB 골격 애니메이션 출력",
-        "target": "GlbAnimation.md",
-        "kind": "relative",
-        "line": 145
-      },
-      {
-        "block_id": "b000106",
-        "label": "FBX 애니메이션 교환",
-        "target": "FbxAnimationImport.md",
-        "kind": "relative",
-        "line": 145
-      },
-      {
-        "block_id": "b000106",
-        "label": "본체 클립 적용",
-        "target": "Object3DAnimation.md",
+        "label": "자동 자세 보정",
+        "target": "AutomaticCorrectives.md",
         "kind": "relative",
         "line": 145
       },
       {
         "block_id": "b000108",
-        "label": "인체 프레임 규칙",
-        "target": "HumanPoseDirections.md",
+        "label": "애니메이션 샘플 변환",
+        "target": "AnimationRetarget.md",
         "kind": "relative",
         "line": 147
       },
       {
         "block_id": "b000108",
-        "label": "프레임 연산",
-        "target": "PoseFrames.md",
+        "label": "GLB 골격 애니메이션 출력",
+        "target": "GlbAnimation.md",
+        "kind": "relative",
+        "line": 147
+      },
+      {
+        "block_id": "b000108",
+        "label": "FBX 애니메이션 교환",
+        "target": "FbxAnimationImport.md",
+        "kind": "relative",
+        "line": 147
+      },
+      {
+        "block_id": "b000108",
+        "label": "본체 클립 적용",
+        "target": "Object3DAnimation.md",
         "kind": "relative",
         "line": 147
       },
       {
         "block_id": "b000110",
-        "label": "JointFrameVerification-20261027.json",
-        "target": "JointFrameVerification-20261027.json",
+        "label": "인체 프레임 규칙",
+        "target": "HumanPoseDirections.md",
+        "kind": "relative",
+        "line": 149
+      },
+      {
+        "block_id": "b000110",
+        "label": "프레임 연산",
+        "target": "PoseFrames.md",
         "kind": "relative",
         "line": 149
       },
       {
         "block_id": "b000112",
-        "label": "편집 가능한 기준 자세",
-        "target": "PoseReference.md",
-        "kind": "relative",
-        "line": 151
-      },
-      {
-        "block_id": "b000112",
-        "label": "모션 재타깃",
-        "target": "AnimationRetarget.md",
+        "label": "JointFrameVerification-20261027.json",
+        "target": "JointFrameVerification-20261027.json",
         "kind": "relative",
         "line": 151
       },
       {
         "block_id": "b000114",
-        "label": "기준 자세와 직접 얼굴 샘플링",
+        "label": "편집 가능한 기준 자세",
         "target": "PoseReference.md",
         "kind": "relative",
         "line": 153
       },
       {
         "block_id": "b000114",
-        "label": "PoseReferenceVerification-20261027.json",
-        "target": "PoseReferenceVerification-20261027.json",
+        "label": "모션 재타깃",
+        "target": "AnimationRetarget.md",
         "kind": "relative",
         "line": 153
       },
       {
         "block_id": "b000116",
-        "label": "리그 제어 일괄 샘플",
-        "target": "RigControlSamples.md",
+        "label": "기준 자세와 직접 얼굴 샘플링",
+        "target": "PoseReference.md",
         "kind": "relative",
         "line": 155
       },
       {
         "block_id": "b000116",
+        "label": "PoseReferenceVerification-20261027.json",
+        "target": "PoseReferenceVerification-20261027.json",
+        "kind": "relative",
+        "line": 155
+      },
+      {
+        "block_id": "b000118",
+        "label": "리그 제어 일괄 샘플",
+        "target": "RigControlSamples.md",
+        "kind": "relative",
+        "line": 157
+      },
+      {
+        "block_id": "b000118",
         "label": "리그 샘플 검증 기록",
         "target": "RigControlSamplesVerification-20261027.md",
         "kind": "relative",
-        "line": 156
+        "line": 158
       }
     ],
     "tables": [
       {
-        "block_id": "b000015",
+        "block_id": "b000017",
         "columns": [
           "객체",
           "책임"

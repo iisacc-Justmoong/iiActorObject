@@ -25,7 +25,7 @@ C++23 표준 라이브러리로 구현한 월드 개체·컴포넌트 SDK이다.
 
 Actor에는 `Root` SceneComponent가 기본 생성된다. Actor의 변환은 루트의 로컬 변환과 동일한 데이터이다. 새 SceneComponent는 기본적으로 루트에 부착된다.
 
-캐릭터 구성·재생·리깅과 실제 참조 소스는 [iiCharacter 문서](Character.md)를 따른다. 헤더와 구현은 모두 `src/iiActorObject/`에 함께 둔다.
+캐릭터 구성·재생·리깅과 실제 참조 소스는 [iiCharacter 문서](Character.md)를 따른다. 헤더와 구현은 모두 `src/Runtime/`을 비롯한 책임별 디렉터리에 함께 둔다.
 
 ## USD 배치 호환성
 
@@ -146,6 +146,6 @@ SPDX-License-Identifier: MIT
 
 ## 소스와 헤더 배치
 
-공개 헤더와 구현은 `src/iiActorObject/`에 함께 둔다. 작성 소스를 별도 `include/`에 모으지 않는다. 기존 `#include` 이름과 CMake 타깃은 유지하며, 설치 과정에서 공개 헤더만 설치본의 include 디렉터리에 배치한다. 생성 export 헤더는 `build/`에 둔다.
+공개 헤더와 구현은 `src/Runtime/`을 비롯한 책임별 디렉터리에 함께 둔다. 작성 소스를 별도 `include/`에 모으지 않는다. 기존 `#include` 이름과 CMake 타깃은 유지하며, 설치 과정에서 공개 헤더만 설치본의 include 디렉터리에 배치한다. 생성 export 헤더는 `build/`에 둔다.
 
 SDK 작업 공간에서 `python3 -B tests/test_source_header_layout.py`로 배치를 검사할 수 있다. 소스·헤더 경로를 변경한 경우 다시 구성·빌드·CTest와 별도 설치본 소비자 검사를 수행한다.

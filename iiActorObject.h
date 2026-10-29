@@ -33,6 +33,7 @@
 #include <iiActorObject/Object3DPoseSnapshot.h>
 #include <iiActorObject/Object3DRigSnapshot.h>
 #include <iiActorObject/Object3DRigSamples.h>
+#include <iiActorObject/RigSampleCatalog.h>
 #include <iiActorObject/PoseAiming.h>
 #include <iiActorObject/PoseFrames.h>
 #include <iiActorObject/PoseReference.h>

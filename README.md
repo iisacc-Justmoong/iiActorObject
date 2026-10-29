@@ -28,6 +28,15 @@ assets and sessions; retained undo history and reference tokens keep assets in t
 engine until explicit removal or engine destruction. Access is serialized by one
 host thread.
 
+The human layer builds as the `iiActorObjectNSCharacter` object target and is
+included in the existing SDK library; it is not a separately deployed library.
+Low-level transforms and mesh data validation build as `iiActorObjectFoundation`,
+an object target that can be tested without linking the engine library. It is
+included in the existing SDK library rather than distributed separately.
+The [responsibility map](resources/architecture/ResponsibilityMap.json) inventories
+the implemented source by owner and responsibility. The [separation report](docs/ResponsibilitySeparation-20261029.md)
+describes the extracted components, architectural checks, and remaining core coupling.
+
 The 3D core also supports static objects and can be built without NSCharacter:
 
 ```sh
@@ -71,6 +80,19 @@ Application execution validation is excluded by the current request; production 
 ## Character authoring
 
 Public entry point: `<iiActorObject/NSCharacter/NSCharacter.h>` or `<iiActorObject.h>`.
+Focused template interfaces are available through `CharacterTemplateCore.h`,
+`HumanAccessories.h`, and `MakeHumanTemplate.h` in the same directory. The existing
+`CharacterTemplate.h` remains an aggregate compatibility header.
+
+For progressive morphs, `Object3DProgressiveMorphCore.h` provides rig and
+animation evaluation, and `Object3DProgressiveMorphInterchange.h` provides FBX
+exchange. The original `Object3DProgressiveMorph.h` retains both interfaces and
+its existing project declarations for source compatibility.
+
+`BoneIndex.h` and `MeshData.h` provide low-level mesh values; focused geometry
+and topology APIs are available through `MeshGeometryCore.h` and
+`MeshTopologyCore.h`. The original geometry and topology headers retain their
+prior skeletal includes as compatibility aggregates.
 
 `humanJointRules` and `mapHumanJoints` resolve human roles through preserved
 semantic tags or source bone names, check required roles and ancestry, and retain
@@ -94,7 +116,9 @@ Core [GLB asset import](docs/GlbImport.md) converts supported triangle meshes,
 multiple skins, morphs and materials into editable engine-owned assets. It can
 retain and sample supported source animation channels. External and non-PNG
 images need a host resolver; the documented scene, animation and material limits
-remain in effect.
+remain in effect. Import policies can be included through
+`Object3DGlbImportOptions.h`, and host image resolvers through `GlbImageResolver.h`;
+the existing interchange header also provides both interfaces.
 
 The optional [human skin catalogue](docs/FaceAssets.md) provides 20 unmodified
 CC0, 2048×2048 MakeHuman skin textures. Applications explicitly select a preset
@@ -108,8 +132,10 @@ manual sculpt, skin, morph, UV, joint and material corrections while body/face
 parameters change. The core owns immutable edit layers and history. Layer enable,
 weight, ordering, removal and undo/redo are supported; `detachTemplate` preserves
 the current result as an ordinary snapshot. See [edit layer contracts](docs/EditLayers.md).
-Character views and recipes live in `src/iiActorObject/NSCharacter/`; common engine
-headers and implementations live directly in `src/iiActorObject/`.
+Character views and recipes live in `src/NSCharacter/`; common engine code is
+grouped by responsibility directly under `src/`. Paired headers and implementations
+remain together. The [source layout](docs/SourceLayout.md) describes the directories;
+existing `<iiActorObject/...>` public includes remain unchanged.
 
 | Object | Responsibility |
 | --- | --- |
@@ -228,7 +254,7 @@ All restored resources belong to the caller's core engine; failed imports preser
 its preexisting resources and ID counters. NSCharacter provides borrowed wrappers.
 Use FBX/GLB/DNA for external application interchange. See [project contracts](docs/Object3DProject.md).
 
-The explicit [progressive morph importer](docs/ProgressiveMorphRig.md) retains FBX in-between shapes, default values and shared channel controls in a core-owned rig. Store that rig with the asset in project version 31. The dedicated progressive FBX API exports static channels for a single mesh or validated identical mesh instances, with warnings and strict rejection of unsupported loss cases. The [progressive animation path](docs/ProgressiveMorphAnimation.md) imports skeleton, ordinary and progressive control animation together, applies them transactionally, and exports multiple named takes with their stored start times. Ordinary FBX/GLB export does not carry the progressive rig program.
+The explicit [progressive morph importer](docs/ProgressiveMorphRig.md) retains FBX in-between shapes, default values and shared channel controls in a core-owned rig. Store that rig with the asset in project version 31. The dedicated progressive FBX API exports channels across multiple meshes: compatible identical instances share geometry, while distinct meshes receive separate channels and SDK metadata for restoring their common control. External editors can expose those channels independently. The [progressive animation path](docs/ProgressiveMorphAnimation.md) imports skeleton, ordinary and progressive control animation together, applies them transactionally, and exports multiple named takes with their stored start times. Ordinary FBX/GLB export does not carry the progressive rig program.
 
 The optional [human accessories](docs/HumanAccessories.md) package connects selected CC0 hair, clothing, eyebrows and eyelashes to the core-owned template using authored control-point mappings, transferred skin weights and covered-body face masks. An editor can add, remove or replace compatible slots, including combined additions and removals in one undo step, while preserving retained edits. Grounded templates preserve their support points; project version 35 records mixed selection remapping. This is not a cloth or hair simulation.
 

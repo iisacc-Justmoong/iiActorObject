@@ -197,10 +197,16 @@ void generatedSurface()
     CHECK(differs);
     NSCharacter::GenerationOptions full;full.skinBinding=NSCharacter::GeneratedSkinBinding::Surface;
     const auto detailed=NSCharacter::HumanoidGenerator::generate(engine,{},full);
-    CHECK(detailed->data().meshes.size()==3&&detailed->data().meshes[0].geometry.morphTargets.size()==52);
+    CHECK(detailed->data().meshes.size()==4&&detailed->data().meshes[0].geometry.morphTargets.size()==52);
     CHECK(detailed->data().meshes[0].geometry.vertices.size()>500&&detailed->skeleton()->bones().size()>=60);
     for(std::size_t eye=1;eye<3;++eye)for(const auto &v:detailed->data().meshes[eye].geometry.vertices)
         CHECK(v.weights.size()==1&&v.weights[0].weight==1);
+    const auto &tongue=detailed->data().meshes[3];const auto jaw=detailed->joint("jaw");
+    CHECK(tongue.name=="Tongue"&&jaw!=NoBone&&!tongue.geometry.vertices.empty());
+    for(const auto &v:tongue.geometry.vertices)
+        CHECK(v.weights.size()==1&&v.weights[0].bone==jaw&&v.weights[0].weight==1);
+    CHECK(std::any_of(tongue.geometry.morphTargets.begin(),tongue.geometry.morphTargets.end(),
+                      [](const auto &m){return m.name=="tongueOut"&&!m.deltas.empty();}));
     const auto count=engine.objectCount();
     options.surfaceBinding.maximumPointVisits=1;
     rejects([&]{(void)NSCharacter::HumanoidGenerator::generate(engine,{},options);});CHECK(engine.objectCount()==count);

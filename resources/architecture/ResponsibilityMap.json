@@ -1,0 +1,1385 @@
+{
+  "schema_version": 1,
+  "source_root": "src",
+  "modules": [
+    {
+      "id": "core_utility",
+      "owner": "core",
+      "responsibility": "좌표·변환, 메시 자료형과 공용 숫자 판독",
+      "files": [
+        "Core/BoneIndex.h",
+        "Core/CharacterMath.h",
+        "Core/MeshData.cpp",
+        "Core/MeshData.h",
+        "Core/Object3DNames.cpp",
+        "Core/Object3DNames.h",
+        "Core/Object3DNumberParsing.h",
+        "Core/Transform.cpp",
+        "Core/Transform.h"
+      ]
+    },
+    {
+      "id": "core_glb_buffer",
+      "owner": "core",
+      "responsibility": "GLB little-endian buffers, sparse morph accessors and JSON primitives independent of scenes",
+      "files": [
+        "Interchange/GLB/Object3DGlbBuffer.h",
+        "Interchange/GLB/Object3DGlbBuffer.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_material_data",
+      "owner": "core",
+      "responsibility": "GLB material variant identity shared by planning and writing",
+      "files": [
+        "Interchange/GLB/Object3DGlbMaterialVariant.h"
+      ]
+    },
+    {
+      "id": "core_glb_material_plan",
+      "owner": "core",
+      "responsibility": "GLB material UV selection and per-mesh variant indexing without asset ownership",
+      "files": [
+        "Interchange/GLB/Object3DGlbMaterialPlan.h",
+        "Interchange/GLB/Object3DGlbMaterialPlan.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_material_write",
+      "owner": "core",
+      "responsibility": "GLB image views and material, image, sampler and texture JSON output",
+      "files": [
+        "Interchange/GLB/Object3DGlbMaterialWrite.h",
+        "Interchange/GLB/Object3DGlbMaterialWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_scene_write",
+      "owner": "core",
+      "responsibility": "GLB asset, scene, node and skin JSON serialization from borrowed data",
+      "files": [
+        "Interchange/GLB/Object3DGlbSceneWrite.h",
+        "Interchange/GLB/Object3DGlbSceneWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_mesh_tangents",
+      "owner": "core",
+      "responsibility": "Mesh corner tangent generation from geometry and UV data",
+      "files": [
+        "Geometry/MeshTangents.cpp",
+        "Geometry/MeshTangents.h"
+      ]
+    },
+    {
+      "id": "core_glb_tangent_data",
+      "owner": "core",
+      "responsibility": "GLB tangent and morph tangent plan data shared by planners and writers",
+      "files": [
+        "Interchange/GLB/Object3DGlbTangentData.h"
+      ]
+    },
+    {
+      "id": "core_glb_tangent_plan",
+      "owner": "core",
+      "responsibility": "GLB generated, authored and FBX tangent projection planning",
+      "files": [
+        "Interchange/GLB/Object3DGlbTangentPlan.cpp",
+        "Interchange/GLB/Object3DGlbTangentPlan.h"
+      ]
+    },
+    {
+      "id": "core_glb_point_attribute_write",
+      "owner": "core",
+      "responsibility": "GLB point identity vertex attribute encoding",
+      "files": [
+        "Interchange/GLB/Object3DGlbPointAttributeWrite.cpp",
+        "Interchange/GLB/Object3DGlbPointAttributeWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_tangent_write",
+      "owner": "core",
+      "responsibility": "GLB tangent primitive and diagnostics serialization",
+      "files": [
+        "Interchange/GLB/Object3DGlbTangentWrite.cpp",
+        "Interchange/GLB/Object3DGlbTangentWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_shared_mesh_write",
+      "owner": "core",
+      "responsibility": "GLB shared vertex, skin, UV and morph accessor output",
+      "files": [
+        "Interchange/GLB/Object3DGlbSharedMeshWrite.cpp",
+        "Interchange/GLB/Object3DGlbSharedMeshWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_mesh_extras_write",
+      "owner": "core",
+      "responsibility": "GLB mesh morph defaults, target names and point identity metadata output",
+      "files": [
+        "Interchange/GLB/Object3DGlbMeshExtrasWrite.cpp",
+        "Interchange/GLB/Object3DGlbMeshExtrasWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_primitive_plan",
+      "owner": "core",
+      "responsibility": "GLB triangle grouping by material and authored tangent state",
+      "files": [
+        "Interchange/GLB/Object3DGlbPrimitivePlan.cpp",
+        "Interchange/GLB/Object3DGlbPrimitivePlan.h"
+      ]
+    },
+    {
+      "id": "core_fbx_tangent_projection",
+      "owner": "core",
+      "responsibility": "Projection of mesh triangle corners to FBX polygon corners",
+      "files": [
+        "Interchange/FBX/Object3DFbxTangentProjection.cpp",
+        "Interchange/FBX/Object3DFbxTangentProjection.h"
+      ]
+    },
+    {
+      "id": "core_glb_fbx_tangent_route",
+      "owner": "core",
+      "responsibility": "GLB export FBX tangent layer selection, diagnostics and cached corner projection",
+      "files": [
+        "Interchange/GLB/Object3DGlbFbxTangentRoute.cpp",
+        "Interchange/GLB/Object3DGlbFbxTangentRoute.h"
+      ]
+    },
+    {
+      "id": "core_glb_mesh_write",
+      "owner": "core",
+      "responsibility": "GLB per-mesh primitive composition from borrowed data and format helpers",
+      "files": [
+        "Interchange/GLB/Object3DGlbMeshWrite.cpp",
+        "Interchange/GLB/Object3DGlbMeshWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_skin_write",
+      "owner": "core",
+      "responsibility": "GLB inverse bind matrix accessor writing",
+      "files": [
+        "Interchange/GLB/Object3DGlbSkinWrite.cpp",
+        "Interchange/GLB/Object3DGlbSkinWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_container_write",
+      "owner": "core",
+      "responsibility": "GLB container header, chunk framing and padding",
+      "files": [
+        "Interchange/GLB/Object3DGlbContainerWrite.cpp",
+        "Interchange/GLB/Object3DGlbContainerWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_document_write",
+      "owner": "core",
+      "responsibility": "GLB scene, mesh, material, animation and buffer JSON composition",
+      "files": [
+        "Interchange/GLB/Object3DGlbDocumentWrite.cpp",
+        "Interchange/GLB/Object3DGlbDocumentWrite.h"
+      ]
+    },
+    {
+      "id": "core_glb_animation_options",
+      "owner": "core",
+      "responsibility": "Public GLB animation and morph binding options independent of asset ownership",
+      "files": [
+        "Interchange/GLB/Object3DGlbAnimationOptions.h"
+      ]
+    },
+    {
+      "id": "core_glb_animation_write",
+      "owner": "core",
+      "responsibility": "GLB animation validation, morph channel planning, buffer and JSON output",
+      "files": [
+        "Interchange/GLB/Object3DGlbAnimationWrite.h",
+        "Interchange/GLB/Object3DGlbAnimationWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_binary",
+      "owner": "core",
+      "responsibility": "FBX 7.4 binary properties and node encoding independent of scene ownership",
+      "files": [
+        "Interchange/FBX/Object3DFbxBinary.cpp",
+        "Interchange/FBX/Object3DFbxBinary.h"
+      ]
+    },
+    {
+      "id": "core_fbx_scene_nodes",
+      "owner": "core",
+      "responsibility": "FBX property, model and layer node construction without scene ownership",
+      "files": [
+        "Interchange/FBX/Object3DFbxSceneNodes.cpp",
+        "Interchange/FBX/Object3DFbxSceneNodes.h"
+      ]
+    },
+    {
+      "id": "core_fbx_pose_write",
+      "owner": "core",
+      "responsibility": "FBX 바인드 포즈 노드와 개수 검증",
+      "files": [
+        "Interchange/FBX/Object3DFbxPoseWrite.h",
+        "Interchange/FBX/Object3DFbxPoseWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_mesh_scene_write",
+      "owner": "core",
+      "responsibility": "FBX 메시 모델·형상·재질·포즈 연결 기록",
+      "files": [
+        "Interchange/FBX/Object3DFbxMeshSceneWrite.h",
+        "Interchange/FBX/Object3DFbxMeshSceneWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_tangent_data",
+      "owner": "core",
+      "responsibility": "FBX tangent layer data supplied to independent geometry writers",
+      "files": [
+        "Interchange/FBX/Object3DFbxTangentData.h"
+      ]
+    },
+    {
+      "id": "core_fbx_tangent_read",
+      "owner": "core",
+      "responsibility": "Inspect and restore FBX authored tangent layers and warnings from borrowed parsed geometry",
+      "files": [
+        "Interchange/FBX/Object3DFbxTangentRead.h",
+        "Interchange/FBX/Object3DFbxTangentRead.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_geometry_write",
+      "owner": "core",
+      "responsibility": "FBX mesh geometry, topology, UV and supplied tangent layer node writing",
+      "files": [
+        "Interchange/FBX/Object3DFbxGeometryWrite.cpp",
+        "Interchange/FBX/Object3DFbxGeometryWrite.h"
+      ]
+    },
+    {
+      "id": "core_fbx_geometry_read",
+      "owner": "core",
+      "responsibility": "FBX control points, UV sets, skin and polygon topology reconstruction with explicit budgets",
+      "files": [
+        "Interchange/FBX/Object3DFbxGeometryRead.h",
+        "Interchange/FBX/Object3DFbxGeometryRead.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_mesh_scene_read",
+      "owner": "core",
+      "responsibility": "FBX 장면 메시 순회와 형상·모프·탄젠트·외부 식별정보의 임시 조립",
+      "files": [
+        "Interchange/FBX/Object3DFbxMeshSceneRead.h",
+        "Interchange/FBX/Object3DFbxMeshSceneRead.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_animation_stage",
+      "owner": "core",
+      "responsibility": "FBX 애니메이션 계획의 사전 검증과 에셋 등록 후 클립 임시 생성",
+      "files": [
+        "Interchange/FBX/Object3DFbxAnimationStage.h",
+        "Interchange/FBX/Object3DFbxAnimationStage.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_animation_nodes",
+      "owner": "core",
+      "responsibility": "FBX sampled animation data, timing validation and node writing",
+      "files": [
+        "Interchange/FBX/Object3DFbxAnimationPlan.h",
+        "Interchange/FBX/Object3DFbxAnimationNodes.cpp",
+        "Interchange/FBX/Object3DFbxAnimationNodes.h"
+      ]
+    },
+    {
+      "id": "core_fbx_resource_write",
+      "owner": "core",
+      "responsibility": "FBX image, texture and material node and connection writing",
+      "files": [
+        "Interchange/FBX/Object3DFbxResourceWrite.cpp",
+        "Interchange/FBX/Object3DFbxResourceWrite.h"
+      ]
+    },
+    {
+      "id": "core_fbx_metadata",
+      "owner": "core",
+      "responsibility": "FBX DOM scalar, array and text decoding without scene or asset ownership",
+      "files": [
+        "Interchange/FBX/Object3DFbxImportFields.cpp",
+        "Interchange/FBX/Object3DFbxImportFields.h",
+        "Interchange/FBX/Object3DFbxMetadata.cpp",
+        "Interchange/FBX/Object3DFbxMetadata.h"
+      ]
+    },
+    {
+      "id": "core_external_identity",
+      "owner": "core",
+      "responsibility": "외부 편집의 문서·본·메시·재질 식별 값",
+      "files": [
+        "Core/Object3DExternalIdentity.h"
+      ]
+    },
+    {
+      "id": "core_external_protocol",
+      "owner": "core",
+      "responsibility": "외부 편집 점·면·모프 식별 텍스트 부호화와 판독",
+      "files": [
+        "Core/Object3DExternalProtocol.h"
+      ]
+    },
+    {
+      "id": "core_fbx_external_identity",
+      "owner": "core",
+      "responsibility": "FBX 외부 문서·메시·점·면·모프 식별 정보 판독",
+      "files": [
+        "Interchange/FBX/Object3DFbxExternalIdentityRead.h",
+        "Interchange/FBX/Object3DFbxExternalIdentityRead.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_scene_metadata",
+      "owner": "core",
+      "responsibility": "FBX 장면 이름·객체 종류·리그 표본 메타데이터 판독",
+      "files": [
+        "Interchange/FBX/Object3DFbxSceneMetadata.h",
+        "Interchange/FBX/Object3DFbxSceneMetadata.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_external_identity_write",
+      "owner": "core",
+      "responsibility": "FBX 외부 문서·본·메시·점·면·모프 식별 정보 기록",
+      "files": [
+        "Interchange/FBX/Object3DFbxExternalIdentityWrite.h",
+        "Interchange/FBX/Object3DFbxExternalIdentityWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_scene_metadata_write",
+      "owner": "core",
+      "responsibility": "FBX 장면 이름·객체 종류·본 의미·리그 표본 메타데이터 기록",
+      "files": [
+        "Interchange/FBX/Object3DFbxSceneMetadataWrite.h",
+        "Interchange/FBX/Object3DFbxSceneMetadataWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_topology",
+      "owner": "core",
+      "responsibility": "FBX authoring topology metadata encoding and decoding",
+      "files": [
+        "Interchange/FBX/Object3DFbxTopologyRead.cpp",
+        "Interchange/FBX/Object3DFbxTopologyRead.h",
+        "Interchange/FBX/Object3DFbxTopologyWrite.cpp",
+        "Interchange/FBX/Object3DFbxTopologyWrite.h"
+      ]
+    },
+    {
+      "id": "core_fbx_image_api",
+      "owner": "core",
+      "responsibility": "Host-owned FBX image resolver and bounded image request interface",
+      "files": [
+        "Interchange/FBX/FbxImageResolver.h"
+      ]
+    },
+    {
+      "id": "core_fbx_resources",
+      "owner": "core",
+      "responsibility": "FBX texture, image and material decoding with borrowed scene and resolver",
+      "files": [
+        "Interchange/FBX/Object3DFbxResources.cpp",
+        "Interchange/FBX/Object3DFbxResources.h"
+      ]
+    },
+    {
+      "id": "core_fbx_skeleton",
+      "owner": "core",
+      "responsibility": "FBX bone hierarchy and bind transform reconstruction without engine ownership",
+      "files": [
+        "Interchange/FBX/Object3DFbxSkeleton.cpp",
+        "Interchange/FBX/Object3DFbxSkeleton.h"
+      ]
+    },
+    {
+      "id": "core_fbx_skin",
+      "owner": "core",
+      "responsibility": "FBX source skin weights and blend profile decoding",
+      "files": [
+        "Interchange/FBX/Object3DFbxSkin.cpp",
+        "Interchange/FBX/Object3DFbxSkin.h"
+      ]
+    },
+    {
+      "id": "core_fbx_skin_write",
+      "owner": "core",
+      "responsibility": "FBX skin profiles, bone clusters and bind matrix node writing",
+      "files": [
+        "Interchange/FBX/Object3DFbxSkinWrite.cpp",
+        "Interchange/FBX/Object3DFbxSkinWrite.h"
+      ]
+    },
+    {
+      "id": "core_fbx_skin_data",
+      "owner": "core",
+      "responsibility": "FBX 스킨과 골격 기록이 공유하는 본·바인드 값",
+      "files": [
+        "Interchange/FBX/Object3DFbxSkinData.h"
+      ]
+    },
+    {
+      "id": "core_fbx_skeleton_write",
+      "owner": "core",
+      "responsibility": "FBX 본 ID·계층·의미 및 바인드 포즈 기록",
+      "files": [
+        "Interchange/FBX/Object3DFbxSkeletonWrite.h",
+        "Interchange/FBX/Object3DFbxSkeletonWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_morph_shape",
+      "owner": "core",
+      "responsibility": "FBX blend shape point and normal conversion with authoring metadata validation",
+      "files": [
+        "Interchange/FBX/Object3DFbxMorphShape.cpp",
+        "Interchange/FBX/Object3DFbxMorphShape.h"
+      ]
+    },
+    {
+      "id": "core_progressive_data",
+      "owner": "core",
+      "responsibility": "Progressive morph channel and key value data independent of runtime rigs",
+      "files": [
+        "Core/Object3DProgressiveMorphData.h"
+      ]
+    },
+    {
+      "id": "core_fbx_animation_data",
+      "owner": "core",
+      "responsibility": "Borrowed FBX morph and progressive animation channel mapping data",
+      "files": [
+        "Interchange/FBX/Object3DFbxAnimationData.h"
+      ]
+    },
+    {
+      "id": "core_fbx_progressive_metadata",
+      "owner": "core",
+      "responsibility": "FBX progressive morph grouping and sparse metadata decoding",
+      "files": [
+        "Interchange/FBX/Object3DFbxProgressiveMetadata.h",
+        "Interchange/FBX/Object3DFbxProgressiveMetadata.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_morph_channel",
+      "owner": "core",
+      "responsibility": "FBX linear and progressive morph channel conversion and shared-control aggregation",
+      "files": [
+        "Interchange/FBX/Object3DFbxMorphChannelRead.h",
+        "Interchange/FBX/Object3DFbxMorphChannelRead.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_morph_write",
+      "owner": "core",
+      "responsibility": "FBX morph point and normal projection and shape node writing",
+      "files": [
+        "Interchange/FBX/Object3DFbxMorphWrite.cpp",
+        "Interchange/FBX/Object3DFbxMorphWrite.h"
+      ]
+    },
+    {
+      "id": "core_fbx_progressive_plan_data",
+      "owner": "core",
+      "responsibility": "FBX 점진 모프 채널과 공유 메시 계획 값",
+      "files": [
+        "Interchange/FBX/Object3DFbxProgressiveData.h"
+      ]
+    },
+    {
+      "id": "core_morph_channels",
+      "owner": "core",
+      "responsibility": "메시 원본 모프 레코드의 논리 채널 묶음",
+      "files": [
+        "Rig/Object3DMorphChannels.h",
+        "Rig/Object3DMorphChannels.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_morph_channels_write",
+      "owner": "core",
+      "responsibility": "FBX 일반·점진 모프 채널과 형상 연결 기록",
+      "files": [
+        "Interchange/FBX/Object3DFbxMorphChannelsWrite.h",
+        "Interchange/FBX/Object3DFbxMorphChannelsWrite.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_shared_geometry",
+      "owner": "core",
+      "responsibility": "점진 FBX 공유 메시의 형상·스킨·모프 호환 검사",
+      "files": [
+        "Interchange/FBX/Object3DFbxSharedGeometry.h",
+        "Interchange/FBX/Object3DFbxSharedGeometry.cpp"
+      ]
+    },
+    {
+      "id": "core_fbx_geometry_registry",
+      "owner": "core",
+      "responsibility": "FBX 공유 형상 원본 등록과 선행 메시 ID 선택",
+      "files": [
+        "Interchange/FBX/Object3DFbxGeometryRegistry.h",
+        "Interchange/FBX/Object3DFbxGeometryRegistry.cpp"
+      ]
+    },
+    {
+      "id": "core_skeletal_motion",
+      "owner": "core",
+      "responsibility": "골격과 포즈, 애니메이션·리타기팅·기초 리그 계산 및 샘플 자료",
+      "files": [
+        "Rig/Animation.cpp",
+        "Rig/Animation.h",
+        "Rig/AnimationRetarget.cpp",
+        "Rig/AnimationRetarget.h",
+        "Rig/CharacterRig.cpp",
+        "Rig/CharacterRig.h",
+        "Rig/PoseAiming.cpp",
+        "Rig/PoseAiming.h",
+        "Rig/PoseFrames.cpp",
+        "Rig/PoseFrames.h",
+        "Rig/PoseHierarchy.h",
+        "Rig/PoseReference.cpp",
+        "Rig/PoseReference.h",
+        "Rig/PoseRetarget.cpp",
+        "Rig/PoseRetarget.h",
+        "Rig/RigControlSpace.h",
+        "Rig/RigSampleCatalog.cpp",
+        "Rig/RigSampleCatalogCore.h",
+        "Rig/SkeletalTransform.h",
+        "Rig/Skeleton.cpp",
+        "Rig/Skeleton.h"
+      ]
+    },
+    {
+      "id": "core_mesh_foundation",
+      "owner": "core",
+      "responsibility": "메시 토폴로지와 기본 형상 검증·변환",
+      "files": [
+        "Geometry/MeshGeometry.cpp",
+        "Geometry/MeshGeometryCore.h",
+        "Geometry/MeshTopology.cpp",
+        "Geometry/MeshTopologyCore.h"
+      ]
+    },
+    {
+      "id": "core_glb_flat_normals",
+      "owner": "core",
+      "responsibility": "Generate missing face normals and corresponding morph normal deltas with explicit geometry work budgets",
+      "files": [
+        "Interchange/GLB/Object3DGlbFlatNormals.h",
+        "Interchange/GLB/Object3DGlbFlatNormals.cpp"
+      ]
+    },
+    {
+      "id": "core_material_data",
+      "owner": "core",
+      "responsibility": "Standalone material properties and alpha-mode semantics",
+      "files": [
+        "Core/Object3DMaterial.h"
+      ]
+    },
+    {
+      "id": "core_mesh_data",
+      "owner": "core",
+      "responsibility": "Standalone 3D mesh and morph default data independent of asset and rig ownership",
+      "files": [
+        "Geometry/Object3DMesh.h"
+      ]
+    },
+    {
+      "id": "core_surface_topology",
+      "owner": "core",
+      "responsibility": "Template surface visibility compatibility, grounding support and follower triangle remapping independent of editing",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceTopology.h",
+        "Geometry/Object3DTemplateSurfaceTopology.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_meshes",
+      "owner": "core",
+      "responsibility": "표면 추가·제거·교체에 필요한 메시 조립과 가시성·재질 유지",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceMeshes.h",
+        "Geometry/Object3DTemplateSurfaceMeshes.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_material_routing",
+      "owner": "core",
+      "responsibility": "추가 표면의 유지·신규 메시 재질 슬롯 연결과 재배치",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceMaterialRouting.h",
+        "Geometry/Object3DTemplateSurfaceMaterialRouting.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_material_native",
+      "owner": "core",
+      "responsibility": "표면 재질 대응 인터페이스와 기본 자원 관리기 연결",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceMaterialNative.h",
+        "Geometry/Object3DTemplateSurfaceMaterialNative.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_tangent_snapshot",
+      "owner": "core",
+      "responsibility": "Immutable GLB tangent provenance snapshots from mesh topology",
+      "files": [
+        "Interchange/GLB/Object3DGlbTangentSnapshot.h",
+        "Interchange/GLB/Object3DGlbTangentSnapshot.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_bundle_data",
+      "owner": "core",
+      "responsibility": "GLB vertex and point bundle ranges",
+      "files": [
+        "Interchange/GLB/Object3DGlbBundleData.h"
+      ]
+    },
+    {
+      "id": "core_glb_bundle_index",
+      "owner": "core",
+      "responsibility": "Bounded reuse and identity of GLB vertex and point bundles",
+      "files": [
+        "Interchange/GLB/Object3DGlbBundleIndex.h",
+        "Interchange/GLB/Object3DGlbBundleIndex.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_tangent_notes",
+      "owner": "core",
+      "responsibility": "Bounded GLB diagnostics for optional FBX tangent notes",
+      "files": [
+        "Interchange/GLB/Object3DGlbTangentNotes.h",
+        "Interchange/GLB/Object3DGlbTangentNotes.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_primitive_topology",
+      "owner": "core",
+      "responsibility": "Validated primitive triangles and staged material and normal associations",
+      "files": [
+        "Interchange/GLB/Object3DGlbPrimitiveTopology.h",
+        "Interchange/GLB/Object3DGlbPrimitiveTopology.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_mesh_bundle",
+      "owner": "core",
+      "responsibility": "Assembly of decoded GLB vertex bundles into staged mesh topology and morphs",
+      "files": [
+        "Interchange/GLB/Object3DGlbMeshBundle.h",
+        "Interchange/GLB/Object3DGlbMeshBundle.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_transform",
+      "owner": "core",
+      "responsibility": "GLB affine conversion, validation and point/vector transformation",
+      "files": [
+        "Interchange/GLB/Object3DGlbTransform.h",
+        "Interchange/GLB/Object3DGlbTransform.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_geometry_budget",
+      "owner": "core",
+      "responsibility": "Per-import geometry work counters with caller-supplied limits",
+      "files": [
+        "Interchange/GLB/Object3DGlbGeometryBudget.h"
+      ]
+    },
+    {
+      "id": "core_glb_accessor_read",
+      "owner": "core",
+      "responsibility": "Bounded GLB mesh, skin, point identity and triangle accessor decoding",
+      "files": [
+        "Interchange/GLB/Object3DGlbAccessorRead.h",
+        "Interchange/GLB/Object3DGlbAccessorRead.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_json",
+      "owner": "core",
+      "responsibility": "Checked GLB JSON fields and unsupported-feature policy",
+      "files": [
+        "Interchange/GLB/Object3DGlbJson.h",
+        "Interchange/GLB/Object3DGlbJson.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_mesh_attributes",
+      "owner": "core",
+      "responsibility": "GLB primitive attribute, morph channel and access identifier parsing",
+      "files": [
+        "Interchange/GLB/Object3DGlbMeshAttributes.h",
+        "Interchange/GLB/Object3DGlbMeshAttributes.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_document",
+      "owner": "core",
+      "responsibility": "GLB container and accessor validation and bounded decoding",
+      "files": [
+        "Interchange/GLB/GlbDocument.h",
+        "Interchange/GLB/GlbDocument.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_image_api",
+      "owner": "core",
+      "responsibility": "Host-supplied GLB image resolver interface",
+      "files": [
+        "Interchange/GLB/GlbImageResolver.h"
+      ]
+    },
+    {
+      "id": "core_glb_import_options",
+      "owner": "core",
+      "responsibility": "GLB import budgets and policies independent of engine ownership",
+      "files": [
+        "Interchange/GLB/Object3DGlbImportOptions.h"
+      ]
+    },
+    {
+      "id": "core_glb_point_restore_core",
+      "owner": "core",
+      "responsibility": "Pure reconstruction plan for GLB source points, skin weights and morph deltas",
+      "files": [
+        "Interchange/GLB/Object3DGlbPointRestoreCore.h",
+        "Interchange/GLB/Object3DGlbPointRestoreCore.cpp"
+      ]
+    },
+    {
+      "id": "core_glb_point_identity_codec",
+      "owner": "core",
+      "responsibility": "GLB source point identity sidecar encoding and bounded decoding from mesh and bone data",
+      "files": [
+        "Interchange/GLB/Object3DGlbPointIdentity.h",
+        "Interchange/GLB/Object3DGlbPointIdentity.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_resources",
+      "owner": "core",
+      "responsibility": "Template surface material and image slot reconciliation using borrowed staged resource arrays",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceResources.h",
+        "Geometry/Object3DTemplateSurfaceResources.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_slots",
+      "owner": "core",
+      "responsibility": "템플릿 표면 슬롯 선택·골격 식별 검증과 인덱스 대응 계획",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceSlots.h",
+        "Geometry/Object3DTemplateSurfaceSlots.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_replacement_resources",
+      "owner": "core",
+      "responsibility": "표면 교체 시 전용 재질·이미지 슬롯 검증과 재사용 계획",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceReplacementResources.h",
+        "Geometry/Object3DTemplateSurfaceReplacementResources.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_replacement_layers",
+      "owner": "core",
+      "responsibility": "표면 교체 시 불변 편집 레이어의 재질·이미지 반영과 충돌 검사",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceReplacementLayers.h",
+        "Geometry/Object3DTemplateSurfaceReplacementLayers.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_edit_remap",
+      "owner": "core",
+      "responsibility": "표면 구성 변경 시 편집 보정과 마스크의 불변 인덱스 재연결",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceEditRemap.h",
+        "Geometry/Object3DTemplateSurfaceEditRemap.cpp"
+      ]
+    },
+    {
+      "id": "core_point_selection_data",
+      "owner": "core",
+      "responsibility": "편집기와 분리된 불변 이름 선택·마스크 상태 값",
+      "files": [
+        "Geometry/Object3DSelectionData.h"
+      ]
+    },
+    {
+      "id": "core_mask_validation",
+      "owner": "core",
+      "responsibility": "메시 포인트 마스크의 인덱스·크기·가중치 검증",
+      "files": [
+        "Geometry/MeshPointMaskValidation.h",
+        "Geometry/MeshPointMaskValidation.cpp",
+        "Geometry/MeshPointWeightValidation.h",
+        "Geometry/MeshPointWeightValidation.cpp"
+      ]
+    },
+    {
+      "id": "core_point_selection_validation",
+      "owner": "core",
+      "responsibility": "이름 선택 상태 및 메시 전환의 원본 점 식별 검증",
+      "files": [
+        "Geometry/Object3DSelectionState.h",
+        "Geometry/Object3DSelectionValidation.h",
+        "Geometry/Object3DSelectionValidation.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_selection_remap",
+      "owner": "core",
+      "responsibility": "표면 슬롯 변경 시 불변 이름 선택 마스크의 재연결",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceSelectionRemap.h",
+        "Geometry/Object3DTemplateSurfaceSelectionRemap.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_references",
+      "owner": "core",
+      "responsibility": "표면 변경 시 템플릿 타깃·관절·추종·맞춤 참조 검증과 재연결",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceReferences.h",
+        "Geometry/Object3DTemplateSurfaceReferences.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_followers",
+      "owner": "core",
+      "responsibility": "표면 추종 순서·중립 정합성과 스킨 전사의 독립 조정",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceFollowers.h",
+        "Geometry/Object3DTemplateSurfaceFollowers.cpp"
+      ]
+    },
+    {
+      "id": "core_surface_follower_native",
+      "owner": "core",
+      "responsibility": "표면 추종 계산을 기본 피팅과 스킨 전사에 연결하는 어댑터",
+      "files": [
+        "Geometry/Object3DTemplateSurfaceFollowerNative.h",
+        "Geometry/Object3DTemplateSurfaceFollowerNative.cpp"
+      ]
+    },
+    {
+      "id": "core_asset_data",
+      "owner": "core",
+      "responsibility": "액터 실행 객체와 분리된 에셋 자료 및 이미지 자원",
+      "files": [
+        "Core/Object3DData.h",
+        "Core/Object3DImage.cpp",
+        "Core/Object3DImage.h"
+      ]
+    },
+    {
+      "id": "core_deformation",
+      "owner": "core",
+      "responsibility": "불변 스켈레탈 메시와 선형·듀얼 쿼터니언 변형 계산",
+      "files": [
+        "Rig/DualQuaternionSkinning.cpp",
+        "Rig/DualQuaternionSkinning.h",
+        "Rig/SkeletalMesh.cpp",
+        "Rig/SkeletalMeshCore.h",
+        "Rig/SkinningPalette.cpp",
+        "Rig/SkinningPalette.h"
+      ]
+    },
+    {
+      "id": "core_runtime",
+      "owner": "core",
+      "responsibility": "액터 수명, 공용 소유권과 자산 참조",
+      "files": [
+        "Runtime/Actor.cpp",
+        "Runtime/Actor.h",
+        "Runtime/ActorComponent.cpp",
+        "Runtime/ActorComponent.h",
+        "Runtime/Character.cpp",
+        "Runtime/Character.h",
+        "Runtime/Object3DAsset.cpp",
+        "Runtime/Object3DAsset.h",
+        "Runtime/Object3DEngine.cpp",
+        "Runtime/Object3DEngine.h",
+        "Runtime/Object3DEngineState.h",
+        "Runtime/Object3DInstanceTransfer.cpp",
+        "Runtime/Object3DInstanceTransferCore.h",
+        "Runtime/Object3DJointIdentity.h",
+        "Runtime/Object3DJointIdentityInternal.cpp",
+        "Runtime/Object3DJointIdentityInternal.h",
+        "Runtime/SceneComponent.cpp",
+        "Runtime/SceneComponent.h",
+        "Runtime/SkeletalMeshComponent.cpp",
+        "Runtime/SkeletalMeshComponent.h"
+      ]
+    },
+    {
+      "id": "core_geometry",
+      "owner": "core",
+      "responsibility": "메시 토폴로지, 공간 질의, 표면·선택과 형상 연산",
+      "files": [
+        "Geometry/ImplicitSurface.cpp",
+        "Geometry/ImplicitSurface.h",
+        "Geometry/MeshCollider.cpp",
+        "Geometry/MeshCollider.h",
+        "Geometry/MeshEditGraph.h",
+        "Geometry/MeshEditing.cpp",
+        "Geometry/MeshEditing.h",
+        "Geometry/MeshMaskProjection.cpp",
+        "Geometry/MeshMaskProjectionCore.h",
+        "Geometry/MeshPrimitives.cpp",
+        "Geometry/MeshPrimitives.h",
+        "Geometry/MeshScreenSelection.cpp",
+        "Geometry/MeshScreenSelectionCore.h",
+        "Geometry/MeshSurface.cpp",
+        "Geometry/MeshSurface.h",
+        "Geometry/MeshSurfaceCorrespondence.cpp",
+        "Geometry/MeshSurfaceCorrespondence.h",
+        "Geometry/MeshSymmetry.cpp",
+        "Geometry/MeshSymmetry.h",
+        "Geometry/MorphSymmetry.cpp",
+        "Geometry/MorphSymmetry.h",
+        "Geometry/Object3DPointCorrespondence.cpp",
+        "Geometry/Object3DPointCorrespondence.h",
+        "Geometry/SurfaceBinding.cpp",
+        "Geometry/SurfaceBindingCore.h",
+        "Geometry/SurfaceBindingView.h",
+        "Geometry/SurfaceCollider.h",
+        "Geometry/SurfaceFitting.cpp",
+        "Geometry/SurfaceFitting.h",
+        "Geometry/SurfaceFittingRules.cpp",
+        "Geometry/SurfaceFittingRules.h",
+        "Geometry/SurfaceQuery.h",
+        "Geometry/SurfaceFitSettings.cpp",
+        "Geometry/SurfaceFitSettings.h"
+      ]
+    },
+    {
+      "id": "core_skeleton_skin",
+      "owner": "core",
+      "responsibility": "골격, 본 편집, 스키닝과 가중치",
+      "files": [
+        "Rig/SkeletonEditing.cpp",
+        "Rig/SkeletonEditing.h",
+        "Rig/SkeletonScale.cpp",
+        "Rig/SkeletonScale.h",
+        "Rig/SkinBinding.cpp",
+        "Rig/SkinBinding.h",
+        "Rig/SkinEnvelopeGroups.h",
+        "Rig/SkinEnvelopeInference.cpp",
+        "Rig/SkinPainting.cpp",
+        "Rig/SkinPainting.h",
+        "Rig/SkinSurfaceBinding.cpp",
+        "Rig/SurfaceAttachment.cpp",
+        "Rig/SurfaceAttachment.h"
+      ]
+    },
+    {
+      "id": "core_rig_animation",
+      "owner": "core",
+      "responsibility": "리그 세션, 제어, 포즈와 애니메이션 계산",
+      "files": [
+        "Rig/Object3DAnimation.cpp",
+        "Rig/Object3DAnimation.h",
+        "Rig/Object3DAnimationApply.h",
+        "Rig/Object3DAutomaticCorrectives.cpp",
+        "Rig/Object3DAutomaticCorrectives.h",
+        "Rig/Object3DBvh.cpp",
+        "Rig/Object3DBvh.h",
+        "Rig/Object3DEngineRig.cpp",
+        "Rig/Object3DPoseCorrectiveAnimation.cpp",
+        "Rig/Object3DPoseCorrectiveAnimation.h",
+        "Rig/Object3DPoseCorrectives.cpp",
+        "Rig/Object3DPoseCorrectives.h",
+        "Rig/Object3DPoseCorrectivesBackend.h",
+        "Rig/Object3DPoseMorphs.cpp",
+        "Rig/Object3DPoseMorphs.h",
+        "Rig/Object3DPoseRig.cpp",
+        "Rig/Object3DPoseRig.h",
+        "Rig/Object3DPoseRigBackend.h",
+        "Rig/Object3DPoseSnapshot.cpp",
+        "Rig/Object3DPoseSnapshot.h",
+        "Rig/Object3DProgressiveMorph.cpp",
+        "Rig/Object3DProgressiveMorphAnimation.cpp",
+        "Rig/Object3DProgressiveMorphBackend.h",
+        "Rig/Object3DProgressiveMorphCore.h",
+        "Project/Object3DProjectAnimationData.h",
+        "Rig/Object3DRig.cpp",
+        "Rig/Object3DRig.h",
+        "Rig/Object3DRigEvaluation.h",
+        "Rig/Object3DRigSamples.cpp",
+        "Rig/Object3DRigSamples.h",
+        "Rig/Object3DRigSnapshot.cpp",
+        "Rig/Object3DRigSnapshot.h"
+      ]
+    },
+    {
+      "id": "core_adapters",
+      "owner": "core",
+      "responsibility": "기초 계산과 소유된 에셋을 연결하는 어댑터",
+      "files": [
+        "Interchange/MeshMaskProjectionAsset.cpp",
+        "Interchange/MeshMaskProjectionAsset.h",
+        "Interchange/MeshScreenSelectionAsset.cpp",
+        "Interchange/MeshScreenSelectionAsset.h"
+      ]
+    },
+    {
+      "id": "core_mesh_mask_data",
+      "owner": "core",
+      "responsibility": "메시 점 마스크 값 자료",
+      "files": [
+        "Geometry/MeshPointMask.h"
+      ]
+    },
+    {
+      "id": "core_edit_layer_data",
+      "owner": "core",
+      "responsibility": "편집 레이어 식별과 평가 설정 값 자료",
+      "files": [
+        "Core/Object3DEditLayerData.h"
+      ]
+    },
+    {
+      "id": "core_pose_program_data",
+      "owner": "core",
+      "responsibility": "포즈 프로그램 값 자료",
+      "files": [
+        "Core/Object3DPoseProgramData.h"
+      ]
+    },
+    {
+      "id": "core_project_options",
+      "owner": "core",
+      "responsibility": "프로젝트 저장·읽기 제한 설정",
+      "files": [
+        "Project/Object3DProjectOptions.h"
+      ]
+    },
+    {
+      "id": "core_template_types",
+      "owner": "core",
+      "responsibility": "템플릿 대상과 제어 값 자료",
+      "files": [
+        "Core/Object3DTemplateTypes.h"
+      ]
+    },
+    {
+      "id": "core_template_morph_data",
+      "owner": "core",
+      "responsibility": "템플릿 모프 프로그램 값 자료",
+      "files": [
+        "Core/Object3DTemplateMorphData.h"
+      ]
+    },
+    {
+      "id": "core_adjustment_data",
+      "owner": "core",
+      "responsibility": "형상과 관절 조정 값 자료",
+      "files": [
+        "Core/Object3DAdjustmentData.h"
+      ]
+    },
+    {
+      "id": "core_project_archive",
+      "owner": "core",
+      "responsibility": "엔진 소유 없이 저장하는 프로젝트 그래프 값",
+      "files": [
+        "Project/Object3DProjectArchive.h"
+      ]
+    },
+    {
+      "id": "core_project_version",
+      "owner": "core",
+      "responsibility": "프로젝트 그래프의 저장 형식 버전 선택",
+      "files": [
+        "Project/Object3DProjectVersion.h",
+        "Project/Object3DProjectVersion.cpp"
+      ]
+    },
+    {
+      "id": "core_project_codec",
+      "owner": "core",
+      "responsibility": "프로젝트 그래프의 부호화·복호화와 리그 샘플 직렬화",
+      "files": [
+        "Project/Object3DProjectCodec.h",
+        "Project/Object3DProjectCodec.cpp",
+        "Project/RigSampleCatalogCodec.h"
+      ]
+    },
+    {
+      "id": "core_project_adjustment_validation",
+      "owner": "core",
+      "responsibility": "프로젝트 편집 보정의 메시·UV·법선·스킨·관절 참조 검증",
+      "files": [
+        "Project/Object3DProjectAdjustmentValidation.h",
+        "Project/Object3DProjectAdjustmentValidation.cpp"
+      ]
+    },
+    {
+      "id": "core_project_rig_archive",
+      "owner": "core",
+      "responsibility": "프로젝트 리그 프로그램의 값 기록과 중복 제거",
+      "files": [
+        "Project/Object3DProjectRigArchive.h",
+        "Project/Object3DProjectRigArchive.cpp"
+      ]
+    },
+    {
+      "id": "core_project_history_selection",
+      "owner": "core",
+      "responsibility": "프로젝트 이력에서 선택의 동일성·형식 버전·메시 재배치 검증",
+      "files": [
+        "Project/Object3DProjectHistorySelection.h",
+        "Project/Object3DProjectHistorySelection.cpp"
+      ]
+    },
+    {
+      "id": "core_project_capture",
+      "owner": "core",
+      "responsibility": "엔진 편집 이력과 리그를 프로젝트 그래프 값으로 수집하는 어댑터",
+      "files": [
+        "Project/Object3DProjectCapture.cpp"
+      ]
+    },
+    {
+      "id": "core_project_restore",
+      "owner": "core",
+      "responsibility": "프로젝트 그래프를 엔진·편집 이력·리그로 복원하는 어댑터",
+      "files": [
+        "Project/Object3DProjectRestore.cpp"
+      ]
+    },
+    {
+      "id": "core_authoring",
+      "owner": "core",
+      "responsibility": "편집 세션, 템플릿, 이력과 프로젝트 보존",
+      "files": [
+        "Authoring/Object3DAdjustment.cpp",
+        "Authoring/Object3DAdjustment.h",
+        "Authoring/Object3DEditLayers.cpp",
+        "Authoring/Object3DEditor.cpp",
+        "Authoring/Object3DEditor.h",
+        "Authoring/Object3DEditorInstanceTransfer.cpp",
+        "Authoring/Object3DEditorInstanceTransfer.h",
+        "Authoring/Object3DEditorRig.cpp",
+        "Authoring/Object3DEditorRig.h",
+        "Authoring/Object3DEngineAuthoring.cpp",
+        "Project/Object3DProject.cpp",
+        "Project/Object3DProject.h",
+        "Project/Object3DProjectRigRestore.cpp",
+        "Project/Object3DProjectRigRestore.h",
+        "Project/Object3DProjectAnimation.cpp",
+        "Project/Object3DProjectAnimation.h",
+        "Project/Object3DProjectAnimationValidation.h",
+        "Project/Object3DProjectState.h",
+        "Authoring/Object3DSelections.cpp",
+        "Authoring/Object3DTemplate.cpp",
+        "Authoring/Object3DTemplate.h",
+        "Authoring/Object3DTemplateAdapt.cpp",
+        "Authoring/Object3DTemplateAdapt.h",
+        "Authoring/Object3DTemplateAdaptFollowers.cpp",
+        "Authoring/Object3DTemplateAdaptFollowers.h",
+        "Authoring/Object3DTemplateJointFrames.h",
+        "Authoring/Object3DTemplateMorphBackend.h",
+        "Authoring/Object3DTemplateMorphs.cpp",
+        "Authoring/Object3DTemplateMorphs.h",
+        "Authoring/Object3DTemplateRigProjection.cpp",
+        "Authoring/Object3DTemplateRigProjection.h",
+        "Authoring/Object3DTemplateRigTransfer.cpp",
+        "Authoring/Object3DTemplateRigTransfer.h",
+        "Authoring/Object3DTemplateShapeFit.cpp",
+        "Authoring/Object3DTemplateShapeFit.h",
+        "Authoring/Object3DTemplateSurfaceSwap.cpp",
+        "Project/Object3DProjectTemplateAdapter.cpp",
+        "Project/Object3DProjectTemplateAdapter.h"
+      ]
+    },
+    {
+      "id": "core_interchange",
+      "owner": "core",
+      "responsibility": "형식 입출력, 외부 편집 추적과 형식별 어댑터",
+      "files": [
+        "Interchange/FBX/FbxVisualImageResolver.cpp",
+        "Interchange/FBX/FbxVisualImageResolver.h",
+        "Interchange/GLB/GlbAnimationBake.cpp",
+        "Interchange/GLB/GlbAnimationBake.h",
+        "Interchange/GLB/GlbAnimationPose.cpp",
+        "Interchange/GLB/GlbAnimationPose.h",
+        "Interchange/GLB/GlbAnimationSource.cpp",
+        "Interchange/GLB/GlbAnimationSource.h",
+        "Interchange/Object3DDna.cpp",
+        "Interchange/Object3DDna.h",
+        "Interchange/Object3DDnaBackend.h",
+        "Interchange/Object3DDnaPreflight.cpp",
+        "Interchange/Object3DDnaPreflight.h",
+        "Interchange/Object3DExternalEdits.cpp",
+        "Interchange/Object3DExternalEdits.h",
+        "Interchange/FBX/Object3DFbx.cpp",
+        "Interchange/FBX/Object3DFbxAnimation.cpp",
+        "Interchange/FBX/Object3DFbxAnimation.h",
+        "Interchange/FBX/Object3DFbxAnimationImport.cpp",
+        "Interchange/FBX/Object3DFbxAnimationImport.h",
+        "Interchange/FBX/Object3DFbxImport.cpp",
+        "Interchange/FBX/Object3DFbxProgressivePlan.cpp",
+        "Interchange/FBX/Object3DFbxProgressivePlan.h",
+        "Interchange/FBX/Object3DFbxTangents.cpp",
+        "Interchange/FBX/Object3DFbxTangents.h",
+        "Interchange/GLB/Object3DGlbExternalEdits.cpp",
+        "Interchange/GLB/Object3DGlbImport.cpp",
+        "Interchange/GLB/Object3DGlbMaterials.cpp",
+        "Interchange/GLB/Object3DGlbMaterials.h",
+        "Interchange/GLB/Object3DGlbMesh.cpp",
+        "Interchange/GLB/Object3DGlbMesh.h",
+        "Interchange/GLB/Object3DGlbPointRestore.cpp",
+        "Interchange/GLB/Object3DGlbPointRestore.h",
+        "Interchange/GLB/Object3DGlbScene.cpp",
+        "Interchange/GLB/Object3DGlbScene.h",
+        "Interchange/GLB/Object3DGlbSkin.cpp",
+        "Interchange/GLB/Object3DGlbSkin.h",
+        "Interchange/Object3DInterchange.cpp",
+        "Interchange/Object3DInterchange.h",
+        "Interchange/Object3DObj.cpp",
+        "Interchange/Object3DObj.h",
+        "Interchange/Object3DProgressiveMorphInterchange.h",
+        "Interchange/Object3DProxy.cpp",
+        "Interchange/Object3DProxy.h",
+        "Interchange/RigSampleCatalogExport.cpp",
+        "Interchange/RigSampleCatalogExport.h",
+        "Interchange/Usd.cpp",
+        "Interchange/Usd.h"
+      ]
+    },
+    {
+      "id": "core_composition",
+      "owner": "core",
+      "responsibility": "기존 메시·스켈레탈 컴포넌트·선택·표면 결합·액터 이전·리그 샘플·점진 모프 공개 API 사용 경로를 유지하는 호환 진입점",
+      "files": [
+        "Geometry/MeshGeometry.h",
+        "Geometry/MeshMaskProjection.h",
+        "Geometry/MeshScreenSelection.h",
+        "Geometry/MeshTopology.h",
+        "Runtime/Object3DInstanceTransfer.h",
+        "Rig/Object3DProgressiveMorph.h",
+        "Rig/RigSampleCatalog.h",
+        "Rig/SkeletalMesh.h",
+        "Geometry/SurfaceBinding.h"
+      ]
+    },
+    {
+      "id": "character_views",
+      "owner": "character",
+      "responsibility": "본체 핸들을 참조하는 인체 자산, 편집기와 템플릿 뷰",
+      "files": [
+        "NSCharacter/CharacterAsset.cpp",
+        "NSCharacter/CharacterAsset.h",
+        "NSCharacter/CharacterEditor.cpp",
+        "NSCharacter/CharacterEditor.h",
+        "NSCharacter/CharacterTemplateCore.cpp",
+        "NSCharacter/CharacterTemplateCore.h"
+      ]
+    },
+    {
+      "id": "character_assets",
+      "owner": "character",
+      "responsibility": "인체 템플릿과 피부·부속 자료 및 카탈로그",
+      "files": [
+        "NSCharacter/HumanAccessories.cpp",
+        "NSCharacter/HumanAccessories.h",
+        "NSCharacter/HumanAccessoryCatalogInternal.cpp",
+        "NSCharacter/HumanAccessoryCatalogInternal.h",
+        "NSCharacter/HumanMorphology.cpp",
+        "NSCharacter/HumanMorphology.h",
+        "NSCharacter/HumanSkin.cpp",
+        "NSCharacter/HumanSkin.h",
+        "NSCharacter/HumanSkinInternal.h",
+        "NSCharacter/MakeHumanAttachments.cpp",
+        "NSCharacter/MakeHumanAttachments.h",
+        "NSCharacter/MakeHumanExpressions.cpp",
+        "NSCharacter/MakeHumanExpressions.h",
+        "NSCharacter/MakeHumanMorphology.cpp",
+        "NSCharacter/MakeHumanMorphology.h",
+        "NSCharacter/MakeHumanResourceReader.cpp",
+        "NSCharacter/MakeHumanResourceReader.h",
+        "NSCharacter/MakeHumanRigReader.cpp",
+        "NSCharacter/MakeHumanRigReader.h",
+        "NSCharacter/MakeHumanTemplate.cpp",
+        "NSCharacter/MakeHumanTemplate.h"
+      ]
+    },
+    {
+      "id": "character_anatomy",
+      "owner": "character",
+      "responsibility": "인체 구조 생성, 역할·자세·보정 규칙",
+      "files": [
+        "NSCharacter/AutoRig.h",
+        "NSCharacter/HumanAutomaticCorrectives.cpp",
+        "NSCharacter/HumanAutomaticCorrectives.h",
+        "NSCharacter/HumanJointNaming.cpp",
+        "NSCharacter/HumanJointNaming.h",
+        "NSCharacter/HumanPoseDirections.cpp",
+        "NSCharacter/HumanPoseDirections.h",
+        "NSCharacter/HumanPosePlanner.cpp",
+        "NSCharacter/HumanPosePlanner.h",
+        "NSCharacter/HumanPoseRetarget.cpp",
+        "NSCharacter/HumanPoseRetarget.h",
+        "NSCharacter/HumanoidCharacterization.cpp",
+        "NSCharacter/HumanoidCharacterization.h",
+        "NSCharacter/HumanoidGenerator.cpp",
+        "NSCharacter/HumanoidGenerator.h",
+        "NSCharacter/RigSamples.cpp",
+        "NSCharacter/RigSamples.h"
+      ]
+    },
+    {
+      "id": "character_interchange",
+      "owner": "character",
+      "responsibility": "인체 뷰의 형식 입출력 위임",
+      "files": [
+        "NSCharacter/CharacterInterchange.cpp",
+        "NSCharacter/CharacterInterchange.h",
+        "NSCharacter/DnaCharacter.cpp",
+        "NSCharacter/DnaCharacter.h"
+      ]
+    },
+    {
+      "id": "character_composition",
+      "owner": "character",
+      "responsibility": "기존 사용 경로를 유지하는 인체 모듈 진입점",
+      "files": [
+        "NSCharacter/CharacterTemplate.h",
+        "NSCharacter/NSCharacter.h"
+      ]
+    }
+  ]
+}

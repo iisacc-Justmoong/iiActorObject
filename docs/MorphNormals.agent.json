@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/MorphNormals.md",
-    "sha256": "cad4fdd32db7752371fd21721c7310e00b50cd60d9f2392cf9fda3a1351b01be",
-    "bytes": 5452,
-    "line_count": 41,
+    "sha256": "1987c58a1ac83a6537305e91f760df81a9e34702395d5ce543816f5b2909925b",
+    "bytes": 6080,
+    "line_count": 43,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -59,7 +59,7 @@
       "kind": "paragraph",
       "start_line": 5,
       "end_line": 5,
-      "raw": "모프 법선 자료, 검증, 렌더 변환, 편집 레이어와 파일 교환은 모두 `src/iiActorObject/`에 있다. `Object3DEngine`이 에셋·편집 세션·리그·템플릿을 소유한다. NSCharacter는 본체 핸들을 참조하며 이 자료의 별도 저장소나 엔진을 만들지 않는다. NSCharacter를 끈 빌드에서도 같은 법선 기능을 사용할 수 있다.\n"
+      "raw": "모프 법선 자료, 검증, 렌더 변환, 편집 레이어와 파일 교환은 모두 `src/`의 책임별 디렉터리에 있다. `Object3DEngine`이 에셋·편집 세션·리그·템플릿을 소유한다. NSCharacter는 본체 핸들을 참조하며 이 자료의 별도 저장소나 엔진을 만들지 않는다. NSCharacter를 끈 빌드에서도 같은 법선 기능을 사용할 수 있다.\n"
     },
     {
       "id": "b000006",
@@ -236,7 +236,7 @@
       "kind": "paragraph",
       "start_line": 29,
       "end_line": 29,
-      "raw": "FBX 표준 Shape의 법선 델타는 제어점 단위이다. 입력 시 geometry 역전치 변환 `N`을 적용하고, 원시 기준 법선 `nRaw`에 대해 `N*dRaw / length(N*nRaw)`를 저장한다. 비균등 스케일·반사에서도 중간 모프 계수의 법선이 유지된다.\n"
+      "raw": "일반 FBX 모프와 점진 모프의 형상 델타·법선 변환은 내부 `Object3DFbxMorphShape`가 공통으로 담당한다. 이 판독기는 원본 형상과 토폴로지를 빌려 사용하고 에셋·엔진을 소유하지 않는다. 위치·법선·가중치 배열과 작성용 법선 메타데이터를 검사한 뒤 독립된 델타를 반환한다. 출력에서는 `Object3DFbxMorphWrite`가 위치·법선을 제어점에 투영하고 Shape 자료를 만든다. 두 구성 요소 모두 에셋이나 엔진을 소유하지 않으며 채널 이름과 프로그램 연결은 호출자가 담당한다.\n"
     },
     {
       "id": "b000028",
@@ -250,7 +250,7 @@
       "kind": "paragraph",
       "start_line": 31,
       "end_line": 31,
-      "raw": "같은 제어점의 layout들에 서로 다른 원시 법선 델타가 필요하면 표준 FBX로 정확히 표현할 수 없다. 기본 `exportObject3DFbx(asset)`는 이를 거부한다. `FbxExportOptions::allowMorphNormalMetadata=true`를 명시하면 표준 Shape에는 첫 layout의 투영을 작성하고 정확한 값은 채널의 `iiNormalMode`, `iiLayoutNormals`, `iiNormalProjectionExact`에 보관한다. 법선 blob은 레코드마다 little-endian uint32 layout과 float64 3개, 총 28바이트이다.\n"
+      "raw": "FBX 표준 Shape의 법선 델타는 제어점 단위이다. 입력 시 geometry 역전치 변환 `N`을 적용하고, 원시 기준 법선 `nRaw`에 대해 `N*dRaw / length(N*nRaw)`를 저장한다. 비균등 스케일·반사에서도 중간 모프 계수의 법선이 유지된다.\n"
     },
     {
       "id": "b000030",
@@ -264,7 +264,7 @@
       "kind": "paragraph",
       "start_line": 33,
       "end_line": 33,
-      "raw": "SDK 기본 가져오기는 원본 작성용 확장과 함께 정확한 법선 목록을 복원한다. `restoreAuthoringMetadata=false`는 표준 Shape만 사용하며 투영 손실이 있으면 경고한다. 외부 앱은 확장을 삭제할 수 있으므로 이 옵션을 외부 앱의 경계별 법선 지원으로 해석하지 않는다. GLB는 렌더 정점별 `NORMAL` 모프 accessor에 정확한 델타를 기록한다.\n"
+      "raw": "같은 제어점의 layout들에 서로 다른 원시 법선 델타가 필요하면 표준 FBX로 정확히 표현할 수 없다. 기본 `exportObject3DFbx(asset)`는 이를 거부한다. `FbxExportOptions::allowMorphNormalMetadata=true`를 명시하면 표준 Shape에는 첫 layout의 투영을 작성하고 정확한 값은 채널의 `iiNormalMode`, `iiLayoutNormals`, `iiNormalProjectionExact`에 보관한다. 법선 blob은 레코드마다 little-endian uint32 layout과 float64 3개, 총 28바이트이다.\n"
     },
     {
       "id": "b000032",
@@ -275,12 +275,10 @@
     },
     {
       "id": "b000033",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 35,
       "end_line": 35,
-      "raw": "## DNA\n",
-      "level": 2,
-      "title": "DNA"
+      "raw": "SDK 기본 가져오기는 원본 작성용 확장과 함께 정확한 법선 목록을 복원한다. `restoreAuthoringMetadata=false`는 표준 Shape만 사용하며 투영 손실이 있으면 경고한다. 외부 앱은 확장을 삭제할 수 있으므로 이 옵션을 외부 앱의 경계별 법선 지원으로 해석하지 않는다. GLB는 렌더 정점별 `NORMAL` 모프 accessor에 정확한 델타를 기록한다.\n"
     },
     {
       "id": "b000034",
@@ -291,10 +289,12 @@
     },
     {
       "id": "b000035",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 37,
       "end_line": 37,
-      "raw": "DNA는 명시적 target 법선 필드가 없다. 명시적 목록이 위치에서 계산한 값과 같으면 저장할 수 있다. 다른 경우 기본 저장은 거부한다. `RigSourceExportOptions::allowDiscardMorphNormals=true`는 경고와 함께 법선 보정의 삭제를 허용한다. 법선 델타를 위치 델타에 섞지 않는다. 원본 DNA 바이트 보관과 편집 결과 직렬화도 구분한다.\n"
+      "raw": "## DNA\n",
+      "level": 2,
+      "title": "DNA"
     },
     {
       "id": "b000036",
@@ -305,12 +305,10 @@
     },
     {
       "id": "b000037",
-      "kind": "heading",
+      "kind": "paragraph",
       "start_line": 39,
       "end_line": 39,
-      "raw": "## 검증 범위\n",
-      "level": 2,
-      "title": "검증 범위"
+      "raw": "DNA는 명시적 target 법선 필드가 없다. 명시적 목록이 위치에서 계산한 값과 같으면 저장할 수 있다. 다른 경우 기본 저장은 거부한다. `RigSourceExportOptions::allowDiscardMorphNormals=true`는 경고와 함께 법선 보정의 삭제를 허용한다. 법선 델타를 위치 델타에 섞지 않는다. 원본 DNA 바이트 보관과 편집 결과 직렬화도 구분한다.\n"
     },
     {
       "id": "b000038",
@@ -321,9 +319,25 @@
     },
     {
       "id": "b000039",
-      "kind": "paragraph",
+      "kind": "heading",
       "start_line": 41,
       "end_line": 41,
+      "raw": "## 검증 범위\n",
+      "level": 2,
+      "title": "검증 범위"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 43,
+      "end_line": 43,
       "raw": "수치 검증은 경계 양쪽의 법선, 법선만 있는 모프, 명시적 빈 목록, 중간 강도, 비균등 스킨 스케일, 템플릿 재계산과 undo, 비균등·반사 FBX 변환, 표준 FBX와 확장 왕복, DNA 저장 정책과 범위를 포함한다. GLB accessor는 SDK와 독립적인 파서로 검사한다. 실제 Blender의 기존 메시·리그 가져오기 검증과 앱의 모프 법선 평가 지원은 서로 다른 증거이다. tangent, 다중 UV·색, 제작용 MetaHuman 자료, CC5·Unreal에서의 상세 재편집과 품질은 별도의 남은 작업이다.\n"
     }
   ],
@@ -369,20 +383,20 @@
       "start_line": 27
     },
     {
-      "block_id": "b000033",
+      "block_id": "b000035",
       "parent_id": "b000001",
       "level": 2,
       "title": "DNA",
       "anchor": "dna",
-      "start_line": 35
+      "start_line": 37
     },
     {
-      "block_id": "b000037",
+      "block_id": "b000039",
       "parent_id": "b000001",
       "level": 2,
       "title": "검증 범위",
       "anchor": "검증-범위",
-      "start_line": 39
+      "start_line": 41
     }
   ],
   "indexes": {
@@ -409,8 +423,15 @@
         "context": "paragraph"
       },
       {
-        "block_id": "b000031",
-        "line": 33,
+        "block_id": "b000027",
+        "line": 29,
+        "text": "일반 FBX 모프와 점진 모프의 형상 델타·법선 변환은 내부 `Object3DFbxMorphShape`가 공통으로 담당한다. 이 판독기는 원본 형상과 토폴로지를 빌려 사용하고 에셋·엔진을 소유하지 않는다. 위치·법선·가중치 배열과 작성용 법선 메타데이터를 검사한 뒤 독립된 델타를 반환한다. 출력에서는 `Object3DFbxMorphWrite`가 위치·법선을 제어점에 투영하고 Shape 자료를 만든다. 두 구성 요소 모두 에셋이나 엔진을 소유하지 않으며 채널 이름과 프로그램 연결은 호출자가 담당한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000033",
+        "line": 35,
         "text": "SDK 기본 가져오기는 원본 작성용 확장과 함께 정확한 법선 목록을 복원한다. `restoreAuthoringMetadata=false`는 표준 Shape만 사용하며 투영 손실이 있으면 경고한다. 외부 앱은 확장을 삭제할 수 있으므로 이 옵션을 외부 앱의 경계별 법선 지원으로 해석하지 않는다. GLB는 렌더 정점별 `NORMAL` 모프 accessor에 정확한 델타를 기록한다.",
         "basis": "lexical_match",
         "context": "paragraph"
