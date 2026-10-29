@@ -1,0 +1,281 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:b84ff86f0c131c118f3a5a5a90356d7f29ed389d6bef38b6366362084d285209",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/GlbAuthoredTangentsVerification-20261028.md",
+    "sha256": "f54eab61cecaceffb6f187d7fd113511d31c53298c7d5655d7f7879300b31212",
+    "bytes": 5374,
+    "line_count": 24,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "GLB 원본 탄젠트·면별 법선 검증 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# GLB 원본 탄젠트·면별 법선 검증 — 2026-10-28\n",
+      "level": 1,
+      "title": "GLB 원본 탄젠트·면별 법선 검증 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 범위\n",
+      "level": 2,
+      "title": "범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "[원본 탄젠트 계약](GlbAuthoredTangents.md)과 [GLB 가져오기](GlbImport.md)에 기준 탄젠트, 모프 차이, 원본 위치·변형 접근자의 공유, 법선이 없는 면의 처리를 연결했다. 공용 자료는 iiActorObject 본체가 소유하고 NSCharacter는 참조한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "heading",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "## 검사\n",
+      "level": 2,
+      "title": "검사"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "list",
+      "start_line": 9,
+      "end_line": 13,
+      "raw": "- 새 스냅샷을 사용하는 시험이 구현 전 컴파일되지 않는 것을 확인했다. 기준 방향과 모프, 반사된 비균일 스케일, 같은 재질의 탄젠트 유무가 다른 두 프리미티브, 사용되지 않는 원본 점, 프로젝트 저장·복원과 편집·실행 취소를 확인했다. 부호가 잘못되거나 NaN, 차원 불일치, 기준 탄젠트 없는 모프, 유효하지 않은 스냅샷은 거부했다. 호출자가 보유한 변경 가능한 별칭을 에셋 생성 후 손상시켰을 때 GLB와 프로젝트 저장이 모두 거부되는지도 확인했다. `KHR_mesh_quantization`의 부호 있는 정규화 탄젠트와 노멀 맵 UV 연결 변경도 검사했다.\n- 독립 Python GLB 판독기는 원본과 재출력의 탄젠트 및 모프 방향을 계산하고 반사 시 W 부호를 확인했다. 버전 24 프로젝트의 헤더·크기·CRC를 독립적으로 읽었다. 탄젠트 유무가 달라도 같은 제어점을 공유해야 하는 두 면에서 편집 전에는 한쪽만 움직이는 실패를 재현했고, 수정 후 양쪽 이동이 일치했다. 서로 다른 UV 접근자는 제어점을 공유하고, 스킨 또는 위치 모프 접근자가 다르면 별도로 보관하는 검사도 추가했다.\n- 법선이 없는 공유 점과 직교하는 두 면에서 수정 전 표시 정점이 공유되는 실패를 확인했다. 수정 후 면별 기본 법선과 위치 모프를 적용한 면별 법선이 일치했다. 원본 제어점은 네 개로 유지했다.\n- macOS arm64 Release의 NSCharacter 포함·DNA 제외 구성에서 GLB 입력 관련 시험 6건, 기존 프로젝트 버전 1~8과 버전 23의 독립 형식 검사 및 이력·손상·원자성 검사 14건, 기존 FBX 원본 탄젠트와 GLB 탄젠트 생성의 독립 회귀 2건이 통과했다. NSCharacter 포함·DNA 제외 및 코어 전용·DNA 제외 패키지를 스테이징해 공개 헤더와 라이브러리로 빌드한 소비자가 각각 1건 통과했다. 두 소비자의 실행 경로는 해당 스테이징 라이브러리를 가리켰다. 최종 라이브러리는 각 스테이징 위치에 갱신한 뒤 빌드 결과와 바이트 단위로 비교했다.\n- NSCharacter를 끈 코어 전용 구성에서 DNA를 끈 경우와 켠 경우, NSCharacter와 DNA를 모두 켠 구성에서 각각 GLB 입력 시험 6건이 통과했다. iiActorObject 공유 라이브러리와 테스트를 ASan·UBSan으로 계측한 구성에서도 같은 시험 6건이 통과했다. 설치된 iiJson 정적 라이브러리는 별도로 계측하지 않았다. 사용자 요청에 따라 CC5·Blender·Unreal과 사용자용 명령행 도구는 실행하지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "새 스냅샷을 사용하는 시험이 구현 전 컴파일되지 않는 것을 확인했다. 기준 방향과 모프, 반사된 비균일 스케일, 같은 재질의 탄젠트 유무가 다른 두 프리미티브, 사용되지 않는 원본 점, 프로젝트 저장·복원과 편집·실행 취소를 확인했다. 부호가 잘못되거나 NaN, 차원 불일치, 기준 탄젠트 없는 모프, 유효하지 않은 스냅샷은 거부했다. 호출자가 보유한 변경 가능한 별칭을 에셋 생성 후 손상시켰을 때 GLB와 프로젝트 저장이 모두 거부되는지도 확인했다. `KHR_mesh_quantization`의 부호 있는 정규화 탄젠트와 노멀 맵 UV 연결 변경도 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "독립 Python GLB 판독기는 원본과 재출력의 탄젠트 및 모프 방향을 계산하고 반사 시 W 부호를 확인했다. 버전 24 프로젝트의 헤더·크기·CRC를 독립적으로 읽었다. 탄젠트 유무가 달라도 같은 제어점을 공유해야 하는 두 면에서 편집 전에는 한쪽만 움직이는 실패를 재현했고, 수정 후 양쪽 이동이 일치했다. 서로 다른 UV 접근자는 제어점을 공유하고, 스킨 또는 위치 모프 접근자가 다르면 별도로 보관하는 검사도 추가했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "법선이 없는 공유 점과 직교하는 두 면에서 수정 전 표시 정점이 공유되는 실패를 확인했다. 수정 후 면별 기본 법선과 위치 모프를 적용한 면별 법선이 일치했다. 원본 제어점은 네 개로 유지했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "macOS arm64 Release의 NSCharacter 포함·DNA 제외 구성에서 GLB 입력 관련 시험 6건, 기존 프로젝트 버전 1~8과 버전 23의 독립 형식 검사 및 이력·손상·원자성 검사 14건, 기존 FBX 원본 탄젠트와 GLB 탄젠트 생성의 독립 회귀 2건이 통과했다. NSCharacter 포함·DNA 제외 및 코어 전용·DNA 제외 패키지를 스테이징해 공개 헤더와 라이브러리로 빌드한 소비자가 각각 1건 통과했다. 두 소비자의 실행 경로는 해당 스테이징 라이브러리를 가리켰다. 최종 라이브러리는 각 스테이징 위치에 갱신한 뒤 빌드 결과와 바이트 단위로 비교했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter를 끈 코어 전용 구성에서 DNA를 끈 경우와 켠 경우, NSCharacter와 DNA를 모두 켠 구성에서 각각 GLB 입력 시험 6건이 통과했다. iiActorObject 공유 라이브러리와 테스트를 ASan·UBSan으로 계측한 구성에서도 같은 시험 6건이 통과했다. 설치된 iiJson 정적 라이브러리는 별도로 계측하지 않았다. 사용자 요청에 따라 CC5·Blender·Unreal과 사용자용 명령행 도구는 실행하지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "## GLB에서 FBX로 기준 탄젠트 전달\n",
+      "level": 2,
+      "title": "GLB에서 FBX로 기준 탄젠트 전달"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "list",
+      "start_line": 17,
+      "end_line": 20,
+      "raw": "- 노멀 맵의 UV에 결합된 원본 탄젠트와 탄젠트가 없는 면을 같은 메시로 출력하는 독립 FBX 검사에서 구현 전 원본 방향이 재계산되는 실패를 확인했다. 수정 후 원본 방향, 반사된 변환과 V 반전에 따른 부호, 비탄젠트, 비원본 면의 재계산, 보조 UV 선택을 검사했다. 모든 면에 원본이 있는 경우 및 퇴화한 UV의 경우에도 원본을 출력하는지 확인했다.\n- 위치 편집 후 무효화, 실행 취소 및 프로젝트 복원 후 재사용, 노멀 맵 UV 변경, 노멀 맵에 연결되지 않은 원본의 상태 기록과 FBX 재가져오기 경고를 확인했다. 출력할 때 공유 스냅샷 별칭이 손상된 경우도 거부한다. 모프가 있는 메시의 FBX 출력은 기준 기저만 포함한다는 상태를 기록하며, GLB 모프 탄젠트를 FBX shape에 복원한 것으로 간주하지 않는다.\n- macOS arm64 Release의 NSCharacter 포함·DNA 제외 구성은 관련 회귀 12건, 최종 보조 UV 사례를 포함한 원본 탄젠트 검사 재실행 2건이 통과했다. 이 회귀에는 인체 표본의 FBX 탄젠트 53,512개 코너와 FBX 재가져오기 비교가 포함된다. NSCharacter·DNA를 끈 코어 전용 구성은 9건 통과했다. ASan·UBSan 계측 구성도 9건 통과했으며 iiJson 정적 라이브러리는 별도 계측하지 않았다. 두 Release 구성의 라이브러리를 각각 기존 설치 스테이징에 복사해 빌드 결과와 바이트 단위로 일치시킨 뒤, 해당 설치본을 사용하는 소비자 시험이 각각 통과했다.\n- 이 검사는 작성된 파일의 수치와 상태를 독립 판독기 및 SDK 네이티브 시험으로 확인한다. 이미지 색 채널, 소비자별 노멀 맵 규약이나 실제 앱의 렌더 결과는 확인하지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "노멀 맵의 UV에 결합된 원본 탄젠트와 탄젠트가 없는 면을 같은 메시로 출력하는 독립 FBX 검사에서 구현 전 원본 방향이 재계산되는 실패를 확인했다. 수정 후 원본 방향, 반사된 변환과 V 반전에 따른 부호, 비탄젠트, 비원본 면의 재계산, 보조 UV 선택을 검사했다. 모든 면에 원본이 있는 경우 및 퇴화한 UV의 경우에도 원본을 출력하는지 확인했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "위치 편집 후 무효화, 실행 취소 및 프로젝트 복원 후 재사용, 노멀 맵 UV 변경, 노멀 맵에 연결되지 않은 원본의 상태 기록과 FBX 재가져오기 경고를 확인했다. 출력할 때 공유 스냅샷 별칭이 손상된 경우도 거부한다. 모프가 있는 메시의 FBX 출력은 기준 기저만 포함한다는 상태를 기록하며, GLB 모프 탄젠트를 FBX shape에 복원한 것으로 간주하지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "macOS arm64 Release의 NSCharacter 포함·DNA 제외 구성은 관련 회귀 12건, 최종 보조 UV 사례를 포함한 원본 탄젠트 검사 재실행 2건이 통과했다. 이 회귀에는 인체 표본의 FBX 탄젠트 53,512개 코너와 FBX 재가져오기 비교가 포함된다. NSCharacter·DNA를 끈 코어 전용 구성은 9건 통과했다. ASan·UBSan 계측 구성도 9건 통과했으며 iiJson 정적 라이브러리는 별도 계측하지 않았다. 두 Release 구성의 라이브러리를 각각 기존 설치 스테이징에 복사해 빌드 결과와 바이트 단위로 일치시킨 뒤, 해당 설치본을 사용하는 소비자 시험이 각각 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "이 검사는 작성된 파일의 수치와 상태를 독립 판독기 및 SDK 네이티브 시험으로 확인한다. 이미지 색 채널, 소비자별 노멀 맵 규약이나 실제 앱의 렌더 결과는 확인하지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "## 한계\n",
+      "level": 2,
+      "title": "한계"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "GLB 애니메이션 가져오기, 모든 PBR 재질과 확장, FBX 모프 탄젠트 전달 및 원본 제작 리그는 별도 작업이다. 원본의 서로 다른 위치·스킨·위치 모프 접근자는 값만 비교해 합치지 않는다. 실제 앱 호환성, Windows·Linux, 제작용 MetaHuman 수준의 시각적 품질은 이 검사에서 확인하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "GLB 원본 탄젠트·면별 법선 검증 — 2026-10-28",
+      "anchor": "glb-원본-탄젠트면별-법선-검증--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "범위",
+      "anchor": "범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000007",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검사",
+      "anchor": "검사",
+      "start_line": 7
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "GLB에서 FBX로 기준 탄젠트 전달",
+      "anchor": "glb에서-fbx로-기준-탄젠트-전달",
+      "start_line": 15
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "한계",
+      "anchor": "한계",
+      "start_line": 22
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000013",
+        "line": 18,
+        "text": "- 위치 편집 후 무효화, 실행 취소 및 프로젝트 복원 후 재사용, 노멀 맵 UV 변경, 노멀 맵에 연결되지 않은 원본의 상태 기록과 FBX 재가져오기 경고를 확인했다. 출력할 때 공유 스냅샷 별칭이 손상된 경우도 거부한다. 모프가 있는 메시의 FBX 출력은 기준 기저만 포함한다는 상태를 기록하며, GLB 모프 탄젠트를 FBX shape에 복원한 것으로 간주하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "원본 탄젠트 계약",
+        "target": "GlbAuthoredTangents.md",
+        "kind": "relative",
+        "line": 5
+      },
+      {
+        "block_id": "b000005",
+        "label": "GLB 가져오기",
+        "target": "GlbImport.md",
+        "kind": "relative",
+        "line": 5
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

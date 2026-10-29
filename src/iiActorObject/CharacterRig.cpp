@@ -1,4 +1,5 @@
 #include "CharacterMath.h"
+#include "PoseHierarchy.h"
 #include <iiActorObject/CharacterRig.h>
 #include <numbers>
 #include <unordered_set>
@@ -16,9 +17,9 @@ bool overlaps(std::span<const double> a, std::span<const double> b)
 }
 Quaternion worldRotation(const Pose &pose, BoneIndex bone)
 {
-    Quaternion result = pose.locals()[bone].rotation;
+    Quaternion result = product(object3d_detail::deformationRotation(pose,bone),pose.locals()[bone].rotation);
     for (auto p = pose.skeleton()->bones()[bone].parent; p != NoBone; p = pose.skeleton()->bones()[p].parent)
-        result = product(pose.locals()[p].rotation, result);
+        result = product(product(object3d_detail::deformationRotation(pose,p),pose.locals()[p].rotation), result);
     return result;
 }
 Quaternion fromTo(Vector3 from, Vector3 to)
@@ -103,6 +104,16 @@ TwoBoneResult CharacterRig::solveTwoBone(Pose &pose, const TwoBoneGoal &goal)
         const auto scale = pose.locals()[bone].scale;
         if (std::abs(scale.x - 1) > 1e-12 || std::abs(scale.y - 1) > 1e-12 || std::abs(scale.z - 1) > 1e-12)
             throw std::invalid_argument("Two-bone IK requires unit-scale ancestors");
+        const auto bind=pose.deformationBindTransforms();
+        if(!bind.empty())
+        {
+            const auto before=bones[bone].bindTransform.scale,after=bind[bone].scale;
+            const auto unitRatio=[](double oldValue,double newValue)
+            {const auto ratio=newValue/oldValue;return std::isfinite(ratio)&&std::abs(ratio-1)<=1e-12;};
+            if(!unitRatio(before.x,after.x)||!unitRatio(before.y,after.y)||!unitRatio(before.z,after.z))
+                throw std::invalid_argument("Two-bone IK requires unit-scale deformation bind corrections");
+            (void)object3d_detail::deformationRotation(pose,bone);
+        }
     }
     const auto world = pose.worldMatrices();
     const auto a = world[goal.root].transformPoint({}), b = world[goal.middle].transformPoint({}),
@@ -134,14 +145,18 @@ TwoBoneResult CharacterRig::solveTwoBone(Pose &pose, const TwoBoneGoal &goal)
     const auto parentQ = parent == NoBone ? Quaternion{} : worldRotation(pose, parent);
     const auto rootQ = worldRotation(pose, goal.root);
     auto root = pose.locals()[goal.root], middle = pose.locals()[goal.middle];
-    root.rotation = product(conjugate(parentQ), product(fromTo(sub(b, a), sub(desiredMiddle, a)), rootQ));
-    const auto rootWorld = parent == NoBone ? root.matrix() : world[parent] * root.matrix();
-    const auto middleWorld = rootWorld * middle.matrix();
+    const auto rootCorrection=object3d_detail::deformationRotation(pose,goal.root);
+    const auto middleCorrection=object3d_detail::deformationRotation(pose,goal.middle);
+    root.rotation = product(conjugate(rootCorrection),product(conjugate(parentQ), product(fromTo(sub(b, a), sub(desiredMiddle, a)), rootQ)));
+    const auto rootLocal=object3d_detail::evaluatedLocalMatrix(pose,goal.root,root);
+    const auto rootWorld = parent == NoBone ? rootLocal : world[parent] * rootLocal;
+    const auto middleWorld = rootWorld * object3d_detail::evaluatedLocalMatrix(pose,goal.middle,middle);
     const auto newB = middleWorld.transformPoint({});
-    const auto newC = (middleWorld * pose.locals()[goal.end].matrix()).transformPoint({});
-    const auto newRootQ = product(parentQ, root.rotation);
-    middle.rotation = product(conjugate(newRootQ), product(fromTo(sub(newC, newB), sub(desiredEnd, newB)),
-                                                           product(newRootQ, middle.rotation)));
+    const auto newC = (middleWorld * object3d_detail::evaluatedLocalMatrix(pose,goal.end,pose.locals()[goal.end])).transformPoint({});
+    const auto newRootQ = product(parentQ,product(rootCorrection,root.rotation));
+    const auto effectiveMiddle=product(middleCorrection,middle.rotation);
+    middle.rotation = product(conjugate(middleCorrection),product(conjugate(newRootQ), product(fromTo(sub(newC, newB), sub(desiredEnd, newB)),
+                                                           product(newRootQ, effectiveMiddle))));
     root = blend(pose.locals()[goal.root], root, goal.weight);
     middle = blend(pose.locals()[goal.middle], middle, goal.weight);
     pose.setLocal(goal.root, root);

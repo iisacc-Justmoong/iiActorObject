@@ -1,0 +1,195 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:c2c797a70ed8093a4a3d4d388cc7d42213cfe1e7fd0a6c99afe97a101dd2b3bf",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/SkeletonEnvelopes.md",
+    "sha256": "7d9fa3f322085a7146200e005130af2bfe9ec8a7a6557087c9a7ec376831c0c2",
+    "bytes": 3762,
+    "line_count": 26,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "기존 골격에서 스킨 엔벌로프 추정",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 기존 골격에서 스킨 엔벌로프 추정\n",
+      "level": 1,
+      "title": "기존 골격에서 스킨 엔벌로프 추정"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "본체의 `SkinBinder::inferEnvelopes`는 이미 존재하는 골격의 바인드 자세를 오브젝트 좌표로 평가하여 자동 스킨 바인딩용 선분을 만든다. 이름이나 관절 ID의 부모 정렬을 가정하지 않는다. 원본 본 ID는 그대로이며 모든 자식 방향을 별도 선분으로 보존한다. `NSCharacter::AutoRigger`는 이 본체 기능의 별칭이고 캐릭터 편집기는 엔진 소유 세션을 참조한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "fenced_code",
+      "start_line": 5,
+      "end_line": 16,
+      "raw": "```cpp\n#include <iiActorObject/Object3DEditor.h>\n\niiActorObject::SkeletonEnvelopeOptions inference;\ninference.radiusRatio = .25;\ninference.minimumRadius = .001; // 오브젝트 좌표 단위에 맞게 지정\niiActorObject::SurfaceBindOptions binding;\nbinding.unreachable = iiActorObject::SurfaceBindUnreachable::Euclidean;\nauto result = editor.bindSurfaceWeightsFromSkeleton(meshIndex, inference, binding);\n// result.inference.envelopes는 편집 또는 재사용할 수 있는 값이다.\n// result.binding은 적용·미도달·대체 점 수를 구분한다.\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/Object3DEditor.h>\n\niiActorObject::SkeletonEnvelopeOptions inference;\ninference.radiusRatio = .25;\ninference.minimumRadius = .001; // 오브젝트 좌표 단위에 맞게 지정\niiActorObject::SurfaceBindOptions binding;\nbinding.unreachable = iiActorObject::SurfaceBindUnreachable::Euclidean;\nauto result = editor.bindSurfaceWeightsFromSkeleton(meshIndex, inference, binding);\n// result.inference.envelopes는 편집 또는 재사용할 수 있는 값이다.\n// result.binding은 적용·미도달·대체 점 수를 구분한다.\n",
+      "closed": true
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "추정만 수행하려면 `SkinBinder::inferEnvelopes(skeleton, inference)`를 호출하고 반환된 선분을 검토·수정해 `bindMesh` 또는 `bindSurfaceMesh`에 넘긴다. `includedBones`가 비어 있으면 모든 본을 사용하고, 지정하면 그 ID들만 대상으로 한다. 선택 여부와 관계없이 자식 본의 위치는 부모 선분의 끝을 결정한다. 중복·범위 밖 ID는 거부한다. span의 수명은 호출 동안만 필요하다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "각 부모에서 서로 다른 위치의 자식으로 선분을 만들고, `minimumSegmentLength` 이하인 연결은 건너뛰며 `zeroLengthChildLinks`에 기록한다. 자식이 있지만 모두 겹치면 그 관절의 점 엔벌로프를 만든다. 실제 말단은 부모에서 말단까지의 방향을 `leafLengthRatio`만큼 연장하며 기본값은 0.5다. 연장할 수 없는 뿌리나 0 비율은 점 엔벌로프가 된다. 보고서의 `projectedLeaves`와 `pointEnvelopes`로 이 추정을 구분한다. 이 방향은 말단의 실제 기하학을 안다는 뜻이 아니다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "본별 반경은 가장 긴 유효 자식 선분 길이, 또는 유효 자식이 없는 경우 들어오는 부모 선분 길이에 `radiusRatio`를 곱한 뒤 `minimumRadius`와 `maximumRadius` 사이로 제한한다. 기본값은 각각 0.25, `1e-6`, 양의 무한대이며 길이의 단위는 오브젝트 좌표를 따른다. 모든 분기 선분의 반경은 같다. 거리·반경·좌표가 범위를 벗어나면 실패하며 입력 골격과 편집 기록을 변경하지 않는다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "표면 경로는 동일 본의 모든 선분에서 시드를 모아 한 번 계산한다. 직선거리 경로는 모든 선분 중 가장 가까운 거리를 사용한다. 각 점의 영향 목록에는 같은 본이 한 번만 나타난다. 다른 반경을 가진 동일 본 선분은 모호하므로 거부한다. 추정과 바인딩은 기본 파라미터를 가진 기하학적 시작점이지, 제어·트위스트·보조 뼈 자동 분류, 관절 위치 생성, 볼륨 유지, 충돌 처리 또는 제작용 얼굴·손 품질을 보장하지 않는다. 사용자는 적용할 본 ID와 반경·말단을 조정할 수 있다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "`Object3DEditor::bindSurfaceWeightsFromSkeleton`과 대응하는 `CharacterEditor`는 기존 undo·redo 및 템플릿 레이어 경계를 사용한다. 실패하면 편집을 반영하지 않는다. 외부 앱을 실행하거나 형식 호환성을 판정하는 API는 아니다. 공개 C++ API가 추가되었으므로 소비자는 일치하는 헤더와 라이브러리로 다시 빌드한다. 실제 검사 범위는 [검증 기록](SkeletonEnvelopesVerification-20261028.md)을 따른다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "기존 골격에서 스킨 엔벌로프 추정",
+      "anchor": "기존-골격에서-스킨-엔벌로프-추정",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "본체의 `SkinBinder::inferEnvelopes`는 이미 존재하는 골격의 바인드 자세를 오브젝트 좌표로 평가하여 자동 스킨 바인딩용 선분을 만든다. 이름이나 관절 ID의 부모 정렬을 가정하지 않는다. 원본 본 ID는 그대로이며 모든 자식 방향을 별도 선분으로 보존한다. `NSCharacter::AutoRigger`는 이 본체 기능의 별칭이고 캐릭터 편집기는 엔진 소유 세션을 참조한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000011",
+        "line": 22,
+        "text": "본별 반경은 가장 긴 유효 자식 선분 길이, 또는 유효 자식이 없는 경우 들어오는 부모 선분 길이에 `radiusRatio`를 곱한 뒤 `minimumRadius`와 `maximumRadius` 사이로 제한한다. 기본값은 각각 0.25, `1e-6`, 양의 무한대이며 길이의 단위는 오브젝트 좌표를 따른다. 모든 분기 선분의 반경은 같다. 거리·반경·좌표가 범위를 벗어나면 실패하며 입력 골격과 편집 기록을 변경하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 24,
+        "text": "표면 경로는 동일 본의 모든 선분에서 시드를 모아 한 번 계산한다. 직선거리 경로는 모든 선분 중 가장 가까운 거리를 사용한다. 각 점의 영향 목록에는 같은 본이 한 번만 나타난다. 다른 반경을 가진 동일 본 선분은 모호하므로 거부한다. 추정과 바인딩은 기본 파라미터를 가진 기하학적 시작점이지, 제어·트위스트·보조 뼈 자동 분류, 관절 위치 생성, 볼륨 유지, 충돌 처리 또는 제작용 얼굴·손 품질을 보장하지 않는다. 사용자는 적용할 본 ID와 반경·말단을 조정할 수 있다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 26,
+        "text": "`Object3DEditor::bindSurfaceWeightsFromSkeleton`과 대응하는 `CharacterEditor`는 기존 undo·redo 및 템플릿 레이어 경계를 사용한다. 실패하면 편집을 반영하지 않는다. 외부 앱을 실행하거나 형식 호환성을 판정하는 API는 아니다. 공개 C++ API가 추가되었으므로 소비자는 일치하는 헤더와 라이브러리로 다시 빌드한다. 실제 검사 범위는 [검증 기록](SkeletonEnvelopesVerification-20261028.md)을 따른다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000015",
+        "label": "검증 기록",
+        "target": "SkeletonEnvelopesVerification-20261028.md",
+        "kind": "relative",
+        "line": 26
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

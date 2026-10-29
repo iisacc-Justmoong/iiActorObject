@@ -1,0 +1,341 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:aa1e2f24a122b4c779e24c545a987864ec1dc420328eae138da6a88d3e0d2316",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/MultipleUvSets.md",
+    "sha256": "45b3bca6894592b6d408a8f21499c81331d98c4309cef8eb4c3af41802ea43f8",
+    "bytes": 5153,
+    "line_count": 34,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "여러 UV 세트의 작성과 교환",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 여러 UV 세트의 작성과 교환\n",
+      "level": 1,
+      "title": "여러 UV 세트의 작성과 교환"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "공용 `iiActorObject`는 메시의 첫 UV와 추가 UV 세트를 소유한다. NSCharacter 편집기는 본체 편집 세션을 참조한다. 앱의 실행이나 렌더러는 포함하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 원본과 표시 자료\n",
+      "level": 2,
+      "title": "원본과 표시 자료"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`MeshTopology::primaryUvName`은 첫 세트의 이름이며, 빈 이름은 FBX에서 `UVMap`으로 출력한다. `additionalUvSets`의 각 `TopologyTextureCoordinateSet`은 이름, 원본 좌표 배열과 layout별 원본 좌표 ID를 가진다. 모든 표시 layout에는 해당 세트의 유효한 ID가 필요하다. 숨긴 면이나 사용하지 않는 layout은 `NoTopologyIndex`를 가질 수 있다. 사용하지 않는 좌표도 정본에 보존한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "서로 다른 UV 세트의 seam은 별도 layout을 필요로 한다. FBX 가져오기는 위치·첫 UV·법선뿐 아니라 모든 추가 UV의 인덱스를 layout 생성에 반영한다. 따라서 첫 UV가 같아도 다른 UV의 seam에서 표시 정점이 분리되며 원본 제어점 ID는 유지된다. `Object3DMesh::additionalUvSets`는 토폴로지가 있을 때 본체가 만드는 표시 캐시이고, 토폴로지가 없으면 렌더 정점별 정본이다. 이름은 유효한 UTF-8이어야 하며 같은 메시 안에서 중복될 수 없다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "`Object3DEditor::setTextureCoordinates(mesh, set, edits)`는 0번 세트와 이후 추가 세트를 수정한다. 토폴로지가 있으면 각 세트의 원본 좌표 ID, 없으면 렌더 정점 ID를 사용한다. 비유한 값, 중복 ID와 잘못된 인덱스는 거부한다. 기존 `setTopologyTextureCoordinates`는 작성용 토폴로지의 첫 세트를 편집한다. NSCharacter의 동명 어댑터는 본체 세션을 호출한다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "fenced_code",
+      "start_line": 13,
+      "end_line": 16,
+      "raw": "```cpp\neditor.setTextureCoordinates(0, 1,\n    std::array{iiActorObject::TopologyUvEdit{7, {.25, .75}}});\n```\n",
+      "language": "cpp",
+      "code": "editor.setTextureCoordinates(0, 1,\n    std::array{iiActorObject::TopologyUvEdit{7, {.25, .75}}});\n",
+      "closed": true
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "템플릿 편집은 세트별 좌표 차이를 보정 계층에 넣고 강도·undo/redo와 파라미터 재생성을 따른다. 세트 이름·개수·layout 대응의 구조 변경은 계층 편집에서 거부한다. 구조를 바꾸려면 일반 스냅샷을 편집해 새 템플릿의 기반으로 사용한다. 변경이 없는 좌표 편집은 revision을 늘리지 않는다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "heading",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "## 파일 형식과 머티리얼\n",
+      "level": 2,
+      "title": "파일 형식과 머티리얼"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "FBX는 UV 세트를 각각 `LayerElementUV`와 대응 레이어로 출력한다. SDK 확장은 숨긴 면과 사용하지 않는 layout의 세트별 인덱스를 보존하고, 복원 시 표준 FBX의 보이는 코너와 대조한다. 확장이 없는 FBX에서는 보이는 코너의 모든 세트를 이용해 layout을 구성한다. FBX 입력의 `maxUvSets` 기본값은 32, 모든 메시의 직접 좌표, 보이는 코너 인덱스 및 복원하는 추가 세트의 layout 인덱스 합에 대한 `maxUvEntries` 기본값은 1,600만이다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "GLB는 세트 순서대로 `TEXCOORD_0`, `TEXCOORD_1` 등을 출력하며 각 V 좌표를 glTF 규약에 맞게 변환한다. GLB의 표준 정점 속성은 UV 세트 이름이나 숨긴 원본 layout을 보존하지 않는다. 원본 이름과 편집 이력은 `.ii3dproject`에 보관한다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "`Object3DMaterial::baseColorUvSet`과 `normalUvSet`이 비어 있으면 각각 해당 메시의 첫 세트를 사용하고, 이름이 있으면 같은 이름의 세트를 선택한다. 선택한 세트가 해당 머티리얼을 사용하는 메시에서 누락되면 에셋 등록을 거부한다. FBX는 텍스처별 UV 세트 이름을 기록하며, 같은 이미지를 여러 세트에서 사용하면 이미지 자료를 공유한다. GLB는 메시에서 각 이름을 번호로 해석하고 필요한 경우 같은 머티리얼의 변형을 만들어 텍스처별 `texCoord`에 기록한다. [노멀 맵](NormalMaps.md)의 지원 범위와 미지원 UV 변환을 확인한다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "`.ii3dproject` 버전 16 이상은 이름, 세트별 좌표와 layout ID, 보정 계층의 UV 변경 및 머티리얼의 세트 선택을 보관한다. UV 자료와 더 높은 버전이 필요한 자료가 없는 프로젝트는 기존 버전 선택을 유지하며 버전 1~21을 읽는다. 외부 편집 병합은 동일한 세트 이름과 정본 ID를 요구하고, 원본 좌표가 존재하는 첫 세트와 추가 세트의 기준 좌표가 원본과 허용 오차 내에서 일치해야 한다. 공유 UV를 서로 다른 값으로 쪼개야 하는 편집은 거부한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "DNA는 추가 UV 세트를 표현하지 않는다. 기본 DNA 저장은 추가 세트가 있는 스냅샷을 거부하며, `DnaExportOptions::allowDiscardAdditionalUvSets=true`를 명시하면 해당 세트를 제외하고 경고한다. DNA는 첫 UV 세트 이름도 보존하지 않으므로 이름이 있으면 경고한다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "이 기능은 C++ 구조와 교환 파일의 계약이다. CC5·Blender·Unreal 실제 실행·가져오기, 제작용 텍스처의 시각 품질, tangent와 UV 변환 처리를 검증하거나 완료한 뜻은 아니다. 공개 구조체가 바뀌므로 기존 C++ 바이너리 소비자는 새 헤더와 라이브러리로 다시 빌드해야 한다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "확인한 구성과 경계는 [검증 기록](MultipleUvSetsVerification-20261028.md)에 있다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "여러 UV 세트의 작성과 교환",
+      "anchor": "여러-uv-세트의-작성과-교환",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "원본과 표시 자료",
+      "anchor": "원본과-표시-자료",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000017",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "파일 형식과 머티리얼",
+      "anchor": "파일-형식과-머티리얼",
+      "start_line": 20
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "공용 `iiActorObject`는 메시의 첫 UV와 추가 UV 세트를 소유한다. NSCharacter 편집기는 본체 편집 세션을 참조한다. 앱의 실행이나 렌더러는 포함하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000021",
+        "line": 24,
+        "text": "GLB는 세트 순서대로 `TEXCOORD_0`, `TEXCOORD_1` 등을 출력하며 각 V 좌표를 glTF 규약에 맞게 변환한다. GLB의 표준 정점 속성은 UV 세트 이름이나 숨긴 원본 layout을 보존하지 않는다. 원본 이름과 편집 이력은 `.ii3dproject`에 보관한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 28,
+        "text": "`.ii3dproject` 버전 16 이상은 이름, 세트별 좌표와 layout ID, 보정 계층의 UV 변경 및 머티리얼의 세트 선택을 보관한다. UV 자료와 더 높은 버전이 필요한 자료가 없는 프로젝트는 기존 버전 선택을 유지하며 버전 1~21을 읽는다. 외부 편집 병합은 동일한 세트 이름과 정본 ID를 요구하고, 원본 좌표가 존재하는 첫 세트와 추가 세트의 기준 좌표가 원본과 허용 오차 내에서 일치해야 한다. 공유 UV를 서로 다른 값으로 쪼개야 하는 편집은 거부한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000027",
+        "line": 30,
+        "text": "DNA는 추가 UV 세트를 표현하지 않는다. 기본 DNA 저장은 추가 세트가 있는 스냅샷을 거부하며, `DnaExportOptions::allowDiscardAdditionalUvSets=true`를 명시하면 해당 세트를 제외하고 경고한다. DNA는 첫 UV 세트 이름도 보존하지 않으므로 이름이 있으면 경고한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 32,
+        "text": "이 기능은 C++ 구조와 교환 파일의 계약이다. CC5·Blender·Unreal 실제 실행·가져오기, 제작용 텍스처의 시각 품질, tangent와 UV 변환 처리를 검증하거나 완료한 뜻은 아니다. 공개 구조체가 바뀌므로 기존 C++ 바이너리 소비자는 새 헤더와 라이브러리로 다시 빌드해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000023",
+        "label": "노멀 맵",
+        "target": "NormalMaps.md",
+        "kind": "relative",
+        "line": 26
+      },
+      {
+        "block_id": "b000031",
+        "label": "검증 기록",
+        "target": "MultipleUvSetsVerification-20261028.md",
+        "kind": "relative",
+        "line": 34
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:fba025534bfc49e5c26ec16e66350fa93fcededd52f9efa240a79d10e9fcf129",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/BaseNormalEditing.md",
+    "sha256": "808ca621361a5e8989c3b3f2533a6bb87677891b034b8efaaaf1aef6503b0e74",
+    "bytes": 4141,
+    "line_count": 23,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "기준 메시 법선의 상세 편집",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 기준 메시 법선의 상세 편집\n",
+      "level": 1,
+      "title": "기준 메시 법선의 상세 편집"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 소유권과 대상\n",
+      "level": 2,
+      "title": "소유권과 대상"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "기준 표면의 법선은 본체 `Object3DAsset`이 소유한다. 작성용 메시에서는 `MeshTopology::normals`와 불변 layout의 법선 ID를 사용하고, 작성용 토폴로지가 없는 메시에서는 렌더 정점의 법선을 사용한다. NSCharacter는 본체 편집기와 에셋을 참조한다. 여기서 다루는 법선은 [모프별 법선 델타](MorphNormals.md)와 별도이며, [노멀 맵 이미지](NormalMaps.md)도 아니다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "heading",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "## 외부 편집 병합\n",
+      "level": 2,
+      "title": "외부 편집 병합"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "`applyObject3DExternalEdits`는 기준·편집 스냅샷의 코너를 원본 layout ID로 대응하고, 기준 법선에서 편집 법선으로 가는 최단 회전을 정본의 현재 법선에 적용한다. 위치도 바뀐 경우에는 각 스냅샷의 기하 법선을 계산하여 표면 변화에 따른 법선 방향과 수동 법선 차이를 구분한다. 현재 정본의 기하 법선에 대해 기존 법선 방향을 전달한 뒤 외부 편집의 회전 차이를 적용한다. 현재 정본이 외부 편집을 시작할 때의 정본과 같다면 그 결과는 편집 파일의 법선 방향과 일치한다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "외부 기준 파일에서 공유 법선이 이미 서로 다르게 분리되어 있더라도 편집 파일이 이를 바꾸지 않았다면 법선 수정으로 취급하지 않는다. 실제 방향 편집을 반영할 때 같은 원본 법선 ID를 공유하는 코너는 같은 결과를 요구해야 한다. 서로 다른 방향으로 나누는 수정이나 법선 ID가 없는 원본에 새 법선을 만드는 수정은 별도의 작성용 토폴로지 변경이 필요하므로 거부한다. 외부의 법선 방향 편집이 감지되었는데 기준 법선이 정본과 허용 오차 밖으로 다르거나 법선의 존재 여부가 바뀌면 실패하며 원본은 변경되지 않는다. 외부 앱이 재출력한 원본 ID 대응은 기존 [외부 편집 계약](ExternalEdits.md)을 따른다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "`Object3DExternalReport::normals`는 새로 적용된 기준 법선 ID의 수이다. 위치 이동만으로 생긴 법선 재계산과 구분한다. 호출자는 `positionTolerance`, `attributeTolerance`, `referenceTolerance`를 지정할 수 있다. 법선은 방향으로 정규화하며 0 벡터와 유효하지 않은 수치는 거부한다. 서로 정확히 반대 방향일 때의 회전축은 결정적으로 선택한다. 공개 보고서 구조가 바뀌었으므로 C++ 소비자는 일치하는 헤더와 라이브러리로 다시 빌드해야 한다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "## 비파괴 계층과 저장\n",
+      "level": 2,
+      "title": "비파괴 계층과 저장"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "템플릿 편집기는 기준 법선 보정을 원본 법선 ID와 회전으로 기록한다. 표면 위치와 자동 맞춤, 관절을 계산하고 기하 법선을 갱신한 뒤 활성 법선 보정을 계층 순서대로 적용한다. 계층 강도는 회전을 항등 회전에서 보간한다. 정점 마스크는 같은 법선 ID를 참조하는 **서로 다른 원본 점**의 가중치 평균을 사용하므로 공유 법선을 코너마다 다른 값으로 갈라놓지 않는다. 렌더 메시에서는 해당 정점의 가중치를 사용한다. 법선 보정과 모프 법선은 각각 유지한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "일반 `Object3DEditor::replace`의 법선 수정과 외부 편집은 undo·redo, 레이어 교체와 프로젝트 저장을 사용한다. 정점 위치와 법선을 함께 반영할 때는 기존 계층을 포함하여 예상 결과를 계산하고 필요한 법선 회전만 새 계층에 기록한다. 저장된 이력에 법선 보정이 하나라도 있으면 `.ii3dproject` 버전 19 이상을 쓴다. 이전 버전을 계속 읽으며 법선 보정이 없는 프로젝트는 기존 버전 선택을 유지한다. 복원 시 중복·범위 밖 ID와 비정규 회전을 검사한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "heading",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "## 범위\n",
+      "level": 2,
+      "title": "범위"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "이 기능은 원본 토폴로지의 법선 ID를 변경하지 않는다. 새로운 hard edge나 법선 seam을 만들려면 토폴로지 편집이 필요하다. 앱의 법선 재계산·재출력 정책, 탄젠트·노멀 맵과의 시각적 일치는 독립 문제이다. 현재 CC5·Blender·Unreal과 사용자용 앱은 실행하지 않는다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "기준 메시 법선의 상세 편집",
+      "anchor": "기준-메시-법선의-상세-편집",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "소유권과 대상",
+      "anchor": "소유권과-대상",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000007",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "외부 편집 병합",
+      "anchor": "외부-편집-병합",
+      "start_line": 7
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "비파괴 계층과 저장",
+      "anchor": "비파괴-계층과-저장",
+      "start_line": 15
+    },
+    {
+      "block_id": "b000021",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "범위",
+      "anchor": "범위",
+      "start_line": 21
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000011",
+        "line": 11,
+        "text": "외부 기준 파일에서 공유 법선이 이미 서로 다르게 분리되어 있더라도 편집 파일이 이를 바꾸지 않았다면 법선 수정으로 취급하지 않는다. 실제 방향 편집을 반영할 때 같은 원본 법선 ID를 공유하는 코너는 같은 결과를 요구해야 한다. 서로 다른 방향으로 나누는 수정이나 법선 ID가 없는 원본에 새 법선을 만드는 수정은 별도의 작성용 토폴로지 변경이 필요하므로 거부한다. 외부의 법선 방향 편집이 감지되었는데 기준 법선이 정본과 허용 오차 밖으로 다르거나 법선의 존재 여부가 바뀌면 실패하며 원본은 변경되지 않는다. 외부 앱이 재출력한 원본 ID 대응은 기존 [외부 편집 계약](ExternalEdits.md)을 따른다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 13,
+        "text": "`Object3DExternalReport::normals`는 새로 적용된 기준 법선 ID의 수이다. 위치 이동만으로 생긴 법선 재계산과 구분한다. 호출자는 `positionTolerance`, `attributeTolerance`, `referenceTolerance`를 지정할 수 있다. 법선은 방향으로 정규화하며 0 벡터와 유효하지 않은 수치는 거부한다. 서로 정확히 반대 방향일 때의 회전축은 결정적으로 선택한다. 공개 보고서 구조가 바뀌었으므로 C++ 소비자는 일치하는 헤더와 라이브러리로 다시 빌드해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 23,
+        "text": "이 기능은 원본 토폴로지의 법선 ID를 변경하지 않는다. 새로운 hard edge나 법선 seam을 만들려면 토폴로지 편집이 필요하다. 앱의 법선 재계산·재출력 정책, 탄젠트·노멀 맵과의 시각적 일치는 독립 문제이다. 현재 CC5·Blender·Unreal과 사용자용 앱은 실행하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "모프별 법선 델타",
+        "target": "MorphNormals.md",
+        "kind": "relative",
+        "line": 5
+      },
+      {
+        "block_id": "b000005",
+        "label": "노멀 맵 이미지",
+        "target": "NormalMaps.md",
+        "kind": "relative",
+        "line": 5
+      },
+      {
+        "block_id": "b000011",
+        "label": "외부 편집 계약",
+        "target": "ExternalEdits.md",
+        "kind": "relative",
+        "line": 11
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

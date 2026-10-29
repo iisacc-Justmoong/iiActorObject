@@ -1,0 +1,243 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:fdc56e50f01b82044868a3b4906a896b0304279710f8a192ebc9b6c8a68bacac",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/DynamicMorphBindVerification-20261028.md",
+    "sha256": "fe196287656594eb6fca8342883423e080a5dc4c20e2deaced90fd7192b455c0",
+    "bytes": 3221,
+    "line_count": 21,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "템플릿 형상과 인스턴스 바인드 검증 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 템플릿 형상과 인스턴스 바인드 검증 — 2026-10-28\n",
+      "level": 1,
+      "title": "템플릿 형상과 인스턴스 바인드 검증 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 검사 대상\n",
+      "level": 2,
+      "title": "검사 대상"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "공용 `Pose`의 인스턴스별 변형 바인드, 템플릿 모프 리그의 기준 입력·끝점 합성, 소스 관절 재평가와 메시 채널 동기화를 검사한다. 본체 `Object3DEngine`이 템플릿·에셋·리그와 캐시를 소유하고, 각 액터가 포즈와 모프 값을 보관한다. NSCharacter는 같은 본체 자료를 참조한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "합성 골격에서 형상에 맞춘 바인드와 원래 기준 로컬 애니메이션으로 평가한 월드·스킨 행렬을, 별도로 생성한 새 기준 골격의 결과와 비교한다. 중립·중간·끝점 모프, 로컬 포즈 유지, 같은 입력 재적용의 캐시와 revision, `copyFrom`, `reset`, 바인드 제거, 역바인드 및 스킨 법선을 검사한다. 유효하지 않은 기준 입력, 소스 제거, 다른 액터, 이름이 변경된 재연결 골격은 오류로 거부하며 액터 상태를 유지한다. 아주 작은 바인드 스케일에서 두 배의 보정을 단위 보정으로 오인하지 않는지도 검사한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "변형 바인드의 2본 IK, 방향 맞춤, 관절 프레임 맞춤을 검사한다. 회전으로 표현할 수 없는 보정은 오류로 거부한다. 이 단계 당시에는 인스턴스 바인드가 활성화된 포즈 리타깃을 거부했으며, 이후 [포즈 리타깃](PoseRetarget.md)에서 지원 범위를 확장했다. 복원한 버전 21 프로젝트의 리그 두 개를 각기 다른 입력으로 적용하여 각 액터의 바인드가 독립적인지 확인한다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "## 구성별 결과\n",
+      "level": 2,
+      "title": "구성별 결과"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "표준 구성의 캐릭터·포즈·템플릿·프로젝트 관련 검사 82개와 NSCharacter 제외 코어 구성의 같은 범주 79개가 통과했다. 빌드 안에 별도로 설치한 NSCharacter 포함 소비자, 코어 전용 소비자와 VisualCodec 소비자도 각각 새 공개 헤더와 라이브러리를 사용해 통과했다. 전역 설치본은 교체하지 않았다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "AddressSanitizer와 UndefinedBehaviorSanitizer를 켠 바인드·포즈·모프·프로젝트 관련 검사 13개가 통과했다. 이 환경에서 누수 검출은 비활성화했으므로 누수 검사 결과는 아니다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "CC0 인체 자료의 몸·눈·치아·혀 네 메시, 렌더 정점 20,569개를 사용해 별도로 생성한 목표 형상과 비교하였다. 형상 변화로 위치가 가장 많이 달라진 스킨 관절 중 하나인 원본 ID 123은 0.00372m 이동했고, 해당 관절과 루트를 회전시킨 결과의 최대 정점 위치 오차는 약 `7.55e-16`m였다. 이 수치는 해당 템플릿과 입력 표본의 네이티브 계산 결과이며 제작용 캐릭터의 시각 품질 검증은 아니다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 범위와 한계\n",
+      "level": 2,
+      "title": "범위와 한계"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "새 바인드의 관절은 원본 템플릿의 합성 입력으로 평가한다. 베이크된 메시 모프는 선형으로 합성되므로 비선형 형상이나 복합 슬라이더에 대한 전체 표면 일치는 보장하지 않는다. 값이 바뀔 때 큰 템플릿의 계산 시간은 별도로 측정해야 한다. FBX·GLB 동적 바인드 제어기 출력은 포함하지 않는다. CC5·Blender·Unreal은 실행하거나 가져오지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "템플릿 형상과 인스턴스 바인드 검증 — 2026-10-28",
+      "anchor": "템플릿-형상과-인스턴스-바인드-검증--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검사 대상",
+      "anchor": "검사-대상",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구성별 결과",
+      "anchor": "구성별-결과",
+      "start_line": 11
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "범위와 한계",
+      "anchor": "범위와-한계",
+      "start_line": 19
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000021",
+        "line": 21,
+        "text": "새 바인드의 관절은 원본 템플릿의 합성 입력으로 평가한다. 베이크된 메시 모프는 선형으로 합성되므로 비선형 형상이나 복합 슬라이더에 대한 전체 표면 일치는 보장하지 않는다. 값이 바뀔 때 큰 템플릿의 계산 시간은 별도로 측정해야 한다. FBX·GLB 동적 바인드 제어기 출력은 포함하지 않는다. CC5·Blender·Unreal은 실행하거나 가져오지 않았다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000009",
+        "label": "포즈 리타깃",
+        "target": "PoseRetarget.md",
+        "kind": "relative",
+        "line": 9
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

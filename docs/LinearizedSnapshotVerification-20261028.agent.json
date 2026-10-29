@@ -1,0 +1,206 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:881f4d5193a7f0315aa729b1fb950e22103739eb9381ea4efb425f75a5f2a863",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/LinearizedSnapshotVerification-20261028.md",
+    "sha256": "6a99005935214aad90b3ff83c64a6457168dc3f7841483a1898f3fd0d086cc1b",
+    "bytes": 3286,
+    "line_count": 19,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "선형 교환 스냅샷 검증 기록 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 선형 교환 스냅샷 검증 기록 — 2026-10-28\n",
+      "level": 1,
+      "title": "선형 교환 스냅샷 검증 기록 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 범위\n",
+      "level": 2,
+      "title": "범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "공통 `iiActorObject`의 자세·모프·리그 스냅샷에 선택적 `Object3DSnapshotSkinning::LinearizeAtBind` 정책을 추가했다. 원본의 DQ 또는 점별 혼합 스킨으로 선택한 자세와 모프 기준값을 먼저 계산하고, 결과 자산의 저작 토폴로지와 렌더 프로필을 선형으로 만든다. 기본 경로와 명시적 `Preserve`는 종전 프로필을 유지한다. 원본 에셋·리그·평가 결과는 변경하지 않으며 새 에셋은 원본과 같은 코어 엔진에 등록된다. NSCharacter는 코어를 참조한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "선택한 바인드에서 모프 추가값을 적용한 위치와 법선의 동일성이 대상이다. 변경된 바인드에 다른 자세나 애니메이션을 적용했을 때 원본 DQ와 일치한다는 보장은 없다. 리그 드라이버와 애니메이티드 맵을 GLB로 직렬화하지 않는다. GLB 출력기의 다른 제약과 현재 DNA 출력의 제약도 그대로 적용된다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 결과\n",
+      "level": 2,
+      "title": "결과"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "list",
+      "start_line": 11,
+      "end_line": 17,
+      "raw": "- `IIACTOROBJECT_WITH_NSCHARACTER=OFF`와 `ON`의 macOS arm64 Release 구성을 C++23으로 빌드했다. 두 구성 모두 `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF`이다.\n- 각 구성에서 스냅샷·리그·기존 포즈 회귀, 합성 DNA 리그 fixture, 독립 GLB 파일 검사 등 총 38개 테스트가 통과했다. 유효하지 않은 정책, 지원되지 않는 DQ 전단 및 예산 초과에서 새 자산이 등록되지 않는 경로를 포함한다.\n- 순수 DQ와 점별 혼합을 렌더 전용 메시와 원본 토폴로지 각각에 적용했다. 선택한 자세에 0이 아닌 기준 모프를 적용한 후 다섯 추가 모프 조합의 위치와 법선을 원본 런타임과 비교했다. 숨은 가중·무가중 원본 점과 이음새 및 원본 프로필 유지도 검사했다.\n- 독립 Python GLB 판독기는 네 fixture의 계층, 역바인드, 정점 스킨 가중치, 위치 및 모프 법선을 원본 런타임이 별도로 출력한 수치와 비교했다. 형식의 실수 정밀도를 고려해 상대·절대 `3e-6` 허용치를 사용했다.\n- `build/` 아래의 두 별도 설치본을 대상으로 공개 헤더를 사용한 소비자 빌드와 포즈 스냅샷 테스트가 각 1개씩 통과했다. 설치 라이브러리의 해시는 각 빌드 결과와 일치했다. `~/.local`에는 설치하지 않았다.\n- `nm`은 기존 시그니처와 새 정책 오버로드의 심볼을 모두 표시했다. `otool -L`은 두 라이브러리의 직접 동적 의존성으로 C++ 런타임과 macOS 시스템 라이브러리를 표시했고 Qt를 표시하지 않았다. 이는 전체 공급망의 라이선스 감사나 다른 플랫폼 검증은 아니다.\n- 추가 테스트는 구현 전에 새 타입과 오버로드가 없어 컴파일에 실패했고, 구현 후 통과했다. 기존 `Object3DPoseMorphs.cpp`의 일부 필드를 명시적으로 초기화하지 않았다는 컴파일 경고 두 건은 남아 있다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "`IIACTOROBJECT_WITH_NSCHARACTER=OFF`와 `ON`의 macOS arm64 Release 구성을 C++23으로 빌드했다. 두 구성 모두 `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION=OFF`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "각 구성에서 스냅샷·리그·기존 포즈 회귀, 합성 DNA 리그 fixture, 독립 GLB 파일 검사 등 총 38개 테스트가 통과했다. 유효하지 않은 정책, 지원되지 않는 DQ 전단 및 예산 초과에서 새 자산이 등록되지 않는 경로를 포함한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "순수 DQ와 점별 혼합을 렌더 전용 메시와 원본 토폴로지 각각에 적용했다. 선택한 자세에 0이 아닌 기준 모프를 적용한 후 다섯 추가 모프 조합의 위치와 법선을 원본 런타임과 비교했다. 숨은 가중·무가중 원본 점과 이음새 및 원본 프로필 유지도 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "독립 Python GLB 판독기는 네 fixture의 계층, 역바인드, 정점 스킨 가중치, 위치 및 모프 법선을 원본 런타임이 별도로 출력한 수치와 비교했다. 형식의 실수 정밀도를 고려해 상대·절대 `3e-6` 허용치를 사용했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 아래의 두 별도 설치본을 대상으로 공개 헤더를 사용한 소비자 빌드와 포즈 스냅샷 테스트가 각 1개씩 통과했다. 설치 라이브러리의 해시는 각 빌드 결과와 일치했다. `~/.local`에는 설치하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`nm`은 기존 시그니처와 새 정책 오버로드의 심볼을 모두 표시했다. `otool -L`은 두 라이브러리의 직접 동적 의존성으로 C++ 런타임과 macOS 시스템 라이브러리를 표시했고 Qt를 표시하지 않았다. 이는 전체 공급망의 라이선스 감사나 다른 플랫폼 검증은 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "추가 테스트는 구현 전에 새 타입과 오버로드가 없어 컴파일에 실패했고, 구현 후 통과했다. 기존 `Object3DPoseMorphs.cpp`의 일부 필드를 명시적으로 초기화하지 않았다는 컴파일 경고 두 건은 남아 있다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "사용자 지시에 따라 CC5, Blender, Unreal 등 실제 앱을 실행하거나 가져오기·시각 검증을 하지 않았다. 이 기록은 파일과 네이티브 수치 검증이며, 제작용 MetaHuman 자료나 외형 품질의 검증 결과가 아니다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "선형 교환 스냅샷 검증 기록 — 2026-10-28",
+      "anchor": "선형-교환-스냅샷-검증-기록--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "범위",
+      "anchor": "범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "결과",
+      "anchor": "결과",
+      "start_line": 9
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 7,
+        "text": "선택한 바인드에서 모프 추가값을 적용한 위치와 법선의 동일성이 대상이다. 변경된 바인드에 다른 자세나 애니메이션을 적용했을 때 원본 DQ와 일치한다는 보장은 없다. 리그 드라이버와 애니메이티드 맵을 GLB로 직렬화하지 않는다. GLB 출력기의 다른 제약과 현재 DNA 출력의 제약도 그대로 적용된다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

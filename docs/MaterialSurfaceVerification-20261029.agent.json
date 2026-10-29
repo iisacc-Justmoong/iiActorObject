@@ -1,0 +1,209 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:793898a6650f2105fdf749e5cdb4d7ce56f53835cc28b09d5cf205f19c030952",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/MaterialSurfaceVerification-20261029.md",
+    "sha256": "464fc52df81048f2ff2c7ebea2a660aaa23f795fa558575e17c6fa6edf46299b",
+    "bytes": 2653,
+    "line_count": 19,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "캐릭터 재질 표면 검증 기록 — 2026-10-29",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 캐릭터 재질 표면 검증 기록 — 2026-10-29\n",
+      "level": 1,
+      "title": "캐릭터 재질 표면 검증 기록 — 2026-10-29"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "이 기록은 `iiActorObject` 본체의 재질 표면 설정과 NSCharacter 위임을 다룬다. 전체 캐릭터 제작 기능이나 다른 앱과의 완전한 호환성을 검증한 보고서는 아니다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 확인한 동작\n",
+      "level": 2,
+      "title": "확인한 동작"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "list",
+      "start_line": 7,
+      "end_line": 12,
+      "raw": "- GLB의 불투명·마스크·혼합 방식, 임계값, 양면 여부와 Opaque에서 무시되는 원본 알파 및 PNG 연결을 보존한다. 형식 바이트는 SDK 판독기와 별개로 검사했다.\n- 편집기, 비파괴 템플릿 레이어, 레이어 강도, undo/redo, 외부 편집 충돌 처리와 프로젝트 버전 29 복원을 검사했다. 선택 이전 이력과 버전 29의 결합, 기존 버전 24의 탄젠트 보존도 확인했다.\n- FBX의 표준 불투명도와 SDK 전용 재질 속성을 독립적으로 검사하고 SDK 재입력을 확인했다. 표준 불투명도만 외부에서 수정되어 보존용 정보가 낡으면 기본 가져오기가 실패하며, 작성용 정보 복원을 끈 호출은 표준 값을 사용하고 경고한다.\n- macOS arm64에서 NSCharacter 포함 구성과 코어 전용 구성의 관련 네이티브·독립 형식 회귀 검사가 각각 77개 통과했다. 실제 앱 실행을 요구하는 검사는 제외했다.\n- NSCharacter 포함 구성의 주소 및 미정의 동작 검사에서 관련 10개가 통과했다. 이 실행은 누수 검사 `detect_leaks=0`을 사용했다.\n- `build/`의 분리된 두 설치 위치에서 각각 새 공개 헤더와 라이브러리를 소비해 재질 편집과 GLB·FBX·프로젝트 왕복을 확인했다. NSCharacter 포함 구성은 위임 호출도 검사했다. 두 라이브러리의 직접 연결 목록에 Qt가 없다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "GLB의 불투명·마스크·혼합 방식, 임계값, 양면 여부와 Opaque에서 무시되는 원본 알파 및 PNG 연결을 보존한다. 형식 바이트는 SDK 판독기와 별개로 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "편집기, 비파괴 템플릿 레이어, 레이어 강도, undo/redo, 외부 편집 충돌 처리와 프로젝트 버전 29 복원을 검사했다. 선택 이전 이력과 버전 29의 결합, 기존 버전 24의 탄젠트 보존도 확인했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "FBX의 표준 불투명도와 SDK 전용 재질 속성을 독립적으로 검사하고 SDK 재입력을 확인했다. 표준 불투명도만 외부에서 수정되어 보존용 정보가 낡으면 기본 가져오기가 실패하며, 작성용 정보 복원을 끈 호출은 표준 값을 사용하고 경고한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "macOS arm64에서 NSCharacter 포함 구성과 코어 전용 구성의 관련 네이티브·독립 형식 회귀 검사가 각각 77개 통과했다. 실제 앱 실행을 요구하는 검사는 제외했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter 포함 구성의 주소 및 미정의 동작 검사에서 관련 10개가 통과했다. 이 실행은 누수 검사 `detect_leaks=0`을 사용했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/`의 분리된 두 설치 위치에서 각각 새 공개 헤더와 라이브러리를 소비해 재질 편집과 GLB·FBX·프로젝트 왕복을 확인했다. NSCharacter 포함 구성은 위임 호출도 검사했다. 두 라이브러리의 직접 연결 목록에 Qt가 없다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "## 한계와 후속 작업\n",
+      "level": 2,
+      "title": "한계와 후속 작업"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "list",
+      "start_line": 16,
+      "end_line": 19,
+      "raw": "- 이번 작업에서 CC5, Blender, Unreal 또는 다른 사용자 앱을 실행하지 않았다. 재질의 시각적 결과와 각 앱의 FBX 확장 보존, 실제 MetaHuman 제작 경로는 확인하지 않았다.\n- FBX의 마스크·양면 설정은 SDK 전용 속성이므로 다른 앱이 같은 셰이더로 해석한다고 보장할 수 없다. DNA는 재질과 텍스처를 보존하는 경로가 아니며 호스트가 별도로 연결한다.\n- 헤더의 재질 구조 크기가 바뀌어 기존 C++ 바이너리는 새 헤더와 라이브러리로 다시 빌드해야 한다. 별도 설치 검사만 수행했으며 `~/.local`의 사용자 설치본은 교체하지 않았다.\n- 피부 산란, 머리카락 전용 셰이더, 다른 운영체제와 실제 제작 데이터, CC5·Blender·Unreal의 전체 메시·리그 생성 및 상세 편집은 이 기록의 완료 범위가 아니다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "이번 작업에서 CC5, Blender, Unreal 또는 다른 사용자 앱을 실행하지 않았다. 재질의 시각적 결과와 각 앱의 FBX 확장 보존, 실제 MetaHuman 제작 경로는 확인하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "FBX의 마스크·양면 설정은 SDK 전용 속성이므로 다른 앱이 같은 셰이더로 해석한다고 보장할 수 없다. DNA는 재질과 텍스처를 보존하는 경로가 아니며 호스트가 별도로 연결한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "헤더의 재질 구조 크기가 바뀌어 기존 C++ 바이너리는 새 헤더와 라이브러리로 다시 빌드해야 한다. 별도 설치 검사만 수행했으며 `~/.local`의 사용자 설치본은 교체하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "피부 산란, 머리카락 전용 셰이더, 다른 운영체제와 실제 제작 데이터, CC5·Blender·Unreal의 전체 메시·리그 생성 및 상세 편집은 이 기록의 완료 범위가 아니다.",
+          "checked": null
+        }
+      ]
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "캐릭터 재질 표면 검증 기록 — 2026-10-29",
+      "anchor": "캐릭터-재질-표면-검증-기록--2026-10-29",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인한 동작",
+      "anchor": "확인한-동작",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "한계와 후속 작업",
+      "anchor": "한계와-후속-작업",
+      "start_line": 14
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000011",
+        "line": 18,
+        "text": "- 헤더의 재질 구조 크기가 바뀌어 기존 C++ 바이너리는 새 헤더와 라이브러리로 다시 빌드해야 한다. 별도 설치 검사만 수행했으며 `~/.local`의 사용자 설치본은 교체하지 않았다.",
+        "basis": "lexical_match",
+        "context": "list"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

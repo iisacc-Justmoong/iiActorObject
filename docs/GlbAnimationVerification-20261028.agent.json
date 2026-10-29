@@ -1,0 +1,156 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:423534bde0398d85dfdfefe81f2ae74a96d70f77436225f359eeb5e73702fc7a",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/GlbAnimationVerification-20261028.md",
+    "sha256": "24b32d2ee4579c574d51264a0606d32698dfd66ae8b9ff8c4581234344387808",
+    "bytes": 2562,
+    "line_count": 13,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "GLB 골격 애니메이션 검증 기록: 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# GLB 골격 애니메이션 검증 기록: 2026-10-28\n",
+      "level": 1,
+      "title": "GLB 골격 애니메이션 검증 기록: 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "본체 `exportObject3DGlb(asset, clip)`에 동일한 골격의 위치·회전·스케일 트랙을 작성하는 경로를 추가했다. float32 변환으로 시간이 겹치거나 스케일이 0으로 바뀌는 경우, 표현 범위 초과, 예산 초과, 다른 골격과 무명 스칼라 곡선은 명시적으로 거부한다. 스칼라 곡선의 버림은 호출자가 선택해야 한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "공유 및 NSCharacter 제외 코어 구성에서 각각 리타깃·GLB 관련 테스트 5개가 통과했다. 결과는 `build/pose-plan/glb-animation-final.xml`, `build/pose-plan/glb-animation-core.xml`이다. 별도 파서는 GLB의 헤더·JSON·바이너리 버퍼를 읽어 본별 채널, 시간·양 끝 보충, 회전 보간, 역 바인드와 스킨 정점 계산을 검사한다. 다른 시험 자료에서는 클립 리타깃부터 GLB 샘플 읽기까지 연결한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "별도의 CC0 성인·아동 자료에서 163개 본의 역할 기반 리타깃과 대상 스킨 변형을 계산하고, 아동 에셋과 변환한 클립을 하나의 GLB로 출력했다. 결과는 `build/pose-plan/glb-animation-human-assets.xml`이다. 이 시험은 해당 GLB를 외부 앱에서 가져온 결과가 아니다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "이전 정적 GLB 출력과 다중 스킨 영향의 회귀 2개도 통과했다. 결과는 `build/pose-plan/glb-animation-static-regression.xml`이다. 구현 전 실패한 두 테스트의 기록은 `build/pose-plan/glb-animation-red.xml`이다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "Workspace 내부에 별도로 설치한 공유·코어 SDK의 소비자가 리타깃부터 GLB 바이트 생성까지 통과했다. 결과는 각각 `build/pose-plan/glb-animation-consumer.xml`, `build/pose-plan/glb-animation-core-consumer.xml`이다. 사용자 설치본은 변경하지 않았다. 앱 실행 검사 제외 설정의 등록 검사는 `build/pose-plan/glb-animation-policy.xml`에서 통과했다. 정적 Debug AddressSanitizer·UndefinedBehaviorSanitizer 구성의 GLB·리타깃·인체 연계 테스트 9개가 통과했다. 결과는 `build/pose-plan/glb-animation-sanitizers.xml`이다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "독립 GLB 파서는 독자 합성 자료를 사용한다. 인체 연결 검사는 `resources/rig-sampling/`의 CC0 자료를 사용한다. CC5·Blender·Unreal과 사용자용 명령행 프로그램은 실행하지 않았다. 독립 형식 검사를 실제 앱의 가져오기 호환성이나 시각적 품질의 증거로 확대하지 않는다. FBX 애니메이션, 모프 곡선 대응과 제작용 리그 보정은 추가 작업이다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "GLB 골격 애니메이션 검증 기록: 2026-10-28",
+      "anchor": "glb-골격-애니메이션-검증-기록-2026-10-28",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "본체 `exportObject3DGlb(asset, clip)`에 동일한 골격의 위치·회전·스케일 트랙을 작성하는 경로를 추가했다. float32 변환으로 시간이 겹치거나 스케일이 0으로 바뀌는 경우, 표현 범위 초과, 예산 초과, 다른 골격과 무명 스칼라 곡선은 명시적으로 거부한다. 스칼라 곡선의 버림은 호출자가 선택해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 13,
+        "text": "독립 GLB 파서는 독자 합성 자료를 사용한다. 인체 연결 검사는 `resources/rig-sampling/`의 CC0 자료를 사용한다. CC5·Blender·Unreal과 사용자용 명령행 프로그램은 실행하지 않았다. 독립 형식 검사를 실제 앱의 가져오기 호환성이나 시각적 품질의 증거로 확대하지 않는다. FBX 애니메이션, 모프 곡선 대응과 제작용 리그 보정은 추가 작업이다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

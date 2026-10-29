@@ -1,0 +1,1075 @@
+{
+  "status": "passed",
+  "recordedAt": "2026-10-27T11:01:47.172042+00:00",
+  "sourceFingerprint": "57c5719f8a9ba4a888bdeb75d928c47fadb93b786ba8413131c266a949a9725f",
+  "baseCommit": "21e4dc163ef1505ebdffd2ebf8104f12ed48faf1",
+  "baseCheckpoint": "docs/PoseReferenceVerification-20261027.json",
+  "fullGoalStatus": "active and incomplete",
+  "scope": "iiActorObject 코어가 소유하는 자세와 기준 모프 스냅샷 및 범용/DNA 리그 평가 결과 연결",
+  "ownership": "새 자산은 기존 코어 엔진에 등록한다. NSCharacter 소유 엔진, 영속 자세 버퍼 또는 역방향 의존성은 추가하지 않는다.",
+  "contract": "output(w) = source(선택한 자세, baseline + w). 기존 모프 이름, 원본 포인트/타깃 ID, UV 경계와 미사용 속성을 보존한다.",
+  "rigContract": "이미 계산된 관절과 이름 대응 블렌드셰이프를 applyTo 규칙으로 적용한다. 백엔드를 추가로 실행하지 않는다. 맵 출력은 호출자의 평가 결과에 남는다.",
+  "ctestRuns": [
+    {
+      "profile": "shared",
+      "kind": "native",
+      "counts": {
+        "tests": 85,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/deformation-matrix-tests.xml",
+        "bytes": 20897,
+        "sha256": "af45269f53529cdf384c9812c18751675113fef8ba6347f25d5de97737517839"
+      }
+    },
+    {
+      "profile": "shared",
+      "kind": "consumer",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/consumer/build/deformation-consumer-tests.xml",
+        "bytes": 1123,
+        "sha256": "e670af302b5f4723cb44673a3d8f8a2fd8331279fc970691a767a87642f24da4"
+      }
+    },
+    {
+      "profile": "core",
+      "kind": "native",
+      "counts": {
+        "tests": 298,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/core-only/build/deformation-matrix-tests.xml",
+        "bytes": 64193,
+        "sha256": "26713abc7be221754b2ee47ec053992cc838e4ab2f36d3255c5b0fc7c10e39e4"
+      }
+    },
+    {
+      "profile": "core",
+      "kind": "consumer",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/core-only/consumer/build/deformation-consumer-tests.xml",
+        "bytes": 1397,
+        "sha256": "62bb0541670517d8ff27183c9df8f46da50c96e734cf099871e290f2145eda16"
+      }
+    },
+    {
+      "profile": "nodna",
+      "kind": "native",
+      "counts": {
+        "tests": 274,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/no-dna/build/deformation-matrix-tests.xml",
+        "bytes": 58953,
+        "sha256": "e249876928e0cd299615eaaf5935a1732191712a3ee3c43230eba2605d08e849"
+      }
+    },
+    {
+      "profile": "nodna",
+      "kind": "consumer",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/no-dna/consumer/build/deformation-consumer-tests.xml",
+        "bytes": 1123,
+        "sha256": "f26c4a497b263fc782b785d73323c792403eeb2ebcd8b64e5ecd0a0609e194ad"
+      }
+    },
+    {
+      "profile": "sanitizers",
+      "kind": "native",
+      "counts": {
+        "tests": 84,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/sanitizers/build/deformation-matrix-tests.xml",
+        "bytes": 20559,
+        "sha256": "287edb7a0b36ae35159076d89f3cce19a0d92e1f7f1f9118b13e155f11e76c02"
+      }
+    },
+    {
+      "profile": "sanitizers",
+      "kind": "consumer",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "skipped": 0
+      },
+      "result": {
+        "path": "build/sanitizers/consumer/build/deformation-consumer-tests.xml",
+        "bytes": 1124,
+        "sha256": "223837dba7386c0ea1b9320d9980dc9fced598fde637f458812cdfbcf8287004"
+      }
+    }
+  ],
+  "ctestExecutions": 754,
+  "additionalQuickExecutions": 20,
+  "nativeHumanMetrics": [
+    {
+      "profile": "shared",
+      "test": "iiActorObject.deformation_snapshot.human.adult",
+      "bones": 163,
+      "meshes": 5,
+      "sourcePoints": 43474,
+      "sourceMorphRecords": 296,
+      "renderChannels": 296,
+      "baselinePattern": [
+        0.12,
+        -0.04
+      ],
+      "offsetCases": 5,
+      "maximumPositionErrorMetres": 5.924901495919269e-15,
+      "maximumNormalError": 6.6116699931801015e-15
+    },
+    {
+      "profile": "shared",
+      "test": "iiActorObject.deformation_snapshot.human.child",
+      "bones": 163,
+      "meshes": 5,
+      "sourcePoints": 43474,
+      "sourceMorphRecords": 296,
+      "renderChannels": 296,
+      "baselinePattern": [
+        0.12,
+        -0.04
+      ],
+      "offsetCases": 5,
+      "maximumPositionErrorMetres": 5.0158376661916654e-15,
+      "maximumNormalError": 1.028728874388792e-14
+    },
+    {
+      "profile": "sanitizers",
+      "test": "iiActorObject.deformation_snapshot.human.adult",
+      "bones": 163,
+      "meshes": 5,
+      "sourcePoints": 43474,
+      "sourceMorphRecords": 296,
+      "renderChannels": 296,
+      "baselinePattern": [
+        0.12,
+        -0.04
+      ],
+      "offsetCases": 5,
+      "maximumPositionErrorMetres": 5.924901495919269e-15,
+      "maximumNormalError": 6.6116699931801015e-15
+    },
+    {
+      "profile": "sanitizers",
+      "test": "iiActorObject.deformation_snapshot.human.child",
+      "bones": 163,
+      "meshes": 5,
+      "sourcePoints": 43474,
+      "sourceMorphRecords": 296,
+      "renderChannels": 296,
+      "baselinePattern": [
+        0.12,
+        -0.04
+      ],
+      "offsetCases": 5,
+      "maximumPositionErrorMetres": 5.0158376661916654e-15,
+      "maximumNormalError": 1.028728874388792e-14
+    }
+  ],
+  "actualAppImports": 0,
+  "actualAppValidation": "excluded by explicit user instruction; not a completion gate",
+  "cliVerification": {
+    "status": "passed",
+    "cases": [
+      {
+        "case": "same_path",
+        "exitCode": 1,
+        "sourceUnchanged": true
+      },
+      {
+        "case": "hard_link",
+        "exitCode": 1,
+        "sourceUnchanged": true
+      },
+      {
+        "case": "symbolic_link",
+        "exitCode": 1,
+        "sourceUnchanged": true
+      },
+      {
+        "case": "nonfinite",
+        "exitCode": 1,
+        "sourceUnchanged": true
+      },
+      {
+        "case": "unknown_joint",
+        "exitCode": 1,
+        "sourceUnchanged": true
+      },
+      {
+        "case": "usage",
+        "exitCode": 2,
+        "sourceUnchanged": true
+      },
+      {
+        "case": "separate_output",
+        "exitCode": 0,
+        "sourceUnchanged": true
+      }
+    ],
+    "inputSha256": "12db89354a9fd2ffd4abc1cd2c88b7db104f567ff69cf1d8b9a75d68e2eb5c57",
+    "sourceUnchanged": true
+  },
+  "packages": [
+    {
+      "profile": "shared",
+      "nsCharacter": true,
+      "dna": true,
+      "publicHeaders": 62,
+      "library": {
+        "path": "build/install/lib/libiiActorObject.0.2.1.dylib",
+        "bytes": 6209960,
+        "sha256": "a944f4a1ca6dae644107b7d03021cc3278d29283c54828876b0292f06d69eeea"
+      },
+      "buildLibrarySha256": "a944f4a1ca6dae644107b7d03021cc3278d29283c54828876b0292f06d69eeea",
+      "libraryIdentity": "byte identical",
+      "normalizedArchiveSha256": null,
+      "newHeader": {
+        "path": "build/install/include/iiActorObject/Object3DRigSnapshot.h",
+        "bytes": 557,
+        "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+      },
+      "poseSnapshotHeader": {
+        "path": "build/install/include/iiActorObject/Object3DPoseSnapshot.h",
+        "bytes": 2674,
+        "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+      },
+      "linkedDependencies": "/Volumes/Storage/Workspace/SDK/iiActorObject/build/install/lib/libiiActorObject.0.2.1.dylib:\n\t@rpath/libiiActorObject.0.2.dylib (compatibility version 0.2.0, current version 0.2.1)\n\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)\n",
+      "cpp23": true
+    },
+    {
+      "profile": "core",
+      "nsCharacter": false,
+      "dna": true,
+      "publicHeaders": 51,
+      "library": {
+        "path": "build/core-only/install/lib/libiiActorObject.0.2.1.dylib",
+        "bytes": 5916840,
+        "sha256": "347f0f6003cfee3e3cbcd62ddc6928cd5c2da71650ae611ea21d4dee5cd4a207"
+      },
+      "buildLibrarySha256": "347f0f6003cfee3e3cbcd62ddc6928cd5c2da71650ae611ea21d4dee5cd4a207",
+      "libraryIdentity": "byte identical",
+      "normalizedArchiveSha256": null,
+      "newHeader": {
+        "path": "build/core-only/install/include/iiActorObject/Object3DRigSnapshot.h",
+        "bytes": 557,
+        "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+      },
+      "poseSnapshotHeader": {
+        "path": "build/core-only/install/include/iiActorObject/Object3DPoseSnapshot.h",
+        "bytes": 2674,
+        "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+      },
+      "linkedDependencies": "/Volumes/Storage/Workspace/SDK/iiActorObject/build/core-only/install/lib/libiiActorObject.0.2.1.dylib:\n\t@rpath/libiiActorObject.0.2.dylib (compatibility version 0.2.0, current version 0.2.1)\n\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)\n",
+      "cpp23": true
+    },
+    {
+      "profile": "nodna",
+      "nsCharacter": false,
+      "dna": false,
+      "publicHeaders": 51,
+      "library": {
+        "path": "build/no-dna/install/lib/libiiActorObject.0.2.1.dylib",
+        "bytes": 2232024,
+        "sha256": "034aa278135bc8cd4a3d99fd4632958033c527bc2f8a0585ef0ee54a40270632"
+      },
+      "buildLibrarySha256": "034aa278135bc8cd4a3d99fd4632958033c527bc2f8a0585ef0ee54a40270632",
+      "libraryIdentity": "byte identical",
+      "normalizedArchiveSha256": null,
+      "newHeader": {
+        "path": "build/no-dna/install/include/iiActorObject/Object3DRigSnapshot.h",
+        "bytes": 557,
+        "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+      },
+      "poseSnapshotHeader": {
+        "path": "build/no-dna/install/include/iiActorObject/Object3DPoseSnapshot.h",
+        "bytes": 2674,
+        "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+      },
+      "linkedDependencies": "/Volumes/Storage/Workspace/SDK/iiActorObject/build/no-dna/install/lib/libiiActorObject.0.2.1.dylib:\n\t@rpath/libiiActorObject.0.2.dylib (compatibility version 0.2.0, current version 0.2.1)\n\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)\n",
+      "cpp23": true
+    },
+    {
+      "profile": "sanitizers",
+      "nsCharacter": true,
+      "dna": true,
+      "publicHeaders": 62,
+      "library": {
+        "path": "build/sanitizers/install/lib/libiiActorObject.a",
+        "bytes": 231613552,
+        "sha256": "3905c035e0bcc0f56e507e4d80064a04278b7262299cef128682f45102c5f89a"
+      },
+      "buildLibrarySha256": "608038babe81fda622da13b6263b08a1d7bc630e6cb91b5c13908f627faf162c",
+      "libraryIdentity": "identical archive after normalizing only member timestamp fields",
+      "normalizedArchiveSha256": "0a2d0ac6398c9240a4e33155e69b0e26628005551675c03a4ae2d94acb0e04a8",
+      "newHeader": {
+        "path": "build/sanitizers/install/include/iiActorObject/Object3DRigSnapshot.h",
+        "bytes": 557,
+        "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+      },
+      "poseSnapshotHeader": {
+        "path": "build/sanitizers/install/include/iiActorObject/Object3DPoseSnapshot.h",
+        "bytes": 2674,
+        "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+      },
+      "linkedDependencies": null,
+      "cpp23": true
+    }
+  ],
+  "frozenInputs": [
+    {
+      "path": "build/surface-fairing/adult/FittedHuman.fbx",
+      "sha256": "12db89354a9fd2ffd4abc1cd2c88b7db104f567ff69cf1d8b9a75d68e2eb5c57",
+      "bytes": 16715084
+    },
+    {
+      "path": "build/surface-fairing/child/FittedHuman.fbx",
+      "sha256": "003875cec34bc8f9790800658a8b12ad0635923656501b6eb3f9e20040951f4f",
+      "bytes": 16715084
+    },
+    {
+      "path": "build/sanitizers/build/surface-fairing/adult/FittedHuman.fbx",
+      "sha256": "12db89354a9fd2ffd4abc1cd2c88b7db104f567ff69cf1d8b9a75d68e2eb5c57",
+      "bytes": 16715084
+    },
+    {
+      "path": "build/sanitizers/build/surface-fairing/child/FittedHuman.fbx",
+      "sha256": "003875cec34bc8f9790800658a8b12ad0635923656501b6eb3f9e20040951f4f",
+      "bytes": 16715084
+    }
+  ],
+  "changedFiles": [
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 71252,
+      "sha256": "f4156d6a403f958ddce5d2e3d6cb7cbc01444f07f804d5141c1b0e6650e63a83"
+    },
+    {
+      "path": "iiActorObject.h",
+      "bytes": 1749,
+      "sha256": "7e435ba6e9b403bc3969cb1fba7b675064f21a9cad9fc4c93924b2d8d49244a8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 26493,
+      "sha256": "d24abbd83862d3fb65c56019984c535357bcade16f83d7e1e1e2fc5fc98aa722"
+    },
+    {
+      "path": "AGENT.md",
+      "bytes": 4653,
+      "sha256": "789f5000c34f4beed17afe54bbe68a3af55cd4fc236f296f36a6e4e32226ddc3"
+    },
+    {
+      "path": "src/iiActorObject/Object3DPoseSnapshot.cpp",
+      "bytes": 15655,
+      "sha256": "a3df399e6c58f43518c70dbd8734c138096368aedca6026c6bf2700c0c7a0baf"
+    },
+    {
+      "path": "src/iiActorObject/Object3DPoseSnapshot.h",
+      "bytes": 2674,
+      "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+    },
+    {
+      "path": "src/iiActorObject/Object3DRigSnapshot.cpp",
+      "bytes": 1012,
+      "sha256": "3b7b3ddfedf557dbb22ee28af7bd44c45c2ab8ac993d70efab3336ce0dce2cb4"
+    },
+    {
+      "path": "src/iiActorObject/Object3DRigSnapshot.h",
+      "bytes": 557,
+      "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+    },
+    {
+      "path": "tests/Object3DDeformationSnapshotTest.cpp",
+      "bytes": 20089,
+      "sha256": "343132cf768c9eb6ef894b9bb5a9918fb338a3104877e4d5ac667f19cea8f658"
+    },
+    {
+      "path": "tests/Object3DRigSnapshotTest.cpp",
+      "bytes": 9645,
+      "sha256": "78b18043c0cdced76124684410782b3c8628ca3eb3a7c48f6a9ad3bbe7dc2a69"
+    },
+    {
+      "path": "tests/consumer/PoseSnapshotConsumer.h",
+      "bytes": 6595,
+      "sha256": "263722e108345b6871d2a951de35807c4ce90a2af21686d99b45f73f3013bc0d"
+    },
+    {
+      "path": "docs/DeformationSnapshots.md",
+      "bytes": 9545,
+      "sha256": "4def8132a84b4c9cde60607300cdde3c0da61441219a5dc228c92ab7f146e38a"
+    },
+    {
+      "path": "docs/DeformationSnapshots.agent.json",
+      "bytes": 22503,
+      "sha256": "f5b95af5ef6f202b1ee38fe71e1c2bfa6bbca62cf45af052d411611b0e7645dd"
+    },
+    {
+      "path": "docs/NSCharacter.md",
+      "bytes": 21966,
+      "sha256": "5e09647e770d6ac7e985b4f3ffacadefe65e8a6662d48b1bc90887a9fa0aef8f"
+    },
+    {
+      "path": "docs/NSCharacter.agent.json",
+      "bytes": 64776,
+      "sha256": "0b4d2b96c628e0363234f863433582c161a6afc4847e2b6edac6cd2feb64e13b"
+    },
+    {
+      "path": "docs/DeformationSnapshotVerification-20261027.md",
+      "bytes": 3363,
+      "sha256": "48c8ebdf29aba26956ae068aee6ffc5f14945d7fb2746d16fcb31bf06286e52f"
+    },
+    {
+      "path": "docs/DeformationSnapshotVerification-20261027.agent.json",
+      "bytes": 13307,
+      "sha256": "3b77a0b69b69114ce59741b03217e181b678ea25fea1c9d36be352c23aa01ca8"
+    },
+    {
+      "path": "docs/agent-index.json",
+      "bytes": 19332,
+      "sha256": "da56a13729e07563e6bd5b5d83c0cbc6a75ec81578e49c63b952addcd38a14e5"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "build/deformation-matrix-tests.xml",
+      "bytes": 20897,
+      "sha256": "af45269f53529cdf384c9812c18751675113fef8ba6347f25d5de97737517839"
+    },
+    {
+      "path": "build/consumer/build/deformation-consumer-tests.xml",
+      "bytes": 1123,
+      "sha256": "e670af302b5f4723cb44673a3d8f8a2fd8331279fc970691a767a87642f24da4"
+    },
+    {
+      "path": "build/install/lib/libiiActorObject.0.2.1.dylib",
+      "bytes": 6209960,
+      "sha256": "a944f4a1ca6dae644107b7d03021cc3278d29283c54828876b0292f06d69eeea"
+    },
+    {
+      "path": "build/install/include/iiActorObject/Object3DRigSnapshot.h",
+      "bytes": 557,
+      "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+    },
+    {
+      "path": "build/install/include/iiActorObject/Object3DPoseSnapshot.h",
+      "bytes": 2674,
+      "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+    },
+    {
+      "path": "build/install/share/iiActorObject/docs/DeformationSnapshots.md",
+      "bytes": 9545,
+      "sha256": "4def8132a84b4c9cde60607300cdde3c0da61441219a5dc228c92ab7f146e38a"
+    },
+    {
+      "path": "build/install/share/iiActorObject/docs/DeformationSnapshots.agent.json",
+      "bytes": 22503,
+      "sha256": "f5b95af5ef6f202b1ee38fe71e1c2bfa6bbca62cf45af052d411611b0e7645dd"
+    },
+    {
+      "path": "build/install/share/iiActorObject/docs/agent-index.json",
+      "bytes": 19332,
+      "sha256": "da56a13729e07563e6bd5b5d83c0cbc6a75ec81578e49c63b952addcd38a14e5"
+    },
+    {
+      "path": "build/deformation-snapshot/human/adult/PoseSnapshot.fbx",
+      "bytes": 17362748,
+      "sha256": "0659cab062a05584ab49c2e70578f162aaff3d2125c1f0630f8365368b66b061"
+    },
+    {
+      "path": "build/deformation-snapshot/human/adult/PoseSnapshot.ii3dproject",
+      "bytes": 17627882,
+      "sha256": "67a7d0e912316b9994f72bb04c9ebc7b89270d6ebd58a143364b4957c46b9e83"
+    },
+    {
+      "path": "build/deformation-snapshot/human/adult/Expected.json",
+      "bytes": 10035655,
+      "sha256": "b94d904afcb87dc0b6c29d0758843447b38a922981c7f546cc29f5e6226b17ae"
+    },
+    {
+      "path": "build/deformation-snapshot/human/child/PoseSnapshot.fbx",
+      "bytes": 17362780,
+      "sha256": "4559db9d9e63d32842ab69c5bd1ebd76f6f7fed28aa9ce9e1ad5f126610d406c"
+    },
+    {
+      "path": "build/deformation-snapshot/human/child/PoseSnapshot.ii3dproject",
+      "bytes": 17627906,
+      "sha256": "57e8e0895e7bc4089e79fbaf6eca9da5c19e7b498f8be5bfc43e15bf3090d2f0"
+    },
+    {
+      "path": "build/deformation-snapshot/human/child/Expected.json",
+      "bytes": 10026711,
+      "sha256": "9f8be5c5099bf5ae3d078b1564f091cbd492bccfae8de7d32bf74c6110482e10"
+    },
+    {
+      "path": "build/pose-snapshot/human/adult/PoseSnapshot.fbx",
+      "bytes": 17362700,
+      "sha256": "a2351c53a3a27442b1d7f47dc7342c9dd02afb507fbab2c0a80ea6bcbc7a1753"
+    },
+    {
+      "path": "build/pose-snapshot/human/adult/PoseSnapshot.ii3dproject",
+      "bytes": 17627834,
+      "sha256": "05fb6b32702a798c7fbbaf28ab6f2a9ce1ce6cea46b8afe746b18a45082f5f9c"
+    },
+    {
+      "path": "build/pose-snapshot/human/adult/Expected.json",
+      "bytes": 10035449,
+      "sha256": "ba50460b5e98d851aaca0b6c346ea8d9cb4f82da5cd3c3ed2ef37ec6d4b30bc8"
+    },
+    {
+      "path": "build/pose-snapshot/human/child/PoseSnapshot.fbx",
+      "bytes": 17362732,
+      "sha256": "71e653dd9b75eaffd0bcc6fba42a3d7fac78ecc83446f3dd5600ee46af676526"
+    },
+    {
+      "path": "build/pose-snapshot/human/child/PoseSnapshot.ii3dproject",
+      "bytes": 17627858,
+      "sha256": "25d7a4a48ea9405706d23235eea37e1cddfd2a4dacd38d422855101a754b7665"
+    },
+    {
+      "path": "build/pose-snapshot/human/child/Expected.json",
+      "bytes": 10025004,
+      "sha256": "49061c168232524ac3c10e1f387ca66727cb975fe1a95eaa3d91b73c7d8f0b00"
+    },
+    {
+      "path": "build/core-only/build/deformation-matrix-tests.xml",
+      "bytes": 64193,
+      "sha256": "26713abc7be221754b2ee47ec053992cc838e4ab2f36d3255c5b0fc7c10e39e4"
+    },
+    {
+      "path": "build/core-only/consumer/build/deformation-consumer-tests.xml",
+      "bytes": 1397,
+      "sha256": "62bb0541670517d8ff27183c9df8f46da50c96e734cf099871e290f2145eda16"
+    },
+    {
+      "path": "build/core-only/install/lib/libiiActorObject.0.2.1.dylib",
+      "bytes": 5916840,
+      "sha256": "347f0f6003cfee3e3cbcd62ddc6928cd5c2da71650ae611ea21d4dee5cd4a207"
+    },
+    {
+      "path": "build/core-only/install/include/iiActorObject/Object3DRigSnapshot.h",
+      "bytes": 557,
+      "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+    },
+    {
+      "path": "build/core-only/install/include/iiActorObject/Object3DPoseSnapshot.h",
+      "bytes": 2674,
+      "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+    },
+    {
+      "path": "build/core-only/install/share/iiActorObject/docs/DeformationSnapshots.md",
+      "bytes": 9545,
+      "sha256": "4def8132a84b4c9cde60607300cdde3c0da61441219a5dc228c92ab7f146e38a"
+    },
+    {
+      "path": "build/core-only/install/share/iiActorObject/docs/DeformationSnapshots.agent.json",
+      "bytes": 22503,
+      "sha256": "f5b95af5ef6f202b1ee38fe71e1c2bfa6bbca62cf45af052d411611b0e7645dd"
+    },
+    {
+      "path": "build/core-only/install/share/iiActorObject/docs/agent-index.json",
+      "bytes": 19332,
+      "sha256": "da56a13729e07563e6bd5b5d83c0cbc6a75ec81578e49c63b952addcd38a14e5"
+    },
+    {
+      "path": "build/no-dna/build/deformation-matrix-tests.xml",
+      "bytes": 58953,
+      "sha256": "e249876928e0cd299615eaaf5935a1732191712a3ee3c43230eba2605d08e849"
+    },
+    {
+      "path": "build/no-dna/consumer/build/deformation-consumer-tests.xml",
+      "bytes": 1123,
+      "sha256": "f26c4a497b263fc782b785d73323c792403eeb2ebcd8b64e5ecd0a0609e194ad"
+    },
+    {
+      "path": "build/no-dna/install/lib/libiiActorObject.0.2.1.dylib",
+      "bytes": 2232024,
+      "sha256": "034aa278135bc8cd4a3d99fd4632958033c527bc2f8a0585ef0ee54a40270632"
+    },
+    {
+      "path": "build/no-dna/install/include/iiActorObject/Object3DRigSnapshot.h",
+      "bytes": 557,
+      "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+    },
+    {
+      "path": "build/no-dna/install/include/iiActorObject/Object3DPoseSnapshot.h",
+      "bytes": 2674,
+      "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+    },
+    {
+      "path": "build/no-dna/install/share/iiActorObject/docs/DeformationSnapshots.md",
+      "bytes": 9545,
+      "sha256": "4def8132a84b4c9cde60607300cdde3c0da61441219a5dc228c92ab7f146e38a"
+    },
+    {
+      "path": "build/no-dna/install/share/iiActorObject/docs/DeformationSnapshots.agent.json",
+      "bytes": 22503,
+      "sha256": "f5b95af5ef6f202b1ee38fe71e1c2bfa6bbca62cf45af052d411611b0e7645dd"
+    },
+    {
+      "path": "build/no-dna/install/share/iiActorObject/docs/agent-index.json",
+      "bytes": 19332,
+      "sha256": "da56a13729e07563e6bd5b5d83c0cbc6a75ec81578e49c63b952addcd38a14e5"
+    },
+    {
+      "path": "build/sanitizers/build/deformation-matrix-tests.xml",
+      "bytes": 20559,
+      "sha256": "287edb7a0b36ae35159076d89f3cce19a0d92e1f7f1f9118b13e155f11e76c02"
+    },
+    {
+      "path": "build/sanitizers/consumer/build/deformation-consumer-tests.xml",
+      "bytes": 1124,
+      "sha256": "223837dba7386c0ea1b9320d9980dc9fced598fde637f458812cdfbcf8287004"
+    },
+    {
+      "path": "build/sanitizers/install/lib/libiiActorObject.a",
+      "bytes": 231613552,
+      "sha256": "3905c035e0bcc0f56e507e4d80064a04278b7262299cef128682f45102c5f89a"
+    },
+    {
+      "path": "build/sanitizers/install/include/iiActorObject/Object3DRigSnapshot.h",
+      "bytes": 557,
+      "sha256": "e485efc9c387d7ce12b4d3b0f7b9af2d4857206d75e35debadf02c3efc4c75da"
+    },
+    {
+      "path": "build/sanitizers/install/include/iiActorObject/Object3DPoseSnapshot.h",
+      "bytes": 2674,
+      "sha256": "d8504454c2e4e42068eaefb1b61cdc04cfc42d14679107046157ac79190950fd"
+    },
+    {
+      "path": "build/sanitizers/install/share/iiActorObject/docs/DeformationSnapshots.md",
+      "bytes": 9545,
+      "sha256": "4def8132a84b4c9cde60607300cdde3c0da61441219a5dc228c92ab7f146e38a"
+    },
+    {
+      "path": "build/sanitizers/install/share/iiActorObject/docs/DeformationSnapshots.agent.json",
+      "bytes": 22503,
+      "sha256": "f5b95af5ef6f202b1ee38fe71e1c2bfa6bbca62cf45af052d411611b0e7645dd"
+    },
+    {
+      "path": "build/sanitizers/install/share/iiActorObject/docs/agent-index.json",
+      "bytes": 19332,
+      "sha256": "da56a13729e07563e6bd5b5d83c0cbc6a75ec81578e49c63b952addcd38a14e5"
+    },
+    {
+      "path": "build/sanitizers/build/deformation-snapshot/human/adult/PoseSnapshot.fbx",
+      "bytes": 17362748,
+      "sha256": "0659cab062a05584ab49c2e70578f162aaff3d2125c1f0630f8365368b66b061"
+    },
+    {
+      "path": "build/sanitizers/build/deformation-snapshot/human/adult/PoseSnapshot.ii3dproject",
+      "bytes": 17627882,
+      "sha256": "67a7d0e912316b9994f72bb04c9ebc7b89270d6ebd58a143364b4957c46b9e83"
+    },
+    {
+      "path": "build/sanitizers/build/deformation-snapshot/human/adult/Expected.json",
+      "bytes": 10035655,
+      "sha256": "b94d904afcb87dc0b6c29d0758843447b38a922981c7f546cc29f5e6226b17ae"
+    },
+    {
+      "path": "build/sanitizers/build/deformation-snapshot/human/child/PoseSnapshot.fbx",
+      "bytes": 17362780,
+      "sha256": "4559db9d9e63d32842ab69c5bd1ebd76f6f7fed28aa9ce9e1ad5f126610d406c"
+    },
+    {
+      "path": "build/sanitizers/build/deformation-snapshot/human/child/PoseSnapshot.ii3dproject",
+      "bytes": 17627906,
+      "sha256": "57e8e0895e7bc4089e79fbaf6eca9da5c19e7b498f8be5bfc43e15bf3090d2f0"
+    },
+    {
+      "path": "build/sanitizers/build/deformation-snapshot/human/child/Expected.json",
+      "bytes": 10026711,
+      "sha256": "9f8be5c5099bf5ae3d078b1564f091cbd492bccfae8de7d32bf74c6110482e10"
+    },
+    {
+      "path": "build/sanitizers/build/pose-snapshot/human/adult/PoseSnapshot.fbx",
+      "bytes": 17362700,
+      "sha256": "a2351c53a3a27442b1d7f47dc7342c9dd02afb507fbab2c0a80ea6bcbc7a1753"
+    },
+    {
+      "path": "build/sanitizers/build/pose-snapshot/human/adult/PoseSnapshot.ii3dproject",
+      "bytes": 17627834,
+      "sha256": "05fb6b32702a798c7fbbaf28ab6f2a9ce1ce6cea46b8afe746b18a45082f5f9c"
+    },
+    {
+      "path": "build/sanitizers/build/pose-snapshot/human/adult/Expected.json",
+      "bytes": 10035449,
+      "sha256": "ba50460b5e98d851aaca0b6c346ea8d9cb4f82da5cd3c3ed2ef37ec6d4b30bc8"
+    },
+    {
+      "path": "build/sanitizers/build/pose-snapshot/human/child/PoseSnapshot.fbx",
+      "bytes": 17362732,
+      "sha256": "71e653dd9b75eaffd0bcc6fba42a3d7fac78ecc83446f3dd5600ee46af676526"
+    },
+    {
+      "path": "build/sanitizers/build/pose-snapshot/human/child/PoseSnapshot.ii3dproject",
+      "bytes": 17627858,
+      "sha256": "25d7a4a48ea9405706d23235eea37e1cddfd2a4dacd38d422855101a754b7665"
+    },
+    {
+      "path": "build/sanitizers/build/pose-snapshot/human/child/Expected.json",
+      "bytes": 10025004,
+      "sha256": "49061c168232524ac3c10e1f387ca66727cb975fe1a95eaa3d91b73c7d8f0b00"
+    },
+    {
+      "path": "build/deformation-quick-tests.xml",
+      "bytes": 6576,
+      "sha256": "0dcd9411522fe0bbf31f41bd20fa87bd7147d4ff34538625996fe399392eccbb"
+    },
+    {
+      "path": "build/deformation-integration/MatrixState.json",
+      "bytes": 12204,
+      "sha256": "bb777d74340b2b0165badc1761066517f99b2345542c64ddefa00418402d0653"
+    },
+    {
+      "path": "build/deformation-integration/RuntimeRed.json",
+      "bytes": 1115,
+      "sha256": "5bf9c7d599da94fb1b31a9ff713e38ac0c680939ca9a2db38b5deb8849330569"
+    },
+    {
+      "path": "build/deformation-integration/FrozenInputs.json",
+      "bytes": 725,
+      "sha256": "62d37e0d08337b0cf3c8e9fd436fb583464995a028010877df516bf490da6816"
+    },
+    {
+      "path": "build/deformation-integration/FixtureExpansionCancelled.json",
+      "bytes": 1065,
+      "sha256": "3d7ac053425f0769716d1830151d51b11311a0aba53c3844db02b703f70e540c"
+    },
+    {
+      "path": "build/deformation-integration/UpstreamPreservation.json",
+      "bytes": 1939,
+      "sha256": "9f2d80cc2fd0cbda5ffdefdca6ec5340f24ec89d8434dbab93c3c2ec69dc6635"
+    },
+    {
+      "path": "build/deformation-integration/AppValidationScope.json",
+      "bytes": 50021,
+      "sha256": "1c8b297ffce8518a756cd5015bdb4c70f47e618ec6256487f6e5f4ae009f8acd"
+    },
+    {
+      "path": "build/deformation-integration/ScopeStopObservation.json",
+      "bytes": 74,
+      "sha256": "9032b8a9bef7825106824a67db245dbc2b087c54240f3dbafb6ce6df5557f790"
+    },
+    {
+      "path": "build/deformation-integration/ApplicationTestConfiguration.json",
+      "bytes": 242,
+      "sha256": "392c79dc661b51df7685c2431afa32563a30bdfca7e3349d51527af3ed8e83d2"
+    },
+    {
+      "path": "build/deformation-integration/NoApplicationBuildProcesses.json",
+      "bytes": 121,
+      "sha256": "2d48e322228d53953d42f214d4b970427138369b74aa2d6f5280ed55f1ca45d5"
+    },
+    {
+      "path": "build/deformation-integration/StaticArchiveInstallation.json",
+      "bytes": 529,
+      "sha256": "9988a6c0cd3f642b7357156169984021ee81f411094e6f8c6eb89bacaa194a20"
+    },
+    {
+      "path": "build/deformation-integration/nodna-consumer-build.log",
+      "bytes": 193,
+      "sha256": "54066a541f10570d9582fc4c61ffe926f662ba81109de0df84297768e98085ff"
+    },
+    {
+      "path": "build/deformation-integration/shared-quick-build.log",
+      "bytes": 452,
+      "sha256": "9c5a3b5a681be603c5602dd8f4d6c9bc6f2204f40763a64ebddc0e9440da76d5"
+    },
+    {
+      "path": "build/deformation-integration/nodna-build.log",
+      "bytes": 5560,
+      "sha256": "c9802785fa815eda695045e2f0f1f26dd6a4b4f71c85431ab458d510389507c4"
+    },
+    {
+      "path": "build/deformation-integration/focused-tests.log",
+      "bytes": 6205,
+      "sha256": "729a951c788e13f60d13c09a3d3275d3b9a66c9d6bd67102c88a754f3a9b3637"
+    },
+    {
+      "path": "build/deformation-integration/core-consumer-tests.log",
+      "bytes": 782,
+      "sha256": "001065d7c0c81fc295bddd3b3c46d06c89ca8e994883ebc1c7a6b284abacf751"
+    },
+    {
+      "path": "build/deformation-integration/sanitizers-build.log",
+      "bytes": 9866,
+      "sha256": "b9183f6a194e203ad3fc498e74039a25cdbc782e96b35881d76a1e2aa2de4b17"
+    },
+    {
+      "path": "build/deformation-integration/sanitizers-configure.log",
+      "bytes": 159,
+      "sha256": "4463834a7df03f51c47ca11e1e1f6a564c226708bbea9ea5a21791d198781cdd"
+    },
+    {
+      "path": "build/deformation-integration/core-install.log",
+      "bytes": 26554,
+      "sha256": "a0b46dba05aa72bb4719e957f955ae791aa4aa706d0cfa09559ef503317f2aaf"
+    },
+    {
+      "path": "build/deformation-integration/nodna-consumer-tests.log",
+      "bytes": 624,
+      "sha256": "15e1fd8a222d5bcc0f0305b1a70bf1584929cf6857a2c33e8294620363b6ae6f"
+    },
+    {
+      "path": "build/deformation-integration/configure.log",
+      "bytes": 142,
+      "sha256": "083ce0b7c458ce2b63f91e3cf5aeb4b69dffa994fc9c615237ce7aaee9b573de"
+    },
+    {
+      "path": "build/deformation-integration/nodna-configure.log",
+      "bytes": 155,
+      "sha256": "4db0daab9c4b50608decc42835ccc6caf021c5ddf4db15ba040b91a98fa3708c"
+    },
+    {
+      "path": "build/deformation-integration/shared-quick-tests.log",
+      "bytes": 3185,
+      "sha256": "34d7159480b76e2429b2eb2307909298d70ab9d565b606178906ea55bdd002f3"
+    },
+    {
+      "path": "build/deformation-integration/shared-configure.log",
+      "bytes": 142,
+      "sha256": "646540447e99274c30c58933ba965635aae8633f66e4ec8a022488149f383b31"
+    },
+    {
+      "path": "build/deformation-integration/nodna-consumer-configure.log",
+      "bytes": 163,
+      "sha256": "03bfc6369a31055afd05d095648b03820524ccb6eac631399367c967be4e8ef3"
+    },
+    {
+      "path": "build/deformation-integration/core-consumer-build.log",
+      "bytes": 193,
+      "sha256": "54066a541f10570d9582fc4c61ffe926f662ba81109de0df84297768e98085ff"
+    },
+    {
+      "path": "build/deformation-integration/focused-build.log",
+      "bytes": 2095,
+      "sha256": "b595dae3df641c6cc00cc4ef58a69c37a95cb6ca9a4a3ac4b3c1d044932c1598"
+    },
+    {
+      "path": "build/deformation-integration/nodna-tests.log",
+      "bytes": 44047,
+      "sha256": "cf130fce0bab128d835259e8dbfe7818070b1ef938f55d716fe49fd01ca4b30f"
+    },
+    {
+      "path": "build/deformation-integration/sanitizers-tests.log",
+      "bytes": 12693,
+      "sha256": "b130e976589c785956889e80ef55004df5d8393ff92678b615b2c7818edd35f8"
+    },
+    {
+      "path": "build/deformation-integration/shared-tests.log",
+      "bytes": 12834,
+      "sha256": "af863a2479a98c79c3f2e48176ee0b13b37223a330da903cdbf9a374dbc93045"
+    },
+    {
+      "path": "build/deformation-integration/shared-consumer-build.log",
+      "bytes": 202,
+      "sha256": "b214900c39960a46ac7b28196447041d7789b0feff5d8673c5ab8a3a94bdfe18"
+    },
+    {
+      "path": "build/deformation-integration/core-consumer-configure.log",
+      "bytes": 166,
+      "sha256": "6fbcb07375a6c104b8749081d4faad774789306c63c047eef0932f8002922f89"
+    },
+    {
+      "path": "build/deformation-integration/shared-consumer-configure.log",
+      "bytes": 156,
+      "sha256": "e090a6af65893a430816ad5aac7e2020ab10c1378e1b5689b41678a8678d1bba"
+    },
+    {
+      "path": "build/deformation-integration/DisableApplicationTests.log",
+      "bytes": 142,
+      "sha256": "fa28083d0e0646afc82fe54ed1c3ade0da592ac481e5202443282799185dccc1"
+    },
+    {
+      "path": "build/deformation-integration/sanitizers-consumer-build.log",
+      "bytes": 202,
+      "sha256": "b214900c39960a46ac7b28196447041d7789b0feff5d8673c5ab8a3a94bdfe18"
+    },
+    {
+      "path": "build/deformation-integration/core-build.log",
+      "bytes": 6078,
+      "sha256": "7686d6a14aa80cbe77b935f5cb403071b526c389a69a2d9ddd8fde02de8ab7ea"
+    },
+    {
+      "path": "build/deformation-integration/core-configure.log",
+      "bytes": 158,
+      "sha256": "ccccfb4bb9130cd654a9e8f2c26da456da66f3b06c657b6f30b69b85c10aa48c"
+    },
+    {
+      "path": "build/deformation-integration/shared-cli-tests.log",
+      "bytes": 591,
+      "sha256": "91460884155a467d8249b4af8c096e604f53300c91b8d2af887fbd18dd2d5f36"
+    },
+    {
+      "path": "build/deformation-integration/shared-consumer-tests.log",
+      "bytes": 577,
+      "sha256": "9bb43773cbe9f8c0f1328732fc8fb346c7b8c46b8097a36abe6fe6404e1d3906"
+    },
+    {
+      "path": "build/deformation-integration/shared-build.log",
+      "bytes": 3166,
+      "sha256": "cffd9c716dcdf130779353952feac5cfed02fa44fc23085b2787e60e49141b20"
+    },
+    {
+      "path": "build/deformation-integration/nodna-install.log",
+      "bytes": 25542,
+      "sha256": "687629002f84bfebf3f0e70db8a0a22e916c690a0158a997e5d30848253458b5"
+    },
+    {
+      "path": "build/deformation-integration/sanitizers-consumer-tests.log",
+      "bytes": 588,
+      "sha256": "36de4855fe1c2f854dc272e336ad002fe627d11dd951c606129e8c51ed9829bb"
+    },
+    {
+      "path": "build/deformation-integration/sanitizers-consumer-configure.log",
+      "bytes": 167,
+      "sha256": "5d887c8de87bfd0cae498e3d1c6ef01f7130a84f636e210cb6e3749a5eafba3f"
+    },
+    {
+      "path": "build/deformation-integration/sanitizers-install.log",
+      "bytes": 185764,
+      "sha256": "a86f80ea0ceec2f77a609c5ab75d067b1c4f88153c85d308e0082d64e2d38b90"
+    },
+    {
+      "path": "build/deformation-integration/core-tests.log",
+      "bytes": 47761,
+      "sha256": "a270169d5356a39d0265e9be505045b31d4dfd4dc3273d87eed42672f79bc4ef"
+    },
+    {
+      "path": "build/deformation-integration/shared-install.log",
+      "bytes": 173873,
+      "sha256": "85c3c89df268f579e56ba8044326005657b950f1f38b4281528170cd8b4fb365"
+    },
+    {
+      "path": "build/deformation-integration/cli/Verification.json",
+      "bytes": 801,
+      "sha256": "736af1590cb0966f0919002e373a6ec3f88e83e717cfa84c09724d6e9fff466a"
+    },
+    {
+      "path": "build/deformation-integration/DocumentSync.log",
+      "bytes": 118,
+      "sha256": "93d304170395761fc350bf633854be09419f57b6faac0b898bba3d8fab847f53"
+    },
+    {
+      "path": "build/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.agent.json",
+      "bytes": 13307,
+      "sha256": "3b77a0b69b69114ce59741b03217e181b678ea25fea1c9d36be352c23aa01ca8"
+    },
+    {
+      "path": "build/install/share/iiActorObject/docs/NSCharacter.md",
+      "bytes": 21966,
+      "sha256": "5e09647e770d6ac7e985b4f3ffacadefe65e8a6662d48b1bc90887a9fa0aef8f"
+    },
+    {
+      "path": "build/install/share/iiActorObject/docs/NSCharacter.agent.json",
+      "bytes": 64776,
+      "sha256": "0b4d2b96c628e0363234f863433582c161a6afc4847e2b6edac6cd2feb64e13b"
+    },
+    {
+      "path": "build/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.md",
+      "bytes": 3363,
+      "sha256": "48c8ebdf29aba26956ae068aee6ffc5f14945d7fb2746d16fcb31bf06286e52f"
+    },
+    {
+      "path": "build/core-only/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.agent.json",
+      "bytes": 13307,
+      "sha256": "3b77a0b69b69114ce59741b03217e181b678ea25fea1c9d36be352c23aa01ca8"
+    },
+    {
+      "path": "build/core-only/install/share/iiActorObject/docs/NSCharacter.md",
+      "bytes": 21966,
+      "sha256": "5e09647e770d6ac7e985b4f3ffacadefe65e8a6662d48b1bc90887a9fa0aef8f"
+    },
+    {
+      "path": "build/core-only/install/share/iiActorObject/docs/NSCharacter.agent.json",
+      "bytes": 64776,
+      "sha256": "0b4d2b96c628e0363234f863433582c161a6afc4847e2b6edac6cd2feb64e13b"
+    },
+    {
+      "path": "build/core-only/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.md",
+      "bytes": 3363,
+      "sha256": "48c8ebdf29aba26956ae068aee6ffc5f14945d7fb2746d16fcb31bf06286e52f"
+    },
+    {
+      "path": "build/no-dna/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.agent.json",
+      "bytes": 13307,
+      "sha256": "3b77a0b69b69114ce59741b03217e181b678ea25fea1c9d36be352c23aa01ca8"
+    },
+    {
+      "path": "build/no-dna/install/share/iiActorObject/docs/NSCharacter.md",
+      "bytes": 21966,
+      "sha256": "5e09647e770d6ac7e985b4f3ffacadefe65e8a6662d48b1bc90887a9fa0aef8f"
+    },
+    {
+      "path": "build/no-dna/install/share/iiActorObject/docs/NSCharacter.agent.json",
+      "bytes": 64776,
+      "sha256": "0b4d2b96c628e0363234f863433582c161a6afc4847e2b6edac6cd2feb64e13b"
+    },
+    {
+      "path": "build/no-dna/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.md",
+      "bytes": 3363,
+      "sha256": "48c8ebdf29aba26956ae068aee6ffc5f14945d7fb2746d16fcb31bf06286e52f"
+    },
+    {
+      "path": "build/sanitizers/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.agent.json",
+      "bytes": 13307,
+      "sha256": "3b77a0b69b69114ce59741b03217e181b678ea25fea1c9d36be352c23aa01ca8"
+    },
+    {
+      "path": "build/sanitizers/install/share/iiActorObject/docs/NSCharacter.md",
+      "bytes": 21966,
+      "sha256": "5e09647e770d6ac7e985b4f3ffacadefe65e8a6662d48b1bc90887a9fa0aef8f"
+    },
+    {
+      "path": "build/sanitizers/install/share/iiActorObject/docs/NSCharacter.agent.json",
+      "bytes": 64776,
+      "sha256": "0b4d2b96c628e0363234f863433582c161a6afc4847e2b6edac6cd2feb64e13b"
+    },
+    {
+      "path": "build/sanitizers/install/share/iiActorObject/docs/DeformationSnapshotVerification-20261027.md",
+      "bytes": 3363,
+      "sha256": "48c8ebdf29aba26956ae068aee6ffc5f14945d7fb2746d16fcb31bf06286e52f"
+    },
+    {
+      "path": "build/deformation-integration/DocumentVerification.log",
+      "bytes": 141,
+      "sha256": "11570942c6ba55998650d5f43bfd7d7b16c8c54a9aa4b92ed807c54efa5976a1"
+    }
+  ],
+  "limitations": [
+    "애니메이티드 맵 값 및 컨트롤 레시피의 파일 영속 저장과 재질 연결은 남아 있다.",
+    "완전히 퇴화한 기준 형상은 기존 저작 자산 규칙에 따라 원자적으로 거부한다.",
+    "바인드 변경 이후 원래 애니메이션의 동등성이나 일반 리타기팅은 이 검사로 보장하지 않는다.",
+    "DNA 검사는 작은 독립 fixture에 한정된다. 제작용 MetaHuman 자료·기능 검증은 남아 있다.",
+    "제작용 인체/재질/헤어, 플랫폼 및 성능 검증은 남아 있다. 실제 CC5/Blender/Unreal 검증은 사용자 지시로 제외되었다.",
+    "macOS에서 실행한 검증이다. 다른 플랫폼의 실행 증거로 해석하지 않는다."
+  ],
+  "sourceRestoreManifest": "build/deformation-integration/checkpoint/SourceManifest.json",
+  "evidencePreservationManifest": "build/deformation-integration/checkpoint/EvidenceManifest.json"
+}

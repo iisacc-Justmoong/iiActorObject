@@ -1,0 +1,16 @@
+#pragma once
+#include <iiActorObject/NSCharacter/DnaCharacter.h>
+#include <iiActorObject/NSCharacter/AutoRig.h>
+#include <iiActorObject/NSCharacter/CharacterEditor.h>
+#include <iiActorObject/NSCharacter/CharacterInterchange.h>
+#include <iiActorObject/NSCharacter/HumanoidGenerator.h>
+#include <iiActorObject/NSCharacter/CharacterTemplate.h>
+#include <iiActorObject/NSCharacter/HumanMorphology.h>
+#include <iiActorObject/NSCharacter/HumanSkin.h>
+#include <iiActorObject/NSCharacter/HumanoidCharacterization.h>
+#include <iiActorObject/NSCharacter/HumanPoseDirections.h>
+#include <iiActorObject/NSCharacter/HumanPosePlanner.h>
+#include <iiActorObject/NSCharacter/HumanAutomaticCorrectives.h>
+#include <iiActorObject/NSCharacter/HumanPoseRetarget.h>
+#include <iiActorObject/NSCharacter/HumanJointNaming.h>
+#include <iiActorObject/NSCharacter/RigSamples.h>

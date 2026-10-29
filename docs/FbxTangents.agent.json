@@ -1,0 +1,353 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:f8b7b0534404b9b6737dc61ce4ff31ccc3a01d0f74030b424edaf4c7e5aa6efb",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/FbxTangents.md",
+    "sha256": "2b151b0bcae6956fdcaecfe691db457bb964f8ef82fef02267253d9880902602",
+    "bytes": 10538,
+    "line_count": 29,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "FBX 탄젠트 레이어",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# FBX 탄젠트 레이어\n",
+      "level": 1,
+      "title": "FBX 탄젠트 레이어"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "FBX 입력에서 UV 레이어에 연결된 탄젠트·비탄젠트는 본체 `MeshTopology::sourceTangents`의 불변 스냅샷에 폴리곤 코너별로 보관한다. 원본 값이 유효하면 노멀 맵 연결 유무와 관계없이 FBX에 다시 기록한다. 탄젠트만 있거나 비탄젠트만 있는 경우와 선택적인 `TangentsW`·`BinormalsW`도 구분한다. 가져올 때 공간 변환의 선형 부분으로 두 벡터를 변환하고, 반사 시 코너 순서와 탄젠트 W의 부호를 함께 바꾼다. 배열 인덱스 방식은 표준 폴리곤 코너별 `Direct` 표현으로 정규화되므로 원래의 FBX 배열 배치까지 보존하는 것은 아니다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "GLB 출력에서는 유효한 GLB 원본 스냅샷을 우선하고, 그것이 없는 프리미티브에는 현재 머티리얼의 노멀 맵 UV와 일치하는 FBX 원본 레이어를 사용한다. FBX 폴리곤 코너를 본체의 삼각형 코너에 대응해 원래 방향을 정규화하여 기록하므로 사각형 분할과 같은 점의 UV·탄젠트 이음새를 유지한다. 비탄젠트와 노멀·탄젠트의 외적을 비교해 기저 방향을 확인하고 FBX와 GLB의 V 방향 차이에 맞게 부호를 바꾼다. FBX의 `TangentsW`가 이 방향과 다르면 비탄젠트를 우선하고 충돌을 기록한다. 원본 비탄젠트가 외적 방향과 일치하지 않는 경우에는 GLB가 별도의 비탄젠트를 담지 못하므로 방향을 근사했다는 상태를 남긴다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "GLB 출력은 코너별 속성을 표현하기 위해 표시 정점을 나눈다. iiActorObject가 출력한 파일의 [선택적 점 식별 정보](GlbPointIdentity.md)가 보존되고 표시 데이터와 일치하면 재가져올 때 원본 제어점 ID와 사용되지 않는 점을 복원한다. 이 정보가 없거나 충돌하면 같은 위치만으로 서로 다른 점을 합치지 않는다. 원본 폴리곤과 편집 이력은 GLB에서 복원하지 않으므로 본체 프로젝트에 보관해야 한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "원본 탄젠트나 비탄젠트가 없어 방향을 판단할 수 없거나, 한 삼각형의 코너들이 서로 다른 부호를 요구하면 값을 추측하지 않는다. 노멀 맵이 있는 경우 현재 UV에서 MikkTSpace를 계산하고, 없는 경우는 탄젠트를 생략한다. 같은 머티리얼 안에 보존 가능한 면과 불가능한 면이 섞여 있으면 GLB 프리미티브를 분리하여 정상 면의 원본 기저와 문제 면의 재계산·생략을 각각 기록한다. 원본 형상이 편집되어 기준과 달라진 경우도 같은 정책을 따르며 실행 취소하면 다시 보존한다. 노멀 맵이 없는 머티리얼에서 탄젠트 레이어가 하나뿐이면 그 레이어를 GLB에 기록하고 선택한 UV 번호를 `extras.iiActorObjectFbxTangentUvSet`에 남긴다. 여러 레이어 중 선택할 근거가 없으면 생략한다. 한 GLB 프리미티브는 탄젠트 속성 하나만 갖기 때문에 선택되지 않은 FBX UV 레이어는 그 프리미티브에 보존되지 않는다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "`extras.iiActorObjectFbxTangentNotes`는 `source_fbx_tangents_stale`, `source_fbx_uv_layer_missing`, `source_fbx_tangent_missing`, `source_fbx_uv_ambiguous`, `source_fbx_handedness_unknown`, `source_fbx_triangle_handedness`, `source_fbx_binormal_approximated`, `source_fbx_tangent_w_conflict`, `source_fbx_binormal_w_omitted`, `source_fbx_other_uv_layers_omitted`, `source_fbx_unbound_uv`, `source_fbx_morph_tangents_unavailable` 등의 상태를 기록한다. 삼각형·모프 작업량이나 코너 투영 한도를 넘는 경우도 별도로 표시한다. SDK가 이 GLB를 읽을 때는 정해진 상태만 경고로 전달하고 알 수 없는 문자열을 그대로 표시하지 않으며 이 유형의 경고는 32건과 추가 생략 알림 한 건으로 제한한다. 이 `extras`는 일반 GLB 소비자가 보존하거나 해석할 의무가 없다. 특히 노멀 맵이 없는 경우 UV 번호는 출력 메타데이터로만 남고, 현재 GLB 가져오기는 그 번호를 편집 가능한 원본 연결로 복원하지 않는다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "보존된 원본이 없거나 유효하지 않은 UV 세트에서 노멀 맵이 연결된 머티리얼을 사용하면 본체의 [면별 MikkTSpace](MeshTangents.md)를 계산한다. FBX에 기록하는 원본 UV 좌표로 계산하며, 해당 FBX `Layer`에 `LayerElementUV`, `LayerElementTangent`, `LayerElementBinormal`을 같은 typed index로 연결한다. 계산된 `TangentsW`는 기저의 부호이고, 비탄젠트는 정규화된 노멀과 탄젠트의 외적에 이 부호를 곱해 만든다. 원본도 노멀 맵도 없는 UV 세트에는 레이어를 만들지 않는다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "GLB에서 가져온 기준 탄젠트가 있고 위치·법선·UV·모프와 원래 노멀 맵 UV 연결이 여전히 유효하면, 해당 재질이 실제로 사용하는 FBX UV 레이어의 폴리곤 코너에 원래 방향을 기록한다. 내부 및 FBX의 V 좌표는 GLB의 V와 반대이므로 W의 부호를 바꾸고 그 부호로 비탄젠트를 구성한다. 같은 메시에서 원본 탄젠트가 없는 면은 그 UV 세트의 MikkTSpace 값을 사용하며, 모든 면에 원본이 있으면 재계산하지 않는다. 같은 FBX UV 레이어에 유효한 FBX 원본 탄젠트도 있는 경우에는 기존 FBX 원본을 우선한다. 서로 다른 삼각형이 한 폴리곤 코너에 양립할 수 없는 결과를 요구하면 해당 레이어를 생략하고 `polygon_tangent_conflict`로 표시한다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "GLB에 노멀 맵이 없는 원본 탄젠트는 어느 UV에 연결할지 단정할 수 없어 임의로 FBX 레이어에 배정하지 않고 `source_tangent_uv_unbound`로 기록한다. 노멀 맵의 유무 또는 UV 선택이 원본과 달라진 경우는 `source_tangent_uv_changed`, 메시나 모프 편집으로 기준이 달라진 경우는 `source_tangents_stale`을 기록하고 필요한 현재 UV의 기저를 계산한다. 이 세 가지 GLB 스냅샷 상태의 `UVIndex`와 `UVName`은 기본 UV를 가리키는 기록용 자리표시자이며 손실된 원본의 UV가 확정됐다는 뜻이 아니다. 원래 상태로 되돌리면 다시 사용할 수 있다. FBX 출력에서도 호출자가 보유한 변경 가능한 스냅샷 별칭을 재검사해 손상된 인덱스나 값은 거부한다. SDK가 FBX를 다시 읽으면 이 상태들을 경고로 전달한다. 노멀 맵 이미지의 색 채널을 재변환하지 않으므로 소비자별 노멀 맵 방향과 실제 표시 결과의 일치는 이 계약만으로 보장하지 않는다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "본체가 소유한 삼각분할 결과에서 탄젠트를 계산한 뒤 FBX의 원본 폴리곤 코너로 투영한다. 숨긴 폴리곤은 제외하며 뒤집힌 winding도 FBX 출력 순서에 맞춘다. 같은 폴리곤 코너가 여러 삼각형에서 서로 다른 부호나 `1e-5`보다 큰 방향 차이를 요구하면 하나의 FBX 폴리곤 코너에 충실하게 저장할 수 없으므로 해당 UV 세트의 탄젠트·비탄젠트를 생략한다. 원본 폴리곤, 정점, UV, 노멀, 스킨과 모프 자료는 그대로 유지한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "메시당 삼각형 코너는 최대 800만, UV별 코너 계산 작업 합계는 6,400만, 보관할 폴리곤 코너와 UV 세트의 곱은 800만으로 제한한다. 가져오는 파일 전체의 보존 코너와 UV 세트의 곱도 800만으로 제한한다. 한도나 표현 불가능한 기저를 만나면 geometry의 `iiActorObjectTangentStatus`에 `UVIndex`, `UVName`, `Reason`을 기록한다. 계산 사유는 `corner_budget`, `work_budget`, `memory_budget`, `polygon_mapping`, `polygon_tangent_conflict`, `invalid_basis` 중 하나이다. 이 레이어가 없는 FBX를 받는 쪽은 필요한 경우 탄젠트를 재계산해야 한다. SDK는 이 상태를 다시 가져올 때 정해진 사유만 경고로 전달하며, 알 수 없는 외부 문자열은 그대로 경고에 주입하지 않는다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "모프가 있는 메시에서 내보내는 탄젠트는 **기준 형상만** 나타낸다. FBX의 현재 shape 출력은 위치와 노멀을 지원하며 모프 탄젠트·비탄젠트는 아직 출력하지 않는다. 이 경우 탄젠트 레이어는 유지하고 `base_only_morphs` 상태를 기록한다. [Autodesk FBX shape 문서](https://help.autodesk.com/cloudhelp/2020/ENU/FBX-API-Reference/cpp_ref/class_fbx_shape.html)는 현대적인 shape 표현에 탄젠트 레이어가 포함될 수 있음을 설명하지만, 이 SDK는 그 표현의 읽기·쓰기를 아직 구현하지 않았다. 실제 앱에서 모프 시 기저를 재계산하는지 확인한 것으로 간주하지 않는다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "스냅샷은 기준 위치·법선·모든 UV 및 원본 토폴로지와 삼각분할을 함께 기억한다. 어느 하나라도 바뀌면 `topologySourceTangentsValid`가 거짓이 되고 원본 기저를 재출력하지 않는다. 노멀의 반복 정규화로 인한 오차는 `1e-12`까지 허용한다. 바뀐 메시를 내보낼 때 `source_tangents_stale` 상태를 기록하고 필요한 UV의 기저를 새로 계산한다. 기준이 그대로인 스킨 가중치·머티리얼 속성 편집은 원본 기저를 유지한다. 실행 취소나 편집 레이어 비활성화로 기준 상태에 돌아가면 원본 기저를 다시 사용할 수 있다. 원본 스냅샷 자체의 교체는 편집 레이어가 지원하지 않으므로 명시적으로 거부한다. 프로젝트 버전 20은 원본 스냅샷과 공유 이력을 보존한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "UV에 연결되지 않았거나 한도로 보존하지 못한 FBX 레이어는 경고한다. 외부 FBX의 숨김 폴리곤에 있던 탄젠트 값은 보관하지 않으며 이 손실도 경고한다. FBX 모프별 탄젠트는 아직 보존하거나 출력하지 않는다. GLB는 자체 [원본 탄젠트 스냅샷](GlbAuthoredTangents.md)을 우선 사용하고 그 외에는 위의 FBX 원본 또는 MikkTSpace를 사용한다. FBX 원본 스냅샷의 수치와 배열은 출력 전 다시 검사하므로 외부에서 보유한 변경 가능한 별칭이 손상되면 거부한다. 이 공개 자료 구조가 변경되었으므로 기존 C++ 소비자는 새 헤더와 라이브러리로 다시 빌드해야 한다. 앱과 엔진 소유권은 바뀌지 않으며, CC5·Blender·Unreal을 실행하지 않고 네이티브 검사와 독립 파일 파서로 검증한다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "원본 보존·이력·인체 시료의 검증 범위는 [검증 기록](FbxAuthoredTangentsVerification-20261028.md)에 있다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "FBX 탄젠트 레이어",
+      "anchor": "fbx-탄젠트-레이어",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 7,
+        "text": "GLB 출력은 코너별 속성을 표현하기 위해 표시 정점을 나눈다. iiActorObject가 출력한 파일의 [선택적 점 식별 정보](GlbPointIdentity.md)가 보존되고 표시 데이터와 일치하면 재가져올 때 원본 제어점 ID와 사용되지 않는 점을 복원한다. 이 정보가 없거나 충돌하면 같은 위치만으로 서로 다른 점을 합치지 않는다. 원본 폴리곤과 편집 이력은 GLB에서 복원하지 않으므로 본체 프로젝트에 보관해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000009",
+        "line": 9,
+        "text": "원본 탄젠트나 비탄젠트가 없어 방향을 판단할 수 없거나, 한 삼각형의 코너들이 서로 다른 부호를 요구하면 값을 추측하지 않는다. 노멀 맵이 있는 경우 현재 UV에서 MikkTSpace를 계산하고, 없는 경우는 탄젠트를 생략한다. 같은 머티리얼 안에 보존 가능한 면과 불가능한 면이 섞여 있으면 GLB 프리미티브를 분리하여 정상 면의 원본 기저와 문제 면의 재계산·생략을 각각 기록한다. 원본 형상이 편집되어 기준과 달라진 경우도 같은 정책을 따르며 실행 취소하면 다시 보존한다. 노멀 맵이 없는 머티리얼에서 탄젠트 레이어가 하나뿐이면 그 레이어를 GLB에 기록하고 선택한 UV 번호를 `extras.iiActorObjectFbxTangentUvSet`에 남긴다. 여러 레이어 중 선택할 근거가 없으면 생략한다. 한 GLB 프리미티브는 탄젠트 속성 하나만 갖기 때문에 선택되지 않은 FBX UV 레이어는 그 프리미티브에 보존되지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000011",
+        "line": 11,
+        "text": "`extras.iiActorObjectFbxTangentNotes`는 `source_fbx_tangents_stale`, `source_fbx_uv_layer_missing`, `source_fbx_tangent_missing`, `source_fbx_uv_ambiguous`, `source_fbx_handedness_unknown`, `source_fbx_triangle_handedness`, `source_fbx_binormal_approximated`, `source_fbx_tangent_w_conflict`, `source_fbx_binormal_w_omitted`, `source_fbx_other_uv_layers_omitted`, `source_fbx_unbound_uv`, `source_fbx_morph_tangents_unavailable` 등의 상태를 기록한다. 삼각형·모프 작업량이나 코너 투영 한도를 넘는 경우도 별도로 표시한다. SDK가 이 GLB를 읽을 때는 정해진 상태만 경고로 전달하고 알 수 없는 문자열을 그대로 표시하지 않으며 이 유형의 경고는 32건과 추가 생략 알림 한 건으로 제한한다. 이 `extras`는 일반 GLB 소비자가 보존하거나 해석할 의무가 없다. 특히 노멀 맵이 없는 경우 UV 번호는 출력 메타데이터로만 남고, 현재 GLB 가져오기는 그 번호를 편집 가능한 원본 연결로 복원하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 15,
+        "text": "GLB에서 가져온 기준 탄젠트가 있고 위치·법선·UV·모프와 원래 노멀 맵 UV 연결이 여전히 유효하면, 해당 재질이 실제로 사용하는 FBX UV 레이어의 폴리곤 코너에 원래 방향을 기록한다. 내부 및 FBX의 V 좌표는 GLB의 V와 반대이므로 W의 부호를 바꾸고 그 부호로 비탄젠트를 구성한다. 같은 메시에서 원본 탄젠트가 없는 면은 그 UV 세트의 MikkTSpace 값을 사용하며, 모든 면에 원본이 있으면 재계산하지 않는다. 같은 FBX UV 레이어에 유효한 FBX 원본 탄젠트도 있는 경우에는 기존 FBX 원본을 우선한다. 서로 다른 삼각형이 한 폴리곤 코너에 양립할 수 없는 결과를 요구하면 해당 레이어를 생략하고 `polygon_tangent_conflict`로 표시한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000017",
+        "line": 17,
+        "text": "GLB에 노멀 맵이 없는 원본 탄젠트는 어느 UV에 연결할지 단정할 수 없어 임의로 FBX 레이어에 배정하지 않고 `source_tangent_uv_unbound`로 기록한다. 노멀 맵의 유무 또는 UV 선택이 원본과 달라진 경우는 `source_tangent_uv_changed`, 메시나 모프 편집으로 기준이 달라진 경우는 `source_tangents_stale`을 기록하고 필요한 현재 UV의 기저를 계산한다. 이 세 가지 GLB 스냅샷 상태의 `UVIndex`와 `UVName`은 기본 UV를 가리키는 기록용 자리표시자이며 손실된 원본의 UV가 확정됐다는 뜻이 아니다. 원래 상태로 되돌리면 다시 사용할 수 있다. FBX 출력에서도 호출자가 보유한 변경 가능한 스냅샷 별칭을 재검사해 손상된 인덱스나 값은 거부한다. SDK가 FBX를 다시 읽으면 이 상태들을 경고로 전달한다. 노멀 맵 이미지의 색 채널을 재변환하지 않으므로 소비자별 노멀 맵 방향과 실제 표시 결과의 일치는 이 계약만으로 보장하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000021",
+        "line": 21,
+        "text": "메시당 삼각형 코너는 최대 800만, UV별 코너 계산 작업 합계는 6,400만, 보관할 폴리곤 코너와 UV 세트의 곱은 800만으로 제한한다. 가져오는 파일 전체의 보존 코너와 UV 세트의 곱도 800만으로 제한한다. 한도나 표현 불가능한 기저를 만나면 geometry의 `iiActorObjectTangentStatus`에 `UVIndex`, `UVName`, `Reason`을 기록한다. 계산 사유는 `corner_budget`, `work_budget`, `memory_budget`, `polygon_mapping`, `polygon_tangent_conflict`, `invalid_basis` 중 하나이다. 이 레이어가 없는 FBX를 받는 쪽은 필요한 경우 탄젠트를 재계산해야 한다. SDK는 이 상태를 다시 가져올 때 정해진 사유만 경고로 전달하며, 알 수 없는 외부 문자열은 그대로 경고에 주입하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 23,
+        "text": "모프가 있는 메시에서 내보내는 탄젠트는 **기준 형상만** 나타낸다. FBX의 현재 shape 출력은 위치와 노멀을 지원하며 모프 탄젠트·비탄젠트는 아직 출력하지 않는다. 이 경우 탄젠트 레이어는 유지하고 `base_only_morphs` 상태를 기록한다. [Autodesk FBX shape 문서](https://help.autodesk.com/cloudhelp/2020/ENU/FBX-API-Reference/cpp_ref/class_fbx_shape.html)는 현대적인 shape 표현에 탄젠트 레이어가 포함될 수 있음을 설명하지만, 이 SDK는 그 표현의 읽기·쓰기를 아직 구현하지 않았다. 실제 앱에서 모프 시 기저를 재계산하는지 확인한 것으로 간주하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 25,
+        "text": "스냅샷은 기준 위치·법선·모든 UV 및 원본 토폴로지와 삼각분할을 함께 기억한다. 어느 하나라도 바뀌면 `topologySourceTangentsValid`가 거짓이 되고 원본 기저를 재출력하지 않는다. 노멀의 반복 정규화로 인한 오차는 `1e-12`까지 허용한다. 바뀐 메시를 내보낼 때 `source_tangents_stale` 상태를 기록하고 필요한 UV의 기저를 새로 계산한다. 기준이 그대로인 스킨 가중치·머티리얼 속성 편집은 원본 기저를 유지한다. 실행 취소나 편집 레이어 비활성화로 기준 상태에 돌아가면 원본 기저를 다시 사용할 수 있다. 원본 스냅샷 자체의 교체는 편집 레이어가 지원하지 않으므로 명시적으로 거부한다. 프로젝트 버전 20은 원본 스냅샷과 공유 이력을 보존한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000027",
+        "line": 27,
+        "text": "UV에 연결되지 않았거나 한도로 보존하지 못한 FBX 레이어는 경고한다. 외부 FBX의 숨김 폴리곤에 있던 탄젠트 값은 보관하지 않으며 이 손실도 경고한다. FBX 모프별 탄젠트는 아직 보존하거나 출력하지 않는다. GLB는 자체 [원본 탄젠트 스냅샷](GlbAuthoredTangents.md)을 우선 사용하고 그 외에는 위의 FBX 원본 또는 MikkTSpace를 사용한다. FBX 원본 스냅샷의 수치와 배열은 출력 전 다시 검사하므로 외부에서 보유한 변경 가능한 별칭이 손상되면 거부한다. 이 공개 자료 구조가 변경되었으므로 기존 C++ 소비자는 새 헤더와 라이브러리로 다시 빌드해야 한다. 앱과 엔진 소유권은 바뀌지 않으며, CC5·Blender·Unreal을 실행하지 않고 네이티브 검사와 독립 파일 파서로 검증한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000007",
+        "label": "선택적 점 식별 정보",
+        "target": "GlbPointIdentity.md",
+        "kind": "relative",
+        "line": 7
+      },
+      {
+        "block_id": "b000013",
+        "label": "면별 MikkTSpace",
+        "target": "MeshTangents.md",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000023",
+        "label": "Autodesk FBX shape 문서",
+        "target": "https://help.autodesk.com/cloudhelp/2020/ENU/FBX-API-Reference/cpp_ref/class_fbx_shape.html",
+        "kind": "external",
+        "line": 23
+      },
+      {
+        "block_id": "b000027",
+        "label": "원본 탄젠트 스냅샷",
+        "target": "GlbAuthoredTangents.md",
+        "kind": "relative",
+        "line": 27
+      },
+      {
+        "block_id": "b000029",
+        "label": "검증 기록",
+        "target": "FbxAuthoredTangentsVerification-20261028.md",
+        "kind": "relative",
+        "line": 29
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

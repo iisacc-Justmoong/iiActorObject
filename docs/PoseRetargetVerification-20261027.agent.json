@@ -1,0 +1,256 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:eb0a62dc20fd0225c8dd454cea44cf4740e722dc50c3f233f7719cb7b8508561",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/PoseRetargetVerification-20261027.md",
+    "sha256": "46a4304162ad9504f6e2fa34de5aa00da3eb0215db1a817236fbdf81555b3914",
+    "bytes": 2822,
+    "line_count": 21,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "기준 자세 간 포즈 리타깃 검증 기록: 2026-10-27",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 기준 자세 간 포즈 리타깃 검증 기록: 2026-10-27\n",
+      "level": 1,
+      "title": "기준 자세 간 포즈 리타깃 검증 기록: 2026-10-27"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 구현 범위\n",
+      "level": 2,
+      "title": "구현 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "iiActorObject 본체의 `retargetPose`는 원본 기준·현재 Pose의 오브젝트 회전 차이를 본 대응과 좌표축 변환을 통해 대상 기준 Pose로 옮긴다. 선택적으로 루트 0 대 0의 이동을 단위 비율과 함께 전달한다. 원본과 대상 Pose를 변경하지 않고 대상 로컬 변환 배열을 반환한다. 동일 원본 본의 복수 대상 대응을 허용하고, 중복 대상과 잘못된 본 ID를 거부한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "NSCharacter의 `planHumanPoseRetarget`는 두 인체 매핑을 역할로 연결하고 불일치와 필수 역할 누락을 구분해 보고한다. 선택적 루트 대응이 기존 역할과 충돌하면 오류이다. 인체 계층의 결과는 본 ID와 문자열 메타데이터이며 Pose·Skeleton·엔진을 소유하지 않는다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 검사 결과\n",
+      "level": 2,
+      "title": "검사 결과"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "list",
+      "start_line": 11,
+      "end_line": 15,
+      "raw": "- 공유 macOS arm64 구성의 테스트 8개가 통과했다. 다른 기준 회전, 좌표축과 루트 이동, `AnimationClip` 샘플, 원본 본 하나를 여러 대상에 대응하는 경우, 중간 helper, 부모 순서와 다른 본 ID, 입력 실패, 인체 역할과 엔진 수명, 별도 성인·아동의 163개 본 자료를 검사했다. 결과는 `build/pose-plan/retarget-final.xml`이다.\n- NSCharacter를 끈 코어 전용 구성의 테스트 4개가 통과했다. 결과는 `build/pose-plan/retarget-core.xml`이다.\n- 정적 Debug AddressSanitizer·UndefinedBehaviorSanitizer 구성의 관련 테스트 8개가 통과했다. 결과는 `build/pose-plan/retarget-sanitizers.xml`이다.\n- 별도로 설치된 공유 및 코어 전용 SDK 소비자가 각각 새 헤더와 라이브러리를 사용하여 통과했다. 결과는 `build/pose-plan/retarget-consumer.xml`, `build/pose-plan/retarget-core-consumer.xml`이다. 실제 사용자 설치본은 변경하지 않았다.\n- 두 macOS 공유 라이브러리의 `otool -L`은 시스템 C++ 라이브러리와 libSystem만 표시한다. 다른 플랫폼의 빌드 결과는 아니다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "공유 macOS arm64 구성의 테스트 8개가 통과했다. 다른 기준 회전, 좌표축과 루트 이동, `AnimationClip` 샘플, 원본 본 하나를 여러 대상에 대응하는 경우, 중간 helper, 부모 순서와 다른 본 ID, 입력 실패, 인체 역할과 엔진 수명, 별도 성인·아동의 163개 본 자료를 검사했다. 결과는 `build/pose-plan/retarget-final.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter를 끈 코어 전용 구성의 테스트 4개가 통과했다. 결과는 `build/pose-plan/retarget-core.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "정적 Debug AddressSanitizer·UndefinedBehaviorSanitizer 구성의 관련 테스트 8개가 통과했다. 결과는 `build/pose-plan/retarget-sanitizers.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "별도로 설치된 공유 및 코어 전용 SDK 소비자가 각각 새 헤더와 라이브러리를 사용하여 통과했다. 결과는 `build/pose-plan/retarget-consumer.xml`, `build/pose-plan/retarget-core-consumer.xml`이다. 실제 사용자 설치본은 변경하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "두 macOS 공유 라이브러리의 `otool -L`은 시스템 C++ 라이브러리와 libSystem만 표시한다. 다른 플랫폼의 빌드 결과는 아니다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "원본 앱이나 사용자용 CLI는 실행하지 않았다. 성인·아동 자료는 `resources/rig-sampling/`에 보관한 기존 CC0 테스트 자료이다. 숫자 검사를 대상 앱에서의 호환성이나 최종 동작 품질로 해석하지 않는다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 제한\n",
+      "level": 2,
+      "title": "제한"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "이 기록의 포즈 구현은 양수 균일 로컬 스케일을 요구하며 반사와 비균일 스케일을 거부한다. 스케일과 비루트 위치 애니메이션은 전달하지 않는다. 이후 지정 시각을 키로 묶는 [클립 표본 변환](AnimationRetarget.md)을 추가했다. 자동 보간 오차 관리, IK·발 접촉·비틀림 분배, 얼굴 리그와 의상 보정은 별도 작업이다. 제작용 MetaHuman 자료와 외형 품질도 전체 목표의 남은 범위이다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "기준 자세 간 포즈 리타깃 검증 기록: 2026-10-27",
+      "anchor": "기준-자세-간-포즈-리타깃-검증-기록-2026-10-27",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구현 범위",
+      "anchor": "구현-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검사 결과",
+      "anchor": "검사-결과",
+      "start_line": 9
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "제한",
+      "anchor": "제한",
+      "start_line": 19
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 7,
+        "text": "NSCharacter의 `planHumanPoseRetarget`는 두 인체 매핑을 역할로 연결하고 불일치와 필수 역할 누락을 구분해 보고한다. 선택적 루트 대응이 기존 역할과 충돌하면 오류이다. 인체 계층의 결과는 본 ID와 문자열 메타데이터이며 Pose·Skeleton·엔진을 소유하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 17,
+        "text": "원본 앱이나 사용자용 CLI는 실행하지 않았다. 성인·아동 자료는 `resources/rig-sampling/`에 보관한 기존 CC0 테스트 자료이다. 숫자 검사를 대상 앱에서의 호환성이나 최종 동작 품질로 해석하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000017",
+        "line": 21,
+        "text": "이 기록의 포즈 구현은 양수 균일 로컬 스케일을 요구하며 반사와 비균일 스케일을 거부한다. 스케일과 비루트 위치 애니메이션은 전달하지 않는다. 이후 지정 시각을 키로 묶는 [클립 표본 변환](AnimationRetarget.md)을 추가했다. 자동 보간 오차 관리, IK·발 접촉·비틀림 분배, 얼굴 리그와 의상 보정은 별도 작업이다. 제작용 MetaHuman 자료와 외형 품질도 전체 목표의 남은 범위이다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000017",
+        "label": "클립 표본 변환",
+        "target": "AnimationRetarget.md",
+        "kind": "relative",
+        "line": 21
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

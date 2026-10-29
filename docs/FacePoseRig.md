@@ -1,0 +1,69 @@
+# 얼굴 포즈 리그와 모프 스냅샷
+
+BVH의 실수 입력은 부동소수점 `from_chars`를 제공하지 않는 표준 라이브러리에서도 지역 설정에 영향을 받지 않는 classic-locale 경로로 읽는다. 자세한 입력 계약은 [인체 부속 자산](HumanAccessories.md)을 따른다.
+
+## 소유와 실행
+
+본체의 `Object3DPoseProgram`은 관절 이름과 단위 포즈별 중립 대비 오브젝트 공간 회전 차이를 보관한다. 본체 엔진이 프로그램·리그 세션·골격 바인딩과 실행 자료를 소유한다. `NSCharacter::RiggedCharacter`는 `CharacterAsset` 뷰와 `Object3DRigHandle`만 가진다.
+
+`resources/MakeHumanExpressions`는 고정 커밋의 원본 BVH·프레임 목록과 CC0 라이선스 자료를 보관한다. 163개 관절과 중립을 포함한 60개 프레임이며 실행 제어는 중립을 제외한 원본 59개 이름이다. ARKit 52개 항목이나 제작용 MetaHuman 컨트롤과 동일하다고 가정하지 않는다. 원본·라이선스·해시는 패키지의 `PROVENANCE.md`와 `UPSTREAM-SHA256.json`을 따른다.
+
+## BVH와 좌표
+
+`parseObject3DBvh`는 단일 루트 BVH의 계층·offset·End Site·위치·회전 채널과 프레임을 읽는다. 지정된 채널 순서로 회전을 합성한다. 바이트·관절·깊이·프레임·전체 샘플 수를 제한하고 중복 채널·이름, 비유한 수, 잘린 입력과 남은 샘플을 거부한다. 정점 데이터나 별도 앱 런타임은 읽지 않는다.
+
+기본은 입력 좌표를 유지한다. `BvhImportOptions::basis`와 `scale`을 명시하여 위치와 회전을 함께 변환한다. 포함된 얼굴 자료는 Z 위쪽이므로 X축 -90도 회전으로 본체의 Y 위쪽에 맞춘다. 프레임 시간은 자료에 기록된 간격을 사용한다.
+
+`makeObject3DPoseProgram`은 선택한 프레임의 관절별 오브젝트 회전에서 중립 프레임의 회전을 제거한다. 중립에 있는 작은 회전도 차감한다. 이 프로그램은 회전 포즈 전용이며 프레임 사이에 변하는 위치 채널은 명시적으로 거부한다. 일반 BVH 판독기는 위치 채널도 보존한다. 일반 프로그램 빌더의 회전 허용 오차 기본값은 0이다. 포함한 프리셋은 카탈로그에 `rotationNoiseToleranceRadians=1e-6`을 명시하여 중립 대비 로컬 미세 회전을 제거한 뒤 오브젝트 회전을 계산한다. 원본 BVH의 6자리 기록 오차가 몸통 제어로 오인되는 것을 방지하며 원본 파일은 바꾸지 않는다.
+
+## 골격 재연결
+
+`createObject3DPoseRig`는 현재 에셋의 기준 골격에 프로그램을 연결한다. 원본 포즈의 오브젝트 회전을 대상의 기준 회전에 적용한 뒤 현재 부모 회전으로 로컬 회전을 계산한다. 따라서 대상의 본 방향·부모·기준 회전을 편집한 후에도 `Object3DRigSession::cloneFor`로 새 스냅샷에 바인딩할 수 있다. 이름을 바꾼 경우 `jointMapping()`으로 얻은 원본 ID 대응을 전달한다. [편집 리그 참조](EditorRigFollow.md)는 이를 편집·undo/redo에 맞춰 조회나 평가 시 수행한다. 새 바인딩은 본체 드라이버의 `cloneFor` 경계에서 계산한다. 다른 드라이버의 기본 동작은 기존 프로그램 복제이다.
+
+제어는 0~1의 유한 값이며 raw·GUI가 같은 원본 포즈 항목을 제공한다. 여러 포즈는 목록 순서대로 중립과의 구면 보간 회전을 곱한다. 회전의 곱은 교환 법칙이 없으므로 항목 순서는 프로그램의 일부이다. 매 평가마다 중립에서 시작하며 누적 드리프트가 없다. 포즈 드라이버는 각 단위에서 실제 로컬 회전이 변하는 관절 목록을 계산한다. `applyTo`는 이 목록만 덮어써 몸통 애니메이션 등 다른 관절의 현재 포즈를 유지한다. 몸체 애니메이션을 갱신한 뒤 얼굴 평가를 적용한다. 기존 드라이버의 목록이 없는 경우 전체 포즈를 적용하는 기존 계약이다. 관절 위치·스케일은 대상 기준 자료를 사용하고 부모 움직임을 따른다. 명시적으로 베이크된 같은 포즈 모프는 런타임에서 0으로 설정하여 포즈가 이중 적용되지 않도록 한다.
+
+## 자동 생성과 상세 편집
+
+`MakeHumanTemplateOptions::expressionAssets`를 지정하면 본체 템플릿에 포즈 프로그램을 보관한다. `CharacterTemplate::generateRigged`는 메시와 얼굴 리그를 함께 생성한다. `createFaceRig`는 이미 생성·편집된 캐릭터에 프로그램을 연결한다. 원본 타깃·매크로·표면 연결·스킨 편집과 얼굴 리그의 소유권은 동일한 본체 경계를 따른다.
+
+포즈 모프 베이크는 최종 형상·스킨·기준 골격에서 수행하는 명시적인 스냅샷 작업이다. `bakeObject3DPoseMorphs` 또는 캐릭터 뷰의 `bakeFaceMorphs` 한 번으로 모든 포즈를 생성한다. 이름은 `pose/원본항목`이다. 원본 제어점과 UV·법선 경계를 보존하며 표시되지 않는 무가중치 helper는 움직이지 않는다. 선형·DQ·점별 혼합 프로필의 제어점 위치는 런타임과 같은 계산을 사용하며 숨은 가중 점도 포함한다. 표시 정점의 스킨 결과를 사용하여 선택적인 명시적 모프 법선을 기록한다.
+
+베이크는 원본 편집 세션을 변경하지 않고 별도 본체 에셋을 만든다. 이후 기준 형상·관절·스킨을 수정하였다면 새 스냅샷에서 다시 베이크한다. 베이크된 모프는 외부 앱에서 독립적으로 상세 편집할 수 있다. 한 포즈의 가중치 1에서 런타임 스킨과 모프의 위치·법선 일치를 검사한다. 여러 포즈의 선형 모프 혼합과 관절 회전의 곱은 서로 다른 보간이므로 중간 가중치에서 같다고 주장하지 않는다.
+
+기존 동명 모프는 기본적으로 오류이며 `replaceExisting`으로 명시적인 재베이크를 허용한다. 다른 사용자 모프는 유지한다. 델타 예산 초과·잘못된 스킨·프로그램·바인딩 실패는 입력 DTO와 본체 에셋을 변경하지 않는다.
+
+## 저장과 교환
+
+포즈 프로그램 전용 바이너리는 버전·길이·CRC와 관절·포즈·회전 표를 보관한다. 크기·배열·이름·정규화 회전을 검증한다. 원래 BVH나 앱 소스 코드의 복원이 아니라 본체가 계산한 프로그램이다.
+
+자체 프로젝트 버전 8은 템플릿의 선택적 포즈 프로그램과 포즈 리그 세션을 저장한다. DNA와 포즈 프로그램을 구분하여 보관하며 포즈 리그는 DNA를 제외한 코어에서도 복원한다. 버전 1~7 입력은 기존 구조로 계속 읽는다. 편집한 메시 자료와 프로그램의 원본 바이트는 별도 책임이다. 프로그램만 내보낸 바이트를 편집 메시의 저장물로 간주하지 않는다.
+
+외부 앱은 FBX·GLB의 골격과 베이크된 포즈 모프를 사용한다. 본체의 실행 드라이버가 해당 앱에 자동 설치되는 것은 아니다. 실제 Blender의 source BVH 회전과 출력 모프를 검사하고, CC5·Unreal 실제 앱 적용과 제작용 MetaHuman 적용은 각각 전체 목표의 완료 조건으로 유지한다.
+
+## 호출 예
+
+```cpp
+#include <iiActorObject.h>
+
+iiActorObject::Object3DEngine engine;
+iiActorObject::NSCharacter::MakeHumanTemplateOptions options;
+options.faceAssets = "resources/MakeHumanFace";
+options.expressionAssets = "resources/MakeHumanExpressions";
+auto human = iiActorObject::NSCharacter::loadMakeHumanTemplate(
+    engine.reference(), "resources/MakeHuman", options);
+auto generated = human.generateRigged();
+auto actor = generated.asset->instantiate();
+const std::array values{iiActorObject::NamedRigControl{"JawDrop", .5}};
+generated.rig.get().applyTo(*actor, generated.rig.get().evaluateNamed(values));
+auto portable = human.bakeFaceMorphs(*generated.asset);
+```
+
+전체 소스·원본 해시·프로젝트·실제 BVH 및 GLB·FBX 검사와 설치 패키지의 증거는 `FacePoseRigVerification-20261027.json`에 기록한다.
+
+CLI는 `--expression-assets=resources/MakeHumanExpressions`를 받으면 리그를 생성한 뒤 중립 형상의 포즈 모프 스냅샷을 FBX·GLB로 출력한다. 다른 생성 파라미터·매크로·얼굴 부속 옵션과 함께 사용할 수 있다.
+
+## 기준 자세 위에서 얼굴 제어를 샘플링하기
+
+[기준 자세 프로그램](PoseReference.md)이 있는 에셋의 앱용 얼굴 모프는 `CharacterTemplate::bakeReferenceFaceMorphs`로 만든다. 본체의 `createReferenceObject3DPoseMorphs`가 실제 초기 자세와 부분 리그의 구동 관절을 함께 평가하고 별도 기준 바인드에 끝점 모프를 기록한다. 원본 에셋·리그·사용자 모프는 유지하며 새 교환 에셋에는 기준 프로그램을 남기지 않는다. 기존 `bakeFaceMorphs`는 중립 바인드용이므로 기준 프로그램이 있는 자료는 거부한다. 두 단계를 연속해서 굽는 방식으로 같은 끝점을 약속하지 않는다. 얼굴 모프의 중간 혼합과 원본 회전 리그의 보간은 구분한다.
+
+기준 자세 위의 실제 템플릿 성인·아동에서 59개 제어와 네 메시의 472개 끝점 쌍을 공유 Release와 정적 ASan·UBSan에서 각각 검사하였다. 관련 구성·설치 소비자·Blender 근거는 [PoseReferenceVerification-20261027.json](PoseReferenceVerification-20261027.json)에 기록한다. 미리보기는 [기준 자세 검증](PoseReference.md)의 제작 품질 한계를 따른다.

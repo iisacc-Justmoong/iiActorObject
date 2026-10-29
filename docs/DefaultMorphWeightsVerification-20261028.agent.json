@@ -1,0 +1,224 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:2dab76af359805cd40c90cf6d17fe82ca7c779ef5739ba69215ba02094ba57fe",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/DefaultMorphWeightsVerification-20261028.md",
+    "sha256": "87caf783aa70851eca71f6ceca0faae864e9b6c4fdf77fcc43c4d58b773fd722",
+    "bytes": 3880,
+    "line_count": 19,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "기본 모프 값과 GLB 입력 검증 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 기본 모프 값과 GLB 입력 검증 — 2026-10-28\n",
+      "level": 1,
+      "title": "기본 모프 값과 GLB 입력 검증 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 구현 범위\n",
+      "level": 2,
+      "title": "구현 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "[기본 모프 값 계약](DefaultMorphWeights.md)은 본체가 소유한 메시·인스턴스·편집 이력과 GLB, FBX, 프로젝트 저장을 연결한다. `NSCharacter`는 본체 에셋을 참조하고 편집 명령을 전달한다. 서로 다른 기본값의 논리 채널 병합, DNA 소스 출력의 손실, 템플릿 레이어에서 지원하지 않는 값 변경은 명시적으로 거부한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "heading",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "## 이번 검사\n",
+      "level": 2,
+      "title": "이번 검사"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "list",
+      "start_line": 9,
+      "end_line": 15,
+      "raw": "- 새 자료 필드와 편집 메서드를 사용하는 테스트가 구현 전 컴파일되지 않는 것을 확인했다. macOS arm64 Release의 NSCharacter 포함/DNA 제외 구성에서 GLB 입력·애니메이션 4건, 코어 전용 구성에서 같은 4건, DNA 포함 구성에서 GLB 입력 2건이 통과했다.\n- 노드가 메시의 기본값을 덮어쓰는 경우, 동일 GLB 메시를 참조하는 노드마다 다른 값, 0·음수, 인스턴스 초기화, 모프 이름 변경, 실행 취소·재실행, 이전 이력에만 값이 남은 버전 23 프로젝트, FBX 왕복과 잘못된 이름·중복·가중치 개수를 검사했다. 선택한 모프를 변형 스냅샷에 굽고 새 인스턴스를 만들 때 값이 두 번 적용되지 않는지도 수치로 비교했다.\n- GLB 애니메이션의 연결되지 않은 타깃이 기본값을 유지하는지 네이티브 테스트와 독립 Python JSON·바이너리 판독기로 확인했다. 새 프로젝트 버전 23의 envelope·CRC·이름·값을 독립 판독하고, CRC를 다시 계산한 NaN·알 수 없는 이름·잘못된 버전 등의 입력이 복원 실패 후 기존 엔진을 유지하는지 검사했다. 버전 18 fixture도 같은 검사기로 통과했다.\n- 프로젝트 구버전 복원, 편집 레이어, FBX 입력, 변형 및 리그 스냅샷을 포함한 기존 회귀 62건이 통과했다. 레이어에서 기본값 변경을 거부하는 추가 검사도 통과했다. DNA fixture와 기본값이 있는 DNA 소스 출력 거부·제거 후 출력 검사는 2건이 통과했다.\n- 전체 iiActorObject 공유 라이브러리와 테스트를 ASan·UBSan으로 계측한 구성에서 GLB 입력 2건과 애니메이션 1건이 통과했다. 설치된 iiJson 정적 라이브러리는 이 구성에서 별도 계측하지 않았다. 이전 부분 계측 실행에서 보고된 벡터 경계 오류의 조건을 다시 추가해, `clear()` 후 용량이 남은 본과 스킨 가중치 벡터를 전체 계측 라이브러리로 넘기는 검사가 통과했다. 계측 구성의 차이가 최초 보고에 미친 영향과 최초 원인은 확정하지 않는다.\n- `build/` 아래에 각각 스테이징한 코어 전용, NSCharacter 포함/DNA 제외, NSCharacter·DNA 포함 패키지의 별도 소비자를 새 공개 헤더로 다시 빌드했으며 각 1건이 통과했다. 초기 소비자 검사 3건은 이전 시험의 기준 자세가 복사되어 GLB 출력이 거부되는 테스트 입력 오류로 실패했다. 기준 자세를 제거한 별도 입력으로 수정한 뒤 세 구성 모두 통과했다. 실제 `~/.local` 설치본은 이 검사로 변경하지 않았다.\n- 검사한 NSCharacter 공유 라이브러리의 직접 동적 의존성은 macOS의 C++ 표준 라이브러리와 시스템 라이브러리였다. 이것은 전체 플랫폼 또는 모든 간접 의존성에 대한 증명이 아니다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "새 자료 필드와 편집 메서드를 사용하는 테스트가 구현 전 컴파일되지 않는 것을 확인했다. macOS arm64 Release의 NSCharacter 포함/DNA 제외 구성에서 GLB 입력·애니메이션 4건, 코어 전용 구성에서 같은 4건, DNA 포함 구성에서 GLB 입력 2건이 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "노드가 메시의 기본값을 덮어쓰는 경우, 동일 GLB 메시를 참조하는 노드마다 다른 값, 0·음수, 인스턴스 초기화, 모프 이름 변경, 실행 취소·재실행, 이전 이력에만 값이 남은 버전 23 프로젝트, FBX 왕복과 잘못된 이름·중복·가중치 개수를 검사했다. 선택한 모프를 변형 스냅샷에 굽고 새 인스턴스를 만들 때 값이 두 번 적용되지 않는지도 수치로 비교했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "GLB 애니메이션의 연결되지 않은 타깃이 기본값을 유지하는지 네이티브 테스트와 독립 Python JSON·바이너리 판독기로 확인했다. 새 프로젝트 버전 23의 envelope·CRC·이름·값을 독립 판독하고, CRC를 다시 계산한 NaN·알 수 없는 이름·잘못된 버전 등의 입력이 복원 실패 후 기존 엔진을 유지하는지 검사했다. 버전 18 fixture도 같은 검사기로 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "프로젝트 구버전 복원, 편집 레이어, FBX 입력, 변형 및 리그 스냅샷을 포함한 기존 회귀 62건이 통과했다. 레이어에서 기본값 변경을 거부하는 추가 검사도 통과했다. DNA fixture와 기본값이 있는 DNA 소스 출력 거부·제거 후 출력 검사는 2건이 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "전체 iiActorObject 공유 라이브러리와 테스트를 ASan·UBSan으로 계측한 구성에서 GLB 입력 2건과 애니메이션 1건이 통과했다. 설치된 iiJson 정적 라이브러리는 이 구성에서 별도 계측하지 않았다. 이전 부분 계측 실행에서 보고된 벡터 경계 오류의 조건을 다시 추가해, `clear()` 후 용량이 남은 본과 스킨 가중치 벡터를 전체 계측 라이브러리로 넘기는 검사가 통과했다. 계측 구성의 차이가 최초 보고에 미친 영향과 최초 원인은 확정하지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 아래에 각각 스테이징한 코어 전용, NSCharacter 포함/DNA 제외, NSCharacter·DNA 포함 패키지의 별도 소비자를 새 공개 헤더로 다시 빌드했으며 각 1건이 통과했다. 초기 소비자 검사 3건은 이전 시험의 기준 자세가 복사되어 GLB 출력이 거부되는 테스트 입력 오류로 실패했다. 기준 자세를 제거한 별도 입력으로 수정한 뒤 세 구성 모두 통과했다. 실제 `~/.local` 설치본은 이 검사로 변경하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "검사한 NSCharacter 공유 라이브러리의 직접 동적 의존성은 macOS의 C++ 표준 라이브러리와 시스템 라이브러리였다. 이것은 전체 플랫폼 또는 모든 간접 의존성에 대한 증명이 아니다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "GLB 애니메이션 입력, 여러 스킨의 통합, 원본 탄젠트·모프 탄젠트와 모든 재질 확장의 무손실 입력, 제작용 MetaHuman 수준의 얼굴·의상·리그 품질은 이 결과로 완료되지 않았다. Windows·Linux 빌드와 실제 CC5·Blender·Unreal 동작도 이 검사에 포함되지 않는다. 실제 앱과 사용자용 명령행 도구는 사용자 지시에 따라 실행하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "기본 모프 값과 GLB 입력 검증 — 2026-10-28",
+      "anchor": "기본-모프-값과-glb-입력-검증--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구현 범위",
+      "anchor": "구현-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000007",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "이번 검사",
+      "anchor": "이번-검사",
+      "start_line": 7
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 17
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000009",
+        "line": 13,
+        "text": "- 전체 iiActorObject 공유 라이브러리와 테스트를 ASan·UBSan으로 계측한 구성에서 GLB 입력 2건과 애니메이션 1건이 통과했다. 설치된 iiJson 정적 라이브러리는 이 구성에서 별도 계측하지 않았다. 이전 부분 계측 실행에서 보고된 벡터 경계 오류의 조건을 다시 추가해, `clear()` 후 용량이 남은 본과 스킨 가중치 벡터를 전체 계측 라이브러리로 넘기는 검사가 통과했다. 계측 구성의 차이가 최초 보고에 미친 영향과 최초 원인은 확정하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "기본 모프 값 계약",
+        "target": "DefaultMorphWeights.md",
+        "kind": "relative",
+        "line": 5
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

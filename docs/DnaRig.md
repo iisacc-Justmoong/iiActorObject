@@ -1,0 +1,127 @@
+# DNA 메시와 리그 실행
+
+iiActorObject 본체는 Epic OpenRigLogic의 MIT 소스를 통해 DNA의 메시·골격·스킨·블렌드셰이프와 실제 리그 계산을 읽는다. NSCharacter는 본체의 결과를 캐릭터 뷰로 연결한다. C++23으로 빌드하며 Qt, Unreal 런타임, Autodesk SDK와 Python 런타임을 연결하지 않는다.
+
+## 소유권과 교체 경계
+
+| 객체 | 책임 |
+| --- | --- |
+| `Object3DRigDriver` | 교체 가능한 리그 프로그램 실행 인터페이스이다. 관절 델타·블렌드셰이프·애니메이티드 맵을 출력한다. |
+| `Object3DRigSession` | 본체 에셋에 프로그램을 연결하고 기준 포즈와 델타를 결합하며 런타임 객체에 적용한다. 엔진만 생성하고 소유한다. |
+| `Object3DRigHandle` | 실행 세션에 대한 참조 토큰이다. 엔진이나 세션을 소유하지 않는다. |
+| `importObject3DDna` | 본체에 메시와 DNA 드라이버 세션을 등록한다. 세션 등록 실패 시 새 에셋을 되돌린다. |
+| `NSCharacter::importDna` | 본체의 에셋을 `CharacterAsset` 뷰로 감싼다. 3D 자료나 실행 버퍼를 보유하지 않는다. |
+
+DNA 드라이버가 사용하는 reader, 프로그램, 입력·출력 버퍼와 원본 바이트의 소유권은 본체 실행 세션에 있다. 복제 세션들은 본체 내부에서 불변 프로그램을 공유하고 각자 실행 버퍼를 가진다. 엔진 소멸·명시적 제거는 남아 있는 NSCharacter 참조와 실행 세션 참조를 만료시킨다. 세션이 가리키는 에셋을 지우면 평가는 실패한다. 참조가 사라진 세션은 엔진 수거 대상이며 이후 해당 에셋도 수거할 수 있다.
+
+호스트는 한 스레드에서 같은 엔진과 드라이버의 접근을 직렬화한다. 호스트 UI·렌더러·셰이더의 소유권은 포함하지 않는다.
+
+## 입력과 좌표
+
+선택한 `DnaImportOptions::geometryLod`의 메시 파트를 본체 에셋으로 작성한다. 프로그램과 원본 DNA에는 모든 LOD를 유지한다. 한 에셋에 여러 LOD의 메시를 동시에 겹쳐 추가하지 않는다. 다른 표시용 LOD가 필요하면 해당 LOD로 가져온다. 실행 LOD는 메시 표시 LOD와 독립적인 프로그램 평가 수준이다.
+
+DNA의 정점 layout에 맞춰 렌더용 정점을 만들며 UV·법선 분리와 원본 위치의 스킨·모프 대응을 유지한다. 폴리곤은 ear clipping으로 삼각형화하여 오목한 면도 처리한다. 원본 폴리곤과 layout ID는 본체의 작성용 `MeshTopology`에 보관하며 원본 바이트도 별도로 유지한다. [작성용 토폴로지](MeshTopology.md)를 통해 원본 제어점·스킨·모프·UV를 편집할 수 있다.
+
+원본 좌표축·길이 단위·면 감김 방향을 본체의 Y 위쪽·미터 좌표로 변환한다. 축 반전은 정점·법선·관절 위치·회전·모프·면 방향에 함께 적용한다. 관절의 회전 순서·방향·단위는 DNA 메타데이터와 RigLogic의 쿼터니언 계산을 따른다. 부모 순서가 정렬되지 않은 골격은 정렬하고 스킨 인덱스를 다시 대응한다. 여러 루트에는 항등 변환 루트를 제공하며 순환·범위 밖 부모는 거부한다.
+
+DNA는 피부 머티리얼·텍스처·머리카락·의상 에셋을 제공하지 않는다. 가져오기는 원본 모프 위치 델타를 보존하며 작성용 법선 그룹으로 렌더 모프의 법선 델타를 계산한다. 가중치가 없는 정점은 루트에 부착하고 경고한다.
+
+## 제어와 런타임 적용
+
+`definition()`은 raw·GUI 제어, 본, 블렌드셰이프, 애니메이티드 맵의 실제 이름과 기본값을 제공한다. 인덱스는 해당 정의 순서이다. `evaluate()`는 선택한 공간의 전체 입력 버퍼를 받는다. `evaluateNamed()`는 지정되지 않은 제어에 드라이버 기본값을 쓰며 알 수 없는 이름과 중복 이름을 거부한다. 기본값은 항상 0이라고 가정하지 않는다. DNA의 쿼터니언 입력 등 원본 초기값도 전달한다.
+
+공용 계층이 입력 값을 임의로 제한하지는 않는다. DNA GUI→raw 매핑과 PSD·관절 등 프로그램 자체의 범위 연산은 원본 RigLogic 계산을 따른다. 매 호출마다 선택한 입력 상태를 완성하므로 직전 호출의 제어값이 남지 않는다. GUI 매핑 후 ML, RBF, PSD, 관절, 블렌드셰이프와 애니메이티드 맵 계산을 호출한다.
+
+다음 예제의 `smile`은 독립 테스트 DNA의 이름이다. 실제 파일에서는 `definition().rawControls` 또는 `guiControls`를 조회한다.
+
+~~~cpp
+#include <iiActorObject.h>
+
+iiActorObject::Object3DEngine objects;
+auto character = iiActorObject::NSCharacter::importDna(objects, bytes);
+auto actor = character.asset->instantiate("Character");
+auto evaluated = character.rig.get().evaluateNamed(
+    std::array{iiActorObject::NamedRigControl{"smile", .5}});
+character.rig.get().applyTo(*actor, evaluated);
+~~~
+
+평가 결과의 관절은 본체 골격 순서의 로컬 변환이다. 기준 위치·회전·스케일에 리그 델타를 결합하므로 기준 골격 편집을 재연결할 수 있다. `applyTo()`는 동일 에셋에서 만든 `iiCharacter`의 포즈와 이름이 대응하는 모프를 갱신한다. 애니메이티드 맵 값은 호스트 셰이더가 사용할 출력으로 제공한다.
+
+`rig.get().cloneFor(editedObject)`는 편집된 스냅샷에 같은 프로그램과 독립 실행 버퍼를 연결한다. 기본 연결은 본 이름을 사용한다. 이름을 바꾸었으면 프로그램 본 순서로 대상 본 인덱스를 명시한다.
+
+~~~cpp
+auto remapped = character.rig.get().cloneFor(
+    editedObject, std::array<iiActorObject::BoneIndex, 2>{0, 1});
+~~~
+
+다른 엔진의 객체, 누락·중복 본, 잘못된 입력·출력 크기, 비유한 값은 거부한다. 같은 이름이나 인덱스가 있다는 이유로 다른 골격의 런타임 객체에 평가 결과를 적용하지 않는다.
+
+## 원본 보존과 편집 결과
+
+`rig.get().sourceBytes()`는 최초의 원본 DNA 바이트를 반환한다. `exportObject3DDna()`와 `NSCharacter::exportDna()`는 현재 작성용 스냅샷의 메시·기준 골격·스킨·모프·UV를 원본 템플릿에 반영한다. 원본 인덱스와 폴리곤 연결을 유지하며 여러 편집 LOD를 함께 저장할 수 있다. [편집 DNA 저장 계약](DnaEditing.md)을 따른다.
+
+FBX·GLB로도 편집한 메시·골격·모프를 전달할 수 있다. 해당 형식에 RigLogic 계산 그래프를 내장하는 기능과 실제 Unreal/MetaHuman 적용은 별도 검증 대상이다.
+
+## 빌드와 예제
+
+`IIACTOROBJECT_WITH_DNA=ON`이 기본값이다. `OFF`이면 DNA 소스는 빌드하지 않으며 가용성은 `object3DDnaAvailable()`로 조회한다. 공용 리그 인터페이스와 다른 드라이버는 계속 사용할 수 있다. NSCharacter를 제외한 빌드에서도 본체 DNA 가져오기와 실행은 동작한다.
+
+~~~sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+cmake --build build --parallel 4
+ctest --test-dir build --output-on-failure
+build/iiActorObjectDnaCharacter user-owned-character.dna build/dna/Character.fbx
+~~~
+
+예제는 DNA로 캐릭터와 리그를 만들고 중립 제어를 평가한 뒤 FBX·GLB 또는 DNA로 저장한다. 파일과 프로그램은 호스트가 제공한다. 제작용 MetaHuman 샘플 에셋을 소스 배포에 포함하지 않는다.
+
+의존 소스는 `55756aca0c4c55adc56ad68a796bcc1c0bf6fa5a` 리비전의 수정 없는 MIT 코드이다. [출처와 해시](../src/third_party/openriglogic/PROVENANCE.md)를 따른다. 자체 CMake wrapper가 C++23으로 컴파일하고 scalar·float 계산을 사용한다. upstream의 외부 빌드 모듈 다운로드, Python wrapper와 C 언어 프로젝트 설정을 실행하지 않는다. 현대 libc++에서 빠진 전이 include를 보완하려고 표준 `<type_traits>`를 빌드 PCH에 제공하며 upstream 파일은 바꾸지 않는다.
+
+## 제한과 검증 범위
+
+입력 바이트, parser·RigLogic 할당 예산, 메시·본·정점·모프 수를 제한한다. 공용 메시 저장소의 복사·변환 버퍼는 별도의 정점·델타 수 제한을 따른다. 기본 동작은 256 MiB 입력, 1 GiB DNA 할당 예산, 정점 200만 개이다. 임포터는 축·회전 메타데이터, 기본 behavior 표 크기·인덱스·유한 값, 골격·폴리곤·스킨·모프 대응을 검사한다. 이 검사는 모든 가능한 DNA 확장 레이어의 검증기 완성을 뜻하지 않는다.
+
+신경망 정의의 입력·출력 제어 인덱스, 각 레이어의 출력 수와 가중치 행렬 크기, 이어지는 레이어의 차원, 유한 계수·활성화 함수와 leaky ReLU 매개변수도 RigLogic 생성 전에 검사한다. 네트워크에 기존 입력 인덱스 목록이 있으면 첫 레이어의 입력 폭과 일치해야 한다. 레이어가 아예 없는 네트워크는 비활성 placeholder로 남길 수 있지만, 존재하는 레이어의 출력 수가 0이면 거부한다. 런타임의 입력 제어는 float32 범위를 확인한 후 변환한다.
+
+확장 ML 그래프는 연산별 제어·네트워크 인덱스, 이전 연산에 대한 의존성 쌍, LOD별 연산 인덱스·레이어 행 수와 gather 입력 폭을 검사한다. 가중합의 계수 개수·유한성도 확인한다. OpenRigLogic의 reader가 공개 검사보다 먼저 관절 표로 캐시를 구성하므로, 본체는 고정된 backend의 ML 관련 레이어를 먼저 읽어 관절 표 길이와 출력 속성 표현을 검사한다. 이후 임시 자료를 해제하고 전체 reader를 사용한다. 이 과정은 ML 관련 자료를 두 번 읽으며, 같은 DNA 메모리 예산을 사용한다. 고정된 upstream 내부 archive에 대한 의존성은 별도 preflight 구현에 한정한다. 모든 가능한 ML 그래프 연결과 reader 내부의 손상된 LOD 매핑을 완전히 검증한다는 뜻은 아니다. 사례와 한계는 [ML 확장 검증 기록](DnaMlGraphVerification-20261028.md)에 기록한다.
+
+twist와 swing은 각각 쿼터니언을 구성하는 raw 제어 인덱스가 정확히 4개여야 한다. 제어와 출력 관절의 범위, 관절별 가중치 개수·유한성, X/Y/Z 축도 RigLogic 생성 전에 검사한다. 독립된 정상 twist·swing 자료의 회전과 잘못된 표는 [검증 기록](DnaTwistVerification-20261028.md)에서 구분한다. 이는 모든 제작용 리그의 시각적 관절 변형을 검증한 것은 아니다.
+
+RBF 포즈의 제어 인덱스·출력 가중치와 solver의 raw 입력·포즈·LOD 인덱스, 목표 행렬 크기, 유한 값, 열거형 및 쿼터니언 입력 폭을 RigLogic 생성 전에 검사한다. 포즈가 있는 수동 반경은 양수여야 하며 자동 반경은 둘 이상의 포즈를 요구한다. [합성 RBF 검증 기록](DnaRbfVerification-20261028.md)은 가산·보간 solver와 여러 거리 방식의 사례 및 잘못된 입력 거부를 구분한다. 동일하거나 거리상 일치하는 자동 반경 목표, 쿼터니언 정규화 및 내부 LOD 매핑을 포함한 모든 수치·구조 안전성은 아직 검증하지 않는다.
+
+독립 C++ DNA writer fixture에는 사각형·UV·스킨·모프, GUI→raw, PSD 곱셈, 관절 이동·회전, 블렌드셰이프·애니메이티드 맵, 두 LOD, 축 교환과 반전이 있다. 테스트는 손으로 계산한 결과, 런타임 변형, 제어 재설정, 기준 골격 편집 재연결, 잘못된 표·메모리·수 제한의 거부와 등록 실패 되돌리기를 확인한다.
+
+실제 제작용 MetaHuman DNA의 ML·RBF·twist/swing 회귀 데이터, 제작용 표면 품질과 CC5·Unreal·MetaHuman Creator 적용은 추가 근거가 필요하다. 현재 이 전체 목표는 진행 중이다.
+
+## 2026-10-26 초기 DNA 연결 단계의 검증
+
+| 구성 | 결과 |
+| --- | --- |
+| Release 전체, 기존 실제 Blender 검증 포함 | 77/77 통과 |
+| NSCharacter 제외, DNA 본체 포함 | 48/48 통과 |
+| Debug 정적 라이브러리, ASan·UBSan | 66/66 통과 |
+| NSCharacter·DNA 모두 제외 | 41/41 통과 |
+| 설치 패키지 소비자, NSCharacter·DNA 포함 | 2/2 통과 |
+| 설치 패키지 소비자, NSCharacter 제외·DNA 포함 | 2/2 통과 |
+| 설치 패키지 소비자, NSCharacter·DNA 모두 제외 | 1/1 통과 |
+
+기존 Blender 검사는 생성 캐릭터와 정적 메시의 형식·변형·편집 회귀이며, 실제 제작용 DNA를 Blender에서 검증했다는 뜻이 아니다. 새 DNA의 FBX·GLB 출력과 C++ FBX 재입력은 독립 DNA fixture로 검사하였다.
+
+upstream 원본 파일 374개의 해시가 일치하고 C++ 번역 단위 106개가 모두 C++23으로 컴파일되었다. 설치본에 private RigLogic·DNA 심벌을 공개하지 않는다. 코어 전용 설치본은 NSCharacter 헤더·심벌을 포함하지 않는다. 공유 라이브러리의 직접 동적 의존성은 libc++와 libSystem이다.
+
+자세한 소스·fixture·실행 결과 해시는 `DnaRigVerification-20261026.json`에 기록한다. 위 표는 초기 DNA 연결 단계의 역사적 스냅샷이다. 작성용 토폴로지와 편집 DNA 저장 이후의 검증은 `TopologyDnaVerification-20261026.json`에 기록한다.
+
+설치된 헤더와 라이브러리만 사용하는 소비자의 추가 DNA 검사는 다음처럼 활성화한다.
+
+~~~sh
+cmake --install build --prefix "$PWD/build/install"
+cmake -S tests/consumer -B build/consumer/build \
+  -DCMAKE_PREFIX_PATH="$PWD/build/install" \
+  -DIIACTOROBJECT_DNA_TEST_FIXTURE="$PWD/resources/fixtures/dna/independent.dna"
+cmake --build build/consumer/build --parallel 4
+ctest --test-dir build/consumer/build --output-on-failure
+~~~
+
+[포즈 리그](FacePoseRig.md)는 동일한 본체 실행 인터페이스를 사용하는 별도 백엔드이다. 새 `cloneFor` 바인딩 경계는 대상 기준 프레임을 사용하는 드라이버가 재계산할 수 있도록 하며 DNA의 기본 복제 동작을 바꾸지 않는다. `Object3DRigDefinition::drivenJoints`가 있으면 해당 원본 관절 인덱스만 런타임에 적용하고 다른 현재 포즈를 유지한다. 목록이 없으면 기존 전체 포즈 적용이다. 프로젝트 버전 8은 DNA와 포즈 프로그램을 구분한다.
+
+[리그 제어 일괄 샘플](RigControlSamples.md)은 선택한 DNA·일반 리그 상태들을 편집 가능한 모프 끝점과 제어·맵 출처로 저장한다. 이는 RigLogic 그래프나 애니메이티드 맵의 셰이더 연결을 FBX·GLB에 내장한다는 의미가 아니다.

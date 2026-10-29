@@ -1,0 +1,3902 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:38ee28f4de9255f1f31b9b5efe4c5696c2bf41e0a2bb23db1dbd7eb0189160cf",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/README.md",
+    "sha256": "a25f45db724ff008fa7a1b71d22628d896f6c5633191161760e0c05d67ae7b3c",
+    "bytes": 20779,
+    "line_count": 181,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "iiActorObject Documentation",
+    "role": "overview",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiActorObject Documentation\n",
+      "level": 1,
+      "title": "iiActorObject Documentation"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "html",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "<!-- workspace-docs:document-map:start -->\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "heading",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "## Human and agent document map\n",
+      "level": 2,
+      "title": "Human and agent document map"
+    },
+    {
+      "id": "b000005",
+      "kind": "blank",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "paragraph",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "Markdown is the maintained human source. Agent JSON is a structured, source-traceable projection.\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "blank",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "table",
+      "start_line": 8,
+      "end_line": 180,
+      "raw": "| Document | Agent JSON |\n| --- | --- |\n| [`AGENT.md`](../AGENT.md) | [JSON](entrypoints/AGENT.agent.json) |\n| [`README.md`](../README.md) | [JSON](entrypoints/README.agent.json) |\n| [`data/MakeHuman/LICENSE.ASSETS.md`](../data/MakeHuman/LICENSE.ASSETS.md) | [JSON](mirrors/data/MakeHuman/LICENSE.ASSETS.agent.json) |\n| [`data/MakeHuman/LICENSE.md`](../data/MakeHuman/LICENSE.md) | [JSON](mirrors/data/MakeHuman/LICENSE.agent.json) |\n| [`data/MakeHuman/PROVENANCE.md`](../data/MakeHuman/PROVENANCE.md) | [JSON](mirrors/data/MakeHuman/PROVENANCE.agent.json) |\n| [`data/MakeHumanExpressions/LICENSE.ASSETS.md`](../data/MakeHumanExpressions/LICENSE.ASSETS.md) | [JSON](mirrors/data/MakeHumanExpressions/LICENSE.ASSETS.agent.json) |\n| [`data/MakeHumanExpressions/LICENSE.md`](../data/MakeHumanExpressions/LICENSE.md) | [JSON](mirrors/data/MakeHumanExpressions/LICENSE.agent.json) |\n| [`data/MakeHumanExpressions/PROVENANCE.md`](../data/MakeHumanExpressions/PROVENANCE.md) | [JSON](mirrors/data/MakeHumanExpressions/PROVENANCE.agent.json) |\n| [`data/MakeHumanFace/LICENSE.ASSETS.md`](../data/MakeHumanFace/LICENSE.ASSETS.md) | [JSON](mirrors/data/MakeHumanFace/LICENSE.ASSETS.agent.json) |\n| [`data/MakeHumanFace/LICENSE.md`](../data/MakeHumanFace/LICENSE.md) | [JSON](mirrors/data/MakeHumanFace/LICENSE.agent.json) |\n| [`data/MakeHumanFace/PROVENANCE.md`](../data/MakeHumanFace/PROVENANCE.md) | [JSON](mirrors/data/MakeHumanFace/PROVENANCE.agent.json) |\n| [`data/MakeHumanMacro/LICENSE.ASSETS.md`](../data/MakeHumanMacro/LICENSE.ASSETS.md) | [JSON](mirrors/data/MakeHumanMacro/LICENSE.ASSETS.agent.json) |\n| [`data/MakeHumanMacro/LICENSE.md`](../data/MakeHumanMacro/LICENSE.md) | [JSON](mirrors/data/MakeHumanMacro/LICENSE.agent.json) |\n| [`data/MakeHumanMacro/PROVENANCE.md`](../data/MakeHumanMacro/PROVENANCE.md) | [JSON](mirrors/data/MakeHumanMacro/PROVENANCE.agent.json) |\n| [`docs/Actor.md`](Actor.md) | [JSON](Actor.agent.json) |\n| [`docs/AnimationRetarget.md`](AnimationRetarget.md) | [JSON](AnimationRetarget.agent.json) |\n| [`docs/AnimationRetargetVerification-20261027.md`](AnimationRetargetVerification-20261027.md) | [JSON](AnimationRetargetVerification-20261027.agent.json) |\n| [`docs/AutomaticConventionDetectionVerification-20261029.md`](AutomaticConventionDetectionVerification-20261029.md) | [JSON](AutomaticConventionDetectionVerification-20261029.agent.json) |\n| [`docs/AutomaticCorrectives.md`](AutomaticCorrectives.md) | [JSON](AutomaticCorrectives.agent.json) |\n| [`docs/AutomaticCorrectivesVerification-20261029.md`](AutomaticCorrectivesVerification-20261029.md) | [JSON](AutomaticCorrectivesVerification-20261029.agent.json) |\n| [`docs/AutomaticSurfaceFitting.md`](AutomaticSurfaceFitting.md) | [JSON](AutomaticSurfaceFitting.agent.json) |\n| [`docs/BaseNormalEditing.md`](BaseNormalEditing.md) | [JSON](BaseNormalEditing.agent.json) |\n| [`docs/BaseNormalVerification-20261028.md`](BaseNormalVerification-20261028.md) | [JSON](BaseNormalVerification-20261028.agent.json) |\n| [`docs/Changes-20261021.md`](Changes-20261021.md) | [JSON](Changes-20261021.agent.json) |\n| [`docs/Character.md`](Character.md) | [JSON](Character.agent.json) |\n| [`docs/CharacterCreatorG3Verification-20261027.md`](CharacterCreatorG3Verification-20261027.md) | [JSON](CharacterCreatorG3Verification-20261027.agent.json) |\n| [`docs/CharacterTemplate.md`](CharacterTemplate.md) | [JSON](CharacterTemplate.agent.json) |\n| [`docs/DefaultMorphWeights.md`](DefaultMorphWeights.md) | [JSON](DefaultMorphWeights.agent.json) |\n| [`docs/DefaultMorphWeightsVerification-20261028.md`](DefaultMorphWeightsVerification-20261028.md) | [JSON](DefaultMorphWeightsVerification-20261028.agent.json) |\n| [`docs/DeformationSnapshotVerification-20261027.md`](DeformationSnapshotVerification-20261027.md) | [JSON](DeformationSnapshotVerification-20261027.agent.json) |\n| [`docs/DeformationSnapshots.md`](DeformationSnapshots.md) | [JSON](DeformationSnapshots.agent.json) |\n| [`docs/DnaEditing.md`](DnaEditing.md) | [JSON](DnaEditing.agent.json) |\n| [`docs/DnaMlGraphVerification-20261028.md`](DnaMlGraphVerification-20261028.md) | [JSON](DnaMlGraphVerification-20261028.agent.json) |\n| [`docs/DnaMlVerification-20261028.md`](DnaMlVerification-20261028.md) | [JSON](DnaMlVerification-20261028.agent.json) |\n| [`docs/DnaRbfVerification-20261028.md`](DnaRbfVerification-20261028.md) | [JSON](DnaRbfVerification-20261028.agent.json) |\n| [`docs/DnaRig.md`](DnaRig.md) | [JSON](DnaRig.agent.json) |\n| [`docs/DnaTwistVerification-20261028.md`](DnaTwistVerification-20261028.md) | [JSON](DnaTwistVerification-20261028.agent.json) |\n| [`docs/DualQuaternionProfileVerification-20261028.md`](DualQuaternionProfileVerification-20261028.md) | [JSON](DualQuaternionProfileVerification-20261028.agent.json) |\n| [`docs/DualQuaternionSkinning.md`](DualQuaternionSkinning.md) | [JSON](DualQuaternionSkinning.agent.json) |\n| [`docs/DualQuaternionSkinningVerification-20261028.md`](DualQuaternionSkinningVerification-20261028.md) | [JSON](DualQuaternionSkinningVerification-20261028.agent.json) |\n| [`docs/DynamicMorphBindVerification-20261028.md`](DynamicMorphBindVerification-20261028.md) | [JSON](DynamicMorphBindVerification-20261028.agent.json) |\n| [`docs/DynamicRetargetVerification-20261028.md`](DynamicRetargetVerification-20261028.md) | [JSON](DynamicRetargetVerification-20261028.agent.json) |\n| [`docs/EditLayers.md`](EditLayers.md) | [JSON](EditLayers.agent.json) |\n| [`docs/EditorRigFollow.md`](EditorRigFollow.md) | [JSON](EditorRigFollow.agent.json) |\n| [`docs/EditorRigFollowVerification-20261029.md`](EditorRigFollowVerification-20261029.md) | [JSON](EditorRigFollowVerification-20261029.agent.json) |\n| [`docs/EvaluatedEditLayers.md`](EvaluatedEditLayers.md) | [JSON](EvaluatedEditLayers.agent.json) |\n| [`docs/ExternalEdits.md`](ExternalEdits.md) | [JSON](ExternalEdits.agent.json) |\n| [`docs/ExternalTriangleEdits.md`](ExternalTriangleEdits.md) | [JSON](ExternalTriangleEdits.agent.json) |\n| [`docs/FaceAssets.md`](FaceAssets.md) | [JSON](FaceAssets.agent.json) |\n| [`docs/FacePoseRig.md`](FacePoseRig.md) | [JSON](FacePoseRig.agent.json) |\n| [`docs/FbxAnimation.md`](FbxAnimation.md) | [JSON](FbxAnimation.agent.json) |\n| [`docs/FbxAnimationImport.md`](FbxAnimationImport.md) | [JSON](FbxAnimationImport.agent.json) |\n| [`docs/FbxAnimationImportVerification-20261028.md`](FbxAnimationImportVerification-20261028.md) | [JSON](FbxAnimationImportVerification-20261028.agent.json) |\n| [`docs/FbxAnimationVerification-20261028.md`](FbxAnimationVerification-20261028.md) | [JSON](FbxAnimationVerification-20261028.agent.json) |\n| [`docs/FbxAuthoredTangentsVerification-20261028.md`](FbxAuthoredTangentsVerification-20261028.md) | [JSON](FbxAuthoredTangentsVerification-20261028.agent.json) |\n| [`docs/FbxAuthoring.md`](FbxAuthoring.md) | [JSON](FbxAuthoring.agent.json) |\n| [`docs/FbxImageResolution.md`](FbxImageResolution.md) | [JSON](FbxImageResolution.agent.json) |\n| [`docs/FbxImageResolutionVerification-20261028.md`](FbxImageResolutionVerification-20261028.md) | [JSON](FbxImageResolutionVerification-20261028.agent.json) |\n| [`docs/FbxTangents.md`](FbxTangents.md) | [JSON](FbxTangents.agent.json) |\n| [`docs/FbxTangentsVerification-20261028.md`](FbxTangentsVerification-20261028.md) | [JSON](FbxTangentsVerification-20261028.agent.json) |\n| [`docs/GlbAnimation.md`](GlbAnimation.md) | [JSON](GlbAnimation.agent.json) |\n| [`docs/GlbAnimationBake.md`](GlbAnimationBake.md) | [JSON](GlbAnimationBake.agent.json) |\n| [`docs/GlbAnimationVerification-20261028.md`](GlbAnimationVerification-20261028.md) | [JSON](GlbAnimationVerification-20261028.agent.json) |\n| [`docs/GlbAuthoredTangents.md`](GlbAuthoredTangents.md) | [JSON](GlbAuthoredTangents.agent.json) |\n| [`docs/GlbAuthoredTangentsVerification-20261028.md`](GlbAuthoredTangentsVerification-20261028.md) | [JSON](GlbAuthoredTangentsVerification-20261028.agent.json) |\n| [`docs/GlbDocument.md`](GlbDocument.md) | [JSON](GlbDocument.agent.json) |\n| [`docs/GlbDocumentVerification-20261028.md`](GlbDocumentVerification-20261028.md) | [JSON](GlbDocumentVerification-20261028.agent.json) |\n| [`docs/GlbExternalEdits.md`](GlbExternalEdits.md) | [JSON](GlbExternalEdits.agent.json) |\n| [`docs/GlbImport.md`](GlbImport.md) | [JSON](GlbImport.agent.json) |\n| [`docs/GlbImportVerification-20261028.md`](GlbImportVerification-20261028.md) | [JSON](GlbImportVerification-20261028.agent.json) |\n| [`docs/GlbMixedAttributesVerification-20261029.md`](GlbMixedAttributesVerification-20261029.md) | [JSON](GlbMixedAttributesVerification-20261029.agent.json) |\n| [`docs/GlbMorphAnimationVerification-20261028.md`](GlbMorphAnimationVerification-20261028.md) | [JSON](GlbMorphAnimationVerification-20261028.agent.json) |\n| [`docs/GlbMultiSkin.md`](GlbMultiSkin.md) | [JSON](GlbMultiSkin.agent.json) |\n| [`docs/GlbMultiSkinVerification-20261028.md`](GlbMultiSkinVerification-20261028.md) | [JSON](GlbMultiSkinVerification-20261028.agent.json) |\n| [`docs/GlbPointIdentity.md`](GlbPointIdentity.md) | [JSON](GlbPointIdentity.agent.json) |\n| [`docs/GlbPointIdentityVerification-20261028.md`](GlbPointIdentityVerification-20261028.md) | [JSON](GlbPointIdentityVerification-20261028.agent.json) |\n| [`docs/HumanAccessories.md`](HumanAccessories.md) | [JSON](HumanAccessories.agent.json) |\n| [`docs/HumanAccessoriesVerification-20261029.md`](HumanAccessoriesVerification-20261029.md) | [JSON](HumanAccessoriesVerification-20261029.agent.json) |\n| [`docs/HumanAccessoryAdditionVerification-20261029.md`](HumanAccessoryAdditionVerification-20261029.md) | [JSON](HumanAccessoryAdditionVerification-20261029.agent.json) |\n| [`docs/HumanAccessoryCompositionVerification-20261029.md`](HumanAccessoryCompositionVerification-20261029.md) | [JSON](HumanAccessoryCompositionVerification-20261029.agent.json) |\n| [`docs/HumanAccessoryRemovalVerification-20261029.md`](HumanAccessoryRemovalVerification-20261029.md) | [JSON](HumanAccessoryRemovalVerification-20261029.agent.json) |\n| [`docs/HumanAccessorySwitchVerification-20261029.md`](HumanAccessorySwitchVerification-20261029.md) | [JSON](HumanAccessorySwitchVerification-20261029.agent.json) |\n| [`docs/HumanInterchangeVerification-20261029.md`](HumanInterchangeVerification-20261029.md) | [JSON](HumanInterchangeVerification-20261029.agent.json) |\n| [`docs/HumanJointNaming.md`](HumanJointNaming.md) | [JSON](HumanJointNaming.agent.json) |\n| [`docs/HumanJointNamingVerification-20261027.md`](HumanJointNamingVerification-20261027.md) | [JSON](HumanJointNamingVerification-20261027.agent.json) |\n| [`docs/HumanMorphology.md`](HumanMorphology.md) | [JSON](HumanMorphology.agent.json) |\n| [`docs/HumanPoseDirections.md`](HumanPoseDirections.md) | [JSON](HumanPoseDirections.agent.json) |\n| [`docs/HumanPosePlanner.md`](HumanPosePlanner.md) | [JSON](HumanPosePlanner.agent.json) |\n| [`docs/HumanPosePlannerVerification-20261027.md`](HumanPosePlannerVerification-20261027.md) | [JSON](HumanPosePlannerVerification-20261027.agent.json) |\n| [`docs/HumanPoseRetarget.md`](HumanPoseRetarget.md) | [JSON](HumanPoseRetarget.agent.json) |\n| [`docs/HumanoidCharacterization.md`](HumanoidCharacterization.md) | [JSON](HumanoidCharacterization.agent.json) |\n| [`docs/InstanceTransfer.md`](InstanceTransfer.md) | [JSON](InstanceTransfer.agent.json) |\n| [`docs/InstanceTransferVerification-20261029.md`](InstanceTransferVerification-20261029.md) | [JSON](InstanceTransferVerification-20261029.agent.json) |\n| [`docs/LinearizedSnapshotVerification-20261028.md`](LinearizedSnapshotVerification-20261028.md) | [JSON](LinearizedSnapshotVerification-20261028.agent.json) |\n| [`docs/LogicalMorphChannels.md`](LogicalMorphChannels.md) | [JSON](LogicalMorphChannels.agent.json) |\n| [`docs/LogicalMorphChannelsVerification-20261028.md`](LogicalMorphChannelsVerification-20261028.md) | [JSON](LogicalMorphChannelsVerification-20261028.agent.json) |\n| [`docs/MaterialSurface.md`](MaterialSurface.md) | [JSON](MaterialSurface.agent.json) |\n| [`docs/MaterialSurfaceVerification-20261029.md`](MaterialSurfaceVerification-20261029.md) | [JSON](MaterialSurfaceVerification-20261029.agent.json) |\n| [`docs/MeshMaskProjection.md`](MeshMaskProjection.md) | [JSON](MeshMaskProjection.agent.json) |\n| [`docs/MeshMaskProjectionVerification-20261028.md`](MeshMaskProjectionVerification-20261028.md) | [JSON](MeshMaskProjectionVerification-20261028.agent.json) |\n| [`docs/MeshPainting.md`](MeshPainting.md) | [JSON](MeshPainting.agent.json) |\n| [`docs/MeshScreenSelection.md`](MeshScreenSelection.md) | [JSON](MeshScreenSelection.agent.json) |\n| [`docs/MeshScreenSelectionVerification-20261029.md`](MeshScreenSelectionVerification-20261029.md) | [JSON](MeshScreenSelectionVerification-20261029.agent.json) |\n| [`docs/MeshSymmetry.md`](MeshSymmetry.md) | [JSON](MeshSymmetry.agent.json) |\n| [`docs/MeshTangents.md`](MeshTangents.md) | [JSON](MeshTangents.agent.json) |\n| [`docs/MeshTangentsVerification-20261028.md`](MeshTangentsVerification-20261028.md) | [JSON](MeshTangentsVerification-20261028.agent.json) |\n| [`docs/MeshTopology.md`](MeshTopology.md) | [JSON](MeshTopology.agent.json) |\n| [`docs/MorphChannelRig.md`](MorphChannelRig.md) | [JSON](MorphChannelRig.agent.json) |\n| [`docs/MorphChannelRigVerification-20261028.md`](MorphChannelRigVerification-20261028.md) | [JSON](MorphChannelRigVerification-20261028.agent.json) |\n| [`docs/MorphNormals.md`](MorphNormals.md) | [JSON](MorphNormals.agent.json) |\n| [`docs/MultipleUvSets.md`](MultipleUvSets.md) | [JSON](MultipleUvSets.agent.json) |\n| [`docs/MultipleUvSetsVerification-20261028.md`](MultipleUvSetsVerification-20261028.md) | [JSON](MultipleUvSetsVerification-20261028.agent.json) |\n| [`docs/NSCharacter.md`](NSCharacter.md) | [JSON](NSCharacter.agent.json) |\n| [`docs/NamedPointSelections.md`](NamedPointSelections.md) | [JSON](NamedPointSelections.agent.json) |\n| [`docs/NamedPointSelectionsVerification-20261028.md`](NamedPointSelectionsVerification-20261028.md) | [JSON](NamedPointSelectionsVerification-20261028.agent.json) |\n| [`docs/NormalMaps.md`](NormalMaps.md) | [JSON](NormalMaps.agent.json) |\n| [`docs/NormalMapsVerification-20261028.md`](NormalMapsVerification-20261028.md) | [JSON](NormalMapsVerification-20261028.agent.json) |\n| [`docs/Object3DAnimation.md`](Object3DAnimation.md) | [JSON](Object3DAnimation.agent.json) |\n| [`docs/Object3DAnimationVerification-20261029.md`](Object3DAnimationVerification-20261029.md) | [JSON](Object3DAnimationVerification-20261029.agent.json) |\n| [`docs/Object3DEngine.md`](Object3DEngine.md) | [JSON](Object3DEngine.agent.json) |\n| [`docs/Object3DProject.md`](Object3DProject.md) | [JSON](Object3DProject.agent.json) |\n| [`docs/PoseCorrectiveAnimation.md`](PoseCorrectiveAnimation.md) | [JSON](PoseCorrectiveAnimation.agent.json) |\n| [`docs/PoseCorrectives.md`](PoseCorrectives.md) | [JSON](PoseCorrectives.agent.json) |\n| [`docs/PoseFrames.md`](PoseFrames.md) | [JSON](PoseFrames.agent.json) |\n| [`docs/PoseReference.md`](PoseReference.md) | [JSON](PoseReference.agent.json) |\n| [`docs/PoseRetarget.md`](PoseRetarget.md) | [JSON](PoseRetarget.agent.json) |\n| [`docs/PoseRetargetVerification-20261027.md`](PoseRetargetVerification-20261027.md) | [JSON](PoseRetargetVerification-20261027.agent.json) |\n| [`docs/PoseSnapshots.md`](PoseSnapshots.md) | [JSON](PoseSnapshots.agent.json) |\n| [`docs/ProgressiveMorphAnimation.md`](ProgressiveMorphAnimation.md) | [JSON](ProgressiveMorphAnimation.agent.json) |\n| [`docs/ProgressiveMorphAnimationVerification-20261029.md`](ProgressiveMorphAnimationVerification-20261029.md) | [JSON](ProgressiveMorphAnimationVerification-20261029.agent.json) |\n| [`docs/ProgressiveMorphRig.md`](ProgressiveMorphRig.md) | [JSON](ProgressiveMorphRig.agent.json) |\n| [`docs/ProgressiveMorphVerification-20261029.md`](ProgressiveMorphVerification-20261029.md) | [JSON](ProgressiveMorphVerification-20261029.agent.json) |\n| [`docs/ProgressiveTakesVerification-20261029.md`](ProgressiveTakesVerification-20261029.md) | [JSON](ProgressiveTakesVerification-20261029.agent.json) |\n| [`docs/ProjectAnimation.md`](ProjectAnimation.md) | [JSON](ProjectAnimation.agent.json) |\n| [`docs/ProjectAnimationVerification-20261029.md`](ProjectAnimationVerification-20261029.md) | [JSON](ProjectAnimationVerification-20261029.agent.json) |\n| [`docs/ProjectIntegrityVerification-20261028.md`](ProjectIntegrityVerification-20261028.md) | [JSON](ProjectIntegrityVerification-20261028.agent.json) |\n| [`docs/Resources.md`](Resources.md) | [JSON](Resources.agent.json) |\n| [`docs/RigControlSamples.md`](RigControlSamples.md) | [JSON](RigControlSamples.agent.json) |\n| [`docs/RigControlSamplesVerification-20261027.md`](RigControlSamplesVerification-20261027.md) | [JSON](RigControlSamplesVerification-20261027.agent.json) |\n| [`docs/RigSampleSkinningVerification-20261029.md`](RigSampleSkinningVerification-20261029.md) | [JSON](RigSampleSkinningVerification-20261029.agent.json) |\n| [`docs/SelectionTransfer.md`](SelectionTransfer.md) | [JSON](SelectionTransfer.agent.json) |\n| [`docs/SelectionTransferVerification-20261029.md`](SelectionTransferVerification-20261029.md) | [JSON](SelectionTransferVerification-20261029.agent.json) |\n| [`docs/SkeletonEditing.md`](SkeletonEditing.md) | [JSON](SkeletonEditing.agent.json) |\n| [`docs/SkeletonEnvelopes.md`](SkeletonEnvelopes.md) | [JSON](SkeletonEnvelopes.agent.json) |\n| [`docs/SkeletonEnvelopesVerification-20261028.md`](SkeletonEnvelopesVerification-20261028.md) | [JSON](SkeletonEnvelopesVerification-20261028.agent.json) |\n| [`docs/SkeletonScale.md`](SkeletonScale.md) | [JSON](SkeletonScale.agent.json) |\n| [`docs/SkinSurface.md`](SkinSurface.md) | [JSON](SkinSurface.agent.json) |\n| [`docs/SkinningProfileTransferVerification-20261028.md`](SkinningProfileTransferVerification-20261028.md) | [JSON](SkinningProfileTransferVerification-20261028.agent.json) |\n| [`docs/SurfaceCollision.md`](SurfaceCollision.md) | [JSON](SurfaceCollision.agent.json) |\n| [`docs/SurfaceFairing.md`](SurfaceFairing.md) | [JSON](SurfaceFairing.agent.json) |\n| [`docs/SurfaceFitting.md`](SurfaceFitting.md) | [JSON](SurfaceFitting.agent.json) |\n| [`docs/SurfaceGeodesicSkin.md`](SurfaceGeodesicSkin.md) | [JSON](SurfaceGeodesicSkin.agent.json) |\n| [`docs/SurfaceGeodesicSkinVerification-20261028.md`](SurfaceGeodesicSkinVerification-20261028.md) | [JSON](SurfaceGeodesicSkinVerification-20261028.agent.json) |\n| [`docs/TemplateAdapt.md`](TemplateAdapt.md) | [JSON](TemplateAdapt.agent.json) |\n| [`docs/TemplateAdaptVerification-20261028.md`](TemplateAdaptVerification-20261028.md) | [JSON](TemplateAdaptVerification-20261028.agent.json) |\n| [`docs/TemplateControls.md`](TemplateControls.md) | [JSON](TemplateControls.agent.json) |\n| [`docs/TemplateFollowersVerification-20261028.md`](TemplateFollowersVerification-20261028.md) | [JSON](TemplateFollowersVerification-20261028.agent.json) |\n| [`docs/TemplateMorphBaking.md`](TemplateMorphBaking.md) | [JSON](TemplateMorphBaking.agent.json) |\n| [`docs/TemplateMorphBakingVerification-20261028.md`](TemplateMorphBakingVerification-20261028.md) | [JSON](TemplateMorphBakingVerification-20261028.agent.json) |\n| [`docs/TemplateMorphProjectVerification-20261028.md`](TemplateMorphProjectVerification-20261028.md) | [JSON](TemplateMorphProjectVerification-20261028.agent.json) |\n| [`docs/TemplateRigProjection.md`](TemplateRigProjection.md) | [JSON](TemplateRigProjection.agent.json) |\n| [`docs/TemplateRigProjectionVerification-20261028.md`](TemplateRigProjectionVerification-20261028.md) | [JSON](TemplateRigProjectionVerification-20261028.agent.json) |\n| [`docs/TemplateRigTransfer.md`](TemplateRigTransfer.md) | [JSON](TemplateRigTransfer.agent.json) |\n| [`docs/TemplateRigTransferVerification-20261028.md`](TemplateRigTransferVerification-20261028.md) | [JSON](TemplateRigTransferVerification-20261028.agent.json) |\n| [`docs/TemplateRigYawVerification-20261028.md`](TemplateRigYawVerification-20261028.md) | [JSON](TemplateRigYawVerification-20261028.agent.json) |\n| [`docs/TemplateShapeFit.md`](TemplateShapeFit.md) | [JSON](TemplateShapeFit.agent.json) |\n| [`docs/USD.md`](USD.md) | [JSON](USD.agent.json) |\n| [`docs/Verification.md`](Verification.md) | [JSON](Verification.agent.json) |\n| [`docs/WindowsBuildAndRun.md`](WindowsBuildAndRun.md) | [JSON](WindowsBuildAndRun.agent.json) |\n| [`docs/documentation-structure.md`](documentation-structure.md) | [JSON](documentation-structure.agent.json) |\n| [`tests/fixtures/project/README.md`](../tests/fixtures/project/README.md) | [JSON](mirrors/tests/fixtures/project/README.agent.json) |\n",
+      "columns": [
+        "Document",
+        "Agent JSON"
+      ],
+      "rows": [
+        [
+          "[`AGENT.md`](../AGENT.md)",
+          "[JSON](entrypoints/AGENT.agent.json)"
+        ],
+        [
+          "[`README.md`](../README.md)",
+          "[JSON](entrypoints/README.agent.json)"
+        ],
+        [
+          "[`data/MakeHuman/LICENSE.ASSETS.md`](../data/MakeHuman/LICENSE.ASSETS.md)",
+          "[JSON](mirrors/data/MakeHuman/LICENSE.ASSETS.agent.json)"
+        ],
+        [
+          "[`data/MakeHuman/LICENSE.md`](../data/MakeHuman/LICENSE.md)",
+          "[JSON](mirrors/data/MakeHuman/LICENSE.agent.json)"
+        ],
+        [
+          "[`data/MakeHuman/PROVENANCE.md`](../data/MakeHuman/PROVENANCE.md)",
+          "[JSON](mirrors/data/MakeHuman/PROVENANCE.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanExpressions/LICENSE.ASSETS.md`](../data/MakeHumanExpressions/LICENSE.ASSETS.md)",
+          "[JSON](mirrors/data/MakeHumanExpressions/LICENSE.ASSETS.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanExpressions/LICENSE.md`](../data/MakeHumanExpressions/LICENSE.md)",
+          "[JSON](mirrors/data/MakeHumanExpressions/LICENSE.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanExpressions/PROVENANCE.md`](../data/MakeHumanExpressions/PROVENANCE.md)",
+          "[JSON](mirrors/data/MakeHumanExpressions/PROVENANCE.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanFace/LICENSE.ASSETS.md`](../data/MakeHumanFace/LICENSE.ASSETS.md)",
+          "[JSON](mirrors/data/MakeHumanFace/LICENSE.ASSETS.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanFace/LICENSE.md`](../data/MakeHumanFace/LICENSE.md)",
+          "[JSON](mirrors/data/MakeHumanFace/LICENSE.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanFace/PROVENANCE.md`](../data/MakeHumanFace/PROVENANCE.md)",
+          "[JSON](mirrors/data/MakeHumanFace/PROVENANCE.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanMacro/LICENSE.ASSETS.md`](../data/MakeHumanMacro/LICENSE.ASSETS.md)",
+          "[JSON](mirrors/data/MakeHumanMacro/LICENSE.ASSETS.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanMacro/LICENSE.md`](../data/MakeHumanMacro/LICENSE.md)",
+          "[JSON](mirrors/data/MakeHumanMacro/LICENSE.agent.json)"
+        ],
+        [
+          "[`data/MakeHumanMacro/PROVENANCE.md`](../data/MakeHumanMacro/PROVENANCE.md)",
+          "[JSON](mirrors/data/MakeHumanMacro/PROVENANCE.agent.json)"
+        ],
+        [
+          "[`docs/Actor.md`](Actor.md)",
+          "[JSON](Actor.agent.json)"
+        ],
+        [
+          "[`docs/AnimationRetarget.md`](AnimationRetarget.md)",
+          "[JSON](AnimationRetarget.agent.json)"
+        ],
+        [
+          "[`docs/AnimationRetargetVerification-20261027.md`](AnimationRetargetVerification-20261027.md)",
+          "[JSON](AnimationRetargetVerification-20261027.agent.json)"
+        ],
+        [
+          "[`docs/AutomaticConventionDetectionVerification-20261029.md`](AutomaticConventionDetectionVerification-20261029.md)",
+          "[JSON](AutomaticConventionDetectionVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/AutomaticCorrectives.md`](AutomaticCorrectives.md)",
+          "[JSON](AutomaticCorrectives.agent.json)"
+        ],
+        [
+          "[`docs/AutomaticCorrectivesVerification-20261029.md`](AutomaticCorrectivesVerification-20261029.md)",
+          "[JSON](AutomaticCorrectivesVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/AutomaticSurfaceFitting.md`](AutomaticSurfaceFitting.md)",
+          "[JSON](AutomaticSurfaceFitting.agent.json)"
+        ],
+        [
+          "[`docs/BaseNormalEditing.md`](BaseNormalEditing.md)",
+          "[JSON](BaseNormalEditing.agent.json)"
+        ],
+        [
+          "[`docs/BaseNormalVerification-20261028.md`](BaseNormalVerification-20261028.md)",
+          "[JSON](BaseNormalVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/Changes-20261021.md`](Changes-20261021.md)",
+          "[JSON](Changes-20261021.agent.json)"
+        ],
+        [
+          "[`docs/Character.md`](Character.md)",
+          "[JSON](Character.agent.json)"
+        ],
+        [
+          "[`docs/CharacterCreatorG3Verification-20261027.md`](CharacterCreatorG3Verification-20261027.md)",
+          "[JSON](CharacterCreatorG3Verification-20261027.agent.json)"
+        ],
+        [
+          "[`docs/CharacterTemplate.md`](CharacterTemplate.md)",
+          "[JSON](CharacterTemplate.agent.json)"
+        ],
+        [
+          "[`docs/DefaultMorphWeights.md`](DefaultMorphWeights.md)",
+          "[JSON](DefaultMorphWeights.agent.json)"
+        ],
+        [
+          "[`docs/DefaultMorphWeightsVerification-20261028.md`](DefaultMorphWeightsVerification-20261028.md)",
+          "[JSON](DefaultMorphWeightsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DeformationSnapshotVerification-20261027.md`](DeformationSnapshotVerification-20261027.md)",
+          "[JSON](DeformationSnapshotVerification-20261027.agent.json)"
+        ],
+        [
+          "[`docs/DeformationSnapshots.md`](DeformationSnapshots.md)",
+          "[JSON](DeformationSnapshots.agent.json)"
+        ],
+        [
+          "[`docs/DnaEditing.md`](DnaEditing.md)",
+          "[JSON](DnaEditing.agent.json)"
+        ],
+        [
+          "[`docs/DnaMlGraphVerification-20261028.md`](DnaMlGraphVerification-20261028.md)",
+          "[JSON](DnaMlGraphVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DnaMlVerification-20261028.md`](DnaMlVerification-20261028.md)",
+          "[JSON](DnaMlVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DnaRbfVerification-20261028.md`](DnaRbfVerification-20261028.md)",
+          "[JSON](DnaRbfVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DnaRig.md`](DnaRig.md)",
+          "[JSON](DnaRig.agent.json)"
+        ],
+        [
+          "[`docs/DnaTwistVerification-20261028.md`](DnaTwistVerification-20261028.md)",
+          "[JSON](DnaTwistVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DualQuaternionProfileVerification-20261028.md`](DualQuaternionProfileVerification-20261028.md)",
+          "[JSON](DualQuaternionProfileVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DualQuaternionSkinning.md`](DualQuaternionSkinning.md)",
+          "[JSON](DualQuaternionSkinning.agent.json)"
+        ],
+        [
+          "[`docs/DualQuaternionSkinningVerification-20261028.md`](DualQuaternionSkinningVerification-20261028.md)",
+          "[JSON](DualQuaternionSkinningVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DynamicMorphBindVerification-20261028.md`](DynamicMorphBindVerification-20261028.md)",
+          "[JSON](DynamicMorphBindVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/DynamicRetargetVerification-20261028.md`](DynamicRetargetVerification-20261028.md)",
+          "[JSON](DynamicRetargetVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/EditLayers.md`](EditLayers.md)",
+          "[JSON](EditLayers.agent.json)"
+        ],
+        [
+          "[`docs/EditorRigFollow.md`](EditorRigFollow.md)",
+          "[JSON](EditorRigFollow.agent.json)"
+        ],
+        [
+          "[`docs/EditorRigFollowVerification-20261029.md`](EditorRigFollowVerification-20261029.md)",
+          "[JSON](EditorRigFollowVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/EvaluatedEditLayers.md`](EvaluatedEditLayers.md)",
+          "[JSON](EvaluatedEditLayers.agent.json)"
+        ],
+        [
+          "[`docs/ExternalEdits.md`](ExternalEdits.md)",
+          "[JSON](ExternalEdits.agent.json)"
+        ],
+        [
+          "[`docs/ExternalTriangleEdits.md`](ExternalTriangleEdits.md)",
+          "[JSON](ExternalTriangleEdits.agent.json)"
+        ],
+        [
+          "[`docs/FaceAssets.md`](FaceAssets.md)",
+          "[JSON](FaceAssets.agent.json)"
+        ],
+        [
+          "[`docs/FacePoseRig.md`](FacePoseRig.md)",
+          "[JSON](FacePoseRig.agent.json)"
+        ],
+        [
+          "[`docs/FbxAnimation.md`](FbxAnimation.md)",
+          "[JSON](FbxAnimation.agent.json)"
+        ],
+        [
+          "[`docs/FbxAnimationImport.md`](FbxAnimationImport.md)",
+          "[JSON](FbxAnimationImport.agent.json)"
+        ],
+        [
+          "[`docs/FbxAnimationImportVerification-20261028.md`](FbxAnimationImportVerification-20261028.md)",
+          "[JSON](FbxAnimationImportVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/FbxAnimationVerification-20261028.md`](FbxAnimationVerification-20261028.md)",
+          "[JSON](FbxAnimationVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/FbxAuthoredTangentsVerification-20261028.md`](FbxAuthoredTangentsVerification-20261028.md)",
+          "[JSON](FbxAuthoredTangentsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/FbxAuthoring.md`](FbxAuthoring.md)",
+          "[JSON](FbxAuthoring.agent.json)"
+        ],
+        [
+          "[`docs/FbxImageResolution.md`](FbxImageResolution.md)",
+          "[JSON](FbxImageResolution.agent.json)"
+        ],
+        [
+          "[`docs/FbxImageResolutionVerification-20261028.md`](FbxImageResolutionVerification-20261028.md)",
+          "[JSON](FbxImageResolutionVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/FbxTangents.md`](FbxTangents.md)",
+          "[JSON](FbxTangents.agent.json)"
+        ],
+        [
+          "[`docs/FbxTangentsVerification-20261028.md`](FbxTangentsVerification-20261028.md)",
+          "[JSON](FbxTangentsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/GlbAnimation.md`](GlbAnimation.md)",
+          "[JSON](GlbAnimation.agent.json)"
+        ],
+        [
+          "[`docs/GlbAnimationBake.md`](GlbAnimationBake.md)",
+          "[JSON](GlbAnimationBake.agent.json)"
+        ],
+        [
+          "[`docs/GlbAnimationVerification-20261028.md`](GlbAnimationVerification-20261028.md)",
+          "[JSON](GlbAnimationVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/GlbAuthoredTangents.md`](GlbAuthoredTangents.md)",
+          "[JSON](GlbAuthoredTangents.agent.json)"
+        ],
+        [
+          "[`docs/GlbAuthoredTangentsVerification-20261028.md`](GlbAuthoredTangentsVerification-20261028.md)",
+          "[JSON](GlbAuthoredTangentsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/GlbDocument.md`](GlbDocument.md)",
+          "[JSON](GlbDocument.agent.json)"
+        ],
+        [
+          "[`docs/GlbDocumentVerification-20261028.md`](GlbDocumentVerification-20261028.md)",
+          "[JSON](GlbDocumentVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/GlbExternalEdits.md`](GlbExternalEdits.md)",
+          "[JSON](GlbExternalEdits.agent.json)"
+        ],
+        [
+          "[`docs/GlbImport.md`](GlbImport.md)",
+          "[JSON](GlbImport.agent.json)"
+        ],
+        [
+          "[`docs/GlbImportVerification-20261028.md`](GlbImportVerification-20261028.md)",
+          "[JSON](GlbImportVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/GlbMixedAttributesVerification-20261029.md`](GlbMixedAttributesVerification-20261029.md)",
+          "[JSON](GlbMixedAttributesVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/GlbMorphAnimationVerification-20261028.md`](GlbMorphAnimationVerification-20261028.md)",
+          "[JSON](GlbMorphAnimationVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/GlbMultiSkin.md`](GlbMultiSkin.md)",
+          "[JSON](GlbMultiSkin.agent.json)"
+        ],
+        [
+          "[`docs/GlbMultiSkinVerification-20261028.md`](GlbMultiSkinVerification-20261028.md)",
+          "[JSON](GlbMultiSkinVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/GlbPointIdentity.md`](GlbPointIdentity.md)",
+          "[JSON](GlbPointIdentity.agent.json)"
+        ],
+        [
+          "[`docs/GlbPointIdentityVerification-20261028.md`](GlbPointIdentityVerification-20261028.md)",
+          "[JSON](GlbPointIdentityVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/HumanAccessories.md`](HumanAccessories.md)",
+          "[JSON](HumanAccessories.agent.json)"
+        ],
+        [
+          "[`docs/HumanAccessoriesVerification-20261029.md`](HumanAccessoriesVerification-20261029.md)",
+          "[JSON](HumanAccessoriesVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/HumanAccessoryAdditionVerification-20261029.md`](HumanAccessoryAdditionVerification-20261029.md)",
+          "[JSON](HumanAccessoryAdditionVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/HumanAccessoryCompositionVerification-20261029.md`](HumanAccessoryCompositionVerification-20261029.md)",
+          "[JSON](HumanAccessoryCompositionVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/HumanAccessoryRemovalVerification-20261029.md`](HumanAccessoryRemovalVerification-20261029.md)",
+          "[JSON](HumanAccessoryRemovalVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/HumanAccessorySwitchVerification-20261029.md`](HumanAccessorySwitchVerification-20261029.md)",
+          "[JSON](HumanAccessorySwitchVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/HumanInterchangeVerification-20261029.md`](HumanInterchangeVerification-20261029.md)",
+          "[JSON](HumanInterchangeVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/HumanJointNaming.md`](HumanJointNaming.md)",
+          "[JSON](HumanJointNaming.agent.json)"
+        ],
+        [
+          "[`docs/HumanJointNamingVerification-20261027.md`](HumanJointNamingVerification-20261027.md)",
+          "[JSON](HumanJointNamingVerification-20261027.agent.json)"
+        ],
+        [
+          "[`docs/HumanMorphology.md`](HumanMorphology.md)",
+          "[JSON](HumanMorphology.agent.json)"
+        ],
+        [
+          "[`docs/HumanPoseDirections.md`](HumanPoseDirections.md)",
+          "[JSON](HumanPoseDirections.agent.json)"
+        ],
+        [
+          "[`docs/HumanPosePlanner.md`](HumanPosePlanner.md)",
+          "[JSON](HumanPosePlanner.agent.json)"
+        ],
+        [
+          "[`docs/HumanPosePlannerVerification-20261027.md`](HumanPosePlannerVerification-20261027.md)",
+          "[JSON](HumanPosePlannerVerification-20261027.agent.json)"
+        ],
+        [
+          "[`docs/HumanPoseRetarget.md`](HumanPoseRetarget.md)",
+          "[JSON](HumanPoseRetarget.agent.json)"
+        ],
+        [
+          "[`docs/HumanoidCharacterization.md`](HumanoidCharacterization.md)",
+          "[JSON](HumanoidCharacterization.agent.json)"
+        ],
+        [
+          "[`docs/InstanceTransfer.md`](InstanceTransfer.md)",
+          "[JSON](InstanceTransfer.agent.json)"
+        ],
+        [
+          "[`docs/InstanceTransferVerification-20261029.md`](InstanceTransferVerification-20261029.md)",
+          "[JSON](InstanceTransferVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/LinearizedSnapshotVerification-20261028.md`](LinearizedSnapshotVerification-20261028.md)",
+          "[JSON](LinearizedSnapshotVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/LogicalMorphChannels.md`](LogicalMorphChannels.md)",
+          "[JSON](LogicalMorphChannels.agent.json)"
+        ],
+        [
+          "[`docs/LogicalMorphChannelsVerification-20261028.md`](LogicalMorphChannelsVerification-20261028.md)",
+          "[JSON](LogicalMorphChannelsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/MaterialSurface.md`](MaterialSurface.md)",
+          "[JSON](MaterialSurface.agent.json)"
+        ],
+        [
+          "[`docs/MaterialSurfaceVerification-20261029.md`](MaterialSurfaceVerification-20261029.md)",
+          "[JSON](MaterialSurfaceVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/MeshMaskProjection.md`](MeshMaskProjection.md)",
+          "[JSON](MeshMaskProjection.agent.json)"
+        ],
+        [
+          "[`docs/MeshMaskProjectionVerification-20261028.md`](MeshMaskProjectionVerification-20261028.md)",
+          "[JSON](MeshMaskProjectionVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/MeshPainting.md`](MeshPainting.md)",
+          "[JSON](MeshPainting.agent.json)"
+        ],
+        [
+          "[`docs/MeshScreenSelection.md`](MeshScreenSelection.md)",
+          "[JSON](MeshScreenSelection.agent.json)"
+        ],
+        [
+          "[`docs/MeshScreenSelectionVerification-20261029.md`](MeshScreenSelectionVerification-20261029.md)",
+          "[JSON](MeshScreenSelectionVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/MeshSymmetry.md`](MeshSymmetry.md)",
+          "[JSON](MeshSymmetry.agent.json)"
+        ],
+        [
+          "[`docs/MeshTangents.md`](MeshTangents.md)",
+          "[JSON](MeshTangents.agent.json)"
+        ],
+        [
+          "[`docs/MeshTangentsVerification-20261028.md`](MeshTangentsVerification-20261028.md)",
+          "[JSON](MeshTangentsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/MeshTopology.md`](MeshTopology.md)",
+          "[JSON](MeshTopology.agent.json)"
+        ],
+        [
+          "[`docs/MorphChannelRig.md`](MorphChannelRig.md)",
+          "[JSON](MorphChannelRig.agent.json)"
+        ],
+        [
+          "[`docs/MorphChannelRigVerification-20261028.md`](MorphChannelRigVerification-20261028.md)",
+          "[JSON](MorphChannelRigVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/MorphNormals.md`](MorphNormals.md)",
+          "[JSON](MorphNormals.agent.json)"
+        ],
+        [
+          "[`docs/MultipleUvSets.md`](MultipleUvSets.md)",
+          "[JSON](MultipleUvSets.agent.json)"
+        ],
+        [
+          "[`docs/MultipleUvSetsVerification-20261028.md`](MultipleUvSetsVerification-20261028.md)",
+          "[JSON](MultipleUvSetsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/NSCharacter.md`](NSCharacter.md)",
+          "[JSON](NSCharacter.agent.json)"
+        ],
+        [
+          "[`docs/NamedPointSelections.md`](NamedPointSelections.md)",
+          "[JSON](NamedPointSelections.agent.json)"
+        ],
+        [
+          "[`docs/NamedPointSelectionsVerification-20261028.md`](NamedPointSelectionsVerification-20261028.md)",
+          "[JSON](NamedPointSelectionsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/NormalMaps.md`](NormalMaps.md)",
+          "[JSON](NormalMaps.agent.json)"
+        ],
+        [
+          "[`docs/NormalMapsVerification-20261028.md`](NormalMapsVerification-20261028.md)",
+          "[JSON](NormalMapsVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/Object3DAnimation.md`](Object3DAnimation.md)",
+          "[JSON](Object3DAnimation.agent.json)"
+        ],
+        [
+          "[`docs/Object3DAnimationVerification-20261029.md`](Object3DAnimationVerification-20261029.md)",
+          "[JSON](Object3DAnimationVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/Object3DEngine.md`](Object3DEngine.md)",
+          "[JSON](Object3DEngine.agent.json)"
+        ],
+        [
+          "[`docs/Object3DProject.md`](Object3DProject.md)",
+          "[JSON](Object3DProject.agent.json)"
+        ],
+        [
+          "[`docs/PoseCorrectiveAnimation.md`](PoseCorrectiveAnimation.md)",
+          "[JSON](PoseCorrectiveAnimation.agent.json)"
+        ],
+        [
+          "[`docs/PoseCorrectives.md`](PoseCorrectives.md)",
+          "[JSON](PoseCorrectives.agent.json)"
+        ],
+        [
+          "[`docs/PoseFrames.md`](PoseFrames.md)",
+          "[JSON](PoseFrames.agent.json)"
+        ],
+        [
+          "[`docs/PoseReference.md`](PoseReference.md)",
+          "[JSON](PoseReference.agent.json)"
+        ],
+        [
+          "[`docs/PoseRetarget.md`](PoseRetarget.md)",
+          "[JSON](PoseRetarget.agent.json)"
+        ],
+        [
+          "[`docs/PoseRetargetVerification-20261027.md`](PoseRetargetVerification-20261027.md)",
+          "[JSON](PoseRetargetVerification-20261027.agent.json)"
+        ],
+        [
+          "[`docs/PoseSnapshots.md`](PoseSnapshots.md)",
+          "[JSON](PoseSnapshots.agent.json)"
+        ],
+        [
+          "[`docs/ProgressiveMorphAnimation.md`](ProgressiveMorphAnimation.md)",
+          "[JSON](ProgressiveMorphAnimation.agent.json)"
+        ],
+        [
+          "[`docs/ProgressiveMorphAnimationVerification-20261029.md`](ProgressiveMorphAnimationVerification-20261029.md)",
+          "[JSON](ProgressiveMorphAnimationVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/ProgressiveMorphRig.md`](ProgressiveMorphRig.md)",
+          "[JSON](ProgressiveMorphRig.agent.json)"
+        ],
+        [
+          "[`docs/ProgressiveMorphVerification-20261029.md`](ProgressiveMorphVerification-20261029.md)",
+          "[JSON](ProgressiveMorphVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/ProgressiveTakesVerification-20261029.md`](ProgressiveTakesVerification-20261029.md)",
+          "[JSON](ProgressiveTakesVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/ProjectAnimation.md`](ProjectAnimation.md)",
+          "[JSON](ProjectAnimation.agent.json)"
+        ],
+        [
+          "[`docs/ProjectAnimationVerification-20261029.md`](ProjectAnimationVerification-20261029.md)",
+          "[JSON](ProjectAnimationVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/ProjectIntegrityVerification-20261028.md`](ProjectIntegrityVerification-20261028.md)",
+          "[JSON](ProjectIntegrityVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/Resources.md`](Resources.md)",
+          "[JSON](Resources.agent.json)"
+        ],
+        [
+          "[`docs/RigControlSamples.md`](RigControlSamples.md)",
+          "[JSON](RigControlSamples.agent.json)"
+        ],
+        [
+          "[`docs/RigControlSamplesVerification-20261027.md`](RigControlSamplesVerification-20261027.md)",
+          "[JSON](RigControlSamplesVerification-20261027.agent.json)"
+        ],
+        [
+          "[`docs/RigSampleSkinningVerification-20261029.md`](RigSampleSkinningVerification-20261029.md)",
+          "[JSON](RigSampleSkinningVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/SelectionTransfer.md`](SelectionTransfer.md)",
+          "[JSON](SelectionTransfer.agent.json)"
+        ],
+        [
+          "[`docs/SelectionTransferVerification-20261029.md`](SelectionTransferVerification-20261029.md)",
+          "[JSON](SelectionTransferVerification-20261029.agent.json)"
+        ],
+        [
+          "[`docs/SkeletonEditing.md`](SkeletonEditing.md)",
+          "[JSON](SkeletonEditing.agent.json)"
+        ],
+        [
+          "[`docs/SkeletonEnvelopes.md`](SkeletonEnvelopes.md)",
+          "[JSON](SkeletonEnvelopes.agent.json)"
+        ],
+        [
+          "[`docs/SkeletonEnvelopesVerification-20261028.md`](SkeletonEnvelopesVerification-20261028.md)",
+          "[JSON](SkeletonEnvelopesVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/SkeletonScale.md`](SkeletonScale.md)",
+          "[JSON](SkeletonScale.agent.json)"
+        ],
+        [
+          "[`docs/SkinSurface.md`](SkinSurface.md)",
+          "[JSON](SkinSurface.agent.json)"
+        ],
+        [
+          "[`docs/SkinningProfileTransferVerification-20261028.md`](SkinningProfileTransferVerification-20261028.md)",
+          "[JSON](SkinningProfileTransferVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/SurfaceCollision.md`](SurfaceCollision.md)",
+          "[JSON](SurfaceCollision.agent.json)"
+        ],
+        [
+          "[`docs/SurfaceFairing.md`](SurfaceFairing.md)",
+          "[JSON](SurfaceFairing.agent.json)"
+        ],
+        [
+          "[`docs/SurfaceFitting.md`](SurfaceFitting.md)",
+          "[JSON](SurfaceFitting.agent.json)"
+        ],
+        [
+          "[`docs/SurfaceGeodesicSkin.md`](SurfaceGeodesicSkin.md)",
+          "[JSON](SurfaceGeodesicSkin.agent.json)"
+        ],
+        [
+          "[`docs/SurfaceGeodesicSkinVerification-20261028.md`](SurfaceGeodesicSkinVerification-20261028.md)",
+          "[JSON](SurfaceGeodesicSkinVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateAdapt.md`](TemplateAdapt.md)",
+          "[JSON](TemplateAdapt.agent.json)"
+        ],
+        [
+          "[`docs/TemplateAdaptVerification-20261028.md`](TemplateAdaptVerification-20261028.md)",
+          "[JSON](TemplateAdaptVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateControls.md`](TemplateControls.md)",
+          "[JSON](TemplateControls.agent.json)"
+        ],
+        [
+          "[`docs/TemplateFollowersVerification-20261028.md`](TemplateFollowersVerification-20261028.md)",
+          "[JSON](TemplateFollowersVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateMorphBaking.md`](TemplateMorphBaking.md)",
+          "[JSON](TemplateMorphBaking.agent.json)"
+        ],
+        [
+          "[`docs/TemplateMorphBakingVerification-20261028.md`](TemplateMorphBakingVerification-20261028.md)",
+          "[JSON](TemplateMorphBakingVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateMorphProjectVerification-20261028.md`](TemplateMorphProjectVerification-20261028.md)",
+          "[JSON](TemplateMorphProjectVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateRigProjection.md`](TemplateRigProjection.md)",
+          "[JSON](TemplateRigProjection.agent.json)"
+        ],
+        [
+          "[`docs/TemplateRigProjectionVerification-20261028.md`](TemplateRigProjectionVerification-20261028.md)",
+          "[JSON](TemplateRigProjectionVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateRigTransfer.md`](TemplateRigTransfer.md)",
+          "[JSON](TemplateRigTransfer.agent.json)"
+        ],
+        [
+          "[`docs/TemplateRigTransferVerification-20261028.md`](TemplateRigTransferVerification-20261028.md)",
+          "[JSON](TemplateRigTransferVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateRigYawVerification-20261028.md`](TemplateRigYawVerification-20261028.md)",
+          "[JSON](TemplateRigYawVerification-20261028.agent.json)"
+        ],
+        [
+          "[`docs/TemplateShapeFit.md`](TemplateShapeFit.md)",
+          "[JSON](TemplateShapeFit.agent.json)"
+        ],
+        [
+          "[`docs/USD.md`](USD.md)",
+          "[JSON](USD.agent.json)"
+        ],
+        [
+          "[`docs/Verification.md`](Verification.md)",
+          "[JSON](Verification.agent.json)"
+        ],
+        [
+          "[`docs/WindowsBuildAndRun.md`](WindowsBuildAndRun.md)",
+          "[JSON](WindowsBuildAndRun.agent.json)"
+        ],
+        [
+          "[`docs/documentation-structure.md`](documentation-structure.md)",
+          "[JSON](documentation-structure.agent.json)"
+        ],
+        [
+          "[`tests/fixtures/project/README.md`](../tests/fixtures/project/README.md)",
+          "[JSON](mirrors/tests/fixtures/project/README.agent.json)"
+        ]
+      ]
+    },
+    {
+      "id": "b000009",
+      "kind": "html",
+      "start_line": 181,
+      "end_line": 181,
+      "raw": "<!-- workspace-docs:document-map:end -->\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiActorObject Documentation",
+      "anchor": "iiactorobject-documentation",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000004",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Human and agent document map",
+      "anchor": "human-and-agent-document-map",
+      "start_line": 4
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000008",
+        "label": "`AGENT.md`",
+        "target": "../AGENT.md",
+        "kind": "relative",
+        "line": 10
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "entrypoints/AGENT.agent.json",
+        "kind": "relative",
+        "line": 10
+      },
+      {
+        "block_id": "b000008",
+        "label": "`README.md`",
+        "target": "../README.md",
+        "kind": "relative",
+        "line": 11
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "entrypoints/README.agent.json",
+        "kind": "relative",
+        "line": 11
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHuman/LICENSE.ASSETS.md`",
+        "target": "../data/MakeHuman/LICENSE.ASSETS.md",
+        "kind": "relative",
+        "line": 12
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHuman/LICENSE.ASSETS.agent.json",
+        "kind": "relative",
+        "line": 12
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHuman/LICENSE.md`",
+        "target": "../data/MakeHuman/LICENSE.md",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHuman/LICENSE.agent.json",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHuman/PROVENANCE.md`",
+        "target": "../data/MakeHuman/PROVENANCE.md",
+        "kind": "relative",
+        "line": 14
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHuman/PROVENANCE.agent.json",
+        "kind": "relative",
+        "line": 14
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanExpressions/LICENSE.ASSETS.md`",
+        "target": "../data/MakeHumanExpressions/LICENSE.ASSETS.md",
+        "kind": "relative",
+        "line": 15
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanExpressions/LICENSE.ASSETS.agent.json",
+        "kind": "relative",
+        "line": 15
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanExpressions/LICENSE.md`",
+        "target": "../data/MakeHumanExpressions/LICENSE.md",
+        "kind": "relative",
+        "line": 16
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanExpressions/LICENSE.agent.json",
+        "kind": "relative",
+        "line": 16
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanExpressions/PROVENANCE.md`",
+        "target": "../data/MakeHumanExpressions/PROVENANCE.md",
+        "kind": "relative",
+        "line": 17
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanExpressions/PROVENANCE.agent.json",
+        "kind": "relative",
+        "line": 17
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanFace/LICENSE.ASSETS.md`",
+        "target": "../data/MakeHumanFace/LICENSE.ASSETS.md",
+        "kind": "relative",
+        "line": 18
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanFace/LICENSE.ASSETS.agent.json",
+        "kind": "relative",
+        "line": 18
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanFace/LICENSE.md`",
+        "target": "../data/MakeHumanFace/LICENSE.md",
+        "kind": "relative",
+        "line": 19
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanFace/LICENSE.agent.json",
+        "kind": "relative",
+        "line": 19
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanFace/PROVENANCE.md`",
+        "target": "../data/MakeHumanFace/PROVENANCE.md",
+        "kind": "relative",
+        "line": 20
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanFace/PROVENANCE.agent.json",
+        "kind": "relative",
+        "line": 20
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanMacro/LICENSE.ASSETS.md`",
+        "target": "../data/MakeHumanMacro/LICENSE.ASSETS.md",
+        "kind": "relative",
+        "line": 21
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanMacro/LICENSE.ASSETS.agent.json",
+        "kind": "relative",
+        "line": 21
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanMacro/LICENSE.md`",
+        "target": "../data/MakeHumanMacro/LICENSE.md",
+        "kind": "relative",
+        "line": 22
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanMacro/LICENSE.agent.json",
+        "kind": "relative",
+        "line": 22
+      },
+      {
+        "block_id": "b000008",
+        "label": "`data/MakeHumanMacro/PROVENANCE.md`",
+        "target": "../data/MakeHumanMacro/PROVENANCE.md",
+        "kind": "relative",
+        "line": 23
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/data/MakeHumanMacro/PROVENANCE.agent.json",
+        "kind": "relative",
+        "line": 23
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Actor.md`",
+        "target": "Actor.md",
+        "kind": "relative",
+        "line": 24
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Actor.agent.json",
+        "kind": "relative",
+        "line": 24
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/AnimationRetarget.md`",
+        "target": "AnimationRetarget.md",
+        "kind": "relative",
+        "line": 25
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "AnimationRetarget.agent.json",
+        "kind": "relative",
+        "line": 25
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/AnimationRetargetVerification-20261027.md`",
+        "target": "AnimationRetargetVerification-20261027.md",
+        "kind": "relative",
+        "line": 26
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "AnimationRetargetVerification-20261027.agent.json",
+        "kind": "relative",
+        "line": 26
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/AutomaticConventionDetectionVerification-20261029.md`",
+        "target": "AutomaticConventionDetectionVerification-20261029.md",
+        "kind": "relative",
+        "line": 27
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "AutomaticConventionDetectionVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 27
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/AutomaticCorrectives.md`",
+        "target": "AutomaticCorrectives.md",
+        "kind": "relative",
+        "line": 28
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "AutomaticCorrectives.agent.json",
+        "kind": "relative",
+        "line": 28
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/AutomaticCorrectivesVerification-20261029.md`",
+        "target": "AutomaticCorrectivesVerification-20261029.md",
+        "kind": "relative",
+        "line": 29
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "AutomaticCorrectivesVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 29
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/AutomaticSurfaceFitting.md`",
+        "target": "AutomaticSurfaceFitting.md",
+        "kind": "relative",
+        "line": 30
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "AutomaticSurfaceFitting.agent.json",
+        "kind": "relative",
+        "line": 30
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/BaseNormalEditing.md`",
+        "target": "BaseNormalEditing.md",
+        "kind": "relative",
+        "line": 31
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "BaseNormalEditing.agent.json",
+        "kind": "relative",
+        "line": 31
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/BaseNormalVerification-20261028.md`",
+        "target": "BaseNormalVerification-20261028.md",
+        "kind": "relative",
+        "line": 32
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "BaseNormalVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 32
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Changes-20261021.md`",
+        "target": "Changes-20261021.md",
+        "kind": "relative",
+        "line": 33
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Changes-20261021.agent.json",
+        "kind": "relative",
+        "line": 33
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Character.md`",
+        "target": "Character.md",
+        "kind": "relative",
+        "line": 34
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Character.agent.json",
+        "kind": "relative",
+        "line": 34
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/CharacterCreatorG3Verification-20261027.md`",
+        "target": "CharacterCreatorG3Verification-20261027.md",
+        "kind": "relative",
+        "line": 35
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "CharacterCreatorG3Verification-20261027.agent.json",
+        "kind": "relative",
+        "line": 35
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/CharacterTemplate.md`",
+        "target": "CharacterTemplate.md",
+        "kind": "relative",
+        "line": 36
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "CharacterTemplate.agent.json",
+        "kind": "relative",
+        "line": 36
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DefaultMorphWeights.md`",
+        "target": "DefaultMorphWeights.md",
+        "kind": "relative",
+        "line": 37
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DefaultMorphWeights.agent.json",
+        "kind": "relative",
+        "line": 37
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DefaultMorphWeightsVerification-20261028.md`",
+        "target": "DefaultMorphWeightsVerification-20261028.md",
+        "kind": "relative",
+        "line": 38
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DefaultMorphWeightsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 38
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DeformationSnapshotVerification-20261027.md`",
+        "target": "DeformationSnapshotVerification-20261027.md",
+        "kind": "relative",
+        "line": 39
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DeformationSnapshotVerification-20261027.agent.json",
+        "kind": "relative",
+        "line": 39
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DeformationSnapshots.md`",
+        "target": "DeformationSnapshots.md",
+        "kind": "relative",
+        "line": 40
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DeformationSnapshots.agent.json",
+        "kind": "relative",
+        "line": 40
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DnaEditing.md`",
+        "target": "DnaEditing.md",
+        "kind": "relative",
+        "line": 41
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DnaEditing.agent.json",
+        "kind": "relative",
+        "line": 41
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DnaMlGraphVerification-20261028.md`",
+        "target": "DnaMlGraphVerification-20261028.md",
+        "kind": "relative",
+        "line": 42
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DnaMlGraphVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 42
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DnaMlVerification-20261028.md`",
+        "target": "DnaMlVerification-20261028.md",
+        "kind": "relative",
+        "line": 43
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DnaMlVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 43
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DnaRbfVerification-20261028.md`",
+        "target": "DnaRbfVerification-20261028.md",
+        "kind": "relative",
+        "line": 44
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DnaRbfVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 44
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DnaRig.md`",
+        "target": "DnaRig.md",
+        "kind": "relative",
+        "line": 45
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DnaRig.agent.json",
+        "kind": "relative",
+        "line": 45
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DnaTwistVerification-20261028.md`",
+        "target": "DnaTwistVerification-20261028.md",
+        "kind": "relative",
+        "line": 46
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DnaTwistVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 46
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DualQuaternionProfileVerification-20261028.md`",
+        "target": "DualQuaternionProfileVerification-20261028.md",
+        "kind": "relative",
+        "line": 47
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DualQuaternionProfileVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 47
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DualQuaternionSkinning.md`",
+        "target": "DualQuaternionSkinning.md",
+        "kind": "relative",
+        "line": 48
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DualQuaternionSkinning.agent.json",
+        "kind": "relative",
+        "line": 48
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DualQuaternionSkinningVerification-20261028.md`",
+        "target": "DualQuaternionSkinningVerification-20261028.md",
+        "kind": "relative",
+        "line": 49
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DualQuaternionSkinningVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 49
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DynamicMorphBindVerification-20261028.md`",
+        "target": "DynamicMorphBindVerification-20261028.md",
+        "kind": "relative",
+        "line": 50
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DynamicMorphBindVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 50
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/DynamicRetargetVerification-20261028.md`",
+        "target": "DynamicRetargetVerification-20261028.md",
+        "kind": "relative",
+        "line": 51
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "DynamicRetargetVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 51
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/EditLayers.md`",
+        "target": "EditLayers.md",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "EditLayers.agent.json",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/EditorRigFollow.md`",
+        "target": "EditorRigFollow.md",
+        "kind": "relative",
+        "line": 53
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "EditorRigFollow.agent.json",
+        "kind": "relative",
+        "line": 53
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/EditorRigFollowVerification-20261029.md`",
+        "target": "EditorRigFollowVerification-20261029.md",
+        "kind": "relative",
+        "line": 54
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "EditorRigFollowVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 54
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/EvaluatedEditLayers.md`",
+        "target": "EvaluatedEditLayers.md",
+        "kind": "relative",
+        "line": 55
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "EvaluatedEditLayers.agent.json",
+        "kind": "relative",
+        "line": 55
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ExternalEdits.md`",
+        "target": "ExternalEdits.md",
+        "kind": "relative",
+        "line": 56
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ExternalEdits.agent.json",
+        "kind": "relative",
+        "line": 56
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ExternalTriangleEdits.md`",
+        "target": "ExternalTriangleEdits.md",
+        "kind": "relative",
+        "line": 57
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ExternalTriangleEdits.agent.json",
+        "kind": "relative",
+        "line": 57
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FaceAssets.md`",
+        "target": "FaceAssets.md",
+        "kind": "relative",
+        "line": 58
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FaceAssets.agent.json",
+        "kind": "relative",
+        "line": 58
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FacePoseRig.md`",
+        "target": "FacePoseRig.md",
+        "kind": "relative",
+        "line": 59
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FacePoseRig.agent.json",
+        "kind": "relative",
+        "line": 59
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxAnimation.md`",
+        "target": "FbxAnimation.md",
+        "kind": "relative",
+        "line": 60
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxAnimation.agent.json",
+        "kind": "relative",
+        "line": 60
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxAnimationImport.md`",
+        "target": "FbxAnimationImport.md",
+        "kind": "relative",
+        "line": 61
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxAnimationImport.agent.json",
+        "kind": "relative",
+        "line": 61
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxAnimationImportVerification-20261028.md`",
+        "target": "FbxAnimationImportVerification-20261028.md",
+        "kind": "relative",
+        "line": 62
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxAnimationImportVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 62
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxAnimationVerification-20261028.md`",
+        "target": "FbxAnimationVerification-20261028.md",
+        "kind": "relative",
+        "line": 63
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxAnimationVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 63
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxAuthoredTangentsVerification-20261028.md`",
+        "target": "FbxAuthoredTangentsVerification-20261028.md",
+        "kind": "relative",
+        "line": 64
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxAuthoredTangentsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 64
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxAuthoring.md`",
+        "target": "FbxAuthoring.md",
+        "kind": "relative",
+        "line": 65
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxAuthoring.agent.json",
+        "kind": "relative",
+        "line": 65
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxImageResolution.md`",
+        "target": "FbxImageResolution.md",
+        "kind": "relative",
+        "line": 66
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxImageResolution.agent.json",
+        "kind": "relative",
+        "line": 66
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxImageResolutionVerification-20261028.md`",
+        "target": "FbxImageResolutionVerification-20261028.md",
+        "kind": "relative",
+        "line": 67
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxImageResolutionVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 67
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxTangents.md`",
+        "target": "FbxTangents.md",
+        "kind": "relative",
+        "line": 68
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxTangents.agent.json",
+        "kind": "relative",
+        "line": 68
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/FbxTangentsVerification-20261028.md`",
+        "target": "FbxTangentsVerification-20261028.md",
+        "kind": "relative",
+        "line": 69
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "FbxTangentsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 69
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbAnimation.md`",
+        "target": "GlbAnimation.md",
+        "kind": "relative",
+        "line": 70
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbAnimation.agent.json",
+        "kind": "relative",
+        "line": 70
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbAnimationBake.md`",
+        "target": "GlbAnimationBake.md",
+        "kind": "relative",
+        "line": 71
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbAnimationBake.agent.json",
+        "kind": "relative",
+        "line": 71
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbAnimationVerification-20261028.md`",
+        "target": "GlbAnimationVerification-20261028.md",
+        "kind": "relative",
+        "line": 72
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbAnimationVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 72
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbAuthoredTangents.md`",
+        "target": "GlbAuthoredTangents.md",
+        "kind": "relative",
+        "line": 73
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbAuthoredTangents.agent.json",
+        "kind": "relative",
+        "line": 73
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbAuthoredTangentsVerification-20261028.md`",
+        "target": "GlbAuthoredTangentsVerification-20261028.md",
+        "kind": "relative",
+        "line": 74
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbAuthoredTangentsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 74
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbDocument.md`",
+        "target": "GlbDocument.md",
+        "kind": "relative",
+        "line": 75
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbDocument.agent.json",
+        "kind": "relative",
+        "line": 75
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbDocumentVerification-20261028.md`",
+        "target": "GlbDocumentVerification-20261028.md",
+        "kind": "relative",
+        "line": 76
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbDocumentVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 76
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbExternalEdits.md`",
+        "target": "GlbExternalEdits.md",
+        "kind": "relative",
+        "line": 77
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbExternalEdits.agent.json",
+        "kind": "relative",
+        "line": 77
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbImport.md`",
+        "target": "GlbImport.md",
+        "kind": "relative",
+        "line": 78
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbImport.agent.json",
+        "kind": "relative",
+        "line": 78
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbImportVerification-20261028.md`",
+        "target": "GlbImportVerification-20261028.md",
+        "kind": "relative",
+        "line": 79
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbImportVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 79
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbMixedAttributesVerification-20261029.md`",
+        "target": "GlbMixedAttributesVerification-20261029.md",
+        "kind": "relative",
+        "line": 80
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbMixedAttributesVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 80
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbMorphAnimationVerification-20261028.md`",
+        "target": "GlbMorphAnimationVerification-20261028.md",
+        "kind": "relative",
+        "line": 81
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbMorphAnimationVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 81
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbMultiSkin.md`",
+        "target": "GlbMultiSkin.md",
+        "kind": "relative",
+        "line": 82
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbMultiSkin.agent.json",
+        "kind": "relative",
+        "line": 82
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbMultiSkinVerification-20261028.md`",
+        "target": "GlbMultiSkinVerification-20261028.md",
+        "kind": "relative",
+        "line": 83
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbMultiSkinVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 83
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbPointIdentity.md`",
+        "target": "GlbPointIdentity.md",
+        "kind": "relative",
+        "line": 84
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbPointIdentity.agent.json",
+        "kind": "relative",
+        "line": 84
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/GlbPointIdentityVerification-20261028.md`",
+        "target": "GlbPointIdentityVerification-20261028.md",
+        "kind": "relative",
+        "line": 85
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "GlbPointIdentityVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 85
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanAccessories.md`",
+        "target": "HumanAccessories.md",
+        "kind": "relative",
+        "line": 86
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanAccessories.agent.json",
+        "kind": "relative",
+        "line": 86
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanAccessoriesVerification-20261029.md`",
+        "target": "HumanAccessoriesVerification-20261029.md",
+        "kind": "relative",
+        "line": 87
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanAccessoriesVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 87
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanAccessoryAdditionVerification-20261029.md`",
+        "target": "HumanAccessoryAdditionVerification-20261029.md",
+        "kind": "relative",
+        "line": 88
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanAccessoryAdditionVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 88
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanAccessoryCompositionVerification-20261029.md`",
+        "target": "HumanAccessoryCompositionVerification-20261029.md",
+        "kind": "relative",
+        "line": 89
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanAccessoryCompositionVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 89
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanAccessoryRemovalVerification-20261029.md`",
+        "target": "HumanAccessoryRemovalVerification-20261029.md",
+        "kind": "relative",
+        "line": 90
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanAccessoryRemovalVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 90
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanAccessorySwitchVerification-20261029.md`",
+        "target": "HumanAccessorySwitchVerification-20261029.md",
+        "kind": "relative",
+        "line": 91
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanAccessorySwitchVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 91
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanInterchangeVerification-20261029.md`",
+        "target": "HumanInterchangeVerification-20261029.md",
+        "kind": "relative",
+        "line": 92
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanInterchangeVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 92
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanJointNaming.md`",
+        "target": "HumanJointNaming.md",
+        "kind": "relative",
+        "line": 93
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanJointNaming.agent.json",
+        "kind": "relative",
+        "line": 93
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanJointNamingVerification-20261027.md`",
+        "target": "HumanJointNamingVerification-20261027.md",
+        "kind": "relative",
+        "line": 94
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanJointNamingVerification-20261027.agent.json",
+        "kind": "relative",
+        "line": 94
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanMorphology.md`",
+        "target": "HumanMorphology.md",
+        "kind": "relative",
+        "line": 95
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanMorphology.agent.json",
+        "kind": "relative",
+        "line": 95
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanPoseDirections.md`",
+        "target": "HumanPoseDirections.md",
+        "kind": "relative",
+        "line": 96
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanPoseDirections.agent.json",
+        "kind": "relative",
+        "line": 96
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanPosePlanner.md`",
+        "target": "HumanPosePlanner.md",
+        "kind": "relative",
+        "line": 97
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanPosePlanner.agent.json",
+        "kind": "relative",
+        "line": 97
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanPosePlannerVerification-20261027.md`",
+        "target": "HumanPosePlannerVerification-20261027.md",
+        "kind": "relative",
+        "line": 98
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanPosePlannerVerification-20261027.agent.json",
+        "kind": "relative",
+        "line": 98
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanPoseRetarget.md`",
+        "target": "HumanPoseRetarget.md",
+        "kind": "relative",
+        "line": 99
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanPoseRetarget.agent.json",
+        "kind": "relative",
+        "line": 99
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/HumanoidCharacterization.md`",
+        "target": "HumanoidCharacterization.md",
+        "kind": "relative",
+        "line": 100
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "HumanoidCharacterization.agent.json",
+        "kind": "relative",
+        "line": 100
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/InstanceTransfer.md`",
+        "target": "InstanceTransfer.md",
+        "kind": "relative",
+        "line": 101
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "InstanceTransfer.agent.json",
+        "kind": "relative",
+        "line": 101
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/InstanceTransferVerification-20261029.md`",
+        "target": "InstanceTransferVerification-20261029.md",
+        "kind": "relative",
+        "line": 102
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "InstanceTransferVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 102
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/LinearizedSnapshotVerification-20261028.md`",
+        "target": "LinearizedSnapshotVerification-20261028.md",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "LinearizedSnapshotVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 103
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/LogicalMorphChannels.md`",
+        "target": "LogicalMorphChannels.md",
+        "kind": "relative",
+        "line": 104
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "LogicalMorphChannels.agent.json",
+        "kind": "relative",
+        "line": 104
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/LogicalMorphChannelsVerification-20261028.md`",
+        "target": "LogicalMorphChannelsVerification-20261028.md",
+        "kind": "relative",
+        "line": 105
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "LogicalMorphChannelsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 105
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MaterialSurface.md`",
+        "target": "MaterialSurface.md",
+        "kind": "relative",
+        "line": 106
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MaterialSurface.agent.json",
+        "kind": "relative",
+        "line": 106
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MaterialSurfaceVerification-20261029.md`",
+        "target": "MaterialSurfaceVerification-20261029.md",
+        "kind": "relative",
+        "line": 107
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MaterialSurfaceVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 107
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshMaskProjection.md`",
+        "target": "MeshMaskProjection.md",
+        "kind": "relative",
+        "line": 108
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshMaskProjection.agent.json",
+        "kind": "relative",
+        "line": 108
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshMaskProjectionVerification-20261028.md`",
+        "target": "MeshMaskProjectionVerification-20261028.md",
+        "kind": "relative",
+        "line": 109
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshMaskProjectionVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 109
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshPainting.md`",
+        "target": "MeshPainting.md",
+        "kind": "relative",
+        "line": 110
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshPainting.agent.json",
+        "kind": "relative",
+        "line": 110
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshScreenSelection.md`",
+        "target": "MeshScreenSelection.md",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshScreenSelection.agent.json",
+        "kind": "relative",
+        "line": 111
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshScreenSelectionVerification-20261029.md`",
+        "target": "MeshScreenSelectionVerification-20261029.md",
+        "kind": "relative",
+        "line": 112
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshScreenSelectionVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 112
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshSymmetry.md`",
+        "target": "MeshSymmetry.md",
+        "kind": "relative",
+        "line": 113
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshSymmetry.agent.json",
+        "kind": "relative",
+        "line": 113
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshTangents.md`",
+        "target": "MeshTangents.md",
+        "kind": "relative",
+        "line": 114
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshTangents.agent.json",
+        "kind": "relative",
+        "line": 114
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshTangentsVerification-20261028.md`",
+        "target": "MeshTangentsVerification-20261028.md",
+        "kind": "relative",
+        "line": 115
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshTangentsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 115
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MeshTopology.md`",
+        "target": "MeshTopology.md",
+        "kind": "relative",
+        "line": 116
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MeshTopology.agent.json",
+        "kind": "relative",
+        "line": 116
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MorphChannelRig.md`",
+        "target": "MorphChannelRig.md",
+        "kind": "relative",
+        "line": 117
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MorphChannelRig.agent.json",
+        "kind": "relative",
+        "line": 117
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MorphChannelRigVerification-20261028.md`",
+        "target": "MorphChannelRigVerification-20261028.md",
+        "kind": "relative",
+        "line": 118
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MorphChannelRigVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 118
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MorphNormals.md`",
+        "target": "MorphNormals.md",
+        "kind": "relative",
+        "line": 119
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MorphNormals.agent.json",
+        "kind": "relative",
+        "line": 119
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MultipleUvSets.md`",
+        "target": "MultipleUvSets.md",
+        "kind": "relative",
+        "line": 120
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MultipleUvSets.agent.json",
+        "kind": "relative",
+        "line": 120
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/MultipleUvSetsVerification-20261028.md`",
+        "target": "MultipleUvSetsVerification-20261028.md",
+        "kind": "relative",
+        "line": 121
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "MultipleUvSetsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 121
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/NSCharacter.md`",
+        "target": "NSCharacter.md",
+        "kind": "relative",
+        "line": 122
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "NSCharacter.agent.json",
+        "kind": "relative",
+        "line": 122
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/NamedPointSelections.md`",
+        "target": "NamedPointSelections.md",
+        "kind": "relative",
+        "line": 123
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "NamedPointSelections.agent.json",
+        "kind": "relative",
+        "line": 123
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/NamedPointSelectionsVerification-20261028.md`",
+        "target": "NamedPointSelectionsVerification-20261028.md",
+        "kind": "relative",
+        "line": 124
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "NamedPointSelectionsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 124
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/NormalMaps.md`",
+        "target": "NormalMaps.md",
+        "kind": "relative",
+        "line": 125
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "NormalMaps.agent.json",
+        "kind": "relative",
+        "line": 125
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/NormalMapsVerification-20261028.md`",
+        "target": "NormalMapsVerification-20261028.md",
+        "kind": "relative",
+        "line": 126
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "NormalMapsVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 126
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Object3DAnimation.md`",
+        "target": "Object3DAnimation.md",
+        "kind": "relative",
+        "line": 127
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Object3DAnimation.agent.json",
+        "kind": "relative",
+        "line": 127
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Object3DAnimationVerification-20261029.md`",
+        "target": "Object3DAnimationVerification-20261029.md",
+        "kind": "relative",
+        "line": 128
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Object3DAnimationVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 128
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Object3DEngine.md`",
+        "target": "Object3DEngine.md",
+        "kind": "relative",
+        "line": 129
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Object3DEngine.agent.json",
+        "kind": "relative",
+        "line": 129
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Object3DProject.md`",
+        "target": "Object3DProject.md",
+        "kind": "relative",
+        "line": 130
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Object3DProject.agent.json",
+        "kind": "relative",
+        "line": 130
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/PoseCorrectiveAnimation.md`",
+        "target": "PoseCorrectiveAnimation.md",
+        "kind": "relative",
+        "line": 131
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "PoseCorrectiveAnimation.agent.json",
+        "kind": "relative",
+        "line": 131
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/PoseCorrectives.md`",
+        "target": "PoseCorrectives.md",
+        "kind": "relative",
+        "line": 132
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "PoseCorrectives.agent.json",
+        "kind": "relative",
+        "line": 132
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/PoseFrames.md`",
+        "target": "PoseFrames.md",
+        "kind": "relative",
+        "line": 133
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "PoseFrames.agent.json",
+        "kind": "relative",
+        "line": 133
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/PoseReference.md`",
+        "target": "PoseReference.md",
+        "kind": "relative",
+        "line": 134
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "PoseReference.agent.json",
+        "kind": "relative",
+        "line": 134
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/PoseRetarget.md`",
+        "target": "PoseRetarget.md",
+        "kind": "relative",
+        "line": 135
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "PoseRetarget.agent.json",
+        "kind": "relative",
+        "line": 135
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/PoseRetargetVerification-20261027.md`",
+        "target": "PoseRetargetVerification-20261027.md",
+        "kind": "relative",
+        "line": 136
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "PoseRetargetVerification-20261027.agent.json",
+        "kind": "relative",
+        "line": 136
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/PoseSnapshots.md`",
+        "target": "PoseSnapshots.md",
+        "kind": "relative",
+        "line": 137
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "PoseSnapshots.agent.json",
+        "kind": "relative",
+        "line": 137
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProgressiveMorphAnimation.md`",
+        "target": "ProgressiveMorphAnimation.md",
+        "kind": "relative",
+        "line": 138
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProgressiveMorphAnimation.agent.json",
+        "kind": "relative",
+        "line": 138
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProgressiveMorphAnimationVerification-20261029.md`",
+        "target": "ProgressiveMorphAnimationVerification-20261029.md",
+        "kind": "relative",
+        "line": 139
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProgressiveMorphAnimationVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 139
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProgressiveMorphRig.md`",
+        "target": "ProgressiveMorphRig.md",
+        "kind": "relative",
+        "line": 140
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProgressiveMorphRig.agent.json",
+        "kind": "relative",
+        "line": 140
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProgressiveMorphVerification-20261029.md`",
+        "target": "ProgressiveMorphVerification-20261029.md",
+        "kind": "relative",
+        "line": 141
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProgressiveMorphVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 141
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProgressiveTakesVerification-20261029.md`",
+        "target": "ProgressiveTakesVerification-20261029.md",
+        "kind": "relative",
+        "line": 142
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProgressiveTakesVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 142
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProjectAnimation.md`",
+        "target": "ProjectAnimation.md",
+        "kind": "relative",
+        "line": 143
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProjectAnimation.agent.json",
+        "kind": "relative",
+        "line": 143
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProjectAnimationVerification-20261029.md`",
+        "target": "ProjectAnimationVerification-20261029.md",
+        "kind": "relative",
+        "line": 144
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProjectAnimationVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 144
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/ProjectIntegrityVerification-20261028.md`",
+        "target": "ProjectIntegrityVerification-20261028.md",
+        "kind": "relative",
+        "line": 145
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "ProjectIntegrityVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 145
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Resources.md`",
+        "target": "Resources.md",
+        "kind": "relative",
+        "line": 146
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Resources.agent.json",
+        "kind": "relative",
+        "line": 146
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/RigControlSamples.md`",
+        "target": "RigControlSamples.md",
+        "kind": "relative",
+        "line": 147
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "RigControlSamples.agent.json",
+        "kind": "relative",
+        "line": 147
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/RigControlSamplesVerification-20261027.md`",
+        "target": "RigControlSamplesVerification-20261027.md",
+        "kind": "relative",
+        "line": 148
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "RigControlSamplesVerification-20261027.agent.json",
+        "kind": "relative",
+        "line": 148
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/RigSampleSkinningVerification-20261029.md`",
+        "target": "RigSampleSkinningVerification-20261029.md",
+        "kind": "relative",
+        "line": 149
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "RigSampleSkinningVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 149
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SelectionTransfer.md`",
+        "target": "SelectionTransfer.md",
+        "kind": "relative",
+        "line": 150
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SelectionTransfer.agent.json",
+        "kind": "relative",
+        "line": 150
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SelectionTransferVerification-20261029.md`",
+        "target": "SelectionTransferVerification-20261029.md",
+        "kind": "relative",
+        "line": 151
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SelectionTransferVerification-20261029.agent.json",
+        "kind": "relative",
+        "line": 151
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SkeletonEditing.md`",
+        "target": "SkeletonEditing.md",
+        "kind": "relative",
+        "line": 152
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SkeletonEditing.agent.json",
+        "kind": "relative",
+        "line": 152
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SkeletonEnvelopes.md`",
+        "target": "SkeletonEnvelopes.md",
+        "kind": "relative",
+        "line": 153
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SkeletonEnvelopes.agent.json",
+        "kind": "relative",
+        "line": 153
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SkeletonEnvelopesVerification-20261028.md`",
+        "target": "SkeletonEnvelopesVerification-20261028.md",
+        "kind": "relative",
+        "line": 154
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SkeletonEnvelopesVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 154
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SkeletonScale.md`",
+        "target": "SkeletonScale.md",
+        "kind": "relative",
+        "line": 155
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SkeletonScale.agent.json",
+        "kind": "relative",
+        "line": 155
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SkinSurface.md`",
+        "target": "SkinSurface.md",
+        "kind": "relative",
+        "line": 156
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SkinSurface.agent.json",
+        "kind": "relative",
+        "line": 156
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SkinningProfileTransferVerification-20261028.md`",
+        "target": "SkinningProfileTransferVerification-20261028.md",
+        "kind": "relative",
+        "line": 157
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SkinningProfileTransferVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 157
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SurfaceCollision.md`",
+        "target": "SurfaceCollision.md",
+        "kind": "relative",
+        "line": 158
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SurfaceCollision.agent.json",
+        "kind": "relative",
+        "line": 158
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SurfaceFairing.md`",
+        "target": "SurfaceFairing.md",
+        "kind": "relative",
+        "line": 159
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SurfaceFairing.agent.json",
+        "kind": "relative",
+        "line": 159
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SurfaceFitting.md`",
+        "target": "SurfaceFitting.md",
+        "kind": "relative",
+        "line": 160
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SurfaceFitting.agent.json",
+        "kind": "relative",
+        "line": 160
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SurfaceGeodesicSkin.md`",
+        "target": "SurfaceGeodesicSkin.md",
+        "kind": "relative",
+        "line": 161
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SurfaceGeodesicSkin.agent.json",
+        "kind": "relative",
+        "line": 161
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/SurfaceGeodesicSkinVerification-20261028.md`",
+        "target": "SurfaceGeodesicSkinVerification-20261028.md",
+        "kind": "relative",
+        "line": 162
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SurfaceGeodesicSkinVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 162
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateAdapt.md`",
+        "target": "TemplateAdapt.md",
+        "kind": "relative",
+        "line": 163
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateAdapt.agent.json",
+        "kind": "relative",
+        "line": 163
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateAdaptVerification-20261028.md`",
+        "target": "TemplateAdaptVerification-20261028.md",
+        "kind": "relative",
+        "line": 164
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateAdaptVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 164
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateControls.md`",
+        "target": "TemplateControls.md",
+        "kind": "relative",
+        "line": 165
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateControls.agent.json",
+        "kind": "relative",
+        "line": 165
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateFollowersVerification-20261028.md`",
+        "target": "TemplateFollowersVerification-20261028.md",
+        "kind": "relative",
+        "line": 166
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateFollowersVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 166
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateMorphBaking.md`",
+        "target": "TemplateMorphBaking.md",
+        "kind": "relative",
+        "line": 167
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateMorphBaking.agent.json",
+        "kind": "relative",
+        "line": 167
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateMorphBakingVerification-20261028.md`",
+        "target": "TemplateMorphBakingVerification-20261028.md",
+        "kind": "relative",
+        "line": 168
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateMorphBakingVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 168
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateMorphProjectVerification-20261028.md`",
+        "target": "TemplateMorphProjectVerification-20261028.md",
+        "kind": "relative",
+        "line": 169
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateMorphProjectVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 169
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateRigProjection.md`",
+        "target": "TemplateRigProjection.md",
+        "kind": "relative",
+        "line": 170
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateRigProjection.agent.json",
+        "kind": "relative",
+        "line": 170
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateRigProjectionVerification-20261028.md`",
+        "target": "TemplateRigProjectionVerification-20261028.md",
+        "kind": "relative",
+        "line": 171
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateRigProjectionVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 171
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateRigTransfer.md`",
+        "target": "TemplateRigTransfer.md",
+        "kind": "relative",
+        "line": 172
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateRigTransfer.agent.json",
+        "kind": "relative",
+        "line": 172
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateRigTransferVerification-20261028.md`",
+        "target": "TemplateRigTransferVerification-20261028.md",
+        "kind": "relative",
+        "line": 173
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateRigTransferVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 173
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateRigYawVerification-20261028.md`",
+        "target": "TemplateRigYawVerification-20261028.md",
+        "kind": "relative",
+        "line": 174
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateRigYawVerification-20261028.agent.json",
+        "kind": "relative",
+        "line": 174
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/TemplateShapeFit.md`",
+        "target": "TemplateShapeFit.md",
+        "kind": "relative",
+        "line": 175
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "TemplateShapeFit.agent.json",
+        "kind": "relative",
+        "line": 175
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/USD.md`",
+        "target": "USD.md",
+        "kind": "relative",
+        "line": 176
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "USD.agent.json",
+        "kind": "relative",
+        "line": 176
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/Verification.md`",
+        "target": "Verification.md",
+        "kind": "relative",
+        "line": 177
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "Verification.agent.json",
+        "kind": "relative",
+        "line": 177
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/WindowsBuildAndRun.md`",
+        "target": "WindowsBuildAndRun.md",
+        "kind": "relative",
+        "line": 178
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "WindowsBuildAndRun.agent.json",
+        "kind": "relative",
+        "line": 178
+      },
+      {
+        "block_id": "b000008",
+        "label": "`docs/documentation-structure.md`",
+        "target": "documentation-structure.md",
+        "kind": "relative",
+        "line": 179
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "documentation-structure.agent.json",
+        "kind": "relative",
+        "line": 179
+      },
+      {
+        "block_id": "b000008",
+        "label": "`tests/fixtures/project/README.md`",
+        "target": "../tests/fixtures/project/README.md",
+        "kind": "relative",
+        "line": 180
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "mirrors/tests/fixtures/project/README.agent.json",
+        "kind": "relative",
+        "line": 180
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000008",
+        "columns": [
+          "Document",
+          "Agent JSON"
+        ],
+        "rows": [
+          [
+            "[`AGENT.md`](../AGENT.md)",
+            "[JSON](entrypoints/AGENT.agent.json)"
+          ],
+          [
+            "[`README.md`](../README.md)",
+            "[JSON](entrypoints/README.agent.json)"
+          ],
+          [
+            "[`data/MakeHuman/LICENSE.ASSETS.md`](../data/MakeHuman/LICENSE.ASSETS.md)",
+            "[JSON](mirrors/data/MakeHuman/LICENSE.ASSETS.agent.json)"
+          ],
+          [
+            "[`data/MakeHuman/LICENSE.md`](../data/MakeHuman/LICENSE.md)",
+            "[JSON](mirrors/data/MakeHuman/LICENSE.agent.json)"
+          ],
+          [
+            "[`data/MakeHuman/PROVENANCE.md`](../data/MakeHuman/PROVENANCE.md)",
+            "[JSON](mirrors/data/MakeHuman/PROVENANCE.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanExpressions/LICENSE.ASSETS.md`](../data/MakeHumanExpressions/LICENSE.ASSETS.md)",
+            "[JSON](mirrors/data/MakeHumanExpressions/LICENSE.ASSETS.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanExpressions/LICENSE.md`](../data/MakeHumanExpressions/LICENSE.md)",
+            "[JSON](mirrors/data/MakeHumanExpressions/LICENSE.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanExpressions/PROVENANCE.md`](../data/MakeHumanExpressions/PROVENANCE.md)",
+            "[JSON](mirrors/data/MakeHumanExpressions/PROVENANCE.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanFace/LICENSE.ASSETS.md`](../data/MakeHumanFace/LICENSE.ASSETS.md)",
+            "[JSON](mirrors/data/MakeHumanFace/LICENSE.ASSETS.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanFace/LICENSE.md`](../data/MakeHumanFace/LICENSE.md)",
+            "[JSON](mirrors/data/MakeHumanFace/LICENSE.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanFace/PROVENANCE.md`](../data/MakeHumanFace/PROVENANCE.md)",
+            "[JSON](mirrors/data/MakeHumanFace/PROVENANCE.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanMacro/LICENSE.ASSETS.md`](../data/MakeHumanMacro/LICENSE.ASSETS.md)",
+            "[JSON](mirrors/data/MakeHumanMacro/LICENSE.ASSETS.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanMacro/LICENSE.md`](../data/MakeHumanMacro/LICENSE.md)",
+            "[JSON](mirrors/data/MakeHumanMacro/LICENSE.agent.json)"
+          ],
+          [
+            "[`data/MakeHumanMacro/PROVENANCE.md`](../data/MakeHumanMacro/PROVENANCE.md)",
+            "[JSON](mirrors/data/MakeHumanMacro/PROVENANCE.agent.json)"
+          ],
+          [
+            "[`docs/Actor.md`](Actor.md)",
+            "[JSON](Actor.agent.json)"
+          ],
+          [
+            "[`docs/AnimationRetarget.md`](AnimationRetarget.md)",
+            "[JSON](AnimationRetarget.agent.json)"
+          ],
+          [
+            "[`docs/AnimationRetargetVerification-20261027.md`](AnimationRetargetVerification-20261027.md)",
+            "[JSON](AnimationRetargetVerification-20261027.agent.json)"
+          ],
+          [
+            "[`docs/AutomaticConventionDetectionVerification-20261029.md`](AutomaticConventionDetectionVerification-20261029.md)",
+            "[JSON](AutomaticConventionDetectionVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/AutomaticCorrectives.md`](AutomaticCorrectives.md)",
+            "[JSON](AutomaticCorrectives.agent.json)"
+          ],
+          [
+            "[`docs/AutomaticCorrectivesVerification-20261029.md`](AutomaticCorrectivesVerification-20261029.md)",
+            "[JSON](AutomaticCorrectivesVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/AutomaticSurfaceFitting.md`](AutomaticSurfaceFitting.md)",
+            "[JSON](AutomaticSurfaceFitting.agent.json)"
+          ],
+          [
+            "[`docs/BaseNormalEditing.md`](BaseNormalEditing.md)",
+            "[JSON](BaseNormalEditing.agent.json)"
+          ],
+          [
+            "[`docs/BaseNormalVerification-20261028.md`](BaseNormalVerification-20261028.md)",
+            "[JSON](BaseNormalVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/Changes-20261021.md`](Changes-20261021.md)",
+            "[JSON](Changes-20261021.agent.json)"
+          ],
+          [
+            "[`docs/Character.md`](Character.md)",
+            "[JSON](Character.agent.json)"
+          ],
+          [
+            "[`docs/CharacterCreatorG3Verification-20261027.md`](CharacterCreatorG3Verification-20261027.md)",
+            "[JSON](CharacterCreatorG3Verification-20261027.agent.json)"
+          ],
+          [
+            "[`docs/CharacterTemplate.md`](CharacterTemplate.md)",
+            "[JSON](CharacterTemplate.agent.json)"
+          ],
+          [
+            "[`docs/DefaultMorphWeights.md`](DefaultMorphWeights.md)",
+            "[JSON](DefaultMorphWeights.agent.json)"
+          ],
+          [
+            "[`docs/DefaultMorphWeightsVerification-20261028.md`](DefaultMorphWeightsVerification-20261028.md)",
+            "[JSON](DefaultMorphWeightsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DeformationSnapshotVerification-20261027.md`](DeformationSnapshotVerification-20261027.md)",
+            "[JSON](DeformationSnapshotVerification-20261027.agent.json)"
+          ],
+          [
+            "[`docs/DeformationSnapshots.md`](DeformationSnapshots.md)",
+            "[JSON](DeformationSnapshots.agent.json)"
+          ],
+          [
+            "[`docs/DnaEditing.md`](DnaEditing.md)",
+            "[JSON](DnaEditing.agent.json)"
+          ],
+          [
+            "[`docs/DnaMlGraphVerification-20261028.md`](DnaMlGraphVerification-20261028.md)",
+            "[JSON](DnaMlGraphVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DnaMlVerification-20261028.md`](DnaMlVerification-20261028.md)",
+            "[JSON](DnaMlVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DnaRbfVerification-20261028.md`](DnaRbfVerification-20261028.md)",
+            "[JSON](DnaRbfVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DnaRig.md`](DnaRig.md)",
+            "[JSON](DnaRig.agent.json)"
+          ],
+          [
+            "[`docs/DnaTwistVerification-20261028.md`](DnaTwistVerification-20261028.md)",
+            "[JSON](DnaTwistVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DualQuaternionProfileVerification-20261028.md`](DualQuaternionProfileVerification-20261028.md)",
+            "[JSON](DualQuaternionProfileVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DualQuaternionSkinning.md`](DualQuaternionSkinning.md)",
+            "[JSON](DualQuaternionSkinning.agent.json)"
+          ],
+          [
+            "[`docs/DualQuaternionSkinningVerification-20261028.md`](DualQuaternionSkinningVerification-20261028.md)",
+            "[JSON](DualQuaternionSkinningVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DynamicMorphBindVerification-20261028.md`](DynamicMorphBindVerification-20261028.md)",
+            "[JSON](DynamicMorphBindVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/DynamicRetargetVerification-20261028.md`](DynamicRetargetVerification-20261028.md)",
+            "[JSON](DynamicRetargetVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/EditLayers.md`](EditLayers.md)",
+            "[JSON](EditLayers.agent.json)"
+          ],
+          [
+            "[`docs/EditorRigFollow.md`](EditorRigFollow.md)",
+            "[JSON](EditorRigFollow.agent.json)"
+          ],
+          [
+            "[`docs/EditorRigFollowVerification-20261029.md`](EditorRigFollowVerification-20261029.md)",
+            "[JSON](EditorRigFollowVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/EvaluatedEditLayers.md`](EvaluatedEditLayers.md)",
+            "[JSON](EvaluatedEditLayers.agent.json)"
+          ],
+          [
+            "[`docs/ExternalEdits.md`](ExternalEdits.md)",
+            "[JSON](ExternalEdits.agent.json)"
+          ],
+          [
+            "[`docs/ExternalTriangleEdits.md`](ExternalTriangleEdits.md)",
+            "[JSON](ExternalTriangleEdits.agent.json)"
+          ],
+          [
+            "[`docs/FaceAssets.md`](FaceAssets.md)",
+            "[JSON](FaceAssets.agent.json)"
+          ],
+          [
+            "[`docs/FacePoseRig.md`](FacePoseRig.md)",
+            "[JSON](FacePoseRig.agent.json)"
+          ],
+          [
+            "[`docs/FbxAnimation.md`](FbxAnimation.md)",
+            "[JSON](FbxAnimation.agent.json)"
+          ],
+          [
+            "[`docs/FbxAnimationImport.md`](FbxAnimationImport.md)",
+            "[JSON](FbxAnimationImport.agent.json)"
+          ],
+          [
+            "[`docs/FbxAnimationImportVerification-20261028.md`](FbxAnimationImportVerification-20261028.md)",
+            "[JSON](FbxAnimationImportVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/FbxAnimationVerification-20261028.md`](FbxAnimationVerification-20261028.md)",
+            "[JSON](FbxAnimationVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/FbxAuthoredTangentsVerification-20261028.md`](FbxAuthoredTangentsVerification-20261028.md)",
+            "[JSON](FbxAuthoredTangentsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/FbxAuthoring.md`](FbxAuthoring.md)",
+            "[JSON](FbxAuthoring.agent.json)"
+          ],
+          [
+            "[`docs/FbxImageResolution.md`](FbxImageResolution.md)",
+            "[JSON](FbxImageResolution.agent.json)"
+          ],
+          [
+            "[`docs/FbxImageResolutionVerification-20261028.md`](FbxImageResolutionVerification-20261028.md)",
+            "[JSON](FbxImageResolutionVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/FbxTangents.md`](FbxTangents.md)",
+            "[JSON](FbxTangents.agent.json)"
+          ],
+          [
+            "[`docs/FbxTangentsVerification-20261028.md`](FbxTangentsVerification-20261028.md)",
+            "[JSON](FbxTangentsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/GlbAnimation.md`](GlbAnimation.md)",
+            "[JSON](GlbAnimation.agent.json)"
+          ],
+          [
+            "[`docs/GlbAnimationBake.md`](GlbAnimationBake.md)",
+            "[JSON](GlbAnimationBake.agent.json)"
+          ],
+          [
+            "[`docs/GlbAnimationVerification-20261028.md`](GlbAnimationVerification-20261028.md)",
+            "[JSON](GlbAnimationVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/GlbAuthoredTangents.md`](GlbAuthoredTangents.md)",
+            "[JSON](GlbAuthoredTangents.agent.json)"
+          ],
+          [
+            "[`docs/GlbAuthoredTangentsVerification-20261028.md`](GlbAuthoredTangentsVerification-20261028.md)",
+            "[JSON](GlbAuthoredTangentsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/GlbDocument.md`](GlbDocument.md)",
+            "[JSON](GlbDocument.agent.json)"
+          ],
+          [
+            "[`docs/GlbDocumentVerification-20261028.md`](GlbDocumentVerification-20261028.md)",
+            "[JSON](GlbDocumentVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/GlbExternalEdits.md`](GlbExternalEdits.md)",
+            "[JSON](GlbExternalEdits.agent.json)"
+          ],
+          [
+            "[`docs/GlbImport.md`](GlbImport.md)",
+            "[JSON](GlbImport.agent.json)"
+          ],
+          [
+            "[`docs/GlbImportVerification-20261028.md`](GlbImportVerification-20261028.md)",
+            "[JSON](GlbImportVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/GlbMixedAttributesVerification-20261029.md`](GlbMixedAttributesVerification-20261029.md)",
+            "[JSON](GlbMixedAttributesVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/GlbMorphAnimationVerification-20261028.md`](GlbMorphAnimationVerification-20261028.md)",
+            "[JSON](GlbMorphAnimationVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/GlbMultiSkin.md`](GlbMultiSkin.md)",
+            "[JSON](GlbMultiSkin.agent.json)"
+          ],
+          [
+            "[`docs/GlbMultiSkinVerification-20261028.md`](GlbMultiSkinVerification-20261028.md)",
+            "[JSON](GlbMultiSkinVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/GlbPointIdentity.md`](GlbPointIdentity.md)",
+            "[JSON](GlbPointIdentity.agent.json)"
+          ],
+          [
+            "[`docs/GlbPointIdentityVerification-20261028.md`](GlbPointIdentityVerification-20261028.md)",
+            "[JSON](GlbPointIdentityVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/HumanAccessories.md`](HumanAccessories.md)",
+            "[JSON](HumanAccessories.agent.json)"
+          ],
+          [
+            "[`docs/HumanAccessoriesVerification-20261029.md`](HumanAccessoriesVerification-20261029.md)",
+            "[JSON](HumanAccessoriesVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/HumanAccessoryAdditionVerification-20261029.md`](HumanAccessoryAdditionVerification-20261029.md)",
+            "[JSON](HumanAccessoryAdditionVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/HumanAccessoryCompositionVerification-20261029.md`](HumanAccessoryCompositionVerification-20261029.md)",
+            "[JSON](HumanAccessoryCompositionVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/HumanAccessoryRemovalVerification-20261029.md`](HumanAccessoryRemovalVerification-20261029.md)",
+            "[JSON](HumanAccessoryRemovalVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/HumanAccessorySwitchVerification-20261029.md`](HumanAccessorySwitchVerification-20261029.md)",
+            "[JSON](HumanAccessorySwitchVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/HumanInterchangeVerification-20261029.md`](HumanInterchangeVerification-20261029.md)",
+            "[JSON](HumanInterchangeVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/HumanJointNaming.md`](HumanJointNaming.md)",
+            "[JSON](HumanJointNaming.agent.json)"
+          ],
+          [
+            "[`docs/HumanJointNamingVerification-20261027.md`](HumanJointNamingVerification-20261027.md)",
+            "[JSON](HumanJointNamingVerification-20261027.agent.json)"
+          ],
+          [
+            "[`docs/HumanMorphology.md`](HumanMorphology.md)",
+            "[JSON](HumanMorphology.agent.json)"
+          ],
+          [
+            "[`docs/HumanPoseDirections.md`](HumanPoseDirections.md)",
+            "[JSON](HumanPoseDirections.agent.json)"
+          ],
+          [
+            "[`docs/HumanPosePlanner.md`](HumanPosePlanner.md)",
+            "[JSON](HumanPosePlanner.agent.json)"
+          ],
+          [
+            "[`docs/HumanPosePlannerVerification-20261027.md`](HumanPosePlannerVerification-20261027.md)",
+            "[JSON](HumanPosePlannerVerification-20261027.agent.json)"
+          ],
+          [
+            "[`docs/HumanPoseRetarget.md`](HumanPoseRetarget.md)",
+            "[JSON](HumanPoseRetarget.agent.json)"
+          ],
+          [
+            "[`docs/HumanoidCharacterization.md`](HumanoidCharacterization.md)",
+            "[JSON](HumanoidCharacterization.agent.json)"
+          ],
+          [
+            "[`docs/InstanceTransfer.md`](InstanceTransfer.md)",
+            "[JSON](InstanceTransfer.agent.json)"
+          ],
+          [
+            "[`docs/InstanceTransferVerification-20261029.md`](InstanceTransferVerification-20261029.md)",
+            "[JSON](InstanceTransferVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/LinearizedSnapshotVerification-20261028.md`](LinearizedSnapshotVerification-20261028.md)",
+            "[JSON](LinearizedSnapshotVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/LogicalMorphChannels.md`](LogicalMorphChannels.md)",
+            "[JSON](LogicalMorphChannels.agent.json)"
+          ],
+          [
+            "[`docs/LogicalMorphChannelsVerification-20261028.md`](LogicalMorphChannelsVerification-20261028.md)",
+            "[JSON](LogicalMorphChannelsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/MaterialSurface.md`](MaterialSurface.md)",
+            "[JSON](MaterialSurface.agent.json)"
+          ],
+          [
+            "[`docs/MaterialSurfaceVerification-20261029.md`](MaterialSurfaceVerification-20261029.md)",
+            "[JSON](MaterialSurfaceVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/MeshMaskProjection.md`](MeshMaskProjection.md)",
+            "[JSON](MeshMaskProjection.agent.json)"
+          ],
+          [
+            "[`docs/MeshMaskProjectionVerification-20261028.md`](MeshMaskProjectionVerification-20261028.md)",
+            "[JSON](MeshMaskProjectionVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/MeshPainting.md`](MeshPainting.md)",
+            "[JSON](MeshPainting.agent.json)"
+          ],
+          [
+            "[`docs/MeshScreenSelection.md`](MeshScreenSelection.md)",
+            "[JSON](MeshScreenSelection.agent.json)"
+          ],
+          [
+            "[`docs/MeshScreenSelectionVerification-20261029.md`](MeshScreenSelectionVerification-20261029.md)",
+            "[JSON](MeshScreenSelectionVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/MeshSymmetry.md`](MeshSymmetry.md)",
+            "[JSON](MeshSymmetry.agent.json)"
+          ],
+          [
+            "[`docs/MeshTangents.md`](MeshTangents.md)",
+            "[JSON](MeshTangents.agent.json)"
+          ],
+          [
+            "[`docs/MeshTangentsVerification-20261028.md`](MeshTangentsVerification-20261028.md)",
+            "[JSON](MeshTangentsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/MeshTopology.md`](MeshTopology.md)",
+            "[JSON](MeshTopology.agent.json)"
+          ],
+          [
+            "[`docs/MorphChannelRig.md`](MorphChannelRig.md)",
+            "[JSON](MorphChannelRig.agent.json)"
+          ],
+          [
+            "[`docs/MorphChannelRigVerification-20261028.md`](MorphChannelRigVerification-20261028.md)",
+            "[JSON](MorphChannelRigVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/MorphNormals.md`](MorphNormals.md)",
+            "[JSON](MorphNormals.agent.json)"
+          ],
+          [
+            "[`docs/MultipleUvSets.md`](MultipleUvSets.md)",
+            "[JSON](MultipleUvSets.agent.json)"
+          ],
+          [
+            "[`docs/MultipleUvSetsVerification-20261028.md`](MultipleUvSetsVerification-20261028.md)",
+            "[JSON](MultipleUvSetsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/NSCharacter.md`](NSCharacter.md)",
+            "[JSON](NSCharacter.agent.json)"
+          ],
+          [
+            "[`docs/NamedPointSelections.md`](NamedPointSelections.md)",
+            "[JSON](NamedPointSelections.agent.json)"
+          ],
+          [
+            "[`docs/NamedPointSelectionsVerification-20261028.md`](NamedPointSelectionsVerification-20261028.md)",
+            "[JSON](NamedPointSelectionsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/NormalMaps.md`](NormalMaps.md)",
+            "[JSON](NormalMaps.agent.json)"
+          ],
+          [
+            "[`docs/NormalMapsVerification-20261028.md`](NormalMapsVerification-20261028.md)",
+            "[JSON](NormalMapsVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/Object3DAnimation.md`](Object3DAnimation.md)",
+            "[JSON](Object3DAnimation.agent.json)"
+          ],
+          [
+            "[`docs/Object3DAnimationVerification-20261029.md`](Object3DAnimationVerification-20261029.md)",
+            "[JSON](Object3DAnimationVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/Object3DEngine.md`](Object3DEngine.md)",
+            "[JSON](Object3DEngine.agent.json)"
+          ],
+          [
+            "[`docs/Object3DProject.md`](Object3DProject.md)",
+            "[JSON](Object3DProject.agent.json)"
+          ],
+          [
+            "[`docs/PoseCorrectiveAnimation.md`](PoseCorrectiveAnimation.md)",
+            "[JSON](PoseCorrectiveAnimation.agent.json)"
+          ],
+          [
+            "[`docs/PoseCorrectives.md`](PoseCorrectives.md)",
+            "[JSON](PoseCorrectives.agent.json)"
+          ],
+          [
+            "[`docs/PoseFrames.md`](PoseFrames.md)",
+            "[JSON](PoseFrames.agent.json)"
+          ],
+          [
+            "[`docs/PoseReference.md`](PoseReference.md)",
+            "[JSON](PoseReference.agent.json)"
+          ],
+          [
+            "[`docs/PoseRetarget.md`](PoseRetarget.md)",
+            "[JSON](PoseRetarget.agent.json)"
+          ],
+          [
+            "[`docs/PoseRetargetVerification-20261027.md`](PoseRetargetVerification-20261027.md)",
+            "[JSON](PoseRetargetVerification-20261027.agent.json)"
+          ],
+          [
+            "[`docs/PoseSnapshots.md`](PoseSnapshots.md)",
+            "[JSON](PoseSnapshots.agent.json)"
+          ],
+          [
+            "[`docs/ProgressiveMorphAnimation.md`](ProgressiveMorphAnimation.md)",
+            "[JSON](ProgressiveMorphAnimation.agent.json)"
+          ],
+          [
+            "[`docs/ProgressiveMorphAnimationVerification-20261029.md`](ProgressiveMorphAnimationVerification-20261029.md)",
+            "[JSON](ProgressiveMorphAnimationVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/ProgressiveMorphRig.md`](ProgressiveMorphRig.md)",
+            "[JSON](ProgressiveMorphRig.agent.json)"
+          ],
+          [
+            "[`docs/ProgressiveMorphVerification-20261029.md`](ProgressiveMorphVerification-20261029.md)",
+            "[JSON](ProgressiveMorphVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/ProgressiveTakesVerification-20261029.md`](ProgressiveTakesVerification-20261029.md)",
+            "[JSON](ProgressiveTakesVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/ProjectAnimation.md`](ProjectAnimation.md)",
+            "[JSON](ProjectAnimation.agent.json)"
+          ],
+          [
+            "[`docs/ProjectAnimationVerification-20261029.md`](ProjectAnimationVerification-20261029.md)",
+            "[JSON](ProjectAnimationVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/ProjectIntegrityVerification-20261028.md`](ProjectIntegrityVerification-20261028.md)",
+            "[JSON](ProjectIntegrityVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/Resources.md`](Resources.md)",
+            "[JSON](Resources.agent.json)"
+          ],
+          [
+            "[`docs/RigControlSamples.md`](RigControlSamples.md)",
+            "[JSON](RigControlSamples.agent.json)"
+          ],
+          [
+            "[`docs/RigControlSamplesVerification-20261027.md`](RigControlSamplesVerification-20261027.md)",
+            "[JSON](RigControlSamplesVerification-20261027.agent.json)"
+          ],
+          [
+            "[`docs/RigSampleSkinningVerification-20261029.md`](RigSampleSkinningVerification-20261029.md)",
+            "[JSON](RigSampleSkinningVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/SelectionTransfer.md`](SelectionTransfer.md)",
+            "[JSON](SelectionTransfer.agent.json)"
+          ],
+          [
+            "[`docs/SelectionTransferVerification-20261029.md`](SelectionTransferVerification-20261029.md)",
+            "[JSON](SelectionTransferVerification-20261029.agent.json)"
+          ],
+          [
+            "[`docs/SkeletonEditing.md`](SkeletonEditing.md)",
+            "[JSON](SkeletonEditing.agent.json)"
+          ],
+          [
+            "[`docs/SkeletonEnvelopes.md`](SkeletonEnvelopes.md)",
+            "[JSON](SkeletonEnvelopes.agent.json)"
+          ],
+          [
+            "[`docs/SkeletonEnvelopesVerification-20261028.md`](SkeletonEnvelopesVerification-20261028.md)",
+            "[JSON](SkeletonEnvelopesVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/SkeletonScale.md`](SkeletonScale.md)",
+            "[JSON](SkeletonScale.agent.json)"
+          ],
+          [
+            "[`docs/SkinSurface.md`](SkinSurface.md)",
+            "[JSON](SkinSurface.agent.json)"
+          ],
+          [
+            "[`docs/SkinningProfileTransferVerification-20261028.md`](SkinningProfileTransferVerification-20261028.md)",
+            "[JSON](SkinningProfileTransferVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/SurfaceCollision.md`](SurfaceCollision.md)",
+            "[JSON](SurfaceCollision.agent.json)"
+          ],
+          [
+            "[`docs/SurfaceFairing.md`](SurfaceFairing.md)",
+            "[JSON](SurfaceFairing.agent.json)"
+          ],
+          [
+            "[`docs/SurfaceFitting.md`](SurfaceFitting.md)",
+            "[JSON](SurfaceFitting.agent.json)"
+          ],
+          [
+            "[`docs/SurfaceGeodesicSkin.md`](SurfaceGeodesicSkin.md)",
+            "[JSON](SurfaceGeodesicSkin.agent.json)"
+          ],
+          [
+            "[`docs/SurfaceGeodesicSkinVerification-20261028.md`](SurfaceGeodesicSkinVerification-20261028.md)",
+            "[JSON](SurfaceGeodesicSkinVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateAdapt.md`](TemplateAdapt.md)",
+            "[JSON](TemplateAdapt.agent.json)"
+          ],
+          [
+            "[`docs/TemplateAdaptVerification-20261028.md`](TemplateAdaptVerification-20261028.md)",
+            "[JSON](TemplateAdaptVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateControls.md`](TemplateControls.md)",
+            "[JSON](TemplateControls.agent.json)"
+          ],
+          [
+            "[`docs/TemplateFollowersVerification-20261028.md`](TemplateFollowersVerification-20261028.md)",
+            "[JSON](TemplateFollowersVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateMorphBaking.md`](TemplateMorphBaking.md)",
+            "[JSON](TemplateMorphBaking.agent.json)"
+          ],
+          [
+            "[`docs/TemplateMorphBakingVerification-20261028.md`](TemplateMorphBakingVerification-20261028.md)",
+            "[JSON](TemplateMorphBakingVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateMorphProjectVerification-20261028.md`](TemplateMorphProjectVerification-20261028.md)",
+            "[JSON](TemplateMorphProjectVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateRigProjection.md`](TemplateRigProjection.md)",
+            "[JSON](TemplateRigProjection.agent.json)"
+          ],
+          [
+            "[`docs/TemplateRigProjectionVerification-20261028.md`](TemplateRigProjectionVerification-20261028.md)",
+            "[JSON](TemplateRigProjectionVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateRigTransfer.md`](TemplateRigTransfer.md)",
+            "[JSON](TemplateRigTransfer.agent.json)"
+          ],
+          [
+            "[`docs/TemplateRigTransferVerification-20261028.md`](TemplateRigTransferVerification-20261028.md)",
+            "[JSON](TemplateRigTransferVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateRigYawVerification-20261028.md`](TemplateRigYawVerification-20261028.md)",
+            "[JSON](TemplateRigYawVerification-20261028.agent.json)"
+          ],
+          [
+            "[`docs/TemplateShapeFit.md`](TemplateShapeFit.md)",
+            "[JSON](TemplateShapeFit.agent.json)"
+          ],
+          [
+            "[`docs/USD.md`](USD.md)",
+            "[JSON](USD.agent.json)"
+          ],
+          [
+            "[`docs/Verification.md`](Verification.md)",
+            "[JSON](Verification.agent.json)"
+          ],
+          [
+            "[`docs/WindowsBuildAndRun.md`](WindowsBuildAndRun.md)",
+            "[JSON](WindowsBuildAndRun.agent.json)"
+          ],
+          [
+            "[`docs/documentation-structure.md`](documentation-structure.md)",
+            "[JSON](documentation-structure.agent.json)"
+          ],
+          [
+            "[`tests/fixtures/project/README.md`](../tests/fixtures/project/README.md)",
+            "[JSON](mirrors/tests/fixtures/project/README.agent.json)"
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

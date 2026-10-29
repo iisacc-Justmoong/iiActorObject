@@ -1,10 +1,42 @@
 #include "CharacterMath.h"
+#include "DualQuaternionSkinning.h"
 #include <iiActorObject/SkeletalMesh.h>
 #include <unordered_set>
 
 namespace iiActorObject
 {
 using namespace character_detail;
+void validateSkinningProfile(const SkinningProfile &profile,std::size_t pointCount)
+{
+    switch(profile.method)
+    {
+    case SkinningMethod::Linear:
+    case SkinningMethod::DualQuaternion:
+        if(!profile.blendWeights.empty())throw std::invalid_argument("Only blended skinning accepts blend weights");
+        break;
+    case SkinningMethod::Blended:
+        if(profile.blendWeights.size()!=pointCount)throw std::invalid_argument("Skinning blend weights must match source points");
+        for(const auto value:profile.blendWeights)weight(value);
+        break;
+    default:throw std::invalid_argument("Unknown skinning method");
+    }
+}
+void normalizeSkinWeights(std::span<SkinWeight> result, std::size_t boneCount)
+{
+    double largest=0;
+    std::unordered_set<BoneIndex> seen;
+    for (const auto &influence:result)
+    {
+        if (influence.bone>=boneCount || !seen.insert(influence.bone).second ||
+            !std::isfinite(influence.weight) || influence.weight<0)
+            throw std::invalid_argument("Invalid or duplicate skin influence");
+        largest=std::max(largest,influence.weight);
+    }
+    if (largest==0) throw std::invalid_argument("Each vertex needs positive skin influence");
+    double total=0;
+    for (const auto &influence:result) total+=influence.weight/largest;
+    for (auto &influence:result) influence.weight=(influence.weight/largest)/total;
+}
 SkeletalMesh::SkeletalMesh(std::shared_ptr<const Skeleton> skeleton, std::vector<SkeletalMeshLod> lods)
     : skeleton_(std::move(skeleton)), lods_(std::move(lods))
 {
@@ -15,6 +47,13 @@ SkeletalMesh::SkeletalMesh(std::shared_ptr<const Skeleton> skeleton, std::vector
         std::vector<BoneIndex> required;
         if (lod.vertices.empty() || lod.triangles.size() % 3 != 0)
             throw std::invalid_argument("Invalid mesh geometry");
+        validateSkinningProfile(lod.skinning,lod.vertices.size());
+        switch(lod.skinning.method)
+        {
+        case SkinningMethod::Linear: authoredDualQuaternionWeights_.emplace_back();break;
+        case SkinningMethod::DualQuaternion: authoredDualQuaternionWeights_.emplace_back(lod.vertices.size(),1.);break;
+        case SkinningMethod::Blended: authoredDualQuaternionWeights_.push_back(lod.skinning.blendWeights);break;
+        }
         for (auto index : lod.triangles)
             if (index >= lod.vertices.size())
                 throw std::invalid_argument("Mesh triangle index");
@@ -23,23 +62,9 @@ SkeletalMesh::SkeletalMesh(std::shared_ptr<const Skeleton> skeleton, std::vector
             if (!finite(vertex.position))
                 throw std::invalid_argument("Mesh position must be finite");
             vertex.normal = unit(vertex.normal);
-            double largest = 0;
-            std::unordered_set<BoneIndex> seen;
+            normalizeSkinWeights(vertex.weights,skeleton_->bones().size());
             for (const auto &influence : vertex.weights)
             {
-                if (influence.bone >= skeleton_->bones().size() || !seen.insert(influence.bone).second ||
-                    !std::isfinite(influence.weight) || influence.weight < 0)
-                    throw std::invalid_argument("Invalid or duplicate skin influence");
-                largest = std::max(largest, influence.weight);
-            }
-            if (largest == 0)
-                throw std::invalid_argument("Each vertex needs positive skin influence");
-            double total = 0;
-            for (const auto &influence : vertex.weights)
-                total += influence.weight / largest;
-            for (auto &influence : vertex.weights)
-            {
-                influence.weight = (influence.weight / largest) / total;
                 if (influence.weight != 0)
                     required.push_back(influence.bone);
             }
@@ -81,6 +106,11 @@ void SkeletalMesh::deform(const Pose &pose, std::size_t lodIndex, std::span<cons
         throw std::invalid_argument("Mesh pose skeleton identity mismatch");
     if (lodIndex >= lods_.size())
         throw std::out_of_range("Mesh LOD");
+    if(!authoredDualQuaternionWeights_[lodIndex].empty())
+    {
+        deformDualQuaternionSkin(*this,pose,lodIndex,morphWeights,authoredDualQuaternionWeights_[lodIndex],destination);
+        return;
+    }
     const auto &lod = lods_[lodIndex];
     if (destination.size() != lod.vertices.size() || morphWeights.size() != lod.morphTargets.size())
         throw std::invalid_argument("Deformation buffers must match LOD");
@@ -127,12 +157,17 @@ SkeletalMeshComponent::SkeletalMeshComponent(std::shared_ptr<const SkeletalMesh>
     if (!mesh_ || !pose_ || mesh_->skeleton().get() != pose_->skeleton().get())
         throw std::invalid_argument("Mesh component requires matching mesh and pose");
     morphs_.resize(mesh_->lods()[0].morphTargets.size());
+    dualQuaternionWeights_.resize(mesh_->lods().size());
     vertices_.resize(mesh_->lods()[0].vertices.size());
     boneRevisions_.resize(mesh_->requiredBones(0).size());
 }
 const std::shared_ptr<const SkeletalMesh> &SkeletalMeshComponent::mesh() const noexcept
 {
     return mesh_;
+}
+const Pose &SkeletalMeshComponent::boundPose() const noexcept
+{
+    return *pose_;
 }
 std::size_t SkeletalMeshComponent::lod() const noexcept
 {
@@ -178,6 +213,19 @@ std::span<const double> SkeletalMeshComponent::morphWeights() const noexcept
 {
     return morphs_;
 }
+void SkeletalMeshComponent::setDualQuaternionBlendWeights(std::span<const double> weights)
+{
+    if(!weights.empty()&&weights.size()!=mesh_->lods()[lod_].vertices.size())
+        throw std::invalid_argument("Dual quaternion blend weights must match the LOD");
+    for(const auto value:weights)weight(value);
+    auto &current=dualQuaternionWeights_[lod_];
+    if(current.size()==weights.size()&&std::equal(current.begin(),current.end(),weights.begin()))return;
+    std::vector<double> next(weights.begin(),weights.end());current.swap(next);dirty_=true;
+}
+std::span<const double> SkeletalMeshComponent::dualQuaternionBlendWeights() const noexcept
+{
+    return dualQuaternionWeights_[lod_];
+}
 std::span<const DeformedVertex> SkeletalMeshComponent::deformedVertices() const
 {
     if (dirty_ || poseRevision_ != pose_->revision())
@@ -189,7 +237,9 @@ std::span<const DeformedVertex> SkeletalMeshComponent::deformedVertices() const
             changed = changed || boneRevisions_[i] != current[required[i]];
         if (changed)
         {
-            mesh_->deform(*pose_, lod_, morphs_, vertices_);
+            if(const auto &weights=dualQuaternionWeights_[lod_];!weights.empty())
+                deformDualQuaternionSkin(*mesh_,*pose_,lod_,morphs_,weights,vertices_);
+            else mesh_->deform(*pose_, lod_, morphs_, vertices_);
             for (std::size_t i = 0; i < required.size(); ++i)
                 boneRevisions_[i] = current[required[i]];
             dirty_ = false;

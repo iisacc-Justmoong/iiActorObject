@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <cmath>
+#include <numbers>
 #include <iiActorObject/Transform.h>
 #include <stdexcept>
 
@@ -43,6 +44,21 @@ inline Vector3 unit(Vector3 v)
         throw std::invalid_argument("Vector must be nonzero");
     v = {v.x / scale, v.y / scale, v.z / scale};
     return mul(v, 1 / length(v));
+}
+// Shortest rotation taking one direction to another. The antipodal axis is deterministic.
+inline Quaternion directionRotation(Vector3 from,Vector3 to)
+{
+    from=unit(from);to=unit(to);
+    const auto axis=cross(from,to);const auto sine=length(axis);
+    const auto cosine=std::clamp(dot(from,to),-1.0,1.0);
+    if(sine>1e-15)return Quaternion::fromAxisAngle(mul(axis,1/sine),std::atan2(sine,cosine));
+    if(cosine>=0)return {};
+    return Quaternion::fromAxisAngle(unit(cross(from,std::abs(from.x)<.8?Vector3{1,0,0}:Vector3{0,1,0})),std::numbers::pi);
+}
+inline Vector3 rotateDirection(Quaternion q,Vector3 v)
+{
+    q=q.normalized();const Vector3 axis{q.x,q.y,q.z};const auto t=mul(cross(axis,v),2);
+    return add(v,add(mul(t,q.w),cross(axis,t)));
 }
 inline Quaternion product(Quaternion a, Quaternion b)
 {

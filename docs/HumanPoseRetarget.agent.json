@@ -1,0 +1,167 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:ff2b233949d0ed4e2516699b8371a7d059bac0e7882d5db5af65fcde01c60ec8",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/HumanPoseRetarget.md",
+    "sha256": "e0014eb9b6e4a96466d570f8e447d71e09add58f69aa354d822f5aa5883a3248",
+    "bytes": 2131,
+    "line_count": 18,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "인체 역할 기반 포즈 리타깃 대응",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 인체 역할 기반 포즈 리타깃 대응\n",
+      "level": 1,
+      "title": "인체 역할 기반 포즈 리타깃 대응"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "`planHumanPoseRetarget`는 두 `HumanJointMapping`에서 같은 인체 역할을 찾아 본체 `PoseRetargetJoint` 목록을 만든다. 두 캐릭터가 서로 다른 iiActorObject 엔진에 속해도 된다. 결과는 본 ID와 진단 문자열만 보유하며 어느 골격·엔진·Pose도 소유하지 않는다. 해당 매핑은 적용할 원본과 대상 에셋에서 만들어야 하며, 에셋을 바꾼 뒤에는 다시 매핑한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "원본에만 있거나 대상에만 있는 매핑된 역할은 `skipped`에 남긴다. `skipMissingRoles=false`이면 이런 불일치를 오류로 처리한다. 양쪽 매핑 모두에 없는 선택 역할은 목록만으로 알 수 없고, 필수 역할의 누락은 각각 `sourceMissingRequired`, `targetMissingRequired`에 별도로 복사한다. 완전한 필수 역할을 요구하는 호스트는 이 두 목록도 확인한다. `maximumRoles`는 양쪽의 매핑 및 필수 누락 목록에 적용한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "fenced_code",
+      "start_line": 7,
+      "end_line": 14,
+      "raw": "```cpp\nusing namespace iiActorObject;\nusing namespace iiActorObject::NSCharacter;\nauto sourceMap = mapHumanJoints(sourceCharacter, sourceRules);\nauto targetMap = mapHumanJoints(targetCharacter, targetRules);\nauto plan = planHumanPoseRetarget(sourceMap, targetMap);\nauto locals = retargetPose(sourceReference, sourcePose, targetReference, plan.joints);\n```\n",
+      "language": "cpp",
+      "code": "using namespace iiActorObject;\nusing namespace iiActorObject::NSCharacter;\nauto sourceMap = mapHumanJoints(sourceCharacter, sourceRules);\nauto targetMap = mapHumanJoints(targetCharacter, targetRules);\nauto plan = planHumanPoseRetarget(sourceMap, targetMap);\nauto locals = retargetPose(sourceReference, sourcePose, targetReference, plan.joints);\n",
+      "closed": true
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "본체 연산의 축·스케일·입력 골격 조건은 [포즈 리타깃](PoseRetarget.md)을 따른다. 인체 `Hips` 역할은 반드시 골격 루트 0이 아니다. 루트 이동을 전달하려면 `includeRootPair=true`로 두 Skeleton의 루트 0 대 0을 대응에 추가할 수 있다. 대상 루트가 이미 다른 원본 본에 대응된 경우에는 충돌 오류를 반환한다. 해당 기본 계획은 루트 이동을 암묵적으로 추정하지 않는다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "이 대응은 동일한 인체 역할을 연결하는 일반 어댑터이다. 없는 helper·twist 본 분배, IK, 발 접촉, 표현 리그와 특정 앱의 제작용 보정은 제공하지 않는다. 사용자 요청에 따라 CC5·Blender·Unreal을 실행하여 검증하지 않는다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "인체 역할 기반 포즈 리타깃 대응",
+      "anchor": "인체-역할-기반-포즈-리타깃-대응",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "`planHumanPoseRetarget`는 두 `HumanJointMapping`에서 같은 인체 역할을 찾아 본체 `PoseRetargetJoint` 목록을 만든다. 두 캐릭터가 서로 다른 iiActorObject 엔진에 속해도 된다. 결과는 본 ID와 진단 문자열만 보유하며 어느 골격·엔진·Pose도 소유하지 않는다. 해당 매핑은 적용할 원본과 대상 에셋에서 만들어야 하며, 에셋을 바꾼 뒤에는 다시 매핑한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000005",
+        "line": 5,
+        "text": "원본에만 있거나 대상에만 있는 매핑된 역할은 `skipped`에 남긴다. `skipMissingRoles=false`이면 이런 불일치를 오류로 처리한다. 양쪽 매핑 모두에 없는 선택 역할은 목록만으로 알 수 없고, 필수 역할의 누락은 각각 `sourceMissingRequired`, `targetMissingRequired`에 별도로 복사한다. 완전한 필수 역할을 요구하는 호스트는 이 두 목록도 확인한다. `maximumRoles`는 양쪽의 매핑 및 필수 누락 목록에 적용한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000009",
+        "line": 16,
+        "text": "본체 연산의 축·스케일·입력 골격 조건은 [포즈 리타깃](PoseRetarget.md)을 따른다. 인체 `Hips` 역할은 반드시 골격 루트 0이 아니다. 루트 이동을 전달하려면 `includeRootPair=true`로 두 Skeleton의 루트 0 대 0을 대응에 추가할 수 있다. 대상 루트가 이미 다른 원본 본에 대응된 경우에는 충돌 오류를 반환한다. 해당 기본 계획은 루트 이동을 암묵적으로 추정하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000011",
+        "line": 18,
+        "text": "이 대응은 동일한 인체 역할을 연결하는 일반 어댑터이다. 없는 helper·twist 본 분배, IK, 발 접촉, 표현 리그와 특정 앱의 제작용 보정은 제공하지 않는다. 사용자 요청에 따라 CC5·Blender·Unreal을 실행하여 검증하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000009",
+        "label": "포즈 리타깃",
+        "target": "PoseRetarget.md",
+        "kind": "relative",
+        "line": 16
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

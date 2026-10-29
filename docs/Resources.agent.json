@@ -1,0 +1,156 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:a445f76b2cb394b993b7bf967c7cdc458bca43772460f7b028c2e7bfe57c6ac1",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/Resources.md",
+    "sha256": "11db75e7168756761161b6d47852222c2480d3cde65a03efa874d47e39ad3ff1",
+    "bytes": 2838,
+    "line_count": 13,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "프로젝트 리소스 경로",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 프로젝트 리소스 경로\n",
+      "level": 1,
+      "title": "프로젝트 리소스 경로"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "실행과 테스트에 필요한 별도 입력은 프로젝트의 `resources/`에 둔다. `resources/MakeHuman`, `MakeHumanFace`, `MakeHumanMacro`, `MakeHumanExpressions`에는 기존 인체 자료와 라이선스·출처·해시 목록을 동일하게 보관한다. CMake 테스트와 설치 입력은 이 위치를 사용한다. 설치 후 공개 템플릿 경로는 기존 `share/iiActorObject/templates/`를 유지한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "`resources/fixtures/`에는 이전 프로젝트 버전·이미지와 독립 작성한 소형 DNA 검증 자료를 둔다. DNA는 제작용 MetaHuman이 아닌 합성 테스트 자료이다. `resources/rig-sampling/`에는 성인·아동의 동결된 네이티브 수치 시험 입력과 출처·SHA-256이 있다. 이전 `data/` 및 이전 빌드의 생성물은 보존한다. 빌드와 테스트가 실행 중 새로 생성하는 바이너리·중간 파일·임시 출력은 `build/`에 둔다. 사용자가 제공하거나 별도로 준비한 실행 입력을 `build/`에 투입해야 하는 계약은 만들지 않는다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`resources/fixtures/fbx/external-textures-ascii.fbx`는 기본색·노멀의 외부 참조와 공유 Video를 가진 합성 입력이다. 호스트 해석기의 입력 경계와 이미지 연결을 검사하며 FBX의 경로를 실제로 열지 않는다. JPEG·TGA 시험 바이트는 단위 테스트가 메모리에서 생성한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "명시적으로 요청된 애플리케이션 실행 실험의 입력은 `resources/`에 두고 빌드 하위 임시 디렉터리에 하드링크해 사용한다. `tests/ExecutionResources.py`는 리소스 경계와 링크 이름을 검사하고 정상·예외 종료 시 자신이 만든 임시 입력과 출력만 정리한다. 원본 리소스, 다른 작업의 자료와 자동 테스트의 증거는 보존한다. 명시적인 요청이 없으면 별도 실행 검증을 하지 않는다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "기존 예제 애플리케이션의 오래된 실행 검사에는 이 리소스 링크·정리 계약이 아직 적용되지 않았다. 명시적인 실행 검증 요청이 생기면 해당 검사를 켜기 전에 입력 경로와 정리 절차부터 갱신한다. 리그 샘플링의 선택 실행 검사에는 공통 리소스 관리 도구를 적용하였다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "`tests/RunRigSamplingChecks.py`는 시작 전에 원본 해시 목록을 확인하고 종료 시 소스 지문과 입력 파일 상태를 다시 대조한다. 변경된 입력은 해시를 다시 계산한다. 각 빌드 단계 사이의 불필요한 전체 소스 재탐색은 수행하지 않는다. 일반 코어 구성은 전체 네이티브 테스트를 실행하고, 정적 ASan·UBSan 구성은 변경된 리그 샘플링·스냅샷·프로젝트·FBX 경로와 설치 소비자에 집중한다. UBSan 진단은 즉시 실패하도록 설정한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "프로젝트 리소스 경로",
+      "anchor": "프로젝트-리소스-경로",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000009",
+        "line": 9,
+        "text": "명시적으로 요청된 애플리케이션 실행 실험의 입력은 `resources/`에 두고 빌드 하위 임시 디렉터리에 하드링크해 사용한다. `tests/ExecutionResources.py`는 리소스 경계와 링크 이름을 검사하고 정상·예외 종료 시 자신이 만든 임시 입력과 출력만 정리한다. 원본 리소스, 다른 작업의 자료와 자동 테스트의 증거는 보존한다. 명시적인 요청이 없으면 별도 실행 검증을 하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 13,
+        "text": "`tests/RunRigSamplingChecks.py`는 시작 전에 원본 해시 목록을 확인하고 종료 시 소스 지문과 입력 파일 상태를 다시 대조한다. 변경된 입력은 해시를 다시 계산한다. 각 빌드 단계 사이의 불필요한 전체 소스 재탐색은 수행하지 않는다. 일반 코어 구성은 전체 네이티브 테스트를 실행하고, 정적 ASan·UBSan 구성은 변경된 리그 샘플링·스냅샷·프로젝트·FBX 경로와 설치 소비자에 집중한다. UBSan 진단은 즉시 실패하도록 설정한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

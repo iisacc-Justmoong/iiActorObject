@@ -1,0 +1,61 @@
+# 듀얼 쿼터니언 기준 자동 자세 보정
+
+`createObject3DAutomaticCorrectives`는 본체 에셋과 관절 회전 샘플을 받아 선택한 메시를 선형 스키닝으로 사용하는 새 본체 에셋을 만들고, 각 샘플의 자세 보정 모프와 `Object3DPoseCorrectiveProgram`을 반환한다. 원본 에셋은 바꾸지 않는다. 새 에셋은 원본과 같은 `Object3DEngine`이 소유하며 결과 핸들은 엔진의 수명을 연장하지 않는다.
+
+`NSCharacter::planHumanAutomaticCorrectives`는 명시적인 인체 역할 대응에서 양쪽 팔꿈치와 무릎의 샘플을 계획한다. `createHumanAutomaticCorrectives`는 그 계획을 본체 함수로 전달한다. NSCharacter는 인체 방향 규칙·계획과 비소유 본체 핸들만 가지며 메시나 리그 실행 버퍼를 소유하지 않는다.
+
+```cpp
+#include <iiActorObject/NSCharacter/HumanAutomaticCorrectives.h>
+
+// character는 호출자가 보유한 본체 에셋에 대한 NSCharacter 뷰다.
+auto mapping = iiActorObject::NSCharacter::mapHumanJoints(
+    character, iiActorObject::NSCharacter::humanJointRules(
+        iiActorObject::NSCharacter::HumanSkeletonConvention::MakeHuman));
+auto plan = iiActorObject::NSCharacter::planHumanAutomaticCorrectives(mapping);
+auto generated = iiActorObject::NSCharacter::createHumanAutomaticCorrectives(plan);
+auto rig = iiActorObject::createObject3DPoseCorrectiveRig(generated.object, generated.program);
+auto actor = generated.object.get().instantiate();
+auto &component = iiActorObject::attachObject3DPoseCorrectives(*actor, rig);
+// 포즈 변경 후 component.update() 또는 액터의 일반 tick으로 평가한다.
+```
+
+인체 계획은 `LeftForeArm`·`RightForeArm`과 손 역할, `LeftLeg`·`RightLeg`과 발 역할을 사용한다. 기준 자세에서 전완 방향을 위쪽으로, 하퇴 방향을 뒤쪽으로 회전시키는 축을 계산한다. `up`, `forward`, 팔꿈치·무릎 각도와 영향 반경은 호출자가 변경할 수 있다. 기본 각도는 1.2라디안, 반경은 0.8라디안이다. 이는 명시적 좌표축에 따른 기하학적 초기 제안이며 실제 인체의 해부학적 회전축을 판별하지 않는다. 역할이 없거나 축이 퇴화하거나 조상 변환의 배율이 양의 균일 배율이 아니면 기본적으로 해당 항목을 건너뛰고 `skipped`에 기록한다. 관련 옵션을 끄면 오류로 처리한다. 건너뛰지 않은 항목이 하나도 없으면 계획에 실패한다. 본 번호 순서가 부모 순서와 달라도 골격 평가 순서를 사용한다.
+
+`samplesPerJoint`는 각 관절의 기준 각도부터 지정한 최대 굽힘까지 보정 형상을 몇 개 만들지 정한다. 기본값 1은 기존 이름과 동작을 유지하며 1~32를 허용한다. 2 이상이면 각도를 균등하게 나누고 이름에 `_1`, `_2` 등을 붙인다. 샘플 반경은 지정된 `radiusRadians`와 샘플 각도 간격 중 작은 값이므로 다른 샘플의 중심에는 영향을 주지 않는다. 각도 사이에서는 보정이 겹칠 수 있고 반경을 간격보다 작게 지정하면 영향이 없는 구간도 생긴다. 샘플 수가 늘면 메시와 계산량이 증가하며 모든 자세에서 오차가 감소한다는 보장은 없다. 예를 들어 다음 설정은 각 관절에 세 가지 굽힘을 계획한다.
+
+```cpp
+iiActorObject::NSCharacter::HumanAutomaticCorrectiveOptions sampling;
+sampling.samplesPerJoint = 3;
+auto densePlan = iiActorObject::NSCharacter::planHumanAutomaticCorrectives(mapping, sampling);
+auto denseGenerated = iiActorObject::NSCharacter::createHumanAutomaticCorrectives(densePlan);
+```
+
+계획은 기준 로컬 포즈를 값으로 보관하므로, 생성 시 다른 포즈를 전달하면 거부한다. 계획 생성과 사용 사이에 에셋이나 엔진이 제거되면 실패한다. 호출자는 계획의 샘플을 확인하고 편집하거나 인체 계획을 사용하지 않고 본체 프로그램에 대상 관절·회전·반경을 직접 제공할 수 있다.
+
+## 계산과 기준
+
+`AutomaticCorrectiveReference::DualQuaternion`은 선택한 스킨의 기존 방식과 관계없이 전체 듀얼 쿼터니언(DQ) 변형을 샘플 목표로 사용한다. 기존 선형 스킨의 관절 보정을 생성할 때의 기본값이다. `Authored`는 입력 에셋의 선형·DQ·점별 혼합 프로필을 목표로 사용한다. 어느 경우든 선택한 메시의 **출력 프로필은 선형**이다. 메시 선택이 비어 있으면 모든 메시를 처리한다. 일부만 선택하면 나머지 메시와 그 스킨 방식은 유지되므로 나머지에 DQ가 있다면 GLB 출력이 계속 거부될 수 있다.
+
+기준 포즈는 명시한 `baselineLocals`, 또는 에셋의 참조 자세, 또는 원본 바인드 자세 순으로 선택한다. 각 샘플의 조건 관절은 원본 바인드 회전에 상대 회전을 곱해 설정하고 다른 관절은 기준 포즈를 사용한다. 모프 기준값은 기본적으로 각 메시의 작성된 기본값이며 `baselineMorphWeights`로 메시별 런타임 모프 순서에 맞춰 변경할 수 있다. 위치와 명시적 또는 파생된 모프 법선을 기준값만큼 합산한 다음 계산한다. 기존 모프, 기본값, 원본 점과 숨겨진 점, UV·재질·본 ID는 유지한다.
+
+각 점에서 선형 스킨의 가중 행렬을 `A`, 목표 DQ와 선형 결과의 차이를 `d`, 해당 샘플의 최대 가중치를 `w`라고 하면 기본 경우에는 `A * delta * w = d`를 푼다. 법선은 위치 행렬이 아니라 본별 역전치 행렬의 가중 합으로 같은 방식의 원시 벡터 차이를 푼다. 작성용 토폴로지의 위치는 원본 점별로, 법선은 표시 layout별로 저장해 UV·법선 이음새를 유지한다. 법선 생성이 꺼져 있으면 생성 모프의 법선 보정은 비어 있다.
+
+입력 DQ·혼합 스킨의 기본 참조 자세가 바인드와 다르면, 선형으로 바꾸는 순간 기본 외형이 달라질 수 있다. 이 경우 원본 작성 프로필과 기본 모프값의 결과를 유지하는 별도 `AutoDQ_Baseline` 모프를 필요한 메시마다 만들고 기본 가중치 1을 부여한다. 이름은 `baselineMorphName`으로 바꿀 수 있다. 이후 샘플 모프는 이 기본 오프셋이 이미 적용된 상태를 고려한다. 기본 모프를 선택할 때는 기존 작성 기본값을 사용하며, 샘플용 `baselineMorphWeights`가 별도로 지정되어도 기본 외형 기준은 바꾸지 않는다. 법선 생성을 끄면 기본 자세의 DQ 법선은 보존하지 않는다. 동일 이름이 이미 있거나 샘플 이름과 겹치면 기본 모프가 필요한 경우 실패한다.
+
+## 오류와 제한
+
+역산은 정규화한 3×3 행렬의 행렬식과 최대 델타를 검사한다. 특이하거나 설정한 최대 델타를 넘는 경우 기본 정책은 결과 에셋을 만들지 않고 실패한다. `AutomaticCorrectiveFailurePolicy::Skip`은 해당 위치 또는 법선 보정을 생략하고 개수와 원시 잔차를 보고한다. 법선 생성이 켜져 있으면 작성된 실제 기본 모프값을 쓰는 기본 자세와 지정된 샘플 자세의 원본 기준 법선을 각각 검사한다. 그 법선이 0이거나 유효하지 않아 방향을 만들 수 없다면 생략 정책과 관계없이 거부한다. 법선 생성을 끄면 이 검사도 생략한다. `maximumPositionResidual`은 샘플 및 기본 보정의 위치 잔차, `maximumNormalResidual`은 **정규화 전** 법선 벡터 잔차다. 정규화 후 각도 오차나 임의 시간의 오차를 보증하지 않는다. `epsilon`보다 작은 원시 차이는 생략하고 그 크기를 잔차에 포함한다.
+
+기본적으로 샘플이 선택한 기준 자세 또는 에셋의 실제 기본 자세에서 이미 활성화되면 거부한다. 다른 샘플의 중심 자세에서 활성화되는 샘플도 기본적으로 거부한다. 각각 `allowBaselineActivation`, `allowOverlappingSamples`를 명시하면 허용하고 보고한다. 후자는 **샘플 중심에서의 활성화만** 검사하므로 그 사이의 회전 영역이나 서로 다른 관절의 동시 움직임에서 보정들이 겹치지 않는다는 뜻은 아니다. 겹치거나 기준 모프·다른 관절·인스턴스 변형 바인드가 달라지면 기준 DQ 결과와 차이가 날 수 있다.
+
+점·법선 방문, 영향 수, 기준 모프 델타, 출력 델타 및 샘플 조건 평가에는 각각 옵션의 작업 예산이 적용된다. 기본 자세의 법선 확인과 명시된 샘플 모프값과 구분되는 기본 모프값 준비에도 해당 예산을 사용한다. 예산은 전체 프로세스 메모리 상한은 아니다. 입력 DQ 행렬에 표현할 수 없는 전단이 있거나 선택한 기준 포즈·값·이름·인덱스가 유효하지 않으면 거부한다. DQ 자체의 180도 경계 연속성 제한도 [기존 스키닝 계약](DualQuaternionSkinning.md)을 따른다.
+
+자동으로 계산한 델타는 선택한 기준값과 샘플 자세에 대한 기하학적 근사이며 근육·피부 접힘이나 제작용 MetaHuman 보정의 재현이 아니다. 원본 GLB 탄젠트 스냅샷은 새 모프를 추가하면 기준이 달라져 stale로 남을 수 있으며, 기존 GLB 출력 규칙이 이를 보고하고 필요하면 탄젠트를 재계산한다.
+
+## 저장과 교환
+
+반환 프로그램으로 본체 보정 리그를 만들면 기존 프로젝트 저장·복원과 [보정 애니메이션 베이크](PoseCorrectiveAnimation.md)를 사용할 수 있다. GLB·FBX에는 선형 스킨과 모프 형상을 출력할 수 있지만 SDK의 회전 조건을 외부 앱의 실시간 드라이버로 자동 변환하지 않는다. 별도 애니메이션 베이크를 사용하지 않으면 외부 호스트가 모프 제어를 연결해야 한다. 에셋에 참조 자세 프로그램이 있으면 기존 GLB·FBX 출력은 이를 거부하므로, 해당 자세를 명시적으로 굽거나 해제하고 리그·애니메이션을 다시 맞춰야 한다.
+
+자동 검사는 토폴로지와 렌더 메시, 기본·명시 모프값, 관절 위치·바인드 회전, 선형·DQ·혼합 스킨, 비바인드 참조 자세의 기본 외형과 샘플 변형, 특이 행렬·예산·중복·기준 자세 오류와 프로젝트 복원을 확인한다. 독립 GLB 판독은 희소 모프·스킨의 위치와 법선을 별도 DQ 계산과 비교한다. 단순 굽힘 fixture에서 여러 샘플의 중간 자세 오차를 단일 샘플과 비교하고 CC0 인체의 19,000개 이상 원본 점과 150개 이상 본에서도 검사한다. 사용자 지시에 따라 CC5·Blender·Unreal은 실행하지 않으며 해당 앱에서의 시각 품질은 증명하지 않는다.
+
+검사 구성과 한계는 [2026-10-29 검증 기록](AutomaticCorrectivesVerification-20261029.md)에 정리한다.

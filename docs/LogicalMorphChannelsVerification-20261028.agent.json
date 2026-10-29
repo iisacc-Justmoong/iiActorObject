@@ -1,0 +1,205 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:e13be18e8d68ebb058967cca084b046cab4f2b9fcc0f000f9f46f9abcb7c6f90",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/LogicalMorphChannelsVerification-20261028.md",
+    "sha256": "5c36f97a1fea3e7612866505016d940b8672b6a04dabd38100d371fd77520ed1",
+    "bytes": 3394,
+    "line_count": 18,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "외부 편집용 논리 모프 채널 검증 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 외부 편집용 논리 모프 채널 검증 — 2026-10-28\n",
+      "level": 1,
+      "title": "외부 편집용 논리 모프 채널 검증 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "이 기록은 [논리 모프 채널](LogicalMorphChannels.md)과 외부 편집 병합의 코어 기능에 한정한다. 전체 캐릭터 생성·편집 목표 또는 대상 앱의 실행 호환성 검증을 뜻하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 확인한 동작\n",
+      "level": 2,
+      "title": "확인한 동작"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "list",
+      "start_line": 7,
+      "end_line": 14,
+      "raw": "- 동일 이름의 원본 레코드 두 개를 서로 다른 이름의 타깃 사이에 배치한 후, 외부 편집용 FBX가 하나의 표준 `Smile` 채널과 합산된 위치 델타를 출력하는지 독립 Python 바이너리 파서로 확인했다. 일반 보존용 FBX는 세 원본 레코드의 별도 target ID를 계속 복원한다.\n- 논리 채널의 위치·명시적 법선 변경, 그룹 전체 이름 변경, 삭제, 원본 target ID 보존, 정본 수정과 삭제의 충돌, 명시적 덮어쓰기, 기준 법선 불일치의 실패 원자성을 검사했다. 로컬로 추가한 같은 이름의 레코드는 이름 변경에서 유지하고, 외부 삭제가 이를 지우려 하면 기본적으로 거부한다.\n- 서로 상쇄되어 0이 되는 두 레코드도 빈 논리 채널로 남기고 다시 편집할 수 있다. ID 없는 레코드, 계산형·명시형 법선 혼합, 일반 편집기의 undo·redo, 템플릿의 비파괴 계층과 프로젝트 저장·복원, NSCharacter의 본체 참조 경로도 검사했다.\n- 공개 CC0 MakeHuman 인체 자료의 19,158개 제어점·163개 본 위에 합성 모프 레코드 두 개를 추가하여 FBX 기준·편집 스냅샷 병합과 프로젝트 복원을 검사했다. 이는 공개 인체에 대한 수치·구조 검사이며 제작용 MetaHuman 표정이나 CC5 데이터의 품질 근거가 아니다.\n- 합성 DNA에서 한 `Smile` 채널을 공유하는 원본 타깃 두 개를 외부 편집용 FBX의 단일 채널로 내보내고, 편집 차이를 정본에 병합한 뒤 DNA로 저장했다. SDK와 별도로 공개 OpenRigLogic 리더가 타깃 두 개의 순서·채널 인덱스·정점 인덱스와 편집된 델타를 검사했다. 일반 구성과 코어 전용 구성에서 각각 fixture를 포함한 3개 검사가 통과했다. 실제 상용 DNA 에셋으로 확인한 것은 아니다.\n- macOS arm64에서 외부 편집·FBX·모프 법선·프로젝트·토폴로지·편집 계층 관련 회귀는 일반 구성 94개, NSCharacter 없는 코어 전용 구성 91개가 통과했다. 이후 이름 충돌과 로컬 법선 보존 검사를 추가하여 관련 세 검사를 각 구성에서 다시 통과했다. 실제 CC5·Blender·Unreal과 사용자용 앱은 실행하지 않았다.\n- 주소 및 미정의 동작 검사기(ASan·UBSan)를 활성화한 별도 빌드에서 관련 자동 검사 7개가 통과했다.\n- 별도 설치 스테이징의 공개 헤더와 라이브러리를 사용하는 일반·코어 전용 C++23 소비자 검사는 각각 4개가 통과했다. 새 소비자는 분할 모프의 FBX 투영, 편집 병합과 프로젝트 복원을 확인한다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "동일 이름의 원본 레코드 두 개를 서로 다른 이름의 타깃 사이에 배치한 후, 외부 편집용 FBX가 하나의 표준 `Smile` 채널과 합산된 위치 델타를 출력하는지 독립 Python 바이너리 파서로 확인했다. 일반 보존용 FBX는 세 원본 레코드의 별도 target ID를 계속 복원한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "논리 채널의 위치·명시적 법선 변경, 그룹 전체 이름 변경, 삭제, 원본 target ID 보존, 정본 수정과 삭제의 충돌, 명시적 덮어쓰기, 기준 법선 불일치의 실패 원자성을 검사했다. 로컬로 추가한 같은 이름의 레코드는 이름 변경에서 유지하고, 외부 삭제가 이를 지우려 하면 기본적으로 거부한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "서로 상쇄되어 0이 되는 두 레코드도 빈 논리 채널로 남기고 다시 편집할 수 있다. ID 없는 레코드, 계산형·명시형 법선 혼합, 일반 편집기의 undo·redo, 템플릿의 비파괴 계층과 프로젝트 저장·복원, NSCharacter의 본체 참조 경로도 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "공개 CC0 MakeHuman 인체 자료의 19,158개 제어점·163개 본 위에 합성 모프 레코드 두 개를 추가하여 FBX 기준·편집 스냅샷 병합과 프로젝트 복원을 검사했다. 이는 공개 인체에 대한 수치·구조 검사이며 제작용 MetaHuman 표정이나 CC5 데이터의 품질 근거가 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "합성 DNA에서 한 `Smile` 채널을 공유하는 원본 타깃 두 개를 외부 편집용 FBX의 단일 채널로 내보내고, 편집 차이를 정본에 병합한 뒤 DNA로 저장했다. SDK와 별도로 공개 OpenRigLogic 리더가 타깃 두 개의 순서·채널 인덱스·정점 인덱스와 편집된 델타를 검사했다. 일반 구성과 코어 전용 구성에서 각각 fixture를 포함한 3개 검사가 통과했다. 실제 상용 DNA 에셋으로 확인한 것은 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "macOS arm64에서 외부 편집·FBX·모프 법선·프로젝트·토폴로지·편집 계층 관련 회귀는 일반 구성 94개, NSCharacter 없는 코어 전용 구성 91개가 통과했다. 이후 이름 충돌과 로컬 법선 보존 검사를 추가하여 관련 세 검사를 각 구성에서 다시 통과했다. 실제 CC5·Blender·Unreal과 사용자용 앱은 실행하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "주소 및 미정의 동작 검사기(ASan·UBSan)를 활성화한 별도 빌드에서 관련 자동 검사 7개가 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "별도 설치 스테이징의 공개 헤더와 라이브러리를 사용하는 일반·코어 전용 C++23 소비자 검사는 각각 4개가 통과했다. 새 소비자는 분할 모프의 FBX 투영, 편집 병합과 프로젝트 복원을 확인한다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "외부 앱이 자체적으로 FBX 사용자 속성을 보존하거나 가져온 단일 채널을 어떤 방식으로 표시하는지는 확인하지 않았다. 원본 레코드 분할은 외부 편집용 FBX가 아니라 정본 프로젝트에 보관한다. 제작용 얼굴 리그·상세 템플릿과 최종 시각 품질, 다른 플랫폼에서의 빌드는 별도 작업이다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "외부 편집용 논리 모프 채널 검증 — 2026-10-28",
+      "anchor": "외부-편집용-논리-모프-채널-검증--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인한 동작",
+      "anchor": "확인한-동작",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 16
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "이 기록은 [논리 모프 채널](LogicalMorphChannels.md)과 외부 편집 병합의 코어 기능에 한정한다. 전체 캐릭터 생성·편집 목표 또는 대상 앱의 실행 호환성 검증을 뜻하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000003",
+        "label": "논리 모프 채널",
+        "target": "LogicalMorphChannels.md",
+        "kind": "relative",
+        "line": 3
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

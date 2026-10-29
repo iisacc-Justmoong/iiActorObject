@@ -1,0 +1,309 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:144b32080a01fa240d1e394156530092955761d77a81acf9302ddcc7f2ddc555",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/LogicalMorphChannels.md",
+    "sha256": "54ade59edf6b7219377598741be5bd8c7c18c33a8573fe5384fd140bef0a49c7",
+    "bytes": 5610,
+    "line_count": 39,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "외부 편집용 논리 모프 채널",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 외부 편집용 논리 모프 채널\n",
+      "level": 1,
+      "title": "외부 편집용 논리 모프 채널"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "원본 작성용 메시에는 같은 이름을 가진 모프 레코드가 여러 개 있을 수 있다. 본체 런타임은 같은 이름의 제어점 델타를 합쳐 하나의 채널로 평가하면서 각 레코드의 원본 `sourceTarget` ID는 별도로 보관한다. 이 규칙은 DNA의 원본 target 재저장과 외부 편집용 슬라이더를 구분하기 위해 필요하다. 소유자는 `Object3DEngine`이며 NSCharacter는 본체 에셋과 편집 세션을 참조한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## FBX 출력 경로\n",
+      "level": 2,
+      "title": "FBX 출력 경로"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "일반 `exportObject3DFbx(asset)`는 이전과 같이 원본 레코드별 채널을 작성한다. 같은 이름은 `_SourceN` 접미사로 구분하며 iiActorObject가 확장을 복원할 때 원본 ID를 유지한다. 이 파일은 원본 레코드 보존에 사용하는 경로이다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "`FbxExportOptions::externalDocument`에 문서 토큰을 지정한 출력은 **외부 편집용 투영**이다. 같은 논리 이름의 레코드를 하나의 표준 FBX blend-shape 채널로 합산하고, 다른 이름의 채널은 분리한다. 각 채널의 첫 등장 순서를 유지하며 이름 충돌을 만들기 위한 접미사를 붙이지 않는다. 같은 점의 위치 델타는 더한다. 모든 레코드가 계산형 법선이면 합산 위치로 법선을 계산하고, 명시형이 섞이면 계산형 위치 전체의 법선과 명시형 layout 법선 델타를 합한다. 이를 표준 FBX 제어점 법선으로 정확히 나타낼 수 없는 seam은 기존 `allowMorphNormalMetadata` 정책을 따른다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "투영에는 원본 레코드 분할과 각 `sourceTarget` ID가 들어 있지 않다. SDK가 투영된 채널을 읽으면 그 사실을 경고한다. 이 FBX만으로 원본 DNA target 분할을 복구하지 말고 외부 편집 시작 시의 정본 에셋과 `.ii3dproject`를 함께 보관해야 한다. 외부 앱이 SDK 사용자 속성을 지우거나 재해석하지 않는다는 보장도 없다. 애플리케이션의 실제 파일 가져오기·슬라이더 동작은 이번 검증에 포함하지 않았다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "DNA 리그에서는 위 정본을 읽어 만든 에셋에 외부 편집 차이를 병합한 후, 원본 리그를 편집된 에셋에 `cloneFor`하여 DNA로 다시 저장한다. 두 원본 타깃이 한 채널을 공유하는 합성 DNA에서 이 경로를 시험했다. DNA 편집과 보존 조건은 [DNA 편집](DnaEditing.md)을 따른다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "## 편집 차이 적용\n",
+      "level": 2,
+      "title": "편집 차이 적용"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "`makeObject3DExternalIdentity`는 같은 이름의 원본 레코드마다 별도 대응을 만들지 않고 논리 채널당 대표 레코드 하나를 지정한다. 각 외부 스냅샷에서 대응된 대표 레코드의 이름으로 전체 논리 채널을 찾으므로, 기준과 편집 스냅샷은 원본처럼 분할되어 있거나 FBX처럼 합쳐져 있어도 된다. 같은 외부 채널에 서로 다른 원본 대응을 주거나 채널을 빠뜨리면 거부한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "병합은 원본 전체 레코드의 합과 외부 기준 형상을 비교한 후 편집 차이를 대표 원본 레코드에 더한다. 다른 레코드와 각 `sourceTarget`은 유지한다. ID가 없는 같은 이름의 레코드는 독립적인 식별자가 없으므로 현재 순서의 첫 레코드를 대표로 사용한다. 이들을 재정렬한 뒤 개별 레코드 대응을 추론하지 않는다. 표시 이름 변경은 같은 논리 채널에 현재 추가된 레코드도 함께 변경하며, 다른 그룹과 이름이 겹치거나 원본 레코드가 동시에 제거·이름 변경된 충돌은 기본적으로 거부한다. 외부에서 채널을 삭제하면 해당 원본 그룹의 모든 레코드를 빈 타깃으로 유지한다. 삭제가 현재 정본의 추가·수정된 모프를 지우게 되면 기본적으로 충돌을 반환하며, 명시적인 `overwriteConflicts`만 덮어쓰기를 허용한다. 원본 본·메시·제어점·면 ID는 기존 [외부 편집 계약](ExternalEdits.md)을 따른다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "명시적 법선 편집은 원본 그룹의 전체 법선에 외부의 기준 대비 차이를 적용한다. 나머지 레코드를 유지한 상태에서 대표 레코드에 필요한 잔여 계수를 기록하므로 계산형·명시형이 섞여도 전체 논리 채널의 법선 변화가 유지된다. 기준 모프의 위치 또는 명시적 법선이 원본과 허용 오차를 넘어 다르면 기존 에셋을 변경하지 않고 거부한다. `Object3DEditor`의 일반 스냅샷과 템플릿 보정 레이어는 같은 코어 병합을 사용하므로 undo·redo와 프로젝트 저장 경계도 유지한다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "heading",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "## 예\n",
+      "level": 2,
+      "title": "예"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "fenced_code",
+      "start_line": 25,
+      "end_line": 37,
+      "raw": "```cpp\nFbxExportOptions output;\noutput.externalDocument = \"character-edit-session\";\nauto fbx = exportObject3DFbx(source.get(), output);\n// 호스트가 원본 프로젝트, 기준 FBX와 편집 FBX를 보관한다.\nauto baseline = importObject3DFbx(engine.reference(), baselineBytes);\nauto edited = importObject3DFbx(engine.reference(), editedBytes);\nObject3DExternalOptions merge;\nmerge.document = output.externalDocument;\nauto report = editor.get().applyExternalEdits(source.get(),\n    {baseline.object.get(), baseline.externalIdentity},\n    {edited.object.get(), edited.externalIdentity}, merge);\n```\n",
+      "language": "cpp",
+      "code": "FbxExportOptions output;\noutput.externalDocument = \"character-edit-session\";\nauto fbx = exportObject3DFbx(source.get(), output);\n// 호스트가 원본 프로젝트, 기준 FBX와 편집 FBX를 보관한다.\nauto baseline = importObject3DFbx(engine.reference(), baselineBytes);\nauto edited = importObject3DFbx(engine.reference(), editedBytes);\nObject3DExternalOptions merge;\nmerge.document = output.externalDocument;\nauto report = editor.get().applyExternalEdits(source.get(),\n    {baseline.object.get(), baseline.externalIdentity},\n    {edited.object.get(), edited.externalIdentity}, merge);\n",
+      "closed": true
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "FBX의 한 blend-shape 채널에 여러 타깃을 두는 기능은 점진적 가중치 구간이므로 원본 레코드의 합과 같지 않다. 이 경로는 각 논리 이름에 하나의 합산된 Shape를 작성한다. [Autodesk FBX 채널 API](https://help.autodesk.com/cloudhelp/2020/ENU/FBX-API-Reference/cpp_ref/class_fbx_blend_shape_channel.html)의 점진적 타깃과 구분한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "외부 편집용 논리 모프 채널",
+      "anchor": "외부-편집용-논리-모프-채널",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "FBX 출력 경로",
+      "anchor": "fbx-출력-경로",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "편집 차이 적용",
+      "anchor": "편집-차이-적용",
+      "start_line": 15
+    },
+    {
+      "block_id": "b000023",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "예",
+      "anchor": "예",
+      "start_line": 23
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000011",
+        "line": 11,
+        "text": "투영에는 원본 레코드 분할과 각 `sourceTarget` ID가 들어 있지 않다. SDK가 투영된 채널을 읽으면 그 사실을 경고한다. 이 FBX만으로 원본 DNA target 분할을 복구하지 말고 외부 편집 시작 시의 정본 에셋과 `.ii3dproject`를 함께 보관해야 한다. 외부 앱이 SDK 사용자 속성을 지우거나 재해석하지 않는다는 보장도 없다. 애플리케이션의 실제 파일 가져오기·슬라이더 동작은 이번 검증에 포함하지 않았다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 19,
+        "text": "병합은 원본 전체 레코드의 합과 외부 기준 형상을 비교한 후 편집 차이를 대표 원본 레코드에 더한다. 다른 레코드와 각 `sourceTarget`은 유지한다. ID가 없는 같은 이름의 레코드는 독립적인 식별자가 없으므로 현재 순서의 첫 레코드를 대표로 사용한다. 이들을 재정렬한 뒤 개별 레코드 대응을 추론하지 않는다. 표시 이름 변경은 같은 논리 채널에 현재 추가된 레코드도 함께 변경하며, 다른 그룹과 이름이 겹치거나 원본 레코드가 동시에 제거·이름 변경된 충돌은 기본적으로 거부한다. 외부에서 채널을 삭제하면 해당 원본 그룹의 모든 레코드를 빈 타깃으로 유지한다. 삭제가 현재 정본의 추가·수정된 모프를 지우게 되면 기본적으로 충돌을 반환하며, 명시적인 `overwriteConflicts`만 덮어쓰기를 허용한다. 원본 본·메시·제어점·면 ID는 기존 [외부 편집 계약](ExternalEdits.md)을 따른다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000013",
+        "label": "DNA 편집",
+        "target": "DnaEditing.md",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000019",
+        "label": "외부 편집 계약",
+        "target": "ExternalEdits.md",
+        "kind": "relative",
+        "line": 19
+      },
+      {
+        "block_id": "b000027",
+        "label": "Autodesk FBX 채널 API",
+        "target": "https://help.autodesk.com/cloudhelp/2020/ENU/FBX-API-Reference/cpp_ref/class_fbx_blend_shape_channel.html",
+        "kind": "external",
+        "line": 39
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:ff8c05a99d6ba082fb741a7dd1c4efb8a273c978a7cfa6ae267218ea7d19a64e",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/HumanAccessoriesVerification-20261029.md",
+    "sha256": "245e0375f1b1a67a6a5c261f69ea7ecc19d30fa320423cb1cefb67f9313a2014",
+    "bytes": 5901,
+    "line_count": 34,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "인체 부속 선택 검증 기록",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 인체 부속 선택 검증 기록\n",
+      "level": 1,
+      "title": "인체 부속 선택 검증 기록"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 입력과 범위\n",
+      "level": 2,
+      "title": "입력과 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "[인체 부속 선택 계약](HumanAccessories.md)에 따라 공식 CC0 시스템 자산의 두 머리카락, 두 의상, 눈썹과 속눈썹을 사용했다. 패키지의 원본 파일 28개를 ZIP CRC-32와 기록된 SHA-256으로 검사하고 MHCLO에서 지정한 OBJ·재질·기본색·노멀·AO 이미지가 모두 패키지 안에 있는지 확인했다. 전체 원본 ZIP의 해시를 검증한 것은 아니며 획득한 항목의 범위와 ETag는 패키지 출처 기록에 있다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`hair/bob01`, `clothes/female_casualsuit01`, 눈썹과 속눈썹을 함께 생성하여 163개 본, 다섯 메시, 다섯 이미지, 네 표면 연결과 각 부속 점의 정규화된 스킨 가중치를 검사했다. 다른 조합은 `hair/short01`과 `clothes/male_casualsuit01`을 기존 눈·치아·혀와 함께 생성했다. 여섯 자산을 각각 사용하는 것을 확인한 것이며 서로 다른 두 의상을 동시에 겹쳐 입는 시각 결과를 검증한 것은 아니다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "얼굴 폭과 엉덩이 폭 조절을 각각 0.6으로 설정한 예제에서 머리카락과 의상 점의 최대 이동량은 약 0.0153 m와 0.0230 m였다. 몸과 부속의 편집, 프로젝트 저장·복원 및 undo/redo도 검사했다. 이 수치는 해당 템플릿과 파라미터의 결과일 뿐 어떤 체형이나 포즈에서의 품질 보증이 아니다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "## 독립 형식과 경계\n",
+      "level": 2,
+      "title": "독립 형식과 경계"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "별도 Python 판독기는 원본 의상 파일의 가림 점과 몸 OBJ의 폴리곤을 직접 읽어 몸의 표시 면 13,378개 중 2,688개가 가려지는 것을 계산했다. GLB 몸 메시에는 나머지 21,380개의 삼각형이 기록되었다. GLB의 다섯 메시 스킨 속성, 원본 이미지 바이트, 머리카락의 알파·양면 설정과 의상의 불투명·노멀 이미지 연결도 검사했다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "FBX 판독기는 다섯 메시와 원본 PNG, 네 기본색 연결 및 하나의 노멀 맵 연결을 확인했다. 각 메시의 스킨과 클러스터, 클러스터에 연결된 본 및 제어점별 가중치 합도 검사했다. 이는 파일의 구조와 데이터에 대한 증거이며 다른 애플리케이션의 셰이더나 변형 결과를 확인한 것은 아니다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "공용 토폴로지 시험은 일부 점만 가려진 면을 유지하고, 완전히 가려진 면만 숨기면서 원본 점·폴리곤과 남은 삼각형의 코너 순서를 보존하는지 확인한다. 잘못된 점 ID나 표시 면 전체가 사라지는 요청은 토폴로지를 바꾸지 않고 거부한다. 중복·누락된 선택, 카탈로그 경로 이탈, 자료 크기 한도와 실패 후 엔진의 에셋·템플릿 수 유지도 검사한다. 잘못된 선택은 인체 자료를 열기 전에 거부한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "표준 라이브러리에 부동소수점 `from_chars`가 없을 때 사용하는 숫자 입력은 쉼표 소수점이 설정된 프로세스에서도 점 소수점을 읽는지, 정상 범위·최소 비정규 수·오버플로·언더플로·잘못된 토큰을 다루는지 검사했다. 같은 테스트에서 일부 대표 값은 네이티브 `from_chars` 결과와 비교했다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "heading",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "## 실행 결과\n",
+      "level": 2,
+      "title": "실행 결과"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "list",
+      "start_line": 23,
+      "end_line": 30,
+      "raw": "- macOS arm64 C++23 Release: 부속·피부·얼굴·포즈·표면 연결·점진 애니메이션 관련 자동 회귀 45/45 통과. 최신 독립 FBX 스킨 구조 검사는 별도로 1/1 통과했다. 결과는 `build/glb-import-ninja/human-accessories-final.xml`과 `human-accessories-format-final.xml`이다.\n- NSCharacter 제외 본체 전용 Release: 표면 연결과 포즈 관련 19/19 통과. `build/core-tangent-ninja/human-accessories-final.xml`.\n- NSCharacter 포함 Debug ASan·UBSan: 관련 검사 10/10, 최신 독립 형식 검사 1/1 통과. 누수 검출은 비활성화했다. `build/glb-import-full-asan/human-accessories-final.xml`과 `human-accessories-format-final.xml`.\n- 별도 숫자 파서 단위 테스트는 본체 전용 Release, NSCharacter 포함 Release 및 ASan·UBSan 구성에서 각각 1/1 통과했다. 포함 Release와 계측 구성의 기록은 각 빌드의 `portable-numbers.xml`이다.\n- `build/` 안에 따로 설치한 패키지의 본체 전용 소비자 1/1과 NSCharacter 포함 소비자 2/2가 통과했다. 포함 소비자는 설치된 인체·부속 자료와 공개 헤더를 사용했다. 사용자 설치본은 바꾸지 않았다.\n- Emscripten C++23 컴파일러의 구문 검사는 공용 MHCLO·OBJ·BVH 구현, NSCharacter 템플릿 구현 및 공개 템플릿 헤더에 통과했다. 이 구문 검사는 기존 macOS 빌드의 생성된 기능 설정을 사용했으며 전체 SDK의 WASM 링크나 실행 결과는 아니다.\n- 별도의 WebAssembly 숫자 파서 자동 단위 테스트를 빌드하고 Node에서 실행했다. 해당 대상에는 부동소수점 `from_chars`가 없으며 대체 경로의 정상값·비정규 값·오류 및 지역 설정 검사가 통과했다. 출력은 `build/wasm-portable-numbers/validation.txt`에 있다. 이 테스트는 SDK 전체나 대상 앱의 실행이 아니다.\n- macOS 라이브러리의 직접 동적 링크는 C++ 표준 라이브러리와 시스템 라이브러리만 표시했다. Qt 직접 링크는 확인되지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "macOS arm64 C++23 Release: 부속·피부·얼굴·포즈·표면 연결·점진 애니메이션 관련 자동 회귀 45/45 통과. 최신 독립 FBX 스킨 구조 검사는 별도로 1/1 통과했다. 결과는 `build/glb-import-ninja/human-accessories-final.xml`과 `human-accessories-format-final.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter 제외 본체 전용 Release: 표면 연결과 포즈 관련 19/19 통과. `build/core-tangent-ninja/human-accessories-final.xml`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter 포함 Debug ASan·UBSan: 관련 검사 10/10, 최신 독립 형식 검사 1/1 통과. 누수 검출은 비활성화했다. `build/glb-import-full-asan/human-accessories-final.xml`과 `human-accessories-format-final.xml`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "별도 숫자 파서 단위 테스트는 본체 전용 Release, NSCharacter 포함 Release 및 ASan·UBSan 구성에서 각각 1/1 통과했다. 포함 Release와 계측 구성의 기록은 각 빌드의 `portable-numbers.xml`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 안에 따로 설치한 패키지의 본체 전용 소비자 1/1과 NSCharacter 포함 소비자 2/2가 통과했다. 포함 소비자는 설치된 인체·부속 자료와 공개 헤더를 사용했다. 사용자 설치본은 바꾸지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Emscripten C++23 컴파일러의 구문 검사는 공용 MHCLO·OBJ·BVH 구현, NSCharacter 템플릿 구현 및 공개 템플릿 헤더에 통과했다. 이 구문 검사는 기존 macOS 빌드의 생성된 기능 설정을 사용했으며 전체 SDK의 WASM 링크나 실행 결과는 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "별도의 WebAssembly 숫자 파서 자동 단위 테스트를 빌드하고 Node에서 실행했다. 해당 대상에는 부동소수점 `from_chars`가 없으며 대체 경로의 정상값·비정규 값·오류 및 지역 설정 검사가 통과했다. 출력은 `build/wasm-portable-numbers/validation.txt`에 있다. 이 테스트는 SDK 전체나 대상 앱의 실행이 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "macOS 라이브러리의 직접 동적 링크는 C++ 표준 라이브러리와 시스템 라이브러리만 표시했다. Qt 직접 링크는 확인되지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "heading",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "이 검사는 당시의 자료와 형상 연결에 한정한다. 이후 기존 슬롯의 교체와 몸 가림 변경은 [편집 검증 기록](HumanAccessorySwitchVerification-20261029.md)에 기록한다. 슬롯 추가·삭제, 겹친 의상 순서, 동적 천과 머리카락, 자세별 충돌 및 제작용 셰이더는 남아 있다. CC5·Blender·Unreal과 사용자용 앱은 지시에 따라 실행하지 않았다. 실제 호스트의 가져오기·렌더링, Windows·Linux·전체 SDK의 WASM 실행 및 MetaHuman 수준의 시각적 품질은 확인하지 않았으며 전체 캐릭터 생성·편집 목표는 계속 진행 중이다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "인체 부속 선택 검증 기록",
+      "anchor": "인체-부속-선택-검증-기록",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "입력과 범위",
+      "anchor": "입력과-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "독립 형식과 경계",
+      "anchor": "독립-형식과-경계",
+      "start_line": 11
+    },
+    {
+      "block_id": "b000021",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "실행 결과",
+      "anchor": "실행-결과",
+      "start_line": 21
+    },
+    {
+      "block_id": "b000025",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 32
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "인체 부속 선택 계약",
+        "target": "HumanAccessories.md",
+        "kind": "relative",
+        "line": 5
+      },
+      {
+        "block_id": "b000027",
+        "label": "편집 검증 기록",
+        "target": "HumanAccessorySwitchVerification-20261029.md",
+        "kind": "relative",
+        "line": 34
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

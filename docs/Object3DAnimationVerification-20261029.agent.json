@@ -1,0 +1,335 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:b5ff31b77cbf2637597082c16a265684d8a62946df856d25d1859cb173252a2f",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/Object3DAnimationVerification-20261029.md",
+    "sha256": "01b28f35a29b93a38eaee814d53e86f2273b1896ba5a9521b494b80c80e8793d",
+    "bytes": 3582,
+    "line_count": 30,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "본체 애니메이션 변환과 적용 검증: 2026-10-29",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 본체 애니메이션 변환과 적용 검증: 2026-10-29\n",
+      "level": 1,
+      "title": "본체 애니메이션 변환과 적용 검증: 2026-10-29"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "이 기록은 GLB 원본 채널을 본체 클립으로 변환하고, FBX의 메시별 모프를 가져오며, 본과 모프를 동일 인스턴스에 적용한 작업의 특정 소스 상태에 대한 것이다. 전체 NSCharacter 목표의 완료를 뜻하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 확인한 범위\n",
+      "level": 2,
+      "title": "확인한 범위"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "list",
+      "start_line": 7,
+      "end_line": 11,
+      "raw": "- GLB 원본의 선형·큐빅·선택적 STEP 근사를 편집 가능한 클립으로 표본화하고, 메시별 동일 이름 모프의 서로 다른 값을 인덱스 대응으로 보존했다. STEP의 기본 정책은 거부이며 근사 구간은 결과에서 명시한다.\n- GLB에서 변환한 클립을 FBX로 출력하고 `PerMesh`로 다시 읽은 뒤 본체 인스턴스에 적용했다. 별도 GLB 판독과 MIT ufbx 판독은 출력 본과 모프 곡선을 검사했다.\n- 공용 클립 적용은 다른 에셋·인스턴스·바인드, 잘못된 곡선·모프 및 중복 대상에 대한 실패 시 포즈와 가중치가 그대로인지 확인했다. 같은 곡선을 여러 메시가 공유하는 경우와 서로 다른 곡선을 사용하는 경우를 검사했다.\n- 정적 에셋의 모프만 적용할 때 기존 내부 루트 포즈를 보존했다. 본체 클립 적용과 GLB 원본·베이크 샘플 적용 경로를 각각 확인했다.\n- MakeHuman 인체 템플릿의 19,000개 이상의 원본 점과 150개 이상의 본을 사용하는 검사에 별도 테스트용 모프를 추가했다. 이는 MakeHuman의 원본 모프나 제작용 인체 품질을 입증하는 검사가 아니다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "GLB 원본의 선형·큐빅·선택적 STEP 근사를 편집 가능한 클립으로 표본화하고, 메시별 동일 이름 모프의 서로 다른 값을 인덱스 대응으로 보존했다. STEP의 기본 정책은 거부이며 근사 구간은 결과에서 명시한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "GLB에서 변환한 클립을 FBX로 출력하고 `PerMesh`로 다시 읽은 뒤 본체 인스턴스에 적용했다. 별도 GLB 판독과 MIT ufbx 판독은 출력 본과 모프 곡선을 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "공용 클립 적용은 다른 에셋·인스턴스·바인드, 잘못된 곡선·모프 및 중복 대상에 대한 실패 시 포즈와 가중치가 그대로인지 확인했다. 같은 곡선을 여러 메시가 공유하는 경우와 서로 다른 곡선을 사용하는 경우를 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "정적 에셋의 모프만 적용할 때 기존 내부 루트 포즈를 보존했다. 본체 클립 적용과 GLB 원본·베이크 샘플 적용 경로를 각각 확인했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "MakeHuman 인체 템플릿의 19,000개 이상의 원본 점과 150개 이상의 본을 사용하는 검사에 별도 테스트용 모프를 추가했다. 이는 MakeHuman의 원본 모프나 제작용 인체 품질을 입증하는 검사가 아니다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "## 실행 결과\n",
+      "level": 2,
+      "title": "실행 결과"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "모든 항목은 macOS arm64의 C++ 자동 검사이며 대상 앱 실행 옵션은 꺼 두었다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "table",
+      "start_line": 17,
+      "end_line": 22,
+      "raw": "| 구성 | 범위 | 결과 |\n| --- | --- | --- |\n| Release, NSCharacter 제외 | 본체 적용, GLB·FBX 애니메이션 변환·입출력, 자세 보정 관련 회귀 | 34/34 통과 |\n| Release, NSCharacter 포함 | 위 범위와 큰 인체 GLB 베이크 | 35/35 통과 |\n| Debug, NSCharacter 포함, AddressSanitizer·UndefinedBehaviorSanitizer | 적용·변환·FBX 재가져오기와 큰 인체 검사 | 15/15 통과 |\n| 별도 설치 경로의 SDK 소비자 | 코어 전용 및 NSCharacter 포함의 GLB·FBX 각 2건 | 4/4 통과 |\n",
+      "columns": [
+        "구성",
+        "범위",
+        "결과"
+      ],
+      "rows": [
+        [
+          "Release, NSCharacter 제외",
+          "본체 적용, GLB·FBX 애니메이션 변환·입출력, 자세 보정 관련 회귀",
+          "34/34 통과"
+        ],
+        [
+          "Release, NSCharacter 포함",
+          "위 범위와 큰 인체 GLB 베이크",
+          "35/35 통과"
+        ],
+        [
+          "Debug, NSCharacter 포함, AddressSanitizer·UndefinedBehaviorSanitizer",
+          "적용·변환·FBX 재가져오기와 큰 인체 검사",
+          "15/15 통과"
+        ],
+        [
+          "별도 설치 경로의 SDK 소비자",
+          "코어 전용 및 NSCharacter 포함의 GLB·FBX 각 2건",
+          "4/4 통과"
+        ]
+      ]
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "AddressSanitizer의 누수 검사는 비활성화했으므로 누수 검증 결과는 포함되지 않는다. 두 Release 라이브러리는 Qt 동적 라이브러리에 연결되지 않았다. 설치 소비자는 `build/` 내부의 별도 설치본을 사용했으며 `~/.local` 설치본을 교체하지 않았다. 각 수치는 같은 기능을 여러 구성에서 반복한 검사 건수다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "heading",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "## 남은 한계\n",
+      "level": 2,
+      "title": "남은 한계"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "GLB의 큐빅 베이크 오차는 유한한 검사 시점의 관측치이며 모든 시각의 오차 보증이 아니다. STEP 근사를 선택한 시간 구간에서는 원본과 다를 수 있다. 본체 `AnimationPlayer`는 모프 적용을 자동으로 등록하지 않으므로 호스트가 재생 시각에 공용 적용 함수를 호출해야 한다. FBX 원본 편집 곡선·제약·컨트롤 리그를 복원하지 않으며 FBX 기본 모프 병합 정책과 `PerMesh`의 차이를 호출자가 선택해야 한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "사용자 지시에 따라 CC5·Blender·Unreal 및 별도 사용자용 앱은 실행하지 않았다. 실제 앱 호환성, 제작용 MetaHuman DNA 전체의 평가와 제작용 시각 품질은 이 기록의 검증 범위가 아니다. Windows·Linux 실제 빌드와 실행도 이 기록에는 없다. 전체 남은 과제는 [NSCharacter 목표](NSCharacter.md)의 남은 구현과 검증을 따른다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "본체 애니메이션 변환과 적용 검증: 2026-10-29",
+      "anchor": "본체-애니메이션-변환과-적용-검증-2026-10-29",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인한 범위",
+      "anchor": "확인한-범위",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "실행 결과",
+      "anchor": "실행-결과",
+      "start_line": 13
+    },
+    {
+      "block_id": "b000017",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 한계",
+      "anchor": "남은-한계",
+      "start_line": 26
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "이 기록은 GLB 원본 채널을 본체 클립으로 변환하고, FBX의 메시별 모프를 가져오며, 본과 모프를 동일 인스턴스에 적용한 작업의 특정 소스 상태에 대한 것이다. 전체 NSCharacter 목표의 완료를 뜻하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 28,
+        "text": "GLB의 큐빅 베이크 오차는 유한한 검사 시점의 관측치이며 모든 시각의 오차 보증이 아니다. STEP 근사를 선택한 시간 구간에서는 원본과 다를 수 있다. 본체 `AnimationPlayer`는 모프 적용을 자동으로 등록하지 않으므로 호스트가 재생 시각에 공용 적용 함수를 호출해야 한다. FBX 원본 편집 곡선·제약·컨트롤 리그를 복원하지 않으며 FBX 기본 모프 병합 정책과 `PerMesh`의 차이를 호출자가 선택해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000021",
+        "label": "NSCharacter 목표",
+        "target": "NSCharacter.md",
+        "kind": "relative",
+        "line": 30
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000013",
+        "columns": [
+          "구성",
+          "범위",
+          "결과"
+        ],
+        "rows": [
+          [
+            "Release, NSCharacter 제외",
+            "본체 적용, GLB·FBX 애니메이션 변환·입출력, 자세 보정 관련 회귀",
+            "34/34 통과"
+          ],
+          [
+            "Release, NSCharacter 포함",
+            "위 범위와 큰 인체 GLB 베이크",
+            "35/35 통과"
+          ],
+          [
+            "Debug, NSCharacter 포함, AddressSanitizer·UndefinedBehaviorSanitizer",
+            "적용·변환·FBX 재가져오기와 큰 인체 검사",
+            "15/15 통과"
+          ],
+          [
+            "별도 설치 경로의 SDK 소비자",
+            "코어 전용 및 NSCharacter 포함의 GLB·FBX 각 2건",
+            "4/4 통과"
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

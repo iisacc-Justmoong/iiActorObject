@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-27T03:16:01.094947+00:00",
+  "requirement": "3D 오브젝트 엔진과 공용 자료는 iiActorObject 본체가 소유하며 NSCharacter는 참조한다.",
+  "requirementStatus": "implemented and reverified",
+  "overallCharacterGoalStatus": "active and incomplete",
+  "engineOwner": "iiActorObject::Object3DEngine",
+  "nsCharacterOwnsEngineOrCanonicalGeometry": false,
+  "borrowedHandlesDoNotExtendEngineLifetime": true,
+  "engineDestructionInvalidatesFeatureReferences": true,
+  "coreIndependentOfNsCharacter": true,
+  "verifiedCoreSourceFiles": 96,
+  "coreLibraryNsCharacterSymbols": 0,
+  "validation": [
+    {
+      "path": "build/core-only/build/strain-guard-tests.xml",
+      "sha256": "3d993368e4640900aefcd783a3fabeefb96ff2bf12b19569ac6f62029ce4df40",
+      "tests": 235,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "path": "build/core-only/consumer/build/strain-guard-tests.xml",
+      "sha256": "8b9734a152508d0f36505e61a8e6d40d91eec2cd828efbd3861d9ccf5a47f7ee",
+      "tests": 3,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "path": "build/no-dna/build/strain-guard-tests.xml",
+      "sha256": "179282cd86831c5e7dcbe4dc4827c2386c78b95949c5ea0e3ec9def47a937c0a",
+      "tests": 213,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "path": "build/no-dna/consumer/build/strain-guard-tests.xml",
+      "sha256": "31ba927415816c98f7098ee4eda607da42e203e302a29fceb8e34ace02c789e8",
+      "tests": 2,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "path": "build/strain-guard/ownership/build/tests.xml",
+      "sha256": "b812913372fc10d3479b27bcde2d8dbcc397493b6e9cae050f37dcf26fa1fc68",
+      "tests": 7,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "focusedOwnershipCommands": [
+    {
+      "name": "iiActorObject.layers.ownership",
+      "command": [
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/build/iiActorObjectLayersTests",
+        "ownership"
+      ],
+      "exitCode": 0,
+      "seconds": 0.9996311249999996
+    },
+    {
+      "name": "iiActorObject.template.ownership",
+      "command": [
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/build/iiActorObjectTemplateTests",
+        "ownership"
+      ],
+      "exitCode": 0,
+      "seconds": 1.103642958
+    },
+    {
+      "name": "iiActorObject.rig.ownership",
+      "command": [
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/build/iiActorObjectRigTests",
+        "ownership"
+      ],
+      "exitCode": 0,
+      "seconds": 1.041367375
+    },
+    {
+      "name": "iiActorObject.object3d.collection",
+      "command": [
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/build/iiActorObject3DEngineTests",
+        "collection"
+      ],
+      "exitCode": 0,
+      "seconds": 8.334250292
+    },
+    {
+      "name": "iiActorObject.object3d.limits",
+      "command": [
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/build/iiActorObject3DEngineTests",
+        "limits"
+      ],
+      "exitCode": 0,
+      "seconds": 0.004576916999999625
+    },
+    {
+      "name": "iiActorObject.human.lifetime",
+      "command": [
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/build/iiActorObjectHumanTemplateTests",
+        "lifetime",
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/data/MakeHuman"
+      ],
+      "exitCode": 0,
+      "seconds": 101.335504459
+    },
+    {
+      "name": "iiActorObject.object3d.ownership",
+      "command": [
+        "/Volumes/Storage/Workspace/SDK/iiActorObject/build/iiActorObject3DEngineTests",
+        "ownership"
+      ],
+      "exitCode": 0,
+      "seconds": 0.004893874999993386
+    }
+  ],
+  "verifiedTestExecutions": 460,
+  "sourceFiles": [
+    {
+      "path": "src/iiActorObject/Object3DEngine.h",
+      "sha256": "c664c16647aa38f4dbdf666384ebf153d22f964fbc39065acc8bbccc380c2e69"
+    },
+    {
+      "path": "src/iiActorObject/Object3DAsset.h",
+      "sha256": "aaed2d47fd90eb053674877dcfdc9996154846ea0ac7d5d2c59ebccc50e338c7"
+    },
+    {
+      "path": "src/iiActorObject/Object3DEditor.h",
+      "sha256": "85198a93811527fff35b1eac80dec7811fcac091adf6633889c86214e3e248ee"
+    },
+    {
+      "path": "src/iiActorObject/Object3DTemplate.h",
+      "sha256": "92244c79e33b0250a6fa6633ff35decc1c57f6dbf248e94df74ef2cb59cf42f7"
+    },
+    {
+      "path": "src/iiActorObject/Object3DRig.h",
+      "sha256": "87448c3b5405e6290aeedf3f7bbe434bf5b49e53b2dd7acc9226489dc4fb15d1"
+    },
+    {
+      "path": "src/iiActorObject/Object3DEngine.cpp",
+      "sha256": "47668c1bf665150e0d38c47677c8441da89f3903baf70254346d0844e3e3e92d"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterAsset.h",
+      "sha256": "a23ce4cae1b45355ae30d7d4a30588c98f7a2d3d21268970d08d8cb6a59076db"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterEditor.h",
+      "sha256": "5d8bb94a21f3e66f5e06e648ef8d43e6f16d10dcfba18b7f2ed8c7afd493662a"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterTemplate.h",
+      "sha256": "b83bb27e0973ecdb3a01607524899ce9762396683f3d92c29c1d3ea58d1e47f3"
+    },
+    {
+      "path": "tests/Object3DEngineTest.cpp",
+      "sha256": "f8f9ecf02d0bdfe9543205cc238077738c267faa3de78442797dacd03afc0f08"
+    },
+    {
+      "path": "docs/Object3DEngine.md",
+      "sha256": "45530b0ae8c7b7b4bc59754361bbed2c5c13f53f9f08e9112ea5d8546bd66537"
+    }
+  ],
+  "libraries": [
+    {
+      "path": "build/libiiActorObject.dylib",
+      "sha256": "bb8761f03cde4bd9a11cf30f7027e9be3d37eef137e3b8f0f1a4914a3d84dc18"
+    },
+    {
+      "path": "build/core-only/build/libiiActorObject.dylib",
+      "sha256": "79a0dd6d888830df877de1bc42ce3d32a5ee4de955c3c28e51544bf0a139ff63"
+    },
+    {
+      "path": "build/no-dna/build/libiiActorObject.dylib",
+      "sha256": "fb6ae992925d34554f077e38e864d7451ca4f9908ad29cfd7391929968824cd0"
+    }
+  ],
+  "limitations": [
+    "This scoped checkpoint does not claim completion of the concurrent shared/static full matrix.",
+    "CC5, Unreal, production MetaHuman and other character-engine gates remain open."
+  ],
+  "systemInstalledSdkModified": false
+}

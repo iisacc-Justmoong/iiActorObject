@@ -1,0 +1,135 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:dd3cf02f45bd72827d92293b6421a538257524f40b632dbd5cae664a42fe5e62",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/DnaMlVerification-20261028.md",
+    "sha256": "5f42423837d1863ef830ef81377896b18ea4b13801ad4fb4fabaf1fb9ad618fd",
+    "bytes": 2754,
+    "line_count": 11,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "DNA 신경망 경계와 평가 검증: 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# DNA 신경망 경계와 평가 검증: 2026-10-28\n",
+      "level": 1,
+      "title": "DNA 신경망 경계와 평가 검증: 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "DNA를 RigLogic에 넘기기 전에 신경망의 입력·출력 제어 인덱스, 레이어별 출력 크기와 행렬·연속 레이어 차원, 계수의 유한성, 활성화 함수와 leaky ReLU 매개변수를 검사한다. 비어 있는 레이어 목록은 비활성 placeholder로 허용하되 레이어가 존재하면서 편향 배열이 비어 있는 경우는 거부한다. 입력 제어의 double→float 변환은 먼저 float32 범위를 검사한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "`resources/fixtures/dna/independent.dna`를 메모리에서 복사해 독립 writer로 합성 신경망을 구성했다. 하나 및 두 개의 선형 레이어, leaky ReLU, 빈 placeholder, raw·GUI 입력, 반복 평가와 서로 다른 LOD의 결과를 손으로 계산한 값과 비교했다. LOD 변경 시 RigLogic은 입력 및 출력 버퍼를 초기화한다. 실험한 LOD 전환에서 이전 신경망 값은 남지 않았다. 공유 구성의 관련 검사 결과는 `build/pose-plan/dna-ml-width-shared.xml`이다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "출력이 없는 레이어, 맞지 않는 행렬과 첫 입력 폭·두 레이어 연결, 범위 밖 입력·출력 인덱스, 비유한 계수, 알 수 없는 활성화 함수와 누락된 leaky ReLU 매개변수를 가진 9개 입력은 에셋·리그를 등록하지 않고 거부한다. 변경 전에는 활성 신경망에 비어 있는 출력 레이어가 포함된 DNA와 첫 입력 폭이 맞지 않는 DNA를 가져오기에 성공했다. 최초 실패 기록은 각각 `build/pose-plan/dna-ml-malformed-inspect.xml`, `build/pose-plan/dna-ml-input-width-red.xml`이다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "NSCharacter를 끈 코어 전용 구성과 정적 Debug AddressSanitizer·UndefinedBehaviorSanitizer 구성에서도 신경망과 기존 DNA 가져오기·제어·재연결을 포함한 6개 검사가 각각 통과했다. 결과는 `build/pose-plan/dna-ml-width-core.xml`, `build/pose-plan/dna-ml-width-sanitizers.xml`이다. 공유·코어 전용 SDK를 Workspace 내부에 별도로 설치하고 고정 DNA를 소비자에서 가져와 평가했다. 결과는 `build/pose-plan/dna-ml-width-consumer.xml`, `build/pose-plan/dna-ml-width-core-consumer.xml`이다. 사용자 설치본은 변경하지 않았다. 앱 실행 제외 설정의 등록 검사도 `build/pose-plan/dna-ml-policy.xml`에서 통과했다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "기존 입력 인덱스 목록이 없는 ML 확장 연산의 의존 그래프·첫 레이어 입력 폭, RBF·twist/swing 테이블의 전체 검증은 아직 이 검사에 포함되지 않는다. 합성 자료의 수치 검사는 실제 제작용 MetaHuman DNA의 기능·품질이나 CC5·Blender·Unreal에서의 동작을 증명하지 않는다. 앱 실행 검증은 사용자 지시에 따라 하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "DNA 신경망 경계와 평가 검증: 2026-10-28",
+      "anchor": "dna-신경망-경계와-평가-검증-2026-10-28",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000011",
+        "line": 11,
+        "text": "기존 입력 인덱스 목록이 없는 ML 확장 연산의 의존 그래프·첫 레이어 입력 폭, RBF·twist/swing 테이블의 전체 검증은 아직 이 검사에 포함되지 않는다. 합성 자료의 수치 검사는 실제 제작용 MetaHuman DNA의 기능·품질이나 CC5·Blender·Unreal에서의 동작을 증명하지 않는다. 앱 실행 검증은 사용자 지시에 따라 하지 않았다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

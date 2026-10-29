@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-27",
+  "feature": "core-owned rig control morph samples",
+  "scope": {
+    "coreOwns3DAndRig": true,
+    "nsCharacterOwnsEngine": false,
+    "applicationExecutionValidationAfterPolicy": false,
+    "automatedUnitAndIntegrationTests": true,
+    "qtDependencyAdded": false
+  },
+  "behavior": {
+    "controlSpaces": [
+      "raw",
+      "gui"
+    ],
+    "sourceSessionEvaluated": false,
+    "preserved": [
+      "control values",
+      "source bone locals",
+      "blend shapes",
+      "animated maps",
+      "source topology and normal layouts"
+    ],
+    "provenanceIsLiveRig": false,
+    "shaderConnectionAutomatic": false,
+    "projectVersion": 14,
+    "exchange": [
+      "FBX SDK metadata",
+      "GLB extras",
+      "JSON"
+    ]
+  },
+  "previousNativeRegression": {
+    "sourceFingerprint": "89c378bb040ec32a644a240260db2f0c16d29e6e9b3de96bf419edeb9395c4bd",
+    "shared": 105,
+    "coreOnly": 306,
+    "noDna": 281,
+    "excludedEarlierApplicationChecks": 5,
+    "failures": 0,
+    "evidence": "build/rig-sampling/pre-no-execution-validation/Results.json"
+  },
+  "afterPolicyAutomatedTests": {
+    "shared": 13,
+    "addressAndUndefinedBehaviorSanitizers": 8,
+    "executionPolicyTests": {
+      "shared": 1,
+      "coreOnly": 1,
+      "noDna": 1,
+      "sanitizers": 1
+    },
+    "failures": 0,
+    "sanitizerOptions": "halt_on_error"
+  },
+  "executionValidation": {
+    "currentDefault": false,
+    "cc5BlenderUnrealExecuted": false,
+    "toolChecksBeforePolicyRecorded": true,
+    "toolRunAfterResourceHelperChange": false,
+    "temporaryDirectoriesCleaned": 11,
+    "cleanupEvidence": "build/rig-sampling/ExecutionValidationCleanup.json"
+  },
+  "resources": {
+    "assetFilesVerified": 848,
+    "canonicalRoot": "resources/",
+    "legacyDataPreserved": true,
+    "syntheticDna": "resources/fixtures/dna/independent.dna",
+    "syntheticDnaSha256": "48318a9de7b3ca1020deb44d28cced561adc9e7e1e63d3c4f7dd487553d3046b",
+    "largeFixtures": {
+      "shapes": [
+        "adult",
+        "child"
+      ],
+      "bonesEach": 163,
+      "meshesEach": 5,
+      "sourcePointsEach": 43474
+    },
+    "templateEndpointComparisons": 472,
+    "maximumPositionError": 1.3325578478965066e-15,
+    "maximumNormalError": 8.833950494912839e-16
+  },
+  "platform": "macOS arm64",
+  "remaining": [
+    "production MetaHuman DNA ML and RBF data",
+    "full-body and finger reference frames",
+    "animation retargeting after bind changes",
+    "posed garment correction",
+    "final skin hair and garment quality",
+    "legacy application-validation resource migration before any explicit execution request",
+    "Windows and Linux builds"
+  ],
+  "completeMetaHumanOrApplicationCompatibilityClaimed": false
+}

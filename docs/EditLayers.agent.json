@@ -1,0 +1,663 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:f57a3fb4f997c7fb047360d1f96c3e455fd6cac37d30083a680bce661cf924a9",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/EditLayers.md",
+    "sha256": "e1e7ea41b20c4c814486e27ad98f10de2e1f7b72db2e157a33bd192b43e465ef",
+    "bytes": 9546,
+    "line_count": 75,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "템플릿 파라미터와 비파괴 편집 계층",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 템플릿 파라미터와 비파괴 편집 계층\n",
+      "level": 1,
+      "title": "템플릿 파라미터와 비파괴 편집 계층"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 목적과 소유권\n",
+      "level": 2,
+      "title": "목적과 소유권"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "체형·얼굴 생성 파라미터를 바꿔도 후속 조형·가중치·모프·UV·관절·머티리얼 편집을 유지하기 위한 본체 기능이다. `Object3DEngine::editTemplate`이 본체 소유 `Object3DEditor`를 만든다. 템플릿 참조, 파라미터, 불변 보정 자료와 이력은 모두 본체 편집 세션에 있다. `NSCharacter::CharacterTemplate::edit`과 `CharacterEditor`는 이를 참조하고 전달한다. NSCharacter에 별도 메시·보정·골격 저장소를 두지 않는다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "일반 `editObject`와 기존 `CharacterEditor(asset)`는 이전의 스냅샷 편집을 유지한다. 템플릿 기반 편집만 계층 모드로 시작한다. 공용 계산은 C++23 표준 라이브러리만 사용하고 NSCharacter·JSON·Qt에 의존하지 않는다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 계산 순서\n",
+      "level": 2,
+      "title": "계산 순서"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "list",
+      "start_line": 11,
+      "end_line": 15,
+      "raw": "1. 원본 템플릿과 현재 파라미터에서 새 중립 자료를 계산한다.\n2. 활성 계층의 표면·스킨·모프·UV·머티리얼 보정을 순서대로 적용한다.\n3. 설정된 [자동 표면 맞춤](AutomaticSurfaceFitting.md)을 의존성 순서로 계산하고, 수정된 원본 제어점으로 템플릿의 관절 head·tail·평면 기준을 다시 계산한다.\n4. 활성 계층의 수동 관절 위치·회전·이름 보정을 순서대로 적용한다.\n5. 파생 법선을 다시 계산한 후 활성 기준 법선 보정을 순서대로 적용하고, 렌더 캐시와 본체 에셋 검증을 통과한 결과만 게시한다.\n",
+      "items": [
+        {
+          "marker": "1.",
+          "text": "원본 템플릿과 현재 파라미터에서 새 중립 자료를 계산한다.",
+          "checked": null
+        },
+        {
+          "marker": "2.",
+          "text": "활성 계층의 표면·스킨·모프·UV·머티리얼 보정을 순서대로 적용한다.",
+          "checked": null
+        },
+        {
+          "marker": "3.",
+          "text": "설정된 [자동 표면 맞춤](AutomaticSurfaceFitting.md)을 의존성 순서로 계산하고, 수정된 원본 제어점으로 템플릿의 관절 head·tail·평면 기준을 다시 계산한다.",
+          "checked": null
+        },
+        {
+          "marker": "4.",
+          "text": "활성 계층의 수동 관절 위치·회전·이름 보정을 순서대로 적용한다.",
+          "checked": null
+        },
+        {
+          "marker": "5.",
+          "text": "파생 법선을 다시 계산한 후 활성 기준 법선 보정을 순서대로 적용하고, 렌더 캐시와 본체 에셋 검증을 통과한 결과만 게시한다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "원본 위치·UV·layout·face ID를 유지하므로 UV 경계의 복수 렌더 정점에도 같은 위치 보정이 전달된다. 숨긴 보조 정점과 빈 스킨 행도 원본 자료에 남는다. 파라미터를 반복해서 바꾸어도 이전 생성 결과에 다시 변형을 누적하지 않는다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "관절 보정은 오브젝트 공간의 위치 델타와 회전 델타이다. 생성 파라미터가 기준 골격을 바꿔도 수동 보정이 유지된다. 모든 표면 계층을 처리한 뒤 모든 관절 계층을 처리하는 두 단계 구조이다. 계층 순서는 각 단계 안에서 적용되며 관절 연산과 표면 연산을 임의로 교차 실행하지 않는다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "heading",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "## 공개 API\n",
+      "level": 2,
+      "title": "공개 API"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "fenced_code",
+      "start_line": 23,
+      "end_line": 36,
+      "raw": "```cpp\nusing namespace iiActorObject;\nObject3DEngine engine;\nauto human = NSCharacter::loadMakeHumanTemplate(engine.reference(), dataDirectory);\nauto editor = human.edit();\neditor.moveControlPoints(0, std::array{TopologyPointMove{pointId, {0, 0, .003}}});\nauto detail = editor.layers().back().id;\neditor.renameLayer(detail, \"Face detail\");\neditor.setTemplateValues(std::array{\n    TemplateValue{\"armslegs/upperlegs-height-incr\", .5},\n    TemplateValue{\"nose/nose-scale-vert-incr\", .4}});\neditor.setLayerWeight(detail, .5);\nauto result = editor.asset();\n```\n",
+      "language": "cpp",
+      "code": "using namespace iiActorObject;\nObject3DEngine engine;\nauto human = NSCharacter::loadMakeHumanTemplate(engine.reference(), dataDirectory);\nauto editor = human.edit();\neditor.moveControlPoints(0, std::array{TopologyPointMove{pointId, {0, 0, .003}}});\nauto detail = editor.layers().back().id;\neditor.renameLayer(detail, \"Face detail\");\neditor.setTemplateValues(std::array{\n    TemplateValue{\"armslegs/upperlegs-height-incr\", .5},\n    TemplateValue{\"nose/nose-scale-vert-incr\", .4}});\neditor.setLayerWeight(detail, .5);\nauto result = editor.asset();\n",
+      "closed": true
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "본체 사용자는 `engine.editTemplate(program, values, historyLimit)`와 반환된 핸들의 `get()`을 사용한다. `layered()`는 모드, `templateValues()`는 현재 파라미터의 참조, `layers()`는 ID·이름·활성 상태·강도 메타데이터의 복사본이다. 보정 버퍼는 공개 메타데이터에 포함되지 않는다. 같은 계층은 undo·redo에서도 동일한 ID를 유지하고, 분기 후 새 편집은 폐기한 ID를 재사용하지 않는다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "기존 편집 호출 한 번이 하나의 보정 계층이다. 여러 정점·가중치 변경을 한 span으로 전달하면 한 계층을 구성한다. `setLayerEnabled`, `setLayerWeight`, `renameLayer`, `moveLayer`, `removeLayer`로 수정한다. 계층 강도는 0~1이고, `moveLayer`의 목적지는 이동 후 최종 인덱스이다. `detachTemplate`은 현재 결과를 일반 스냅샷으로 전환한다. 이 전환도 undo로 복원할 수 있다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "계층·파라미터 변경과 일반 편집을 같은 이력에서 undo·redo한다. 새 분기는 redo 이력을 제거한다. 잘못된 입력이나 재계산 실패는 결과·이력·revision을 바꾸지 않는다. 같은 파라미터·활성 상태·강도를 재지정하면 revision을 올리지 않는다. 입력 순서는 이름으로 정렬하고 0 값은 정규화하지만, 정규화 전에 알 수 없는 이름과 중복 입력을 검사한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 43,
+      "end_line": 43,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "heading",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "## 보정의 의미\n",
+      "level": 2,
+      "title": "보정의 의미"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 45,
+      "end_line": 45,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "table",
+      "start_line": 46,
+      "end_line": 55,
+      "raw": "| 자료 | 계층 강도 적용 |\n| --- | --- |\n| 원본 또는 렌더 위치 | 저장한 오브젝트 공간 델타에 강도를 곱하여 더한다. |\n| 스킨 가중치 | 입력 목표를 먼저 정규화한 뒤 앞선 계층 결과와 보간하고 다시 정규화한다. 강도 1에서는 원본의 빈 행도 그대로 보존한다. 중간 강도의 빈 행은 렌더 규약의 루트 부착으로 해석한다. |\n| 얼굴·사용자 모프 | 원본 target ID 또는 신규 이름으로 레코드를 대응하여 위치·명시적 법선 델타를 보간한다. DNA target ID를 유지한다. |\n| UV | 원본 UV ID 또는 렌더 UV ID별 델타를 더한다. |\n| 기준 법선 | 원본 법선 ID 또는 렌더 정점 ID별 회전을 표면 계산 후 강도에 따라 보간하여 적용한다. 공유 ID의 점 마스크는 해당 원본 점들의 평균이다. [기준 법선 편집](BaseNormalEditing.md)을 따른다. |\n| 관절 | 오브젝트 공간 위치 델타·회전 델타의 slerp·로컬 스케일 델타와 이산 부모 변경을 적용한 뒤 로컬 bind 변환을 재구성한다. [골격 상세 편집](SkeletonEditing.md)을 따른다. |\n| 머티리얼 수치 | 기본색·금속성·거칠기를 보간한다. |\n| 이름·시맨틱·머티리얼 슬롯 | 강도가 0보다 큰 활성 계층의 이산 값이 적용된다. |\n",
+      "columns": [
+        "자료",
+        "계층 강도 적용"
+      ],
+      "rows": [
+        [
+          "원본 또는 렌더 위치",
+          "저장한 오브젝트 공간 델타에 강도를 곱하여 더한다."
+        ],
+        [
+          "스킨 가중치",
+          "입력 목표를 먼저 정규화한 뒤 앞선 계층 결과와 보간하고 다시 정규화한다. 강도 1에서는 원본의 빈 행도 그대로 보존한다. 중간 강도의 빈 행은 렌더 규약의 루트 부착으로 해석한다."
+        ],
+        [
+          "얼굴·사용자 모프",
+          "원본 target ID 또는 신규 이름으로 레코드를 대응하여 위치·명시적 법선 델타를 보간한다. DNA target ID를 유지한다."
+        ],
+        [
+          "UV",
+          "원본 UV ID 또는 렌더 UV ID별 델타를 더한다."
+        ],
+        [
+          "기준 법선",
+          "원본 법선 ID 또는 렌더 정점 ID별 회전을 표면 계산 후 강도에 따라 보간하여 적용한다. 공유 ID의 점 마스크는 해당 원본 점들의 평균이다. [기준 법선 편집](BaseNormalEditing.md)을 따른다."
+        ],
+        [
+          "관절",
+          "오브젝트 공간 위치 델타·회전 델타의 slerp·로컬 스케일 델타와 이산 부모 변경을 적용한 뒤 로컬 bind 변환을 재구성한다. [골격 상세 편집](SkeletonEditing.md)을 따른다."
+        ],
+        [
+          "머티리얼 수치",
+          "기본색·금속성·거칠기를 보간한다."
+        ],
+        [
+          "이름·시맨틱·머티리얼 슬롯",
+          "강도가 0보다 큰 활성 계층의 이산 값이 적용된다."
+        ]
+      ]
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 56,
+      "end_line": 56,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 57,
+      "end_line": 57,
+      "raw": "가중치·모프·머티리얼 보정은 순서에 따라 결과가 달라질 수 있다. 예를 들어 같은 점의 가중치를 먼저 A 본, 다음에 B 본으로 바꾼 두 계층은 순서를 바꾸면 최종 영향 본도 바뀐다. 위치 보정은 같은 좌표계에서 더해지지만 관절 회전은 곱셈 순서가 중요하다. 기준 법선은 위치가 바뀐 표면에서만 다시 계산한다. 명시적 모프 법선은 유지하며 계산형과의 중간 강도 규약은 [모프 법선](MorphNormals.md)을 따른다.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 58,
+      "end_line": 58,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "heading",
+      "start_line": 59,
+      "end_line": 59,
+      "raw": "## 경계와 남은 기능\n",
+      "level": 2,
+      "title": "경계와 남은 기능"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 60,
+      "end_line": 60,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 61,
+      "end_line": 61,
+      "raw": "각 템플릿 안의 계층은 메시·본의 개수와 작성용 연결을 고정한다. 본 ID를 유지하는 부모 변경·회전·비단위 스케일은 지원한다. `attachSurface`와 `addTemplateSurfaces`는 [표면 연결](SkinSurface.md)을 포함하는 새로운 본체 템플릿으로 전환하여 메시를 추가하고, `replaceTemplateSurfaces`는 조건에 맞는 기존 표면 슬롯을 교체한다. `removeTemplateSurfaces`는 추종 슬롯 제거 시 남은 계층의 메시 인덱스와 선택을 함께 다시 연결한다. 이들 동작은 이전 템플릿·계층으로 undo할 수 있다. 조합한 골격이 순환하거나 스케일이 0이 되면 원자적으로 거부한다. 임의 인덱스 변경·새 법선 seam과 렌더 메모리 예산 변경은 계층 모드에서 거부한다. 조용히 원본 점 ID를 다시 매기거나 지원하지 않는 수정 내용을 버리지 않는다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 62,
+      "end_line": 62,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 63,
+      "end_line": 63,
+      "raw": "계층은 최대 4,096개, undo 이력은 1~4,096개이다. 각 계층의 보정 자료는 불변으로 이력 간 공유한다. 결과 에셋과 이력은 엔진 자원 제한을 따른다. 엔진 소멸은 NSCharacter 참조를 만료시킨다. 템플릿을 명시적으로 제거하면 기존 결과 스냅샷은 읽을 수 있으나 템플릿 재계산은 실패한다. GC는 편집·리그 세션, 템플릿, 에셋 순서로 불필요한 자원을 회수한다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 64,
+      "end_line": 64,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 65,
+      "end_line": 65,
+      "raw": "FBX·GLB·DNA 출력은 현재 계산 결과를 저장한다. [자체 프로젝트 형식](Object3DProject.md)은 파라미터·계층·이력과 선택 DNA 리그를 저장·복원한다. [점 마스크와 브러시](MeshPainting.md)는 레이어의 위치·스킨·모프 보정을 제어하고 여러 입력을 한 스트로크로 기록한다. 계층 그룹·스트로크 간 병합, 포즈 보정과 의미 슬라이더는 추가 작업이다. 이 구현은 CC5 전체 편집 기능이나 실제 MetaHuman 적용의 완료 근거가 아니다.\n"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 66,
+      "end_line": 66,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "heading",
+      "start_line": 67,
+      "end_line": 67,
+      "raw": "## 검증\n",
+      "level": 2,
+      "title": "검증"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 68,
+      "end_line": 68,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 69,
+      "end_line": 69,
+      "raw": "`Object3DLayersTest`는 파라미터 변경 후 위치·가중치·모프·머티리얼·관절 보정 유지, 미세 회전, 계층 강도·순서·제거·undo·redo, 원본 빈 가중치 행, 실패 원자성과 소유권을 검사한다. 작성용 토폴로지가 없는 렌더 메시도 별도로 검사한다.\n"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "paragraph",
+      "start_line": 71,
+      "end_line": 71,
+      "raw": "실제 CC0 인체에서 독립 생성 결과와 계층 보정 결과를 비교하고 GLB를 실제 Blender에 가져온다. DNA에서는 파라미터와 수동 편집을 합친 결과의 위치·UV·가중치·모프·관절과 RigLogic 반응을 재입력하고, SDK에 링크하지 않은 native reader로 저장된 수치·원본 연결·behavior를 확인한다. 이 독립 fixture는 제작용 MetaHuman ML·RBF·twist/swing 품질을 증명하지 않는다.\n"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 72,
+      "end_line": 72,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "paragraph",
+      "start_line": 73,
+      "end_line": 73,
+      "raw": "[계산된 표면 위의 평가 계층](EvaluatedEditLayers.md)은 활성 자동 맞춤 뒤의 상세 편집을 보존한다. 평가 방법·순서·강도·마스크와 이력은 본체가 소유하며 버전 10으로 저장한다. 이전 프로젝트의 누적 방식은 그대로 복원한다.\n"
+    },
+    {
+      "id": "b000048",
+      "kind": "blank",
+      "start_line": 74,
+      "end_line": 74,
+      "raw": "\n"
+    },
+    {
+      "id": "b000049",
+      "kind": "paragraph",
+      "start_line": 75,
+      "end_line": 75,
+      "raw": "[기준 자세 프로그램](PoseReference.md)의 설정과 해제는 본체 계층 상태에 보관한다. 형상 보정 계층을 추가하지 않고 기존 undo/redo를 사용하며 체형·계층·골격 편집 후 새 골격에서 다시 계산한다. 일반 replace에서 형상과 프로그램을 함께 바꾸어도 한 이력으로 게시한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "템플릿 파라미터와 비파괴 편집 계층",
+      "anchor": "템플릿-파라미터와-비파괴-편집-계층",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "목적과 소유권",
+      "anchor": "목적과-소유권",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "계산 순서",
+      "anchor": "계산-순서",
+      "start_line": 9
+    },
+    {
+      "block_id": "b000017",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "공개 API",
+      "anchor": "공개-api",
+      "start_line": 21
+    },
+    {
+      "block_id": "b000027",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "보정의 의미",
+      "anchor": "보정의-의미",
+      "start_line": 44
+    },
+    {
+      "block_id": "b000033",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "경계와 남은 기능",
+      "anchor": "경계와-남은-기능",
+      "start_line": 59
+    },
+    {
+      "block_id": "b000041",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검증",
+      "anchor": "검증",
+      "start_line": 67
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 7,
+        "text": "일반 `editObject`와 기존 `CharacterEditor(asset)`는 이전의 스냅샷 편집을 유지한다. 템플릿 기반 편집만 계층 모드로 시작한다. 공용 계산은 C++23 표준 라이브러리만 사용하고 NSCharacter·JSON·Qt에 의존하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 17,
+        "text": "원본 위치·UV·layout·face ID를 유지하므로 UV 경계의 복수 렌더 정점에도 같은 위치 보정이 전달된다. 숨긴 보조 정점과 빈 스킨 행도 원본 자료에 남는다. 파라미터를 반복해서 바꾸어도 이전 생성 결과에 다시 변형을 누적하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 19,
+        "text": "관절 보정은 오브젝트 공간의 위치 델타와 회전 델타이다. 생성 파라미터가 기준 골격을 바꿔도 수동 보정이 유지된다. 모든 표면 계층을 처리한 뒤 모든 관절 계층을 처리하는 두 단계 구조이다. 계층 순서는 각 단계 안에서 적용되며 관절 연산과 표면 연산을 임의로 교차 실행하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000021",
+        "line": 38,
+        "text": "본체 사용자는 `engine.editTemplate(program, values, historyLimit)`와 반환된 핸들의 `get()`을 사용한다. `layered()`는 모드, `templateValues()`는 현재 파라미터의 참조, `layers()`는 ID·이름·활성 상태·강도 메타데이터의 복사본이다. 보정 버퍼는 공개 메타데이터에 포함되지 않는다. 같은 계층은 undo·redo에서도 동일한 ID를 유지하고, 분기 후 새 편집은 폐기한 ID를 재사용하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000045",
+        "line": 71,
+        "text": "실제 CC0 인체에서 독립 생성 결과와 계층 보정 결과를 비교하고 GLB를 실제 Blender에 가져온다. DNA에서는 파라미터와 수동 편집을 합친 결과의 위치·UV·가중치·모프·관절과 RigLogic 반응을 재입력하고, SDK에 링크하지 않은 native reader로 저장된 수치·원본 연결·behavior를 확인한다. 이 독립 fixture는 제작용 MetaHuman ML·RBF·twist/swing 품질을 증명하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000011",
+        "label": "자동 표면 맞춤",
+        "target": "AutomaticSurfaceFitting.md",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000029",
+        "label": "기준 법선 편집",
+        "target": "BaseNormalEditing.md",
+        "kind": "relative",
+        "line": 52
+      },
+      {
+        "block_id": "b000029",
+        "label": "골격 상세 편집",
+        "target": "SkeletonEditing.md",
+        "kind": "relative",
+        "line": 53
+      },
+      {
+        "block_id": "b000031",
+        "label": "모프 법선",
+        "target": "MorphNormals.md",
+        "kind": "relative",
+        "line": 57
+      },
+      {
+        "block_id": "b000035",
+        "label": "표면 연결",
+        "target": "SkinSurface.md",
+        "kind": "relative",
+        "line": 61
+      },
+      {
+        "block_id": "b000039",
+        "label": "자체 프로젝트 형식",
+        "target": "Object3DProject.md",
+        "kind": "relative",
+        "line": 65
+      },
+      {
+        "block_id": "b000039",
+        "label": "점 마스크와 브러시",
+        "target": "MeshPainting.md",
+        "kind": "relative",
+        "line": 65
+      },
+      {
+        "block_id": "b000047",
+        "label": "계산된 표면 위의 평가 계층",
+        "target": "EvaluatedEditLayers.md",
+        "kind": "relative",
+        "line": 73
+      },
+      {
+        "block_id": "b000049",
+        "label": "기준 자세 프로그램",
+        "target": "PoseReference.md",
+        "kind": "relative",
+        "line": 75
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000029",
+        "columns": [
+          "자료",
+          "계층 강도 적용"
+        ],
+        "rows": [
+          [
+            "원본 또는 렌더 위치",
+            "저장한 오브젝트 공간 델타에 강도를 곱하여 더한다."
+          ],
+          [
+            "스킨 가중치",
+            "입력 목표를 먼저 정규화한 뒤 앞선 계층 결과와 보간하고 다시 정규화한다. 강도 1에서는 원본의 빈 행도 그대로 보존한다. 중간 강도의 빈 행은 렌더 규약의 루트 부착으로 해석한다."
+          ],
+          [
+            "얼굴·사용자 모프",
+            "원본 target ID 또는 신규 이름으로 레코드를 대응하여 위치·명시적 법선 델타를 보간한다. DNA target ID를 유지한다."
+          ],
+          [
+            "UV",
+            "원본 UV ID 또는 렌더 UV ID별 델타를 더한다."
+          ],
+          [
+            "기준 법선",
+            "원본 법선 ID 또는 렌더 정점 ID별 회전을 표면 계산 후 강도에 따라 보간하여 적용한다. 공유 ID의 점 마스크는 해당 원본 점들의 평균이다. [기준 법선 편집](BaseNormalEditing.md)을 따른다."
+          ],
+          [
+            "관절",
+            "오브젝트 공간 위치 델타·회전 델타의 slerp·로컬 스케일 델타와 이산 부모 변경을 적용한 뒤 로컬 bind 변환을 재구성한다. [골격 상세 편집](SkeletonEditing.md)을 따른다."
+          ],
+          [
+            "머티리얼 수치",
+            "기본색·금속성·거칠기를 보간한다."
+          ],
+          [
+            "이름·시맨틱·머티리얼 슬롯",
+            "강도가 0보다 큰 활성 계층의 이산 값이 적용된다."
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

@@ -1,0 +1,1395 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-26T16:57:35.523479+00:00",
+  "milestone": "Core-owned immutable encoded images and authored helper-point bindings with CC0 eyes, teeth and tongue",
+  "overallGoalStatus": "active and incomplete",
+  "repositoryBaseRevision": "21e4dc163ef1505ebdffd2ebf8104f12ed48faf1",
+  "platform": "Darwin arm64",
+  "ownership": {
+    "engine": "iiActorObject::Object3DEngine",
+    "coreResources": [
+      "assets, authoring topology, immutable encoded images and material image references",
+      "templates, targets, semantic controls, curves and product drivers",
+      "rig source, compiled programs and per-instance execution buffers",
+      "editing sessions, history, masks, surface followers and external edit merge"
+    ],
+    "NSCharacter": "borrowed handles and transient human rule decoding only",
+    "implicitGlobalEngine": false,
+    "coreIncludesNSCharacter": false,
+    "coreLibraryNSCharacterSymbols": 0
+  },
+  "implemented": [
+    "bounded immutable PNG resources with structural CRC and dimensions validation",
+    "shared encoded bytes across parameter rebuilds and history",
+    "material references and native project resource persistence",
+    "embedded PNG standard GLB/FBX exchange with base-color alpha participation",
+    "authored helper-point IDs, signed source coefficients and axis-scaled offsets",
+    "mixed triangle/control-point follower graph and inverse final-frame propagation",
+    "atomic helper skin interpolation and one-mesh rigid bone binding",
+    "source CC0 high-poly eyes, teeth and tongue with three original color images",
+    "eye.L and eye.R rigid binding independent of eyelid helper weights",
+    "eye/jaw numerical skin and shape-following checks",
+    "external image-content mismatch rejection without mutation",
+    "legacy native versions 1 through 5 input"
+  ],
+  "faceMetrics": {
+    "leftEyePoints": 532,
+    "rightEyePoints": 532,
+    "jawPoints": 1884,
+    "tongueInfluences": 1131,
+    "shapeFollowingMetres": 0.0058190426187701896,
+    "eyeMotionMetres": 0.029963312671729334,
+    "oppositeEyeMotionMetres": 0.0,
+    "jawMotionMetres": 0.17154962614389815
+  },
+  "blenderFaceAssets": {
+    "blender": "4.5.9 LTS",
+    "results": [
+      {
+        "format": "glb",
+        "meshes": 4,
+        "bones": 163,
+        "positionErrorsMetres": {
+          "OBJ": 6.024159846286336e-07,
+          "Eyes": 2.4646110694144804e-07,
+          "Teeth": 3.669741855867133e-07,
+          "Tongue": 4.855040946436276e-07
+        },
+        "jointErrorMetres": 6.605434495002478e-07,
+        "textureSha256": {
+          "EyesMaterial": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b",
+          "TeethMaterial": "d0afb57869c6fbb56b98f5efc4aec629ee7593e70d8dd2bfb9de923acfb65f43",
+          "TongueMaterial": "3150be398e48e8ba1feac164c3143c16c0b2e959d9ffb6155f0171f59cfb4ea9"
+        },
+        "eyeMotionMetres": 0.005219679883568841,
+        "oppositeEyeMotionMetres": 0.0,
+        "jawMotionMetres": 0.025236212795358245
+      },
+      {
+        "format": "fbx",
+        "meshes": 4,
+        "bones": 163,
+        "positionErrorsMetres": {
+          "OBJ": 5.204751848153168e-07,
+          "Eyes": 1.50678667546486e-07,
+          "Teeth": 2.4620758953479386e-07,
+          "Tongue": 1.5787497237635472e-07
+        },
+        "jointErrorMetres": 3.7586683796731947e-07,
+        "textureSha256": {
+          "EyesMaterial": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b",
+          "TeethMaterial": "d0afb57869c6fbb56b98f5efc4aec629ee7593e70d8dd2bfb9de923acfb65f43",
+          "TongueMaterial": "3150be398e48e8ba1feac164c3143c16c0b2e959d9ffb6155f0171f59cfb4ea9"
+        },
+        "eyeMotionMetres": 0.005219420060643855,
+        "oppositeEyeMotionMetres": 0.0,
+        "jawMotionMetres": 0.02523624343772947
+      }
+    ]
+  },
+  "blenderImages": {
+    "blender": "4.5.9 LTS",
+    "results": [
+      {
+        "format": "glb",
+        "imageNodes": 1,
+        "imageSha256": "f8a8d60e339ec7113ec2176b7928e3d578a82d902f31e07c7067c22b24017bb3",
+        "redPixels": 32,
+        "greenPixels": 32
+      },
+      {
+        "format": "fbx",
+        "imageNodes": 2,
+        "imageSha256": "f8a8d60e339ec7113ec2176b7928e3d578a82d902f31e07c7067c22b24017bb3",
+        "redPixels": 32,
+        "greenPixels": 32
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "build/face-assets/FaceHuman.glb",
+      "bytes": 5390200,
+      "sha256": "53a9cc8539b00224b2e6c43cd80a35a242d09d64feb69c25d25f77143588f8a4"
+    },
+    {
+      "path": "build/face-assets/FaceHuman.fbx",
+      "bytes": 7801308,
+      "sha256": "6ba136e6518a207cbb3d93d7d870a59cfceb58f9d7b2a07bf1a1734284bc756d"
+    },
+    {
+      "path": "build/face-assets/FaceHuman.ii3dproject",
+      "bytes": 43993152,
+      "sha256": "cca9e0cd7d667c699128f6656c27e2281938c00e05bbd61bb24eacd3fa5492c9"
+    },
+    {
+      "path": "build/face-assets/FaceHumanReference.json",
+      "bytes": 2578961,
+      "sha256": "e88129a10e169c4566f95165cbfbd745d37d763fa102ee664e46aa59f1aa2010"
+    },
+    {
+      "path": "build/face-assets/FaceHuman-glb.blend",
+      "bytes": 8471586,
+      "sha256": "5a90904b4ee20542ead2754e2b47dc313be2b7d6a5976ad6e1ce262d87fd1bbe"
+    },
+    {
+      "path": "build/face-assets/FaceHuman-fbx.blend",
+      "bytes": 10049720,
+      "sha256": "3add2b89ee700e4891829c7a64ed342a12716a0bbe59241e87ace0cd802d36b9"
+    },
+    {
+      "path": "build/face-assets/BlenderFaceAssetsVerification.json",
+      "bytes": 1580,
+      "sha256": "0d6ce3e38de5656f140ac3526509dbba66bd7f76b1ea4222fa2259ccc16e9f1f"
+    },
+    {
+      "path": "build/face-assets/review/Input.glb",
+      "bytes": 5390200,
+      "sha256": "53a9cc8539b00224b2e6c43cd80a35a242d09d64feb69c25d25f77143588f8a4"
+    },
+    {
+      "path": "build/face-assets/review/Neutral.png",
+      "bytes": 544041,
+      "sha256": "045734b9a313aa7b4bce497da4a39263a6f2669146e1b0f35d46077587ea043d"
+    },
+    {
+      "path": "build/face-assets/review/Jaw.png",
+      "bytes": 549879,
+      "sha256": "7417db031b0052630aa2d7557cb0ce12e781b0ad544b64a0bf23c544461ecf11"
+    },
+    {
+      "path": "build/images/Checker.glb",
+      "bytes": 1636,
+      "sha256": "08794ccfa32950f5dfa4eeb5881b1218e16c60fb2faac862eb6cc82587781776"
+    },
+    {
+      "path": "build/images/Checker.fbx",
+      "bytes": 7180,
+      "sha256": "bf252a3f06e16e2207a90ff6d31dc476cc02363ec0c0b83e24420099ce85cb12"
+    },
+    {
+      "path": "build/images/BlenderImagesVerification.json",
+      "bytes": 438,
+      "sha256": "97db8bc82e10cae849c721b6e81c47f15c0c7c0810981fda5bdb34a69e119503"
+    }
+  ],
+  "validation": [
+    {
+      "name": "Release shared and actual Blender",
+      "junit": "build/face-assets-tests.xml",
+      "sha256": "6e00334413a452395648124510ffe86147225ee4ff41d1ecd8f1648c31f0d928",
+      "tests": 224,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Core without NSCharacter",
+      "junit": "build/core-only/build/face-assets-tests.xml",
+      "sha256": "4a6f412ce59c276d2163063a22a7e3e9dd3cfc9bf175faf90786340239ce1c56",
+      "tests": 171,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Debug static ASan and UBSan",
+      "junit": "build/sanitizers/build/face-assets-tests.xml",
+      "sha256": "7a5724942d9357faa3d726bb97251229f245a77b91a9e63e41a304891df20b37",
+      "tests": 198,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Core without NSCharacter or DNA",
+      "junit": "build/no-dna/build/face-assets-tests.xml",
+      "sha256": "2535e4692fa72326c55f27b19a1ad3d0cbea67e2bfbab36b86cd305dc39dc080",
+      "tests": 149,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Installed shared",
+      "junit": "build/consumer/build/face-assets-tests.xml",
+      "sha256": "2beed8e9223d8cb645b25499dab0577000859e50aecf1815848574799e553c35",
+      "tests": 4,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Installed core",
+      "junit": "build/core-only/consumer/build/face-assets-tests.xml",
+      "sha256": "34b6789c032e57eb9fdb4d8809f38ac603d044ed280ba045a650279b99b42a31",
+      "tests": 3,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Installed core without DNA",
+      "junit": "build/no-dna/consumer/build/face-assets-tests.xml",
+      "sha256": "80729ed385e76197882c9bffce26614ab60608b51d7dcfbbc58061dc05be8847",
+      "tests": 2,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Installed static ASan and UBSan",
+      "junit": "build/sanitizers/consumer/build/face-assets-tests.xml",
+      "sha256": "7ad870da2fceecebf2d868d764f5ab0d52d1bccf513f587a4ab6030844d45e8a",
+      "tests": 4,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "totalTestExecutions": 755,
+  "installedHeaderVerification": [
+    {
+      "prefix": "build/install",
+      "matchingPublicHeaders": 42,
+      "matchingFaceFiles": 19,
+      "library": {
+        "path": "build/libiiActorObject.dylib",
+        "bytes": 5839320,
+        "sha256": "926e9f72629e49529e4aa4ccdda450f0976164698e416f5e03b17a99c59cee05"
+      },
+      "installedLibrary": {
+        "path": "build/install/lib/libiiActorObject.dylib",
+        "bytes": 5839320,
+        "sha256": "926e9f72629e49529e4aa4ccdda450f0976164698e416f5e03b17a99c59cee05"
+      },
+      "exactBinaryMatch": true,
+      "archiveMemberContent": null
+    },
+    {
+      "prefix": "build/core-only/install",
+      "matchingPublicHeaders": 34,
+      "matchingFaceFiles": 0,
+      "library": {
+        "path": "build/core-only/build/libiiActorObject.dylib",
+        "bytes": 5649848,
+        "sha256": "0050744f73eb38b390a43cc16957420c23f3c2950405236abc6ed7e409db5a42"
+      },
+      "installedLibrary": {
+        "path": "build/core-only/install/lib/libiiActorObject.dylib",
+        "bytes": 5649848,
+        "sha256": "0050744f73eb38b390a43cc16957420c23f3c2950405236abc6ed7e409db5a42"
+      },
+      "exactBinaryMatch": true,
+      "archiveMemberContent": null
+    },
+    {
+      "prefix": "build/no-dna/install",
+      "matchingPublicHeaders": 34,
+      "matchingFaceFiles": 0,
+      "library": {
+        "path": "build/no-dna/build/libiiActorObject.dylib",
+        "bytes": 1964824,
+        "sha256": "0e7fd20fd38f080dbd7362155ebf9ba32da0b7079a2ff42cebec7a8ef0334c0e"
+      },
+      "installedLibrary": {
+        "path": "build/no-dna/install/lib/libiiActorObject.dylib",
+        "bytes": 1964824,
+        "sha256": "0e7fd20fd38f080dbd7362155ebf9ba32da0b7079a2ff42cebec7a8ef0334c0e"
+      },
+      "exactBinaryMatch": true,
+      "archiveMemberContent": null
+    },
+    {
+      "prefix": "build/sanitizers/install",
+      "matchingPublicHeaders": 42,
+      "matchingFaceFiles": 19,
+      "library": {
+        "path": "build/sanitizers/build/libiiActorObject.a",
+        "bytes": 301758344,
+        "sha256": "b0558b67b2f92519a04ca9a70947772fb967c564700b46b7e729067c8550a293"
+      },
+      "installedLibrary": {
+        "path": "build/sanitizers/install/lib/libiiActorObject.a",
+        "bytes": 301758344,
+        "sha256": "339294cf4d78299657c2dc40c8d9746292f8e79f8ca1ec7ca7452cd90dfc80ef"
+      },
+      "exactBinaryMatch": false,
+      "archiveMemberContent": {
+        "count": 151,
+        "sha256": "93384a63f980bb6043a0aa3ea2f0956e653bba4c19d4fea122d4c6f81de24dd4",
+        "note": "ranlib can change archive index timestamps; all member content matches"
+      }
+    }
+  ],
+  "upstreamVerification": {
+    "MakeHuman": {
+      "files": 478,
+      "revision": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "manifest": {
+        "path": "data/MakeHuman/UPSTREAM-SHA256.json",
+        "bytes": 120198,
+        "sha256": "55715bb1d2e4a80508bda0aca02ef21149eda1cf87b7c7999bd28ed7e5463a9f"
+      }
+    },
+    "MakeHumanFace": {
+      "files": 16,
+      "revision": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "manifest": {
+        "path": "data/MakeHumanFace/UPSTREAM-SHA256.json",
+        "bytes": 4336,
+        "sha256": "c8e1aa5c1a68818e2d66648cadb23ea8da2780bdc9fea3d861cf4f2e8622fe35"
+      }
+    },
+    "openRigLogic": {
+      "files": 374
+    },
+    "ufbx": {
+      "files": 3
+    }
+  },
+  "nativeProject": {
+    "schemaVersion": 6,
+    "readsVersions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "legacyFixtures": [
+      {
+        "path": "tests/fixtures/project/v1.ii3dproject",
+        "bytes": 2780,
+        "sha256": "055f37f50eb6eb51bec8efcaab39300deddf1bb86ecf54ba610aab2d066010f4"
+      },
+      {
+        "path": "tests/fixtures/project/v2.ii3dproject",
+        "bytes": 2788,
+        "sha256": "34218722cc08e8679995bb27d159d8afeeeec1e5bb63ec68f61f32a7c83bc38a"
+      },
+      {
+        "path": "tests/fixtures/project/v3.ii3dproject",
+        "bytes": 3635,
+        "sha256": "0a1e1b075e7f232a0d98c4121275083cf1801788487cf696e2b4ade1f41590b0"
+      },
+      {
+        "path": "tests/fixtures/project/v4.ii3dproject",
+        "bytes": 2797,
+        "sha256": "b58291edd695518c7b0817cd4df081be238347f49ddddb5d6956e404e4ff0b56"
+      },
+      {
+        "path": "tests/fixtures/project/v5.ii3dproject",
+        "bytes": 2813,
+        "sha256": "4b52b5a0b0540c5a2920eb29aa503c16cb40bba0bd5cfb371e116be047b902f7"
+      }
+    ],
+    "dnaDisabledRejection": "Project requires the disabled DNA backend"
+  },
+  "applicationEvidence": {
+    "actualBlender": true,
+    "cc5IntegrationVerified": false,
+    "unrealIntegrationVerified": false,
+    "productionMetaHumanVerified": false,
+    "unrealLocalSourceVersion": "5.8.4",
+    "unrealLocalMacBinaryAvailable": false,
+    "scope": "Prior application probes cover /Applications and local Unreal source only; no remote installation is inferred"
+  },
+  "dependencies": {
+    "language": "C++23",
+    "QtSymbols": 0,
+    "dynamicDependencies": [
+      "build/libiiActorObject.dylib:",
+      "\t@rpath/libiiActorObject.0.2.dylib (compatibility version 0.2.0, current version 0.2.1)",
+      "\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)",
+      "\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)"
+    ],
+    "BlenderPython": "optional host validation and IO only",
+    "systemInstalledSdkModified": false
+  },
+  "visualReview": {
+    "inspected": true,
+    "productionMetaHumanQualityProven": false,
+    "observations": [
+      "visible irises after encoded PNG alpha participates in the material",
+      "separate mouth components are present during an object-axis jaw pose",
+      "teeth and lip appearance still need production visual refinement",
+      "skin remains an untextured constant material and hair/garments are absent",
+      "these renders do not establish production MetaHuman quality"
+    ]
+  },
+  "remaining": [
+    "full macrodetails age/sex/population/weight graphic data and interpolation",
+    "production skin, eyes, hair, anatomical surface and facial rig refinement",
+    "garment fitting with production collisions and pose correction",
+    "morph symmetry, named selection sets and grouped editing layers",
+    "topology additions/deletions and explicit connectivity remapping",
+    "production MetaHuman DNA ML/RBF/twist/swing regression and actual application integration",
+    "actual CC5/Unreal generation, animation and detailed re-editing",
+    "Windows/Linux runtime and large-template performance"
+  ],
+  "limits": [
+    "PNG only; structural validation does not decompress pixel streams",
+    "one base-color UV set with repeat mapping; complete PBR shader graphs are not represented",
+    "original LitSphere application shaders are not copied or reproduced",
+    "source mapping coefficients are preserved; positive terms are separately normalized for skin weights",
+    "proxy parser supports the selected descriptors, not every possible MHCLO section",
+    "host rendering and UI are outside the core engine",
+    "Blender numerical evidence does not establish other-app compatibility or production MetaHuman quality"
+  ],
+  "sourceFiles": [
+    {
+      "path": ".gitignore",
+      "bytes": 43,
+      "sha256": "ec63eb159e3294ad59f5ccfb48f85e32b5b6ac076bbc363c00937d809e1be0bf"
+    },
+    {
+      "path": "AGENT.md",
+      "bytes": 2915,
+      "sha256": "5595aff2aee969f13020071f41e68575658b3d6ca2db0c5f4545d328efe8ea59"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 39544,
+      "sha256": "04b3ac5a01c7563c3a1ec09c3fcfc39673941c71528d55c4c15c9aff3a1a0756"
+    },
+    {
+      "path": "README.md",
+      "bytes": 16624,
+      "sha256": "33eb24f41f13893b38ffb04a23c565d36815a621080b5577cfded25dd0505e73"
+    },
+    {
+      "path": "cmake/OpenRigLogic.cmake",
+      "bytes": 8577,
+      "sha256": "d65d68f4cb543757471f274db23d6f97294731a73048fd0dcf21b47420c170ea"
+    },
+    {
+      "path": "cmake/iiActorObjectConfig.cmake.in",
+      "bytes": 271,
+      "sha256": "5d01d65d14e13ad48873c5e92061b6a66a91f2d4f6c76039d6e7d52e72e6c577"
+    },
+    {
+      "path": "cmake/iiActorObjectFeatures.h.in",
+      "bytes": 95,
+      "sha256": "5d388bc3c335f014ec63b0a9f8b7180b359f578c1e3bc94e7ec67bc9da9af93f"
+    },
+    {
+      "path": "data/MakeHuman/PROVENANCE.md",
+      "bytes": 1236,
+      "sha256": "7ea639c146710a216285876147fd88db8d5efd9850e23b83b8d417ff5174efff"
+    },
+    {
+      "path": "data/MakeHuman/UPSTREAM-SHA256.json",
+      "bytes": 120198,
+      "sha256": "55715bb1d2e4a80508bda0aca02ef21149eda1cf87b7c7999bd28ed7e5463a9f"
+    },
+    {
+      "path": "data/MakeHuman/catalog.json",
+      "bytes": 54519,
+      "sha256": "548c24d0d5db7583489a20816cacb9578dbf35f1699ab9ad139a7a67555800ae"
+    },
+    {
+      "path": "data/MakeHumanFace/PROVENANCE.md",
+      "bytes": 1559,
+      "sha256": "176a8316296ade1fa5a5d2dca105778e267224fc6a1f65315c4774429f19244d"
+    },
+    {
+      "path": "data/MakeHumanFace/UPSTREAM-SHA256.json",
+      "bytes": 4336,
+      "sha256": "c8e1aa5c1a68818e2d66648cadb23ea8da2780bdc9fea3d861cf4f2e8622fe35"
+    },
+    {
+      "path": "data/MakeHumanFace/catalog.json",
+      "bytes": 485,
+      "sha256": "fd6ab2356a7b4427bb3335c98070a96d2788203ef4c89c6072bd33442a2fb018"
+    },
+    {
+      "path": "docs/Actor.md",
+      "bytes": 11814,
+      "sha256": "cc2115581c2e260ee344feb17506c2464a72e639bd28bef4a8a07e7a3c3d1aad"
+    },
+    {
+      "path": "docs/Changes-20261021.md",
+      "bytes": 10943,
+      "sha256": "92a427208f487847a42476a8fd426639dd1e4ede3fe9f41ba4d43f0a90bee287"
+    },
+    {
+      "path": "docs/Character.md",
+      "bytes": 12552,
+      "sha256": "ec0ba7953132035dc5db153e176c68713edbdbf79dc360dddbf01fa5e2600d63"
+    },
+    {
+      "path": "docs/CharacterTemplate.md",
+      "bytes": 7913,
+      "sha256": "5a21592fbd301095e119f172c83192592ed3a2ff3072a86c0d36978e33937374"
+    },
+    {
+      "path": "docs/DnaEditing.md",
+      "bytes": 7643,
+      "sha256": "df3c453c86fea94e1188d36dbc5e2ad5225ae08e0111e00d0dedef876bdb2ca8"
+    },
+    {
+      "path": "docs/DnaRig.md",
+      "bytes": 11153,
+      "sha256": "0796e52b73a5312b1eeef2ef48a40bb26af9d45035f1ec25254712249a3a2835"
+    },
+    {
+      "path": "docs/EditLayers.md",
+      "bytes": 8275,
+      "sha256": "2ba03f72693922b50da25350595243a9a8715166767c133f85692d860f16bcb9"
+    },
+    {
+      "path": "docs/ExternalEdits.md",
+      "bytes": 9850,
+      "sha256": "affabf1f8bd3675462d81151943ecf1b359cf5d73051d36d3b150a829c592a43"
+    },
+    {
+      "path": "docs/FaceAssets.md",
+      "bytes": 6202,
+      "sha256": "e14d21709c59292cbbf043b2f854a0152a5f4c580aee749e1c9c868e02459aa0"
+    },
+    {
+      "path": "docs/FbxAuthoring.md",
+      "bytes": 8915,
+      "sha256": "48781ee201064e9fe83751f695672bb25258e3a54b82d331113ff52a849b2929"
+    },
+    {
+      "path": "docs/MeshPainting.md",
+      "bytes": 8886,
+      "sha256": "b7837d2fb7be71ee5ade84f4ddee912365371ddb274ec066f288545f003793ec"
+    },
+    {
+      "path": "docs/MeshTopology.md",
+      "bytes": 7898,
+      "sha256": "fa1aab33b03b4607f5516b2dd0e6a4d01f923955325c7c48e4df2970ff5a299a"
+    },
+    {
+      "path": "docs/MorphNormals.md",
+      "bytes": 5452,
+      "sha256": "cad4fdd32db7752371fd21721c7310e00b50cd60d9f2392cf9fda3a1351b01be"
+    },
+    {
+      "path": "docs/NSCharacter.md",
+      "bytes": 15991,
+      "sha256": "d12988314d1ac94ec408115356aea7666c7e01d702c4ec5381ee752ddf40ad70"
+    },
+    {
+      "path": "docs/Object3DEngine.md",
+      "bytes": 9551,
+      "sha256": "28ad247d9b8fc9b3456d1d25d006fbd4cb38e9e177244f012b4262bfa8ebd540"
+    },
+    {
+      "path": "docs/Object3DProject.md",
+      "bytes": 7859,
+      "sha256": "f976a1481e2a105b244a52651c684528c4d4b079dcfba738b947dbd38ff51140"
+    },
+    {
+      "path": "docs/SkeletonEditing.md",
+      "bytes": 5982,
+      "sha256": "d94fb1d79b12a79db88d354e38c02ef2456f909e5a40d92a20fe2d74b4097db7"
+    },
+    {
+      "path": "docs/SkeletonScale.md",
+      "bytes": 5423,
+      "sha256": "cc52d18c4256a2ea99066894eb6586aa5de4a4e16ebb8c5ceb8d24c87bb7093b"
+    },
+    {
+      "path": "docs/SkinSurface.md",
+      "bytes": 7981,
+      "sha256": "206db0d6b1577132bb3537ae3383282a3f0c6625967f756d2350933045cd5afb"
+    },
+    {
+      "path": "docs/TemplateControls.md",
+      "bytes": 6797,
+      "sha256": "de43ef132038e1dc1631407e70662db43a9c426e2c0951e880e77762bf3d07b1"
+    },
+    {
+      "path": "docs/USD.md",
+      "bytes": 8667,
+      "sha256": "0bd681abcf999b37ad0abe17f49f1530be058271af3116e006e544379a4b6dce"
+    },
+    {
+      "path": "docs/Verification.md",
+      "bytes": 7100,
+      "sha256": "f686d3b435829110a37b9f01a4aedd1d4dc75783659942ccc692587863250086"
+    },
+    {
+      "path": "docs/WindowsBuildAndRun.md",
+      "bytes": 3901,
+      "sha256": "ec20e1a2c029e30ee58b157bc0c2c96dfba41228dc179f3c1b8096d6fcd0c157"
+    },
+    {
+      "path": "example/BlenderExternalEdits.py",
+      "bytes": 9919,
+      "sha256": "3c4defe18ddc1236deec4aaf701895ba092ad012b128bece598ec85bbbf00be8"
+    },
+    {
+      "path": "example/CharacterAuthoring.cpp",
+      "bytes": 1846,
+      "sha256": "791a458193513a0a159115377ed8710e958ac3f0717c295ef8db0e2dcf41ee11"
+    },
+    {
+      "path": "example/Core3DObject.cpp",
+      "bytes": 1639,
+      "sha256": "1ea9808366c64115bca09c1418c341f29ff6270dca8cee36a0f8d8d52e52cd9b"
+    },
+    {
+      "path": "example/DnaCharacter.cpp",
+      "bytes": 2836,
+      "sha256": "09f0c0a180e9a7d52bf29f5af9a4caf015bade70eee23c6e7276a4c4199177f8"
+    },
+    {
+      "path": "example/TemplateCharacter.cpp",
+      "bytes": 2308,
+      "sha256": "bb7195533c98fd2247753da44407ebb97758d3b7b9fbed8523dbc9ef519b5eac"
+    },
+    {
+      "path": "iiActorObject.h",
+      "bytes": 1156,
+      "sha256": "d3da3b682c9d1c9e003cf4111b9596eb81fb038252c1f0190d2ce00edb719047"
+    },
+    {
+      "path": "install.sh",
+      "bytes": 1532,
+      "sha256": "f6a7cec5f1867fb52d33c721c07126ef65f86d02d909a15e42a029405dac5cd5"
+    },
+    {
+      "path": "src/iiActorObject/Actor.cpp",
+      "bytes": 6849,
+      "sha256": "4bd6ab81799bdaef17a687e37bbe75189879ae679ef0e701638ff253a1f10481"
+    },
+    {
+      "path": "src/iiActorObject/Actor.h",
+      "bytes": 3966,
+      "sha256": "dbde1d73bccb29703632e8009e3f30d573ed2f5412779861f301d91fccbcd988"
+    },
+    {
+      "path": "src/iiActorObject/ActorComponent.cpp",
+      "bytes": 1577,
+      "sha256": "4ffa94b8ca6f435d354114c8c56711ef88057036a373c6062ed21a92fae27a62"
+    },
+    {
+      "path": "src/iiActorObject/ActorComponent.h",
+      "bytes": 1628,
+      "sha256": "130905e32d748a646e674cf0075c019152c6b32552f09b5084936be314df72e0"
+    },
+    {
+      "path": "src/iiActorObject/Animation.cpp",
+      "bytes": 7119,
+      "sha256": "0ffd7e9a36401d7407fbdad6daf185b4d736ffe585f73919e0099dd6b246adf2"
+    },
+    {
+      "path": "src/iiActorObject/Animation.h",
+      "bytes": 2310,
+      "sha256": "e13b8cdb035d1fdd107697a99f7a03740c4e40251117140008119a699edadaeb"
+    },
+    {
+      "path": "src/iiActorObject/Character.cpp",
+      "bytes": 1542,
+      "sha256": "0fa7bb86a5641bea7cc50ef15c55694c9d42acb894002c50866c39448803fe39"
+    },
+    {
+      "path": "src/iiActorObject/Character.h",
+      "bytes": 1190,
+      "sha256": "fa4263637ff9592468dceb5c80f5458db14764e41f8a38094b82b3d29350a67a"
+    },
+    {
+      "path": "src/iiActorObject/CharacterMath.h",
+      "bytes": 3345,
+      "sha256": "ec795fcad76bc3c1ea8ef91f600ecd1f15dc46569194aefe9bdea87f43a235da"
+    },
+    {
+      "path": "src/iiActorObject/CharacterRig.cpp",
+      "bytes": 10931,
+      "sha256": "ef53c421379e6e249c033394a5b6829e5abcb3bcffda9ac7dfbcdc3ba7a59f40"
+    },
+    {
+      "path": "src/iiActorObject/CharacterRig.h",
+      "bytes": 2577,
+      "sha256": "9d13fabb1d63c5eab46b8da64422f16a9a9bef7b3535425cea277ea293e97a87"
+    },
+    {
+      "path": "src/iiActorObject/ImplicitSurface.cpp",
+      "bytes": 8102,
+      "sha256": "e3870b0f0f7848b5d8d67b11e0561d1aeb5459aba155d15b22047a885e7d9035"
+    },
+    {
+      "path": "src/iiActorObject/ImplicitSurface.h",
+      "bytes": 935,
+      "sha256": "4789befcedcc32c925c853e91c398f792ef09a1e55d06efc173b016aa6ad63c0"
+    },
+    {
+      "path": "src/iiActorObject/MeshEditGraph.h",
+      "bytes": 826,
+      "sha256": "3402626123945c7ab3ed8fdc3a394b2cdfda8118d944960a4d4f0dba44765dfe"
+    },
+    {
+      "path": "src/iiActorObject/MeshEditing.cpp",
+      "bytes": 11731,
+      "sha256": "1a44befe3b1f94a2ce8c8f18e2f661cdc0ced7bc57dbe5a7723593b9759aa9af"
+    },
+    {
+      "path": "src/iiActorObject/MeshEditing.h",
+      "bytes": 2417,
+      "sha256": "44c090fd378a6f5d1dceda87a3e6f8fb3fc93387c355fc7d7bfae8fb056313a0"
+    },
+    {
+      "path": "src/iiActorObject/MeshGeometry.cpp",
+      "bytes": 2651,
+      "sha256": "8bf162ca76d984d67c223992d4880434cce31ba7b2c0bbb7c9e5bfd6d492adb1"
+    },
+    {
+      "path": "src/iiActorObject/MeshGeometry.h",
+      "bytes": 331,
+      "sha256": "0c3f470ec93c4971057e98f5a2d74056cc2f3620c55a060eb9f7601310e88916"
+    },
+    {
+      "path": "src/iiActorObject/MeshPrimitives.cpp",
+      "bytes": 2106,
+      "sha256": "a964ce92c237f7621d6a6b57ba6f3ce2d935925699ee127eabdc788646e78c4e"
+    },
+    {
+      "path": "src/iiActorObject/MeshPrimitives.h",
+      "bytes": 346,
+      "sha256": "8b76ad32b7b95f9e20482b5f53455a99d920621ba801fb36dc7919d4965b6e7f"
+    },
+    {
+      "path": "src/iiActorObject/MeshSurface.cpp",
+      "bytes": 7607,
+      "sha256": "2e0f770a5dd4a8809fed541a4d3c947e49dff6387b63924579ef9aaa6fd3a2e2"
+    },
+    {
+      "path": "src/iiActorObject/MeshSurface.h",
+      "bytes": 1090,
+      "sha256": "1bdea3f3b03aa2d81268b876ee2c7956ab7c49722e1b084d8e56f9f92a25a5bb"
+    },
+    {
+      "path": "src/iiActorObject/MeshTopology.cpp",
+      "bytes": 28457,
+      "sha256": "71e995175ab46fbe77d0a3dbba0d3ac95204e306ca066444d212dfae9eaba59d"
+    },
+    {
+      "path": "src/iiActorObject/MeshTopology.h",
+      "bytes": 4812,
+      "sha256": "a34c8cc3fb02fe81fe6f8732ff12768218a8a61919460262ae51967eecabf0e1"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/AutoRig.h",
+      "bytes": 285,
+      "sha256": "fee82ce23d0ac7563b702f60188b9a356217b9c7026b5fb4af2baf68f309ece9"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterAsset.cpp",
+      "bytes": 1067,
+      "sha256": "200395b2ea8731bcf81161f40798ad4795c472e9d86726345767f8d843a978f0"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterAsset.h",
+      "bytes": 1164,
+      "sha256": "a23ce4cae1b45355ae30d7d4a30588c98f7a2d3d21268970d08d8cb6a59076db"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterEditor.cpp",
+      "bytes": 7238,
+      "sha256": "a47d1146693c4c8c9a4bd28a0ede6fdd7f6aadcae222bf71b89241547031088b"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterEditor.h",
+      "bytes": 4786,
+      "sha256": "4f9f8f04229eac9c25fa4d2a2f0ccfb3b973bbad092909660e367e810ea46449"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterInterchange.cpp",
+      "bytes": 1534,
+      "sha256": "ea0d342d6c6dc4b8756c0f03e22e841a3c9f28f0c125dc4d92ff47d73952139d"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterInterchange.h",
+      "bytes": 1736,
+      "sha256": "9904060b91903a721b2ef0e4b19a8275bacf433e04dc645799c43c1edf0b0013"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterTemplate.cpp",
+      "bytes": 16451,
+      "sha256": "64cc8a9f62a436e01d876ad57041fb6a44fa2ff63110d3686643bed952639da7"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/CharacterTemplate.h",
+      "bytes": 1616,
+      "sha256": "c855796984d6238abce28cb4a6502e08869a779b33a26a175ba6380186cc209a"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/DnaCharacter.cpp",
+      "bytes": 1011,
+      "sha256": "1ff16651b8adcd5c9006c043f51ae277135f586151cafa103998f656d2ddb490"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/DnaCharacter.h",
+      "bytes": 905,
+      "sha256": "0fb9723d2d39afa8528a2d7fc4b6dc90e6fde949a9cf7cd8f7e07bf612de88d7"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/HumanoidGenerator.cpp",
+      "bytes": 17755,
+      "sha256": "b4bee8efab48e5e0ac02efc7952f3434b1e6acf995acdae4cbcea4c969f751e6"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/HumanoidGenerator.h",
+      "bytes": 1399,
+      "sha256": "d58229f53eb2d1a49c601ec9b3367ef9e367243280c91933438cbc091fb00598"
+    },
+    {
+      "path": "src/iiActorObject/NSCharacter/NSCharacter.h",
+      "bytes": 341,
+      "sha256": "17e807b9ad5641d392dbbd2abb63415709e855bc706f5f10fb12f19700858dd1"
+    },
+    {
+      "path": "src/iiActorObject/Object3DAdjustment.cpp",
+      "bytes": 18516,
+      "sha256": "90010c60eac7759dea47e41383f05ecb34ae928308b01d1ef0092e0703e00343"
+    },
+    {
+      "path": "src/iiActorObject/Object3DAdjustment.h",
+      "bytes": 2064,
+      "sha256": "252fdbfa8fc67837bb2210f531fb3ccbe2182f9db298861540bfc9dd0e22d0f3"
+    },
+    {
+      "path": "src/iiActorObject/Object3DAsset.cpp",
+      "bytes": 7243,
+      "sha256": "f38c4dfb20e2d123fb3095538e7761b0b7dbc8072ca520882d07d920405249f6"
+    },
+    {
+      "path": "src/iiActorObject/Object3DAsset.h",
+      "bytes": 2605,
+      "sha256": "aaed2d47fd90eb053674877dcfdc9996154846ea0ac7d5d2c59ebccc50e338c7"
+    },
+    {
+      "path": "src/iiActorObject/Object3DDna.cpp",
+      "bytes": 37356,
+      "sha256": "2b6fa39af731d3c813dbdc326eed0a2704e0b35148487c6df1660237173a558d"
+    },
+    {
+      "path": "src/iiActorObject/Object3DDna.h",
+      "bytes": 1115,
+      "sha256": "8dd8a15fccdc3d698a8d2e4e78cd59c1d82183bdbaa9b402d8120263a2e912bd"
+    },
+    {
+      "path": "src/iiActorObject/Object3DDnaBackend.h",
+      "bytes": 355,
+      "sha256": "2bafbd27764abcff3e3b62a94426eb96edc28a9b1fde35b4f588963e603e3538"
+    },
+    {
+      "path": "src/iiActorObject/Object3DEditLayers.cpp",
+      "bytes": 11311,
+      "sha256": "66e33556bcc669e447a4a693ca9140a14bb613606b6a0acfbdce17edad7adfab"
+    },
+    {
+      "path": "src/iiActorObject/Object3DEditor.cpp",
+      "bytes": 17835,
+      "sha256": "386f57708f3e82e1a9f2dcb4269d29a0ff42b76157721c0296c51bfa62f08511"
+    },
+    {
+      "path": "src/iiActorObject/Object3DEditor.h",
+      "bytes": 6102,
+      "sha256": "b95e5300978d992b7c43c26beb1ca35b0a3329da3ea7917df8ad8ea5604be891"
+    },
+    {
+      "path": "src/iiActorObject/Object3DEngine.cpp",
+      "bytes": 14447,
+      "sha256": "47668c1bf665150e0d38c47677c8441da89f3903baf70254346d0844e3e3e92d"
+    },
+    {
+      "path": "src/iiActorObject/Object3DEngine.h",
+      "bytes": 6371,
+      "sha256": "c664c16647aa38f4dbdf666384ebf153d22f964fbc39065acc8bbccc380c2e69"
+    },
+    {
+      "path": "src/iiActorObject/Object3DExternalEdits.cpp",
+      "bytes": 27981,
+      "sha256": "620019a9204c126a82a64abb4d34bf6966db3bdcd8b1f474d1c82b5efd53ab53"
+    },
+    {
+      "path": "src/iiActorObject/Object3DExternalEdits.h",
+      "bytes": 2210,
+      "sha256": "4a109a53c48eedd7b78533f081246a190e35f8786b07da419cb0fa02f1d354ab"
+    },
+    {
+      "path": "src/iiActorObject/Object3DExternalProtocol.h",
+      "bytes": 2688,
+      "sha256": "623efbe3c396bb5a74da1461c70170c05cc509f347634d2faaa968dac18c43b6"
+    },
+    {
+      "path": "src/iiActorObject/Object3DFbx.cpp",
+      "bytes": 31524,
+      "sha256": "95fd89b1a992e3c4e5398903fe468360400c255ab6d6df8dc5b564c360e2a91c"
+    },
+    {
+      "path": "src/iiActorObject/Object3DFbxImport.cpp",
+      "bytes": 41675,
+      "sha256": "553f528cab9cc575f0f5359300fd09b01e379d5c71a34abe61b186612edb7328"
+    },
+    {
+      "path": "src/iiActorObject/Object3DImage.cpp",
+      "bytes": 4179,
+      "sha256": "11507ce10b23e461b1e9ebf4ce315987ed0d82eda01dc8158212c314841ad571"
+    },
+    {
+      "path": "src/iiActorObject/Object3DImage.h",
+      "bytes": 1070,
+      "sha256": "47add72a927168beba6a27f03a8cb53ca665ab90be24a396f23b7d61e135c6fa"
+    },
+    {
+      "path": "src/iiActorObject/Object3DInterchange.cpp",
+      "bytes": 15340,
+      "sha256": "e5970fe7d94a2f525e6906583546115613c08396088c1f77d8627a68fc082f54"
+    },
+    {
+      "path": "src/iiActorObject/Object3DInterchange.h",
+      "bytes": 1571,
+      "sha256": "aa9971b09f9ce7c108ecb3a1c94a16b44bc22823333650d33928c23c9d00a89d"
+    },
+    {
+      "path": "src/iiActorObject/Object3DObj.cpp",
+      "bytes": 7624,
+      "sha256": "ea2a06efab42bdb9461021eb765d5f1ef36577617c8bfc25ec4627d8ec0e53ce"
+    },
+    {
+      "path": "src/iiActorObject/Object3DObj.h",
+      "bytes": 951,
+      "sha256": "b8c8405103ba4e4a65a1ebf570ee5e136fef2f4e58c16470ab80294c9259bfd5"
+    },
+    {
+      "path": "src/iiActorObject/Object3DProject.cpp",
+      "bytes": 26186,
+      "sha256": "0d850016b6a8ab2f633f353e8380e23e63478572945e65d33cffcb45700011c1"
+    },
+    {
+      "path": "src/iiActorObject/Object3DProject.h",
+      "bytes": 1224,
+      "sha256": "e3e8152723c3c9a8db765b6c83064511f6c5fe98216264f8afed73993100f74a"
+    },
+    {
+      "path": "src/iiActorObject/Object3DProjectState.h",
+      "bytes": 1607,
+      "sha256": "4aebc32a1558e8b6aade6842e13471c60703e2945eb14052b3712424ab79be41"
+    },
+    {
+      "path": "src/iiActorObject/Object3DProxy.cpp",
+      "bytes": 4526,
+      "sha256": "42ef328eb5b1c9b0621b5eb08452062bf1edba270dbf1063941659005f9bdb64"
+    },
+    {
+      "path": "src/iiActorObject/Object3DProxy.h",
+      "bytes": 858,
+      "sha256": "e10375d16edc06df7fcf182ab57a9efe60c4f7e8027501f9804636f46ecd6333"
+    },
+    {
+      "path": "src/iiActorObject/Object3DRig.cpp",
+      "bytes": 9041,
+      "sha256": "105bdeebbb516206907ce28b0a92924b98405267c207796917019168436f76c7"
+    },
+    {
+      "path": "src/iiActorObject/Object3DRig.h",
+      "bytes": 4242,
+      "sha256": "a1a815c81491bfd2b41d5ffc44541e4f461ad0585ff9e0b6970097b733a826c6"
+    },
+    {
+      "path": "src/iiActorObject/Object3DTemplate.cpp",
+      "bytes": 13930,
+      "sha256": "bab84e7a0702fcaae17ba8fd782282c35d2c201b03db9fc533c493557b6234d8"
+    },
+    {
+      "path": "src/iiActorObject/Object3DTemplate.h",
+      "bytes": 3029,
+      "sha256": "1b66b6660fed229394baa618a681ab3ab1163d0c4d0049a101d1b2944071d575"
+    },
+    {
+      "path": "src/iiActorObject/SceneComponent.cpp",
+      "bytes": 1876,
+      "sha256": "90fe23e9fa46397fdbbf10d57d9d6627e30bf79f217fd44e09590562f9e91eef"
+    },
+    {
+      "path": "src/iiActorObject/SceneComponent.h",
+      "bytes": 1032,
+      "sha256": "447697b494118b5123d423bc55365f0530fb9a785d417748cd675f3e0cccecb6"
+    },
+    {
+      "path": "src/iiActorObject/SkeletalMesh.cpp",
+      "bytes": 8450,
+      "sha256": "e7ec589a6cb36a92d868d65140257e59862e7a2c9cc8df1c44136e3bf9ddef85"
+    },
+    {
+      "path": "src/iiActorObject/SkeletalMesh.h",
+      "bytes": 2751,
+      "sha256": "710e8424144f3c9fed00f036ea05c14cd818f53a47a5b748de733f597833c69c"
+    },
+    {
+      "path": "src/iiActorObject/SkeletalTransform.h",
+      "bytes": 2403,
+      "sha256": "68cf3aeaac7017bb7d877b74863046855841ac561ed6e51725c5d8d9ac616f58"
+    },
+    {
+      "path": "src/iiActorObject/Skeleton.cpp",
+      "bytes": 4956,
+      "sha256": "3b8d48b20d7869c54768f8bbc5d58a2daa0a73b38a5fdb7e48e4ef9a22dbaee0"
+    },
+    {
+      "path": "src/iiActorObject/Skeleton.h",
+      "bytes": 2840,
+      "sha256": "0b471eb6c3aae246686aea055b86b14de3a52bd1ee9ff0f755aed28c9b35809d"
+    },
+    {
+      "path": "src/iiActorObject/SkeletonEditing.cpp",
+      "bytes": 3009,
+      "sha256": "c2b85131665aeb5598c3f148582974d08d36f90ea236fd03bee05279e6adb7ff"
+    },
+    {
+      "path": "src/iiActorObject/SkeletonEditing.h",
+      "bytes": 897,
+      "sha256": "d4a81f36c58e430b6670830f26ba0cf6dbb4bb2e8f2ebd4d993bec616d317a24"
+    },
+    {
+      "path": "src/iiActorObject/SkeletonScale.cpp",
+      "bytes": 6206,
+      "sha256": "8a79304c25b836fac098edec38710671f3431fa94ba912c5560dab953679c917"
+    },
+    {
+      "path": "src/iiActorObject/SkeletonScale.h",
+      "bytes": 1343,
+      "sha256": "bc2f596eec7d6f5f1142f0d1d2507d8b8eb49adbc784be8d5a98fc096d24cce8"
+    },
+    {
+      "path": "src/iiActorObject/SkinBinding.cpp",
+      "bytes": 12733,
+      "sha256": "5f572d6425abbdc0518918674c675cd5a6c1c1dd658f18b357564f6fd7c45a2e"
+    },
+    {
+      "path": "src/iiActorObject/SkinBinding.h",
+      "bytes": 1809,
+      "sha256": "558551b22c4935f0f2e7d21e8408ca8ad6d1a7ae934a01a4de63b2c1c90f329a"
+    },
+    {
+      "path": "src/iiActorObject/SkinPainting.cpp",
+      "bytes": 6033,
+      "sha256": "d65214268980601a6a3541a561faf56dedbd706f60a25467adf4a944b031c85a"
+    },
+    {
+      "path": "src/iiActorObject/SkinPainting.h",
+      "bytes": 847,
+      "sha256": "df643b3909dbb6a826ddb51a4a34061668df843b842d0cdd47bf88a735d09b7d"
+    },
+    {
+      "path": "src/iiActorObject/SurfaceBinding.cpp",
+      "bytes": 15352,
+      "sha256": "1da16a06c2fef1bde1b912664cc2db06daaeca5ea1016d19a743a1dc96d3f4f5"
+    },
+    {
+      "path": "src/iiActorObject/SurfaceBinding.h",
+      "bytes": 3647,
+      "sha256": "61d48a1d89da9c7124f70b57ac1537d4ad46876c606a824658a5e33e9b825bdd"
+    },
+    {
+      "path": "src/iiActorObject/Transform.cpp",
+      "bytes": 5493,
+      "sha256": "899257a73d506d78a64a0f151082b4118cbf42f833f0a028d4f95a2ad24bdd39"
+    },
+    {
+      "path": "src/iiActorObject/Transform.h",
+      "bytes": 1626,
+      "sha256": "4329f67a0ca14b3460fd54e6e4e3057481bc93f951586423d1ce78d2cfe61646"
+    },
+    {
+      "path": "src/iiActorObject/Usd.cpp",
+      "bytes": 14106,
+      "sha256": "c26687976fb10806645ee3ccd17a9ac3ad4549e501d997a35b7d7990c886a75b"
+    },
+    {
+      "path": "src/iiActorObject/Usd.h",
+      "bytes": 2019,
+      "sha256": "3fbb715481da70774fc9fc512606656b8f89deedee854a461cb1bc05ce5f011e"
+    },
+    {
+      "path": "tests/ActorTest.cpp",
+      "bytes": 15347,
+      "sha256": "e8e6ad4df3114c0a20ee436b74e10124cda67c7825c2d928bfb75e86c2fd0203"
+    },
+    {
+      "path": "tests/CharacterTemplateTest.cpp",
+      "bytes": 6110,
+      "sha256": "7f83c8f93b44becd392660ee1263b945ea3fb368cc980240f2bfa22982a49ef2"
+    },
+    {
+      "path": "tests/CharacterTest.cpp",
+      "bytes": 17789,
+      "sha256": "ba3f90cd9ab6f00c48e7972c576c400215efc50133921792b9b2a402e4b83447"
+    },
+    {
+      "path": "tests/ControlPointBindingsTest.cpp",
+      "bytes": 6570,
+      "sha256": "4002aa082f5bb083d82859cf4dd9a9706a6269f65c4de94edfca9b3a14e2132b"
+    },
+    {
+      "path": "tests/CreateDnaFixture.cpp",
+      "bytes": 11035,
+      "sha256": "0f71cb4ead36362a7a1a3680cae8e066f3cbb655c5b7bf4c6a9b85b20d89cded"
+    },
+    {
+      "path": "tests/FaceAssetsHumanTest.cpp",
+      "bytes": 6260,
+      "sha256": "481327b2c15059da0f1e6edd58d2b07b87dec5b54c9c3505f7e533dfde8ff66a"
+    },
+    {
+      "path": "tests/FbxImportPrecisionTest.cpp",
+      "bytes": 2841,
+      "sha256": "b56c1cd3dc5026a6d884432fc8ecae1fa4e7e094f4a26a275b7714ddb51f4956"
+    },
+    {
+      "path": "tests/MeshPaintingHumanTest.cpp",
+      "bytes": 5100,
+      "sha256": "e7bef37a91253abe47126d8692a362a1e28a25b444d12def723d80a5abab759f"
+    },
+    {
+      "path": "tests/MeshPaintingTest.cpp",
+      "bytes": 11463,
+      "sha256": "08f07a85b8a037d490090a73c196c5a308e7bf72d241cdddfc3ed224f80819d3"
+    },
+    {
+      "path": "tests/MeshTopologyTest.cpp",
+      "bytes": 6663,
+      "sha256": "d9462476d503798c7c076761e987d48c7d1f527597fcef0b3371730bd279a299"
+    },
+    {
+      "path": "tests/MorphNormalsTest.cpp",
+      "bytes": 10053,
+      "sha256": "79112a5b47be584e48aa50cafaedd9e98a275443ab0592eb49522355409daa93"
+    },
+    {
+      "path": "tests/NSCharacterTest.cpp",
+      "bytes": 19250,
+      "sha256": "9332e006726fa6a9716dedbe29f3117cdbff8b80164e30b9c552f6039b3eee34"
+    },
+    {
+      "path": "tests/Object3DDnaTest.cpp",
+      "bytes": 23063,
+      "sha256": "75dc2c4515d49472d895ad7332c3b92fb4d17d119eb1c7239f94efbfbddfe021"
+    },
+    {
+      "path": "tests/Object3DEngineTest.cpp",
+      "bytes": 6831,
+      "sha256": "f8f9ecf02d0bdfe9543205cc238077738c267faa3de78442797dacd03afc0f08"
+    },
+    {
+      "path": "tests/Object3DExternalEditsHumanTest.cpp",
+      "bytes": 9032,
+      "sha256": "a05a8f1c2b0b45f26d86ff2470a027d781446e7b5d01b0f6b7574dfc268fbd98"
+    },
+    {
+      "path": "tests/Object3DExternalEditsTest.cpp",
+      "bytes": 17643,
+      "sha256": "bf3930d33ad11168e9d3df5e5e06a87c99ce5f06b96a0f93ac8ab6bf6ded7ff6"
+    },
+    {
+      "path": "tests/Object3DFbxTopologyTest.cpp",
+      "bytes": 9793,
+      "sha256": "ff0c2932c902012a0dd4627d86b041120aa227d16ff11a0160f07e54789f6e7b"
+    },
+    {
+      "path": "tests/Object3DImagesTest.cpp",
+      "bytes": 4350,
+      "sha256": "b46113524156ff0e3b34f4381ab13c27bde69cbda841faaea2fe9106879f732e"
+    },
+    {
+      "path": "tests/Object3DLayersTest.cpp",
+      "bytes": 9135,
+      "sha256": "180e8f35e706d94b274ca7b850e1a7ae1b0d70a84e80c08f9d2d4f18cea65ffe"
+    },
+    {
+      "path": "tests/Object3DProjectTest.cpp",
+      "bytes": 13898,
+      "sha256": "c278460df6b327c76e2de967a89330f5f11c5175367ba8e43d7391ba7f24382e"
+    },
+    {
+      "path": "tests/Object3DRigTest.cpp",
+      "bytes": 6830,
+      "sha256": "20d75a0a25b403dcac8657f03b9afc79341352d33db4a183dc8fd23ac2677446"
+    },
+    {
+      "path": "tests/Object3DTemplateTest.cpp",
+      "bytes": 4783,
+      "sha256": "0dee19b77feb7b6a47582470d74747ee2bf21c5af4618f3ebb36a4ab3e81bf29"
+    },
+    {
+      "path": "tests/RenderCharacter.py",
+      "bytes": 1795,
+      "sha256": "231b7685c96be6adc0736e613daf3fd1cb05ed38fc2858fb883fe5dc9f07a6a6"
+    },
+    {
+      "path": "tests/RenderFaceAssets.py",
+      "bytes": 2262,
+      "sha256": "842721374546c68f571b47a885fb968451e53ce9859c8a69d6493c32a7c30b6d"
+    },
+    {
+      "path": "tests/SkeletonEditingHumanTest.cpp",
+      "bytes": 6229,
+      "sha256": "25f433b274ded2ec9111fb10435c52903b9152d4aca5e6f89c1ea1f535ff7a73"
+    },
+    {
+      "path": "tests/SkeletonEditingTest.cpp",
+      "bytes": 13537,
+      "sha256": "1e05335b57fd3ecf1db12805ca9d418c9261c9e41a1e664b6c23b62b9feb9b5f"
+    },
+    {
+      "path": "tests/SkeletonScaleTest.cpp",
+      "bytes": 5748,
+      "sha256": "716668a721d7534b9d47fad8723a810ce2d5daf56a7d5852ea135db8a95a12a2"
+    },
+    {
+      "path": "tests/SkinSurfaceTest.cpp",
+      "bytes": 17822,
+      "sha256": "607f4f352bdccba213aec70ca130084f93c2a913f30de7454bcbd75149bd01b6"
+    },
+    {
+      "path": "tests/TemplateControlsHumanTest.cpp",
+      "bytes": 5033,
+      "sha256": "27fe3c9f49df60ef59cd90c75ddc350fc8ddd07e282f18f0cfe8c5058dc384c6"
+    },
+    {
+      "path": "tests/TemplateControlsTest.cpp",
+      "bytes": 5992,
+      "sha256": "3cb303d9940944f35d6625e30ca535bec766dfc67ee72d120d4fa8f775e1bf7f"
+    },
+    {
+      "path": "tests/UsdTest.cpp",
+      "bytes": 10981,
+      "sha256": "26911260e8b96cf512ff5286926df064f381be210cd92005760dcb7e17212eac"
+    },
+    {
+      "path": "tests/VerifyCharacterBlender.py",
+      "bytes": 6840,
+      "sha256": "cf0f06c8723379411e4aa31548846b4831e1869ec7313885a185e70e9b3e200a"
+    },
+    {
+      "path": "tests/VerifyCharacterGlb.py",
+      "bytes": 3920,
+      "sha256": "efa25535445859ab547696f35b1af92bb8b78b66ea38a7466b4f12ce35b405ca"
+    },
+    {
+      "path": "tests/VerifyDnaSnapshot.cpp",
+      "bytes": 15191,
+      "sha256": "bf4d3696a8c52c75124db0b5ce59b5e3c136483bfb8c1ecf9d20e314295f36c6"
+    },
+    {
+      "path": "tests/VerifyExternalEditsBlender.py",
+      "bytes": 5119,
+      "sha256": "05ff90ddb942e8a78247d0d4c219ca967d75d9f0e38ed33fd0fe38a1a4d66f39"
+    },
+    {
+      "path": "tests/VerifyFaceAssetsBlender.py",
+      "bytes": 5775,
+      "sha256": "830f5e2f77412ae582004a0b975f07434e072a1d1112dd11b068d8b1dac766ea"
+    },
+    {
+      "path": "tests/VerifyFbxTopologyBlender.py",
+      "bytes": 2595,
+      "sha256": "37d9294ae31813520206ec0f410a8eae3afd0221334e3d45c931b16c69d6ced4"
+    },
+    {
+      "path": "tests/VerifyHumanTemplateBlender.py",
+      "bytes": 2858,
+      "sha256": "c35855f9a1f73b4da9859aecd15490282b7948a56625bee7e8008dd1742b885f"
+    },
+    {
+      "path": "tests/VerifyImagesBlender.py",
+      "bytes": 2334,
+      "sha256": "64c97c8cb239c2a76af9afa4580c88566986a942b6ebc7af8cd52f76c9e07bf9"
+    },
+    {
+      "path": "tests/VerifyMorphNormalsGlb.py",
+      "bytes": 1552,
+      "sha256": "596dbec5babcf1d978e2db3cf73c3cd17e6db87a2643a20f07d419ba9ae09c9a"
+    },
+    {
+      "path": "tests/VerifyPaintingBlender.py",
+      "bytes": 2994,
+      "sha256": "e9769168695f41e30ddf6b2374c223e49b4eab3393c057e8e293fd7a6d9680b0"
+    },
+    {
+      "path": "tests/VerifyProjectFormat.py",
+      "bytes": 1575,
+      "sha256": "854c31482c08c5ad5cdca7fa90db9e4e1d59a6d30a9eb4a989a98d3f44750e32"
+    },
+    {
+      "path": "tests/VerifySkeletonEditingBlender.py",
+      "bytes": 7980,
+      "sha256": "b3bf699e5def46b9fcafdf002fd44e1b8fb0f36a8d0f9e3b2be3e190b8adbbb6"
+    },
+    {
+      "path": "tests/VerifySurfaceBlender.py",
+      "bytes": 2945,
+      "sha256": "282edd1c692c002a17a8ead324e6c5ebc1b1e7a90b99eec4346e3f5584dcf612"
+    },
+    {
+      "path": "tests/VerifyTemplateControlsBlender.py",
+      "bytes": 2807,
+      "sha256": "23757e2bc102980fb48a10bd9862eadd2b69fc4f70d3e0e773c1a00a81376643"
+    },
+    {
+      "path": "tests/VerifyUsd.py",
+      "bytes": 7561,
+      "sha256": "94b8e5637543bcc30b7e4b205e07ea541e845c613eed78150d6fde8864fb5890"
+    },
+    {
+      "path": "tests/consumer/CMakeLists.txt",
+      "bytes": 2424,
+      "sha256": "4e497d5f56dc91c207f691ad64acde3d753c6618e1ffb76255dbb3771eb3b1ec"
+    },
+    {
+      "path": "tests/consumer/main.cpp",
+      "bytes": 8958,
+      "sha256": "737ee1d73bd361e1188b7c1b6376f3bddb66c26e06fd447077c360d0c468fce5"
+    },
+    {
+      "path": "tests/core_consumer/CMakeLists.txt",
+      "bytes": 1781,
+      "sha256": "b113a5470dcabd7503f0097b72c1d6245bb857cda6f3e2c57352396bd17561bf"
+    },
+    {
+      "path": "tests/core_consumer/main.cpp",
+      "bytes": 10088,
+      "sha256": "7b77d5d7131746d192ee7cb2a2c2816d1dab70574ab56f07cd4cdb7ed09b3951"
+    },
+    {
+      "path": "tests/fixtures/images/blue.png",
+      "bytes": 74,
+      "sha256": "4c4a0ed079a0894a4196d13af94492f9342e51aa7c019a982b88642cff1db462"
+    },
+    {
+      "path": "tests/fixtures/images/checker.png",
+      "bytes": 83,
+      "sha256": "f8a8d60e339ec7113ec2176b7928e3d578a82d902f31e07c7067c22b24017bb3"
+    },
+    {
+      "path": "tests/fixtures/project/README.md",
+      "bytes": 966,
+      "sha256": "bd07b302cde5202dc9beb07c7c4aa00fe85a3de524791cb8b3be0ef2256c0b56"
+    },
+    {
+      "path": "tests/fixtures/project/v1.ii3dproject",
+      "bytes": 2780,
+      "sha256": "055f37f50eb6eb51bec8efcaab39300deddf1bb86ecf54ba610aab2d066010f4"
+    },
+    {
+      "path": "tests/fixtures/project/v2.ii3dproject",
+      "bytes": 2788,
+      "sha256": "34218722cc08e8679995bb27d159d8afeeeec1e5bb63ec68f61f32a7c83bc38a"
+    },
+    {
+      "path": "tests/fixtures/project/v3.ii3dproject",
+      "bytes": 3635,
+      "sha256": "0a1e1b075e7f232a0d98c4121275083cf1801788487cf696e2b4ade1f41590b0"
+    },
+    {
+      "path": "tests/fixtures/project/v4.ii3dproject",
+      "bytes": 2797,
+      "sha256": "b58291edd695518c7b0817cd4df081be238347f49ddddb5d6956e404e4ff0b56"
+    },
+    {
+      "path": "tests/fixtures/project/v5.ii3dproject",
+      "bytes": 2813,
+      "sha256": "4b52b5a0b0540c5a2920eb29aa503c16cb40bba0bd5cfb371e116be047b902f7"
+    }
+  ]
+}

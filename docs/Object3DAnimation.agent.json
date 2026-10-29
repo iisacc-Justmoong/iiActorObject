@@ -1,0 +1,306 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:d875c18c8b364fa5d9294876d8f1e8c82e43213772becea4b0719d14efc49db0",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/Object3DAnimation.md",
+    "sha256": "e40ec7e1adc89cb9b7564204b75d7561cf10ca45d70a7cf62514658b3e6df7c6",
+    "bytes": 4560,
+    "line_count": 41,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "본체 클립의 본·모프 적용",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 본체 클립의 본·모프 적용\n",
+      "level": 1,
+      "title": "본체 클립의 본·모프 적용"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "`applyObject3DAnimationClip`은 하나의 본체 에셋, 그 에셋의 골격을 사용하는 `AnimationClip`, 곡선과 메시·모프의 명시적 대응, 재생 시각과 해당 에셋 인스턴스를 받는다. 클립의 본 트랙과 연결된 모프 곡선을 함께 샘플링하고, 검사가 모두 끝난 뒤에만 포즈와 모프 가중치를 적용한다. FBX 가져오기의 `morphBindings`와 GLB 베이크 결과의 `morphBindings`를 같은 함수에 사용할 수 있다. 원본 클립이나 에셋은 바꾸지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "점진 모프 제어도 함께 적용할 때는 [점진 애니메이션 적용](ProgressiveMorphAnimation.md)을 사용한다. 기존 함수는 점진 리그를 평가하지 않는다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "fenced_code",
+      "start_line": 7,
+      "end_line": 23,
+      "raw": "```cpp\n#include <iiActorObject/Object3DAnimation.h>\n#include <iiActorObject/Object3DInterchange.h>\n\niiActorObject::FbxAnimationImportOptions options;\noptions.morphGrouping = iiActorObject::FbxMorphAnimationGrouping::PerMesh;\nauto imported = iiActorObject::importObject3DFbxWithAnimations(engine.reference(), bytes, options);\nauto instance = imported.asset.object.get().instantiate();\nstd::vector<iiActorObject::SkeletalMeshComponent *> meshes;\nfor (auto *part : instance->components()) {\n    if (auto *mesh = dynamic_cast<iiActorObject::SkeletalMeshComponent *>(part))\n        meshes.push_back(mesh);\n}\nconst auto &take = imported.animations.at(0);\niiActorObject::applyObject3DAnimationClip(imported.asset.object, *take.clip,\n    take.morphBindings, 0.5, instance->pose(), meshes);\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/Object3DAnimation.h>\n#include <iiActorObject/Object3DInterchange.h>\n\niiActorObject::FbxAnimationImportOptions options;\noptions.morphGrouping = iiActorObject::FbxMorphAnimationGrouping::PerMesh;\nauto imported = iiActorObject::importObject3DFbxWithAnimations(engine.reference(), bytes, options);\nauto instance = imported.asset.object.get().instantiate();\nstd::vector<iiActorObject::SkeletalMeshComponent *> meshes;\nfor (auto *part : instance->components()) {\n    if (auto *mesh = dynamic_cast<iiActorObject::SkeletalMeshComponent *>(part))\n        meshes.push_back(mesh);\n}\nconst auto &take = imported.animations.at(0);\niiActorObject::applyObject3DAnimationClip(imported.asset.object, *take.clip,\n    take.morphBindings, 0.5, instance->pose(), meshes);\n",
+      "closed": true
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "## 대응과 수명\n",
+      "level": 2,
+      "title": "대응과 수명"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "`AnimationMorphBinding`의 곡선·메시·타깃 번호는 해당 클립과 에셋의 순서를 나타낸다. 이름이 같은 서로 다른 메시도 별도로 연결하며, 하나의 곡선을 여러 타깃에 연결할 수 있다. 한 타깃을 여러 번 지정하거나 번호가 범위를 벗어나면 실패한다. 명시하지 않은 모프 가중치는 유지하고 값을 임의로 제한하지 않는다. 인스턴스 메시 배열은 에셋의 메시 순서여야 하며 각 구성 요소는 해당 에셋의 정확한 메시와 지정 포즈에 연결되어야 한다. 다른 에셋의 골격, 인스턴스 또는 삭제된 본체 핸들도 거부한다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "리그가 있는 에셋의 포즈는 클립의 모든 본 트랙을 사용한다. 트랙이 없는 본은 기존 `AnimationClip::sample` 계약대로 골격의 바인드 변환을 사용한다. 기본 `Clamp`와 선택적 `Loop`는 본과 모프에 같은 시간을 적용한다. 정적 에셋도 모프 전용 클립에 사용할 수 있지만 더미 골격을 움직이는 본 트랙은 허용하지 않는다. 정적 에셋에서는 인스턴스가 이미 가진 더미 루트 포즈를 유지하여 모프만 적용할 때 위치를 바꾸지 않는다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "인스턴스 포즈에 별도의 변형 바인드가 있다면 이를 임시 포즈에 복사해 샘플링한다. 클립에 필수 변형 바인드가 지정된 경우 이 바인드가 일치해야 한다. 이 함수는 바인드 자체를 바꾸지 않는다. 배열·값·유효 수명·포즈 revision·곡선과 변형 바인드가 잘못되면 포즈와 모프를 변경하지 않고 실패한다. 엔진의 소유권은 계속 iiActorObject 본체에 있으며 호출자는 핸들과 인스턴스의 수명을 관리하고 같은 호스트 스레드에서 수정해야 한다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "이 함수는 한 시각을 적용하는 작업이다. 기존 `AnimationPlayer`의 시간을 사용하려면 호스트가 재생 시간을 관리하고 이 함수를 호출해야 한다. 이 함수가 `AnimationPlayer`에 모프 자동 재생을 등록하지는 않는다. 호출마다 검증과 임시 포즈 샘플링을 수행하며, 대규모 실시간 장면의 성능은 별도 측정 대상이다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "## 검증 범위\n",
+      "level": 2,
+      "title": "검증 범위"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "자동 테스트는 메시별로 다른 동명 모프, 본과 모프의 동시 적용, 반복 시각, 정적 모프, 인스턴스 변형 바인드와 입력 실패 시 무변경을 확인한다. GLB에서 변환한 클립을 FBX로 출력하고 다시 가져와 인스턴스에 적용하는 경로와 설치된 SDK 소비자도 검사한다. CC5·Blender·Unreal은 사용자 지시에 따라 실행하지 않으며 실제 앱에서의 적용은 확인하지 않았다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "구성별 검사 결과와 범위는 [2026-10-29 검증 기록](Object3DAnimationVerification-20261029.md)에 정리한다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "클립과 모프 대응을 편집 이력과 함께 저장하고 복원하는 방법은 [프로젝트 애니메이션](ProjectAnimation.md)을 따른다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "본체 클립의 본·모프 적용",
+      "anchor": "본체-클립의-본모프-적용",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "대응과 수명",
+      "anchor": "대응과-수명",
+      "start_line": 25
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검증 범위",
+      "anchor": "검증-범위",
+      "start_line": 35
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000005",
+        "line": 5,
+        "text": "점진 모프 제어도 함께 적용할 때는 [점진 애니메이션 적용](ProgressiveMorphAnimation.md)을 사용한다. 기존 함수는 점진 리그를 평가하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000011",
+        "line": 27,
+        "text": "`AnimationMorphBinding`의 곡선·메시·타깃 번호는 해당 클립과 에셋의 순서를 나타낸다. 이름이 같은 서로 다른 메시도 별도로 연결하며, 하나의 곡선을 여러 타깃에 연결할 수 있다. 한 타깃을 여러 번 지정하거나 번호가 범위를 벗어나면 실패한다. 명시하지 않은 모프 가중치는 유지하고 값을 임의로 제한하지 않는다. 인스턴스 메시 배열은 에셋의 메시 순서여야 하며 각 구성 요소는 해당 에셋의 정확한 메시와 지정 포즈에 연결되어야 한다. 다른 에셋의 골격, 인스턴스 또는 삭제된 본체 핸들도 거부한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 29,
+        "text": "리그가 있는 에셋의 포즈는 클립의 모든 본 트랙을 사용한다. 트랙이 없는 본은 기존 `AnimationClip::sample` 계약대로 골격의 바인드 변환을 사용한다. 기본 `Clamp`와 선택적 `Loop`는 본과 모프에 같은 시간을 적용한다. 정적 에셋도 모프 전용 클립에 사용할 수 있지만 더미 골격을 움직이는 본 트랙은 허용하지 않는다. 정적 에셋에서는 인스턴스가 이미 가진 더미 루트 포즈를 유지하여 모프만 적용할 때 위치를 바꾸지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 31,
+        "text": "인스턴스 포즈에 별도의 변형 바인드가 있다면 이를 임시 포즈에 복사해 샘플링한다. 클립에 필수 변형 바인드가 지정된 경우 이 바인드가 일치해야 한다. 이 함수는 바인드 자체를 바꾸지 않는다. 배열·값·유효 수명·포즈 revision·곡선과 변형 바인드가 잘못되면 포즈와 모프를 변경하지 않고 실패한다. 엔진의 소유권은 계속 iiActorObject 본체에 있으며 호출자는 핸들과 인스턴스의 수명을 관리하고 같은 호스트 스레드에서 수정해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000017",
+        "line": 33,
+        "text": "이 함수는 한 시각을 적용하는 작업이다. 기존 `AnimationPlayer`의 시간을 사용하려면 호스트가 재생 시간을 관리하고 이 함수를 호출해야 한다. 이 함수가 `AnimationPlayer`에 모프 자동 재생을 등록하지는 않는다. 호출마다 검증과 임시 포즈 샘플링을 수행하며, 대규모 실시간 장면의 성능은 별도 측정 대상이다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "점진 애니메이션 적용",
+        "target": "ProgressiveMorphAnimation.md",
+        "kind": "relative",
+        "line": 5
+      },
+      {
+        "block_id": "b000023",
+        "label": "2026-10-29 검증 기록",
+        "target": "Object3DAnimationVerification-20261029.md",
+        "kind": "relative",
+        "line": 39
+      },
+      {
+        "block_id": "b000025",
+        "label": "프로젝트 애니메이션",
+        "target": "ProjectAnimation.md",
+        "kind": "relative",
+        "line": 41
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

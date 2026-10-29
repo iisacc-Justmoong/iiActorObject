@@ -95,6 +95,69 @@ void dirty()
     rejects([&] { p.setLocal(1, {{}, {}, {0, 1, 1}}); });
     CHECK(p.locals()[1] == s->bones()[1].bindTransform);
 }
+void dynamicBind()
+{
+    auto s = skeleton();
+    Pose pose(s);
+    std::vector<Transform> bind;
+    for (const auto &bone : s->bones()) bind.push_back(bone.bindTransform);
+    bind[1].position = {2, 0, 0};
+    CHECK(pose.setDeformationBind(bind));
+    const auto neutralRevision = pose.revision();
+    CHECK(!pose.setDeformationBind(bind) && pose.revision() == neutralRevision);
+    near(pose.worldMatrices()[2].transformPoint({}), {3, 0, 0});
+    for (const auto &matrix : pose.skinMatrices())
+        near(matrix.transformPoint({1, 2, 3}), {1, 2, 3});
+
+    auto elbow = pose.locals()[1];
+    elbow.rotation = Quaternion::fromAxisAngle({0, 0, 1}, std::numbers::pi / 2);
+    pose.setLocal(1, elbow);
+    auto expectedBones = std::vector<Bone>(s->bones().begin(), s->bones().end());
+    for (std::size_t i=0; i<bind.size(); ++i) expectedBones[i].bindTransform=bind[i];
+    auto expectedSkeleton = std::make_shared<Skeleton>(std::move(expectedBones));
+    Pose expected(expectedSkeleton);
+    auto expectedElbow = bind[1]; expectedElbow.rotation = elbow.rotation;
+    expected.setLocal(1, expectedElbow);
+    for (std::size_t i=0; i<bind.size(); ++i)
+    {
+        near(pose.worldMatrices()[i].transformPoint({.2,.3,.4}),
+             expected.worldMatrices()[i].transformPoint({.2,.3,.4}));
+        near(pose.skinMatrices()[i].transformPoint({.2,.3,.4}),
+             expected.skinMatrices()[i].transformPoint({.2,.3,.4}));
+    }
+    Pose copied(s); copied.copyFrom(pose);
+    near(copied.worldMatrices()[2].transformPoint({}), pose.worldMatrices()[2].transformPoint({}));
+    const auto revision = pose.revision();
+    auto invalid = bind; invalid[1].scale.x=0;
+    rejects([&]{ (void)pose.setDeformationBind(invalid); });
+    rejects([&]{ (void)pose.setDeformationBind(std::span<const Transform>(bind).first(1)); });
+    CHECK(pose.revision()==revision);
+    pose.reset();
+    near(pose.worldMatrices()[2].transformPoint({}), {3,0,0});
+    CHECK(pose.clearDeformationBind());
+    CHECK(!pose.clearDeformationBind());
+    near(pose.worldMatrices()[2].transformPoint({}), {2,0,0});
+    bind[0].rotation=Quaternion::fromAxisAngle({0,0,1},.25);
+    bind[1].rotation=Quaternion::fromAxisAngle({0,1,0},-.2);
+    CHECK(pose.setDeformationBind(bind));
+    const auto stableRevision=pose.revision();
+    CHECK(!pose.setDeformationBind(pose.deformationBindTransforms())&&pose.revision()==stableRevision);
+    const auto reached=CharacterRig::solveTwoBone(pose,{0,1,2,{2,1,.25},{0,0,3},1});
+    CHECK(!reached.clamped);near(reached.reached,{2,1,.25});
+    bind[1].scale={2,1,1};CHECK(pose.setDeformationBind(bind));
+    const auto invalidRevision=pose.revision();
+    rejects([&]{(void)CharacterRig::solveTwoBone(pose,{0,1,2,{2,1,.25},{0,0,3},1});});
+    CHECK(pose.revision()==invalidRevision);
+    auto tinyBones=std::vector<Bone>(s->bones().begin(),s->bones().end());
+    tinyBones[1].bindTransform.scale={1e-15,1e-15,1e-15};
+    Pose tiny(std::make_shared<Skeleton>(std::move(tinyBones)));
+    std::vector<Transform> tinyBind;for(const auto &bone:tiny.skeleton()->bones())tinyBind.push_back(bone.bindTransform);
+    tinyBind[1].scale={2e-15,2e-15,2e-15};tiny.setDeformationBind(tinyBind);
+    auto local=tiny.locals()[1];local.scale={1,1,1};tiny.setLocal(1,local);
+    const auto tinyRevision=tiny.revision();
+    rejects([&]{(void)CharacterRig::solveTwoBone(tiny,{0,1,2,{1,1,0},{0,0,1},1});});
+    CHECK(tiny.revision()==tinyRevision);
+}
 void inverse()
 {
     const auto matrix =
@@ -437,6 +500,8 @@ int main(int argc, char **argv)
             bones();
         else if (name == "dirty")
             dirty();
+        else if (name == "dynamic_bind")
+            dynamicBind();
         else if (name == "inverse")
             inverse();
         else if (name == "animation")

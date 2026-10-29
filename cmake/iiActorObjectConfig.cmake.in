@@ -1,4 +1,18 @@
 @PACKAGE_INIT@
 
+if(NOT @BUILD_SHARED_LIBS@)
+    include(CMakeFindDependencyMacro)
+    find_dependency(iiJson 0.1 CONFIG)
+endif()
 include("${CMAKE_CURRENT_LIST_DIR}/iiActorObjectTargets.cmake")
+if("VisualCodec" IN_LIST iiActorObject_FIND_COMPONENTS)
+    if(@IIACTOROBJECT_WITH_VISUALCODEC@)
+        include(CMakeFindDependencyMacro)
+        find_dependency(iiVisualCodec 0.2 CONFIG COMPONENTS Image)
+        include("${CMAKE_CURRENT_LIST_DIR}/iiActorObjectVisualCodecTargets.cmake")
+        set(iiActorObject_VisualCodec_FOUND TRUE)
+    else()
+        set(iiActorObject_VisualCodec_FOUND FALSE)
+    endif()
+endif()
 check_required_components(iiActorObject)

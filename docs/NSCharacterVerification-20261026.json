@@ -1,0 +1,147 @@
+{
+  "recordedAtUtc": "2026-10-26T04:15:33.116171+00:00",
+  "project": "iiActorObject",
+  "module": "NSCharacter",
+  "goalStatus": "active",
+  "wholeObjectiveCompleted": false,
+  "sourceReleasePromoted": false,
+  "objective": "iiActorObject의 NSCharacter/에 CC5 및 블렌더, 언리얼 엔진에서 모두 메시와 리그가 자동 생성 및 상세 편집이 가능하도록 한다. CC5의 생성 및 편집에 언리얼의 매타휴먼 타겟을 목표로 한다.",
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "compiler": "AppleClang 21.0.0",
+    "language": "C++23",
+    "runtimeDependencies": "C++ standard library, MIT ufbx (compiled as C++23)",
+    "qtLinked": false
+  },
+  "verification": {
+    "release": {
+      "tests": 58,
+      "failures": 0,
+      "skipped": 0,
+      "timestamp": "2026-10-26T13:11:59",
+      "evidence": "build/character/release-tests.xml",
+      "sha256": "8f047a05b5cedd1cd909f5078a671b71aa72113324c6d29e960afc6cb31ae209"
+    },
+    "asan_ubsan": {
+      "tests": 50,
+      "failures": 0,
+      "skipped": 0,
+      "timestamp": "2026-10-26T13:05:57",
+      "evidence": "build/sanitizers/build/tests.xml",
+      "sha256": "30a43abe7a84953d847eb09c6cc8a908f07ca97658dd03be6f2ee6466e610386"
+    },
+    "installed_consumer": {
+      "tests": 1,
+      "failures": 0,
+      "skipped": 0,
+      "timestamp": "2026-10-26T13:06:57",
+      "evidence": "build/consumer/build/tests.xml",
+      "sha256": "566247fa72eafd602ec7280f59ea370295c42a3eddd71bf7f2f52fa8d6f6ec8b"
+    }
+  },
+  "blender": {
+    "blender": "4.5.9 LTS",
+    "bones": 71,
+    "meshParts": 3,
+    "bodyVerticesAfterRoundtrip": 21800,
+    "smileDisplacementMetres": 0.011008737147868779,
+    "skinDisplacementMetres": 0.17441974142863684,
+    "fixtureSkinAndMorphReference": true,
+    "editableRoundtrip": true,
+    "fbxImported": true,
+    "fbxSkinAndMorphReference": true,
+    "twelveInfluencesPreserved": true,
+    "inputSha256": {
+      "contract.glb": "eff00bf261fcc26823dbad58205c7ed4b5535ef95ab08f262c89ea078db08735",
+      "GeneratedHuman.glb": "20a8d14607b3bc205d94b53a6ec3256a0aa10b0676a363ea4a995dfc1133c049",
+      "contract.fbx": "ff6b8f50bebb090b0885905fd3870429b6a8c7e15d7d7752fa6d419917896459",
+      "GeneratedHuman.fbx": "e40ccf287ca88694a63bfda368331bda5e278aa154f0b742322962b3edaa8a5a",
+      "influences.glb": "ac91ab770897db3cc4c5ac7c844992d0c087847e782d0c9406930df63791f9f5"
+    }
+  },
+  "blenderValidationTool": {
+    "version": "4.5.9 LTS",
+    "archiveSha256": "e3a3d7aac381fb4e4d05197f99cd8899484d7e8bc4497c134066e6733f372238",
+    "location": "build/tools/blender-volume/Blender.app/Contents/MacOS/Blender",
+    "archiveSource": "https://download.blender.org/release/Blender4.5/blender-4.5.9-macos-arm64.dmg",
+    "checksumSource": "https://download.blender.org/release/Blender4.5/blender-4.5.9.sha256"
+  },
+  "generatedFixture": {
+    "bones": 71,
+    "parts": 3,
+    "bodyVertices": 21800,
+    "bodyTriangles": 43596,
+    "faceChannels": 52,
+    "reservedBodyChannels": [
+      "tongueOut"
+    ],
+    "visualQuality": "프로시저 개발 메시이다. 제작용 인체 및 MetaHuman 품질은 미완성이다."
+  },
+  "requirementAudit": {
+    "sourceLocation": "implemented",
+    "nativeCpp23StdAndPermissiveOssNoQt": "verified",
+    "automaticHumanMeshAndRig": "partial: procedural generator and explicit envelope binding implemented; production templates and arbitrary-mesh anatomical fitting pending",
+    "detailedEditing": "partial: atomic sculpt/morph/rest-joint/weights/history implemented; richer selection, topology, fitting and correctives pending",
+    "blender": "file import, numerical skin/morph evaluation, edit and GLB/FBX roundtrip verified; embedded authoring controls pending",
+    "cc5": "actual character import, characterization and detailed edits unverified",
+    "unreal": "actual skeletal import, rig/edit and animation unverified",
+    "metahuman": "template polygon/vertex identity, DNA/RigLogic adapter, assets and production visual quality pending"
+  },
+  "installedConsumerPrefix": "/Volumes/Storage/Workspace/SDK/iiActorObject/build/install",
+  "dynamicDependencies": [
+    "\t@rpath/libiiActorObject.0.2.dylib (compatibility version 0.2.0, current version 0.2.1)",
+    "\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)",
+    "\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)"
+  ],
+  "nextSteps": [
+    "Preserve source vertex/polygon/UV identity separately from render triangles and seam vertices.",
+    "Add an isolated C++23 DNA/RigLogic adapter from MIT OpenRigLogic without modifying the official checkout.",
+    "Implement production face/oral/body templates, detailed edit controls, skin transfer/correctives and clothing fitting.",
+    "Verify actual CC5 and Unreal/MetaHuman authoring workflows and cross-platform execution."
+  ],
+  "sourceHashesSha256": {
+    "CMakeLists.txt": "25e43d9fa71d5d1b12c60eeeabed1f2219b03ce3ade69a6bd4ae143390e90716",
+    "iiActorObject.h": "8c98d70d4ead7001540c9198c80d3c314191043086e3d2c2bc5d09a1ba0a775d",
+    "src/iiActorObject/Actor.cpp": "4bd6ab81799bdaef17a687e37bbe75189879ae679ef0e701638ff253a1f10481",
+    "tests/consumer/main.cpp": "e6138f189d55ccf084d3593fa31f11454c526fd3a643a338c58deaa44677d63e",
+    "README.md": "9ed95f2cbaa2b4df7e6bc19d2a902788352f6473b258b8b8e7bf9c84e5c8108f",
+    "AGENT.md": "3a0734e3a509b980593140e689c22a7d88e40f7b53465163f277526b5e051ee6",
+    "docs/NSCharacter.md": "226ea89ca12bb0228f1c5c0e4b6ca79101e2098c22535d3837c98007d886d3b6",
+    "src/iiActorObject/NSCharacter/AutoRig.cpp": "9b8cf5729b67bf63d1c79cf74931ade8f8142d864c83c15f56360df7ea554c8d",
+    "src/iiActorObject/NSCharacter/AutoRig.h": "48a6d5f4d7c4df23a0bc1ee87429d8575d4adabebbcf582a96ea8616705413ab",
+    "src/iiActorObject/NSCharacter/CharacterAsset.cpp": "1b2c0af022a4911517a5fd6c118240d38141b1ac655af8bb46a4f91872e5757b",
+    "src/iiActorObject/NSCharacter/CharacterAsset.h": "7a857122b91ae86b72147b6223455bc38bc746a0d21934cc708aa179fe799cbb",
+    "src/iiActorObject/NSCharacter/CharacterEditor.cpp": "c7ecb5005a62364a9f0fa06257aa8bf1a3f23a6f2fae308a8a307db925ab9c15",
+    "src/iiActorObject/NSCharacter/CharacterEditor.h": "14563d05508655e4f39b395a9511ccb45fd43261190c239a2effe9f919bd32ae",
+    "src/iiActorObject/NSCharacter/CharacterFbx.cpp": "c44a17b18654b5613379d70e11cebd20cd7abdb3748fa98fbae3b9161a01f80f",
+    "src/iiActorObject/NSCharacter/CharacterFbxImport.cpp": "8b1f65debd0166be99108443bf1dd01d25dab35816b1510e1865f28937d78f43",
+    "src/iiActorObject/NSCharacter/CharacterInterchange.cpp": "f7e61c343780d5ba45f16ef7b3f1c29a0cd411bb090e52d3fb0d47472d21863f",
+    "src/iiActorObject/NSCharacter/CharacterInterchange.h": "fdd8917ae9ae9955ed29f495a32538fcea8a986873e6658e3d43017ffc03cf40",
+    "src/iiActorObject/NSCharacter/HumanoidGenerator.cpp": "0bb0e9b2990eb4224cdf7fd458106a1ea81396faed5197308339f89543abc2f4",
+    "src/iiActorObject/NSCharacter/HumanoidGenerator.h": "0db40741f28c415abe464ff3a876bee86b5ba7b3f9846c0c84992626cfd2efc9",
+    "src/iiActorObject/NSCharacter/NSCharacter.h": "9ad9ed8382eda0b4b2da5a0ce58e7141d4f80f15217b611e2fb6d2efe88a76b6",
+    "src/third_party/ufbx/LICENSE": "0dd48ebadf52273c736256325c8f078c03c8bb4facee22a4122de0ad3f615391",
+    "src/third_party/ufbx/PROVENANCE.md": "68c8c5f898f1ca9202a9abe4cae58e667f3ad441c7c8abc4cc079d97a2f32822",
+    "src/third_party/ufbx/ufbx.cpp": "2f7dbfa8f2c7f45fe2d468b13fb8954ef8f502feb43c264c70f29007cc68fa2a",
+    "src/third_party/ufbx/ufbx.h": "05362d987b3bf646932d89758c43d94458620c409b51b06948a32d33b37472f3",
+    "example/CharacterAuthoring.cpp": "df97e75f17cc04cf292656ab2d041a9462efe2b5125cb5c6a485013a2d2f03b4",
+    "tests/NSCharacterTest.cpp": "adf0aa62b5a70691dfcc52acc24f0f66847dbd444103012bb25a865d27888a52",
+    "tests/VerifyCharacterGlb.py": "efa25535445859ab547696f35b1af92bb8b78b66ea38a7466b4f12ce35b405ca",
+    "tests/VerifyCharacterBlender.py": "a503de5000e1f3ef1a71a3e9e0ac1a91c73915b84f2501207ca500a600be1891",
+    "tests/RenderCharacter.py": "231b7685c96be6adc0736e613daf3fd1cb05ed38fc2858fb883fe5dc9f07a6a6"
+  },
+  "artifactHashesSha256": {
+    "build/character/GeneratedHuman.glb": "20a8d14607b3bc205d94b53a6ec3256a0aa10b0676a363ea4a995dfc1133c049",
+    "build/character/GeneratedHuman.fbx": "e40ccf287ca88694a63bfda368331bda5e278aa154f0b742322962b3edaa8a5a",
+    "build/character/GeneratedHuman-preview.png": "08b82ed84b2ffbb0dfb223c852d9587921ffc17ff68eaef8cadb37aa701663ae",
+    "build/character/blender/GeneratedHuman.blend": "8c0e38a291a9691b3432a64cd496cf554da5debcfbf580376c6aeaaa607786ba",
+    "build/character/blender/GeneratedHuman-roundtrip.fbx": "9fcbaf601dc38b82fefa5c4d4498e68fb06412fa64dc416791a75c57d319987d",
+    "build/character/blender/GeneratedHuman-roundtrip.glb": "7f841ea7ead1cda1cfbec5acc581bd83ed50593046ae7301bd4631beb0654bd4"
+  },
+  "reviewPreview": {
+    "path": "build/character/GeneratedHuman-preview.png",
+    "sourceGlbSha256": "20a8d14607b3bc205d94b53a6ec3256a0aa10b0676a363ea4a995dfc1133c049",
+    "qualityStatus": "기본 프로시저 인체이다. 인체 디테일·얼굴·손가락·UV·셰이딩의 제작용 품질은 남은 작업이다."
+  }
+}

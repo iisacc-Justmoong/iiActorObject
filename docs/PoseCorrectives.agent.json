@@ -1,0 +1,344 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:9fbc210d43d42708e959f0351b971f942ea6c6d204a0e136f1b479c78e1aebcb",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/PoseCorrectives.md",
+    "sha256": "5d6e6005d9e8786012c3984a96720f0fefd5aca4d76fe47eb3129cce6779f4a7",
+    "bytes": 6639,
+    "line_count": 40,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "관절 자세에 따른 모프 보정",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 관절 자세에 따른 모프 보정\n",
+      "level": 1,
+      "title": "관절 자세에 따른 모프 보정"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "`Object3DPoseCorrectiveProgram`은 관절 회전과 모프 이름을 연결해 팔꿈치·무릎·의상 등의 작성된 보정 형상을 재생 중인 캐릭터에 적용한다. 모프의 실제 점·법선 변화는 기존 본체 에셋에 있어야 한다. 규칙과 리그 세션은 iiActorObject 본체 엔진이 소유하고 NSCharacter는 본체 핸들을 사용한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "fenced_code",
+      "start_line": 5,
+      "end_line": 16,
+      "raw": "```cpp\niiActorObject::Object3DPoseCorrectiveProgram program{{\n    {\"elbow_fix\", {{\"forearm_l\",\n        iiActorObject::Quaternion::fromAxisAngle({1, 0, 0}, 1.5707963267948966),\n        0.8}}, 1.0}\n}};\nauto rig = iiActorObject::createObject3DPoseCorrectiveRig(asset.object(), program);\nauto actor = asset.instantiate();\nauto &corrective = iiActorObject::attachObject3DPoseCorrectives(*actor, rig);\n// actor의 애니메이션이 갱신된 다음 각 tick에서 보정이 적용된다.\n// 재생하지 않는 편집 화면은 corrective.update()를 명시적으로 호출한다.\n```\n",
+      "language": "cpp",
+      "code": "iiActorObject::Object3DPoseCorrectiveProgram program{{\n    {\"elbow_fix\", {{\"forearm_l\",\n        iiActorObject::Quaternion::fromAxisAngle({1, 0, 0}, 1.5707963267948966),\n        0.8}}, 1.0}\n}};\nauto rig = iiActorObject::createObject3DPoseCorrectiveRig(asset.object(), program);\nauto actor = asset.instantiate();\nauto &corrective = iiActorObject::attachObject3DPoseCorrectives(*actor, rig);\n// actor의 애니메이션이 갱신된 다음 각 tick에서 보정이 적용된다.\n// 재생하지 않는 편집 화면은 corrective.update()를 명시적으로 호출한다.\n",
+      "closed": true
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "NSCharacter의 `CharacterTemplate::createPoseCorrectiveRig`도 같은 엔진에 속한 `CharacterAsset`과 프로그램을 받아 본체 리그를 생성한다. 서로 다른 엔진의 에셋은 거부한다. 리그 핸들은 엔진의 소유권을 연장하지 않으며 엔진 또는 리그가 제거되면 무효가 된다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "## 평가 규칙\n",
+      "level": 2,
+      "title": "평가 규칙"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "각 조건의 목표 회전은 해당 본의 **원래 바인드 회전에 대한 로컬 상대 회전**이다. 현재 `Pose`의 로컬 회전에서 같은 기준을 제거한 뒤 목표 회전까지의 최단 사원수 각도를 라디안으로 측정한다. 사원수 `q`와 `-q`는 같은 회전으로 취급한다. 설정한 각 반경 이상에서는 영향이 0이고 목표 회전에서는 1이다. 그 사이는 `t = clamp(1 - angle / radius, 0, 1)`과 `t²(3 - 2t)`로 부드럽게 보간한다. 한 샘플의 여러 관절 조건은 곱하고 `maximumWeight`를 적용한다. 같은 모프를 가리키는 여러 샘플은 최댓값을 사용하므로 합산 과증폭이 발생하지 않는다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "인스턴스의 변형 바인드가 바뀌어도 `Pose::locals()`는 원래 골격 좌표계를 유지하므로 같은 로컬 애니메이션 입력은 같은 보정값을 낸다. 부모의 월드 회전은 자식의 로컬 조건에 직접 합산하지 않는다. 이동·스케일·접촉·충돌·물리 시뮬레이션과 복잡한 포즈 공간 보간은 이 규칙에 포함되지 않는다. 작성자가 보정 형상을 제공하거나 [DQ 기준 자동 생성](AutomaticCorrectives.md)으로 초기 형상을 만들 수 있다. 자동 생성이 제작용 해부학적 형상을 보증하지는 않는다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "`evaluateObject3DPoseCorrectives`는 입력 포즈와 같은 본체 골격을 요구하고 결과만 반환한다. `applyObject3DPoseCorrectives`는 동일한 모프 이름을 가진 모든 연결된 메시의 현재 LOD에 값을 설정한다. 다른 이름의 모프와 본 포즈는 건드리지 않는다. 현재 LOD에 없는 채널은 그 메시에서 건너뛴다. 다른 리그가 같은 이름을 쓸 때는 마지막으로 적용한 값이 남으므로, 호스트가 적용 순서를 관리하거나 서로 다른 이름을 사용해야 한다. `PoseCorrectiveComponent`는 캐릭터의 애니메이션 갱신 다음에 호출되며 실패를 `error()`에 보관한다. 다른 컴포넌트가 포즈를 수정한다면 부착 순서상 그 컴포넌트 다음에 두거나 모든 포즈 변경 뒤에 `update()`를 호출한다. 직접 `update()`를 호출하면 오류가 호출자에게 전달된다. 정지·비활성화는 이전 모프 값을 자동으로 지우지 않는다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "리그를 다른 에셋에 다시 연결할 때는 `cloneFor`와 명시적인 기존 `jointMapping()`을 사용해 이름 변경 후에도 원래 본 ID를 유지할 수 있다. 생성과 재연결은 대상에 모든 보정 모프 이름이 존재하는지 확인한다. 샘플은 최대 4,096개, 전체 조건은 65,536개, 서로 다른 본은 4,096개까지 허용한다. 샘플마다 조건이 있어야 하며 같은 본을 중복할 수 없다. 각 반경은 0보다 크고 π 이하, 최대값은 0~1, 회전은 유한한 정규 사원수여야 한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "## 저장과 교환\n",
+      "level": 2,
+      "title": "저장과 교환"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "`exportObject3DPoseCorrectiveProgram`과 `importObject3DPoseCorrectiveProgram`은 제한된 바이너리 프로그램을 독립적으로 저장·복원한다. 형식은 8바이트 `iiAOPCR\\0`, little-endian uint32 버전 1, uint64 본문 길이, uint32 CRC-32와 본문이다. 본문에는 uint32 샘플 수와 각 모프 이름, float64 최대값, uint32 조건 수, 각 본 이름·사원수 네 성분·반경의 float64가 들어간다. 이름은 uint32 바이트 길이 뒤에 저장한다. CRC는 손상 검출이며 인증은 아니다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "편집 프로젝트를 저장할 때 리그 핸들을 `exportObject3DProject`에 함께 전달하면 [프로젝트 버전 26](Object3DProject.md)에 규칙과 에셋·본 대응이 저장된다. 불러온 뒤 액터 인스턴스에 컴포넌트를 다시 부착한다. 프로젝트에는 실행 객체나 콜백을 저장하지 않는다. FBX·GLB 출력에는 작성된 모프가 들어가며, [보정 애니메이션 베이크](PoseCorrectiveAnimation.md)로 관절 움직임에 따른 모프 곡선을 클립에 포함할 수 있다. 이 SDK의 회전 조건 자체를 해당 앱의 실시간 드라이버로 자동 변환하지는 않는다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "heading",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "## 확인 범위\n",
+      "level": 2,
+      "title": "확인 범위"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "2026-10-29 macOS arm64에서 코어 전용과 NSCharacter 포함 구성의 관련 포즈·리그·프로젝트 회귀 검사가 각각 51개 통과했다. 별도 스테이징 SDK 소비자는 두 구성에서 각각 통과했다. 메모리·정의되지 않은 동작 검사 10개와 복수 리그 프로젝트의 추가 검사가 통과했으며 누수 검사는 비활성화했다. 독립 판독으로 보정 프로그램과 프로젝트의 길이·CRC·샘플, FBX·GLB에 기록된 모프를 확인했다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "합성 시험은 회전의 중간·끝점과 반대 방향, 여러 관절 조건의 곱, 같은 모프의 여러 샘플, 몸·의상의 동시 적용, 다른 모프·본 포즈 보존, 애니메이션 tick, 변형 바인드, 리그 재연결, 손상된 프로그램의 복구와 여러 리그의 프로젝트 저장을 포함한다. CC0 인체 자료의 19,158개 점과 163개 본을 사용하는 별도 시험에서는 왼팔에 시험용 보정 모프를 직접 작성하고 본 회전 뒤 스킨 정점의 변화가 반영되는지 확인했다. 이는 제작용 보정 형상이나 얼굴 리그의 품질, 외부 앱에서의 실행 결과를 입증하지 않는다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "관절 자세에 따른 모프 보정",
+      "anchor": "관절-자세에-따른-모프-보정",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "평가 규칙",
+      "anchor": "평가-규칙",
+      "start_line": 20
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "저장과 교환",
+      "anchor": "저장과-교환",
+      "start_line": 30
+    },
+    {
+      "block_id": "b000025",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인 범위",
+      "anchor": "확인-범위",
+      "start_line": 36
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000011",
+        "line": 22,
+        "text": "각 조건의 목표 회전은 해당 본의 **원래 바인드 회전에 대한 로컬 상대 회전**이다. 현재 `Pose`의 로컬 회전에서 같은 기준을 제거한 뒤 목표 회전까지의 최단 사원수 각도를 라디안으로 측정한다. 사원수 `q`와 `-q`는 같은 회전으로 취급한다. 설정한 각 반경 이상에서는 영향이 0이고 목표 회전에서는 1이다. 그 사이는 `t = clamp(1 - angle / radius, 0, 1)`과 `t²(3 - 2t)`로 부드럽게 보간한다. 한 샘플의 여러 관절 조건은 곱하고 `maximumWeight`를 적용한다. 같은 모프를 가리키는 여러 샘플은 최댓값을 사용하므로 합산 과증폭이 발생하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000013",
+        "line": 24,
+        "text": "인스턴스의 변형 바인드가 바뀌어도 `Pose::locals()`는 원래 골격 좌표계를 유지하므로 같은 로컬 애니메이션 입력은 같은 보정값을 낸다. 부모의 월드 회전은 자식의 로컬 조건에 직접 합산하지 않는다. 이동·스케일·접촉·충돌·물리 시뮬레이션과 복잡한 포즈 공간 보간은 이 규칙에 포함되지 않는다. 작성자가 보정 형상을 제공하거나 [DQ 기준 자동 생성](AutomaticCorrectives.md)으로 초기 형상을 만들 수 있다. 자동 생성이 제작용 해부학적 형상을 보증하지는 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 26,
+        "text": "`evaluateObject3DPoseCorrectives`는 입력 포즈와 같은 본체 골격을 요구하고 결과만 반환한다. `applyObject3DPoseCorrectives`는 동일한 모프 이름을 가진 모든 연결된 메시의 현재 LOD에 값을 설정한다. 다른 이름의 모프와 본 포즈는 건드리지 않는다. 현재 LOD에 없는 채널은 그 메시에서 건너뛴다. 다른 리그가 같은 이름을 쓸 때는 마지막으로 적용한 값이 남으므로, 호스트가 적용 순서를 관리하거나 서로 다른 이름을 사용해야 한다. `PoseCorrectiveComponent`는 캐릭터의 애니메이션 갱신 다음에 호출되며 실패를 `error()`에 보관한다. 다른 컴포넌트가 포즈를 수정한다면 부착 순서상 그 컴포넌트 다음에 두거나 모든 포즈 변경 뒤에 `update()`를 호출한다. 직접 `update()`를 호출하면 오류가 호출자에게 전달된다. 정지·비활성화는 이전 모프 값을 자동으로 지우지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 34,
+        "text": "편집 프로젝트를 저장할 때 리그 핸들을 `exportObject3DProject`에 함께 전달하면 [프로젝트 버전 26](Object3DProject.md)에 규칙과 에셋·본 대응이 저장된다. 불러온 뒤 액터 인스턴스에 컴포넌트를 다시 부착한다. 프로젝트에는 실행 객체나 콜백을 저장하지 않는다. FBX·GLB 출력에는 작성된 모프가 들어가며, [보정 애니메이션 베이크](PoseCorrectiveAnimation.md)로 관절 움직임에 따른 모프 곡선을 클립에 포함할 수 있다. 이 SDK의 회전 조건 자체를 해당 앱의 실시간 드라이버로 자동 변환하지는 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 40,
+        "text": "합성 시험은 회전의 중간·끝점과 반대 방향, 여러 관절 조건의 곱, 같은 모프의 여러 샘플, 몸·의상의 동시 적용, 다른 모프·본 포즈 보존, 애니메이션 tick, 변형 바인드, 리그 재연결, 손상된 프로그램의 복구와 여러 리그의 프로젝트 저장을 포함한다. CC0 인체 자료의 19,158개 점과 163개 본을 사용하는 별도 시험에서는 왼팔에 시험용 보정 모프를 직접 작성하고 본 회전 뒤 스킨 정점의 변화가 반영되는지 확인했다. 이는 제작용 보정 형상이나 얼굴 리그의 품질, 외부 앱에서의 실행 결과를 입증하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000013",
+        "label": "DQ 기준 자동 생성",
+        "target": "AutomaticCorrectives.md",
+        "kind": "relative",
+        "line": 24
+      },
+      {
+        "block_id": "b000023",
+        "label": "프로젝트 버전 26",
+        "target": "Object3DProject.md",
+        "kind": "relative",
+        "line": 34
+      },
+      {
+        "block_id": "b000023",
+        "label": "보정 애니메이션 베이크",
+        "target": "PoseCorrectiveAnimation.md",
+        "kind": "relative",
+        "line": 34
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

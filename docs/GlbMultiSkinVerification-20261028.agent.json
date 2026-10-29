@@ -1,0 +1,221 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:75695b6e255eaef1b81fa1c76129de3c371e5278a0171bfc368835ad4b5da096",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/GlbMultiSkinVerification-20261028.md",
+    "sha256": "41b34d0715645c63c0ba7ed08881a6d3dd0c2ab4a90ddc6bc99b6bcfcf2eea7a",
+    "bytes": 3218,
+    "line_count": 19,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "GLB 여러 스킨과 부착 메시 검증 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# GLB 여러 스킨과 부착 메시 검증 — 2026-10-28\n",
+      "level": 1,
+      "title": "GLB 여러 스킨과 부착 메시 검증 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 구현과 검사 범위\n",
+      "level": 2,
+      "title": "구현과 검사 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "[여러 스킨 가져오기 계약](GlbMultiSkin.md)은 선택된 장면의 스킨들을 본체가 소유하는 하나의 골격으로 결합하고, 스킨별 원본 관절 대응을 반환한다. 스킨마다 다른 공통 바인드 변환과 관절에 부착된 스킨 없는 메시를 다룬다. NSCharacter는 본체 에셋과 대응을 참조한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "list",
+      "start_line": 7,
+      "end_line": 13,
+      "raw": "- 새 공개 자료와 옵션을 사용하는 테스트는 구현 전에 컴파일에 실패했다. 구현 후 macOS arm64 Release의 NSCharacter 포함·DNA 제외, 코어 전용, NSCharacter·DNA 포함 구성에서 GLB 가져오기 관련 시험이 각각 4건 통과했다.\n- 독립 Python 판독기는 수작업으로 구성한 두 스킨, 네 메시의 GLB 원본과 SDK 출력의 JSON·바이너리를 직접 읽고 회전·이동한 관절에 대한 정점 위치를 비교했다. 공통 관절, 스킨마다 다른 기준 바인드, 독립 소품, 관절 아래 비관절 노드를 거친 부착 소품이 포함된다.\n- 소스 관절 순서와 장면의 스킨 최초 사용 순서, 서로 다른 루트, 다른 스킨에서 발견된 조상, 같은 스킨의 재사용, 역바인드 accessor 공유와 필요한 길이가 다른 경우를 검사했다. 잘못된 루트와 역바인드, 중복 관절, 자원 한도, 모호한 의미 태그에 대한 거부와 실패 시 에셋을 남기지 않는 동작도 검사했다.\n- GLB 입력·애니메이션, FBX 애니메이션 입력, 프로젝트 저장 관련 회귀 12건이 통과했다. 이후 부착 소품 시험 입력에 비관절 중간 노드를 추가한 뒤에는 최신 입력으로 GLB 가져오기 시험 4건을 다시 통과했다.\n- iiActorObject 공유 라이브러리와 테스트를 ASan·UBSan으로 계측한 구성에서 GLB 가져오기 시험 4건이 통과했다. 설치된 iiJson 정적 라이브러리는 별도 계측하지 않았다.\n- `build/` 아래에 스테이징한 코어 전용, NSCharacter 포함·DNA 제외, NSCharacter·DNA 포함 패키지의 별도 소비자가 새 공개 헤더와 라이브러리로 빌드되어 각 1건 통과했다. 기존 `~/.local` 설치본은 변경하지 않았다. 공개 구조체가 바뀌므로 소비자는 다시 빌드해야 한다.\n- 검사한 NSCharacter 공유 라이브러리의 직접 동적 의존성은 macOS C++ 표준 라이브러리와 시스템 라이브러리였다. 모든 간접 의존성과 다른 플랫폼에 대한 검증은 아니다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "새 공개 자료와 옵션을 사용하는 테스트는 구현 전에 컴파일에 실패했다. 구현 후 macOS arm64 Release의 NSCharacter 포함·DNA 제외, 코어 전용, NSCharacter·DNA 포함 구성에서 GLB 가져오기 관련 시험이 각각 4건 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "독립 Python 판독기는 수작업으로 구성한 두 스킨, 네 메시의 GLB 원본과 SDK 출력의 JSON·바이너리를 직접 읽고 회전·이동한 관절에 대한 정점 위치를 비교했다. 공통 관절, 스킨마다 다른 기준 바인드, 독립 소품, 관절 아래 비관절 노드를 거친 부착 소품이 포함된다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "소스 관절 순서와 장면의 스킨 최초 사용 순서, 서로 다른 루트, 다른 스킨에서 발견된 조상, 같은 스킨의 재사용, 역바인드 accessor 공유와 필요한 길이가 다른 경우를 검사했다. 잘못된 루트와 역바인드, 중복 관절, 자원 한도, 모호한 의미 태그에 대한 거부와 실패 시 에셋을 남기지 않는 동작도 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "GLB 입력·애니메이션, FBX 애니메이션 입력, 프로젝트 저장 관련 회귀 12건이 통과했다. 이후 부착 소품 시험 입력에 비관절 중간 노드를 추가한 뒤에는 최신 입력으로 GLB 가져오기 시험 4건을 다시 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "iiActorObject 공유 라이브러리와 테스트를 ASan·UBSan으로 계측한 구성에서 GLB 가져오기 시험 4건이 통과했다. 설치된 iiJson 정적 라이브러리는 별도 계측하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 아래에 스테이징한 코어 전용, NSCharacter 포함·DNA 제외, NSCharacter·DNA 포함 패키지의 별도 소비자가 새 공개 헤더와 라이브러리로 빌드되어 각 1건 통과했다. 기존 `~/.local` 설치본은 변경하지 않았다. 공개 구조체가 바뀌므로 소비자는 다시 빌드해야 한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "검사한 NSCharacter 공유 라이브러리의 직접 동적 의존성은 macOS C++ 표준 라이브러리와 시스템 라이브러리였다. 모든 간접 의존성과 다른 플랫폼에 대한 검증은 아니다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "하나의 스킨 안에서 관절별 바인드 기준이 다른 자료와 본체 TRS로 표현할 수 없는 변환은 거부한다. 출력 시 원래의 스킨 분리, 정적 노드 분류와 독립 노드 애니메이션은 그대로 복원하지 않는다. GLB 애니메이션 입력, 원본 탄젠트·모프 탄젠트와 모든 재질 확장의 무손실 입력은 이 작업으로 완료되지 않았다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "Windows·Linux와 실제 제작용 자산, CC5·Blender·Unreal의 동작, MetaHuman 수준의 시각적 품질은 이 검사로 확인하지 않았다. 실제 앱과 사용자용 명령행 도구는 사용자 지시에 따라 실행하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "GLB 여러 스킨과 부착 메시 검증 — 2026-10-28",
+      "anchor": "glb-여러-스킨과-부착-메시-검증--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구현과 검사 범위",
+      "anchor": "구현과-검사-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 15
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 12,
+        "text": "- `build/` 아래에 스테이징한 코어 전용, NSCharacter 포함·DNA 제외, NSCharacter·DNA 포함 패키지의 별도 소비자가 새 공개 헤더와 라이브러리로 빌드되어 각 1건 통과했다. 기존 `~/.local` 설치본은 변경하지 않았다. 공개 구조체가 바뀌므로 소비자는 다시 빌드해야 한다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000011",
+        "line": 17,
+        "text": "하나의 스킨 안에서 관절별 바인드 기준이 다른 자료와 본체 TRS로 표현할 수 없는 변환은 거부한다. 출력 시 원래의 스킨 분리, 정적 노드 분류와 독립 노드 애니메이션은 그대로 복원하지 않는다. GLB 애니메이션 입력, 원본 탄젠트·모프 탄젠트와 모든 재질 확장의 무손실 입력은 이 작업으로 완료되지 않았다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "여러 스킨 가져오기 계약",
+        "target": "GlbMultiSkin.md",
+        "kind": "relative",
+        "line": 5
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

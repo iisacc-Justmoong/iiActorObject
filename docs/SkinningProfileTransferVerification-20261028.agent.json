@@ -1,0 +1,250 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:8f9bfc81913e4c961e96de8a0e1d3e96ce1333c7d53817c66cb90eb899387cfa",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/SkinningProfileTransferVerification-20261028.md",
+    "sha256": "8085e660ac3b003428d6fabdcec15fefc63a00ba2f31917661fd487f993712cc",
+    "bytes": 3322,
+    "line_count": 22,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "스키닝 프로필 전사 검증",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 스키닝 프로필 전사 검증\n",
+      "level": 1,
+      "title": "스키닝 프로필 전사 검증"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "2026-10-28 macOS arm64에서 C++23 코어 전용 구성과 NSCharacter 포함 구성을 검사했다. 두 구성에서 `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION`은 `OFF`이다. 사용자의 지시에 따라 CC5·Blender·Unreal 등 실제 앱과 사용자용 CLI는 실행하지 않았다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 구현 범위\n",
+      "level": 2,
+      "title": "구현 범위"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`iiActorObject`는 원본 점이나 최근접 표면을 통해 본 가중치와 함께 선형·듀얼 쿼터니언(DQ)·점별 혼합 프로필을 전사할 수 있다. NSCharacter는 본체 엔진의 에셋과 편집기를 참조하고 이 기능에 위임한다. 새 전사 정책은 `PreserveTarget`, `Source`, `SourceIfNonlinear`이다. 기존 일반 표면 전사와 대칭 전사 호출은 대상 프로필을 유지한다. 기존 템플릿 리그·적응 호출은 DQ·혼합 원본을 적용하고 선형 원본에는 기존 대상 프로필을 유지한다. 선형 원본도 명시적으로 복사하려면 `Source`를 사용한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "동일 토폴로지에서는 원본 점 ID를 사용한다. 다른 토폴로지에서는 본 가중치와 동일한 삼각형과 무게중심 좌표로 혼합값을 계산한다. 선택하지 않았거나 거리 조건에서 건너뛴 대상 점은 기존 값을 보존한다. 대칭 평면의 교차점에는 원래 변에서 보간한 값을 사용한다. 부분 전사에 순수 방식이 섞이면 점별 혼합 프로필로 표현한다. 편집기 이력·레이어와 네이티브 프로젝트 저장 경로를 이용하며, 템플릿 적응이 추가한 숨은 보조점의 혼합값은 0으로 초기화한다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "## 확인한 결과\n",
+      "level": 2,
+      "title": "확인한 결과"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "list",
+      "start_line": 13,
+      "end_line": 16,
+      "raw": "- 표면 전사·대칭·편집 7/7, 템플릿 리그 전사 6/6, 템플릿 적응 8/8, DQ 변형·프로필 회귀 10/10, 기존 표면 ABI 1/1이 두 구성에서 각각 통과했다. 기존 `SkinTransferOptions` 크기와 호출 기호는 별도로 검사했다.\n- 과거 프로젝트 버전 1~8, 레이어, 스냅샷, 손상 복원과 런타임 경로 12/12가 두 구성에서 각각 통과했다.\n- `build/` 내부의 별도 설치 경로에 있는 공개 헤더와 라이브러리를 사용하는 소비자 검사는 두 구성에서 각각 2/2 통과했다. 이 검사는 회전한 대상의 리그 등록·DQ 프로필 전사와 기존·추가 API를 사용한다. `~/.local` 설치본은 갱신하지 않았다.\n- 두 공유 라이브러리의 직접 동적 의존성은 C++ 표준 라이브러리와 macOS 시스템 라이브러리이다. Qt는 관찰되지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "표면 전사·대칭·편집 7/7, 템플릿 리그 전사 6/6, 템플릿 적응 8/8, DQ 변형·프로필 회귀 10/10, 기존 표면 ABI 1/1이 두 구성에서 각각 통과했다. 기존 `SkinTransferOptions` 크기와 호출 기호는 별도로 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "과거 프로젝트 버전 1~8, 레이어, 스냅샷, 손상 복원과 런타임 경로 12/12가 두 구성에서 각각 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 내부의 별도 설치 경로에 있는 공개 헤더와 라이브러리를 사용하는 소비자 검사는 두 구성에서 각각 2/2 통과했다. 이 검사는 회전한 대상의 리그 등록·DQ 프로필 전사와 기존·추가 API를 사용한다. `~/.local` 설치본은 갱신하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "두 공유 라이브러리의 직접 동적 의존성은 C++ 표준 라이브러리와 macOS 시스템 라이브러리이다. Qt는 관찰되지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "## 남은 제한\n",
+      "level": 2,
+      "title": "남은 제한"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "최근접 표면 전사는 유사한 기준 자세와 정렬을 전제로 하며 가까운 다른 신체 부위에 잘못 연결될 수 있다. 일치하는 점 ID를 사용하는 경우 ID가 같은 의미인지 호출자가 보장해야 한다. 템플릿 적응의 별도 follower `transferSkin`은 본 가중치만 전사하며 DQ 프로필은 별도로 전사해야 한다. 비선형 프로필의 GLB·DNA 출력과 DQ 포즈·모프 스냅샷은 구현되지 않아 해당 경로는 거부한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "이 작업은 CC5·Blender·Unreal에서의 실제 동작이나 MetaHuman과 동등한 데이터 계약, 제작용 얼굴·인체 품질을 입증하지 않는다. 플랫폼별 빌드, 추가적인 캐릭터 기능 및 이들 형식의 호환 작업은 전체 목표에 남아 있다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "스키닝 프로필 전사 검증",
+      "anchor": "스키닝-프로필-전사-검증",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구현 범위",
+      "anchor": "구현-범위",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인한 결과",
+      "anchor": "확인한-결과",
+      "start_line": 11
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 제한",
+      "anchor": "남은-제한",
+      "start_line": 18
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000017",
+        "line": 20,
+        "text": "최근접 표면 전사는 유사한 기준 자세와 정렬을 전제로 하며 가까운 다른 신체 부위에 잘못 연결될 수 있다. 일치하는 점 ID를 사용하는 경우 ID가 같은 의미인지 호출자가 보장해야 한다. 템플릿 적응의 별도 follower `transferSkin`은 본 가중치만 전사하며 DQ 프로필은 별도로 전사해야 한다. 비선형 프로필의 GLB·DNA 출력과 DQ 포즈·모프 스냅샷은 구현되지 않아 해당 경로는 거부한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 22,
+        "text": "이 작업은 CC5·Blender·Unreal에서의 실제 동작이나 MetaHuman과 동등한 데이터 계약, 제작용 얼굴·인체 품질을 입증하지 않는다. 플랫폼별 빌드, 추가적인 캐릭터 기능 및 이들 형식의 호환 작업은 전체 목표에 남아 있다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

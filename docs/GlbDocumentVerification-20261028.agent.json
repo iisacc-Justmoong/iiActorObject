@@ -1,0 +1,257 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:40d474c68169ac8e8a4297d1bac05c4b81592ee750db278d6f01e4837e202fd0",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/GlbDocumentVerification-20261028.md",
+    "sha256": "0f219218ec51c54041f7d3f0f6adff74f7c04304e45146ea3b13b6a02427eee6",
+    "bytes": 2959,
+    "line_count": 22,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "GLB 문서 판독 검증 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# GLB 문서 판독 검증 — 2026-10-28\n",
+      "level": 1,
+      "title": "GLB 문서 판독 검증 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 검증 범위\n",
+      "level": 2,
+      "title": "검증 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "공용 코어의 `GlbDocument`는 메모리 입력의 GLB 컨테이너, 단일 임베디드 버퍼, 버퍼 뷰 및 접근자를 해석한다. 이 단계는 편집 가능한 메시·리그·애니메이션 가져오기가 아니다. 상세 계약과 미구현 경계는 [GLB 문서 판독](GlbDocument.md)에 기록한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "heading",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "## 직접 네이티브 검사\n",
+      "level": 2,
+      "title": "직접 네이티브 검사"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "list",
+      "start_line": 9,
+      "end_line": 14,
+      "raw": "- 미구현 단계에서 공개 헤더가 없어 테스트 컴파일이 실패하는 것을 확인한 뒤 C++23 판독기를 구현했다.\n- 수동으로 구성한 바이트에서 인터리브 U8 정규화, 음수 I8·I16 정규화의 극값, U32 최대값, 희소 원소, 기존 데이터에 희소 덮어쓰기, U16 MAT3의 열 패딩, 원본 입력 해제 후의 데이터와 버퍼 뷰를 검사했다.\n- 손상된 컨테이너·길이·인덱스·stride·정렬·외부 URI·자료형, 크기와 항목 예산 및 부동소수점 무한대의 거부를 확인했다. 결정적 시드로 정상 fixture의 바이트를 변형한 2,500건도 제한된 예산에서 판독하고 오류를 처리했다.\n- 판독기와 테스트를 ASan·UBSan으로 직접 빌드해 정상·오류·변형 세 묶음을 실행했다. 링크한 기존 설치 iiJson 정적 라이브러리 자체는 해당 명령에서 계측하지 않았다.\n- 기존에 빌드된 iiActorObject 출력 라이브러리와 새 판독기를 결합한 별도 네이티브 테스트에서 골격 및 여러 메시의 모프 애니메이션 GLB의 모든 접근자를 읽었다. 이 검사는 편집 가능한 에셋의 왕복 변환을 증명하지 않는다.\n- 설치된 iiJson 헤더와 현재 워크스페이스 iiJson 헤더 각각에 대해 판독기 소스의 C++23 문법 검사를 수행했다. 이는 두 iiJson 버전 모두와의 설치·런타임 호환성을 증명하지 않는다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "미구현 단계에서 공개 헤더가 없어 테스트 컴파일이 실패하는 것을 확인한 뒤 C++23 판독기를 구현했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "수동으로 구성한 바이트에서 인터리브 U8 정규화, 음수 I8·I16 정규화의 극값, U32 최대값, 희소 원소, 기존 데이터에 희소 덮어쓰기, U16 MAT3의 열 패딩, 원본 입력 해제 후의 데이터와 버퍼 뷰를 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "손상된 컨테이너·길이·인덱스·stride·정렬·외부 URI·자료형, 크기와 항목 예산 및 부동소수점 무한대의 거부를 확인했다. 결정적 시드로 정상 fixture의 바이트를 변형한 2,500건도 제한된 예산에서 판독하고 오류를 처리했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "판독기와 테스트를 ASan·UBSan으로 직접 빌드해 정상·오류·변형 세 묶음을 실행했다. 링크한 기존 설치 iiJson 정적 라이브러리 자체는 해당 명령에서 계측하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "기존에 빌드된 iiActorObject 출력 라이브러리와 새 판독기를 결합한 별도 네이티브 테스트에서 골격 및 여러 메시의 모프 애니메이션 GLB의 모든 접근자를 읽었다. 이 검사는 편집 가능한 에셋의 왕복 변환을 증명하지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "설치된 iiJson 헤더와 현재 워크스페이스 iiJson 헤더 각각에 대해 판독기 소스의 C++23 문법 검사를 수행했다. 이는 두 iiJson 버전 모두와의 설치·런타임 호환성을 증명하지 않는다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "## 프로젝트 구성과 설치 소비자\n",
+      "level": 2,
+      "title": "프로젝트 구성과 설치 소비자"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "list",
+      "start_line": 18,
+      "end_line": 20,
+      "raw": "- macOS arm64 Release에서 NSCharacter 포함 라이브러리와 판독·애니메이션 테스트 대상을 빌드했다. 판독 정상·오류 CTest 2건과 애니메이션 네이티브·독립 판독 CTest 2건이 통과했다. 당시 생성된 CTest 목록에는 변형 검사가 포함되지 않아 빌드된 테스트 실행 파일로 2,500건을 별도 실행했다.\n- NSCharacter를 제외한 코어 라이브러리와 판독 테스트 대상을 빌드했고 정상·오류·변형 CTest 3건이 통과했다. 두 구성의 라이브러리는 직접 동적 의존성에 Qt가 없었다. 코어 전체 재컴파일에서는 변경하지 않은 `Object3DPoseMorphs.cpp`의 기존 초기화 경고 2건이 나타났다.\n- `build/` 아래 별도 스테이징의 NSCharacter 포함 설치본을 사용하는 독립 소비자를 빌드하고 새 GLB 판독 API 호출 테스트를 통과했다. 전역 설치본은 변경하지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "macOS arm64 Release에서 NSCharacter 포함 라이브러리와 판독·애니메이션 테스트 대상을 빌드했다. 판독 정상·오류 CTest 2건과 애니메이션 네이티브·독립 판독 CTest 2건이 통과했다. 당시 생성된 CTest 목록에는 변형 검사가 포함되지 않아 빌드된 테스트 실행 파일로 2,500건을 별도 실행했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter를 제외한 코어 라이브러리와 판독 테스트 대상을 빌드했고 정상·오류·변형 CTest 3건이 통과했다. 두 구성의 라이브러리는 직접 동적 의존성에 Qt가 없었다. 코어 전체 재컴파일에서는 변경하지 않은 `Object3DPoseMorphs.cpp`의 기존 초기화 경고 2건이 나타났다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 아래 별도 스테이징의 NSCharacter 포함 설치본을 사용하는 독립 소비자를 빌드하고 새 GLB 판독 API 호출 테스트를 통과했다. 전역 설치본은 변경하지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "CC5·Blender·Unreal 등 실제 앱 및 사용자용 명령행 도구는 실행하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "GLB 문서 판독 검증 — 2026-10-28",
+      "anchor": "glb-문서-판독-검증--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검증 범위",
+      "anchor": "검증-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000007",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "직접 네이티브 검사",
+      "anchor": "직접-네이티브-검사",
+      "start_line": 7
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "프로젝트 구성과 설치 소비자",
+      "anchor": "프로젝트-구성과-설치-소비자",
+      "start_line": 16
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000009",
+        "line": 13,
+        "text": "- 기존에 빌드된 iiActorObject 출력 라이브러리와 새 판독기를 결합한 별도 네이티브 테스트에서 골격 및 여러 메시의 모프 애니메이션 GLB의 모든 접근자를 읽었다. 이 검사는 편집 가능한 에셋의 왕복 변환을 증명하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000009",
+        "line": 14,
+        "text": "- 설치된 iiJson 헤더와 현재 워크스페이스 iiJson 헤더 각각에 대해 판독기 소스의 C++23 문법 검사를 수행했다. 이는 두 iiJson 버전 모두와의 설치·런타임 호환성을 증명하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "GLB 문서 판독",
+        "target": "GlbDocument.md",
+        "kind": "relative",
+        "line": 5
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

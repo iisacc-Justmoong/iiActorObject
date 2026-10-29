@@ -1,0 +1,34 @@
+# 메시 교체와 선택 집합의 일괄 이전
+
+`Object3DEditor::replaceWithProjectedSelections`는 같은 `Object3DEngine`이 소유한 다른 에셋을 새 메시로 사용하면서 현재의 모든 이름 있는 점 선택을 새 토폴로지로 투영한다. 메시와 선택 집합은 **한 이력 단계**로 바뀌며 undo는 양쪽을 함께 이전 상태로 되돌린다. NSCharacter의 동명 메서드는 본체 편집 세션을 호출하고 별도 메시나 이력을 소유하지 않는다.
+
+```cpp
+#include <iiActorObject/Object3DEditor.h>
+#include <array>
+
+// editor와 target은 같은 iiActorObject 엔진에 속한다.
+const std::array pairs{iiActorObject::MeshMaskProjectionPair{0, 0}};
+iiActorObject::Object3DSelectionTransferOptions options;
+options.projection.maximumDistance = .02; // 오브젝트 좌표 단위
+auto report = editor.replaceWithProjectedSelections(target, pairs, options);
+// report.maximumDistance, projectedPoints와 작업량을 확인한다.
+// editor.undo()는 이전 에셋과 모든 선택을 한 번에 복원한다.
+```
+
+선택 이름과 빈 선택 집합은 유지한다. 한 원본 메시를 여러 대상 메시로 보낼 수 있지만 대상 메시를 중복 지정할 수 없다. 대응되지 않은 대상 메시의 선택 값은 0이다. 기존의 비어 있지 않은 선택 행이 대응되지 않으면 기본적으로 전체 작업을 거부한다. `discardUnmappedSelections=true`는 해당 행의 명시적 폐기를 허용하고 `discardedSourceRows`에 선택 집합별 폐기 행 수를 기록한다. 투영 결과가 모두 0인 행은 기존 선택 규칙에 맞게 생략한다.
+
+기존 편집기가 템플릿 기반이면 기본적으로 거부한다. `detachTemplate=true`를 명시하면 새 에셋은 독립 스냅샷이 되며, 이전 템플릿·레이어·선택은 undo 이력에 남는다. 새 에셋은 호출자가 이미 만든 결과이므로 스킨, 모프, 리그나 애니메이션은 자동 이전하지 않는다. 기존 리그는 이전 에셋에 남으며 호환 가능한 경우 별도 API로 새 에셋에 다시 연결해야 한다.
+
+투영·검증·예산 검사에 실패하면 편집기의 에셋, 선택, 이력과 revision은 바뀌지 않는다. 입력 에셋도 변경하지 않는다. 사용자가 미리 만든 대상 에셋은 실패 시에도 엔진에 그대로 남는다. 저장된 선택과 이력을 제외한 UI 상태는 호스트의 책임이다.
+
+## 일괄 투영과 한계
+
+본체 `projectMeshPointMaskSets`는 [표면 기반 마스크 투영](MeshMaskProjection.md)을 여러 선택에 동시에 적용한다. 하나의 원본·대상 대응에서 대상 점의 최근접 삼각형을 한 번 찾고 해당 무게중심을 각 선택에 재사용한다. 결과는 입력 집합 순서이며 각 집합의 행은 대상 메시 순서다. 보고서의 `projectedPoints`·BVH 노드·삼각형 검사는 실제 공유 질의 횟수이고 `weightEvaluations`는 선택별 보간 횟수다. 입력·출력 가중치, 집합 수와 보간 작업량에도 각각 예산이 적용된다. 0인 결과 행도 반환하는 일괄 API는 그 배열 크기를 출력 예산에 포함한다. 공개 옵션 구조가 확장되었으므로 기존 C++ 소비자는 헤더와 라이브러리를 함께 다시 빌드해야 한다.
+
+대응은 가장 가까운 가시 삼각형과 점별 거리 제한을 사용한다. 두 에셋은 미리 같은 오브젝트 좌표계와 유사한 자세에 있어야 하며 손가락·눈꺼풀·의상 층 사이의 의미나 폐색을 이해하지 못한다. 숨겨진 원본 점의 값은 가시 삼각형에 쓰이지 않으며, 대상의 숨김·미사용 점은 기본적으로 선택되지 않는다. `includeUnusedTargetPoints`를 사용하면 이 점도 투영하지만 원래 선택의 식별을 보장하지는 않는다. `maximumDistance`, 반환된 최대 거리와 결과를 확인해 작업에 적합한지 판단해야 한다.
+
+## 프로젝트 저장
+
+보존된 이력에 메시와 선택이 함께 바뀌는 단계가 있으면 `.ii3dproject` 버전 28을 작성한다. 버전 28의 필드 배치는 버전 27과 같고 이력 전이의 허용 의미가 추가된다. 복원 시 양쪽 선택 집합 이름의 일치, 각 에셋의 마스크 값·크기, 새 단계의 템플릿 분리 상태를 검사한다. 기존 선택 상태를 그대로 공유하며 에셋만 바꾸는 단계는 이전처럼 원본 점 연결의 안정성을 검사한다. 버전 27 이하에서는 메시와 선택이 동시에 바뀌는 이력을 계속 거부한다.
+
+이력 제한으로 해당 단계의 이전 상태가 더 이상 보존되지 않으면 다른 자료가 요구하는 기존 버전을 다시 선택할 수 있다. 투영 규칙과 최근접 대응 자체를 저장하는 것은 아니며, 결과 에셋·선택·이력을 저장한다. CRC는 파일 손상 검사이지 작성자 인증이 아니다. CC5·Blender·Unreal의 실제 앱 실행이나 해당 앱의 UI 연결은 사용자 지시에 따라 검사하지 않는다. 검증 범위는 [검증 기록](SelectionTransferVerification-20261029.md)을 따른다.

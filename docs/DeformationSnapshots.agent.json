@@ -1,0 +1,702 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:d27afb1819723a3be92fd54c3ddf8ef73c4afe0aff7e5169aaebbf15966b87d9",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/DeformationSnapshots.md",
+    "sha256": "8d15cf0eeedbd29aa1b4192a1f652a277309e9d2a57e4d0c2cf40231bce93f48",
+    "bytes": 13826,
+    "line_count": 161,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "자세와 모프를 함께 굽는 교환용 스냅샷",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 자세와 모프를 함께 굽는 교환용 스냅샷\n",
+      "level": 1,
+      "title": "자세와 모프를 함께 굽는 교환용 스냅샷"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 6,
+      "raw": "`Object3DPoseSnapshot.h`의 `bakeObject3DDeformationSnapshot`과\n`createObject3DDeformationSnapshot`은 코어 자산의 자세와 메시별 모프 가중치를 함께\n기준 형상으로 굽는다. 리그 기본 컨트롤이 0이 아니거나, 관절과 블렌드셰이프를 동시에\n출력하는 경우를 위한 공통 3D 기능이다. NSCharacter는 이 계산과 결과 자산을 소유하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 8,
+      "end_line": 11,
+      "raw": "`bake…`는 값으로 `Object3DData`를 반환한다. 영속 자산은 같은 엔진의 `createObject`로\n등록한다. `create…`는 이 두 단계를 처리하고 엔진이 소유한 새 자산의 참조 핸들을\n반환한다. 원본 자산·리그·에디터 기록은 변경하지 않으며, 실패하면 새 자산을 등록하지 않는다.\n엔진이 소멸하면 반환된 핸들도 무효가 된다. 숨겨진 NSCharacter 엔진은 만들지 않는다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "heading",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "## 입력과 모프 채널의 의미\n",
+      "level": 2,
+      "title": "입력과 모프 채널의 의미"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 20,
+      "raw": "`locals`는 원본 스켈레톤의 안정된 본 ID 순서이다. 메시별 가중치 버퍼의 개수는\n`asset.meshes().size()`와 같아야 한다. 각 내부 버퍼는 해당 메시의\n`lods()[0].morphTargets` 순서와 개수에 정확히 맞춘다. 모프가 없는 메시에는 빈 내부\n버퍼를 전달한다. 토폴로지의 같은 이름을 가진 여러 원본 레코드는 하나의 런타임 채널이므로,\n원본 레코드 개수를 가중치 개수로 사용하면 안 된다. 가중치는 유한한 실수이며 음수나\n1을 넘는 값도 임의로 자르지 않는다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 22,
+      "end_line": 23,
+      "raw": "선택한 기준 가중치를 `B`, 출력 자산에 추가로 적용할 가중치를 `w`라고 하면,\n출력 자산의 새 바인드 자세에서 다음 관계를 유지한다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "fenced_code",
+      "start_line": 25,
+      "end_line": 27,
+      "raw": "```text\noutput(w) = source(선택한 자세, B + w)\n```\n",
+      "language": "text",
+      "code": "output(w) = source(선택한 자세, B + w)\n",
+      "closed": true
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 33,
+      "raw": "따라서 출력 자산의 모프 가중치 0이 선택한 기준 상태이다. 기존 모프는 기준 상태에 대한\n추가 변화량으로 남는다. 기존의 절대 가중치를 그대로 출력에 넣으면 기준값이 두 번\n적용된다. 모프 이름과 원본 타깃 ID는 보존하며, 새로운 표정 채널을 자동으로 만들지는 않는다.\n입력 자산에 [기본 모프 값](DefaultMorphWeights.md)이 있더라도 변형 스냅샷에서는 이를\n제거해 새 인스턴스가 선택한 기준 상태에서 시작하도록 한다. 자세만 굽는 스냅샷은 유지한다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "fenced_code",
+      "start_line": 35,
+      "end_line": 48,
+      "raw": "```cpp\n#include <iiActorObject/Object3DPoseSnapshot.h>\n\n// source는 호출자가 이미 보유한 코어 핸들이다.\nconst auto actor = source.get().instantiate();\nstd::vector<std::vector<double>> baseline;\nfor (const auto& mesh : source.get().meshes())\n    baseline.emplace_back(mesh->lods()[0].morphTargets.size(), 0.0);\n\n// 실제 리그 출력이나 사용자 선택값을 메시별 채널에 대응시킨다.\n// 예: baseline[meshIndex][channelIndex] = 0.35;\nconst auto snapshot = iiActorObject::createObject3DDeformationSnapshot(\n    source, actor->pose().locals(), baseline);\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/Object3DPoseSnapshot.h>\n\n// source는 호출자가 이미 보유한 코어 핸들이다.\nconst auto actor = source.get().instantiate();\nstd::vector<std::vector<double>> baseline;\nfor (const auto& mesh : source.get().meshes())\n    baseline.emplace_back(mesh->lods()[0].morphTargets.size(), 0.0);\n\n// 실제 리그 출력이나 사용자 선택값을 메시별 채널에 대응시킨다.\n// 예: baseline[meshIndex][channelIndex] = 0.35;\nconst auto snapshot = iiActorObject::createObject3DDeformationSnapshot(\n    source, actor->pose().locals(), baseline);\n",
+      "closed": true
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 49,
+      "end_line": 49,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 50,
+      "end_line": 53,
+      "raw": "호출자가 현재 액터를 읽는 경우, 원본 자산의 메시 순서를 유지하고 각\n`SkeletalMeshComponent::morphWeights()`를 복사하여 전달한다. 스냅샷 함수 자체는\n액터를 평가하거나 리그 실행 버퍼를 변경하지 않는다. 기존 `createObject3DPoseSnapshot`은\n모프 기준값이 모두 0인 계약을 그대로 유지한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 54,
+      "end_line": 54,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "heading",
+      "start_line": 55,
+      "end_line": 55,
+      "raw": "## 범용 리그와 DNA의 연결\n",
+      "level": 2,
+      "title": "범용 리그와 DNA의 연결"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 56,
+      "end_line": 56,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 57,
+      "end_line": 60,
+      "raw": "`Object3DRigSnapshot.h`의 `createObject3DRigSnapshot(rig, evaluation, options)`은\n이미 계산된 `Object3DRigEvaluation`을 받아 같은 엔진에 스냅샷을 만든다. 컨트롤을\n다시 평가하거나 드라이버를 복제하지 않는다. 명시적으로 평가한 결과를 사용하므로 상태가\n있는 드라이버에서도 의도하지 않은 추가 실행을 만들지 않는다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 61,
+      "end_line": 61,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 62,
+      "end_line": 66,
+      "raw": "코어에서 원본 자산의 임시 액터를 만들고 `Object3DRigSession::applyTo`를 그대로 사용한다.\n전체 자세를 구동하는 리그는 전체 로컬 변환을, 일부 관절만 구동하는 리그는 원본의 기준\n자세 위에 해당 관절만 적용한다. 블렌드셰이프는 정의와 메시의 채널 이름으로 대응하므로\n순서가 다른 여러 메시와 사용자 모프를 함께 유지한다. 평가 결과의 객체·차원·LOD·유한값\n검증도 기존 규칙을 따른다. 결과 자산 이외의 영속 액터나 별도 엔진은 등록하지 않는다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 67,
+      "end_line": 67,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "fenced_code",
+      "start_line": 68,
+      "end_line": 75,
+      "raw": "```cpp\n#include <iiActorObject/Object3DRigSnapshot.h>\n\n// 기본값이 0이라고 가정하지 않고 리그 정의의 기본 컨트롤을 평가한다.\nconst auto evaluated = rig.get().evaluateNamed({});\nconst auto snapshot = iiActorObject::createObject3DRigSnapshot(rig, evaluated);\n// evaluated.animatedMaps는 기존 이름 순서대로 호스트 셰이더에 전달한다.\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/Object3DRigSnapshot.h>\n\n// 기본값이 0이라고 가정하지 않고 리그 정의의 기본 컨트롤을 평가한다.\nconst auto evaluated = rig.get().evaluateNamed({});\nconst auto snapshot = iiActorObject::createObject3DRigSnapshot(rig, evaluated);\n// evaluated.animatedMaps는 기존 이름 순서대로 호스트 셰이더에 전달한다.\n",
+      "closed": true
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 76,
+      "end_line": 76,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 77,
+      "end_line": 81,
+      "raw": "애니메이티드 맵은 표면 위치나 모프 채널이 아니므로 이 함수가 임의의 모프로 바꾸지\n않는다. 호출자의 평가 결과는 변경되지 않는다. 맵 값과 컨트롤 레시피를 교환 파일에\n영속 저장하거나 앱의 주름 재질에 자동 연결하는 기능은 아직 이 API의 범위에 포함되지\n않는다. DNA 검사는 독립적으로 작성한 작은 fixture의 Raw/GUI·두 LOD·관절·블렌드셰이프·맵\n출력 경로를 검증하며, 제작용 MetaHuman 데이터 검증과 구분한다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 82,
+      "end_line": 82,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "heading",
+      "start_line": 83,
+      "end_line": 83,
+      "raw": "## 형상·법선·속성 보존\n",
+      "level": 2,
+      "title": "형상·법선·속성 보존"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 84,
+      "end_line": 84,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 85,
+      "end_line": 85,
+      "raw": "스냅샷은 선형, 듀얼 쿼터니언(DQ), 점별 선형·DQ 혼합 스키닝을 계산한다. 원본의 작성된 프로필과 원본 점별 혼합값은 새 에셋에도 보존한다. DQ의 본 회전·이동·배율 혼합과 노멀 행렬은 본체 런타임과 같은 계산을 사용한다. 혼합 방식의 위치와 노멀은 각각 선형 결과와 DQ 결과를 섞는다. 여러 본의 가중치나 UV 이음새가 있어도 위의 기준값·추가 모프 관계를 지정한 자세에서 유지한다.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 86,
+      "end_line": 86,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 87,
+      "end_line": 87,
+      "raw": "소스에 작성된 프로필만 사용한다. `SkeletalMeshComponent`의 인스턴스별 임시 DQ 덮어쓰기는 스냅샷 입력에 포함되지 않는다. DQ에 사용되는 본 행렬의 전단이나 특이한 혼합 배율은 기존 런타임과 같이 거부하며 실패 시 새 에셋을 등록하지 않는다. 혼합값이 0인 점은 DQ 분해를 요구하지 않는다. 영향을 받지 않는 숨은 무가중치 점은 기존 규약대로 모프만 적용한다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 88,
+      "end_line": 88,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 89,
+      "end_line": 92,
+      "raw": "위치는 모프를 합산한 뒤 원본 스킨 행렬로 변환한다. 법선은 기준 모프의 법선 변화량을\n합산한 뒤 스킨의 법선 행렬로 변환하고 정규화한다. 보존할 모프 법선 변화량도 같은\n기준 법선의 변환 길이로 나누어야 이후 모프 보간 결과가 일치한다. 법선만 정규화하고\n기존 모프 법선을 그대로 두는 방식은 혼합 스킨·비균일 스케일에서 일치하지 않는다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 93,
+      "end_line": 93,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 94,
+      "end_line": 99,
+      "raw": "저작 토폴로지는 원본 포인트, 레이아웃, UV, 폴리곤, 재질과 사용되지 않은 속성의 ID를\n보존한다. 법선 경계가 필요한 경우 기존 법선 배열을 유지한 채 새 법선 그룹을 덧붙인다.\n같은 채널의 암시적 법선은 위치 타깃을 먼저 합산하여 한 번 계산한 뒤 명시적 변화량으로\n보존한다. 표시되지 않는 포인트의 모프도 버리지 않는다. 스킨이 없는 미사용 포인트는\n모프 변화만 적용하고 공간 변환은 하지 않는다. 표시되는 무가중치 포인트는 기존 코어\n규칙에 따라 루트에 강체 바인딩된다.\n"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 100,
+      "end_line": 100,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 101,
+      "end_line": 103,
+      "raw": "포인트·레이아웃·델타·스킨 영향 방문·추가 법선 예산은 `Object3DPoseSnapshotOptions`를\n재사용한다. 차원 불일치, 비유한 입력, 표현 범위를 벗어난 중간 결과, 표시 법선의 완전한\n상쇄는 예외로 거부한다. 원본은 그대로 유지된다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 104,
+      "end_line": 104,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 105,
+      "end_line": 110,
+      "raw": "런타임에서 변형된 삼각형이 완전히 접힐 수 있어도, 이를 새로운 저작 자산으로 등록할\n때는 기존 코어의 비퇴화 형상 규칙을 적용한다. 따라서 기준값 때문에 삼각형이 완전히\n퇴화하거나 포인트의 표면 법선이 정의되지 않으면 스냅샷 생성은 실패한다. 포인트를\n합치거나 삼각형을 삭제하여 이를 숨기지 않는다. 작은 독립 DNA fixture의 컨트롤 0.5가\n이 경우를 재현하며, 검사에서는 원본·등록 개수가 그대로임을 확인하고 유효한 0.25의\nRaw/GUI·두 LOD 출력도 각각 비교한다.\n"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 111,
+      "end_line": 111,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "heading",
+      "start_line": 112,
+      "end_line": 112,
+      "raw": "## 직렬화와 적용 범위\n",
+      "level": 2,
+      "title": "직렬화와 적용 범위"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 113,
+      "end_line": 113,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "paragraph",
+      "start_line": 114,
+      "end_line": 114,
+      "raw": "출력은 일반 코어 자산이므로 기존 네이티브 프로젝트와 FBX 교환 경로를 이용한다. 기본 스냅샷은 원본 DQ·혼합 프로필을 보존하고, 현재 GLB 출력기는 이 프로필을 거부한다. 선택한 자세와 모프 상태를 GLB로 전달하려면 `Object3DSnapshotSkinning::LinearizeAtBind`를 명시한다.\n"
+    },
+    {
+      "id": "b000048",
+      "kind": "blank",
+      "start_line": 115,
+      "end_line": 115,
+      "raw": "\n"
+    },
+    {
+      "id": "b000049",
+      "kind": "fenced_code",
+      "start_line": 116,
+      "end_line": 124,
+      "raw": "```cpp\n#include <iiActorObject/Object3DPoseSnapshot.h>\n#include <iiActorObject/Object3DInterchange.h>\n\nconst auto exchange = iiActorObject::createObject3DDeformationSnapshot(\n    source, actor->pose().locals(), baseline, {},\n    iiActorObject::Object3DSnapshotSkinning::LinearizeAtBind);\nconst auto glb = iiActorObject::exportObject3DGlb(exchange.get());\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/Object3DPoseSnapshot.h>\n#include <iiActorObject/Object3DInterchange.h>\n\nconst auto exchange = iiActorObject::createObject3DDeformationSnapshot(\n    source, actor->pose().locals(), baseline, {},\n    iiActorObject::Object3DSnapshotSkinning::LinearizeAtBind);\nconst auto glb = iiActorObject::exportObject3DGlb(exchange.get());\n",
+      "closed": true
+    },
+    {
+      "id": "b000050",
+      "kind": "blank",
+      "start_line": 125,
+      "end_line": 125,
+      "raw": "\n"
+    },
+    {
+      "id": "b000051",
+      "kind": "paragraph",
+      "start_line": 126,
+      "end_line": 126,
+      "raw": "선형화는 선택한 자세와 기준 모프를 원래의 선형·DQ·혼합 규칙으로 먼저 계산한 뒤, 새 바인드에서 스냅샷의 작성 토폴로지와 렌더 메시 프로필을 선형으로 변경한다. `bakeObject3DDeformationSnapshot`, `createObject3DPoseSnapshot`, `bakeObject3DPoseSnapshot`, `createObject3DRigSnapshot`에도 같은 명시적 정책을 전달할 수 있다. 기존 오버로드와 `Preserve`는 원본 프로필을 유지한다. 리그 오버로드는 이미 얻은 평가를 사용하며 백엔드를 다시 평가하지 않는다. 지원하지 않는 정책, DQ 전단, 유효하지 않은 기준 형상이나 예산 초과는 기존처럼 거부하며 새 에셋을 등록하지 않는다.\n"
+    },
+    {
+      "id": "b000052",
+      "kind": "blank",
+      "start_line": 127,
+      "end_line": 127,
+      "raw": "\n"
+    },
+    {
+      "id": "b000053",
+      "kind": "paragraph",
+      "start_line": 128,
+      "end_line": 128,
+      "raw": "원본 메시·리그·점별 DQ 혼합값은 변경하지 않는다. 선형화된 결과의 새 바인드에서 스냅샷의 추가 모프를 적용한 위치와 법선은 원본의 선택 자세·기준 모프에 같은 추가값을 적용한 결과와 일치한다. GLB 숫자는 파일의 부동소수점 표현 정밀도에 따른다. 다른 자세에서의 DQ 변형, 원본 애니메이션, 리그 드라이버와 애니메이티드 맵이 그대로 보존된다는 뜻은 아니다. 대상 형식의 다른 출력 제약도 여전히 적용된다. DNA 출력 지원이나 외부 앱 동작을 보증하는 기능은 아니다.\n"
+    },
+    {
+      "id": "b000054",
+      "kind": "blank",
+      "start_line": 129,
+      "end_line": 129,
+      "raw": "\n"
+    },
+    {
+      "id": "b000055",
+      "kind": "paragraph",
+      "start_line": 130,
+      "end_line": 132,
+      "raw": "저작용 `referencePose`는 이미 적용된 결과에서 제거하여 중복 적용을 방지한다. 새 저장\n형식을 추가하지 않는다. FBX에서 서로 다른 레이아웃의 모프 법선을 모두 보존하려면\n기존 `allowMorphNormalMetadata`의 명시적 선택이 필요할 수 있다.\n"
+    },
+    {
+      "id": "b000056",
+      "kind": "blank",
+      "start_line": 133,
+      "end_line": 133,
+      "raw": "\n"
+    },
+    {
+      "id": "b000057",
+      "kind": "paragraph",
+      "start_line": 134,
+      "end_line": 138,
+      "raw": "이 스냅샷은 지정한 자세에서의 모프 보간을 보존한다. 바뀐 바인드에 원본 애니메이션을\n그대로 적용해도 모든 변형이 같아진다는 의미는 아니다. 리그 컨트롤 샘플링, 애니메이티드 맵\n값의 영속 보존, 애니메이션 리타기팅은 별도 경로이다. 2026-10-27 사용자 지시에 따라\nCC5·Blender·Unreal 앱 검증은 수행하지 않는다. 네이티브 수치·파일 검사 결과를 실제 앱에서\n검증하였다는 의미로 사용하지 않는다. 제작용 MetaHuman 자료·기능 검증은 별도이다.\n"
+    },
+    {
+      "id": "b000058",
+      "kind": "blank",
+      "start_line": 139,
+      "end_line": 139,
+      "raw": "\n"
+    },
+    {
+      "id": "b000059",
+      "kind": "heading",
+      "start_line": 140,
+      "end_line": 140,
+      "raw": "## 검증\n",
+      "level": 2,
+      "title": "검증"
+    },
+    {
+      "id": "b000060",
+      "kind": "blank",
+      "start_line": 141,
+      "end_line": 141,
+      "raw": "\n"
+    },
+    {
+      "id": "b000061",
+      "kind": "paragraph",
+      "start_line": 142,
+      "end_line": 153,
+      "raw": "`iiActorObject.deformation_snapshot.*`는 0이 아닌 기준값과 추가 모프의 조합을 원본\n런타임 변형과 비교한다. 원본 ID와 UV 경계, 같은 이름의 여러 소스 타깃, 암시적·명시적\n법선 혼합, 음수 가중치, 반사·비균일 스케일, 여러 메시와 모프 없는 메시, 정적 메시,\n기준 자세, 실패 원자성, 법선 상쇄, 오버플로, 프로젝트·FBX 복원과 수명을 확인한다.\n4개 설치 소비자 경로에서도 공개 API와 엔진 소멸에 따른 핸들 무효화를 검사한다.\n`iiActorObject.rig_snapshot.*`는 0이 아닌 Raw/GUI 기본값, 부분 관절 구동과 기준 자세,\n다중 메시의 채널 순서 차이, 추가 평가 방지, 잘못된 결과의 원자적 거부, 예산과 수명,\n실제 OpenRigLogic DNA fixture 출력을 확인한다. 전체 성인·아동 입력 검사에서는\n163본·5메시·43,474 원본 포인트·296 런타임 채널을 유지하고 기준값과 추가 모프의\n다섯 조합을 원본 런타임과 비교한다. 현재 검증은 네이티브 파일 복원까지이며, 기존의 선택적\nBlender 검사는 사용자 지시에 따라 실행하지 않는다.\n실행 결과와 실제 앱 검증 여부는 날짜가 있는 체크포인트에 별도로 기록한다.\n"
+    },
+    {
+      "id": "b000062",
+      "kind": "blank",
+      "start_line": 154,
+      "end_line": 154,
+      "raw": "\n"
+    },
+    {
+      "id": "b000063",
+      "kind": "paragraph",
+      "start_line": 155,
+      "end_line": 157,
+      "raw": "DQ 관련 테스트는 저작 토폴로지와 렌더 전용 메시의 순수 DQ·혼합 프로필, 다중 본,\n숨은 가중·무가중 점, 기준 모프와 추가 모프, FBX·프로젝트 복원, 전단 거부와 0 혼합값을\n원본 런타임 결과와 비교한다. 선형화 스냅샷도 같은 조건과 본·모프 추가값에서 비교하고, 프로필 보존·원본 불변·잘못된 정책의 원자적 거부를 검사한다. 독립 Python GLB 판독기는 컨테이너, 본 계층과 역바인드, 스킨 가중치, 위치·모프 법선을 원본 DQ 런타임 결과와 비교한다. 얼굴 포즈 모프와 기준 자세의 얼굴 포즈도 별도로 비교한다.\n"
+    },
+    {
+      "id": "b000064",
+      "kind": "blank",
+      "start_line": 158,
+      "end_line": 158,
+      "raw": "\n"
+    },
+    {
+      "id": "b000065",
+      "kind": "paragraph",
+      "start_line": 159,
+      "end_line": 159,
+      "raw": "선택적 선형 교환 경로의 빌드·테스트와 적용 범위는 [2026-10-28 검증 기록](LinearizedSnapshotVerification-20261028.md)에 있다.\n"
+    },
+    {
+      "id": "b000066",
+      "kind": "blank",
+      "start_line": 160,
+      "end_line": 160,
+      "raw": "\n"
+    },
+    {
+      "id": "b000067",
+      "kind": "paragraph",
+      "start_line": 161,
+      "end_line": 161,
+      "raw": "여러 제어 상태의 끝점 생성과 컨트롤·맵 출처 보관은 별도의 [리그 제어 일괄 샘플](RigControlSamples.md) API가 제공한다. 이 문서의 단일 스냅샷 함수 자체의 계약은 바뀌지 않는다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "자세와 모프를 함께 굽는 교환용 스냅샷",
+      "anchor": "자세와-모프를-함께-굽는-교환용-스냅샷",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000007",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "입력과 모프 채널의 의미",
+      "anchor": "입력과-모프-채널의-의미",
+      "start_line": 13
+    },
+    {
+      "block_id": "b000021",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "범용 리그와 DNA의 연결",
+      "anchor": "범용-리그와-dna의-연결",
+      "start_line": 55
+    },
+    {
+      "block_id": "b000031",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "형상·법선·속성 보존",
+      "anchor": "형상법선속성-보존",
+      "start_line": 83
+    },
+    {
+      "block_id": "b000045",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "직렬화와 적용 범위",
+      "anchor": "직렬화와-적용-범위",
+      "start_line": 112
+    },
+    {
+      "block_id": "b000059",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검증",
+      "anchor": "검증",
+      "start_line": 140
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 6,
+        "text": "출력하는 경우를 위한 공통 3D 기능이다. NSCharacter는 이 계산과 결과 자산을 소유하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000005",
+        "line": 10,
+        "text": "반환한다. 원본 자산·리그·에디터 기록은 변경하지 않으며, 실패하면 새 자산을 등록하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 52,
+        "text": "액터를 평가하거나 리그 실행 버퍼를 변경하지 않는다. 기존 `createObject3DPoseSnapshot`은",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 59,
+        "text": "다시 평가하거나 드라이버를 복제하지 않는다. 명시적으로 평가한 결과를 사용하므로 상태가",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 66,
+        "text": "검증도 기존 규칙을 따른다. 결과 자산 이외의 영속 액터나 별도 엔진은 등록하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000035",
+        "line": 87,
+        "text": "소스에 작성된 프로필만 사용한다. `SkeletalMeshComponent`의 인스턴스별 임시 DQ 덮어쓰기는 스냅샷 입력에 포함되지 않는다. DQ에 사용되는 본 행렬의 전단이나 특이한 혼합 배율은 기존 런타임과 같이 거부하며 실패 시 새 에셋을 등록하지 않는다. 혼합값이 0인 점은 DQ 분해를 요구하지 않는다. 영향을 받지 않는 숨은 무가중치 점은 기존 규약대로 모프만 적용한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000037",
+        "line": 92,
+        "text": "기존 모프 법선을 그대로 두는 방식은 혼합 스킨·비균일 스케일에서 일치하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000039",
+        "line": 98,
+        "text": "모프 변화만 적용하고 공간 변환은 하지 않는다. 표시되는 무가중치 포인트는 기존 코어",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000051",
+        "line": 126,
+        "text": "선형화는 선택한 자세와 기준 모프를 원래의 선형·DQ·혼합 규칙으로 먼저 계산한 뒤, 새 바인드에서 스냅샷의 작성 토폴로지와 렌더 메시 프로필을 선형으로 변경한다. `bakeObject3DDeformationSnapshot`, `createObject3DPoseSnapshot`, `bakeObject3DPoseSnapshot`, `createObject3DRigSnapshot`에도 같은 명시적 정책을 전달할 수 있다. 기존 오버로드와 `Preserve`는 원본 프로필을 유지한다. 리그 오버로드는 이미 얻은 평가를 사용하며 백엔드를 다시 평가하지 않는다. 지원하지 않는 정책, DQ 전단, 유효하지 않은 기준 형상이나 예산 초과는 기존처럼 거부하며 새 에셋을 등록하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000053",
+        "line": 128,
+        "text": "원본 메시·리그·점별 DQ 혼합값은 변경하지 않는다. 선형화된 결과의 새 바인드에서 스냅샷의 추가 모프를 적용한 위치와 법선은 원본의 선택 자세·기준 모프에 같은 추가값을 적용한 결과와 일치한다. GLB 숫자는 파일의 부동소수점 표현 정밀도에 따른다. 다른 자세에서의 DQ 변형, 원본 애니메이션, 리그 드라이버와 애니메이티드 맵이 그대로 보존된다는 뜻은 아니다. 대상 형식의 다른 출력 제약도 여전히 적용된다. DNA 출력 지원이나 외부 앱 동작을 보증하는 기능은 아니다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000055",
+        "line": 131,
+        "text": "형식을 추가하지 않는다. FBX에서 서로 다른 레이아웃의 모프 법선을 모두 보존하려면",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000057",
+        "line": 137,
+        "text": "CC5·Blender·Unreal 앱 검증은 수행하지 않는다. 네이티브 수치·파일 검사 결과를 실제 앱에서",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000057",
+        "line": 138,
+        "text": "검증하였다는 의미로 사용하지 않는다. 제작용 MetaHuman 자료·기능 검증은 별도이다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000061",
+        "line": 152,
+        "text": "Blender 검사는 사용자 지시에 따라 실행하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000015",
+        "label": "기본 모프 값",
+        "target": "DefaultMorphWeights.md",
+        "kind": "relative",
+        "line": 32
+      },
+      {
+        "block_id": "b000065",
+        "label": "2026-10-28 검증 기록",
+        "target": "LinearizedSnapshotVerification-20261028.md",
+        "kind": "relative",
+        "line": 159
+      },
+      {
+        "block_id": "b000067",
+        "label": "리그 제어 일괄 샘플",
+        "target": "RigControlSamples.md",
+        "kind": "relative",
+        "line": 161
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

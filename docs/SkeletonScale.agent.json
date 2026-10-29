@@ -1,0 +1,434 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:cb558f30c8dc423782299d6e9f6f6564724e2b71b31ca5d10522721d671fefac",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/SkeletonScale.md",
+    "sha256": "cc52d18c4256a2ea99066894eb6586aa5de4a4e16ebb8c5ceb8d24c87bb7093b",
+    "bytes": 5423,
+    "line_count": 45,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "균일 기준 스케일을 사용하는 리그의 교환",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 균일 기준 스케일을 사용하는 리그의 교환\n",
+      "level": 1,
+      "title": "균일 기준 스케일을 사용하는 리그의 교환"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 목적과 소유권\n",
+      "level": 2,
+      "title": "목적과 소유권"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "`SkeletonScale`은 본체의 골격 좌표계를 가역적으로 변환한다. 균일한 기준 스케일을 가진 본을 단위 기준 스케일로 보내면서 원래 자료와 임의 포즈의 스킨 변형을 유지한다. Blender처럼 edit bone의 기준 행렬을 정규화하는 가져오기 경로에서 사용한다. NSCharacter는 변환 자료나 별도 리그 저장소를 소유하지 않는다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`normalizeSkeletonBindScale(data)`는 메시·모프·법선·가중치·본 ID·부모를 유지하고 본의 로컬 변환만 바꾼다. 반환한 `SkeletonScaleProfile`에는 본 이름과 원래 Object 공간의 균일 스케일이 있다. 변경한 자료를 호출자의 본체 엔진에 등록하여 GLB·FBX로 출력한다. 원래 편집 프로젝트도 함께 보존한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 변환과 역변환\n",
+      "level": 2,
+      "title": "변환과 역변환"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "프로파일의 본별 균일 스케일 행렬을 `C_i`로 정의한다. 본의 기준 행렬과 포즈 행렬 모두 같은 좌표계 변환을 적용한다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "fenced_code",
+      "start_line": 13,
+      "end_line": 17,
+      "raw": "```\nW_unit = W_source * inverse(C_i)\nB_unit = B_source * inverse(C_i)\nW_unit * inverse(B_unit) = W_source * inverse(B_source)\n```\n",
+      "language": "",
+      "code": "W_unit = W_source * inverse(C_i)\nB_unit = B_source * inverse(C_i)\nW_unit * inverse(B_unit) = W_source * inverse(B_source)\n",
+      "closed": true
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "따라서 각 영향 본의 스킨 행렬이 같고 그 가중합·법선 변환·모프 뒤의 변형도 같다. 부모의 스케일을 `c_parent`, 자신의 스케일을 `c_i`라고 하면 로컬 변환은 다음과 같다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "list",
+      "start_line": 21,
+      "end_line": 23,
+      "raw": "- Unit 방향의 위치는 `c_parent * position`, 스케일은 `(c_parent / c_i) * scale`이다.\n- Source 방향은 이 비율의 역수이다. 쿼터니언은 유지한다.\n- 루트의 부모 계수는 1이다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "Unit 방향의 위치는 `c_parent * position`, 스케일은 `(c_parent / c_i) * scale`이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Source 방향은 이 비율의 역수이다. 쿼터니언은 유지한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "루트의 부모 계수는 1이다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "`convertSkeletonTransforms(hierarchy, transforms, profile, direction)`는 임의 로컬 포즈를 양방향 변환한다. 이름으로 프로파일을 찾으므로 앱이 본 배열을 다시 정렬해도 사용할 수 있다. 현재 부모를 사용하므로 프로파일을 유지한 상태의 재부모화와 상세 편집에도 대응한다. 변환 대상 전체 본 이름이 프로파일에 있어야 한다. 이름 변경·추가 본에는 호출자가 명시적인 대응을 제공해야 한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "외부 앱에서 가져온 Unit 골격에는 `restoreSkeletonBindScale(data, profile)`를 적용하여 원래 좌표계로 되돌린다. 메시와 스킨 행은 그대로 유지한다. 같은 프로파일로 포즈를 변환하면 편집한 기준 골격에서도 동일한 스킨 행렬을 만든다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "heading",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "## 저장과 입력 제한\n",
+      "level": 2,
+      "title": "저장과 입력 제한"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "`exportSkeletonScaleProfile`·`importSkeletonScaleProfile`은 `.ii3dscale` 텍스트를 읽고 쓴다. 헤더 `iiActorObjectSkeletonScale 1`, 본 개수, 본별 유한한 0이 아닌 스케일과 따옴표로 이스케이프한 이름 순서이다. 수치는 classic locale과 double의 왕복 정밀도를 사용한다. 파일 경로·실행 코드·외부 의존성을 포함하지 않는다. GLB·FBX와 같은 디렉터리에 함께 보관하여 앱 재출력 후 역변환에 사용한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "기본 제한은 8 MiB·65,535개 본·이름 4,096바이트이다. 중복·빈 이름·NUL·0 스케일·비유한 값·잘못된 버전·잘린 입력·후행 자료를 거부한다. 한 본의 오류나 수치 범위 초과는 원본 골격을 변경하지 않는다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "처음 Unit 기준을 만드는 함수는 각 본의 로컬 기준 스케일이 수치 오차 범위에서 균일해야 한다. 성분별 차이는 버리지 않고 그대로 비율 변환한다. 비균일 기준 스케일을 무손실로 단위화하는 기능은 제공하지 않는다. 기존 C++ 골격은 비균일 스케일을 계속 지원하며 원래 프로젝트와 일반 내보내기 경로로 보존한다. 이미 만든 균일 프로파일을 이용한 포즈·편집 결과의 양방향 변환은 비균일 포즈 스케일도 처리한다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "heading",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "## 검증 자료와 앱 경계\n",
+      "level": 2,
+      "title": "검증 자료와 앱 경계"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "`SkeletonScaleTest`는 균일 기준 스케일·음의 균일 기준 스케일·재부모화 뒤의 비균일 편집·본 배열 재정렬에서 24개 포즈 조합을 사용한다. 위치·회전·비균일 포즈 스케일을 함께 바꾸고 본별 스킨 행렬·실제 메시 변형·역변환을 비교한다. 코덱과 실패 시 원자성도 검사한다.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "`SkeletonEditingHumanTest`는 19,158개 원본 점·163개 본·몸과 의상, 기존 가중치 마스크가 있는 실제 CC0 인체 프로젝트에 적용한다. 원본과 Unit 리그의 포즈 행렬, Unit FBX를 다시 읽고 프로파일로 복원한 원본 기준 행렬을 확인한다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 43,
+      "end_line": 43,
+      "raw": "`build/skeleton-editing-human/`의 `SourceHuman.glb`·`SourceHuman.fbx`는 원래 기준 스케일을 보존한다. `EditedHuman.glb`·`EditedHuman.fbx`는 앱용 Unit 리그이고, `EditedHuman.ii3dscale`은 역변환 프로파일이다. `EditedHuman.ii3dproject`에는 원래 기준 골격과 파라미터·레이어·이력을 저장한다. 이 파일들의 역할을 바꾸어 해석하지 않는다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 45,
+      "end_line": 45,
+      "raw": "실제 Blender 검사는 작은 해석용 골격과 인체의 GLB·FBX에서 부모 관계·원본 파일 대비 메시와 관절 위치·회전 후의 스킨 변형을 검사한다. 앱에서 수정한 골격을 재출력한 뒤 프로파일로 복원하는 전체 경로, 본 이름·좌표축 변경의 대응, CC5·Unreal과 제작용 MetaHuman 데이터는 남은 전체 목표이다. 이 단계의 결과와 해시는 [SkeletonEditingVerification-20261026.json](SkeletonEditingVerification-20261026.json)에 기록한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "균일 기준 스케일을 사용하는 리그의 교환",
+      "anchor": "균일-기준-스케일을-사용하는-리그의-교환",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "목적과 소유권",
+      "anchor": "목적과-소유권",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "변환과 역변환",
+      "anchor": "변환과-역변환",
+      "start_line": 9
+    },
+    {
+      "block_id": "b000023",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "저장과 입력 제한",
+      "anchor": "저장과-입력-제한",
+      "start_line": 29
+    },
+    {
+      "block_id": "b000031",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "검증 자료와 앱 경계",
+      "anchor": "검증-자료와-앱-경계",
+      "start_line": 37
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000005",
+        "line": 5,
+        "text": "`SkeletonScale`은 본체의 골격 좌표계를 가역적으로 변환한다. 균일한 기준 스케일을 가진 본을 단위 기준 스케일로 보내면서 원래 자료와 임의 포즈의 스킨 변형을 유지한다. Blender처럼 edit bone의 기준 행렬을 정규화하는 가져오기 경로에서 사용한다. NSCharacter는 변환 자료나 별도 리그 저장소를 소유하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 25,
+        "text": "`convertSkeletonTransforms(hierarchy, transforms, profile, direction)`는 임의 로컬 포즈를 양방향 변환한다. 이름으로 프로파일을 찾으므로 앱이 본 배열을 다시 정렬해도 사용할 수 있다. 현재 부모를 사용하므로 프로파일을 유지한 상태의 재부모화와 상세 편집에도 대응한다. 변환 대상 전체 본 이름이 프로파일에 있어야 한다. 이름 변경·추가 본에는 호출자가 명시적인 대응을 제공해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 31,
+        "text": "`exportSkeletonScaleProfile`·`importSkeletonScaleProfile`은 `.ii3dscale` 텍스트를 읽고 쓴다. 헤더 `iiActorObjectSkeletonScale 1`, 본 개수, 본별 유한한 0이 아닌 스케일과 따옴표로 이스케이프한 이름 순서이다. 수치는 classic locale과 double의 왕복 정밀도를 사용한다. 파일 경로·실행 코드·외부 의존성을 포함하지 않는다. GLB·FBX와 같은 디렉터리에 함께 보관하여 앱 재출력 후 역변환에 사용한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000027",
+        "line": 33,
+        "text": "기본 제한은 8 MiB·65,535개 본·이름 4,096바이트이다. 중복·빈 이름·NUL·0 스케일·비유한 값·잘못된 버전·잘린 입력·후행 자료를 거부한다. 한 본의 오류나 수치 범위 초과는 원본 골격을 변경하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 35,
+        "text": "처음 Unit 기준을 만드는 함수는 각 본의 로컬 기준 스케일이 수치 오차 범위에서 균일해야 한다. 성분별 차이는 버리지 않고 그대로 비율 변환한다. 비균일 기준 스케일을 무손실로 단위화하는 기능은 제공하지 않는다. 기존 C++ 골격은 비균일 스케일을 계속 지원하며 원래 프로젝트와 일반 내보내기 경로로 보존한다. 이미 만든 균일 프로파일을 이용한 포즈·편집 결과의 양방향 변환은 비균일 포즈 스케일도 처리한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000037",
+        "line": 43,
+        "text": "`build/skeleton-editing-human/`의 `SourceHuman.glb`·`SourceHuman.fbx`는 원래 기준 스케일을 보존한다. `EditedHuman.glb`·`EditedHuman.fbx`는 앱용 Unit 리그이고, `EditedHuman.ii3dscale`은 역변환 프로파일이다. `EditedHuman.ii3dproject`에는 원래 기준 골격과 파라미터·레이어·이력을 저장한다. 이 파일들의 역할을 바꾸어 해석하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000039",
+        "label": "SkeletonEditingVerification-20261026.json",
+        "target": "SkeletonEditingVerification-20261026.json",
+        "kind": "relative",
+        "line": 45
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

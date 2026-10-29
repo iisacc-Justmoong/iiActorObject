@@ -1,0 +1,776 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:95275ce4975c4b48981c8ca5bb4856ecd057d861fb5fa88154faff68d34ef201",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/SkinSurface.md",
+    "sha256": "404d4955c257e55f9428648830c37df24ec7098dea2237da75d798e2796af81b",
+    "bytes": 18780,
+    "line_count": 84,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "표면 전사와 의상 부착",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 표면 전사와 의상 부착\n",
+      "level": 1,
+      "title": "표면 전사와 의상 부착"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 본체 경계\n",
+      "level": 2,
+      "title": "본체 경계"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "표면 검색·스킨 전사·대칭·의상 연결은 `src/iiActorObject/`의 공용 기능이다. 생성 템플릿·편집 세션·계층·연결 자료는 본체 엔진이 소유한다. NSCharacter는 `CharacterEditor`를 통해 본체 API를 호출한다. `MeshSurface`는 원본 에셋과 구분되는 불변 검색 스냅샷이며 공간 인덱스와 위치·삼각형 복사본을 가진다. 캐릭터 계층에 별도 엔진이나 에셋 저장소를 만들지 않는다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`MeshSurface::closestCompatible`은 입력 방향과 면의 기하학적 winding 법선의 코사인이 기준 이상인 면 중 가장 가까운 삼각형을 찾는다. 보간된 렌더 법선이 아닌 삼각형 법선을 사용하며, 기존 `closest`처럼 거리와 `SurfaceQueryBudget`의 노드·삼각형 작업 상한을 따른다. 0이거나 비유한 방향, 범위 밖 코사인과 잘못된 거리는 거부한다. 일치하는 면이 없으면 유효하지 않은 hit를 반환한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "표면 추종은 부착 위치의 변화량을 전달한다. 별도의 [충돌 질의](SurfaceCollision.md)와 [의상 맞춤](SurfaceFitting.md)은 닫힌 장애물에서 명시적으로 양의 여유 거리를 구한다. 두 기능을 함께 사용할 때도 원본 점 ID와 기존 본체 편집 계층을 유지한다. 몸·파라미터·포즈 변경 뒤의 충돌 맞춤은 호출자가 다시 실행한다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "## 자동 바인딩과 표면 전사\n",
+      "level": 2,
+      "title": "자동 바인딩과 표면 전사"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "`SkinBinder::bind`는 작성용 토폴로지가 있는 메시에서 원본 제어점의 가중치를 수정한다. 렌더 정점만 바꾸면 다음 에셋 생성 시 원본 자료가 렌더 캐시를 덮어쓰므로 그렇게 처리하지 않는다. 사용하지 않는 제어점 ID도 유지하며, 결과 캐시를 함께 갱신한다. 실패하면 입력 자료를 바꾸지 않는다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "[표면 최단 경로 바인딩](SurfaceGeodesicSkin.md)은 자동 또는 명시적 뼈 시드에서 메시 간선을 따라 가중치를 계산한다. 가까운 다른 표면으로 직선거리가 새는 경우를 줄일 수 있으며 미도달 점과 자원 예산을 명시적으로 처리한다. 본체 편집기와 NSCharacter 참조 편집기에 undo·레이어 경로를 제공한다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "`MeshSurface::closest`는 BVH로 가까운 삼각형을 찾고 표면의 최근접점·삼각형 정점·무게중심 좌표·거리를 반환한다. 면 내부·변·꼭짓점을 처리한다. 거리 제한을 넘으면 유효하지 않은 hit를 반환한다. 같은 거리의 삼각형은 작은 원본 삼각형 ID를 우선한다. 입력은 공통 오브젝트 좌표계이며, 에셋 외부의 월드 변환은 호출자가 맞춘다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "`SkinBinder::transfer`는 이 좌표로 세 원본 정점의 스킨 행을 보간한다. 작성용 UV·법선 경계가 갈라져 있어도 같은 제어점의 결과를 사용한다. 기본 본 대응은 정확한 이름 일치이며 `sourceToTarget`으로 명시적 대응·여러 본의 병합을 지정할 수 있다. 실제 기여하는 미대응 본은 거부한다. 빈 원본 스킨 행은 기존 렌더 규약대로 루트 부착으로 해석한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "`SkinBinder::transferWithNormalTies`는 이 동작에 대상 점의 기하학적 면 방향을 근접 후보의 선택 기준으로 추가한다. 대상 점에 접한 삼각형의 winding 법선을 코너 각도로 가중하여 합산하며, 합 벡터의 길이가 각도 합의 절반 미만이거나 면이 없는 점은 불명확한 방향으로 취급한다. 가장 가까운 원본 면이 `minimumNormalCosine`에 미달할 때만 최근접 거리보다 `maximumNormalTieDistance` 이내로 더 떨어진 면 중 조건에 맞는 가장 가까운 대안을 찾는다. 대안이 없거나 대상 방향이 불명확하면 원래 최근접 면을 사용한다. UV·저장된 렌더 법선은 방향 추정에 사용하지 않는다. 거리 0 또는 코사인 -1은 방향에 따른 재검색을 끈다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "새 함수는 `SkinNormalTransferOptions`의 메시 크기 한도와 호출자가 제공한 `SurfaceQueryBudget`의 누적 BVH 작업 한도를 적용한다. `SkinNormalTransferResult`는 전사 결과와 교체 수, 방향이 불명확한 처리 대상 점의 수를 반환한다. 실패하면 대상 메시를 변경하지 않지만 소모된 질의 예산은 되돌리지 않는다. 이는 기하학적 근접 후보를 구분하는 보조 수단이며 신체 부위의 의미를 인식하지 않는다. 기존 `SkinBinder::transfer`는 이전 최근접 동작을 유지한다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "기본 `maximumInfluences=0`은 모든 보간 영향을 유지한다. 양수일 때만 큰 가중치부터 선택한 뒤 정규화한다. `maximumDistance`로 다른 신체 부위까지 잘못 연결되는 것을 제한할 수 있다. 기본은 범위 밖 점이 하나라도 있으면 실패하며, `skipUnmatched=true`를 지정하면 기존 가중치를 유지하고 반환 보고서의 `skipped`에 기록한다. `includeUnusedPoints`는 대상의 사용하지 않는 점도 처리할지 결정한다. 의상 부착의 기본값은 보이는 점만 처리하는 것이다. 완전 전사를 선택한 자동 부착은 입력 메시의 옛 스킨을 비우고 현재 골격에 바인딩한다. 사용하지 않는 점은 빈 스킨 행으로 유지하여 다른 골격의 본 ID가 남지 않게 한다. 기존 스킨을 유지하려면 `transferSkin=false`를 선택한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "`Object3DEditor::transferWeights`와 `mirrorWeights`는 하나의 편집 이력·보정 계층으로 반영한다. NSCharacter에서도 같은 함수를 제공한다. 일반 전사는 원본 스냅샷을 읽으며, 결과를 계산하는 도중 원본이 덮어써져 전사가 누적되는 방식으로 처리하지 않는다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "본체의 `Object3DEditor::transferWeightsWithNormalTies`와 NSCharacter의 동명 함수는 위 방향 보정을 편집 세션에서 사용한다. 반환값은 계산된 전사·방향 보고서이며, 본체가 소유한 에셋과 편집 이력에 결과를 기록한다. 일반 세션에서는 실행 취소·재실행이 가능하고 템플릿 세션에서는 하나의 가중치·프로필 보정 계층으로 남는다. 전사된 가중치 행과 스키닝 프로필이 순서와 수치까지 기존 상태와 같거나 모든 점을 건너뛰면 새 에셋·이력·revision을 만들지 않는다. 보고서의 `transferred`는 실제 변경 수가 아니라 처리된 점의 수다. 예산 초과 등의 실패는 에셋·이력·redo 상태를 보존하지만 이미 소모한 질의 예산은 유지한다. 프로젝트에는 계산된 가중치와 프로필을 저장하며 전사 원본이나 알고리즘을 재실행하지 않는다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "fenced_code",
+      "start_line": 31,
+      "end_line": 38,
+      "raw": "```cpp\niiActorObject::SkinNormalTransferOptions normals;\nnormals.minimumNormalCosine = 0.5;\nnormals.maximumNormalTieDistance = 1e-5;\niiActorObject::SurfaceQueryBudget budget;\nauto result = editor.transferWeightsWithNormalTies(mesh, source, sourceMesh,\n    transferOptions, iiActorObject::SkinningProfileTransfer::Source, normals, budget);\n```\n",
+      "language": "cpp",
+      "code": "iiActorObject::SkinNormalTransferOptions normals;\nnormals.minimumNormalCosine = 0.5;\nnormals.maximumNormalTieDistance = 1e-5;\niiActorObject::SurfaceQueryBudget budget;\nauto result = editor.transferWeightsWithNormalTies(mesh, source, sourceMesh,\n    transferOptions, iiActorObject::SkinningProfileTransfer::Source, normals, budget);\n",
+      "closed": true
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "2026-10-29 macOS에서 방향을 고려한 편집의 실행 취소·재실행, 레이어 강도·활성화, 동일 결과의 이력 생략, 실패 후 redo 보존과 엔진 소멸 시 캐릭터 참조 만료를 검사했다. NSCharacter 포함 구성의 관련 회귀 96건과 코어 단독 구성의 94건이 통과했다. 편집 결과를 선형 GLB와 선형·혼합 FBX로 내보내 본체 재입력과 독립 판독을 각각 두 구성에서 확인했다. 메모리·정의되지 않은 동작 검사 6건이 통과했으며 누수 검사는 비활성화했다. `build/` 안의 별도 SDK 소비자에서 양쪽 편집 API를 연결했다. 독립 판독은 본 이름, 점별 가중치와 FBX 혼합값을 확인하며 외부 앱의 가져오기나 시각 품질을 입증하지 않는다. GLB는 혼합·DQ 프로필을 지원하지 않으므로 이 시험에서는 대상의 선형 프로필을 유지했다.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "기존 `SkinBinder::transfer`·`mirror`와 편집기 호출은 대상의 스키닝 프로필을 그대로 유지한다. 추가 오버로드의 마지막 인자로 `SkinningProfileTransfer::Source`를 전달하면 본 가중치와 같은 hit를 사용하여 선형·DQ·혼합 설정도 전사한다. `SourceIfNonlinear`는 DQ·혼합 원본에만 적용하고, `PreserveTarget`은 기존 동작이다. 숨은 점이나 거리 조건으로 전사하지 않은 점은 대상의 기존 혼합값을 유지한다. 대칭 전사에서 평면을 가로지르는 삼각형에 새로 계산한 교차점의 혼합값도 원래 변에서 보간한다. 편집기에서는 결과 프로필을 이산 메시 속성으로 이력과 레이어에 보관한다. 레이어가 활성이고 강도가 0이 아니면 점 마스크나 강도에 따라 프로필을 부분 보간하지 않고 메시 전체에 적용한다. 기존 옵션 구조체와 호출 기호를 유지한다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 43,
+      "end_line": 43,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "`transferMeshBindingWeights`의 새 오버로드도 같은 정책을 받는다. 저장된 삼각형 또는 작성용 점 연결의 양수 계수와 실제로 기여하는 원본 스킨 행을 사용해 혼합값을 계산한다. 영향 수 상한으로 본을 절단하기 전의 기여를 사용한다. 연결되지 않은 점과 원본 가중치가 없어 fallback만 사용한 점은 대상 프로필을 유지한다. 부분 전사에서 방식이 섞이면 전체 점별 혼합 프로필로 표현한다. 기존 오버로드는 대상 프로필을 유지한다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 45,
+      "end_line": 45,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "heading",
+      "start_line": 46,
+      "end_line": 46,
+      "raw": "## 대칭 가중치\n",
+      "level": 2,
+      "title": "대칭 가중치"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 47,
+      "end_line": 47,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 48,
+      "end_line": 48,
+      "raw": "`SkinBinder::mirror`는 평면 반사 위치에서 반대편 표면을 샘플링하고 본 대응을 교환한다. `boneMirrors`는 각 본을 다시 반사하면 원래 본으로 돌아오는 대응이어야 한다. 중앙 본은 자신에게 대응한다. 본 이름을 추측하여 좌우를 바꾸지 않는다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 49,
+      "end_line": 49,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 50,
+      "end_line": 50,
+      "raw": "`planeNormal`은 정규화하며 `planeOffset`은 정규화된 법선 방향의 거리이다. `negativeToPositive`로 방향을 선택한다. 중앙 허용 거리 안의 점과 원본 쪽 점은 유지한다. 반대편 표면이 없는 경우 자기 쪽 표면을 잘못 복사하지 않는다. 거리·영향 수·사용하지 않는 점의 처리 규약은 일반 전사와 같다.\n"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "heading",
+      "start_line": 52,
+      "end_line": 52,
+      "raw": "## 의상과 부속 메시의 추종\n",
+      "level": 2,
+      "title": "의상과 부속 메시의 추종"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 53,
+      "end_line": 53,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "paragraph",
+      "start_line": 54,
+      "end_line": 54,
+      "raw": "`bindMeshSurface`는 대상의 각 점을 원본 삼각형에 연결하고, 무게중심 위치에서의 접선·종법선·법선 좌표계에 오프셋을 저장한다. `SurfaceBinding`은 원본 렌더 정점 수·대상 원본 점 수·삼각형 ID와 정점 ID를 함께 보존한다. 원본 연결이 바뀌면 거부한다. 대상 하나에는 하나의 입력 연결을 허용하며, 여러 연결은 DAG이어야 한다. 몸→셔츠→외투 같은 체인도 위상 순서대로 계산한다.\n"
+    },
+    {
+      "id": "b000048",
+      "kind": "blank",
+      "start_line": 55,
+      "end_line": 55,
+      "raw": "\n"
+    },
+    {
+      "id": "b000049",
+      "kind": "paragraph",
+      "start_line": 56,
+      "end_line": 56,
+      "raw": "작성된 `ControlPoints` 연결은 `offsetScales`로 원본 점 쌍의 축별 길이에 따라 오프셋을 조정한다. `Object3DTemplateDefinition::surfaceOffsetBases`는 표면 연결 순서에 맞춘 선택적 `SurfaceBindingBasis`를 보유한다. 빈 벡터는 모든 연결에 오브젝트 축을 적용하며, 비어 있지 않으면 연결마다 한 항목이 있어야 한다. 각 기저는 작성 축을 현재 오브젝트 공간으로 옮기는 세 열 벡터이다. 점 쌍의 길이는 역기저로 원본 축에 투영하고, 조절된 오프셋은 정방향 기저로 되돌린다. 비유한·특이 또는 조건이 나쁜 기저와 삼각형 프레임 연결에 지정된 기저는 거부한다. `bindMeshControlPointsWithBasis`, `evaluateMeshSurfaceBindingWithBasis`, `fitMeshSurfaceBindingWithBasis`, `transferMeshBindingWeightsWithBasis` 및 여러 연결을 다루는 `WithBases` 함수는 이 기저를 명시적으로 받는다. 기존 `SurfaceBinding`의 크기와 기존 함수는 유지한다. [템플릿 적응](TemplateAdapt.md)은 회전과 스케일을 기저에 합성하며, 템플릿과 편집 이력의 기저는 프로젝트 버전 25에 보존한다.\n"
+    },
+    {
+      "id": "b000050",
+      "kind": "blank",
+      "start_line": 57,
+      "end_line": 57,
+      "raw": "\n"
+    },
+    {
+      "id": "b000051",
+      "kind": "paragraph",
+      "start_line": 58,
+      "end_line": 58,
+      "raw": "확장 오버로드의 `SurfaceBindingLimits::additionalPoints`는 보이지 않는 대상 원본 점을 명시적으로 포함한다. 같은 구조의 `maximumVertices`, `maximumTriangles`, `maximumPoints`, `maximumNodeVisits`, `maximumTriangleTests`는 단일 바인딩의 크기와 표면 질의량을 제한한다. 기존 `SurfaceBindingOptions`와 기존 오버로드는 유지하며, 기존 오버로드는 종전처럼 별도의 작업량 한도를 적용하지 않는다.\n"
+    },
+    {
+      "id": "b000052",
+      "kind": "blank",
+      "start_line": 59,
+      "end_line": 59,
+      "raw": "\n"
+    },
+    {
+      "id": "b000053",
+      "kind": "paragraph",
+      "start_line": 60,
+      "end_line": 60,
+      "raw": "`applyMeshSurfaceBindings`는 기준 상태와 현재 원본 표면의 차이만 대상 위치에 더한다. 따라서 대상 자체의 생성 타깃·수동 조형을 덮어쓰지 않는다. 오프셋은 표면 좌표계와 함께 회전하고, 거리는 오브젝트 단위로 유지한다. 원본 삼각형이 퇴화하면 실패한다. 연결 그래프·점·무게중심 좌표·수치의 유효성을 검사하고, 실패 시 입력을 바꾸지 않는다.\n"
+    },
+    {
+      "id": "b000054",
+      "kind": "blank",
+      "start_line": 61,
+      "end_line": 61,
+      "raw": "\n"
+    },
+    {
+      "id": "b000055",
+      "kind": "paragraph",
+      "start_line": 62,
+      "end_line": 62,
+      "raw": "생성 템플릿은 `Object3DTemplateDefinition::surfaces`를 보유한다. 생성 파라미터에 따른 변형 뒤에 표면 추종을 적용한다. 편집 계층은 모든 위치 보정 뒤에 원본 표면의 추가 변화량을 적용하므로, 몸 조형과 의상 조형이 함께 유지된다. 관절 앵커와 렌더 법선은 변경한 결과에서 갱신한다. 스킨 가중치는 개별 의상의 편집 자료이며 몸의 가중치를 수정했다고 자동으로 덮어쓰지 않는다. 필요할 때 명시적으로 다시 전사한다.\n"
+    },
+    {
+      "id": "b000056",
+      "kind": "blank",
+      "start_line": 63,
+      "end_line": 63,
+      "raw": "\n"
+    },
+    {
+      "id": "b000057",
+      "kind": "heading",
+      "start_line": 64,
+      "end_line": 64,
+      "raw": "## 편집 중 부착\n",
+      "level": 2,
+      "title": "편집 중 부착"
+    },
+    {
+      "id": "b000058",
+      "kind": "blank",
+      "start_line": 65,
+      "end_line": 65,
+      "raw": "\n"
+    },
+    {
+      "id": "b000059",
+      "kind": "paragraph",
+      "start_line": 66,
+      "end_line": 66,
+      "raw": "`Object3DEditor::attachSurface`는 현재 모양에 맞춘 메시를 받아 스킨과 표면 연결을 생성하고 새로운 본체 템플릿을 만든다. 이미 적용한 파라미터·몸 조형을 중립 상태로 환산하여 등록하므로, 다음 파라미터 변경 때 이전 몸 조형이 중복 적용되지 않는다. 기존 계층과 편집 이력을 유지하며, 부착 이전의 메시 수·템플릿으로 undo하고 다시 redo할 수 있다. 일반 스냅샷 편집기에도 생성 타깃이 없는 본체 템플릿을 만들어 같은 경로를 사용한다.\n"
+    },
+    {
+      "id": "b000060",
+      "kind": "blank",
+      "start_line": 67,
+      "end_line": 67,
+      "raw": "\n"
+    },
+    {
+      "id": "b000061",
+      "kind": "paragraph",
+      "start_line": 68,
+      "end_line": 68,
+      "raw": "반환값은 추가한 메시 ID와 스킨 전사 보고서이다. `templateProgram()`은 현재 본체 템플릿의 참조를 반환한다. 새 메시의 머티리얼 ID는 중립 템플릿과 현재 결과에 존재하는 슬롯을 사용해야 한다. 메시 자체의 재질·UV·조형·모프는 별도의 편집 자료로 유지한다. 이 API는 물리적인 천 시뮬레이션·충돌 제거·재단·최종 의상 품질을 판정하는 기능이 아니다.\n"
+    },
+    {
+      "id": "b000062",
+      "kind": "blank",
+      "start_line": 69,
+      "end_line": 69,
+      "raw": "\n"
+    },
+    {
+      "id": "b000063",
+      "kind": "paragraph",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "`Object3DEditor::replaceTemplateSurfaces`는 같은 엔진의 대체 템플릿에서 기존 표면 슬롯을 교체하고, 선택한 원본 메시의 가림 상태를 바꾼다. 메시 수·본 ID·유지 대상의 작성용 연결과 남은 면의 삼각형 구성이 같아야 한다. 교체 대상은 단일 전용 재질과 대응하는 전용 이미지 슬롯을 사용해야 하며, 편집·선택·다른 추종/맞춤에 사용 중이면 거부한다. 접지 메시의 표시 점이 바뀌면 기존 접지에 사용한 원본 점 집합을 템플릿에 명시하여 체형 조절 시에도 위치 기준을 보존한다. 기존 몸의 편집은 유지하고 새 표면의 기준 위치를 원본에 맞춘 다음 현재 편집 결과의 스킨 가중치·스키닝 프로필을 전사한다. 이력은 하나의 단계로 게시한다. 인체 카탈로그별 검사는 [인체 부속 선택](HumanAccessories.md)을 따른다.\n"
+    },
+    {
+      "id": "b000064",
+      "kind": "blank",
+      "start_line": 71,
+      "end_line": 71,
+      "raw": "\n"
+    },
+    {
+      "id": "b000065",
+      "kind": "paragraph",
+      "start_line": 72,
+      "end_line": 72,
+      "raw": "`Object3DEditor::removeTemplateSurfaces`는 추종 표면을 제거하고 뒤에 남은 메시의 편집 계층·마스크·선택과 템플릿 참조를 원래 순서로 다시 연결한다. 제거 표면이 타깃·관절·접지·남은 추종 표면·자동 맞춤에 필요하면 거부한다. 선택한 표시 메시에서 삼각형 프레임 추종의 원래 폴리곤과 코너가 남아 있으면 새 렌더 인덱스로 다시 연결하고, 기준 삼각형 자체가 가려지면 거부한다. 이 규칙은 위의 표면 교체에도 적용한다. 제거할 표면의 직접 편집·마스크·선택을 현재 상태에서 버리는 것은 `TemplateSurfaceRemovalOptions::discardRemovedEdits`를 명시할 때만 가능하다. 이전 이력에는 남는다. 재질·이미지는 제거하지 않으며 해당 참조의 정리는 별도 작업이다.\n"
+    },
+    {
+      "id": "b000066",
+      "kind": "blank",
+      "start_line": 73,
+      "end_line": 73,
+      "raw": "\n"
+    },
+    {
+      "id": "b000067",
+      "kind": "paragraph",
+      "start_line": 74,
+      "end_line": 74,
+      "raw": "`Object3DEditor::addTemplateSurfaces`는 같은 엔진의 대체 템플릿에서 새 추종 표면을 삽입한다. 새 슬롯 번호는 대체 템플릿 기준이며 표시 변경 슬롯은 기존 템플릿 기준이다. 기존 메시 순서와 점 ID를 유지하고 편집 계층·마스크·선택·타깃·관절·표면·맞춤의 메시 번호를 다시 연결한다. 새 표면의 원본 의존 관계는 순서대로 맞추고 현재 원본의 스킨을 전사한다. 중립 원본 위치가 다르거나 추가 표면이 기존 타깃·앵커·접지 기반으로 쓰이면 실패한다. 여러 재질과 공유 이미지의 참조를 보존하며 이력의 재질·이미지 배열을 같은 슬롯으로 맞춘다. 원본 명칭이 이미 다른 자원에 쓰이면 새 이름을 생성하고, 이력 길이 차이로 불필요한 슬롯 채움 자원이 남을 수 있다.\n"
+    },
+    {
+      "id": "b000068",
+      "kind": "blank",
+      "start_line": 75,
+      "end_line": 75,
+      "raw": "\n"
+    },
+    {
+      "id": "b000069",
+      "kind": "heading",
+      "start_line": 76,
+      "end_line": 76,
+      "raw": "## 저장과 외부 교환\n",
+      "level": 2,
+      "title": "저장과 외부 교환"
+    },
+    {
+      "id": "b000070",
+      "kind": "blank",
+      "start_line": 77,
+      "end_line": 77,
+      "raw": "\n"
+    },
+    {
+      "id": "b000071",
+      "kind": "paragraph",
+      "start_line": 78,
+      "end_line": 78,
+      "raw": "`.ii3dproject` 버전 2는 표면 연결을 템플릿 정의에 저장한다. 버전 1의 연결 없는 프로젝트도 읽고 다시 편집할 수 있다. 결과의 메시·스킨은 FBX·GLB로 내보내며 외부 앱에서 표면 연결 그래프가 그대로 복원된다고 간주하지 않는다. SDK의 생성·편집을 이어갈 때는 자체 프로젝트를 사용한다. 추가 의상 메시를 원래 DNA 문서의 원본 메시로 간주하지 않으며 기존 DNA 직렬화의 원본 식별 규약을 따른다.\n"
+    },
+    {
+      "id": "b000072",
+      "kind": "heading",
+      "start_line": 79,
+      "end_line": 79,
+      "raw": "# 외부 절대 위치의 역산\n",
+      "level": 1,
+      "title": "외부 절대 위치의 역산"
+    },
+    {
+      "id": "b000073",
+      "kind": "blank",
+      "start_line": 80,
+      "end_line": 80,
+      "raw": "\n"
+    },
+    {
+      "id": "b000074",
+      "kind": "paragraph",
+      "start_line": 81,
+      "end_line": 81,
+      "raw": "`unapplyMeshSurfaceBindings`는 최종 위치에서 표면 추종 변위를 빼는 본체 함수이다. 모든 source 프레임은 입력의 최종 자료에서 읽고, 대상에는 복사본을 수정하여 성공할 때만 반영한다. 따라서 몸→셔츠→코트 같은 DAG에도 순서에 따른 중복 보정 없이 적용한 결과를 역산할 수 있다. 외부 앱의 절대 편집 결과를 레이어로 흡수하는 [외부 편집](ExternalEdits.md) 경로에서 사용한다.\n"
+    },
+    {
+      "id": "b000075",
+      "kind": "blank",
+      "start_line": 82,
+      "end_line": 83,
+      "raw": "\n\n"
+    },
+    {
+      "id": "b000076",
+      "kind": "paragraph",
+      "start_line": 84,
+      "end_line": 84,
+      "raw": "[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "표면 전사와 의상 부착",
+      "anchor": "표면-전사와-의상-부착",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "본체 경계",
+      "anchor": "본체-경계",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "자동 바인딩과 표면 전사",
+      "anchor": "자동-바인딩과-표면-전사",
+      "start_line": 11
+    },
+    {
+      "block_id": "b000039",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "대칭 가중치",
+      "anchor": "대칭-가중치",
+      "start_line": 46
+    },
+    {
+      "block_id": "b000045",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "의상과 부속 메시의 추종",
+      "anchor": "의상과-부속-메시의-추종",
+      "start_line": 52
+    },
+    {
+      "block_id": "b000057",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "편집 중 부착",
+      "anchor": "편집-중-부착",
+      "start_line": 64
+    },
+    {
+      "block_id": "b000069",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "저장과 외부 교환",
+      "anchor": "저장과-외부-교환",
+      "start_line": 76
+    },
+    {
+      "block_id": "b000072",
+      "parent_id": null,
+      "level": 1,
+      "title": "외부 절대 위치의 역산",
+      "anchor": "외부-절대-위치의-역산",
+      "start_line": 79
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000013",
+        "line": 13,
+        "text": "`SkinBinder::bind`는 작성용 토폴로지가 있는 메시에서 원본 제어점의 가중치를 수정한다. 렌더 정점만 바꾸면 다음 에셋 생성 시 원본 자료가 렌더 캐시를 덮어쓰므로 그렇게 처리하지 않는다. 사용하지 않는 제어점 ID도 유지하며, 결과 캐시를 함께 갱신한다. 실패하면 입력 자료를 바꾸지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000021",
+        "line": 21,
+        "text": "`SkinBinder::transferWithNormalTies`는 이 동작에 대상 점의 기하학적 면 방향을 근접 후보의 선택 기준으로 추가한다. 대상 점에 접한 삼각형의 winding 법선을 코너 각도로 가중하여 합산하며, 합 벡터의 길이가 각도 합의 절반 미만이거나 면이 없는 점은 불명확한 방향으로 취급한다. 가장 가까운 원본 면이 `minimumNormalCosine`에 미달할 때만 최근접 거리보다 `maximumNormalTieDistance` 이내로 더 떨어진 면 중 조건에 맞는 가장 가까운 대안을 찾는다. 대안이 없거나 대상 방향이 불명확하면 원래 최근접 면을 사용한다. UV·저장된 렌더 법선은 방향 추정에 사용하지 않는다. 거리 0 또는 코사인 -1은 방향에 따른 재검색을 끈다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 23,
+        "text": "새 함수는 `SkinNormalTransferOptions`의 메시 크기 한도와 호출자가 제공한 `SurfaceQueryBudget`의 누적 BVH 작업 한도를 적용한다. `SkinNormalTransferResult`는 전사 결과와 교체 수, 방향이 불명확한 처리 대상 점의 수를 반환한다. 실패하면 대상 메시를 변경하지 않지만 소모된 질의 예산은 되돌리지 않는다. 이는 기하학적 근접 후보를 구분하는 보조 수단이며 신체 부위의 의미를 인식하지 않는다. 기존 `SkinBinder::transfer`는 이전 최근접 동작을 유지한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000027",
+        "line": 27,
+        "text": "`Object3DEditor::transferWeights`와 `mirrorWeights`는 하나의 편집 이력·보정 계층으로 반영한다. NSCharacter에서도 같은 함수를 제공한다. 일반 전사는 원본 스냅샷을 읽으며, 결과를 계산하는 도중 원본이 덮어써져 전사가 누적되는 방식으로 처리하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 29,
+        "text": "본체의 `Object3DEditor::transferWeightsWithNormalTies`와 NSCharacter의 동명 함수는 위 방향 보정을 편집 세션에서 사용한다. 반환값은 계산된 전사·방향 보고서이며, 본체가 소유한 에셋과 편집 이력에 결과를 기록한다. 일반 세션에서는 실행 취소·재실행이 가능하고 템플릿 세션에서는 하나의 가중치·프로필 보정 계층으로 남는다. 전사된 가중치 행과 스키닝 프로필이 순서와 수치까지 기존 상태와 같거나 모든 점을 건너뛰면 새 에셋·이력·revision을 만들지 않는다. 보고서의 `transferred`는 실제 변경 수가 아니라 처리된 점의 수다. 예산 초과 등의 실패는 에셋·이력·redo 상태를 보존하지만 이미 소모한 질의 예산은 유지한다. 프로젝트에는 계산된 가중치와 프로필을 저장하며 전사 원본이나 알고리즘을 재실행하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000033",
+        "line": 40,
+        "text": "2026-10-29 macOS에서 방향을 고려한 편집의 실행 취소·재실행, 레이어 강도·활성화, 동일 결과의 이력 생략, 실패 후 redo 보존과 엔진 소멸 시 캐릭터 참조 만료를 검사했다. NSCharacter 포함 구성의 관련 회귀 96건과 코어 단독 구성의 94건이 통과했다. 편집 결과를 선형 GLB와 선형·혼합 FBX로 내보내 본체 재입력과 독립 판독을 각각 두 구성에서 확인했다. 메모리·정의되지 않은 동작 검사 6건이 통과했으며 누수 검사는 비활성화했다. `build/` 안의 별도 SDK 소비자에서 양쪽 편집 API를 연결했다. 독립 판독은 본 이름, 점별 가중치와 FBX 혼합값을 확인하며 외부 앱의 가져오기나 시각 품질을 입증하지 않는다. GLB는 혼합·DQ 프로필을 지원하지 않으므로 이 시험에서는 대상의 선형 프로필을 유지했다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000043",
+        "line": 50,
+        "text": "`planeNormal`은 정규화하며 `planeOffset`은 정규화된 법선 방향의 거리이다. `negativeToPositive`로 방향을 선택한다. 중앙 허용 거리 안의 점과 원본 쪽 점은 유지한다. 반대편 표면이 없는 경우 자기 쪽 표면을 잘못 복사하지 않는다. 거리·영향 수·사용하지 않는 점의 처리 규약은 일반 전사와 같다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000051",
+        "line": 58,
+        "text": "확장 오버로드의 `SurfaceBindingLimits::additionalPoints`는 보이지 않는 대상 원본 점을 명시적으로 포함한다. 같은 구조의 `maximumVertices`, `maximumTriangles`, `maximumPoints`, `maximumNodeVisits`, `maximumTriangleTests`는 단일 바인딩의 크기와 표면 질의량을 제한한다. 기존 `SurfaceBindingOptions`와 기존 오버로드는 유지하며, 기존 오버로드는 종전처럼 별도의 작업량 한도를 적용하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000061",
+        "line": 68,
+        "text": "반환값은 추가한 메시 ID와 스킨 전사 보고서이다. `templateProgram()`은 현재 본체 템플릿의 참조를 반환한다. 새 메시의 머티리얼 ID는 중립 템플릿과 현재 결과에 존재하는 슬롯을 사용해야 한다. 메시 자체의 재질·UV·조형·모프는 별도의 편집 자료로 유지한다. 이 API는 물리적인 천 시뮬레이션·충돌 제거·재단·최종 의상 품질을 판정하는 기능이 아니다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000071",
+        "line": 78,
+        "text": "`.ii3dproject` 버전 2는 표면 연결을 템플릿 정의에 저장한다. 버전 1의 연결 없는 프로젝트도 읽고 다시 편집할 수 있다. 결과의 메시·스킨은 FBX·GLB로 내보내며 외부 앱에서 표면 연결 그래프가 그대로 복원된다고 간주하지 않는다. SDK의 생성·편집을 이어갈 때는 자체 프로젝트를 사용한다. 추가 의상 메시를 원래 DNA 문서의 원본 메시로 간주하지 않으며 기존 DNA 직렬화의 원본 식별 규약을 따른다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000009",
+        "label": "충돌 질의",
+        "target": "SurfaceCollision.md",
+        "kind": "relative",
+        "line": 9
+      },
+      {
+        "block_id": "b000009",
+        "label": "의상 맞춤",
+        "target": "SurfaceFitting.md",
+        "kind": "relative",
+        "line": 9
+      },
+      {
+        "block_id": "b000015",
+        "label": "표면 최단 경로 바인딩",
+        "target": "SurfaceGeodesicSkin.md",
+        "kind": "relative",
+        "line": 15
+      },
+      {
+        "block_id": "b000049",
+        "label": "템플릿 적응",
+        "target": "TemplateAdapt.md",
+        "kind": "relative",
+        "line": 56
+      },
+      {
+        "block_id": "b000063",
+        "label": "인체 부속 선택",
+        "target": "HumanAccessories.md",
+        "kind": "relative",
+        "line": 70
+      },
+      {
+        "block_id": "b000074",
+        "label": "외부 편집",
+        "target": "ExternalEdits.md",
+        "kind": "relative",
+        "line": 81
+      },
+      {
+        "block_id": "b000076",
+        "label": "얼굴 부속·이미지 연결",
+        "target": "FaceAssets.md",
+        "kind": "relative",
+        "line": 84
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

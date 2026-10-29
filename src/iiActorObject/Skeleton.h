@@ -22,7 +22,7 @@ struct Bone
     Transform bindTransform;
 };
 
-// Immutable, parent-before-child skeleton; shared by assets and instances.
+// Immutable stable-ID skeleton. Evaluation order is separate from source IDs.
 class IIACTOROBJECT_EXPORT Skeleton
 {
   public:
@@ -32,6 +32,7 @@ class IIACTOROBJECT_EXPORT Skeleton
     [[nodiscard]] std::span<const Bone> bones() const noexcept;
     [[nodiscard]] BoneIndex findBone(std::string_view name) const;
     [[nodiscard]] std::span<const Matrix4> inverseBindMatrices() const noexcept;
+    [[nodiscard]] std::span<const BoneIndex> evaluationOrder() const noexcept;
 
   private:
     struct NameHash
@@ -45,6 +46,7 @@ class IIACTOROBJECT_EXPORT Skeleton
     std::vector<Bone> bones_;
     std::unordered_map<std::string, BoneIndex, NameHash, std::equal_to<>> names_;
     std::vector<Matrix4> inverseBind_;
+    std::vector<BoneIndex> order_;
 };
 
 // One host thread owns mutations; queries lazily refresh dirty descendants.
@@ -57,6 +59,11 @@ class IIACTOROBJECT_EXPORT Pose
     [[nodiscard]] const std::shared_ptr<const Skeleton> &skeleton() const noexcept;
     [[nodiscard]] std::span<const Transform> locals() const noexcept;
     bool setLocal(BoneIndex bone, Transform value);
+    // Instance-only bind frames in skeleton order. Locals remain in the original
+    // skeleton's coordinate system; an empty returned span means the original bind.
+    [[nodiscard]] std::span<const Transform> deformationBindTransforms() const noexcept;
+    bool setDeformationBind(std::span<const Transform> bindLocals);
+    bool clearDeformationBind();
     void reset();
     void copyFrom(const Pose &source);
     [[nodiscard]] std::uint64_t revision() const noexcept;
@@ -70,6 +77,8 @@ class IIACTOROBJECT_EXPORT Pose
   private:
     std::shared_ptr<const Skeleton> skeleton_;
     std::vector<Transform> locals_;
+    std::vector<Transform> deformationBind_;
+    std::vector<Matrix4> bindCorrection_,deformationInverseBind_;
     mutable std::vector<Matrix4> world_, skin_, normals_;
     mutable std::vector<unsigned char> dirty_;
     mutable std::vector<unsigned char> changed_;

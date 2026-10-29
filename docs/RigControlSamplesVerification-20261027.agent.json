@@ -1,0 +1,286 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:29ec6d9087049490b845c11b96fe3b7ed9ad8e90a62c982f3ff42727f977cdda",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/RigControlSamplesVerification-20261027.md",
+    "sha256": "020192f1a1765b93994557f2c2e591db3d6160eb3dd60ea003902040efb5a9f8",
+    "bytes": 3986,
+    "line_count": 25,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "리그 제어 샘플과 실행 정책 검증 기록 — 2026-10-27",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 리그 제어 샘플과 실행 정책 검증 기록 — 2026-10-27\n",
+      "level": 1,
+      "title": "리그 제어 샘플과 실행 정책 검증 기록 — 2026-10-27"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 구현 범위\n",
+      "level": 2,
+      "title": "구현 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "본체 `Object3DEngine`이 소유한 일반 리그 또는 DNA 리그에서 기준 제어 상태와 여러 끝점을 독립적으로 평가하여, 관절·블렌드셰이프가 함께 반영된 새 모프와 출처를 본체 자산으로 만든다. 원본 리그는 평가하거나 수정하지 않는다. NSCharacter는 새 본체 자산의 참조만 가진다. 출처는 입력 제어, 원본 본의 로컬 자세, 블렌드셰이프와 애니메이티드 맵을 기록하며 실행 가능한 리그나 셰이더 연결은 아니다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "네이티브 프로젝트 v14, FBX의 SDK 메타데이터, GLB의 extras와 JSON 출처를 제공한다. FBX 중복 메타데이터·중복 필드·CRC 오류, 지나치게 큰 이름 목록, 잘못된 제어와 예산 초과는 거부한다. 여러 같은 이름의 원본 모프와 사용하지 않는 포인트·법선 레이아웃의 보존을 검사한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 테스트와 실행 정책\n",
+      "level": 2,
+      "title": "테스트와 실행 정책"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "list",
+      "start_line": 11,
+      "end_line": 15,
+      "raw": "- 현재 사용자 지시: 별도 애플리케이션·명령행 실행 검증은 명시적 요청이 없으면 하지 않는다. 자동 단위·통합 테스트는 계속한다. 기본 CMake 옵션 `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION`은 OFF이다.\n- 지시 변경 전 동일 C++ 구현에 대한 전체 네이티브 회귀는 공유 105개, NSCharacter 없는 코어 306개, DNA 없는 코어 281개가 통과하였다. 당시의 명령행 실행 검사 5개는 이 숫자에서 제외하였다. 원본 XML과 당시 소스 지문은 `build/rig-sampling/pre-no-execution-validation/Results.json`에 보관한다.\n- 지시 변경 후 앱 실행을 제외한 공유 자동 테스트 13개와 ASan·UBSan 자동 테스트 8개가 통과하였다. UBSan 진단은 즉시 실패하도록 설정하였다. 공유·코어 전용·DNA 제외·안전성 구성의 실행 정책 및 리소스 링크·정리 검사는 각 1개씩 통과하였다.\n- 이전 지침 당시 설치된 명령행 도구와 이동한 복사본이 실행된 기록은 별도 보존하였다. 새 리소스 링크·정리 절차를 추가한 뒤에는 그 도구를 실행하지 않았다. CC5·Blender·Unreal도 실행하지 않았다.\n- 기존 실행 실험의 임시 디렉터리 11개를 정리했다. 기록과 본체 소스, 고정 리소스와 다른 작업의 자료는 보존했다. 정상·예외 종료 시 리소스 링크와 임시 디렉터리의 정리는 앱을 실행하지 않는 자동 테스트로 확인했다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "현재 사용자 지시: 별도 애플리케이션·명령행 실행 검증은 명시적 요청이 없으면 하지 않는다. 자동 단위·통합 테스트는 계속한다. 기본 CMake 옵션 `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION`은 OFF이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "지시 변경 전 동일 C++ 구현에 대한 전체 네이티브 회귀는 공유 105개, NSCharacter 없는 코어 306개, DNA 없는 코어 281개가 통과하였다. 당시의 명령행 실행 검사 5개는 이 숫자에서 제외하였다. 원본 XML과 당시 소스 지문은 `build/rig-sampling/pre-no-execution-validation/Results.json`에 보관한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "지시 변경 후 앱 실행을 제외한 공유 자동 테스트 13개와 ASan·UBSan 자동 테스트 8개가 통과하였다. UBSan 진단은 즉시 실패하도록 설정하였다. 공유·코어 전용·DNA 제외·안전성 구성의 실행 정책 및 리소스 링크·정리 검사는 각 1개씩 통과하였다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "이전 지침 당시 설치된 명령행 도구와 이동한 복사본이 실행된 기록은 별도 보존하였다. 새 리소스 링크·정리 절차를 추가한 뒤에는 그 도구를 실행하지 않았다. CC5·Blender·Unreal도 실행하지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "기존 실행 실험의 임시 디렉터리 11개를 정리했다. 기록과 본체 소스, 고정 리소스와 다른 작업의 자료는 보존했다. 정상·예외 종료 시 리소스 링크와 임시 디렉터리의 정리는 앱을 실행하지 않는 자동 테스트로 확인했다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "heading",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "## 리소스와 대형 자료\n",
+      "level": 2,
+      "title": "리소스와 대형 자료"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "`resources/MakeHuman*`의 기존 해시 목록에 있는 848개 파일이 일치했다. 원본 `data/`는 보존하고 CMake 입력과 설치는 `resources/`를 사용한다. 합성 DNA 입력은 `resources/fixtures/dna/independent.dna`이며 SHA-256은 `48318a9de7b3ca1020deb44d28cced561adc9e7e1e63d3c4f7dd487553d3046b`이다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "성인·아동 리소스 각각 163본·5메시·43,474 원본 포인트의 샘플 끝점이 원본 리그 계산과 일치했다. 별도의 CC0 템플릿 시험은 성인·아동의 59개 얼굴 제어에 대해 472개 메시별 비교를 수행했으며 최대 위치 오차는 약 `1.34e-15`, 최대 법선 오차는 약 `8.84e-16`이다. 이는 독립적인 테스트 자료에 대한 수치 근거이다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "제작용 MetaHuman DNA의 ML·RBF 경로와 대규모 자료, 전신·손가락 기준 프레임, 바인드 변경 후 모션 재타깃, 포즈에 따른 의상 보정과 피부·머리카락·의상의 최종 품질은 추가 작업이다. 기존의 오래된 예제 앱 실행 검사는 리소스 링크와 정리 계약으로 아직 전환되지 않아, 추후 명시적인 실행 검증 요청이 있을 때 이를 먼저 수정해야 한다. 이번 빌드와 테스트는 macOS arm64에서 수행했으며 Windows·Linux 실행은 확인하지 않았다. CC5·Blender·Unreal의 실제 앱 호환성이나 전체 MetaHuman 기능 완성을 주장하지 않는다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "리그 제어 샘플과 실행 정책 검증 기록 — 2026-10-27",
+      "anchor": "리그-제어-샘플과-실행-정책-검증-기록--2026-10-27",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구현 범위",
+      "anchor": "구현-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "테스트와 실행 정책",
+      "anchor": "테스트와-실행-정책",
+      "start_line": 9
+    },
+    {
+      "block_id": "b000013",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "리소스와 대형 자료",
+      "anchor": "리소스와-대형-자료",
+      "start_line": 17
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 23
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000005",
+        "line": 5,
+        "text": "본체 `Object3DEngine`이 소유한 일반 리그 또는 DNA 리그에서 기준 제어 상태와 여러 끝점을 독립적으로 평가하여, 관절·블렌드셰이프가 함께 반영된 새 모프와 출처를 본체 자산으로 만든다. 원본 리그는 평가하거나 수정하지 않는다. NSCharacter는 새 본체 자산의 참조만 가진다. 출처는 입력 제어, 원본 본의 로컬 자세, 블렌드셰이프와 애니메이티드 맵을 기록하며 실행 가능한 리그나 셰이더 연결은 아니다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000011",
+        "line": 11,
+        "text": "- 현재 사용자 지시: 별도 애플리케이션·명령행 실행 검증은 명시적 요청이 없으면 하지 않는다. 자동 단위·통합 테스트는 계속한다. 기본 CMake 옵션 `IIACTOROBJECT_VALIDATE_APPLICATION_EXECUTION`은 OFF이다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000021",
+        "line": 25,
+        "text": "제작용 MetaHuman DNA의 ML·RBF 경로와 대규모 자료, 전신·손가락 기준 프레임, 바인드 변경 후 모션 재타깃, 포즈에 따른 의상 보정과 피부·머리카락·의상의 최종 품질은 추가 작업이다. 기존의 오래된 예제 앱 실행 검사는 리소스 링크와 정리 계약으로 아직 전환되지 않아, 추후 명시적인 실행 검증 요청이 있을 때 이를 먼저 수정해야 한다. 이번 빌드와 테스트는 macOS arm64에서 수행했으며 Windows·Linux 실행은 확인하지 않았다. CC5·Blender·Unreal의 실제 앱 호환성이나 전체 MetaHuman 기능 완성을 주장하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

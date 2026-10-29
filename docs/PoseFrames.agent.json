@@ -1,0 +1,465 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:bc6fa9a37ba7e5fc9e793fa8dae548c6eb0b5ed215ba84b92269325f925834bd",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/PoseFrames.md",
+    "sha256": "6ae105d0b136782c4f6b20639d6a0db8399b1e2748a91fe2b4b2010f053a4817",
+    "bytes": 6686,
+    "line_count": 44,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "관절 주 방향과 기하 면 방향의 프레임 보정",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 관절 주 방향과 기하 면 방향의 프레임 보정\n",
+      "level": 1,
+      "title": "관절 주 방향과 기하 면 방향의 프레임 보정"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "`PoseFrames.h`의 `orientPoseJointFrame`은 관절에서 두 후손으로 향하는 벡터를 사용하여 주 방향과 기하 면 법선을 함께 맞추는 공용 코어 연산이다. 손바닥처럼 주축의 방향뿐 아니라 그 주축 둘레의 회전도 정해야 하는 기준에 사용한다. 원본 Pose의 로컬 변환과 revision을 변경하지 않고 새 로컬 변환을 반환한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 좌표계와 보존\n",
+      "level": 2,
+      "title": "좌표계와 보존"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "관절·주 후손·면 후손은 서로 다른 원본 본 ID이다. 두 후손 사이에 helper·twist 본이 있어도 제거하거나 부모를 바꾸지 않는다. 반환한 변환은 해당 관절의 로컬 회전만 바꾸며 로컬 위치·스케일과 중간 본의 로컬 변환을 유지한다. 부모 좌표계에서 후손까지의 길이와 두 벡터의 각도도 유지한다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "현재 후손 벡터는 관절부터 후손까지 로컬 행렬을 합성하여 구한다. 큰 루트 원점의 월드 위치를 서로 빼지 않으므로 원점의 크기에 따른 위치 상쇄를 피한다. 부모의 선형 변환을 P라 하면 목표 주 방향 d는 `P^-1*d`, 목표 기하 면 법선 n은 `sign(det(P))*P^T*n`으로 부모 좌표계에 옮긴다. 반사 부호는 기하적인 외적의 방향을 보존하기 위한 것이다. 스킨의 법선 행렬과 기하 외적의 부호 의미를 혼동하지 않는다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "현재·목표의 두 직교 프레임을 만든 뒤 그 사이의 강체 회전을 기존 로컬 회전에 곱한다. 부모의 비균일 스케일·전단·반사와 관절 자체의 반사 스케일을 검사한다. 목표는 오브젝트 좌표계이며 호스트의 Actor 월드 변환은 별도이다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "heading",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "## 오류와 예산\n",
+      "level": 2,
+      "title": "오류와 예산"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "`maximumAncestorVisits`는 두 후손 경로를 합한 방문 상한이다. `minimumPlaneSine`는 두 현재 벡터가 공선에 너무 가까운 경우를 거부하는 기준이다. `orthogonalityTolerance`는 유한하고 0~1e-6이어야 하며 목표 방향과 면 법선의 직교 오차를 제한한다. 허용한 작은 오차는 직교 보정한다. 잘못된 본 ID·동일한 기준 점·후손이 아닌 본·영벡터·비유한 값·퇴화 면·수치적으로 특이한 부모는 오류이다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "`createOrientedObject3DPoseSnapshot`은 모든 방향 제약을 적용한 뒤 프레임 목록을 순서대로 적용하고, 마지막에만 같은 본체 엔진에 새 에셋을 등록한다. 조상은 자식보다 먼저 지정한다. 뒤에서 조상을 다시 회전하면 앞선 자식의 목표 방향도 바뀔 수 있다. `maximumJointAims`는 방향과 프레임 수를 합친 상한이며, 중간 실패는 새 에셋이나 편집 이력을 남기지 않는다. [포즈 스냅샷](PoseSnapshots.md)의 형상·모프·법선 보존과 명시적인 리그 재타깃 경계를 따른다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 근거와 검증\n",
+      "level": 2,
+      "title": "근거와 검증"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "독립적인 표준 라이브러리 수치 실험 10,000건에서 부모의 회전·비균일 스케일·전단·반사 조합을 확인하였다. 반사 부호를 뺀 대조 계산은 반사 부모 5,013건 모두에서 면 방향을 뒤집었다. 이 실험은 `build/pose-integration/JointFrameNumericalProbe.json`에 보존한다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "후보 C++는 비순차 원본 ID·중간 본·비균일 스케일·부모와 로컬 반사·루트 관절·1e16 원점·실패 원자성의 8개 모드를 Release와 ASan·UBSan에서 검증하였다. 최초 공선 fixture의 helper 평행이동 오류와 수정 전 로그도 별도 보존하였다. 기하 면 기준을 실제 인체의 손바닥 의미로 해석하려면 좌우 손의 기준 점 순서와 좌표계를 함께 정해야 한다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "heading",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "## 2026-10-27 정본·소유권 검증\n",
+      "level": 2,
+      "title": "2026-10-27 정본·소유권 검증"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "관절 프레임과 인체 규칙 어댑터를 같은 C++23 정본에 반영하고 다음 검사를 통과하였다. 실패·건너뜀은 0이다. NSCharacter 포함 구성은 변경 경로와 소유권에 관련된 선별 검사이며 전체 NSCharacter 회귀 묶음을 다시 실행한 결과는 아니다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "table",
+      "start_line": 29,
+      "end_line": 34,
+      "raw": "| 구성 | SDK 검사 | 별도 설치 소비자 |\n| --- | --- | --- |\n| Release, NSCharacter 포함 | 새 경로 45/45 및 기존 소유권 4/4 | 관련 선별 3/3 |\n| Release, NSCharacter 제외 | 전체 262/262 | 전체 4/4 |\n| Release, NSCharacter·DNA 제외 | 전체 240/240 | 전체 3/3 |\n| Debug 정적, ASan·UBSan | 관련 선별 45/45 | 관련 선별 3/3 |\n",
+      "columns": [
+        "구성",
+        "SDK 검사",
+        "별도 설치 소비자"
+      ],
+      "rows": [
+        [
+          "Release, NSCharacter 포함",
+          "새 경로 45/45 및 기존 소유권 4/4",
+          "관련 선별 3/3"
+        ],
+        [
+          "Release, NSCharacter 제외",
+          "전체 262/262",
+          "전체 4/4"
+        ],
+        [
+          "Release, NSCharacter·DNA 제외",
+          "전체 240/240",
+          "전체 3/3"
+        ],
+        [
+          "Debug 정적, ASan·UBSan",
+          "관련 선별 45/45",
+          "관련 선별 3/3"
+        ]
+      ]
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "합계 609개 CTest 실행이며 구성·빌드·검사·설치·소비자의 29단계가 통과하였다. 공개 `PoseFrames.h`와 새 함수는 네 설치 패키지에서 소비한다. 코어 전용 패키지에는 NSCharacter 헤더·심벌이 없으며 Qt 심벌도 없다. 엔진 소멸 뒤 캐릭터·편집기·템플릿·리그의 참조가 원래 엔진을 연장하지 않는 기존 규칙을 유지한다.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "공유·정적 구성에서 일반 포즈 경로와 인체 역할 경로 각각에 성인·아동의 전체 입력을 적용하였다. 입력마다 본 163개·메시 5개·원본 점 43,474개·모프 채널 296개를 보존한다. 인체 경로는 팔 네 방향 이후 양쪽 손목의 중지·엄지 첫 관절로 주 방향과 면 법선을 맞추며 중간 본과 원본 ID·부모는 유지한다. 다섯 모프 가중치 패턴의 위치·법선은 native에서 확인한다.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "실제 Blender 4.5.9 LTS에서 총 8개 FBX의 본·부모·모든 원본 점·모프 키·스킨 영향을 검사하였다. 중립과 두 가지 중간 가중치 패턴에서 최대 점 오차는 2.5194229451358925e-06m, 최대 스킨 가중치 오차는 2.9787261879299365e-08이다. Blender 검사는 모프 법선, 전신·손가락 캘리브레이션, 포즈 의상 간격과 실제 CC5·Unreal 동작을 확정하지 않는다. 정면 미리보기는 검토하였지만 외형·재질·의상·머리카락은 제작 품질의 완료 근거가 아니다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "방향 전용 CLI는 별도 `ArmDirections.fbx`와 바이트까지 일치한다. 동일 경로·하드링크·심볼릭 링크 출력은 입력 파일과 같은 자료를 덮어쓰지 않도록 거부하며, 잘못된 인자와 별도 출력까지 7개 사례를 검증하였다. 기존 정적 구성은 예제 빌드가 꺼져 있으므로 CLI는 공유 Release에서 검사하였다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 43,
+      "end_line": 43,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "현재 소스·설치 헤더·라이브러리·검사·인체 산출물의 해시는 [관절 프레임 검증 보고서](JointFrameVerification-20261027.json)에 기록한다. 이전 [방향 전용 보고서](PoseSnapshotVerification-20261027.json)와 그 소스·증거는 수정 전에 별도로 보존하였다. 이 단계는 전체 캐릭터 생성·편집 목표의 진행분이며 실제 CC5·Unreal·제작용 MetaHuman의 완료가 아니다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "관절 주 방향과 기하 면 방향의 프레임 보정",
+      "anchor": "관절-주-방향과-기하-면-방향의-프레임-보정",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "좌표계와 보존",
+      "anchor": "좌표계와-보존",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000013",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "오류와 예산",
+      "anchor": "오류와-예산",
+      "start_line": 13
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "근거와 검증",
+      "anchor": "근거와-검증",
+      "start_line": 19
+    },
+    {
+      "block_id": "b000025",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "2026-10-27 정본·소유권 검증",
+      "anchor": "2026-10-27-정본소유권-검증",
+      "start_line": 25
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000009",
+        "line": 9,
+        "text": "현재 후손 벡터는 관절부터 후손까지 로컬 행렬을 합성하여 구한다. 큰 루트 원점의 월드 위치를 서로 빼지 않으므로 원점의 크기에 따른 위치 상쇄를 피한다. 부모의 선형 변환을 P라 하면 목표 주 방향 d는 `P^-1*d`, 목표 기하 면 법선 n은 `sign(det(P))*P^T*n`으로 부모 좌표계에 옮긴다. 반사 부호는 기하적인 외적의 방향을 보존하기 위한 것이다. 스킨의 법선 행렬과 기하 외적의 부호 의미를 혼동하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 23,
+        "text": "후보 C++는 비순차 원본 ID·중간 본·비균일 스케일·부모와 로컬 반사·루트 관절·1e16 원점·실패 원자성의 8개 모드를 Release와 ASan·UBSan에서 검증하였다. 최초 공선 fixture의 helper 평행이동 오류와 수정 전 로그도 별도 보존하였다. 기하 면 기준을 실제 인체의 손바닥 의미로 해석하려면 좌우 손의 기준 점 순서와 좌표계를 함께 정해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000035",
+        "line": 40,
+        "text": "실제 Blender 4.5.9 LTS에서 총 8개 FBX의 본·부모·모든 원본 점·모프 키·스킨 영향을 검사하였다. 중립과 두 가지 중간 가중치 패턴에서 최대 점 오차는 2.5194229451358925e-06m, 최대 스킨 가중치 오차는 2.9787261879299365e-08이다. Blender 검사는 모프 법선, 전신·손가락 캘리브레이션, 포즈 의상 간격과 실제 CC5·Unreal 동작을 확정하지 않는다. 정면 미리보기는 검토하였지만 외형·재질·의상·머리카락은 제작 품질의 완료 근거가 아니다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000017",
+        "label": "포즈 스냅샷",
+        "target": "PoseSnapshots.md",
+        "kind": "relative",
+        "line": 17
+      },
+      {
+        "block_id": "b000039",
+        "label": "관절 프레임 검증 보고서",
+        "target": "JointFrameVerification-20261027.json",
+        "kind": "relative",
+        "line": 44
+      },
+      {
+        "block_id": "b000039",
+        "label": "방향 전용 보고서",
+        "target": "PoseSnapshotVerification-20261027.json",
+        "kind": "relative",
+        "line": 44
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000029",
+        "columns": [
+          "구성",
+          "SDK 검사",
+          "별도 설치 소비자"
+        ],
+        "rows": [
+          [
+            "Release, NSCharacter 포함",
+            "새 경로 45/45 및 기존 소유권 4/4",
+            "관련 선별 3/3"
+          ],
+          [
+            "Release, NSCharacter 제외",
+            "전체 262/262",
+            "전체 4/4"
+          ],
+          [
+            "Release, NSCharacter·DNA 제외",
+            "전체 240/240",
+            "전체 3/3"
+          ],
+          [
+            "Debug 정적, ASan·UBSan",
+            "관련 선별 45/45",
+            "관련 선별 3/3"
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

@@ -1,0 +1,385 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:a4358cc64a122551acf6aa438f1830a07d78e95537c3def0fb0f78ecd4a4e659",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/HumanAccessoryAdditionVerification-20261029.md",
+    "sha256": "ee34c5ebb126f0fce39004f1a94c242a7706e7c7fc2525fb40312a8e0490b6de",
+    "bytes": 7222,
+    "line_count": 40,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "인체 부속 추가와 편집 이력 검증 기록",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 인체 부속 추가와 편집 이력 검증 기록\n",
+      "level": 1,
+      "title": "인체 부속 추가와 편집 이력 검증 기록"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 범위와 소유\n",
+      "level": 2,
+      "title": "범위와 소유"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "[인체 부속 편집 계약](HumanAccessories.md)의 추가 경로는 같은 iiActorObject 엔진에서 준비한 대체 템플릿을 사용한다. 기존 메시의 상대 순서를 유지하면서 사이 또는 끝에 부속을 넣고, 본체가 템플릿·메시·표면 연결·편집 이력을 소유한다. NSCharacter는 인체 카탈로그의 자산 이름을 해석하고 본체 편집기를 참조한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "공식 CC0 인체에서 머리카락·눈썹·속눈썹을 가진 상태로 몸과 눈썹을 조형하고 피부 PNG를 선택한 후 의상을 중간 슬롯에 추가했다. 기존 눈썹의 메시 번호가 2에서 3으로 바뀌면서 조형·점 마스크·이름 있는 선택의 원본 점과 가중치는 유지됐고 몸 위치와 피부 이미지도 유지됐다. 옷의 작성된 대응에 사용되는 몸 점의 스킨을 직접 바꾼 후 추가했을 때 새 의상에 수정된 본 가중치가 전사됐다. 빈 인체에 네 부속을 한 번에 추가한 경우에는 각 부속 점의 가중치 합과 기본색 이미지 연결을 검사했다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "의상 추가 뒤 다른 의상으로 교체하고 undo했으며, 제거 후 같은 의상을 다시 추가하는 경우도 검사했다. 이 과정에서 유지되는 부속의 재질 슬롯 번호가 대체 템플릿과 달라도 기존 재질 연결을 유지하도록 보완했다. 몸 피부 편집층을 끄고 켰을 때도 의상의 기본색·노멀 이미지가 유지됐다. 기존에 같은 이름으로 남은 이미지를 다른 내용으로 편집한 뒤 의상을 다시 추가하면 기존 이미지를 덮지 않고 새 이름에 원래 의상 이미지 바이트를 보관했다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "매크로 인체의 나이·키·질량과 발 접지를 적용한 상태에서 의상을 제거하고 다시 추가한 뒤, 같은 입력으로 원본 템플릿을 생성한 결과와 몸 원본 점의 위치를 비교했다. 이는 특정 인체와 점의 수치 검사이며 외부 호스트의 시각적 결과는 아니다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "heading",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "## 본체 연결과 프로젝트\n",
+      "level": 2,
+      "title": "본체 연결과 프로젝트"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "합성 예제에서는 중간 삽입으로 선택된 기존 메시가 1에서 2로 이동할 때 조형·점 마스크·이름 있는 선택을 함께 옮겼다. 현재 몸의 수정된 본 가중치와 이중 사원수 스키닝 방식은 새 추종 표면에 전사됐다. 추가할 두 표면이 몸→안쪽→바깥쪽으로 연결되되 슬롯 순서가 반대인 경우도 의존 순서로 처리했다. 새 표면의 원본 모프 자료는 본체 에셋과 프로젝트 복원 후 유지됐다. 이 검사는 모프가 외부 앱의 제어와 자동으로 연결된다는 증거가 아니다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "중립 원본 위치가 대체 템플릿과 다르거나 새 표면이 생성 타깃을 가진 경우, 다른 엔진과 중복 슬롯 요청은 편집 상태를 바꾸지 않고 거부했다. 삼각형 프레임으로 연결된 기존 표면은 몸 가림을 변경할 때 살아 있는 원본 삼각형에 다시 연결하며, 기준 삼각형이 사라지면 거부한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "추가 때문에 이름 있는 선택의 메시 슬롯이 움직인 이력은 프로젝트 버전 34로 저장한다. 복원 시 기존 메시의 상대 순서·원본 점·선택 이름과 가중치를 검사한다. CRC를 다시 계산한 프로젝트에서 대응 슬롯을 중복시켜도 복원은 거부되고 대상 엔진에 임시 자원이 남지 않았다. 이 대응이 필요 없는 이력은 다른 자료에 필요한 기존 버전을 계속 선택한다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "재질과 이미지의 전체 편집 스냅샷은 길이가 다를 수 있다. 추가할 때 각 스냅샷의 기존 인덱스를 보존하고 새 자원의 슬롯을 맞춘다. 필요한 내부 채움 이미지와 제거한 부속의 미사용 자원은 현재 프로젝트나 외부 출력에 남을 수 있다. 이미지 및 재질 슬롯은 추가 경로에서 각각 4,096개로 제한되며 에셋의 이미지 바이트 예산도 적용한다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "heading",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "## 독립 형식 검사\n",
+      "level": 2,
+      "title": "독립 형식 검사"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "의상이 없는 상태에서 의상을 추가한 인체를 GLB와 FBX로 출력해 별도 Python 판독기로 검사했다. 의상의 원본 `delete_verts`와 몸 OBJ로부터 몸의 숨김 폴리곤 2,688개와 표시 삼각형 21,380개를 별도로 계산했고, 출력 몸 메시의 삼각형 수가 일치했다. 다섯 메시의 스킨 속성, FBX 스킨·본·정규화된 점 가중치, 머리카락 알파·양면 재질과 의상 기본색·노멀 이미지 바이트를 확인했다. 실제 CC5·Blender·Unreal의 가져오기나 렌더링 결과를 검증한 것은 아니다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "heading",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "## 빌드와 검사\n",
+      "level": 2,
+      "title": "빌드와 검사"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "list",
+      "start_line": 29,
+      "end_line": 34,
+      "raw": "- macOS arm64 C++23 Release: 최종 수정본의 표면 추가·제거·교체와 인체 편집 및 독립 형식 검사 13/13, 매크로 체형·접지 검사 1/1 통과. `build/glb-import-ninja/human-surface-add-chain-final.xml`, `human-surface-add-chain-grounded.xml`.\n- NSCharacter 제외 본체 전용 Release: 프로젝트·접지·편집 계층 등을 포함한 54/54가 교체 연속 동작 수정 전에 통과했고, 수정 후 관련 표면 검사 8/8과 추가 모프 검사 1/1이 통과했다. 각각 `build/core-tangent-ninja/human-surface-add-final.xml`, `human-surface-add-chain-core.xml`, `human-surface-add-morph.xml`.\n- NSCharacter 포함 Debug ASan·UBSan: 최종 구현의 표면 추가·교체·인체 추가·독립 형식 검사 6/6, 새 부속 모프 저장·복원 검사 1/1 통과. 누수 검출은 비활성화했다. `build/glb-import-full-asan/human-surface-add-chain-asan.xml`, `human-surface-add-morph.xml`.\n- `build/`에 별도 설치한 NSCharacter 포함 소비자 2/2와 본체 전용 소비자 1/1이 통과했다. 본체 소비자는 공개 API와 버전 34 선택 이력 복원, 인체 소비자는 제거 뒤 재추가를 검사했다. 사용자 설치본은 바꾸지 않았다. 각 소비자 빌드의 `human-surface-add-chain.xml`.\n- Emscripten C++23으로 변경된 선택·표면·프로젝트·NSCharacter 구현의 구문 검사를 통과했다. macOS 빌드에서 생성한 기능 설정을 사용했으며 SDK 전체의 WebAssembly 링크·실행 결과는 아니다.\n- macOS 라이브러리의 직접 동적 링크 목록에는 C++ 표준 라이브러리와 시스템 라이브러리만 나타났다. Qt 직접 링크는 확인되지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "macOS arm64 C++23 Release: 최종 수정본의 표면 추가·제거·교체와 인체 편집 및 독립 형식 검사 13/13, 매크로 체형·접지 검사 1/1 통과. `build/glb-import-ninja/human-surface-add-chain-final.xml`, `human-surface-add-chain-grounded.xml`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter 제외 본체 전용 Release: 프로젝트·접지·편집 계층 등을 포함한 54/54가 교체 연속 동작 수정 전에 통과했고, 수정 후 관련 표면 검사 8/8과 추가 모프 검사 1/1이 통과했다. 각각 `build/core-tangent-ninja/human-surface-add-final.xml`, `human-surface-add-chain-core.xml`, `human-surface-add-morph.xml`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter 포함 Debug ASan·UBSan: 최종 구현의 표면 추가·교체·인체 추가·독립 형식 검사 6/6, 새 부속 모프 저장·복원 검사 1/1 통과. 누수 검출은 비활성화했다. `build/glb-import-full-asan/human-surface-add-chain-asan.xml`, `human-surface-add-morph.xml`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/`에 별도 설치한 NSCharacter 포함 소비자 2/2와 본체 전용 소비자 1/1이 통과했다. 본체 소비자는 공개 API와 버전 34 선택 이력 복원, 인체 소비자는 제거 뒤 재추가를 검사했다. 사용자 설치본은 바꾸지 않았다. 각 소비자 빌드의 `human-surface-add-chain.xml`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Emscripten C++23으로 변경된 선택·표면·프로젝트·NSCharacter 구현의 구문 검사를 통과했다. macOS 빌드에서 생성한 기능 설정을 사용했으며 SDK 전체의 WebAssembly 링크·실행 결과는 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "macOS 라이브러리의 직접 동적 링크 목록에는 C++ 표준 라이브러리와 시스템 라이브러리만 나타났다. Qt 직접 링크는 확인되지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "heading",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "같은 작업에서 부속 추가와 제거 또는 다른 슬롯의 교체를 함께 처리하거나 기존 슬롯 자체를 재정렬하는 경로, 편집된 부속 조형의 대체 메시 전사와 사용하지 않는 재질·이미지 정리는 남아 있다. 추가 표면 자체가 별도 생성 타깃·관절 앵커·접지 기반인 경우와 재질 재매핑 시 작성된 탄젠트가 무효화되는 경우는 거부한다. 천·머리카락 물리, 의상 간 가림, 자세별 충돌과 제작용 피부·모발 표현도 남아 있다.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "사용자 지시에 따라 CC5·Blender·Unreal과 사용자용 앱은 실행하지 않았다. 앱 간 실제 가져오기·렌더링과 제작용 MetaHuman 수준의 외형·전체 캐릭터 생성 및 상세 편집 목표는 이 검사로 입증되지 않았으며 계속 진행 중이다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "인체 부속 추가와 편집 이력 검증 기록",
+      "anchor": "인체-부속-추가와-편집-이력-검증-기록",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "범위와 소유",
+      "anchor": "범위와-소유",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000013",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "본체 연결과 프로젝트",
+      "anchor": "본체-연결과-프로젝트",
+      "start_line": 13
+    },
+    {
+      "block_id": "b000023",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "독립 형식 검사",
+      "anchor": "독립-형식-검사",
+      "start_line": 23
+    },
+    {
+      "block_id": "b000027",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "빌드와 검사",
+      "anchor": "빌드와-검사",
+      "start_line": 27
+    },
+    {
+      "block_id": "b000031",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 36
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000005",
+        "label": "인체 부속 편집 계약",
+        "target": "HumanAccessories.md",
+        "kind": "relative",
+        "line": 5
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:0ac36b955d273f5f28211cd7407e77c4ee044353544b857351805938c586eefe",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/MultipleUvSetsVerification-20261028.md",
+    "sha256": "de62a2416a12b50dddd8b41f6f22093621f1d3cbb72da7a3366fc2b5bae262e8",
+    "bytes": 3251,
+    "line_count": 23,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "여러 UV 세트 검증 기록 — 2026-10-28",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 여러 UV 세트 검증 기록 — 2026-10-28\n",
+      "level": 1,
+      "title": "여러 UV 세트 검증 기록 — 2026-10-28"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "이 기록은 [여러 UV 세트 계약](MultipleUvSets.md)의 구현과 확인 범위를 설명한다. 전체 캐릭터 생성·편집 목표의 완료를 뜻하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 변경 범위\n",
+      "level": 2,
+      "title": "변경 범위"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "list",
+      "start_line": 7,
+      "end_line": 10,
+      "raw": "- 공용 본체의 작성 토폴로지와 표시 메시가 여러 이름의 UV 세트와 서로 다른 seam을 다룬다. 편집·이력·템플릿 재생성과 프로젝트 버전 16에 연결한다. NSCharacter는 본체 편집기를 참조한다.\n- FBX의 표준 레이어와 SDK 작성 메타데이터를 사용해 세트별 좌표·숨김 layout을 보존하고, 원본 메타데이터와 표시 코너가 다르면 거부한다. 외부 편집에서 공유된 좌표를 충돌 없이 병합할 수 없으면 거부한다.\n- 이미지의 머티리얼별 UV 이름을 FBX에 보관하고 GLB의 `TEXCOORD_n` 및 머티리얼별 `texCoord`에 대응한다. DNA에서 추가 UV를 잃는 경우는 기본적으로 거부하고 명시적 손실 허용 시 경고한다.\n- FBX UV 입력 예산은 좌표와 보이는 코너뿐 아니라 메타데이터로 복원되는 추가 layout 인덱스도 센다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "공용 본체의 작성 토폴로지와 표시 메시가 여러 이름의 UV 세트와 서로 다른 seam을 다룬다. 편집·이력·템플릿 재생성과 프로젝트 버전 16에 연결한다. NSCharacter는 본체 편집기를 참조한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "FBX의 표준 레이어와 SDK 작성 메타데이터를 사용해 세트별 좌표·숨김 layout을 보존하고, 원본 메타데이터와 표시 코너가 다르면 거부한다. 외부 편집에서 공유된 좌표를 충돌 없이 병합할 수 없으면 거부한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "이미지의 머티리얼별 UV 이름을 FBX에 보관하고 GLB의 `TEXCOORD_n` 및 머티리얼별 `texCoord`에 대응한다. DNA에서 추가 UV를 잃는 경우는 기본적으로 거부하고 명시적 손실 허용 시 경고한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "FBX UV 입력 예산은 좌표와 보이는 코너뿐 아니라 메타데이터로 복원되는 추가 layout 인덱스도 센다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "## 자동 검사\n",
+      "level": 2,
+      "title": "자동 검사"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "list",
+      "start_line": 14,
+      "end_line": 19,
+      "raw": "- 구현 전 외부 FBX의 두 번째 UV 세트를 잃는 실패와 잘못된 첫 UV 기준을 허용하는 실패를 재현했다. 현재 기능군의 7개 검사는 외부 FBX의 서로 다른 seam, 편집과 undo/redo, 템플릿·프로젝트 보존, 숨김 layout, 외부 편집의 충돌·기준 불일치·UV 이름 변경 거부, 크기 제한, 머티리얼 UV 선택, DNA 손실 정책을 다룬다.\n- 일반 공유 빌드의 관련 회귀 66개가 통과했다. 외부 분리 충돌, 잘못된 첫 UV 기준 거부와 GLB 머티리얼별 정확한 선택 검사를 포함한다.\n- `IIACTOROBJECT_WITH_NSCHARACTER=OFF` 코어 전용 빌드에서 보강된 관련 회귀 66개가 통과했다. 일반 및 코어 전용 설치 소비자에서 각각 다중 UV API와 DNA 소비자 검사 2개가 통과했다. 설치 위치는 프로젝트 `build/` 아래의 별도 스테이징 디렉터리다.\n- 주소 및 정의되지 않은 동작 검사기(`-fsanitize=address,undefined`)로 다시 빌드한 구성에서도 같은 회귀 66개가 통과했다.\n- 독립 Python 파서가 GLB 이진 좌표와 seam, 메시마다 번호가 다른 UV 세트를 선택하는 머티리얼 인덱스를 검사했다. FBX 왕복은 본체의 ufbx 기반 가져오기 경로로 검사했으며 별도 데스크톱 앱의 결과는 아니다.\n- 두 macOS 공유 라이브러리의 동적 의존성을 확인했으며 Qt 의존성은 나타나지 않았다. Windows·Linux 실행 결과는 이번 기록에 없다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "구현 전 외부 FBX의 두 번째 UV 세트를 잃는 실패와 잘못된 첫 UV 기준을 허용하는 실패를 재현했다. 현재 기능군의 7개 검사는 외부 FBX의 서로 다른 seam, 편집과 undo/redo, 템플릿·프로젝트 보존, 숨김 layout, 외부 편집의 충돌·기준 불일치·UV 이름 변경 거부, 크기 제한, 머티리얼 UV 선택, DNA 손실 정책을 다룬다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "일반 공유 빌드의 관련 회귀 66개가 통과했다. 외부 분리 충돌, 잘못된 첫 UV 기준 거부와 GLB 머티리얼별 정확한 선택 검사를 포함한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`IIACTOROBJECT_WITH_NSCHARACTER=OFF` 코어 전용 빌드에서 보강된 관련 회귀 66개가 통과했다. 일반 및 코어 전용 설치 소비자에서 각각 다중 UV API와 DNA 소비자 검사 2개가 통과했다. 설치 위치는 프로젝트 `build/` 아래의 별도 스테이징 디렉터리다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "주소 및 정의되지 않은 동작 검사기(`-fsanitize=address,undefined`)로 다시 빌드한 구성에서도 같은 회귀 66개가 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "독립 Python 파서가 GLB 이진 좌표와 seam, 메시마다 번호가 다른 UV 세트를 선택하는 머티리얼 인덱스를 검사했다. FBX 왕복은 본체의 ufbx 기반 가져오기 경로로 검사했으며 별도 데스크톱 앱의 결과는 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "두 macOS 공유 라이브러리의 동적 의존성을 확인했으며 Qt 의존성은 나타나지 않았다. Windows·Linux 실행 결과는 이번 기록에 없다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "heading",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "## 경계와 남은 작업\n",
+      "level": 2,
+      "title": "경계와 남은 작업"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "사용자 지시에 따라 CC5·Blender·Unreal과 SDK 사용자 앱은 실행하지 않았다. 따라서 파일의 실제 앱 가져오기, UI 동작 및 시각 결과를 확인하지 않았다. GLB 표준 속성은 UV 세트 이름과 숨긴 작성 layout을 보존하지 않고, 텍스처 UV 변환·다른 텍스처 슬롯·tangent와 제작용 UV 아틀라스도 이 단계에서 완료하지 않았다. 공개 구조체 레이아웃이 바뀌므로 기존 C++ 바이너리 소비자는 맞는 헤더와 라이브러리로 다시 빌드해야 한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "여러 UV 세트 검증 기록 — 2026-10-28",
+      "anchor": "여러-uv-세트-검증-기록--2026-10-28",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "변경 범위",
+      "anchor": "변경-범위",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "자동 검사",
+      "anchor": "자동-검사",
+      "start_line": 12
+    },
+    {
+      "block_id": "b000013",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "경계와 남은 작업",
+      "anchor": "경계와-남은-작업",
+      "start_line": 21
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "이 기록은 [여러 UV 세트 계약](MultipleUvSets.md)의 구현과 확인 범위를 설명한다. 전체 캐릭터 생성·편집 목표의 완료를 뜻하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 23,
+        "text": "사용자 지시에 따라 CC5·Blender·Unreal과 SDK 사용자 앱은 실행하지 않았다. 따라서 파일의 실제 앱 가져오기, UI 동작 및 시각 결과를 확인하지 않았다. GLB 표준 속성은 UV 세트 이름과 숨긴 작성 layout을 보존하지 않고, 텍스처 UV 변환·다른 텍스처 슬롯·tangent와 제작용 UV 아틀라스도 이 단계에서 완료하지 않았다. 공개 구조체 레이아웃이 바뀌므로 기존 C++ 바이너리 소비자는 맞는 헤더와 라이브러리로 다시 빌드해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000003",
+        "label": "여러 UV 세트 계약",
+        "target": "MultipleUvSets.md",
+        "kind": "relative",
+        "line": 3
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

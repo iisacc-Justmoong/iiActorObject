@@ -1,0 +1,200 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:5f29063382bee478964581e8a80dd4aaf76d7ca18bffc31bab0c7609ea60c38c",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/MeshScreenSelectionVerification-20261029.md",
+    "sha256": "ec079ab0611e7e970b8a0176b4d6c5967c6323aec630a221b78432121dc135c7",
+    "bytes": 2268,
+    "line_count": 17,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "화면 영역 선택 검증 기록 — 2026-10-29",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 화면 영역 선택 검증 기록 — 2026-10-29\n",
+      "level": 1,
+      "title": "화면 영역 선택 검증 기록 — 2026-10-29"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "이 기록은 [화면 영역 선택](MeshScreenSelection.md)의 이번 소스 상태를 대상으로 한다. 화면 좌표 선택 결과는 iiActorObject 본체의 원본 점 마스크로 반환하며 NSCharacter는 본체 에셋과 편집 세션을 참조한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 확인한 내용\n",
+      "level": 2,
+      "title": "확인한 내용"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "list",
+      "start_line": 7,
+      "end_line": 13,
+      "raw": "- 코어 전용 구성에서 새 화면 선택과 기존 이름 선택·마스크 투영·브러시를 합한 30개 테스트가 통과했다. 인체 모듈 포함 구성에서는 관련 32개가 통과했다.\n- AddressSanitizer와 UndefinedBehaviorSanitizer 구성의 화면 선택 테스트 8개가 통과했다. 이 실행은 `ASAN_OPTIONS=detect_leaks=0`으로 누수 검사를 끈 상태다.\n- 사각형·원·오목하거나 교차하는 올가미, 화면 Y 방향, 원근 투영과 클리핑, 일반·역방향 깊이와 허용 오차, 누락·잘못된 깊이, 다중 메시와 작업 예산을 검사했다.\n- 리그로 이동한 렌더 정점을 원본 제어점에 대응시키고, UV 이음새의 불일치와 사용하지 않는 원본 점을 처리했다. 선택 결과를 브러시 조형에 적용하고 실행 취소·다시 실행·프로젝트 복원을 검사했다.\n- CC0 인체 시료의 원본 점 19,158개에서 변형된 렌더 위치를 캡처하고, 화면 원에 포함된 2,682개 점을 별도 좌표 계산과 비교했다. 선택 집합을 본체 편집기에 저장했다.\n- `build/` 아래에 각각 설치한 코어 전용·인체 모듈 포함 패키지에서 공개 헤더, 호스트 깊이 샘플러, 렌더 위치 캡처와 선택 저장을 사용하는 소비자 테스트가 각각 통과했다. `~/.local` 설치본은 바꾸지 않았다.\n- macOS 공유 라이브러리의 직접 동적 의존성에서 Qt는 관찰되지 않았다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "코어 전용 구성에서 새 화면 선택과 기존 이름 선택·마스크 투영·브러시를 합한 30개 테스트가 통과했다. 인체 모듈 포함 구성에서는 관련 32개가 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "AddressSanitizer와 UndefinedBehaviorSanitizer 구성의 화면 선택 테스트 8개가 통과했다. 이 실행은 `ASAN_OPTIONS=detect_leaks=0`으로 누수 검사를 끈 상태다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "사각형·원·오목하거나 교차하는 올가미, 화면 Y 방향, 원근 투영과 클리핑, 일반·역방향 깊이와 허용 오차, 누락·잘못된 깊이, 다중 메시와 작업 예산을 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "리그로 이동한 렌더 정점을 원본 제어점에 대응시키고, UV 이음새의 불일치와 사용하지 않는 원본 점을 처리했다. 선택 결과를 브러시 조형에 적용하고 실행 취소·다시 실행·프로젝트 복원을 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "CC0 인체 시료의 원본 점 19,158개에서 변형된 렌더 위치를 캡처하고, 화면 원에 포함된 2,682개 점을 별도 좌표 계산과 비교했다. 선택 집합을 본체 편집기에 저장했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/` 아래에 각각 설치한 코어 전용·인체 모듈 포함 패키지에서 공개 헤더, 호스트 깊이 샘플러, 렌더 위치 캡처와 선택 저장을 사용하는 소비자 테스트가 각각 통과했다. `~/.local` 설치본은 바꾸지 않았다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "macOS 공유 라이브러리의 직접 동적 의존성에서 Qt는 관찰되지 않았다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "## 해석의 한계\n",
+      "level": 2,
+      "title": "해석의 한계"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "깊이 버퍼와 카메라, 입력 이벤트는 호스트가 제공한다. 이 검사는 실제 GPU의 깊이 샘플 정확도나 화면 UI 동작을 뜻하지 않는다. CC5·Blender·Unreal은 사용자 지시에 따라 실행하지 않았으며, 앱 호환성이나 제작용 MetaHuman 수준의 완료를 입증하지 않는다. 외부 앱에서의 선택 UI 연결과 제작용 얼굴·리깅 품질 작업은 남아 있다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "화면 영역 선택 검증 기록 — 2026-10-29",
+      "anchor": "화면-영역-선택-검증-기록--2026-10-29",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "확인한 내용",
+      "anchor": "확인한-내용",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "해석의 한계",
+      "anchor": "해석의-한계",
+      "start_line": 15
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000011",
+        "line": 17,
+        "text": "깊이 버퍼와 카메라, 입력 이벤트는 호스트가 제공한다. 이 검사는 실제 GPU의 깊이 샘플 정확도나 화면 UI 동작을 뜻하지 않는다. CC5·Blender·Unreal은 사용자 지시에 따라 실행하지 않았으며, 앱 호환성이나 제작용 MetaHuman 수준의 완료를 입증하지 않는다. 외부 앱에서의 선택 UI 연결과 제작용 얼굴·리깅 품질 작업은 남아 있다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000003",
+        "label": "화면 영역 선택",
+        "target": "MeshScreenSelection.md",
+        "kind": "relative",
+        "line": 3
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

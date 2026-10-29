@@ -7,6 +7,15 @@ namespace iiActorObject
 using namespace character_detail;
 namespace
 {
+bool equivalentBind(const Transform &a,const Transform &b)
+{
+    if(a==b)return true;
+    if(a.position!=b.position||a.scale!=b.scale)return false;
+    const auto x=a.rotation.normalized(),y=b.rotation.normalized();
+    const auto direct=std::max({std::abs(x.x-y.x),std::abs(x.y-y.y),std::abs(x.z-y.z),std::abs(x.w-y.w)});
+    const auto opposite=std::max({std::abs(x.x+y.x),std::abs(x.y+y.y),std::abs(x.z+y.z),std::abs(x.w+y.w)});
+    return std::min(direct,opposite)<=64*std::numeric_limits<double>::epsilon();
+}
 template <class Keys> void validateKeys(const Keys &keys, double duration)
 {
     if (keys.empty())
@@ -36,11 +45,30 @@ auto sampleKeys(const Keys &keys, double time, Interpolate interpolate)
 } // namespace
 AnimationClip::AnimationClip(std::shared_ptr<const Skeleton> skeleton, double duration,
                              std::vector<BoneTrack> tracks, std::vector<AnimationCurve> curves)
+    : AnimationClip(std::move(skeleton),duration,std::move(tracks),std::move(curves),{})
+{
+}
+AnimationClip::AnimationClip(std::shared_ptr<const Skeleton> skeleton, double duration,
+                             std::vector<BoneTrack> tracks, std::vector<AnimationCurve> curves,
+                             std::vector<Transform> requiredDeformationBind)
     : skeleton_(std::move(skeleton)), duration_(duration), tracks_(std::move(tracks)),
-      curves_(std::move(curves))
+      curves_(std::move(curves)),requiredDeformationBind_(std::move(requiredDeformationBind))
 {
     if (!skeleton_ || !std::isfinite(duration_) || duration_ <= 0)
         throw std::invalid_argument("Animation requires skeleton and positive finite duration");
+    if(!requiredDeformationBind_.empty())
+    {
+        Pose validation(skeleton_);(void)validation.setDeformationBind(requiredDeformationBind_);
+        bool original=true;
+        for(std::size_t i=0;i<requiredDeformationBind_.size();++i)
+            original=original&&equivalentBind(requiredDeformationBind_[i],skeleton_->bones()[i].bindTransform);
+        if(original)requiredDeformationBind_.clear();
+        else
+        {
+            const auto normalized=validation.deformationBindTransforms();
+            requiredDeformationBind_.assign(normalized.begin(),normalized.end());
+        }
+    }
     trackForBone_.assign(skeleton_->bones().size(), NoBone);
     for (std::size_t i = 0; i < tracks_.size(); ++i)
     {
@@ -78,14 +106,30 @@ double AnimationClip::duration() const noexcept
 {
     return duration_;
 }
+std::span<const BoneTrack> AnimationClip::tracks() const noexcept
+{
+    return tracks_;
+}
 std::span<const AnimationCurve> AnimationClip::curves() const noexcept
 {
     return curves_;
+}
+std::span<const Transform> AnimationClip::requiredDeformationBind() const noexcept
+{
+    return requiredDeformationBind_;
 }
 void AnimationClip::sample(double seconds, Pose &destination, AnimationWrap wrap) const
 {
     if (destination.skeleton().get() != skeleton_.get())
         throw std::invalid_argument("Animation skeleton identity mismatch");
+    if(!requiredDeformationBind_.empty())
+    {
+        const auto actual=destination.deformationBindTransforms();
+        if(actual.size()!=requiredDeformationBind_.size())throw std::invalid_argument("Animation requires a matching deformation bind");
+        for(std::size_t i=0;i<actual.size();++i)
+            if(!equivalentBind(actual[i],requiredDeformationBind_[i]))
+                throw std::invalid_argument("Animation requires a matching deformation bind");
+    }
     const double t = sampleTime(seconds, duration_, wrap == AnimationWrap::Loop);
     for (BoneIndex i = 0; i < trackForBone_.size(); ++i)
     {
@@ -145,6 +189,10 @@ double AnimationPlayer::rate() const noexcept
 double AnimationPlayer::time() const noexcept
 {
     return time_;
+}
+AnimationWrap AnimationPlayer::wrap() const noexcept
+{
+    return wrap_;
 }
 bool AnimationPlayer::isPlaying() const noexcept
 {

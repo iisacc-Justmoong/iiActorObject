@@ -1,0 +1,249 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:6b2e379dda0425a0249f116e70d0a32e1716b0ff1a443960e1f2da25264d1694",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/HumanInterchangeVerification-20261029.md",
+    "sha256": "cc7de4348b148009314d3908af31bcc33cf785745c8dfc81a8b65a6bc6b945d7",
+    "bytes": 3473,
+    "line_count": 22,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "인체 본 대응과 발 기준 자세 검증 — 2026-10-29",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 인체 본 대응과 발 기준 자세 검증 — 2026-10-29\n",
+      "level": 1,
+      "title": "인체 본 대응과 발 기준 자세 검증 — 2026-10-29"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 구현한 범위\n",
+      "level": 2,
+      "title": "구현한 범위"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "list",
+      "start_line": 5,
+      "end_line": 7,
+      "raw": "- `CharacterCreatorG5`, `BlenderMetaRig`, `BlenderMetaRigSanitized`의 이름 규칙을 선택하여 본체 소유 골격에 인체 역할을 연결한다. 기존 본 ID와 helper 계층은 유지한다. CC5 G5의 끝 마디·회전 보조 본과 Blender 메타리그의 손가락 본은 존재할 때 대응한다.\n- 본체의 `PoseJointAim`은 하나의 관절 아래 여러 후손의 중심을 목표 방향에 맞춘다. MakeHuman의 공통 발끝 본이 없고 다섯 발가락 시작 본이 모두 있는 경우 NSCharacter가 이를 사용한다. 일부만 있거나 이름·의미 대응이 모호하면 임의로 대체하지 않는다.\n- 편집·이력·템플릿 재계산과 프로젝트 버전 30은 그룹의 원본 본 ID를 보존한다. 합성 골격에 표면 재질과 별도의 얼굴 포즈 리그를 함께 저장·복원해 리그 적용 뒤 다중 후손 관절의 기준 자세가 유지되는지도 검사했다. 다중 후손이 없는 프로젝트는 기존 버전 선택을 유지한다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "`CharacterCreatorG5`, `BlenderMetaRig`, `BlenderMetaRigSanitized`의 이름 규칙을 선택하여 본체 소유 골격에 인체 역할을 연결한다. 기존 본 ID와 helper 계층은 유지한다. CC5 G5의 끝 마디·회전 보조 본과 Blender 메타리그의 손가락 본은 존재할 때 대응한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "본체의 `PoseJointAim`은 하나의 관절 아래 여러 후손의 중심을 목표 방향에 맞춘다. MakeHuman의 공통 발끝 본이 없고 다섯 발가락 시작 본이 모두 있는 경우 NSCharacter가 이를 사용한다. 일부만 있거나 이름·의미 대응이 모호하면 임의로 대체하지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "편집·이력·템플릿 재계산과 프로젝트 버전 30은 그룹의 원본 본 ID를 보존한다. 합성 골격에 표면 재질과 별도의 얼굴 포즈 리그를 함께 저장·복원해 리그 적용 뒤 다중 후손 관절의 기준 자세가 유지되는지도 검사했다. 다중 후손이 없는 프로젝트는 기존 버전 선택을 유지한다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 이번 검사\n",
+      "level": 2,
+      "title": "이번 검사"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "list",
+      "start_line": 11,
+      "end_line": 16,
+      "raw": "- 사용자가 보유한 CC5 배포본의 프로파일을 `resources/` 아래의 임시 연결을 통해 읽어 G5의 전체 `[BoneMap]`과 Blender 프로파일의 기본 몸 `[BoneMap]`을 SDK 출력과 비교했다. 원본 프로파일은 SDK에 복제하지 않았고 검사 후 임시 연결을 제거했다.\n- 성인·아동 CC0 자료에서 각 발의 다섯 후손 중심 방향을 확인하고, 프로젝트 저장·복원과 기준 자세 스냅샷의 FBX·GLB 재입력에서도 확인했다. 누락·중복·잘못된 계층과 모호한 의미 태그, 큰 좌표 원점, 반사·비균일 스케일도 검사했다.\n- 코어 전용 구성의 포즈·프로젝트·교환 관련 회귀 132개가 통과했다. 추가로 버전 30의 이력과 손상 입력 거부, 독립 헤더·체크섬·후손 레코드 검사 3개가 통과했다.\n- NSCharacter 포함 구성의 관련 회귀 177개가 통과했다. 주소·미정의 동작 검사를 적용한 별도 구성에서 신규 경로 11개가 통과했으며 누수 검사 `detect_leaks=0`을 사용했다.\n- DNA를 켠 구성에서 합성 DNA의 읽기·제어·재연결·편집 저장과 독립 판독 관련 19개, 다중 후손 포즈·프로젝트 관련 4개가 통과했다. 제작용 MetaHuman DNA의 검증 결과는 아니다.\n- `build/`의 코어 전용 및 NSCharacter 포함 설치 위치에서 각각 공개 헤더와 라이브러리를 소비하여 다중 후손 포즈·프로젝트 왕복을 검사했다. NSCharacter 포함 소비자는 G5·Blender 규칙과 참조 위임도 확인했다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "사용자가 보유한 CC5 배포본의 프로파일을 `resources/` 아래의 임시 연결을 통해 읽어 G5의 전체 `[BoneMap]`과 Blender 프로파일의 기본 몸 `[BoneMap]`을 SDK 출력과 비교했다. 원본 프로파일은 SDK에 복제하지 않았고 검사 후 임시 연결을 제거했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "성인·아동 CC0 자료에서 각 발의 다섯 후손 중심 방향을 확인하고, 프로젝트 저장·복원과 기준 자세 스냅샷의 FBX·GLB 재입력에서도 확인했다. 누락·중복·잘못된 계층과 모호한 의미 태그, 큰 좌표 원점, 반사·비균일 스케일도 검사했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "코어 전용 구성의 포즈·프로젝트·교환 관련 회귀 132개가 통과했다. 추가로 버전 30의 이력과 손상 입력 거부, 독립 헤더·체크섬·후손 레코드 검사 3개가 통과했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "NSCharacter 포함 구성의 관련 회귀 177개가 통과했다. 주소·미정의 동작 검사를 적용한 별도 구성에서 신규 경로 11개가 통과했으며 누수 검사 `detect_leaks=0`을 사용했다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "DNA를 켠 구성에서 합성 DNA의 읽기·제어·재연결·편집 저장과 독립 판독 관련 19개, 다중 후손 포즈·프로젝트 관련 4개가 통과했다. 제작용 MetaHuman DNA의 검증 결과는 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "`build/`의 코어 전용 및 NSCharacter 포함 설치 위치에서 각각 공개 헤더와 라이브러리를 소비하여 다중 후손 포즈·프로젝트 왕복을 검사했다. NSCharacter 포함 소비자는 G5·Blender 규칙과 참조 위임도 확인했다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "## 남은 범위\n",
+      "level": 2,
+      "title": "남은 범위"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "이번 작업에서 CC5·Blender·Unreal이나 사용자용 CLI는 실행하지 않았다. 본 이름과 파일 수치의 일치는 실제 앱의 컨트롤 리그·가져오기 동작이나 최종 시각 품질의 근거가 아니다. CC5 G5에는 프로파일에 없는 공통 `ToeBase`를 추측하지 않으며, Blender 이름 변경은 Rigify 컨트롤 리그를 만들지 않는다. MetaHuman 제작용 자료 계약과 피부·얼굴·머리카락·의상 등 전체 목표는 계속 남아 있다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "공개 `PoseJointAim`과 `HumanJointDirection`에 필드가 추가되어 C++ 바이너리는 새 헤더와 라이브러리로 다시 빌드해야 한다. `~/.local`의 실제 사용자 설치본은 이번 설치 소비자 검사로 교체하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "인체 본 대응과 발 기준 자세 검증 — 2026-10-29",
+      "anchor": "인체-본-대응과-발-기준-자세-검증--2026-10-29",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "구현한 범위",
+      "anchor": "구현한-범위",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000007",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "이번 검사",
+      "anchor": "이번-검사",
+      "start_line": 9
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "남은 범위",
+      "anchor": "남은-범위",
+      "start_line": 18
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000005",
+        "line": 6,
+        "text": "- 본체의 `PoseJointAim`은 하나의 관절 아래 여러 후손의 중심을 목표 방향에 맞춘다. MakeHuman의 공통 발끝 본이 없고 다섯 발가락 시작 본이 모두 있는 경우 NSCharacter가 이를 사용한다. 일부만 있거나 이름·의미 대응이 모호하면 임의로 대체하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000015",
+        "line": 22,
+        "text": "공개 `PoseJointAim`과 `HumanJointDirection`에 필드가 추가되어 C++ 바이너리는 새 헤더와 라이브러리로 다시 빌드해야 한다. `~/.local`의 실제 사용자 설치본은 이번 설치 소비자 검사로 교체하지 않았다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

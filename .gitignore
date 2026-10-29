@@ -1,2 +1,6 @@
 /build/
 .DS_Store
+!data/MakeHuman/base.obj
+
+!resources/MakeHuman/base.obj
+!resources/MakeHumanWardrobe/**/*.obj

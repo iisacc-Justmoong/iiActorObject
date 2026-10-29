@@ -1,0 +1,65 @@
+# 본체 소유 템플릿과 인체 생성
+
+## 소유와 의존성
+
+`Object3DEngine`이 `Object3DTemplate`과 중립 에셋·희소 변형 타깃·관절 기준점 자료를 소유한다. `Object3DTemplateHandle`은 참조 토큰이며 엔진 수명을 연장하지 않는다. `NSCharacter::CharacterTemplate`의 유일한 상태는 이 핸들이다. 생성한 `CharacterAsset` 역시 본체 에셋을 참조한다. 템플릿 제거는 기존 생성 에셋을 제거하지 않지만 엔진 소멸은 모든 참조를 만료시킨다.
+
+범용 템플릿·OBJ·희소 타깃·관절 재바인딩 계산은 본체 `src/iiActorObject/`에 있다. NSCharacter에는 인체 자료의 임시 해석과 참조 인터페이스만 둔다. 공용 기능은 `IIACTOROBJECT_WITH_NSCHARACTER=OFF`에서도 빌드된다. 인체 JSON 해석은 자체 C++23 SDK `iiJson`을 비공개 의존성으로 재사용한다. NSCharacter를 끄면 이 의존성도 사라진다. 공유 소비자에게 JSON 헤더를 노출하지 않으며 정적 패키지는 `iiJson`과 `iiSDKCore::Contracts`를 찾아 링크한다. Qt와 MakeHuman 애플리케이션 코드는 사용하지 않는다.
+
+## 생성과 편집 계약
+
+`Object3DTemplateDefinition`은 중립 에셋 참조, `TemplateTarget`, `TemplateJointBinding`과 선택적인 조절·드라이버 정의를 받는다. 타깃은 원본 control-point ID에 대한 희소 위치 변화이며 기본 가중치는 0~1이다. [의미 조절과 복합 드라이버](TemplateControls.md)는 양방향 슬라이더·곡선 응답·여러 입력 축의 곱을 본체에서 계산한다. 카탈로그는 런타임 표정 모프와 별개이므로 수백 개의 생성용 타깃을 렌더 메시마다 확장하지 않는다.
+
+`generate(values)`는 항상 중립 자료에서 새 에셋을 계산한다. 누적 슬라이더 오차가 없으며 같은 입력은 같은 소스 위치와 토폴로지를 갖는다. 알 수 없는 이름, 중복 입력, 비유한 값과 범위 밖 가중치를 거부한다. 실패한 생성은 에셋을 게시하지 않는다. 최대 4,096개 타깃과 1,600만 개 희소 변위를 허용한다. 타깃 조합의 해부학적 유효성은 별도의 인체 규칙에 속한다.
+
+`snapshot(values)`는 같은 생성 계산을 에셋 등록 없이 값으로 평가하고 작성용 점과 파생 렌더 메시·UV·머티리얼 캐시를 동기화한다. 이 값은 본체가 제공하는 임시 계산 결과이며 템플릿이나 원본 에셋을 소유하지 않는다.
+
+관절 head·tail은 원본 정점 집합의 중심이다. 작성용 토폴로지가 없으면 렌더 정점 ID로 앵커를 지정할 수 있다. 선택적인 세 기준점의 평면 법선이 회전 기준이다. 본의 +Y 축을 tail에 맞추고 부모 역행렬로 로컬 위치·회전을 계산한다. 평면이 방향과 평행하면 결정적인 보조 축을 사용한다. 영 길이 본과 비단위 bind scale은 거부한다. 본체 함수 `bindObject3DTemplateJoints`는 실패 시 기존 본 배열을 유지한다. 메시 정점이 아닌 오브젝트 좌표를 사용하는 경우에는 동일한 계산을 `bindObject3DJointFrames`로 직접 적용할 수 있다. 원본 앱의 전용 roll 규약과 동일하다는 주장은 하지 않는다.
+
+생성 후의 정점·가중치·모프·관절 편집은 `Object3DEditor`와 `CharacterEditor`를 사용한다. `CharacterTemplate::edit` 또는 본체 `editTemplate`은 파라미터와 후속 수작업 편집을 계층화하여 재계산한다. 계층별 활성 상태·강도·순서와 undo·redo를 제공한다. [비파괴 편집 계약](EditLayers.md)을 따른다. 일반 `generate`는 독립된 결과 에셋을 만든다.
+
+## 원본 작성 자료
+
+`parseObject3DObj`는 위치·UV·법선 분리 인덱스, 양수·음수 상대 인덱스, 폴리곤과 그룹을 읽는다. 위치·UV·layout·폴리곤 ID를 압축하지 않는다. `MeshTopologyDefinition::polygonGroups`는 그룹을, `hiddenPolygons`는 렌더링 제외 face ID를 보관한다. 보조 면을 숨겨도 관절 기준점과 타깃 ID는 유효하다. 작성용 인접 관계는 숨긴 면도 포함한다.
+
+OBJ는 순차 정의된 `v`, `vt`, `vn`, `g`, `f`를 지원한다. `o`, `s`, `usemtl`, `mtllib`은 형상 파싱에 영향을 주지 않는 레코드로 처리하고 외부 파일은 읽지 않는다. 머티리얼·smoothing group 의미 보존, RGB 정점 색, 자유 곡면과 forward reference는 미지원이다. 법선이 없으면 원본 위치별 평활 법선을 재계산한다. UV·법선의 혼합 누락은 거부한다. 기본 제한은 64 MiB, 위치 200만 개, 코너 800만 개이다. 타깃 형식은 `원본정점ID dx dy dz`이며 중복 ID를 거부한다.
+
+## CC0 인체 자료
+
+`resources/MakeHuman`은 공식 커밋 `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`의 수정 없는 그래픽 자료이다. [라이선스 구분](../resources/MakeHuman/LICENSE.md), [CC0 본문](../resources/MakeHuman/LICENSE.ASSETS.md), [경로·해시](../resources/MakeHuman/UPSTREAM-SHA256.json)를 포함한다. 위치 19,158개, UV 21,334개, 폴리곤 18,486개, 본 163개·스킨과 선택 타깃 472개이다. 기본 렌더링은 `body`의 사각형 13,378개를 사용한다. 보조 의상·눈·치아·혀·관절 표면은 보존하되 숨긴다.
+
+`loadMakeHumanTemplate(engine.reference(), directory)`는 지정한 디렉터리 안의 명시된 자료만 읽는다. 상대 경로와 심볼릭 링크의 디렉터리 탈출을 거부하고 총 읽기량은 기본 256 MiB이다. 원본 좌표를 기본 0.1배하여 미터로 바꾸고 발을 Y=0에 맞춘다. 파일과 JSON은 로딩 중에만 임시로 보관하며 완료된 중립 자료·타깃·관절 정의는 본체로 이동한다.
+
+```cpp
+iiActorObject::Object3DEngine engine;
+auto human = iiActorObject::NSCharacter::loadMakeHumanTemplate(
+    engine.reference(), "/path/to/share/iiActorObject/templates/MakeHuman");
+const std::array values{
+    iiActorObject::TemplateValue{"armslegs/upperlegs-height-incr", .5},
+    iiActorObject::TemplateValue{"nose/nose-scale-vert-incr", .4}};
+auto character = human.generate(values);
+```
+
+원본 타깃 목록은 `human.program().get().definition().targets`, 의미 조절 목록은 `human.controls()`로 조회한다. 원본 이름은 `부위/원본파일명`이며 확장자를 제외한다. 의미 조절은 `model/` 접두사·표시 이름·그룹과 조절 범위를 제공하며 같은 `TemplateValue`로 입력한다. 예를 들어 `model/nose/nose-scale-vert-decr-incr=-0.4`는 코의 세로 축소 타깃을 0.4만큼 적용한다. 원본 타깃과 의미 조절을 함께 입력하면 해당 타깃 기여도를 더하며 최종 범위 초과는 거부한다. `MakeHumanTemplateOptions::semanticControls=false`는 원본 타깃만 가진 프로그램을 만든다.
+
+[표면 연결](SkinSurface.md)은 의상·부속 메시를 현재 모양에 부착하고 생성 파라미터와 몸·의상 조형을 함께 유지한다. 이후 일부 CC0 머리카락·의상·눈썹·속눈썹의 선택과 몸 가림을 [인체 부속 자산](HumanAccessories.md)에 추가했다. 동적 자산 교체, 충돌 fitting과 제작용 외형·MetaHuman 토폴로지는 남아 있다.
+
+## 실행과 검사
+
+```sh
+cmake -S . -B build -DCMAKE_PREFIX_PATH="/path/to/iiJson;/path/to/iiSDKCore"
+cmake --build build --parallel 4
+ctest --test-dir build --output-on-failure --no-tests=error
+build/iiActorObjectTemplateCharacter resources/MakeHuman build/human/Custom.glb \
+  armslegs/upperlegs-height-incr=0.5 nose/nose-scale-vert-incr=0.4
+```
+
+테스트는 원본 ID·숨김 면 보존, 타깃 조합, 관절 이동, bind 포즈 표면 일치, 팔 스킨 변형, 비누적 재생성, 입력 실패와 소유권 만료를 검사한다. Blender 검사는 GLB·FBX·편집 GLB의 본·삼각형 수·바인드 일치와 팔 변형을 검사한다. CC5·Unreal·MetaHuman 적용과 최종 시각 품질은 별도 완료 조건이다.
+
+[얼굴 부속·이미지 연결](FaceAssets.md)의 PNG 불변 자료·눈·치아·혀·작성된 점 대응도 본체 소유이다. NSCharacter는 로딩 중의 인체 의미 해석과 본체 핸들만 가진다. 선택적인 `MakeHumanTemplateOptions::faceAssets`로 공식 CC0 별도 패키지를 지정한다. 실제 GLB·FBX의 이미지 바이트·재질 연결·점 위치와 눈·턱의 스킨 변형은 `FaceAssetsVerification-20261027.json`에 기록한다.
+
+[매크로 형상](HumanMorphology.md)은 별도 CC0 타깃 348개를 기존 472개에 연결한다. `macroAssets`와 `faceAssets`를 함께 지정할 수 있으며 총 읽기량 예산을 공유한다. 기본 혼합의 중립 반영과 접지, 모든 그래픽 타깃·드라이버와 부속 자료의 소유자는 본체이다.
+
+[얼굴 포즈 리그](FacePoseRig.md)는 별도 CC0 표현 자료를 `expressionAssets`로 연결한다. 본체의 포즈 프로그램·세션을 참조하는 `generateRigged`와 편집 후 재연결, 명시적인 모프 스냅샷 베이크를 제공한다. 포즈 프로그램은 프로젝트 버전 8부터 보관하며 현재 버전 선택과 복원 계약은 [프로젝트 형식](Object3DProject.md)을 따른다. 과거의 날짜별 보고서는 그 단계의 소스 스냅샷이다.
+
+기본 에셋에 [기준 자세 프로그램](PoseReference.md)이 있으면 새 생성물과 최초 편집 세션이 상속한다. 이후 세션의 설정·해제는 파라미터 재계산에도 보존된다. 계산은 본체의 최종 바인드 골격에서 수행한다.

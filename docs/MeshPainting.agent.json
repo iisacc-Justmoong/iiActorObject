@@ -1,0 +1,657 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:aa260d9ae611433791f26d894302b9e759867a3040c59514cb1f3719e4bc4c86",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/MeshPainting.md",
+    "sha256": "8b7274d24b42f600aeb59735a452436d1dcad6c7705544dd847a51411b59ad2e",
+    "bytes": 9246,
+    "line_count": 83,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "원본 점 선택·마스크와 브러시 스트로크",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 원본 점 선택·마스크와 브러시 스트로크\n",
+      "level": 1,
+      "title": "원본 점 선택·마스크와 브러시 스트로크"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "heading",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "## 소유권과 ID\n",
+      "level": 2,
+      "title": "소유권과 ID"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "선택·브러시·스킨 계산은 공용 본체 `MeshEditing`·`SkinPainting`에 있다. 편집기와 레이어의 장기 마스크 자료는 `Object3DEngine`이 소유한다. NSCharacter는 본체 함수를 호출하며 별도 브러시 저장소를 만들지 않는다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "토폴로지가 있는 메시는 원본 제어점 ID를 사용한다. 같은 점의 UV·법선 경계에 여러 렌더 정점이 있어도 한 번만 편집한다. 토폴로지가 없는 메시는 렌더 정점 ID를 사용한다. 마스크는 이 점 수와 같은 길이의 0~1 배열이며, 원본 ID를 압축하거나 사용하지 않는 점을 삭제하지 않는다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "## 선택과 거리\n",
+      "level": 2,
+      "title": "선택과 거리"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "`makeMeshPointMask`는 지정한 점 ID의 선택을 만들고, `makeMeshBrushMask`는 구형 브러시의 강도·감쇠를 계산한다. `growMeshPointMask`는 원본 폴리곤의 변 이웃으로 선택을 확장한다. `smoothMeshPointMask`는 Jacobi 평균으로 경계를 완화한다. 반전·합집합·교집합·차집합·곱 연산도 제공한다. 잘못된 ID·중복 ID·배열 길이·비유한 값·범위 밖 가중치를 거부한다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "[화면 영역 선택](MeshScreenSelection.md)은 호스트 투영·선택적 깊이와 변형된 렌더 위치에서 같은 원본 점 마스크를 만든다. 결과를 기존 선택 집합과 브러시 마스크에 연결할 수 있다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "`MeshBrushDistance::Euclidean`은 오브젝트 공간의 직선 거리이다. `Surface`는 최근접 표면의 원본 폴리곤 모서리를 시작점으로 삼고 변의 길이를 누적하는 Dijkstra 거리이다. 정확한 연속 표면 측지선 해법이 아니라 메시 변 그래프 근사이다. 연결되지 않은 뒤쪽 표면이나 가까운 다른 부위로 곧바로 뚫고 들어가지 않는다. 숨김 폴리곤은 이웃에서 제외하며, 표면 경로가 없는 사용하지 않는 점은 Surface 모드에서 도달하지 않는다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "브러시 감쇠는 Constant·Linear·Smooth·Sharp이다. 각 샘플의 `strength`는 0~1이고 반경은 양의 유한 값이다. 기본은 보이는 점만 처리한다. 스트로크의 거리·이웃은 시작 스냅샷에서 평가하므로 누적 도중 거리 기준이 바뀌지 않는다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 스킨 페인팅\n",
+      "level": 2,
+      "title": "스킨 페인팅"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "`SkinPainter::paint`와 `Object3DEditor::paintWeights`는 여러 샘플을 순서대로 누적한다. Replace는 활성 본의 목표 가중치로 보간하고, Add·Subtract는 강도와 `value`에 따라 더하거나 뺀다. 나머지 잠기지 않은 본은 남은 질량을 비례 배분한다. Smooth는 이웃의 **전체 영향 행**을 평균하므로 활성 본 인수로 `NoBone`을 사용한다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "`lockedBones`의 수치는 유지한다. 활성 본이나 fallback 본을 잠금과 충돌하게 지정하면 거부한다. 가중치를 줄였지만 남은 질량을 받을 다른 본이 없으면 기본적으로 유일한 영향의 정규화를 유지한다. `fallbackBone`을 명시하면 그 본으로 남은 질량을 보낼 수 있다. 임의 본을 추측하여 추가하지 않는다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "`maximumInfluences=0`은 모든 양의 영향을 유지한다. 양수일 때는 잠금 본을 보존한 뒤 큰 영향부터 선택하고, 잠기지 않은 부분만 정규화한다. 제한 때문에 잠금 본과 남은 질량을 함께 보존할 수 없으면 스트로크 전체를 거부한다. 빈 작성용 스킨 행은 기존 루트 규약으로 계산하되, 실질적인 변화가 없으면 원래 빈 행을 유지한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "heading",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "## 조형과 대칭\n",
+      "level": 2,
+      "title": "조형과 대칭"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "`MeshSculptor::stroke`와 `Object3DEditor::sculptStroke`는 같은 선택·감쇠·거리 규약을 사용한다. 샘플별 변위에 강도와 마스크를 곱한다. 선택적으로 평면 반사를 적용하며, 겹치는 원본·반사 브러시는 최대 강도와 변위의 가중 평균을 사용한다. 중앙 점을 두 번 밀거나 평면의 법선 방향으로 이탈시키지 않기 위한 규약이다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "위치를 바꾼 메시만 기준 법선과 렌더 캐시를 갱신한다. 스킨만 바꿀 때는 아티스트 기준 법선을 다시 계산하지 않는다. 실패하면 점·스킨·렌더 캐시·편집 이력을 변경하지 않는다.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "heading",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "## 이력과 레이어 마스크\n",
+      "level": 2,
+      "title": "이력과 레이어 마스크"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "paragraph",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "한 번의 호출은 하나의 스트로크이다. 일반 편집기는 하나의 snapshot 이력을, 템플릿 편집기는 하나의 보정 레이어를 만든다. 실제 변화가 없으면 revision과 이력을 늘리지 않는다. 빈 스트로크·강도 0·마스크 0도 같은 규약을 따른다. 입력 샘플을 다시 실행하는 절차 대신 원본 ID별 결과 보정을 보관하므로, 생성 파라미터가 바뀐 뒤에도 같은 점의 편집이 유지된다.\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "`setLayerPointMasks(id, masks)`는 기존 레이어의 점 마스크를 바꾼다. 배열의 mesh ID가 생략되면 그 메시에는 마스크 1을 적용한다. 비어 있는 전체 목록은 마스크 제거이며, 모두 1인 행은 정규화하여 생략한다. 서로 다른 메시의 행은 ID 순서로 보관한다. 마스크 배열은 불변으로 공유하여 이름·강도·파라미터 변경마다 큰 배열을 복제하지 않는다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "paragraph",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "점 마스크는 레이어 강도와 곱하여 위치·스킨·모프 위치·명시적 모프 법선에 적용한다. 계산형 법선은 바뀐 표면에서 계산하므로 인접 점에도 물리적인 법선 변화가 생길 수 있다. 모프의 논리 이름·원본 target ID, UV·관절·머티리얼 같은 점 이외의 자료는 이 마스크의 대상이 아니다. 점 마스크는 레이어의 메타데이터 전체를 비활성화하는 기능과 구분한다.\n"
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "마스크 변경은 undo·redo할 수 있다. 몸의 위치 보정 마스크를 바꾸면 표면에 연결한 의상도 갱신하며, 의상 자체의 보정은 유지한다. `layerPointMasks`가 반환하는 span은 본체의 참조이므로 편집 상태를 바꾸거나 엔진을 소멸시킨 뒤 보관하여 사용하지 않는다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "heading",
+      "start_line": 43,
+      "end_line": 43,
+      "raw": "## 본체에서 사용\n",
+      "level": 2,
+      "title": "본체에서 사용"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "paragraph",
+      "start_line": 45,
+      "end_line": 45,
+      "raw": "다음 코드는 호스트가 소유한 `Object3DEngine`의 템플릿 편집 세션을 사용한다. `program`은 같은 엔진에 등록한 `Object3DTemplateHandle`이고, mesh 0의 bone 2가 유효한 입력을 전제로 한다.\n"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 46,
+      "end_line": 46,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "fenced_code",
+      "start_line": 47,
+      "end_line": 69,
+      "raw": "```cpp\n#include <iiActorObject/Object3DEditor.h>\n#include <array>\n\nauto session = engine.editTemplate(program);\nauto &editor = session.get();\niiActorObject::SkinPaintOptions options;\noptions.value = .7;\noptions.lockedBones = {0};\noptions.brush.distance = iiActorObject::MeshBrushDistance::Surface;\nconst std::array stroke{\n    iiActorObject::MeshBrushSample{{0, 1.2, .1}, .1, .5},\n    iiActorObject::MeshBrushSample{{.02, 1.2, .1}, .1, .5}\n};\nconst auto result = editor.paintWeights(0, 2, stroke, options);\nif (result.changedPoints != 0) {\n    const auto layer = editor.layers().back().id;\n    auto weights = iiActorObject::makeMeshBrushMask(\n        editor.object().get().data().meshes[0], stroke.front());\n    const iiActorObject::MeshPointMask mask{0, std::move(weights)};\n    editor.setLayerPointMasks(layer, std::span(&mask, 1));\n}\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/Object3DEditor.h>\n#include <array>\n\nauto session = engine.editTemplate(program);\nauto &editor = session.get();\niiActorObject::SkinPaintOptions options;\noptions.value = .7;\noptions.lockedBones = {0};\noptions.brush.distance = iiActorObject::MeshBrushDistance::Surface;\nconst std::array stroke{\n    iiActorObject::MeshBrushSample{{0, 1.2, .1}, .1, .5},\n    iiActorObject::MeshBrushSample{{.02, 1.2, .1}, .1, .5}\n};\nconst auto result = editor.paintWeights(0, 2, stroke, options);\nif (result.changedPoints != 0) {\n    const auto layer = editor.layers().back().id;\n    auto weights = iiActorObject::makeMeshBrushMask(\n        editor.object().get().data().meshes[0], stroke.front());\n    const iiActorObject::MeshPointMask mask{0, std::move(weights)};\n    editor.setLayerPointMasks(layer, std::span(&mask, 1));\n}\n",
+      "closed": true
+    },
+    {
+      "id": "b000048",
+      "kind": "blank",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "\n"
+    },
+    {
+      "id": "b000049",
+      "kind": "paragraph",
+      "start_line": 71,
+      "end_line": 71,
+      "raw": "`NSCharacter::CharacterEditor::paintWeights`와 `setLayerPointMasks`도 같은 호출 규약이다. 캐릭터 어댑터는 본체의 세션을 참조하며, 위 스트로크의 결과나 마스크를 별도 저장하지 않는다.\n"
+    },
+    {
+      "id": "b000050",
+      "kind": "blank",
+      "start_line": 72,
+      "end_line": 72,
+      "raw": "\n"
+    },
+    {
+      "id": "b000051",
+      "kind": "heading",
+      "start_line": 73,
+      "end_line": 73,
+      "raw": "## 저장과 제한\n",
+      "level": 2,
+      "title": "저장과 제한"
+    },
+    {
+      "id": "b000052",
+      "kind": "blank",
+      "start_line": 74,
+      "end_line": 74,
+      "raw": "\n"
+    },
+    {
+      "id": "b000053",
+      "kind": "paragraph",
+      "start_line": 75,
+      "end_line": 75,
+      "raw": "`.ii3dproject` 버전 3부터 공유 마스크 사전과 레이어의 사전 참조를 저장한다. 버전 4는 관절 보정을, 버전 5는 [의미 조절·복합 드라이버](TemplateControls.md)를 추가했다. 현재는 필요한 자료에 따라 버전 8~31을 기록하며 버전 1~31을 읽는다. 디코딩 중 배열·값·메시 참조·점 수·사전 참조를 검사하고, 비활성 레이어도 검사한다. 공유하지 않는 외부 원본을 참조하거나 실행 코드를 저장하지 않는다.\n"
+    },
+    {
+      "id": "b000054",
+      "kind": "blank",
+      "start_line": 76,
+      "end_line": 76,
+      "raw": "\n"
+    },
+    {
+      "id": "b000055",
+      "kind": "paragraph",
+      "start_line": 77,
+      "end_line": 77,
+      "raw": "스트로크는 최대 4,096개 입력 샘플이며 기본 점 방문 예산은 1억 2,800만 회이다. 대칭 조형은 두 footprint의 비용을 반영한다. 방문 예산은 `MeshBrushSettings`에서 조절한다. 이 예산은 입력 규모의 제한이며 전체 프로세스 메모리나 지연 시간의 보장은 아니다.\n"
+    },
+    {
+      "id": "b000056",
+      "kind": "blank",
+      "start_line": 78,
+      "end_line": 78,
+      "raw": "\n"
+    },
+    {
+      "id": "b000057",
+      "kind": "paragraph",
+      "start_line": 79,
+      "end_line": 79,
+      "raw": "[명명 선택 집합](NamedPointSelections.md)은 본체의 원본 점 마스크를 이력과 프로젝트에 보관하고 브러시나 레이어에 재사용한다. 화면 공간의 드래그 선택 UI, 런타임 천 충돌, 제작용 MetaHuman 데이터와 CC5·Unreal의 실제 편집 검증은 별도 남은 범위이다.\n"
+    },
+    {
+      "id": "b000058",
+      "kind": "blank",
+      "start_line": 80,
+      "end_line": 80,
+      "raw": "\n"
+    },
+    {
+      "id": "b000059",
+      "kind": "paragraph",
+      "start_line": 81,
+      "end_line": 81,
+      "raw": "소스 해시·빌드 구성·회귀 테스트·설치 소비자와 실제 Blender 수치 검증은 [PaintingVerification-20261026.json](PaintingVerification-20261026.json)에 기록한다. 검증용 인체는 CC0 MakeHuman 자료이며, 약식 의상은 그 표면에서 만든 시험용 메시이다. 제작용 MetaHuman 또는 완성된 의상 품질의 증거로 사용하지 않는다.\n"
+    },
+    {
+      "id": "b000060",
+      "kind": "blank",
+      "start_line": 82,
+      "end_line": 82,
+      "raw": "\n"
+    },
+    {
+      "id": "b000061",
+      "kind": "paragraph",
+      "start_line": 83,
+      "end_line": 83,
+      "raw": "현재 프로젝트 버전과 이전 입력의 호환 범위는 [자체 프로젝트 형식](Object3DProject.md)을 따른다. 이미지 자원과 작성된 점 대응은 [얼굴 부속 문서](FaceAssets.md)를 따른다. 앞선 날짜별 보고서는 당시 소스의 검증 기록이다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "원본 점 선택·마스크와 브러시 스트로크",
+      "anchor": "원본-점-선택마스크와-브러시-스트로크",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000003",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "소유권과 ID",
+      "anchor": "소유권과-id",
+      "start_line": 3
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "선택과 거리",
+      "anchor": "선택과-거리",
+      "start_line": 9
+    },
+    {
+      "block_id": "b000019",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "스킨 페인팅",
+      "anchor": "스킨-페인팅",
+      "start_line": 19
+    },
+    {
+      "block_id": "b000027",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "조형과 대칭",
+      "anchor": "조형과-대칭",
+      "start_line": 27
+    },
+    {
+      "block_id": "b000033",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "이력과 레이어 마스크",
+      "anchor": "이력과-레이어-마스크",
+      "start_line": 33
+    },
+    {
+      "block_id": "b000043",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "본체에서 사용",
+      "anchor": "본체에서-사용",
+      "start_line": 43
+    },
+    {
+      "block_id": "b000051",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "저장과 제한",
+      "anchor": "저장과-제한",
+      "start_line": 73
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 7,
+        "text": "토폴로지가 있는 메시는 원본 제어점 ID를 사용한다. 같은 점의 UV·법선 경계에 여러 렌더 정점이 있어도 한 번만 편집한다. 토폴로지가 없는 메시는 렌더 정점 ID를 사용한다. 마스크는 이 점 수와 같은 길이의 0~1 배열이며, 원본 ID를 압축하거나 사용하지 않는 점을 삭제하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 15,
+        "text": "`MeshBrushDistance::Euclidean`은 오브젝트 공간의 직선 거리이다. `Surface`는 최근접 표면의 원본 폴리곤 모서리를 시작점으로 삼고 변의 길이를 누적하는 Dijkstra 거리이다. 정확한 연속 표면 측지선 해법이 아니라 메시 변 그래프 근사이다. 연결되지 않은 뒤쪽 표면이나 가까운 다른 부위로 곧바로 뚫고 들어가지 않는다. 숨김 폴리곤은 이웃에서 제외하며, 표면 경로가 없는 사용하지 않는 점은 Surface 모드에서 도달하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000023",
+        "line": 23,
+        "text": "`lockedBones`의 수치는 유지한다. 활성 본이나 fallback 본을 잠금과 충돌하게 지정하면 거부한다. 가중치를 줄였지만 남은 질량을 받을 다른 본이 없으면 기본적으로 유일한 영향의 정규화를 유지한다. `fallbackBone`을 명시하면 그 본으로 남은 질량을 보낼 수 있다. 임의 본을 추측하여 추가하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000031",
+        "line": 31,
+        "text": "위치를 바꾼 메시만 기준 법선과 렌더 캐시를 갱신한다. 스킨만 바꿀 때는 아티스트 기준 법선을 다시 계산하지 않는다. 실패하면 점·스킨·렌더 캐시·편집 이력을 변경하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000037",
+        "line": 37,
+        "text": "`setLayerPointMasks(id, masks)`는 기존 레이어의 점 마스크를 바꾼다. 배열의 mesh ID가 생략되면 그 메시에는 마스크 1을 적용한다. 비어 있는 전체 목록은 마스크 제거이며, 모두 1인 행은 정규화하여 생략한다. 서로 다른 메시의 행은 ID 순서로 보관한다. 마스크 배열은 불변으로 공유하여 이름·강도·파라미터 변경마다 큰 배열을 복제하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000041",
+        "line": 41,
+        "text": "마스크 변경은 undo·redo할 수 있다. 몸의 위치 보정 마스크를 바꾸면 표면에 연결한 의상도 갱신하며, 의상 자체의 보정은 유지한다. `layerPointMasks`가 반환하는 span은 본체의 참조이므로 편집 상태를 바꾸거나 엔진을 소멸시킨 뒤 보관하여 사용하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000049",
+        "line": 71,
+        "text": "`NSCharacter::CharacterEditor::paintWeights`와 `setLayerPointMasks`도 같은 호출 규약이다. 캐릭터 어댑터는 본체의 세션을 참조하며, 위 스트로크의 결과나 마스크를 별도 저장하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000053",
+        "line": 75,
+        "text": "`.ii3dproject` 버전 3부터 공유 마스크 사전과 레이어의 사전 참조를 저장한다. 버전 4는 관절 보정을, 버전 5는 [의미 조절·복합 드라이버](TemplateControls.md)를 추가했다. 현재는 필요한 자료에 따라 버전 8~31을 기록하며 버전 1~31을 읽는다. 디코딩 중 배열·값·메시 참조·점 수·사전 참조를 검사하고, 비활성 레이어도 검사한다. 공유하지 않는 외부 원본을 참조하거나 실행 코드를 저장하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000059",
+        "line": 81,
+        "text": "소스 해시·빌드 구성·회귀 테스트·설치 소비자와 실제 Blender 수치 검증은 [PaintingVerification-20261026.json](PaintingVerification-20261026.json)에 기록한다. 검증용 인체는 CC0 MakeHuman 자료이며, 약식 의상은 그 표면에서 만든 시험용 메시이다. 제작용 MetaHuman 또는 완성된 의상 품질의 증거로 사용하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000013",
+        "label": "화면 영역 선택",
+        "target": "MeshScreenSelection.md",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000053",
+        "label": "의미 조절·복합 드라이버",
+        "target": "TemplateControls.md",
+        "kind": "relative",
+        "line": 75
+      },
+      {
+        "block_id": "b000057",
+        "label": "명명 선택 집합",
+        "target": "NamedPointSelections.md",
+        "kind": "relative",
+        "line": 79
+      },
+      {
+        "block_id": "b000059",
+        "label": "PaintingVerification-20261026.json",
+        "target": "PaintingVerification-20261026.json",
+        "kind": "relative",
+        "line": 81
+      },
+      {
+        "block_id": "b000061",
+        "label": "자체 프로젝트 형식",
+        "target": "Object3DProject.md",
+        "kind": "relative",
+        "line": 83
+      },
+      {
+        "block_id": "b000061",
+        "label": "얼굴 부속 문서",
+        "target": "FaceAssets.md",
+        "kind": "relative",
+        "line": 83
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}
