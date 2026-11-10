@@ -1,9 +1,10 @@
 #include <iiActorObject/Usd.h>
 
 #include <algorithm>
-#include <charconv>
 #include <cmath>
 #include <limits>
+#include <locale>
+#include <sstream>
 #include <stdexcept>
 #include <string_view>
 #include <unordered_map>
@@ -85,11 +86,12 @@ std::string quoted(std::string_view text)
 std::string number(double value)
 {
     if (!std::isfinite(value)) throw std::invalid_argument("USD numeric values must be finite");
-    char buffer[64];
-    const auto result = std::to_chars(buffer, buffer + sizeof buffer, value,
-        std::chars_format::general, std::numeric_limits<double>::max_digits10);
-    if (result.ec != std::errc{}) throw std::invalid_argument("USD numeric value is not representable");
-    return {buffer, result.ptr};
+    std::ostringstream output;
+    output.imbue(std::locale::classic());
+    output.precision(std::numeric_limits<double>::max_digits10);
+    output << value;
+    if (!output) throw std::invalid_argument("USD numeric value is not representable");
+    return output.str();
 }
 
 std::string assetLiteral(std::string path)

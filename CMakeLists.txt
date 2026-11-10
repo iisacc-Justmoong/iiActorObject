@@ -17,6 +17,9 @@ include(CMakePackageConfigHelpers)
 include(GenerateExportHeader)
 include(CTest)
 option(BUILD_SHARED_LIBS "Build iiActorObject as a shared library" ON)
+if(EMSCRIPTEN AND BUILD_SHARED_LIBS)
+    set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
+endif()
 option(IIACTOROBJECT_WITH_NSCHARACTER "Build character-specific views and humanoid recipes above the core 3D engine" ON)
 option(IIACTOROBJECT_WITH_DNA "Build the MIT OpenRigLogic DNA reader, writer and evaluator" ON)
 option(IIACTOROBJECT_WITH_VISUALCODEC "Build the optional iiVisualCodec external-image adapter" OFF)
@@ -685,6 +688,14 @@ else()
     endif()
 endif()
 add_library(iiActorObject::iiActorObject ALIAS iiActorObject)
+if(BUILD_SHARED_LIBS)
+    if(CMAKE_SYSTEM_NAME STREQUAL "iOS")
+        set_target_properties(iiActorObject PROPERTIES FRAMEWORK TRUE)
+    elseif(EMSCRIPTEN)
+        target_compile_options(iiActorObject PRIVATE -fPIC)
+        target_link_options(iiActorObject PRIVATE -sSIDE_MODULE=1)
+    endif()
+endif()
 if(IIACTOROBJECT_WITH_DNA)
     include(cmake/OpenRigLogic.cmake)
 endif()
@@ -720,17 +731,43 @@ set_target_properties(iiActorObject PROPERTIES
 
 if(IIACTOROBJECT_WITH_VISUALCODEC)
     find_package(iiVisualCodec 0.2 CONFIG REQUIRED COMPONENTS Image)
-    add_library(iiActorObjectVisualCodec STATIC src/Interchange/FBX/FbxVisualImageResolver.cpp)
+    add_library(iiActorObjectVisualCodec src/Interchange/FBX/FbxVisualImageResolver.cpp)
     add_library(iiActorObject::VisualCodec ALIAS iiActorObjectVisualCodec)
+    generate_export_header(iiActorObjectVisualCodec BASE_NAME IIACTOROBJECT_VISUALCODEC
+        EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/include/iiActorObject/VisualCodecExport.h")
+    if(NOT BUILD_SHARED_LIBS)
+        target_compile_definitions(iiActorObjectVisualCodec PUBLIC IIACTOROBJECT_VISUALCODEC_STATIC_DEFINE)
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "iOS")
+        set_target_properties(iiActorObjectVisualCodec PROPERTIES FRAMEWORK TRUE)
+    elseif(EMSCRIPTEN)
+        target_compile_options(iiActorObjectVisualCodec PRIVATE -fPIC)
+        target_link_options(iiActorObjectVisualCodec PRIVATE -sSIDE_MODULE=1)
+    elseif(APPLE)
+        set_target_properties(iiActorObjectVisualCodec PROPERTIES INSTALL_RPATH "@loader_path")
+    elseif(UNIX)
+        set_target_properties(iiActorObjectVisualCodec PROPERTIES INSTALL_RPATH "$ORIGIN")
+    endif()
     target_compile_features(iiActorObjectVisualCodec PUBLIC cxx_std_23)
     target_link_libraries(iiActorObjectVisualCodec PUBLIC iiActorObject::iiActorObject PRIVATE iiVisualCodec::Image)
     set_target_properties(iiActorObjectVisualCodec PROPERTIES CXX_EXTENSIONS OFF POSITION_INDEPENDENT_CODE ON EXPORT_NAME VisualCodec)
-    install(TARGETS iiActorObjectVisualCodec EXPORT iiActorObjectVisualCodecTargets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    install(TARGETS iiActorObjectVisualCodec EXPORT iiActorObjectVisualCodecTargets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR})
     install(FILES src/Interchange/FBX/FbxVisualImageResolver.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiActorObject)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/iiActorObject/VisualCodecExport.h"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiActorObject)
     if(BUILD_TESTING)
         add_executable(iiActorObjectFbxVisualImageTests tests/FbxVisualImageResolverTest.cpp)
         target_link_libraries(iiActorObjectFbxVisualImageTests PRIVATE iiActorObject::VisualCodec iiVisualCodec::Image)
         set_target_properties(iiActorObjectFbxVisualImageTests PROPERTIES CXX_EXTENSIONS OFF)
+        if(BUILD_SHARED_LIBS AND NOT CMAKE_CROSSCOMPILING)
+            add_test(NAME iiActorObject.fbx_visual_image.shared_type COMMAND "${CMAKE_COMMAND}"
+                "-DTARGET_TYPE=$<TARGET_PROPERTY:iiActorObjectVisualCodec,TYPE>"
+                -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/shared_target_type.cmake")
+            add_test(NAME iiActorObject.fbx_visual_image.shared_link COMMAND "${CMAKE_COMMAND}"
+                "-DIMAGE=$<TARGET_FILE:iiActorObjectFbxVisualImageTests>" "-DEXPECTED=$<TARGET_FILE:iiActorObjectVisualCodec>"
+                -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/shared_link.cmake")
+        endif()
         foreach(_case resolution limits passthrough embedded)
             add_test(NAME iiActorObject.fbx_visual_image.${_case} COMMAND iiActorObjectFbxVisualImageTests ${_case}
                 "${CMAKE_CURRENT_SOURCE_DIR}/resources/fixtures/fbx/external-textures-ascii.fbx"
@@ -753,7 +790,11 @@ if(IIACTOROBJECT_BUILD_TOOLS)
     endif()
     install(TARGETS iiActorObjectRigSamples RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 endif()
-option(IIACTOROBJECT_BUILD_EXAMPLE "Build the standalone character authoring example" ON)
+option(IIACTOROBJECT_BUILD_EXAMPLE "Build the standalone character authoring example" OFF)
+if(BUILD_TESTING AND NOT IIACTOROBJECT_BUILD_EXAMPLE)
+    add_test(NAME iiActorObject.default_targets COMMAND ${CMAKE_COMMAND}
+        "-DBUILD_DIR=${CMAKE_CURRENT_BINARY_DIR}" -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/DefaultTargetsTest.cmake")
+endif()
 if(IIACTOROBJECT_BUILD_EXAMPLE)
     add_executable(iiActorObjectPoseSnapshot example/PoseSnapshot.cpp)
     target_link_libraries(iiActorObjectPoseSnapshot PRIVATE iiActorObject::iiActorObject)
@@ -778,6 +819,11 @@ if(IIACTOROBJECT_BUILD_EXAMPLE AND IIACTOROBJECT_WITH_NSCHARACTER)
 endif()
 
 if(BUILD_TESTING)
+    if(WIN32)
+        # Compile public headers with the Windows SDK's min/max macros active.
+        add_library(iiActorObjectWindowsHeaderMacros OBJECT tests/WindowsHeaderMacrosTest.cpp)
+        target_link_libraries(iiActorObjectWindowsHeaderMacros PRIVATE iiActorObject::iiActorObject)
+    endif()
     add_executable(iiActorObjectGlbAnimationImportTests tests/GlbAnimationSourceTest.cpp)
     target_link_libraries(iiActorObjectGlbAnimationImportTests PRIVATE iiActorObject::iiActorObject)
     set_target_properties(iiActorObjectGlbAnimationImportTests PROPERTIES CXX_EXTENSIONS OFF)
@@ -2561,6 +2607,7 @@ install(TARGETS iiActorObject EXPORT iiActorObjectTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 install(FILES iiActorObject.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(FILES

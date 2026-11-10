@@ -20,7 +20,7 @@ inline Quaternion deformationRotation(const Pose &pose,BoneIndex bone)
     // Equal positive scale ratios produce an isotropic correction even when
     // each original bind scale is itself nonuniform or reflected.
     const Vector3 ratios{next.scale.x/base.scale.x,next.scale.y/base.scale.y,next.scale.z/base.scale.z};
-    const auto largest=std::max({ratios.x,ratios.y,ratios.z});
+    const auto largest=(std::max)({ratios.x,ratios.y,ratios.z});
     if(!finite(ratios)||ratios.x<=0||ratios.y<=0||ratios.z<=0||
        std::abs(ratios.x-ratios.y)>1e-12*largest||std::abs(ratios.x-ratios.z)>1e-12*largest)
         throw std::invalid_argument("Deformation bind correction cannot be represented as a rotation");

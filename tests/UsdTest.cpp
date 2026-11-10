@@ -9,6 +9,7 @@
 #include <limits>
 #include <locale>
 #include <numbers>
+#include <sstream>
 #include <stdexcept>
 
 using namespace iiActorObject;
@@ -76,6 +77,25 @@ void layer()
     const auto underLocale = one(actor, "Player");
     std::locale::global(old);
     CHECK(underLocale.usda == result.usda);
+
+    // USD numbers must round-trip independently of the process locale, even on
+    // platforms without floating-point std::to_chars at the deployment target.
+    const std::array placements{UsdActorPlacement{&actor, "Player"}};
+    for (const double value : {0.1, std::numbers::pi, std::nextafter(1.0, 2.0),
+             std::numeric_limits<double>::min(), std::numeric_limits<double>::max()}) {
+        UsdStageOptions options;
+        options.metersPerUnit = value;
+        std::locale::global(std::locale(old, new Comma));
+        const auto text = exportUsdLayer(placements, options).usda;
+        std::locale::global(old);
+        const auto start = text.find("metersPerUnit = ");
+        CHECK(start != std::string::npos);
+        std::istringstream parsed(text.substr(start + std::string_view("metersPerUnit = ").size()));
+        parsed.imbue(std::locale::classic());
+        double decoded = 0;
+        parsed >> decoded;
+        CHECK(parsed && decoded == value);
+    }
 }
 
 void hierarchy()

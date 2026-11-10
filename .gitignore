@@ -1,4 +1,10 @@
 /build/
+/resources/.recovery/
+/resources/.state/
+/resources/.t/
+**/.iisacc-temporary.lock
+**/.*.iisacc-preview
+**/*.iisacc.json
 .DS_Store
 !data/MakeHuman/base.obj
 

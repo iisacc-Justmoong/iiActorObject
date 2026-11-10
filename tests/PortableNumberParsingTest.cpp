@@ -17,6 +17,8 @@ int main()
     if(!readNumber("-.5e-1",value)||std::abs(value+.05)>1e-15)return 1;
     if(!readNumber("5e-324",value)||value!=std::numeric_limits<double>::denorm_min())return 2;
     if(!readNumber("0e-999",value)||value!=0)return 3;
+    if(!readNumber("-0",value)||value!=0||!std::signbit(value))return 6;
+    if(!readNumber("1.7976931348623157e308",value)||value!=std::numeric_limits<double>::max())return 7;
     for(const std::string_view invalid:{"", "+1", ".", "nan", "inf", "1,5", "1e", "1e400", "1e-999", "0x1", " 1", "1x"})
         if(readNumber(invalid,value))return 4;
     int integer=0;if(!readNumber("-42",integer)||integer!=-42||readNumber("42x",integer))return 5;

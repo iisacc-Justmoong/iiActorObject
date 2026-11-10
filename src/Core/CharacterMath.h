@@ -39,7 +39,7 @@ inline Vector3 unit(Vector3 v)
 {
     if (!finite(v))
         throw std::invalid_argument("Vector must be finite");
-    const double scale = std::max({std::abs(v.x), std::abs(v.y), std::abs(v.z)});
+    const double scale = (std::max)({std::abs(v.x), std::abs(v.y), std::abs(v.z)});
     if (scale == 0)
         throw std::invalid_argument("Vector must be nonzero");
     v = {v.x / scale, v.y / scale, v.z / scale};

@@ -18,7 +18,7 @@ inline bool sameSkeletalMatrix(const Matrix4 &a,const Matrix4 &b,double toleranc
 {
     for(std::size_t i=0;i<16;++i)
         if(!std::isfinite(a.elements()[i])||!std::isfinite(b.elements()[i])||
-           std::abs(a.elements()[i]-b.elements()[i])>tolerance*std::max({1.0,std::abs(a.elements()[i]),std::abs(b.elements()[i])}))return false;
+           std::abs(a.elements()[i]-b.elements()[i])>tolerance*(std::max)({1.0,std::abs(a.elements()[i]),std::abs(b.elements()[i])}))return false;
     return true;
 }
 inline Transform skeletalMatrixTransform(const Matrix4 &matrix,double tolerance=1e-9)
@@ -29,7 +29,7 @@ inline Transform skeletalMatrixTransform(const Matrix4 &matrix,double tolerance=
     Vector3 x{m[0],m[1],m[2]},y{m[4],m[5],m[6]},z{m[8],m[9],m[10]},scale{length(x),length(y),length(z)};
     if(!finite(scale)||scale.x==0||scale.y==0||scale.z==0)throw std::invalid_argument("Singular skeletal matrix");
     x={x.x/scale.x,x.y/scale.x,x.z/scale.x};y={y.x/scale.y,y.y/scale.y,y.z/scale.y};z={z.x/scale.z,z.y/scale.z,z.z/scale.z};
-    if(std::max({std::abs(dot(x,y)),std::abs(dot(x,z)),std::abs(dot(y,z))})>tolerance)throw std::invalid_argument("Skeletal edit requires non-representable local shear");
+    if((std::max)({std::abs(dot(x,y)),std::abs(dot(x,z)),std::abs(dot(y,z))})>tolerance)throw std::invalid_argument("Skeletal edit requires non-representable local shear");
     if(dot(cross(x,y),z)<0){scale.x=-scale.x;x=mul(x,-1);}
     Transform result{{m[12],m[13],m[14]},rotationFromAxes(x,y,z),scale};result=skeletalTransform(result);
     if(!sameSkeletalMatrix(matrix,result.matrix(),tolerance))throw std::invalid_argument("Skeletal matrix cannot be represented by TRS");

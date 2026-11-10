@@ -21,7 +21,7 @@
       "document_id": "urn:iisacc:document:27fdc3e1e6d15ed34465088af2593a4e1d2173b5d2c8aee6963bee7bc0b049cb",
       "source": "README.md",
       "agent_json": "docs/entrypoints/README.agent.json",
-      "source_sha256": "6ed22dd3b3c58d58fa740db7ba729aba72c0a36ec8b6de3e7183941f94b090f4",
+      "source_sha256": "43d8898c859522904c2f4a96c992e04a0fbe2e62c78de1d721c4f7878bb40434",
       "role": "overview"
     },
     {
@@ -172,6 +172,13 @@
       "role": "evidence"
     },
     {
+      "document_id": "urn:iisacc:document:e8718f8766817d4a38f70c742a4e472456b221b9ec341dda1ff3be13faed24e1",
+      "source": "docs/BuildLayout.md",
+      "agent_json": "docs/BuildLayout.agent.json",
+      "source_sha256": "1b59db6ecc4de7b68a66cd70efd10fed26620e4290807503d47d3ac819f4fe98",
+      "role": "guide"
+    },
+    {
       "document_id": "urn:iisacc:document:72ed44adbca098b75dd0d232852882e5b53da88125ecbd0cd91fe49b4dc07c14",
       "source": "docs/Changes-20261021.md",
       "agent_json": "docs/Changes-20261021.agent.json",
@@ -289,6 +296,13 @@
       "agent_json": "docs/DualQuaternionSkinningVerification-20261028.agent.json",
       "source_sha256": "efd26785f3aa4a050b836c1a26a400572e942c0628fe7b795628c1c3d9a7f666",
       "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:03f52890bb2f311fe48b4c4f9879ee605ff83affec6e903b104e9325a355a672",
+      "source": "docs/DynamicLinking.md",
+      "agent_json": "docs/DynamicLinking.agent.json",
+      "source_sha256": "07f4a38bf75b4f63c7d28db9f8eb26755a4181a0d8c4178953702606c12db20d",
+      "role": "guide"
     },
     {
       "document_id": "urn:iisacc:document:fdc56e50f01b82044868a3b4906a896b0304279710f8a192ebc9b6c8a68bacac",
@@ -973,7 +987,7 @@
       "document_id": "urn:iisacc:document:38ee28f4de9255f1f31b9b5efe4c5696c2bf41e0a2bb23db1dbd7eb0189160cf",
       "source": "docs/README.md",
       "agent_json": "docs/README.agent.json",
-      "source_sha256": "9e6fa5c000b155e949599af2e0419d69b56d83f2e0f338bead1d070f961f451f",
+      "source_sha256": "cebb7e6669aa7d468d1085a546fd0ab2977a893b1e80adcb4e8cf511c2e42485",
       "role": "overview"
     },
     {

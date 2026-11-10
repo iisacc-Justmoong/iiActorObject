@@ -6,7 +6,7 @@
 
 namespace iiActorObject
 {
-inline constexpr std::uint32_t NoTopologyIndex = std::numeric_limits<std::uint32_t>::max();
+inline constexpr std::uint32_t NoTopologyIndex = (std::numeric_limits<std::uint32_t>::max)();
 struct TextureCoordinate final
 {
     double u = 0, v = 0;

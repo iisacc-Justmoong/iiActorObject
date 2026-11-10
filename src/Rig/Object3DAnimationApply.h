@@ -26,7 +26,7 @@ void applyAnimationPose(const Object3DHandle &object,std::span<const Transform> 
     std::size_t changes=0;
     for(std::size_t i=0;i<locals.size();++i)
     {const auto t=character_detail::skeletalTransform(locals[i]);if(applyLocals&&t!=pose.locals()[i])++changes;}
-    if(changes>std::numeric_limits<std::uint64_t>::max()-pose.revision())fail("pose revision exhausted");
+    if(changes>(std::numeric_limits<std::uint64_t>::max)()-pose.revision())fail("pose revision exhausted");
     std::set<std::pair<std::size_t,std::size_t>> seen;
     for(const auto &value:morphs)
     {

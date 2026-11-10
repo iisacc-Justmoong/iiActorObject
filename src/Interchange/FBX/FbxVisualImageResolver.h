@@ -1,5 +1,6 @@
 #pragma once
 #include <iiActorObject/Object3DInterchange.h>
+#include <iiActorObject/VisualCodecExport.h>
 
 namespace iiActorObject
 {
@@ -18,7 +19,7 @@ struct FbxVisualImageLimits final
     std::uint32_t maxDimension=16384;
 };
 // Optional iiVisualCodec adapter. The source is borrowed through the synchronous import.
-class FbxVisualImageResolver final:public FbxImageResolver
+class IIACTOROBJECT_VISUALCODEC_EXPORT FbxVisualImageResolver final:public FbxImageResolver
 {
   public:
     explicit FbxVisualImageResolver(const FbxExternalImageSource &source,FbxVisualImageLimits limits={});

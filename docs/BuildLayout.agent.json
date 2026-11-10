@@ -1,0 +1,128 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:e8718f8766817d4a38f70c742a4e472456b221b9ec341dda1ff3be13faed24e1",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/BuildLayout.md",
+    "sha256": "1b59db6ecc4de7b68a66cd70efd10fed26620e4290807503d47d3ac819f4fe98",
+    "bytes": 2076,
+    "line_count": 32,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "Build and resource layout",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# Build and resource layout\n",
+      "level": 1,
+      "title": "Build and resource layout"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 6,
+      "raw": "Windows SDK의 `min`·`max` 매크로가 활성화된 상태에서도 공개 헤더의 표준\n함수와 극한값 호출이 매크로로 바뀌지 않도록 보호한다. 소비자의 매크로 설정은\n변경하지 않으며, 테스트 빌드에 이 포함 순서의 컴파일 전용 검사를 둔다.\n이 항목은 소스 구성에 대한 기록이며 Windows 빌드 성공을 의미하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 8,
+      "end_line": 12,
+      "raw": "Compile the module, its agent-facing tool and tests in the repository `build/`\ndirectory. Character-authoring example executables are opt-in through\n`IIACTOROBJECT_BUILD_EXAMPLE`; generated character assets belong under\n`resources/`, not the build tree. The example and external applications are\nnot executed by default.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 14,
+      "end_line": 23,
+      "raw": "Some legacy asset-generation, format and installed-consumer tests still use\n`build/` for fixtures or invoke other applications. Their isolation is a\nseparate migration; clean-layout verification must select tests that do not\ncreate those files or launch external applications. Existing project assets and\nsource snapshots recovered from prior builds are retained under ignored\n`resources/.recovery/` paths until reviewed.\nThe earlier `tools/` directory contained a separate Unreal Engine Git checkout\nand Blender assets; those were preserved together in\n`resources/.recovery/actor-history-20261031/tools/` rather than treated as\nrebuildable compiler output.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 32,
+      "raw": "macOS 12 배포 타깃에서도 USD 부동소수점 값을 내보낼 수 있도록 표준\n클래식 로캘과 `max_digits10` 정밀도를 사용한다. 직렬화 결과는 프로세스\n로캘과 무관하며 유한한 `double` 값을 다시 읽었을 때 보존한다. 같은\n규칙을 리그 샘플 카탈로그의 JSON 숫자 직렬화에도 적용한다.\n구형 Apple 배포 타깃에서 실수 `from_chars`를 사용할 수 없다면 엄격한\n십진 문법과 클래식 로캘을 사용하는 파서로 전환한다. 정수 파싱은 기존\n`from_chars` 경로를 유지하며, 리그 샘플 에이전트 도구도 동일한 실수\n파서를 사용한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "Build and resource layout",
+      "anchor": "build-and-resource-layout",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 6,
+        "text": "이 항목은 소스 구성에 대한 기록이며 Windows 빌드 성공을 의미하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000007",
+        "line": 16,
+        "text": "separate migration; clean-layout verification must select tests that do not",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

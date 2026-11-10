@@ -35,7 +35,7 @@ template<class T> bool readClassicReal(std::string_view text,T &value)
     T parsed{};input>>std::noskipws>>parsed;
     if(!input.eof()||!std::isfinite(parsed))return false;
     // Some implementations set failbit while returning a representable subnormal.
-    if(input.fail()&&std::abs(parsed)>=std::numeric_limits<T>::min())return false;
+    if(input.fail()&&std::abs(parsed)>=(std::numeric_limits<T>::min)())return false;
     if(parsed==0)
         for(const auto c:text){if(c=='e'||c=='E')break;if(c>='1'&&c<='9')return false;}
     value=parsed;return true;
@@ -45,12 +45,18 @@ template<class T> bool readNumber(std::string_view text,T &value)
     if(text.empty())return false;
     if constexpr(std::is_floating_point_v<T>)
     {
+#if defined(_LIBCPP_AVAILABILITY_HAS_FROM_CHARS_FLOATING_POINT) && !_LIBCPP_AVAILABILITY_HAS_FROM_CHARS_FLOATING_POINT
+        // The overload can exist in libc++ headers while the selected Apple
+        // deployment target cannot link it. Use the portable parser in that case.
+        return readClassicReal(text,value);
+#else
         if constexpr(requires(const char *a,const char *b,T &v){std::from_chars(a,b,v,std::chars_format::general);})
         {
             const auto parsed=std::from_chars(text.data(),text.data()+text.size(),value,std::chars_format::general);
             return parsed.ec==std::errc{}&&parsed.ptr==text.data()+text.size()&&std::isfinite(value);
         }
         else return readClassicReal(text,value);
+#endif
     }
     else
     {

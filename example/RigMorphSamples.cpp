@@ -3,6 +3,7 @@
 #include <iiActorObject/Object3DInterchange.h>
 #include <iiActorObject/Object3DProject.h>
 #include <iiActorObject/RigSampleCatalogExport.h>
+#include <iiActorObject/Object3DNumberParsing.h>
 #include <array>
 #include <charconv>
 #include <cmath>
@@ -15,8 +16,8 @@ using namespace iiActorObject;
 namespace fs=std::filesystem;
 double number(std::string_view text)
 {
-    double n=0;const auto r=std::from_chars(text.data(),text.data()+text.size(),n);
-    if(r.ec!=std::errc{}||r.ptr!=text.data()+text.size()||!std::isfinite(n))throw std::invalid_argument("Control values must be finite numbers");return n;
+    double n=0;
+    if(!object3d_detail::readNumber(text,n))throw std::invalid_argument("Control values must be finite numbers");return n;
 }
 std::size_t index(std::string_view text)
 {

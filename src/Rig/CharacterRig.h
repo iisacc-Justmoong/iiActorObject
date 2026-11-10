@@ -37,7 +37,7 @@ struct FacialJointDriver
     double radians = 0;
     Vector3 scaleDelta;
 };
-inline constexpr std::size_t NoFacialControl = std::numeric_limits<std::size_t>::max();
+inline constexpr std::size_t NoFacialControl = (std::numeric_limits<std::size_t>::max)();
 struct FacialTerm
 {
     std::size_t control = 0;

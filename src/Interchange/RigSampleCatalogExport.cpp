@@ -2,6 +2,8 @@
 #include <array>
 #include <charconv>
 #include <limits>
+#include <locale>
+#include <sstream>
 #include <stdexcept>
 #include <utility>
 
@@ -36,8 +38,9 @@ class Json final
     }
     void number(double value)
     {
-        std::array<char,64> bytes{};const auto result=std::to_chars(bytes.data(),bytes.data()+bytes.size(),value,std::chars_format::general,std::numeric_limits<double>::max_digits10);
-        if(result.ec!=std::errc{})throw std::overflow_error("Rig sample number formatting");text({bytes.data(),static_cast<std::size_t>(result.ptr-bytes.data())});
+        std::ostringstream output;output.imbue(std::locale::classic());
+        output.precision(std::numeric_limits<double>::max_digits10);output<<value;
+        if(!output)throw std::overflow_error("Rig sample number formatting");text(output.str());
     }
     template<class Range,class Function>void array(const Range &values,Function function)
     {

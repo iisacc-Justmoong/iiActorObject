@@ -85,7 +85,7 @@ inline std::size_t collect(object3d_detail::State &state)
 }
 inline void capacity(Object3DId next, std::size_t size, std::size_t limit)
 {
-    if (next == std::numeric_limits<Object3DId>::max())
+    if (next == (std::numeric_limits<Object3DId>::max)())
         throw std::overflow_error("3D resource identity exhausted");
     if (size >= limit)
         throw std::length_error("3D engine resource limit reached");

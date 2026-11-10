@@ -358,18 +358,19 @@ geometry or executable behavior.
 
 ## Build and test
 
-Use CMake 3.24+ and a C++23 compiler. All generated files belong under `build/`.
+Use CMake 3.24+ and a C++23 compiler. Compiled outputs belong under `build/`;
+runtime assets and generated example content belong under `resources/`. See
+[build layout](docs/BuildLayout.md) for test and recovery details.
 
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
 cmake --build build --parallel 4
 ctest --test-dir build --output-on-failure --no-tests=error
-build/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.glb 96
-build/iiActorObjectCharacterAuthoring build/character/GeneratedHuman.fbx 96
 ```
 
-The example creates and edits a character and writes a self-contained asset.
-`IIACTOROBJECT_BUILD_EXAMPLE=OFF` disables it. Core CTest needs no Python or app.
+The character-authoring example is disabled by default. To use it, configure
+with `-DIIACTOROBJECT_BUILD_EXAMPLE=ON`, rebuild, and choose a new output path
+under `resources/`. Core CTest needs no Python or app.
 Optional independent format and actual Blender tests:
 
 ```sh

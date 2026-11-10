@@ -30,6 +30,7 @@ Markdown is the maintained human source. Agent JSON is a structured, source-trac
 | [`docs/AutomaticSurfaceFitting.md`](AutomaticSurfaceFitting.md) | [JSON](AutomaticSurfaceFitting.agent.json) |
 | [`docs/BaseNormalEditing.md`](BaseNormalEditing.md) | [JSON](BaseNormalEditing.agent.json) |
 | [`docs/BaseNormalVerification-20261028.md`](BaseNormalVerification-20261028.md) | [JSON](BaseNormalVerification-20261028.agent.json) |
+| [`docs/BuildLayout.md`](BuildLayout.md) | [JSON](BuildLayout.agent.json) |
 | [`docs/Changes-20261021.md`](Changes-20261021.md) | [JSON](Changes-20261021.agent.json) |
 | [`docs/Character.md`](Character.md) | [JSON](Character.agent.json) |
 | [`docs/CharacterCreatorG3Verification-20261027.md`](CharacterCreatorG3Verification-20261027.md) | [JSON](CharacterCreatorG3Verification-20261027.agent.json) |
@@ -47,6 +48,7 @@ Markdown is the maintained human source. Agent JSON is a structured, source-trac
 | [`docs/DualQuaternionProfileVerification-20261028.md`](DualQuaternionProfileVerification-20261028.md) | [JSON](DualQuaternionProfileVerification-20261028.agent.json) |
 | [`docs/DualQuaternionSkinning.md`](DualQuaternionSkinning.md) | [JSON](DualQuaternionSkinning.agent.json) |
 | [`docs/DualQuaternionSkinningVerification-20261028.md`](DualQuaternionSkinningVerification-20261028.md) | [JSON](DualQuaternionSkinningVerification-20261028.agent.json) |
+| [`docs/DynamicLinking.md`](DynamicLinking.md) | [JSON](DynamicLinking.agent.json) |
 | [`docs/DynamicMorphBindVerification-20261028.md`](DynamicMorphBindVerification-20261028.md) | [JSON](DynamicMorphBindVerification-20261028.agent.json) |
 | [`docs/DynamicRetargetVerification-20261028.md`](DynamicRetargetVerification-20261028.md) | [JSON](DynamicRetargetVerification-20261028.agent.json) |
 | [`docs/EditLayers.md`](EditLayers.md) | [JSON](EditLayers.agent.json) |

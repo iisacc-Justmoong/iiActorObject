@@ -1,4 +1,9 @@
 @PACKAGE_INIT@
+if(EMSCRIPTEN)
+    # Emscripten supports side modules although its CMake toolchain defaults
+    # the shared-library capability to false.
+    set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
+endif()
 
 if(NOT @BUILD_SHARED_LIBS@)
     include(CMakeFindDependencyMacro)

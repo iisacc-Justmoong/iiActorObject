@@ -27,7 +27,7 @@ inline std::vector<std::uint32_t> externalIds(std::string_view text,std::size_t 
     {
         if(ids.size()==count)throw std::invalid_argument("External identity count exceeds source dimensions");
         const auto end=text.find(',',offset),limit=end==std::string_view::npos?text.size():end;std::uint32_t value=0;
-        const auto result=std::from_chars(text.data()+offset,text.data()+limit,value);if(result.ec!=std::errc{}||result.ptr!=text.data()+limit||value==std::numeric_limits<std::uint32_t>::max())throw std::invalid_argument("Malformed external source ID");ids.push_back(value);
+        const auto result=std::from_chars(text.data()+offset,text.data()+limit,value);if(result.ec!=std::errc{}||result.ptr!=text.data()+limit||value==(std::numeric_limits<std::uint32_t>::max)())throw std::invalid_argument("Malformed external source ID");ids.push_back(value);
         offset=limit+(end==std::string_view::npos?0:1);if(end!=std::string_view::npos&&offset==text.size())throw std::invalid_argument("Trailing external ID delimiter");
     }
     if(ids.size()!=count)throw std::invalid_argument("External source identity dimensions");return ids;
