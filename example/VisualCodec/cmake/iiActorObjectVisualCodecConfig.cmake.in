@@ -1,4 +1,5 @@
 @PACKAGE_INIT@
+set(iiActorObjectVisualCodec_SPDX_LICENSE "Apache-2.0")
 include(CMakeFindDependencyMacro)
 find_dependency(iiActorObject 0.2.1 CONFIG)
 find_dependency(iiVisualCodec 0.2 CONFIG COMPONENTS Image)

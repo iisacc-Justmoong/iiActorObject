@@ -438,7 +438,18 @@ default prefix is `~/.local/SDK/iiActorObject`; set `INSTALL_PREFIX` for staging
 
 ## License and provenance
 
-Original code and documentation are MIT licensed; see [LICENSE](LICENSE).
+SPDX-License-Identifier: Apache-2.0
+
+Original code and documentation in this repository are licensed under the
+[Apache License, Version 2.0](LICENSE) (SPDX `Apache-2.0`).
+The copyright notice is `Copyright (c) 2026 iisacc`. Attribution for this
+distribution is in [NOTICE](NOTICE). The Korean statement of the same policy
+is [docs/License.md](docs/License.md).
+
+iisacc products under Product are licensed under the GNU Affero General
+Public License (AGPL).
+
+Third-party and vendored code keeps its original license.
 ufbx v0.20.0 uses its MIT alternative, is compiled as C++23, and remains private to
 the FBX adapter. See [third-party provenance and hashes](src/third_party/ufbx/PROVENANCE.md).
 No vendor application source or commercial character assets are included.

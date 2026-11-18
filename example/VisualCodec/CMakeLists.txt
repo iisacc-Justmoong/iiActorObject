@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.31)
 # iisdk:consumer-application
 project(iiActorObjectVisualCodec VERSION 0.1.0 LANGUAGES CXX)
+set(iiActorObjectVisualCodec_SPDX_LICENSE "Apache-2.0")
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(CTest)
@@ -50,4 +51,5 @@ write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/iiActorObjectVisua
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/iiActorObjectVisualCodecConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/iiActorObjectVisualCodecConfigVersion.cmake" DESTINATION "${_package_dir}")
 install(FILES README.md AGENT.md docs/Boundary.md docs/Boundary.agent.json
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../LICENSE" "${CMAKE_CURRENT_SOURCE_DIR}/../../NOTICE"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObjectVisualCodec")

@@ -10,8 +10,8 @@
   },
   "source": {
     "path": "docs/Changes-20261021.md",
-    "sha256": "92a427208f487847a42476a8fd426639dd1e4ede3fe9f41ba4d43f0a90bee287",
-    "bytes": 10943,
+    "sha256": "666c0bc154a820a1d71b7281b00aad6cff5a00ef4b0bde0e257d5d30a0c282f5",
+    "bytes": 11132,
     "line_count": 92,
     "encoding": "utf-8",
     "language": "ko"
@@ -593,11 +593,11 @@
       "raw": "\n"
     },
     {
-      "id": "b000065",
+      "id": "b000074",
       "kind": "paragraph",
       "start_line": 84,
       "end_line": 84,
-      "raw": "커밋 준비 중 원격 `master`의 `6ceb713`(MIT 라이선스 전환)을 반영하였다. 자체 코드·문서의 MIT 조건을 유지하고 README의 라이선스 설명을 일치시켰다. Unreal 확보 자료와 검증용 제삼자 패키지는 이 저장소의 자체 코드에 포함하지 않는다.\n"
+      "raw": "커밋 준비 중 원격 `master`의 `6ceb713`(당시 MIT 라이선스 전환)을 반영하였다. 그 기록은 당시의 자체 코드·문서가 MIT였음을 남긴다. 2026-11-18 정책에 따라 이 모듈의 자사 코드와 문서는 Apache License 2.0이다. 전문은 [LICENSE](../LICENSE), 고지는 [NOTICE](../NOTICE), 한국어 정책은 [License.md](License.md)이다. Unreal 확보 자료와 검증용 제삼자 패키지는 이 저장소의 자체 코드에 포함하지 않는다.\n"
     },
     {
       "id": "b000066",
@@ -777,9 +777,9 @@
         "context": "paragraph"
       },
       {
-        "block_id": "b000065",
+        "block_id": "b000074",
         "line": 84,
-        "text": "커밋 준비 중 원격 `master`의 `6ceb713`(MIT 라이선스 전환)을 반영하였다. 자체 코드·문서의 MIT 조건을 유지하고 README의 라이선스 설명을 일치시켰다. Unreal 확보 자료와 검증용 제삼자 패키지는 이 저장소의 자체 코드에 포함하지 않는다.",
+        "text": "커밋 준비 중 원격 `master`의 `6ceb713`(당시 MIT 라이선스 전환)을 반영하였다. 그 기록은 당시의 자체 코드·문서가 MIT였음을 남긴다. 2026-11-18 정책에 따라 이 모듈의 자사 코드와 문서는 Apache License 2.0이다. 전문은 [LICENSE](../LICENSE), 고지는 [NOTICE](../NOTICE), 한국어 정책은 [License.md](License.md)이다. Unreal 확보 자료와 검증용 제삼자 패키지는 이 저장소의 자체 코드에 포함하지 않는다.",
         "basis": "lexical_match",
         "context": "paragraph"
       },
@@ -827,6 +827,27 @@
         "target": "Verification.md",
         "kind": "relative",
         "line": 78
+      },
+      {
+        "block_id": "b000074",
+        "label": "LICENSE",
+        "target": "../LICENSE",
+        "kind": "relative",
+        "line": 84
+      },
+      {
+        "block_id": "b000074",
+        "label": "NOTICE",
+        "target": "../NOTICE",
+        "kind": "relative",
+        "line": 84
+      },
+      {
+        "block_id": "b000074",
+        "label": "License.md",
+        "target": "License.md",
+        "kind": "relative",
+        "line": 84
       },
       {
         "block_id": "b000073",

@@ -140,9 +140,9 @@ Unreal Engine 5.8.3의 로컬 `GameFramework/Actor.h`, `Components/ActorComponen
 
 ## 라이선스
 
-SPDX-License-Identifier: MIT
+SPDX-License-Identifier: Apache-2.0
 
-이 프로젝트의 자체 코드와 문서는 MIT 라이선스로 제공한다. 전문은 [LICENSE](../LICENSE)를 따른다. 별도 고지된 외부 라이브러리와 제삼자 코드는 각자의 라이선스를 유지한다.
+이 프로젝트의 자체 코드와 문서는 Apache License 2.0으로 제공한다. 저작권 표시는 `Copyright (c) 2026 iisacc`이다. 전문은 [LICENSE](../LICENSE), 고지는 [NOTICE](../NOTICE), 한국어 정책은 [License.md](License.md)이다. 별도 고지된 외부 라이브러리와 제삼자 코드는 각자의 라이선스를 유지한다.
 
 ## 소스와 헤더 배치
 
