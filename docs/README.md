@@ -102,6 +102,7 @@ Markdown is the maintained human source. Agent JSON is a structured, source-trac
 | [`docs/HumanoidCharacterization.md`](HumanoidCharacterization.md) | [JSON](HumanoidCharacterization.agent.json) |
 | [`docs/InstanceTransfer.md`](InstanceTransfer.md) | [JSON](InstanceTransfer.agent.json) |
 | [`docs/InstanceTransferVerification-20261029.md`](InstanceTransferVerification-20261029.md) | [JSON](InstanceTransferVerification-20261029.agent.json) |
+| [`docs/License.md`](License.md) | [JSON](License.agent.json) |
 | [`docs/LinearizedSnapshotVerification-20261028.md`](LinearizedSnapshotVerification-20261028.md) | [JSON](LinearizedSnapshotVerification-20261028.agent.json) |
 | [`docs/LogicalMorphChannels.md`](LogicalMorphChannels.md) | [JSON](LogicalMorphChannels.agent.json) |
 | [`docs/LogicalMorphChannelsVerification-20261028.md`](LogicalMorphChannelsVerification-20261028.md) | [JSON](LogicalMorphChannelsVerification-20261028.agent.json) |

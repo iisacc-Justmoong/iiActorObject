@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "AGENT.md",
-    "sha256": "a999944e3221a4d0a3785d4331fa9cff38f7c0c055885a3c02cab4056f438ea1",
-    "bytes": 6307,
-    "line_count": 44,
+    "sha256": "97933f97f7fe7b27b81cf025c6042c43d060d831b2dadaeeb94b50ff98d65fd1",
+    "bytes": 6839,
+    "line_count": 52,
     "encoding": "utf-8",
     "language": "ko"
   },
@@ -203,17 +203,75 @@
       "raw": "\n"
     },
     {
-      "id": "b000011",
-      "kind": "html",
+      "id": "b000020",
+      "kind": "heading",
       "start_line": 28,
       "end_line": 28,
+      "raw": "## 라이선스\n",
+      "level": 2,
+      "title": "라이선스"
+    },
+    {
+      "id": "b000021",
+      "kind": "blank",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "paragraph",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "이 저장소의 iiActorObject 모듈은 Apache License 2.0이다. 자사 코드, 문서, 도구, 테스트가 포함된다. 저작권 표시는 `Copyright (c) 2026 iisacc`이고 고지는 루트 `NOTICE`에 있다. 사람용 한국어 설명은 [docs/License.md](docs/License.md)이다.\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "blank",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "paragraph",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "`Product` 아래의 iisacc 제품은 GNU Affero General Public License(AGPL)이다.\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "blank",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "paragraph",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "제3자와 벤더 코드는 원래 라이선스를 유지한다. 문서 재편 중에도 그 라이선스와 외부 원본은 보존한다.\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "blank",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "html",
+      "start_line": 36,
+      "end_line": 36,
       "raw": "<!-- workspace-docs:agent:start -->\n"
     },
     {
       "id": "b000012",
       "kind": "heading",
-      "start_line": 29,
-      "end_line": 29,
+      "start_line": 37,
+      "end_line": 37,
       "raw": "## 문서 구조와 에이전트 탐색\n",
       "level": 2,
       "title": "문서 구조와 에이전트 탐색"
@@ -221,15 +279,15 @@
     {
       "id": "b000013",
       "kind": "blank",
-      "start_line": 30,
-      "end_line": 30,
+      "start_line": 38,
+      "end_line": 38,
       "raw": "\n"
     },
     {
       "id": "b000014",
       "kind": "list",
-      "start_line": 31,
-      "end_line": 37,
+      "start_line": 39,
+      "end_line": 45,
       "raw": "- 프로젝트 루트의 `README.md`는 사람용 영문 진입 문서이며 `AGENT.md`는 에이전트 진입점이다.\n- 하위 인간용 Markdown과 구조화된 agent JSON을 함께 유지한다. Markdown이 원본이며 JSON은 원문 해시와 줄 범위를 가진 파생 문서이다.\n- 먼저 [docs/agent-index.json](docs/agent-index.json)에서 관련 문서와 JSON 투영을 찾는다. 원문 SHA-256이 다르면 현재 Markdown을 읽고 투영을 갱신한다.\n- JSON의 규칙 후보는 검색용 어휘 일치 결과이다. 과거 기록·예제·실패 상태를 현재 지시나 검증 완료로 자동 해석하지 않는다.\n- 기존 프로젝트별 규칙, 동결된 증거, 라이선스, 외부 원본, 사용자 데이터와 다른 작업의 변경을 보존한다.\n- 이 문서 재편 지침은 과거 작업의 기능 구현·배포를 자동 재개하라는 요청이 아니다. 현재 사용자의 작업 범위를 우선한다.\n- 문서를 수정하면 JSON 쌍·색인을 함께 갱신하고 검증한다. 기존 소스 변경에 대한 빌드·테스트 규칙은 계속 따른다.\n",
       "items": [
         {
@@ -272,29 +330,29 @@
     {
       "id": "b000015",
       "kind": "blank",
-      "start_line": 38,
-      "end_line": 38,
+      "start_line": 46,
+      "end_line": 46,
       "raw": "\n"
     },
     {
       "id": "b000016",
       "kind": "paragraph",
-      "start_line": 39,
-      "end_line": 39,
+      "start_line": 47,
+      "end_line": 47,
       "raw": "Workspace에서 이 프로젝트의 문서를 갱신하는 명령은 다음과 같다.\n"
     },
     {
       "id": "b000017",
       "kind": "blank",
-      "start_line": 40,
-      "end_line": 40,
+      "start_line": 48,
+      "end_line": 48,
       "raw": "\n"
     },
     {
       "id": "b000018",
       "kind": "fenced_code",
-      "start_line": 41,
-      "end_line": 43,
+      "start_line": 49,
+      "end_line": 51,
       "raw": "```sh\npython3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiActorObject\n```\n",
       "language": "sh",
       "code": "python3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiActorObject\n",
@@ -303,8 +361,8 @@
     {
       "id": "b000019",
       "kind": "html",
-      "start_line": 44,
-      "end_line": 44,
+      "start_line": 52,
+      "end_line": 52,
       "raw": "<!-- workspace-docs:agent:end -->\n"
     }
   ],
@@ -326,12 +384,20 @@
       "start_line": 23
     },
     {
+      "block_id": "b000020",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "라이선스",
+      "anchor": "라이선스",
+      "start_line": 28
+    },
+    {
       "block_id": "b000012",
       "parent_id": "b000001",
       "level": 2,
       "title": "문서 구조와 에이전트 탐색",
       "anchor": "문서-구조와-에이전트-탐색",
-      "start_line": 29
+      "start_line": 37
     }
   ],
   "indexes": {
@@ -408,7 +474,7 @@
       },
       {
         "block_id": "b000014",
-        "line": 34,
+        "line": 42,
         "text": "- JSON의 규칙 후보는 검색용 어휘 일치 결과이다. 과거 기록·예제·실패 상태를 현재 지시나 검증 완료로 자동 해석하지 않는다.",
         "basis": "lexical_match",
         "context": "list"
@@ -451,11 +517,18 @@
         "line": 25
       },
       {
+        "block_id": "b000022",
+        "label": "docs/License.md",
+        "target": "docs/License.md",
+        "kind": "relative",
+        "line": 30
+      },
+      {
         "block_id": "b000014",
         "label": "docs/agent-index.json",
         "target": "docs/agent-index.json",
         "kind": "relative",
-        "line": 33
+        "line": 41
       }
     ],
     "tables": []

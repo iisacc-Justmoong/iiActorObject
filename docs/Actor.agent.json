@@ -10,8 +10,8 @@
   },
   "source": {
     "path": "docs/Actor.md",
-    "sha256": "a1f19bc3d9dcfdb478068a5625880e2ba7af3ee3ab070a1de64d1e1f21ca52f5",
-    "bytes": 11874,
+    "sha256": "f529e6c40c174e86fa40e4f0b9a6612f2d4b2feab2c2b14842bb491df25b9dd7",
+    "bytes": 12011,
     "line_count": 151,
     "encoding": "utf-8",
     "language": "ko"
@@ -677,11 +677,11 @@
       "raw": "\n"
     },
     {
-      "id": "b000077",
+      "id": "b000087",
       "kind": "paragraph",
       "start_line": 143,
       "end_line": 143,
-      "raw": "SPDX-License-Identifier: MIT\n"
+      "raw": "SPDX-License-Identifier: Apache-2.0\n"
     },
     {
       "id": "b000078",
@@ -691,11 +691,11 @@
       "raw": "\n"
     },
     {
-      "id": "b000079",
+      "id": "b000086",
       "kind": "paragraph",
       "start_line": 145,
       "end_line": 145,
-      "raw": "이 프로젝트의 자체 코드와 문서는 MIT 라이선스로 제공한다. 전문은 [LICENSE](../LICENSE)를 따른다. 별도 고지된 외부 라이브러리와 제삼자 코드는 각자의 라이선스를 유지한다.\n"
+      "raw": "이 프로젝트의 자체 코드와 문서는 Apache License 2.0으로 제공한다. 저작권 표시는 `Copyright (c) 2026 iisacc`이다. 전문은 [LICENSE](../LICENSE), 고지는 [NOTICE](../NOTICE), 한국어 정책은 [License.md](License.md)이다. 별도 고지된 외부 라이브러리와 제삼자 코드는 각자의 라이선스를 유지한다.\n"
     },
     {
       "id": "b000080",
@@ -971,9 +971,23 @@
         "line": 139
       },
       {
-        "block_id": "b000079",
+        "block_id": "b000086",
         "label": "LICENSE",
         "target": "../LICENSE",
+        "kind": "relative",
+        "line": 145
+      },
+      {
+        "block_id": "b000086",
+        "label": "NOTICE",
+        "target": "../NOTICE",
+        "kind": "relative",
+        "line": 145
+      },
+      {
+        "block_id": "b000086",
+        "label": "License.md",
+        "target": "License.md",
         "kind": "relative",
         "line": 145
       }

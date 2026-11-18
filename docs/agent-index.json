@@ -14,14 +14,14 @@
       "document_id": "urn:iisacc:document:f82de08300d2497b5b87bd8c4f0ccdf9f7e99d09989c5a92cf890df3a9d1829d",
       "source": "AGENT.md",
       "agent_json": "docs/entrypoints/AGENT.agent.json",
-      "source_sha256": "a999944e3221a4d0a3785d4331fa9cff38f7c0c055885a3c02cab4056f438ea1",
+      "source_sha256": "97933f97f7fe7b27b81cf025c6042c43d060d831b2dadaeeb94b50ff98d65fd1",
       "role": "instructions"
     },
     {
       "document_id": "urn:iisacc:document:27fdc3e1e6d15ed34465088af2593a4e1d2173b5d2c8aee6963bee7bc0b049cb",
       "source": "README.md",
       "agent_json": "docs/entrypoints/README.agent.json",
-      "source_sha256": "43d8898c859522904c2f4a96c992e04a0fbe2e62c78de1d721c4f7878bb40434",
+      "source_sha256": "16a6ea741f2765e4671ea25857a8d876d8f6cd19b571923544b4d4ff93d8e09b",
       "role": "overview"
     },
     {
@@ -112,7 +112,7 @@
       "document_id": "urn:iisacc:document:ac90eb04d5b4b2143ce7311be7fad729e01dcd09b0c90398d6fe5e5de1775dc2",
       "source": "docs/Actor.md",
       "agent_json": "docs/Actor.agent.json",
-      "source_sha256": "a1f19bc3d9dcfdb478068a5625880e2ba7af3ee3ab070a1de64d1e1f21ca52f5",
+      "source_sha256": "f529e6c40c174e86fa40e4f0b9a6612f2d4b2feab2c2b14842bb491df25b9dd7",
       "role": "guide"
     },
     {
@@ -182,7 +182,7 @@
       "document_id": "urn:iisacc:document:72ed44adbca098b75dd0d232852882e5b53da88125ecbd0cd91fe49b4dc07c14",
       "source": "docs/Changes-20261021.md",
       "agent_json": "docs/Changes-20261021.agent.json",
-      "source_sha256": "92a427208f487847a42476a8fd426639dd1e4ede3fe9f41ba4d43f0a90bee287",
+      "source_sha256": "666c0bc154a820a1d71b7281b00aad6cff5a00ef4b0bde0e257d5d30a0c282f5",
       "role": "history"
     },
     {
@@ -676,6 +676,13 @@
       "role": "evidence"
     },
     {
+      "document_id": "urn:iisacc:document:29b4014b843d9d6aaf437ee4b35c0ae39205db3f70930b74b8f1e10df464d532",
+      "source": "docs/License.md",
+      "agent_json": "docs/License.agent.json",
+      "source_sha256": "8f16e82fbd594b86fd5f171049e2b3cda845a139a4c870945a9e0f1bc4d85844",
+      "role": "guide"
+    },
+    {
       "document_id": "urn:iisacc:document:881f4d5193a7f0315aa729b1fb950e22103739eb9381ea4efb425f75a5f2a863",
       "source": "docs/LinearizedSnapshotVerification-20261028.md",
       "agent_json": "docs/LinearizedSnapshotVerification-20261028.agent.json",
@@ -987,7 +994,7 @@
       "document_id": "urn:iisacc:document:38ee28f4de9255f1f31b9b5efe4c5696c2bf41e0a2bb23db1dbd7eb0189160cf",
       "source": "docs/README.md",
       "agent_json": "docs/README.agent.json",
-      "source_sha256": "cebb7e6669aa7d468d1085a546fd0ab2977a893b1e80adcb4e8cf511c2e42485",
+      "source_sha256": "2803493a4c416d34ab963ea82852920513251096d4a430fd9c1bcfcbb8c9f852",
       "role": "overview"
     },
     {

@@ -25,6 +25,14 @@
 - 사용자가 이 작업의 구현 재개를 명시한 경우에는 [종료 기록](docs/ResponsibilitySeparationCloseout-20261029.md), [상세 보고서](docs/ResponsibilitySeparation-20261029.md), [에이전트 인수인계 지침](docs/ResponsibilitySeparationHandoff-20261029.md)을 현재 코드와 함께 확인한다.
 - 이 문서와 미완료 목록은 자동 재개 지시가 아니다. 현재 사용자 요구와 기존 변경·참조 수명·실제 앱 검증 제외 범위를 우선한다.
 
+## 라이선스
+
+이 저장소의 iiActorObject 모듈은 Apache License 2.0이다. 자사 코드, 문서, 도구, 테스트가 포함된다. 저작권 표시는 `Copyright (c) 2026 iisacc`이고 고지는 루트 `NOTICE`에 있다. 사람용 한국어 설명은 [docs/License.md](docs/License.md)이다.
+
+`Product` 아래의 iisacc 제품은 GNU Affero General Public License(AGPL)이다.
+
+제3자와 벤더 코드는 원래 라이선스를 유지한다. 문서 재편 중에도 그 라이선스와 외부 원본은 보존한다.
+
 <!-- workspace-docs:agent:start -->
 ## 문서 구조와 에이전트 탐색
 

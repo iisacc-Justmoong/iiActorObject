@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(iiActorObject VERSION 0.2.1 LANGUAGES CXX)
+set(iiActorObject_SPDX_LICENSE "Apache-2.0")
 
 if(PROJECT_IS_TOP_LEVEL AND CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     if(DEFINED ENV{HOME} AND NOT "$ENV{HOME}" STREQUAL "")
@@ -924,6 +925,9 @@ if(BUILD_TESTING)
     add_test(NAME iiActorObject.rig_samples.formats COMMAND iiActorObjectRigSamplesTests formats "${CMAKE_CURRENT_BINARY_DIR}/rig-samples")
     set_tests_properties(iiActorObject.rig_samples.formats PROPERTIES FIXTURES_SETUP iiActorObject_rig_samples_formats)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    add_test(NAME iiActorObject.license COMMAND "${Python3_EXECUTABLE}" -B
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/VerifyLicense.py" "${CMAKE_CURRENT_SOURCE_DIR}"
+        "${CMAKE_CURRENT_BINARY_DIR}/iiActorObjectConfig.cmake")
     add_test(NAME iiActorObject.architecture.source_layout COMMAND "${Python3_EXECUTABLE}" -B
         "${CMAKE_CURRENT_SOURCE_DIR}/tests/VerifySourceLayout.py" "${CMAKE_CURRENT_SOURCE_DIR}")
     add_test(NAME iiActorObject.architecture.responsibility_map COMMAND "${Python3_EXECUTABLE}" -B
@@ -2766,7 +2770,7 @@ install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/iiActorObjectConfigVersion.cmake"
     DESTINATION "${_package_dir}"
 )
-install(FILES README.md DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject")
+install(FILES LICENSE NOTICE README.md DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject")
 install(FILES src/third_party/ufbx/LICENSE src/third_party/ufbx/PROVENANCE.md DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject/licenses/ufbx")
 install(FILES src/third_party/mikktspace/LICENSE src/third_party/mikktspace/PROVENANCE.md DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject/licenses/mikktspace")
 if(IIACTOROBJECT_WITH_DNA)
