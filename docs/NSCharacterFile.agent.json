@@ -1,0 +1,375 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:077b54a9adb861159eb121230f2a060452df34d438af62258a2d2699f1d8279f",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiActorObject",
+    "name": "iiActorObject",
+    "root": "SDK/iiActorObject",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/NSCharacterFile.md",
+    "sha256": "478918d28fff67cec7b4421b12e1c29053d9d8fc4924183fed5e161b0d89d610",
+    "bytes": 4929,
+    "line_count": 51,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": ".nscharacter 외부 파일 형식 v1",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# .nscharacter 외부 파일 형식 v1\n",
+      "level": 1,
+      "title": ".nscharacter 외부 파일 형식 v1"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "`.nscharacter`는 3D 프로젝트와 작성자의 캐릭터 시트를 같은 파일에 보관하는 iiActorObject 형식이다. 외부 파일 버전은 `1`에서 시작한다. Boost.Serialization의 아카이브 버전, 라이브러리 릴리스 번호, 앱의 과금 또는 라이선스 상태를 읽거나 기록하지 않는다. 내부 `.ii3dproject`의 버전도 별도이다. 예를 들어 기존 `.ii3dproject` v21은 모프 리그를 위한 SDK 버전이다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 바이트 배치\n",
+      "level": 2,
+      "title": "바이트 배치"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "정수는 부호 없는 little-endian이다. 파일에는 36바이트 헤더, 3D 프로젝트 바이트열, 시트 바이트열이 순서대로 들어간다. 추가 패딩과 후행 데이터는 허용하지 않는다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "table",
+      "start_line": 9,
+      "end_line": 16,
+      "raw": "| 오프셋 | 길이 | 값 |\n| --- | --- | --- |\n| 0 | 8 | `NSCHAR\\r\\n` (`4e 53 43 48 41 52 0d 0a`) |\n| 8 | 4 | 외부 형식 버전 `1` |\n| 12 | 4 | 액터 인코딩 `1`: iiActorObject의 `.ii3dproject` |\n| 16 | 8 | 액터 섹션의 바이트 수 |\n| 24 | 8 | 시트 섹션의 바이트 수 |\n| 32 | 4 | 시트 원본 바이트의 CRC-32/ISO-HDLC (`zlib.crc32`과 같은 값) |\n",
+      "columns": [
+        "오프셋",
+        "길이",
+        "값"
+      ],
+      "rows": [
+        [
+          "0",
+          "8",
+          "`NSCHAR\\r\\n` (`4e 53 43 48 41 52 0d 0a`)"
+        ],
+        [
+          "8",
+          "4",
+          "외부 형식 버전 `1`"
+        ],
+        [
+          "12",
+          "4",
+          "액터 인코딩 `1`: iiActorObject의 `.ii3dproject`"
+        ],
+        [
+          "16",
+          "8",
+          "액터 섹션의 바이트 수"
+        ],
+        [
+          "24",
+          "8",
+          "시트 섹션의 바이트 수"
+        ],
+        [
+          "32",
+          "4",
+          "시트 원본 바이트의 CRC-32/ISO-HDLC (`zlib.crc32`과 같은 값)"
+        ]
+      ]
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "액터 인코딩 `1`은 `iiAOPRJ\\0` 서명, 0이 아닌 자체 프로젝트 버전, 길이와 체크섬을 가진 [기존 네이티브 프로젝트](Object3DProject.md)이다. 외부 코덱은 액터의 서명·버전 필드·길이를 확인하고 바이트를 그대로 돌려준다. 내부 체크섬, 그래프의 유효성 및 해당 프로젝트 버전의 복원 가능 여부는 `importObject3DProject`가 검사한다. 내부 버전이 새롭더라도 외부 v1이 유효하면 시트를 읽고 원본 바이트를 보존할 수 있다. CRC는 의도치 않은 손상 검출용이다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "시트는 BOM 없는 UTF-8 JSON 객체이다. 필드 이름이나 유형을 창작 규칙으로 확정하지 않으며, 모르는 필드·공백·정확한 입력 숫자 표기를 바꾸지 않는다. 중복 디코딩 키, 잘못된 유니코드, 부호 있는 64비트 또는 부호 없는 64비트 범위를 벗어난 정수, 유한한 binary64 범위를 벗어나거나 0으로 언더플로하는 실수는 거부한다. 루트 깊이는 1이며 최댓값은 64, 키와 값을 합쳐 100,000개, 디코딩된 개별 문자열은 1 MiB까지이다. 기본 입력 상한은 액터 256 MiB, 시트 4 MiB이다. 호출자는 섹션별 바이트 상한을 조정할 수 있다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "## 저장과 복원\n",
+      "level": 2,
+      "title": "저장과 복원"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "fenced_code",
+      "start_line": 24,
+      "end_line": 33,
+      "raw": "```cpp\n#include <iiActorObject/NSCharacterFile.h>\n#include <iiActorObject/Object3DProject.h>\n\nconst auto actor = iiActorObject::exportObject3DProject(project);\nconst auto file = iiActorObject::packNSCharacterFile(actor, creatorSheetUtf8);\n// 파일 경로·원자적 저장·리비전은 호스트가 소유한다.\nconst auto view = iiActorObject::unpackNSCharacterFile(file);\nconst auto restored = iiActorObject::importObject3DProject(engine.reference(), view.actorProject);\n```\n",
+      "language": "cpp",
+      "code": "#include <iiActorObject/NSCharacterFile.h>\n#include <iiActorObject/Object3DProject.h>\n\nconst auto actor = iiActorObject::exportObject3DProject(project);\nconst auto file = iiActorObject::packNSCharacterFile(actor, creatorSheetUtf8);\n// 파일 경로·원자적 저장·리비전은 호스트가 소유한다.\nconst auto view = iiActorObject::unpackNSCharacterFile(file);\nconst auto restored = iiActorObject::importObject3DProject(engine.reference(), view.actorProject);\n",
+      "closed": true
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "섹션 뷰는 원본 버퍼를 빌린다. 그동안 버퍼를 수정하거나 파괴하면 안 된다. C++ API는 섹션 바이트 상한 초과에 `std::length_error`, 지원하지 않는 외부 버전·인코딩 및 잘못된 데이터에 `std::invalid_argument`를 던진다. 파일 I/O 없이 바이트만 다루므로 앱은 자신의 파일 공급자와 함께 사용한다. 3D 리소스의 소유권은 계속 본체 엔진에 있고, 선택 기능 `IIACTOROBJECT_WITH_NSCHARACTER` 없이도 컨테이너 코덱을 사용할 수 있다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "설치본의 `share/iiActorObject/python/`을 Python 모듈 경로에 추가하면 같은 바이트 계약을 사용할 수 있다. Python 표준 라이브러리만으로 포장과 섹션 열람을 지원한다. 실제 3D 리소스 복원은 SDK의 역할이다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "fenced_code",
+      "start_line": 39,
+      "end_line": 45,
+      "raw": "```python\nfrom nscharacter_file import pack_nscharacter_file, unpack_nscharacter_file\n\ndocument = pack_nscharacter_file(actor_project_bytes, creator_sheet_utf8_bytes)\nsections = unpack_nscharacter_file(document)\nassert sections.sheet_json == creator_sheet_utf8_bytes\n```\n",
+      "language": "python",
+      "code": "from nscharacter_file import pack_nscharacter_file, unpack_nscharacter_file\n\ndocument = pack_nscharacter_file(actor_project_bytes, creator_sheet_utf8_bytes)\nsections = unpack_nscharacter_file(document)\nassert sections.sheet_json == creator_sheet_utf8_bytes\n",
+      "closed": true
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 46,
+      "end_line": 46,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "heading",
+      "start_line": 47,
+      "end_line": 47,
+      "raw": "## 호환성과 검증\n",
+      "level": 2,
+      "title": "호환성과 검증"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 48,
+      "end_line": 48,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 49,
+      "end_line": 49,
+      "raw": "작업 공간에는 Boost로 저장된 기존 `.nscharacter` 쓰기 경로나 실제 파일 견본이 확인되지 않았다. Boost 아카이브 바이트는 외부 `NSCHAR` 파일이나 네이티브 액터로 자동 해석하지 않는다. 실제로 유통된 Boost 파일이 발견되면 원래의 클래스 스키마와 시험 파일을 확보해서 별도 변환 도구로 처리한다. 기존 `.ii3dproject`는 현재의 독립 포맷이며 v1부터 쓰던 자료를 포장해 복원할 수 있다.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 50,
+      "end_line": 50,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "자동 검사는 독립적으로 계산한 헤더·체크섬, C++↔Python 양방향 호환, 한국어와 미정의 시트 필드의 원문 보존, 기존 프로젝트 복원, 데이터가 잘린 파일·위조된 길이·미지원 버전과 인코딩·잘못된 JSON·Boost 형식의 거부를 확인한다. 설치 소비자는 설치된 헤더와 라이브러리로 같은 프로젝트 복원 경로를 검증한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": ".nscharacter 외부 파일 형식 v1",
+      "anchor": "nscharacter-외부-파일-형식-v1",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "바이트 배치",
+      "anchor": "바이트-배치",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "저장과 복원",
+      "anchor": "저장과-복원",
+      "start_line": 22
+    },
+    {
+      "block_id": "b000025",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "호환성과 검증",
+      "anchor": "호환성과-검증",
+      "start_line": 47
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [],
+    "commands": [],
+    "links": [
+      {
+        "block_id": "b000011",
+        "label": "기존 네이티브 프로젝트",
+        "target": "Object3DProject.md",
+        "kind": "relative",
+        "line": 18
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000009",
+        "columns": [
+          "오프셋",
+          "길이",
+          "값"
+        ],
+        "rows": [
+          [
+            "0",
+            "8",
+            "`NSCHAR\\r\\n` (`4e 53 43 48 41 52 0d 0a`)"
+          ],
+          [
+            "8",
+            "4",
+            "외부 형식 버전 `1`"
+          ],
+          [
+            "12",
+            "4",
+            "액터 인코딩 `1`: iiActorObject의 `.ii3dproject`"
+          ],
+          [
+            "16",
+            "8",
+            "액터 섹션의 바이트 수"
+          ],
+          [
+            "24",
+            "8",
+            "시트 섹션의 바이트 수"
+          ],
+          [
+            "32",
+            "4",
+            "시트 원본 바이트의 CRC-32/ISO-HDLC (`zlib.crc32`과 같은 값)"
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

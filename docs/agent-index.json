@@ -21,7 +21,7 @@
       "document_id": "urn:iisacc:document:27fdc3e1e6d15ed34465088af2593a4e1d2173b5d2c8aee6963bee7bc0b049cb",
       "source": "README.md",
       "agent_json": "docs/entrypoints/README.agent.json",
-      "source_sha256": "43d8898c859522904c2f4a96c992e04a0fbe2e62c78de1d721c4f7878bb40434",
+      "source_sha256": "61e378859599c02bda64ede523885ac7cae98ef0200fc1888c906bd75b562cb6",
       "role": "overview"
     },
     {
@@ -813,6 +813,13 @@
       "source": "docs/NSCharacter.md",
       "agent_json": "docs/NSCharacter.agent.json",
       "source_sha256": "c672833eb9eb5eacb342a604885c2ae22125b5752cf81418d5d28a7cb3943f59",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:077b54a9adb861159eb121230f2a060452df34d438af62258a2d2699f1d8279f",
+      "source": "docs/NSCharacterFile.md",
+      "agent_json": "docs/NSCharacterFile.agent.json",
+      "source_sha256": "478918d28fff67cec7b4421b12e1c29053d9d8fc4924183fed5e161b0d89d610",
       "role": "guide"
     },
     {

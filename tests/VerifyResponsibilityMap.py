@@ -106,6 +106,8 @@ for raw in sorted(actual):
             raise AssertionError(f"Project version selection depends on a higher responsibility: {raw} -> {rel}")
         if other and group == "core_project_codec" and other not in (group, "core_project_archive", "core_project_options", "core_project_version", "core_skeletal_motion"):
             raise AssertionError(f"Project codec depends on a higher responsibility: {raw} -> {rel}")
+        if other and group == "core_nscharacter_file" and other != group:
+            raise AssertionError(f"Character document envelope depends on engine internals: {raw} -> {rel}")
         if other and group == "core_project_adjustment_validation" and other not in (group, "core_adjustment_data", "core_utility"):
             raise AssertionError(f"Project adjustment validation depends on a higher responsibility: {raw} -> {rel}")
         if other and group == "core_project_rig_archive" and other not in (group, "core_project_archive", "core_utility"):

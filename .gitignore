@@ -11,3 +11,9 @@
 !resources/MakeHuman/base.obj
 !resources/MakeHumanWardrobe/**/*.obj
 resources/
+# This manifest classifies source files; template and fixture resources stay ignored.
+!/resources/
+/resources/*
+!/resources/architecture/
+/resources/architecture/*
+!/resources/architecture/ResponsibilityMap.json

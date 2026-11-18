@@ -42,6 +42,7 @@
 #include <iiActorObject/Object3DDna.h>
 #include <iiActorObject/Object3DInterchange.h>
 #include <iiActorObject/Object3DProject.h>
+#include <iiActorObject/NSCharacterFile.h>
 #include <iiActorObject/ImplicitSurface.h>
 #include <iiActorObject/MeshPrimitives.h>
 #include <iiActorObject/MeshTopology.h>

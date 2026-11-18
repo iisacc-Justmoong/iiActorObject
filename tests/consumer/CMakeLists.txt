@@ -5,6 +5,13 @@ find_package(iiActorObject 0.2.1 CONFIG REQUIRED)
 if(TARGET Qt6::Core)
     message(FATAL_ERROR "iiActorObject must not import Qt")
 endif()
+if(TARGET Boost::serialization)
+    message(FATAL_ERROR "The character document consumer must not import Boost.Serialization")
+endif()
+
+add_executable(iiActorObject_installed_nscharacter ../NSCharacterFileTest.cpp)
+target_link_libraries(iiActorObject_installed_nscharacter PRIVATE iiActorObject::iiActorObject)
+set_target_properties(iiActorObject_installed_nscharacter PROPERTIES CXX_EXTENSIONS OFF)
 
 add_executable(iiActorObject_installed_consumer main.cpp)
 target_link_libraries(iiActorObject_installed_consumer PRIVATE iiActorObject::iiActorObject)
@@ -56,6 +63,12 @@ add_executable(iiActorObject_installed_project_data_headers ../ProjectDataHeader
 target_link_libraries(iiActorObject_installed_project_data_headers PRIVATE iiActorObject::iiActorObject)
 set_target_properties(iiActorObject_installed_project_data_headers PROPERTIES CXX_EXTENSIONS OFF)
 enable_testing()
+add_test(NAME iiActorObject.installed_nscharacter COMMAND iiActorObject_installed_nscharacter roundtrip
+    "${CMAKE_CURRENT_LIST_DIR}/../../resources/fixtures/project/v1.ii3dproject")
+if(WIN32)
+    set_tests_properties(iiActorObject.installed_nscharacter PROPERTIES
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:$<TARGET_FILE_DIR:iiActorObject::iiActorObject>")
+endif()
 add_test(NAME iiActorObject.installed_project_data_headers COMMAND iiActorObject_installed_project_data_headers)
 add_executable(iiActorObject_installed_mask_validation_consumer ../PointMaskValidationInstalledConsumer.cpp)
 target_link_libraries(iiActorObject_installed_mask_validation_consumer PRIVATE iiActorObject::iiActorObject)

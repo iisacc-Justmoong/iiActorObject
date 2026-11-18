@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(iiActorObject VERSION 0.2.1 LANGUAGES CXX)
+include(./cmake/ModuleImports.cmake)
 
 if(PROJECT_IS_TOP_LEVEL AND CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     if(DEFINED ENV{HOME} AND NOT "$ENV{HOME}" STREQUAL "")
@@ -88,6 +89,7 @@ add_library(iiActorObject src/Runtime/Actor.cpp
     src/Authoring/Object3DEditLayers.cpp
     src/Authoring/Object3DTemplateSurfaceSwap.cpp
     src/Project/Object3DProject.cpp
+    src/Project/NSCharacterFile.cpp
     src/Rig/Object3DRig.cpp
     src/Authoring/Object3DEditorRig.cpp
     src/Runtime/Object3DInstanceTransfer.cpp
@@ -1839,6 +1841,18 @@ if(BUILD_TESTING)
     set_tests_properties(iiActorObject.template_adapt.follower_morph_independent PROPERTIES FIXTURES_REQUIRED iiActorObject_template_adapt_formats)
     add_executable(iiActorObjectProjectTests tests/Object3DProjectTest.cpp)
     target_link_libraries(iiActorObjectProjectTests PRIVATE iiActorObject::iiActorObject)
+    add_executable(iiActorObjectNSCharacterFileTests tests/NSCharacterFileTest.cpp)
+    target_link_libraries(iiActorObjectNSCharacterFileTests PRIVATE iiActorObject::iiActorObject)
+    set_target_properties(iiActorObjectNSCharacterFileTests PROPERTIES CXX_EXTENSIONS OFF)
+    set(_nscharacter_old_actor "${CMAKE_CURRENT_SOURCE_DIR}/resources/fixtures/project/v1.ii3dproject")
+    foreach(_case roundtrip invalid)
+        add_test(NAME iiActorObject.nscharacter.${_case}
+            COMMAND iiActorObjectNSCharacterFileTests ${_case} "${_nscharacter_old_actor}")
+    endforeach()
+    add_test(NAME iiActorObject.nscharacter.interoperability COMMAND "${Python3_EXECUTABLE}" -B
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/VerifyNSCharacterFile.py"
+        "$<TARGET_FILE:iiActorObjectNSCharacterFileTests>" "${_nscharacter_old_actor}"
+        "${CMAKE_CURRENT_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/src/Project")
     add_executable(iiActorObjectProjectAnimationTests tests/Object3DProjectAnimationTest.cpp)
     target_link_libraries(iiActorObjectProjectAnimationTests PRIVATE iiActorObject::iiActorObject)
     set_target_properties(iiActorObjectProjectAnimationTests PROPERTIES CXX_EXTENSIONS OFF)
@@ -1868,6 +1882,9 @@ if(BUILD_TESTING)
     add_test(NAME iiActorObject.project.morph_fixture COMMAND iiActorObjectProjectTests morph_fixture
         "${CMAKE_CURRENT_BINARY_DIR}/project/Fixture-v21.ii3dproject")
     set_tests_properties(iiActorObject.project.morph_fixture PROPERTIES FIXTURES_SETUP iiActorObject_project_morph)
+    add_test(NAME iiActorObject.nscharacter.actor_v21 COMMAND iiActorObjectNSCharacterFileTests roundtrip
+        "${CMAKE_CURRENT_BINARY_DIR}/project/Fixture-v21.ii3dproject")
+    set_tests_properties(iiActorObject.nscharacter.actor_v21 PROPERTIES FIXTURES_REQUIRED iiActorObject_project_morph)
     add_test(NAME iiActorObject.project.morph_independent COMMAND "${Python3_EXECUTABLE}" -B
         "${CMAKE_CURRENT_SOURCE_DIR}/tests/VerifyMorphProject.py" "$<TARGET_FILE:iiActorObjectProjectTests>"
         "${CMAKE_CURRENT_BINARY_DIR}/project/Fixture-v21.ii3dproject")
@@ -2693,6 +2710,7 @@ install(FILES
     src/Interchange/Object3DInterchange.h
     src/Interchange/FBX/FbxImageResolver.h
     src/Project/Object3DProject.h
+    src/Project/NSCharacterFile.h
     src/Geometry/MeshGeometry.h
     src/Geometry/MeshGeometryCore.h
     src/Geometry/MeshTangents.h
@@ -2775,6 +2793,7 @@ if(IIACTOROBJECT_WITH_DNA)
         DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject/licenses/openriglogic")
 endif()
 install(DIRECTORY docs/ DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject/docs")
+install(FILES src/Project/nscharacter_file.py DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject/python")
 install(FILES resources/architecture/ResponsibilityMap.json
     DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject/resources/architecture")
 install(FILES example/BlenderExternalEdits.py DESTINATION "${CMAKE_INSTALL_DATADIR}/iiActorObject/integration")

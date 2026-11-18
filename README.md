@@ -254,6 +254,11 @@ All restored resources belong to the caller's core engine; failed imports preser
 its preexisting resources and ID counters. NSCharacter provides borrowed wrappers.
 Use FBX/GLB/DNA for external application interchange. See [project contracts](docs/Object3DProject.md).
 
+The independent [`.nscharacter` file format](docs/NSCharacterFile.md) packages a
+native `.ii3dproject` with the creator's original UTF-8 JSON sheet. Its version,
+lengths and checksum are defined by iiActorObject. C++ and Python can inspect and
+write the envelope without Boost.Serialization or a live 3D engine.
+
 The explicit [progressive morph importer](docs/ProgressiveMorphRig.md) retains FBX in-between shapes, default values and shared channel controls in a core-owned rig. Store that rig with the asset in project version 31. The dedicated progressive FBX API exports channels across multiple meshes: compatible identical instances share geometry, while distinct meshes receive separate channels and SDK metadata for restoring their common control. External editors can expose those channels independently. The [progressive animation path](docs/ProgressiveMorphAnimation.md) imports skeleton, ordinary and progressive control animation together, applies them transactionally, and exports multiple named takes with their stored start times. Ordinary FBX/GLB export does not carry the progressive rig program.
 
 The optional [human accessories](docs/HumanAccessories.md) package connects selected CC0 hair, clothing, eyebrows and eyelashes to the core-owned template using authored control-point mappings, transferred skin weights and covered-body face masks. An editor can add, remove or replace compatible slots, including combined additions and removals in one undo step, while preserving retained edits. Grounded templates preserve their support points; project version 35 records mixed selection remapping. This is not a cloth or hair simulation.

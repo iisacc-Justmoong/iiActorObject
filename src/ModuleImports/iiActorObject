@@ -1,0 +1,7 @@
+#pragma once
+
+// C++ public entry for iiActorObject; the linked components select the API.
+
+#if defined(IISDK_IMPORT_IIACTOROBJECT_CORE)
+#include <iiActorObject.h>
+#endif
