@@ -17,3 +17,4 @@ resources/
 !/resources/architecture/
 /resources/architecture/*
 !/resources/architecture/ResponsibilityMap.json
+resources/
