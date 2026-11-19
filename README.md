@@ -443,7 +443,7 @@ default prefix is `~/.local/SDK/iiActorObject`; set `INSTALL_PREFIX` for staging
 
 ## License and provenance
 
-Original code and documentation are MIT licensed; see [LICENSE](LICENSE).
+Original code and documentation are licensed under Apache 2.0. See [LICENSE](LICENSE).
 ufbx v0.20.0 uses its MIT alternative, is compiled as C++23, and remains private to
 the FBX adapter. See [third-party provenance and hashes](src/third_party/ufbx/PROVENANCE.md).
 No vendor application source or commercial character assets are included.

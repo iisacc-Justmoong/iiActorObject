@@ -10,8 +10,8 @@
   },
   "source": {
     "path": "README.md",
-    "sha256": "61e378859599c02bda64ede523885ac7cae98ef0200fc1888c906bd75b562cb6",
-    "bytes": 51241,
+    "sha256": "abd9772d174e4637a9ebea09db8eb5e95c55a6fcdef459dac4ce30cdf9409717",
+    "bytes": 51254,
     "line_count": 638,
     "encoding": "utf-8",
     "language": "en"
@@ -1152,7 +1152,7 @@
       "kind": "paragraph",
       "start_line": 446,
       "end_line": 449,
-      "raw": "Original code and documentation are MIT licensed; see [LICENSE](LICENSE).\nufbx v0.20.0 uses its MIT alternative, is compiled as C++23, and remains private to\nthe FBX adapter. See [third-party provenance and hashes](src/third_party/ufbx/PROVENANCE.md).\nNo vendor application source or commercial character assets are included.\n"
+      "raw": "Original code and documentation are licensed under Apache 2.0. See [LICENSE](LICENSE).\nufbx v0.20.0 uses its MIT alternative, is compiled as C++23, and remains private to\nthe FBX adapter. See [third-party provenance and hashes](src/third_party/ufbx/PROVENANCE.md).\nNo vendor application source or commercial character assets are included.\n"
     },
     {
       "id": "b000152",
